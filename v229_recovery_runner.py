@@ -52,6 +52,9 @@ def verify_swc(p,rid):
 def route1(rid,out):
  from fafbseg import flywire; import navis
  n=flywire.get_skeletons(rid,dataset=783,progress=False)
+ if isinstance(n, navis.NeuronList):
+  if len(n) != 1: raise RuntimeError(f"FlyWire endpoint returned {len(n)} neurons")
+  n = n[0]
  if neuron_id_as_int(n)!=rid: raise RuntimeError(f"root ID mismatch: requested {rid}, received {getattr(n, 'id', None)!r}")
  navis.write_swc(n,out); a=verify_swc(out,rid)
  if not a["valid"]: raise RuntimeError("SWC validation failed")
