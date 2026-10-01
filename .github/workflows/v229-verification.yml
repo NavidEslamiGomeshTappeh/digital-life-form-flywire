@@ -17,7 +17,7 @@ jobs:
       - name: Compile
         run: python -m py_compile v229_recovery_runner.py
       - name: Unit tests
-        run: python test_v229_runner.py
+        run: python test_v229_recovery_runner.py
 
   network-probe:
     runs-on: ubuntu-latest
