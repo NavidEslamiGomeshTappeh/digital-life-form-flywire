@@ -8,7 +8,7 @@ This repository contains the recovery runner for four exact FlyWire v783 neuron 
 |---|---:|---|
 | T4a | 720575940632008007 | VFB_fw077172 |
 | T4c | 720575940616224414 | VFB_fw091869 |
-| T5a | 720575940625571465 | VFB_fw077056211 |
+| T5a | 720575940625571465 | VFB_fw056211 |
 | T5c | 720575940617782941 | VFB_fw077474 |
 
 Recovery order: fafbseg/FlyWire → MRC precomputed → Zenodo bulk.
