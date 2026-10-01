@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import argparse,hashlib,json,shutil,time
+import argparse,hashlib,json,shutil,time,tempfile,platform
 from urllib.request import Request,urlopen
 ROOTS={"T4a":720575940632008007,"T4c":720575940616224414,"T5a":720575940625571465,"T5c":720575940617782941}
 VFB_IDS={"T4a":"VFB_fw077172","T4c":"VFB_fw091869","T5a":"VFB_fw056211","T5c":"VFB_fw077474"}
 MRC_BASE="https://flyem.mrc-lmb.cam.ac.uk/flyconnectome/flywire_skeletons_783"
 ZENODO_URL="https://zenodo.org/records/10877326/files/sk_lod1_783_healed_ds2.parquet?download=1"
 ZENODO_MD5="a4c104776f33ec539ef859064c4de3df"
+VERSION="0.229.0"
 def digest(p,a="sha256"):
  h=hashlib.new(a)
  with open(p,"rb") as f:
@@ -66,13 +67,15 @@ def route3(rid,out,cache):
  if tab.num_rows==0: raise RuntimeError(f"root {rid} not found")
  raise RuntimeError("Zenodo reached but schema is not a verified node-table; no approximation made")
 def main():
- ap=argparse.ArgumentParser(); ap.add_argument("--route",choices=["all","1","2","3"],default="all"); ap.add_argument("--only",nargs="*",choices=list(ROOTS),default=list(ROOTS)); ap.add_argument("--out",default="v229_recovery_results"); ap.add_argument("--cache",default="v229_cache"); a=ap.parse_args(); out=Path(a.out); cache=Path(a.cache); out.mkdir(parents=True,exist_ok=True); report={"dataset":783,"route_order":[1,2,3],"cells":[]}
+ ap=argparse.ArgumentParser(description="Recover and validate exact FlyWire v783 neuron skeletons.")
+ ap.add_argument("--version",action="version",version=VERSION)
+ ap.add_argument("--route",choices=["all","1","2","3"],default="all"); ap.add_argument("--only",nargs="*",choices=list(ROOTS),default=list(ROOTS)); ap.add_argument("--out",default="v229_recovery_results"); ap.add_argument("--cache",default="v229_cache"); a=ap.parse_args(); out=Path(a.out); cache=Path(a.cache); out.mkdir(parents=True,exist_ok=True); report={"schema_version":1,"runner_version":VERSION,"dataset":783,"route_order":[1,2,3],"python":platform.python_version(),"cells":[]}
  for name in a.only:
   rid=ROOTS[name]; rec={"cell":name,"root_id":rid,"vfb_id":VFB_IDS[name],"attempts":[]}
   for route in ([1,2,3] if a.route=="all" else [int(a.route)]):
-   tmp=out/f"{name}_{rid}.route{route}.swc"; t=time.time()
+   tmp=out/f".{name}_{rid}.route{route}.tmp.swc"; t=time.time()
    try:
-    aa=route1(rid,tmp) if route==1 else route2(rid,tmp) if route==2 else route3(rid,tmp,cache); shutil.copy2(tmp,out/f"{name}_{rid}.swc"); rec["attempts"].append({"route":route,"status":"PASS","seconds":round(time.time()-t,3),"audit":aa}); rec["selected_route"]=route; rec["status"]="PASS"; break
+    aa=route1(rid,tmp) if route==1 else route2(rid,tmp) if route==2 else route3(rid,tmp,cache); shutil.copy2(tmp,out/f"{name}_{rid}.swc"); tmp.unlink(missing_ok=True); rec["attempts"].append({"route":route,"status":"PASS","seconds":round(time.time()-t,3),"audit":aa}); rec["selected_route"]=route; rec["status"]="PASS"; break
    except Exception as e:
     rec["attempts"].append({"route":route,"status":"FAIL","seconds":round(time.time()-t,3),"error":f"{type(e).__name__}: {e}"})
     if tmp.exists(): tmp.unlink()
