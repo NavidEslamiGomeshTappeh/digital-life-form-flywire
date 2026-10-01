@@ -25,15 +25,28 @@ def neuron_id_as_int(neuron):
 
 def verify_swc(p,rid):
  rows=[]
- for line in open(p,encoding="utf-8",errors="replace"):
-  if not line.strip() or line.lstrip().startswith("#"): continue
-  x=line.split()
-  if len(x)>=7:
-   try: rows.append((int(x[0]),float(x[2]),float(x[3]),float(x[4]),float(x[5]),int(x[6])))
-   except: pass
- ids={x[0] for x in rows}; roots=[x[0] for x in rows if x[5]==-1]; missing=sorted({x[5] for x in rows if x[5]!=-1}-ids)
+ parse_errors=[]
+ with open(p,encoding="utf-8",errors="replace") as fh:
+  for lineno,line in enumerate(fh,1):
+   if not line.strip() or line.lstrip().startswith("#"): continue
+   x=line.split()
+   if len(x)<7:
+    parse_errors.append(lineno); continue
+   try:
+    rows.append((int(x[0]),float(x[2]),float(x[3]),float(x[4]),float(x[5]),int(x[6])))
+   except (TypeError,ValueError):
+    parse_errors.append(lineno)
+ ids=[x[0] for x in rows]
+ idset=set(ids)
+ roots=[x[0] for x in rows if x[5]==-1]
+ missing=sorted({x[5] for x in rows if x[5]!=-1}-idset)
+ duplicate_ids=sorted({i for i in ids if ids.count(i)>1})
  finite=all(all(v==v and abs(v)!=float("inf") for v in x[1:5]) for x in rows)
- return {"requested_root_id":rid,"node_count":len(rows),"structural_root_count":len(roots),"missing_parent_refs":missing,"finite_geometry":finite,"sha256":digest(p),"valid":bool(rows) and len(roots)==1 and not missing and finite}
+ valid=bool(rows) and not parse_errors and len(duplicate_ids)==0 and len(roots)==1 and not missing and finite
+ return {"requested_root_id":rid,"node_count":len(rows),"structural_root_count":len(roots),
+         "missing_parent_refs":missing,"duplicate_node_ids":duplicate_ids,
+         "parse_error_lines":parse_errors,"finite_geometry":finite,"sha256":digest(p),"valid":valid}
+
 def route1(rid,out):
  from fafbseg import flywire; import navis
  n=flywire.get_skeletons(rid,dataset=783,progress=False)
