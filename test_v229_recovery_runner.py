@@ -32,6 +32,13 @@ with tempfile.TemporaryDirectory() as d:
     bad.write_text("1 1 0 0 0 1 -1\n2 3 nan 1 1 1 9\n", encoding="utf-8")
     b=ns["verify_swc"](bad, 123)
     assert not b["valid"]
-    assert b["missing_parent_refs"] == [9]
+    assert b["missing_parent_refs"] == [9] and b["parse_error_lines"] == []
 
 print("PASS: SWC structural and finite-geometry validation")
+
+with tempfile.TemporaryDirectory() as d:
+    malformed=Path(d)/"malformed.swc"
+    malformed.write_text("1 1 0 0 0 1 -1\nBROKEN\n", encoding="utf-8")
+    c=ns["verify_swc"](malformed, 123)
+    assert not c["valid"] and c["parse_error_lines"] == [2]
+print("PASS: malformed SWC lines fail closed")
