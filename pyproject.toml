@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "digital-life-form-flywire"
+version = "0.229.0"
+description = "Exact FlyWire v783 neuron skeleton recovery and validation tools."
+requires-python = ">=3.12"
+dependencies = ["fafbseg==3.2.2", "navis>=1.10", "pyarrow>=18"]
+
+[project.scripts]
+dlf-flywire-recover = "v229_recovery_runner:main"
