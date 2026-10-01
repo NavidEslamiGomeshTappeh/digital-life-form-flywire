@@ -1,11 +1,15 @@
 {
-  "schema_version": 1,
-  "dataset": 783,
+  "schema_version": 2,
+  "dataset_label": "783",
   "artifact": "V230_target_synapses.csv",
   "git_blob_sha": "507fc706cc29781457ed502ae0ebdf328a4bae33",
   "row_count": 649,
+  "unique_coordinate_rows": 649,
   "unique_pre_root_ids": 33,
   "unique_post_root_ids": 38,
+  "unique_pre_post_pairs": 75,
+  "pair_row_count_min": 5,
+  "pair_row_count_max": 21,
   "required_v229_post_roots": [
     "720575940632008007",
     "720575940616224414",
@@ -13,12 +17,31 @@
     "720575940617782941"
   ],
   "missing_required_v229_post_roots": [],
-  "columns": [
-    "pre_root_id",
-    "post_root_id",
-    "x",
-    "y",
-    "z"
+  "coordinate_ranges": {
+    "x": [706678, 795414],
+    "y": [208754, 278758],
+    "z": [199840, 227900]
+  },
+  "columns": ["pre_root_id", "post_root_id", "x", "y", "z"],
+  "provenance": {
+    "artifact_first_seen_commit": "e57b1ccc5b9f64964af223b6bf8e853579985fe0",
+    "artifact_first_seen_commit_message": "V229 FlyWire morphology recovery and V230 synapse coordinates",
+    "extraction_script_in_repository": false,
+    "source_dataset_file_or_record": null,
+    "coordinate_semantics_proven": false,
+    "threshold_or_filter_proven": false,
+    "biological_completeness_proven": false,
+    "reproducible_extraction_path_proven": false,
+    "status": "UNVERIFIED"
+  },
+  "observations": [
+    "All 75 observed pre/post pairs contain at least 5 coordinate rows.",
+    "All 649 coordinate triplets are unique.",
+    "The four V229 target roots occur as postsynaptic roots, but 34 additional postsynaptic roots are also present."
   ],
-  "validation": "PASS"
+  "inference_not_proof": [
+    "The minimum of 5 rows per observed pair is consistent with a >=5-synapse selection rule, but the repository does not prove that this was the extraction rule.",
+    "The single x/y/z triplet per row is consistent with synapse coordinates, but the repository does not prove whether these are pre- or post-synaptic coordinates or another coordinate representation."
+  ],
+  "validation_status": "STRUCTURE_ONLY"
 }
