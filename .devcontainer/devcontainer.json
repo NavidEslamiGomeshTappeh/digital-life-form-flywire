@@ -1,0 +1,9 @@
+{
+  "name": "V229 FlyWire Recovery",
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
+  "features": {},
+  "postCreateCommand": "bash scripts/bootstrap.sh",
+  "remoteEnv": {
+    "PYTHONUNBUFFERED": "1"
+  }
+}

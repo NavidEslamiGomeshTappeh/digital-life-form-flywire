@@ -1,0 +1,34 @@
+{
+  "stage": "V229_FINAL_PROVENANCE_AUDIT",
+  "dataset": 783,
+  "python": "3.14.2",
+  "fafbseg": "3.2.2",
+  "navis": "1.12.0",
+  "files": [
+    {
+      "file": "T4a_720575940632008007.route1.swc",
+      "bytes": 40382,
+      "sha256": "d17623da9812d0f2ef53ab6aed4a9d89a2c2820d34aa0294af2ba434b6107c2a"
+    },
+    {
+      "file": "T4c_720575940616224414.route1.swc",
+      "bytes": 41105,
+      "sha256": "7d9cc29226e092c233f35cfcf70f75ac137b8c9f8744a1ba319264f96da3857a"
+    },
+    {
+      "file": "T5a_720575940625571465.route1.swc",
+      "bytes": 27651,
+      "sha256": "6d4d2a33cfea8525449b7a1508c6e6c2d9550034aac3774e6b2d64c4e76bae5c"
+    },
+    {
+      "file": "T5c_720575940617782941.route1.swc",
+      "bytes": 26577,
+      "sha256": "83b287e914522b0b382e3e46d39ced36494ff257d835cac11d7f4243ae1d7745"
+    }
+  ],
+  "recovery_report": {
+    "file": "V229_recovery_report.json",
+    "bytes": 2597,
+    "sha256": "9c534d2fafadf9480e8100729051b87a30e131463664a980a7cfeb0a33f202ff"
+  }
+}

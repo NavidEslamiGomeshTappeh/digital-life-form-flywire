@@ -1,0 +1,10 @@
+.git/
+__pycache__/
+*.pyc
+*.pyo
+*.log
+v229_cache/
+.env
+.env.*
+*.token
+*.secret

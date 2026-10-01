@@ -1,0 +1,102 @@
+{
+  "dataset": 783,
+  "route_order": [
+    1,
+    2,
+    3
+  ],
+  "cells": [
+    {
+      "cell": "T4a",
+      "root_id": 720575940632008007,
+      "vfb_id": "VFB_fw077172",
+      "attempts": [
+        {
+          "route": 1,
+          "status": "PASS",
+          "seconds": 5.101,
+          "audit": {
+            "requested_root_id": 720575940632008007,
+            "node_count": 880,
+            "structural_root_count": 1,
+            "missing_parent_refs": [],
+            "finite_geometry": true,
+            "sha256": "d17623da9812d0f2ef53ab6aed4a9d89a2c2820d34aa0294af2ba434b6107c2a",
+            "valid": true
+          }
+        }
+      ],
+      "selected_route": 1,
+      "status": "PASS"
+    },
+    {
+      "cell": "T4c",
+      "root_id": 720575940616224414,
+      "vfb_id": "VFB_fw091869",
+      "attempts": [
+        {
+          "route": 1,
+          "status": "PASS",
+          "seconds": 0.028,
+          "audit": {
+            "requested_root_id": 720575940616224414,
+            "node_count": 898,
+            "structural_root_count": 1,
+            "missing_parent_refs": [],
+            "finite_geometry": true,
+            "sha256": "7d9cc29226e092c233f35cfcf70f75ac137b8c9f8744a1ba319264f96da3857a",
+            "valid": true
+          }
+        }
+      ],
+      "selected_route": 1,
+      "status": "PASS"
+    },
+    {
+      "cell": "T5a",
+      "root_id": 720575940625571465,
+      "vfb_id": "VFB_fw056211",
+      "attempts": [
+        {
+          "route": 1,
+          "status": "PASS",
+          "seconds": 0.025,
+          "audit": {
+            "requested_root_id": 720575940625571465,
+            "node_count": 601,
+            "structural_root_count": 1,
+            "missing_parent_refs": [],
+            "finite_geometry": true,
+            "sha256": "6d4d2a33cfea8525449b7a1508c6e6c2d9550034aac3774e6b2d64c4e76bae5c",
+            "valid": true
+          }
+        }
+      ],
+      "selected_route": 1,
+      "status": "PASS"
+    },
+    {
+      "cell": "T5c",
+      "root_id": 720575940617782941,
+      "vfb_id": "VFB_fw077474",
+      "attempts": [
+        {
+          "route": 1,
+          "status": "PASS",
+          "seconds": 0.026,
+          "audit": {
+            "requested_root_id": 720575940617782941,
+            "node_count": 577,
+            "structural_root_count": 1,
+            "missing_parent_refs": [],
+            "finite_geometry": true,
+            "sha256": "83b287e914522b0b382e3e46d39ced36494ff257d835cac11d7f4243ae1d7745",
+            "valid": true
+          }
+        }
+      ],
+      "selected_route": 1,
+      "status": "PASS"
+    }
+  ]
+}
