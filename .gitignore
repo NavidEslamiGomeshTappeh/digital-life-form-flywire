@@ -1,10 +1,9 @@
-.git/
 __pycache__/
-*.pyc
-*.pyo
-*.log
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.vscode/
+.idea/
+.DS_Store
 v229_cache/
-.env
-.env.*
-*.token
-*.secret
+*.log
