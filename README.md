@@ -36,3 +36,15 @@ V229 is a morphology-recovery milestone. It is not a claim of a complete fly bra
 ## License
 
 No open-source license has been asserted. Normal copyright rules apply unless the project owner adds a license.
+
+## Command reference
+
+Show version:
+
+    python v229_recovery_runner.py --version
+
+Recover one target:
+
+    python v229_recovery_runner.py --route 1 --only T4a --out v229_results --cache v229_cache
+
+The runner's default output directory is `v229_recovery_results`; examples above explicitly use the repository evidence directory `v229_results`.
