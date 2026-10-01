@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import socket, ssl, urllib.request
+import argparse, socket, urllib.request
 HOSTS=[
     "flyem.mrc-lmb.cam.ac.uk",
     "zenodo.org",
@@ -10,6 +10,10 @@ URLS=[
     "https://flyem.mrc-lmb.cam.ac.uk/",
     "https://zenodo.org/",
 ]
+ap=argparse.ArgumentParser(description="Probe V229 external-data network dependencies.")
+ap.add_argument("--strict", action="store_true")
+args=ap.parse_args()
+failures=0
 print("=== V229 NETWORK PROBE ===")
 for h in HOSTS:
     try:
@@ -17,6 +21,7 @@ for h in HOSTS:
         ips=sorted({x[4][0] for x in ans})
         print(f"DNS PASS  {h}: {', '.join(ips)}")
     except Exception as e:
+        failures += 1
         print(f"DNS FAIL  {h}: {type(e).__name__}: {e}")
 for u in URLS:
     try:
@@ -24,5 +29,7 @@ for u in URLS:
         with urllib.request.urlopen(req,timeout=20) as r:
             print(f"HTTPS PASS {u}: {r.status} {r.headers.get('content-type','')}")
     except Exception as e:
+        failures += 1
         print(f"HTTPS FAIL {u}: {type(e).__name__}: {e}")
-print("=== END PROBE ===")
+print(f"=== END PROBE: failures={failures} ===")
+raise SystemExit(1 if args.strict and failures else 0)
