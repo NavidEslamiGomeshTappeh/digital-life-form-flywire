@@ -18,3 +18,20 @@ except RuntimeError:
 else:
     raise AssertionError("non-integer source ID must fail")
 print("PASS: source neuron ID validation")
+
+
+# Structural SWC validation tests without external services.
+import tempfile
+with tempfile.TemporaryDirectory() as d:
+    good=Path(d)/"good.swc"
+    good.write_text("1 1 0 0 0 1 -1\n2 3 1 1 1 1 1\n", encoding="utf-8")
+    a=ns["verify_swc"](good, 123)
+    assert a["valid"] and a["structural_root_count"] == 1 and not a["missing_parent_refs"]
+
+    bad=Path(d)/"bad.swc"
+    bad.write_text("1 1 0 0 0 1 -1\n2 3 nan 1 1 1 9\n", encoding="utf-8")
+    b=ns["verify_swc"](bad, 123)
+    assert not b["valid"]
+    assert b["missing_parent_refs"] == [9]
+
+print("PASS: SWC structural and finite-geometry validation")
