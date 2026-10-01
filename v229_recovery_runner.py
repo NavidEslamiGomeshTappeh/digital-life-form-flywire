@@ -12,6 +12,16 @@ def digest(p,a="sha256"):
  with open(p,"rb") as f:
   for b in iter(lambda:f.read(1048576),b""): h.update(b)
  return h.hexdigest()
+def neuron_id_as_int(neuron):
+    """Return the source neuron/root ID without inventing one."""
+    value = getattr(neuron, "id", None)
+    if value is None:
+        raise RuntimeError("source neuron has no ID")
+    try:
+        return int(value)
+    except (TypeError, ValueError) as e:
+        raise RuntimeError(f"source neuron ID is not an integer: {value!r}") from e
+
 def verify_swc(p,rid):
  rows=[]
  for line in open(p,encoding="utf-8",errors="replace"):
@@ -26,13 +36,19 @@ def verify_swc(p,rid):
 def route1(rid,out):
  from fafbseg import flywire; import navis
  n=flywire.get_skeletons(rid,dataset=783,progress=False)
- if int(getattr(n,"id",0))!=rid: raise RuntimeError("root ID mismatch")
+ if neuron_id_as_int(n)!=rid: raise RuntimeError(f"root ID mismatch: requested {rid}, received {getattr(n, 'id', None)!r}")
  navis.write_swc(n,out); a=verify_swc(out,rid)
  if not a["valid"]: raise RuntimeError("SWC validation failed")
  return a
 def route2(rid,out):
  import navis
- n=navis.read_precomputed(f"{MRC_BASE}/{rid}"); n.id=rid; navis.write_swc(n,out); a=verify_swc(out,rid)
+ n=navis.read_precomputed(f"{MRC_BASE}/{rid}")
+ if isinstance(n, navis.NeuronList):
+  if len(n) != 1: raise RuntimeError(f"precomputed endpoint returned {len(n)} neurons")
+  n = n[0]
+ source_id = neuron_id_as_int(n)
+ if source_id != rid: raise RuntimeError(f"root ID mismatch: requested {rid}, received {source_id}")
+ navis.write_swc(n,out); a=verify_swc(out,rid)
  if not a["valid"]: raise RuntimeError("SWC validation failed")
  return a
 def download(url,p,md5=None):
