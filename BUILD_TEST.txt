@@ -1,4 +1,0 @@
-compile=0
-
-test=0
-PASS: exact roots, route order, endpoint and Zenodo MD5
