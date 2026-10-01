@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "dataset": 783,
+  "artifact": "V230_target_synapses.csv",
+  "git_blob_sha": "507fc706cc29781457ed502ae0ebdf328a4bae33",
+  "row_count": 649,
+  "unique_pre_root_ids": 33,
+  "unique_post_root_ids": 38,
+  "required_v229_post_roots": [
+    "720575940632008007",
+    "720575940616224414",
+    "720575940625571465",
+    "720575940617782941"
+  ],
+  "missing_required_v229_post_roots": [],
+  "columns": [
+    "pre_root_id",
+    "post_root_id",
+    "x",
+    "y",
+    "z"
+  ],
+  "validation": "PASS"
+}
