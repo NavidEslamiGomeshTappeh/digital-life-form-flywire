@@ -22,12 +22,16 @@ Software tests are not treated as proof of external-data recovery. Those are sep
 ## Run
 
     python -m py_compile v229_recovery_runner.py
-    python test_v229_runner.py
+    python test_v229_recovery_runner.py
     python v229_recovery_runner.py --route all --out v229_results --cache v229_cache
 
 ## Validation
 
 A recovered SWC must contain nodes, exactly one structural root, no missing parent references and finite geometry. The source neuron's real ID must match the requested root before serialization.
+
+## V230 synapse artifact
+
+`v230_results/V230_target_synapses.csv` is a checked-in synapse-coordinate artifact. The repository now validates its schema, finite coordinates, integer root IDs, row count, unique pre/post root counts, and presence of all four V229 target roots. The current artifact contains 649 rows, 33 unique presynaptic root IDs and 38 unique postsynaptic root IDs. These checks validate the artifact structure; they do not by themselves prove biological completeness.
 
 ## Project status
 
