@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import argparse,hashlib,json,shutil,time,tempfile,platform
+import argparse,hashlib,json,shutil,time,platform
+from collections import Counter
+from datetime import datetime,timezone
 from urllib.request import Request,urlopen
 ROOTS={"T4a":720575940632008007,"T4c":720575940616224414,"T5a":720575940625571465,"T5c":720575940617782941}
 VFB_IDS={"T4a":"VFB_fw077172","T4c":"VFB_fw091869","T5a":"VFB_fw056211","T5c":"VFB_fw077474"}
@@ -40,7 +42,7 @@ def verify_swc(p,rid):
  idset=set(ids)
  roots=[x[0] for x in rows if x[5]==-1]
  missing=sorted({x[5] for x in rows if x[5]!=-1}-idset)
- duplicate_ids=sorted({i for i in ids if ids.count(i)>1})
+ duplicate_ids=sorted(i for i,n in Counter(ids).items() if n>1)
  finite=all(all(v==v and abs(v)!=float("inf") for v in x[1:5]) for x in rows)
  valid=bool(rows) and not parse_errors and len(duplicate_ids)==0 and len(roots)==1 and not missing and finite
  return {"requested_root_id":rid,"node_count":len(rows),"structural_root_count":len(roots),
