@@ -48,6 +48,20 @@ The data pattern is compatible with a pair-level selection followed by expansion
 
 See `v230_results/V230_validation.json` for the machine-readable audit. Structural validation of the CSV is intentionally labeled `STRUCTURE_ONLY`, not biological PASS.
 
+## V230 exact provenance route
+
+The repository now includes `scripts/v230_zenodo_exact_probe.py`. It compares every V230 `(pre_root_id, post_root_id, x, y, z)` row against both coordinate sides in a local copy of the canonical public FAFB v783 `flywire_synapses_783.feather` release.
+
+The canonical public Zenodo release is 9.5 GB and has MD5 `f8f1b97c9d4b0ea9b4c8b287f6b99091`. It contains pre/post root IDs and separate pre/post XYZ coordinates. The smaller 852 MB `proofread_connections_783.feather` can validate pair-level connectivity/counts but cannot validate individual coordinate rows.
+
+Codex's current static-download API documents an `api_token` requirement for programmatic downloads. Therefore this repository does not claim that the Codex API route is token-free.
+
+Example after obtaining the canonical Feather file:
+
+    python scripts/v230_zenodo_exact_probe.py /path/to/flywire_synapses_783.feather
+
+An `EXACT_MATCH` result would establish exact membership of the 649 V230 rows in the public FAFB v783 synapse release and identify whether V230 coordinates are pre- or post-synaptic. It would not prove the historical extraction command or completeness.
+
 ## Project status
 
 V229 is a morphology-recovery milestone. V230 is currently a **provenance-unverified synapse-coordinate artifact**. The project does not claim from this CSV alone that it has recovered a verified set of 649 biological synapses or a complete T4/T5 connectivity circuit.
