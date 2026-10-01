@@ -15,7 +15,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Compile
-        run: python -m py_compile v229_recovery_runner.py scripts/v230_zenodo_exact_probe.py
+        run: python -m py_compile v229_recovery_runner.py scripts/v230_zenodo_exact_probe.py scripts/v230_proofread_pair_probe.py
       - name: Unit tests
         run: python test_v229_recovery_runner.py
       - name: V230 artifact validation
