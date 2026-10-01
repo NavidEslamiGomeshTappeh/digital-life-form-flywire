@@ -18,11 +18,26 @@
   ],
   "missing_required_v229_post_roots": [],
   "coordinate_ranges": {
-    "x": [706678, 795414],
-    "y": [208754, 278758],
-    "z": [199840, 227900]
+    "x": [
+      706678,
+      795414
+    ],
+    "y": [
+      208754,
+      278758
+    ],
+    "z": [
+      199840,
+      227900
+    ]
   },
-  "columns": ["pre_root_id", "post_root_id", "x", "y", "z"],
+  "columns": [
+    "pre_root_id",
+    "post_root_id",
+    "x",
+    "y",
+    "z"
+  ],
   "provenance": {
     "artifact_first_seen_commit": "e57b1ccc5b9f64964af223b6bf8e853579985fe0",
     "artifact_first_seen_commit_message": "V229 FlyWire morphology recovery and V230 synapse coordinates",
@@ -32,7 +47,17 @@
     "threshold_or_filter_proven": false,
     "biological_completeness_proven": false,
     "reproducible_extraction_path_proven": false,
-    "status": "UNVERIFIED"
+    "status": "UNVERIFIED",
+    "codex_documented_fafb_connection_threshold": {
+      "minimum_synapses": 5,
+      "source": "Codex FAQ / FAFB v783",
+      "interpretation": "V230 observed minimum of 5 rows per pre/post pair is consistent with the documented FAFB connectivity threshold, but this does not prove the historical V230 extraction used that rule."
+    },
+    "exact_coordinate_probe": {
+      "script": "scripts/v230_exact_provenance_probe.py",
+      "status": "READY_BUT_NOT_EXECUTED",
+      "reason": "Programmatic FlyWire/CAVE access requires an access token in the execution environment."
+    }
   },
   "observations": [
     "All 75 observed pre/post pairs contain at least 5 coordinate rows.",
