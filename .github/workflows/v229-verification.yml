@@ -15,11 +15,13 @@ jobs:
         with:
           python-version: "3.12"
       - name: Compile
-        run: python -m py_compile v229_recovery_runner.py scripts/v230_zenodo_exact_probe.py scripts/v230_proofread_pair_probe.py scripts/v231_circuit_fingerprint.py
+        run: python -m py_compile v229_recovery_runner.py scripts/v230_zenodo_exact_probe.py scripts/v230_proofread_pair_probe.py scripts/v231_circuit_fingerprint.py scripts/build_evidence_ledger.py
       - name: Unit tests
         run: python test_v229_recovery_runner.py
       - name: V231 structural fingerprint test
         run: python test_v231_circuit_fingerprint.py
+      - name: Evidence ledger test
+        run: python test_evidence_ledger.py
       - name: V230 artifact validation
         run: python test_v230_target_synapses.py
       - name: Dependency imports
