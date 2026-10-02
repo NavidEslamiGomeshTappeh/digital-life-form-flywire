@@ -1,0 +1,42 @@
+name: V242 exact midpoint provenance
+
+on:
+  push:
+    branches:
+      - v242-exact-midpoint-provenance
+    paths:
+      - "scripts/v242_exact_midpoint_provenance.py"
+      - "scripts/test_v242_exact_midpoint_provenance.py"
+      - "v230_results/V230_target_synapses.csv"
+      - ".github/workflows/v242-exact-midpoint-provenance.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-provenance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 420
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install "pyarrow>=18,<24"
+      - name: Unit tests
+        run: python -m pytest -q scripts/test_v242_exact_midpoint_provenance.py
+      - name: Download canonical FAFB v783 synapse table
+        run: |
+          curl --fail --location --retry 8 --retry-all-errors             --output /tmp/flywire_synapses_783.feather             "https://zenodo.org/records/10676866/files/flywire_synapses_783.feather?download=1"
+          md5sum /tmp/flywire_synapses_783.feather
+      - name: Exact midpoint provenance scan
+        run: |
+          python scripts/v242_exact_midpoint_provenance.py             --source /tmp/flywire_synapses_783.feather             --target-csv v230_results/V230_target_synapses.csv             --output /tmp/V242_exact_midpoint_provenance.json
+      - name: Upload provenance evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: V242-exact-midpoint-provenance
+          path: /tmp/V242_exact_midpoint_provenance.json
+          retention-days: 90
