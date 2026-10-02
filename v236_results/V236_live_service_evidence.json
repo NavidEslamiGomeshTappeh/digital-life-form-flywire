@@ -1,0 +1,29 @@
+{
+  "schema":"V236-live-service-evidence/v1",
+  "timestamp":"2026-10-02",
+  "services":{
+    "tinyfish":{
+      "status":"PASS",
+      "operation":"web_search",
+      "query":"site:zenodo.org FlyWire FAFB v783 synapses 10676866 flywire_synapses_783.feather",
+      "result":{
+        "title":"FlyWire Whole-brain Connectome Connectivity Data - Zenodo",
+        "url":"https://zenodo.org/records/10676866",
+        "snippet":"flywire_synapses_783.feather a pandas dataframe with all ~130 million synapses, their locations, neurotransmitter predictions and pre and post root IDs."
+      },
+      "evidence_boundary":"Proves live web-search access and discovery of the named Zenodo record; does not by itself prove local download or coordinate-level extraction."
+    },
+    "wolfram":{
+      "status":"PASS",
+      "operation":"independent_arithmetic_verification",
+      "inputs":{"vertices":138584,"directed_edges":3732460},
+      "outputs":{
+        "edges_per_vertex":26.9328,
+        "twice_edges_per_vertex":53.8657,
+        "edge_density_if_simple_directed_without_self_loops":0.000194344
+      },
+      "evidence_boundary":"Independent arithmetic check only; it does not validate the biological provenance of the vertex/edge counts."
+    }
+  },
+  "policy":"Service PASS means the service operation executed and returned a result. It does not upgrade any biological or dataset-provenance claim without source-specific evidence."
+}
