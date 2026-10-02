@@ -126,7 +126,7 @@ def build(args):
         if not result['regression']['pair_counts_exact'] or not result['regression']['individual_synapse_set_exact']:
             result['status'] = 'FAIL'
 
-    (output / 'MANIFEST.json').write_text(json.dumps(result, indent=2, ensure_ascii=False) + '\\n', encoding='utf-8')
+    (output / 'MANIFEST.json').write_text(json.dumps(result, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
     print(json.dumps({
         'status': result['status'],
         'dataset': args.dataset,
