@@ -38,8 +38,8 @@ def test_fixture_assigns_polarity_without_fake_coordinate_compartment(tmp_path: 
         f"{ROOTS[0]},999,10,20,30\n"
         f"999,{ROOTS[2]},40,50,60\n",
     )
-    report = build(v230, out)
-    # Exact 649-row regression is only for the real V230 artifact; fixture is allowed to be tiny.
+    report = build(v230, out, enforce_v230_regression=False)
+    # Exact 649-row regression is only for the real V230 artifact; this fixture is intentionally tiny.
     # The build contract is tested independently by the row classifier below.
     assert report["counts"]["rows"] == 2
 
