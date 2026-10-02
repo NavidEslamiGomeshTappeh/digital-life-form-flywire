@@ -1,0 +1,30 @@
+name: V254 Circuit Evidence Pack regression
+on:
+  push:
+    branches: [v254-reproducible-circuit-pack]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install test dependency
+        run: python -m pip install pytest
+      - name: Run unit tests
+        run: pytest -q scripts/test_v254_build_circuit_evidence_pack.py
+      - name: Download Codex v783 connections
+        run: curl --fail --location --retry 8 --retry-all-errors -o /tmp/connections.csv.gz 'https://storage.googleapis.com/flywire-data/codex/data/fafb/783/connections.csv.gz'
+      - name: Download Codex v783 synapse coordinates
+        run: curl --fail --location --retry 8 --retry-all-errors -o /tmp/synapse_coordinates.csv.gz 'https://storage.googleapis.com/flywire-data/codex/data/fafb/783/synapse_coordinates.csv.gz'
+      - name: Build and regression-check the four-neuron evidence pack
+        run: python scripts/v254_build_circuit_evidence_pack.py --connections /tmp/connections.csv.gz --synapses /tmp/synapse_coordinates.csv.gz --reference-v230 v230_results/V230_target_synapses.csv --output /tmp/V254_Circuit_Evidence_Pack
+      - name: Show manifest
+        run: cat /tmp/V254_Circuit_Evidence_Pack/MANIFEST.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: V254-Circuit-Evidence-Pack
+          path: /tmp/V254_Circuit_Evidence_Pack
+          retention-days: 90
