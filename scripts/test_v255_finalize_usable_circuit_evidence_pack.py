@@ -1,3 +1,4 @@
+import csv
 from __future__ import annotations
 
 import json
@@ -80,8 +81,8 @@ def test_usable_pack_end_to_end(tmp_path):
 
     write(
         ann,
-        "root_id\tcell_type\tcell_class\tsuper_class\n"
-        + "".join(f"{rid}\tType-{i}\tclass\tsuper\n" for i, rid in enumerate(ROOTS)),
+        "root_id\tcell_type\tcell_class\tsuper_class\tvfb_id\n"
+        + "".join(f"{rid}\tType-{i}\tclass\tsuper\tfw{['077172','091869','056211','077474'][i]}\n" for i, rid in enumerate(ROOTS)),
     )
 
     build(args_for(core, v230, ann, morph, out))
@@ -93,6 +94,10 @@ def test_usable_pack_end_to_end(tmp_path):
     assert manifest["counts"]["geometry_mapping_rows"] == 2
     assert manifest["exact_identity"]["status"] == "PASS"
     assert manifest["exact_morphology"]["status"] == "PASS"
+    identities = list(csv.DictReader((out / "identity.csv").open(encoding="utf-8")))
+    assert {r["vfb_id_from_annotation"] for r in identities} == {
+        "VFB_fw077172", "VFB_fw091869", "VFB_fw056211", "VFB_fw077474"
+    }
     assert (out / "identity.csv").exists()
     assert (out / "morphology_manifest.csv").exists()
     assert (out / "synapse_geometry_mapping.csv").exists()
