@@ -472,6 +472,13 @@ def build(args):
         ],
     }
 
+    (out / "REGENERATE.txt").write_text(
+        "This package was generated from exact FAFB v783 sources.\n\n"
+        + args.v254_command + "\n"
+        + args.v255_command + "\n",
+        encoding="utf-8",
+    )
+
     output_hashes = {}
     for path in sorted(out.rglob("*")):
         if path.is_file() and path.name != "PACKAGE_MANIFEST.json":
@@ -481,12 +488,6 @@ def build(args):
     (out / "PACKAGE_MANIFEST.json").write_text(
         json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
-    (out / "REGENERATE.txt").write_text(
-        "This package was generated from exact FAFB v783 sources.\n\n"
-        + args.v254_command + "\n"
-        + args.v255_command + "\n",
-        encoding="utf-8",
-    )
 
     if args.zip:
         zip_path = Path(args.zip)
@@ -495,9 +496,9 @@ def build(args):
             for path in sorted(out.rglob("*")):
                 if path.is_file():
                     zf.write(path, path.relative_to(out))
-        manifest["zip_sha256"] = sha256_file(zip_path)
-        (out / "PACKAGE_MANIFEST.json").write_text(
-            json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+        (zip_path.with_suffix(zip_path.suffix + ".sha256")).write_text(
+            sha256_file(zip_path) + "  " + zip_path.name + "\n",
+            encoding="utf-8",
         )
 
     print(json.dumps({
