@@ -33,6 +33,15 @@ To run the external checks as well, supply local copies of the official v783 Fea
 | V230 pair-level probe against proofread v783 connections | Implemented; awaiting source-file execution |
 | V231 reproducible structural fingerprint | Implemented and CI-tested |
 
+## V231 structural snapshot
+
+The repository now includes a machine-generated structural snapshot of the checked-in V230 artifact:
+
+- `v231_results/V231_structural_snapshot.json` — auditable graph metrics
+- `v231_results/V231_structural_connectome.svg` — 75 observed pre→post pairs visualized as a structural graph
+
+Open the SVG directly from the repository to inspect the current topology. The figure is explicitly labeled `STRUCTURE ONLY` and makes no biological provenance claim.
+
 ## V231 structural fingerprint
 
 V231 turns the V230 artifact into a machine-checkable target: canonical SHA-256, row/coordinate counts, neuron-pair counts, bidirectionality, self-loops, connected components and degree distributions.
