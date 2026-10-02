@@ -1,5 +1,50 @@
 # Digital Life Form — FlyWire
 
+> **A provenance-first attempt to reconstruct and validate a small visual microcircuit from the public FlyWire connectome.**
+>
+> **Current scientific status:** V229 morphology recovery is documented; V230 contains a 649-row synapse-coordinate artifact; V231 now gives that artifact a reproducible structural fingerprint. **Biological provenance of the 649 rows is still unverified.**
+
+[![V229 verification](https://github.com/mafiabax/digital-life-form-flywire/actions/workflows/v229-verification.yml/badge.svg)](https://github.com/mafiabax/digital-life-form-flywire/actions/workflows/v229-verification.yml)
+
+## What is unusual about this repository
+
+This project treats **evidence as part of the implementation**. A code test is not counted as biological proof, an inferred threshold is not recorded as a fact, and a matching-looking neuron is not accepted as the requested neuron.
+
+The central challenge is falsifiable:
+
+**Can the checked-in V230 coordinates be independently recovered from the canonical FAFB v783 release, row for row, without guessing?**
+
+The repository now contains the machinery to answer that question.
+
+## Current milestones
+
+| Milestone | State |
+|---|---|
+| V229 exact-root morphology recovery pipeline | Implemented |
+| V230 649-row structural validation | Implemented |
+| V230 provenance audit | Implemented; provenance is **UNVERIFIED** |
+| V230 exact coordinate probe against FAFB v783 | Implemented; awaiting source-file execution |
+| V230 pair-level probe against proofread v783 connections | Implemented; awaiting source-file execution |
+| V231 reproducible structural fingerprint | Implemented and CI-tested |
+
+## V231 structural fingerprint
+
+V231 turns the V230 artifact into a machine-checkable target: canonical SHA-256, row/coordinate counts, neuron-pair counts, bidirectionality, self-loops, connected components and degree distributions.
+
+Run:
+
+    python scripts/v231_circuit_fingerprint.py
+
+See docs/V231_STRUCTURAL_FINGERPRINT.md.
+
+## Research principle
+
+The project deliberately separates:
+
+**observed data → reproducible computation → source match → biological interpretation**
+
+No missing stage is silently promoted to a stronger claim.
+
 ## V229 FlyWire skeleton recovery
 
 This repository contains the recovery runner for four exact FlyWire v783 neuron skeletons. It is designed to fail closed: a similar or guessed neuron is never accepted as a substitute.
