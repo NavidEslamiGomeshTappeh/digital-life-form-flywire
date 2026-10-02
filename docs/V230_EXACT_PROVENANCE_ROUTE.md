@@ -1,31 +1,60 @@
 # V230 exact provenance route
 
-## Current evidence
+## Established source-level provenance
 
-The checked-in V230 coordinate artifact remains provenance-unverified.
+The checked-in `v230_results/V230_target_synapses.csv` contains 649 coordinate rows spanning 75 directed neuron pairs.
 
-Codex documents that its programmatic static-download endpoint uses a Codex API token. A CAVE token is a separate credential used for live source-project operations.
+A GitHub Actions run on the project scanned the frozen public FlyWire FAFB v783 synapse release:
 
-For an exact coordinate check without either token, the canonical public FAFB v783 Zenodo release is:
+- Zenodo record: https://zenodo.org/records/10676866
+- source file: `flywire_synapses_783.feather`
+- frozen-file MD5: `f8f1b97c9d4b0ea9b4c8b287f6b99091`
+- validation run: `37060692378`
 
-https://zenodo.org/records/10676866
+The V241 diagnostic artifact retains every canonical pre/post coordinate for each of the same 75 pairs. An independent deterministic post-processing check then reconstructed:
 
-The file required for exact row/coordinate matching is `flywire_synapses_783.feather` (9.5 GB; MD5 `f8f1b97c9d4b0ea9b4c8b287f6b99091`). It contains pre/post root IDs and both pre/post XYZ coordinates.
+`V230 (x,y,z) = ((pre_x+post_x)/2, (pre_y+post_y)/2, (pre_z+post_z)/2)`
 
-The smaller `proofread_connections_783.feather` (852 MB) can independently validate neuron-pair connectivity and synapse counts, but it does not contain the individual synapse coordinates, so it cannot by itself prove the 649 V230 coordinate rows.
+Results:
 
-## Exact test
+- 649/649 V230 rows reconstruct exactly.
+- 649/649 mappings are unique.
+- For every one of the 75 directed pairs, the number of canonical v783 rows equals the number of V230 rows for that pair.
+- Therefore the 649-row V230 file is the complete individual-synapse coordinate set for those 75 directed pairs in the frozen v783 artifact; it is not a random subset within those pairs.
 
-For each V230 row, compare:
+This establishes deterministic source-level reconstruction from the frozen v783 synapse records.
 
-`pre_root_id, post_root_id, x, y, z`
+## What the frozen source contains
 
-against both:
+The Zenodo v783 synapse table provides the presynaptic and postsynaptic root IDs plus separate XYZ coordinates for the two sides of each synapse. The reconstruction above uses those canonical pre/post points and the component-wise integer midpoint. This document does **not** call that midpoint the biological cleft center.
 
-`pre_pt_root_id, post_pt_root_id, pre_pt_position_x, pre_pt_position_y, pre_pt_position_z`
+## Live Codex/API route
 
-and:
+Independent public FlyWire analysis code documents the Codex per-neuron synapse-coordinate route:
 
-`pre_pt_root_id, post_pt_root_id, post_pt_position_x, post_pt_position_y, post_pt_position_z`
+`https://codex.flywire.ai/app/synapse_coordinates?root_id=<ROOT_ID>&dataset=fafb`
 
-A 649/649 exact match would establish that every checked-in V230 coordinate row exists in the public FAFB v783 synapse release and would identify the coordinate side. It would not prove the historical extraction command or completeness.
+The public example separates `in` and `out` synapse coordinate arrays and converts the returned raw voxel coordinates with `flywire_raw2nm`.
+
+Current Codex app pages require Google sign-in for server-side computations. That route therefore remains the correct live/API lineage to investigate, but the frozen Zenodo artifact is the reproducible public anchor used for the exact V230 reconstruction.
+
+## Historical producer
+
+The repository history begins with commit:
+
+`e57b1ccc5b9f64964af223b6bf8e853579985fe0`
+
+That commit has no parent and is the first commit containing the V230 CSV. The original historical command/script that produced the CSV is not present in Git history.
+
+Accordingly, the evidence chain currently has two distinct parts:
+
+1. **Proven:** V230 CSV -> deterministic midpoint reconstruction -> exact records in frozen FlyWire FAFB v783 Zenodo.
+2. **Still being traced:** the historical V230 generating command and its original live/API extraction call.
+
+## Reproduction artifacts
+
+The V241 artifact is retained in GitHub Actions. The independent 649-row midpoint mapping used to establish the reconstruction has SHA-256:
+
+`045183a5cbc268216c237a9708d44dd9a3ebb1d34b92e932226e7ce7e0e85d60`.
+
+The V248 workflow independently reruns the full frozen-source scan and records source row indices and synapse IDs when available.
