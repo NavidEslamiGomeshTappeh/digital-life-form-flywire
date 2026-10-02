@@ -317,18 +317,21 @@ def build(v230_path: Path, morphology_dir: Path, output_dir: Path) -> dict:
         writer.writeheader()
         writer.writerows(mapping_rows)
 
+    def fmt(value: float) -> str:
+        return f"{value:.12f}"
+
     def stats(entry: dict) -> dict:
         n = entry["rows"]
         return {
             "rows": n,
             "full_nearest_segment_inside_candidate": entry["full_inside"],
-            "full_nearest_segment_inside_candidate_pct": entry["full_inside"] / n if n else 0.0,
+            "full_nearest_segment_inside_candidate_pct": fmt(entry["full_inside"] / n) if n else "0.000000000000",
             "candidate_same_as_full_nearest_segment": entry["same_segment"],
-            "candidate_same_as_full_nearest_segment_pct": entry["same_segment"] / n if n else 0.0,
-            "max_full_centerline_distance_nm": max(entry["full_dist"]) if n else 0.0,
-            "mean_full_centerline_distance_nm": sum(entry["full_dist"]) / n if n else 0.0,
-            "max_candidate_centerline_distance_nm": max(entry["candidate_dist"]) if n else 0.0,
-            "mean_candidate_centerline_distance_nm": sum(entry["candidate_dist"]) / n if n else 0.0,
+            "candidate_same_as_full_nearest_segment_pct": fmt(entry["same_segment"] / n) if n else "0.000000000000",
+            "max_full_centerline_distance_nm": fmt(max(entry["full_dist"])) if n else "0.000000000000",
+            "mean_full_centerline_distance_nm": fmt(sum(entry["full_dist"]) / n) if n else "0.000000000000",
+            "max_candidate_centerline_distance_nm": fmt(max(entry["candidate_dist"])) if n else "0.000000000000",
+            "mean_candidate_centerline_distance_nm": fmt(sum(entry["candidate_dist"]) / n) if n else "0.000000000000",
         }
 
     per_root = {}
@@ -337,10 +340,10 @@ def build(v230_path: Path, morphology_dir: Path, output_dir: Path) -> dict:
         best = alg["best"]
         per_root[info["name"]] = {
             "root_id": root_id, "swc_sha256": tree["sha256"],
-            "swc_node_count": len(tree["nodes"]), "total_cable_nm": tree["total_cable"],
+            "swc_node_count": len(tree["nodes"]), "total_cable_nm": fmt(tree["total_cable"]),
             "leaf_count": alg["leaf_count"], "selected_algorithm_node_id": best["id"],
-            "selected_algorithm_node_row": best["row"], "published_algorithm_score": best["score"],
-            "subtree_cable_nm": best["subtree_cable"], "subtree_leaf_count": best["subtree_leaves"],
+            "selected_algorithm_node_row": best["row"], "published_algorithm_score": fmt(best["score"]),
+            "subtree_cable_nm": fmt(best["subtree_cable"]), "subtree_leaf_count": best["subtree_leaves"],
             "subtree_node_count": len(alg["members"]),
             "roles": {"pre": stats(by_root[root_id]["pre"]), "post": stats(by_root[root_id]["post"])},
         }
