@@ -2,7 +2,7 @@
   "provenance_status": "DETERMINISTIC_FROZEN_V783_MAPPING_ESTABLISHED",
   "target_artifact": {
     "path": "v230_results/V230_target_synapses.csv",
-    "sha256": "507fc706cc29781457ed502ae0ebdf328a4bae33",
+    "git_blob_sha": "507fc706cc29781457ed502ae0ebdf328a4bae33",
     "rows": 649,
     "unique_directed_pairs": 75
   },
