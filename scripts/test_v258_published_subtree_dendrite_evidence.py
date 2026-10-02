@@ -57,7 +57,11 @@ def test_exact_project_regression_has_649_rows() -> None:
 
 def test_anchor_endpoint_rule_fails_on_non_anchor_row(tmp_path: Path) -> None:
     v230 = tmp_path / "V230.csv"
-    write(v230, "pre_root_id,post_root_id,x,y,z\n111,222,1,2,3\n")
+    write(
+        v230,
+        "pre_root_id,post_root_id,x,y,z\n"
+        + ("111,222,1,2,3\n" * 649),
+    )
     morph = tmp_path / "morph"
     for name, rid in ROOTS.items():
         write(morph / f"{name}_{rid}.swc", "1 1 0 0 0 1 -1\n2 3 1 0 0 1 1\n")
