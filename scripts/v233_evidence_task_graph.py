@@ -104,7 +104,14 @@ def main():
     if args.budget_seconds < 5: raise SystemExit("--budget-seconds must be >= 5")
     state_path, plan_path = Path(args.state), Path(args.plan)
     state = load_state(state_path)
-    merge_plan(state, json.loads(plan_path.read_text(encoding="utf-8")))
+    plan_bytes = plan_path.read_bytes()
+    plan_sha256 = hashlib.sha256(plan_bytes).hexdigest()
+    plan = json.loads(plan_bytes.decode("utf-8"))
+    merge_plan(state, plan)
+    if "plan_sha256" in state and state["plan_sha256"] != plan_sha256:
+        raise ValueError("checkpoint plan digest mismatch; refusing unsafe resume")
+    state["plan_sha256"] = plan_sha256
+    state["checkpoint_schema"] = "V234-checkpoint/v1"
     state["worker"] = {"host": socket.gethostname(), "pid": os.getpid(), "started_at": now(), "budget_seconds": args.budget_seconds}
     atomic_write(state_path, state)
     deadline = time.monotonic() + args.budget_seconds
