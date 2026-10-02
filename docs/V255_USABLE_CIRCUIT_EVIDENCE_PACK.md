@@ -23,6 +23,10 @@ This is deliberate: a usable scientific package is more valuable than a convenie
 
 ## Reproduction flow
 
+The GitHub Actions workflow installs its test runner explicitly before executing the fail-closed tests:
+
+python -m pip install pytest
+
 The GitHub Actions workflow:
 
 1. downloads official Codex FAFB v783 connections;
