@@ -258,7 +258,10 @@ def build(args):
 
     v230_rows = read_csv_rows(v230, ["pre_root_id", "post_root_id", "x", "y", "z"])
     synapses = read_csv_rows(out / "synapses_selected.csv", ["pre_root_id", "post_root_id", "x", "y", "z"])
-    if synapses != v230_rows:
+    def row_key(row):
+        return (row["pre_root_id"], row["post_root_id"], row["x"], row["y"], row["z"])
+
+    if sorted(map(row_key, synapses)) != sorted(map(row_key, v230_rows)):
         raise RuntimeError("V254 core synapse rows do not exactly reproduce V230 artifact")
 
     annotation_fields, root_field, annotation_rows = load_annotations(annotation_path)
