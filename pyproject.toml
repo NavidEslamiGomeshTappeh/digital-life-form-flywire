@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "digital-life-form-flywire"
-version = "0.229.0"
-description = "Exact FlyWire v783 neuron skeleton recovery and validation tools."
+version = "0.231.0"
+description = "Provenance-first FlyWire v783 morphology, synapse validation, and reproducibility tools."
 requires-python = ">=3.12"
 dependencies = ["fafbseg==3.2.2", "navis>=1.10", "pyarrow>=18"]
 
