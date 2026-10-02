@@ -15,7 +15,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Compile
-        run: python -m py_compile v229_recovery_runner.py scripts/v230_zenodo_exact_probe.py scripts/v230_proofread_pair_probe.py scripts/v231_circuit_fingerprint.py scripts/build_evidence_ledger.py scripts/run_v231_audit.py scripts/v231_evidence_engine.py
+        run: python -m py_compile v229_recovery_runner.py scripts/v230_zenodo_exact_probe.py scripts/v230_proofread_pair_probe.py scripts/v231_circuit_fingerprint.py scripts/build_evidence_ledger.py scripts/run_v231_audit.py scripts/v231_evidence_engine.py scripts/build_v231_target_capsule.py
       - name: Unit tests
         run: python test_v229_recovery_runner.py
       - name: V231 structural fingerprint test
@@ -24,6 +24,8 @@ jobs:
         run: python test_evidence_ledger.py
       - name: Evidence engine test
         run: python test_v231_evidence_engine.py
+      - name: Target capsule test
+        run: python scripts/test_v231_target_capsule.py
       - name: End-to-end local audit test
         run: python test_v231_audit.py
       - name: V230 artifact validation
