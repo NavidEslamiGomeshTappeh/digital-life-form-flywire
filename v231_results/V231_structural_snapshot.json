@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "milestone": "V231",
+  "source_artifact": "v230_results/V230_target_synapses.csv",
+  "row_count": 649,
+  "unique_pre_root_ids": 33,
+  "unique_post_root_ids": 38,
+  "unique_pre_post_pairs": 75,
+  "coordinate_triplets_unique": true,
+  "target_posts": [
+    {
+      "root_id": "720575940632008007",
+      "coordinate_rows_as_post": 113,
+      "coordinate_rows_as_pre": 84
+    },
+    {
+      "root_id": "720575940616224414",
+      "coordinate_rows_as_post": 45,
+      "coordinate_rows_as_pre": 120
+    },
+    {
+      "root_id": "720575940625571465",
+      "coordinate_rows_as_post": 91,
+      "coordinate_rows_as_pre": 72
+    },
+    {
+      "root_id": "720575940617782941",
+      "coordinate_rows_as_post": 69,
+      "coordinate_rows_as_pre": 55
+    }
+  ],
+  "top_pairs": [
+    {
+      "pre": "720575940626979621",
+      "post": "720575940625571465",
+      "coordinate_rows": 21
+    },
+    {
+      "pre": "720575940635066798",
+      "post": "720575940625571465",
+      "coordinate_rows": 21
+    },
+    {
+      "pre": "720575940632008007",
+      "post": "720575940632504874",
+      "coordinate_rows": 20
+    },
+    {
+      "pre": "720575940617782941",
+      "post": "720575940616358722",
+      "coordinate_rows": 18
+    },
+    {
+      "pre": "720575940630799226",
+      "post": "720575940632008007",
+      "coordinate_rows": 18
+    },
+    {
+      "pre": "720575940632008007",
+      "post": "720575940615933919",
+      "coordinate_rows": 18
+    },
+    {
+      "pre": "720575940626979621",
+      "post": "720575940617782941",
+      "coordinate_rows": 16
+    },
+    {
+      "pre": "720575940616224414",
+      "post": "720575940644651812",
+      "coordinate_rows": 14
+    },
+    {
+      "pre": "720575940608305756",
+      "post": "720575940625571465",
+      "coordinate_rows": 13
+    },
+    {
+      "pre": "720575940612197986",
+      "post": "720575940616224414",
+      "coordinate_rows": 13
+    },
+    {
+      "pre": "720575940616224414",
+      "post": "720575940618898715",
+      "coordinate_rows": 13
+    },
+    {
+      "pre": "720575940607385283",
+      "post": "720575940632008007",
+      "coordinate_rows": 12
+    },
+    {
+      "pre": "720575940626979621",
+      "post": "720575940616224414",
+      "coordinate_rows": 12
+    },
+    {
+      "pre": "720575940626979621",
+      "post": "720575940632008007",
+      "coordinate_rows": 12
+    },
+    {
+      "pre": "720575940616224414",
+      "post": "720575940617278109",
+      "coordinate_rows": 11
+    },
+    {
+      "pre": "720575940616224414",
+      "post": "720575940630475351",
+      "coordinate_rows": 11
+    },
+    {
+      "pre": "720575940617782941",
+      "post": "720575940608552405",
+      "coordinate_rows": 11
+    },
+    {
+      "pre": "720575940625571465",
+      "post": "720575940632504874",
+      "coordinate_rows": 11
+    },
+    {
+      "pre": "720575940632008007",
+      "post": "720575940626979621",
+      "coordinate_rows": 11
+    },
+    {
+      "pre": "720575940635066798",
+      "post": "720575940617782941",
+      "coordinate_rows": 11
+    }
+  ],
+  "bidirectional_pair_count": 6,
+  "undirected_edge_count": 69,
+  "status": "STRUCTURE_ONLY",
+  "scientific_note": "No biological provenance claim is made by this report."
+}
