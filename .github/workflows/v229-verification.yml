@@ -9,6 +9,7 @@ on:
 jobs:
   unit:
     runs-on: ubuntu-latest
+    timeout-minutes: 350
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -26,6 +27,10 @@ jobs:
         run: python test_v231_evidence_engine.py
       - name: Target capsule test
         run: python scripts/test_v231_target_capsule.py
+      - name: Persistent worker test
+        run: python scripts/test_v232_persistent_worker.py
+      - name: Compile persistent worker
+        run: python -m py_compile scripts/v232_persistent_worker.py
       - name: End-to-end local audit test
         run: python test_v231_audit.py
       - name: V230 artifact validation
