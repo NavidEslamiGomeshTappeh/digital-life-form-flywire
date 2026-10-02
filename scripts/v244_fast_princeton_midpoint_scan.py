@@ -81,7 +81,7 @@ def main():
         "source_dataset":"FlyWire FAFB v783 Princeton Synapse Table",
         "source_url":SOURCE_URL,
         "v230_rows":649,
-        "target_pairs":int(pairs.height),
+        "target_pairs":int(pairs.select(pl.len()).collect(engine="streaming").item()),
         "matched_midpoint_rows":int(matched.height),
         "ambiguous_matches":int(ambiguous),
         "ctr_equals_v230_midpoint":int(ctr_equal),
