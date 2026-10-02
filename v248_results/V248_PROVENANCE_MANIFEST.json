@@ -21,7 +21,14 @@
     "unique_mappings": 649,
     "all_exact": true,
     "independent_local_evidence": "/mnt/data/V241_extract/V242_midpoint_reconstruction_649.json",
-    "independent_local_evidence_sha256": "045183a5cbc268216c237a9708d44dd9a3ebb1d34b92e932226e7ce7e0e85d60"
+    "independent_local_evidence_sha256": "045183a5cbc268216c237a9708d44dd9a3ebb1d34b92e932226e7ce7e0e85d60",
+    "pair_exhaustiveness": {
+      "directed_pairs_checked": 75,
+      "directed_pairs_with_canonical_count_equal_target_count": 75,
+      "target_rows": 649,
+      "canonical_rows_for_target_pairs": 649,
+      "exhaustive_within_frozen_v783_pairs": true
+    }
   },
   "history": {
     "v230_csv_first_commit": "e57b1ccc5b9f64964af223b6bf8e853579985fe0",
@@ -31,7 +38,8 @@
   "live_cortex_crosscheck": {
     "current_codex_princeton_synapse_table": "fafb_v783_princeton_synapse_table.csv.gz",
     "current_export_is_not_used_as_the_frozen_provenance_anchor": true,
-    "reason": "The project target is historically anchored to the frozen v783 Zenodo artifact; current Codex exports can be regenerated separately."
+    "reason": "The project target is historically anchored to the frozen v783 Zenodo artifact; current Codex exports can be regenerated separately.",
+    "note": "Current Codex per-neuron synapse-coordinate pages are sign-in gated for server-side computation; public analysis code documents the endpoint and raw-to-nm conversion."
   },
   "interpretation": {
     "claim": "The 649 V230 coordinates are exactly reconstructable from canonical frozen FAFB v783 synapse records using the midpoint transform.",
