@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from types import SimpleNamespace
 
 from scripts.v255_finalize_usable_circuit_evidence_pack import build
 
@@ -29,24 +30,22 @@ def tiny_swc(path: Path, rid: str):
 
 
 def args_for(core, v230, ann, morph, out):
-    class Args:
-        core_dir = str(core)
-        v230 = str(v230)
-        annotations = str(ann)
-        morphology_dir = str(morph)
-        output = str(out)
-        zip = None
-        dataset = "FAFB v783"
-        annotation_tag = "v3.2.0"
-        annotation_commit = "test-commit"
-        annotation_url = "https://example.invalid/annotations"
-        software_revision = "test"
-        v254_command = "python scripts/v254_build_circuit_evidence_pack.py ..."
-        v255_command = "python scripts/v255_finalize_usable_circuit_evidence_pack.py ..."
-        max_distance_nm = None
-
-    return Args
-
+    return SimpleNamespace(
+        core_dir=str(core),
+        v230=str(v230),
+        annotations=str(ann),
+        morphology_dir=str(morph),
+        output=str(out),
+        zip=None,
+        dataset="FAFB v783",
+        annotation_tag="v3.2.0",
+        annotation_commit="test-commit",
+        annotation_url="https://example.invalid/annotations",
+        software_revision="test",
+        v254_command="python scripts/v254_build_circuit_evidence_pack.py ...",
+        v255_command="python scripts/v255_finalize_usable_circuit_evidence_pack.py ...",
+        max_distance_nm=None,
+    )
 
 def test_usable_pack_end_to_end(tmp_path):
     core = tmp_path / "core"
