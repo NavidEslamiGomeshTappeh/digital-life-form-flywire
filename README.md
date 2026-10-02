@@ -49,6 +49,21 @@ V255 makes the evidence consumable as a real package containing:
 
 The package never invents a biological compartment label. Geometry is reported as geometry.
 
+## V256 — biological compartment evidence audit
+
+V256 adds a source-backed cell-level polarity layer over the exact V230 synapse set.
+
+For the 649 V230 rows:
+- 331 rows have one of the four anchors as the presynaptic neuron and are classified at cell level as axon-terminal output;
+- 318 rows have one of the four anchors as the postsynaptic neuron and are classified at cell level as dendritic input;
+- exact coordinate-level compartment remains **UNRESOLVED**.
+
+This distinction is deliberate. Published T4/T5 anatomy supports the cell-level input/output organization, but nearest-SWC geometry alone is not treated as proof of the biological compartment of an individual synapse.
+
+V256 is enforced by GitHub Actions and the current audit completed with **5/5 tests passing** and the expected 649-row regression.
+
+See `docs/V256_COMPARTMENT_EVIDENCE_AUDIT.md` and `scripts/v256_compartment_evidence_audit.py`.
+
 ## What makes the project useful
 
 The practical target is a researcher who already knows the neurons of interest and needs a trustworthy, portable model input.
