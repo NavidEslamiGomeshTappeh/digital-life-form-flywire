@@ -1,7 +1,23 @@
 cff-version: 1.2.0
-title: Digital Life Form — FlyWire
-version: 0.231.0
-date-released: 2026-10-02
+title: "Digital Life Form — FlyWire"
+version: "0.255.0"
+date-released: 2026-10-03
 type: software
-repository-code: https://github.com/mafiabax/digital-life-form-flywire
-abstract: Provenance-first tools for exact FlyWire v783 neuron morphology recovery, synapse-coordinate validation, and reproducible evidence tracking.
+authors:
+  - given-names: "نوید"
+    family-names: "گُمِش تَپِّه"
+repository-code: "https://github.com/mafiabax/digital-life-form-flywire"
+abstract: >
+  Provenance-first tools for exact FlyWire v783 neuron identity, connectivity,
+  individual synapse-coordinate recovery, morphology binding, and reproducible
+  Circuit Evidence Pack generation.
+keywords:
+  - FlyWire
+  - FAFB
+  - connectomics
+  - neuroscience
+  - provenance
+  - reproducibility
+  - synapse
+  - morphology
+  - neural circuits
