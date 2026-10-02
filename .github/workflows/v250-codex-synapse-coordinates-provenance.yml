@@ -1,0 +1,30 @@
+name: V250 Codex synapse_coordinates provenance
+on:
+  push:
+    branches: [v250-codex-synapse-coordinates-provenance]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  provenance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download Codex v783 synapse_coordinates
+        run: |
+          curl --fail --location --retry 8 --retry-all-errors \
+            --output /tmp/synapse_coordinates.csv.gz \
+            "https://storage.googleapis.com/flywire-data/codex/data/fafb/783/synapse_coordinates.csv.gz"
+          sha256sum /tmp/synapse_coordinates.csv.gz
+      - name: Scan exact V230 coordinates
+        run: |
+          python scripts/v250_codex_synapse_coordinates_provenance.py \
+            --source /tmp/synapse_coordinates.csv.gz \
+            --target v230_results/V230_target_synapses.csv \
+            --output /tmp/V250_codex_synapse_coordinates.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: V250-codex-synapse-coordinates-provenance
+          path: /tmp/V250_codex_synapse_coordinates.json
+          retention-days: 90
