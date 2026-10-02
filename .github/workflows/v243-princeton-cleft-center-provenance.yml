@@ -1,0 +1,30 @@
+name: V243 Princeton cleft-center provenance
+on:
+  push:
+    branches: [v243-princeton-cleft-center-provenance]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  provenance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install pytest
+      - run: python -m pytest -q scripts/test_v243_princeton_cleft_center_provenance.py
+      - name: Download Princeton FAFB v783 Synapse Table
+        run: |
+          curl --fail --location --retry 8 --retry-all-errors             --output /tmp/fafb_v783_princeton_synapse_table.csv.gz             "https://storage.googleapis.com/flywire-data/codex/data/fafb/783/fafb_v783_princeton_synapse_table.csv.gz"
+          gzip -t /tmp/fafb_v783_princeton_synapse_table.csv.gz
+      - name: Exact midpoint + cleft-center scan
+        run: |
+          python scripts/v243_princeton_cleft_center_provenance.py             --source /tmp/fafb_v783_princeton_synapse_table.csv.gz             --target-csv v230_results/V230_target_synapses.csv             --output /tmp/V243_princeton_cleft_center.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: V243-princeton-cleft-center-provenance
+          path: /tmp/V243_princeton_cleft_center.json
+          retention-days: 90
