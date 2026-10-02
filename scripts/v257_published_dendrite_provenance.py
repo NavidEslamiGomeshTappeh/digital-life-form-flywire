@@ -53,7 +53,9 @@ def build(source_path: Path, output_dir: Path) -> dict:
                 f"table-index mismatch for {rid}: expected {expected['table_index']}, got {actual_index}"
             )
         if subtype != expected["subtype"]:
-            raise RuntimeError(f"subtype mismatch for {rid}: expected {expected["subtype"]}, got {subtype}")
+            raise RuntimeError(
+                f"subtype mismatch for {rid}: expected {expected['subtype']}, got {subtype}"
+            )
         if not dendrite_used:
             raise RuntimeError(f"Dendrite_used is not true for exact root {rid}")
         evidence.append({
