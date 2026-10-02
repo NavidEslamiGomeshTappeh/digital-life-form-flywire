@@ -16,6 +16,12 @@ The central challenge is falsifiable:
 
 The repository now contains the machinery to answer that question.
 
+For a local, data-independent audit of the current evidence stack:
+
+    python scripts/run_v231_audit.py
+
+To run the external checks as well, supply local copies of the official v783 Feather files with `--proofread` and/or `--synapses`.
+
 ## Current milestones
 
 | Milestone | State |
@@ -36,6 +42,10 @@ Run:
     python scripts/v231_circuit_fingerprint.py
 
 See docs/V231_STRUCTURAL_FINGERPRINT.md.
+
+## Independent verification challenge
+
+Issue #1 is an explicit public challenge to reproduce the 649 coordinate rows from the canonical FAFB v783 release: https://github.com/mafiabax/digital-life-form-flywire/issues/1
 
 ## Research principle
 
