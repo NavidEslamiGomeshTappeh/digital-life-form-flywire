@@ -106,10 +106,13 @@ def main():
     state = load_state(state_path)
     plan_bytes = plan_path.read_bytes()
     plan_sha256 = hashlib.sha256(plan_bytes).hexdigest()
-    plan = json.loads(plan_bytes.decode("utf-8"))
-    merge_plan(state, plan)
+    # Validate the checkpoint binding BEFORE merging the plan. Otherwise an edited
+    # task can raise the generic immutable-definition error and hide the intended
+    # V234 safety boundary.
     if "plan_sha256" in state and state["plan_sha256"] != plan_sha256:
         raise ValueError("checkpoint plan digest mismatch; refusing unsafe resume")
+    plan = json.loads(plan_bytes.decode("utf-8"))
+    merge_plan(state, plan)
     state["plan_sha256"] = plan_sha256
     state["checkpoint_schema"] = "V234-checkpoint/v1"
     state["worker"] = {"host": socket.gethostname(), "pid": os.getpid(), "started_at": now(), "budget_seconds": args.budget_seconds}
