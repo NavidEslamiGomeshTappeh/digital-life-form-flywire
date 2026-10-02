@@ -27,3 +27,5 @@ jobs:
           name: V247-neuropil-count-provenance
           path: /tmp/V247.json
           retention-days: 90
+
+# trigger: v247 rerun after workflow registration
