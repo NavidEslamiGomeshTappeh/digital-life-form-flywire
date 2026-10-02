@@ -4,7 +4,7 @@
 
 ## Author
 
-**نوید گُمِش تَپِّه**
+**Navid Eslami Gomesh Tappeh**
 
 This project is developed as a research-engineering effort focused on reproducible connectomics evidence and downstream neural modeling.
 
