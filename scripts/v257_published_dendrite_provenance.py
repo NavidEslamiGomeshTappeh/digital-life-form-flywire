@@ -48,8 +48,9 @@ def build(source_path: Path, output_dir: Path) -> dict:
         subtype = row["Subtype"].strip()
         dendrite_used = as_bool(row["Dendrite_used"])
         if row.get("", "").strip() != expected["table_index"]:
+            actual_index = row.get("", "").strip()
             raise RuntimeError(
-                f"table-index mismatch for {rid}: expected {expected["table_index"]}, got {row.get("", "").strip()}"
+                f"table-index mismatch for {rid}: expected {expected['table_index']}, got {actual_index}"
             )
         if subtype != expected["subtype"]:
             raise RuntimeError(f"subtype mismatch for {rid}: expected {expected["subtype"]}, got {subtype}")
