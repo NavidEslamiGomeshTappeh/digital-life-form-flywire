@@ -1,4 +1,5 @@
 name: V254 Circuit Evidence Pack regression
+# Live v783 regression: this workflow is the executable acceptance test for the first Circuit Evidence Pack.
 on:
   push:
     branches: [v254-reproducible-circuit-pack]
