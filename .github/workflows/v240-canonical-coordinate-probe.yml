@@ -1,0 +1,38 @@
+name: V240 canonical coordinate probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/v240_canonical_coordinate_probe.py"
+      - ".github/workflows/v240-canonical-coordinate-probe.yml"
+      - "v230_results/V230_target_synapses.csv"
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install "pyarrow>=18,<24"
+      - name: Download canonical v783 synapse table
+        run: |
+          curl --fail --location --retry 5 --retry-all-errors             --output /tmp/flywire_synapses_783.feather             "https://zenodo.org/records/10676866/files/flywire_synapses_783.feather?download=1"
+          md5sum /tmp/flywire_synapses_783.feather
+      - name: Run coordinate probe
+        run: |
+          python scripts/v240_canonical_coordinate_probe.py             --source /tmp/flywire_synapses_783.feather             --target-csv v230_results/V230_target_synapses.csv             --output /tmp/V240_coordinate_probe.json
+      - name: Publish evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: V240-canonical-coordinate-probe
+          path: /tmp/V240_coordinate_probe.json
+          retention-days: 90
