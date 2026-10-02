@@ -27,7 +27,7 @@ jobs:
       - name: Restore newest V233 state artifact
         shell: bash
         env:
-          GH_TOKEN: \${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           mkdir -p v233_state
@@ -47,6 +47,23 @@ jobs:
             echo "NO_PREVIOUS_STATE"
           fi
 
+      - name: Verify checkpoint provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f v233_state/task_graph_state.json ]; then
+            python - <<'PY'
+import hashlib, json, pathlib
+p=pathlib.Path("v233_state/task_graph_state.json")
+s=json.loads(p.read_text())
+if s.get("schema") != "V233-task-graph/v1":
+    raise SystemExit("checkpoint schema mismatch")
+expected=hashlib.sha256(pathlib.Path("v233_results/V233_plan.json").read_bytes()).hexdigest()
+if s.get("plan_sha256") != expected:
+    raise SystemExit("checkpoint plan digest mismatch; refusing unsafe resume")
+print("CHECKPOINT_VALID", expected)
+PY
+          fi
       - name: Compile V233 worker
         run: python -m py_compile scripts/v233_evidence_task_graph.py
 
