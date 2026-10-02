@@ -46,16 +46,15 @@ def main():
                 if pre not in TARGETS and post not in TARGETS:
                     continue
                 pair_hits[(pre,post)]=pair_hits.get((pre,post),0)+1
-                pxyz=tuple(norm(r[c]) for c in pre_xyz)
-                qxyz=tuple(norm(r[c]) for c in post_xyz)
-                key=(pre,post,*pxyz)
+                xyz=tuple(norm(r[col]) for col in ["x","y","z"])
+                key=(pre,post,*xyz)
                 if key in expected:
                     matched.setdefault(key,[]).append({
-                            "coord_kind":"canonical_xyz",
-                            "pre_root_id":pre,
-                            "post_root_id":post,
-                            "x":xyz[0],"y":xyz[1],"z":xyz[2]
-                        })
+                        "coord_kind":"canonical_xyz",
+                        "pre_root_id":pre,
+                        "post_root_id":post,
+                        "x":xyz[0],"y":xyz[1],"z":xyz[2]
+                    })
     exact=sum(1 for v in matched.values() if v)
     ambiguous=sum(1 for v in matched.values() if len(v)>1)
     result={
