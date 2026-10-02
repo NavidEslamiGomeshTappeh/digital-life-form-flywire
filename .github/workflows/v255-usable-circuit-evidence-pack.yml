@@ -1,0 +1,80 @@
+name: V255 usable circuit evidence pack
+
+on:
+  push:
+    branches:
+      - v255-usable-circuit-evidence-pack
+  pull_request:
+    branches:
+      - main
+      - v255-usable-circuit-evidence-pack
+
+jobs:
+  build-usable-pack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test runner
+        run: python -m pip install --disable-pip-version-check pytest
+
+      - name: Unit tests
+        run: python -m pytest -q scripts/test_v255_finalize_usable_circuit_evidence_pack.py
+
+      - name: Download official Codex v783 connections
+        run: |
+          curl -L --fail --retry 3             https://storage.googleapis.com/flywire-data/codex/data/fafb/783/connections.csv.gz             -o /tmp/connections.csv.gz
+
+      - name: Download official Codex v783 individual synapse coordinates
+        run: |
+          curl -L --fail --retry 3             https://storage.googleapis.com/flywire-data/codex/data/fafb/783/synapse_coordinates.csv.gz             -o /tmp/synapse_coordinates.csv.gz
+
+      - name: Download pinned FlyWire annotation release
+        run: |
+          curl -L --fail --retry 3             https://raw.githubusercontent.com/flyconnectome/flywire_annotations/a83b2776d60d5764cef36b927f5f9679c16c47a2/supplemental_files/Supplemental_file1_neuron_annotations.tsv             -o /tmp/Supplemental_file1_neuron_annotations.tsv
+
+      - name: Verify annotation source file exists
+        run: |
+          sha256sum /tmp/Supplemental_file1_neuron_annotations.tsv
+          test -s /tmp/Supplemental_file1_neuron_annotations.tsv
+
+      - name: Build V254 reproducible core
+        run: |
+          python scripts/v254_build_circuit_evidence_pack.py             --connections /tmp/connections.csv.gz             --synapses /tmp/synapse_coordinates.csv.gz             --output /tmp/v254_core             --dataset "FAFB v783"             --reference-v230 v230_results/V230_target_synapses.csv
+
+      - name: Finalize V255 usable package
+        run: |
+          python scripts/v255_finalize_usable_circuit_evidence_pack.py             --core-dir /tmp/v254_core             --v230 v230_results/V230_target_synapses.csv             --annotations /tmp/Supplemental_file1_neuron_annotations.tsv             --morphology-dir v229_results             --output /tmp/v255_pack             --zip /tmp/DLF_V255_FAFB783_Circuit_Evidence_Pack.zip             --dataset "FAFB v783"             --annotation-tag "v3.2.0"             --annotation-commit "a83b2776d60d5764cef36b927f5f9679c16c47a2"             --annotation-url "https://raw.githubusercontent.com/flyconnectome/flywire_annotations/a83b2776d60d5764cef36b927f5f9679c16c47a2/supplemental_files/Supplemental_file1_neuron_annotations.tsv"             --software-revision "$GITHUB_SHA"             --v254-command "python scripts/v254_build_circuit_evidence_pack.py --connections /tmp/connections.csv.gz --synapses /tmp/synapse_coordinates.csv.gz --output /tmp/v254_core --dataset 'FAFB v783' --reference-v230 v230_results/V230_target_synapses.csv"             --v255-command "python scripts/v255_finalize_usable_circuit_evidence_pack.py --core-dir /tmp/v254_core --v230 v230_results/V230_target_synapses.csv --annotations /tmp/Supplemental_file1_neuron_annotations.tsv --morphology-dir v229_results --output /tmp/v255_pack"
+
+      - name: Print package summary
+        run: |
+          python - <<'PY'
+          import json
+          p = json.load(open('/tmp/v255_pack/PACKAGE_MANIFEST.json', encoding='utf-8'))
+          print(json.dumps({
+              'status': p['status'],
+              'counts': p['counts'],
+              'identity_status': p['exact_identity']['status'],
+              'morphology_status': p['exact_morphology']['status'],
+              'geometry_status': p['geometry_mapping']['status'],
+              'known_limits': p['known_limits'],
+          }, indent=2))
+          PY
+
+      - name: Publish package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: V255-FAFB783-Circuit-Evidence-Pack
+          path: |
+            /tmp/DLF_V255_FAFB783_Circuit_Evidence_Pack.zip
+            /tmp/DLF_V255_FAFB783_Circuit_Evidence_Pack.zip.sha256
+            /tmp/v255_pack/PACKAGE_MANIFEST.json
+            /tmp/v255_pack/identity.csv
+            /tmp/v255_pack/morphology_manifest.csv
+            /tmp/v255_pack/synapse_geometry_mapping.csv

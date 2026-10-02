@@ -1,147 +1,81 @@
 # Digital Life Form — FlyWire
 
-> **A provenance-first attempt to reconstruct and validate a small visual microcircuit from the public FlyWire connectome.**
->
-> **Current scientific status:** V229 morphology recovery is documented; V230 contains a 649-row synapse-coordinate artifact; V231 now gives that artifact a reproducible structural fingerprint. **Biological provenance of the 649 rows is still unverified.**
+> An auditable pipeline for turning exact FlyWire neuron IDs into reproducible circuit evidence and, eventually, biophysically usable neuron models.
 
-[![V229 verification](https://github.com/mafiabax/digital-life-form-flywire/actions/workflows/v229-verification.yml/badge.svg)](https://github.com/mafiabax/digital-life-form-flywire/actions/workflows/v229-verification.yml)
+## The problem
 
-## What is unusual about this repository
+FlyWire already has strong tools for data access, annotations, morphology and connectivity. This project targets the handoff between those layers:
 
-This project treats **evidence as part of the implementation**. A code test is not counted as biological proof, an inferred threshold is not recorded as a fact, and a matching-looking neuron is not accepted as the requested neuron.
+**exact root IDs → exact identity → directed connectivity → individual synapses → exact morphology → measured geometry → downstream modeling**
 
-The central challenge is falsifiable:
+The reusable output is a **Circuit Evidence Pack**: a version-pinned bundle with exact data, hashes, transformations and validation evidence.
 
-**Can the checked-in V230 coordinates be independently recovered from the canonical FAFB v783 release, row for row, without guessing?**
+## Current evidence: V215 → V230
 
-The repository now contains the machinery to answer that question.
+Four exact anchor neurons:
 
-For a local, data-independent audit of the current evidence stack:
-
-    python scripts/run_v231_audit.py
-
-To run the external checks as well, supply local copies of the official v783 Feather files with `--proofread` and/or `--synapses`.
-
-## Current milestones
-
-| Milestone | State |
-|---|---|
-| V229 exact-root morphology recovery pipeline | Implemented |
-| V230 649-row structural validation | Implemented |
-| V230 provenance audit | Implemented; provenance is **UNVERIFIED** |
-| V230 exact coordinate probe against FAFB v783 | Implemented; awaiting source-file execution |
-| V230 pair-level probe against proofread v783 connections | Implemented; awaiting source-file execution |
-| V231 reproducible structural fingerprint | Implemented and CI-tested |
-
-## V231 structural snapshot
-
-The repository now includes a machine-generated structural snapshot of the checked-in V230 artifact:
-
-- `v231_results/V231_structural_snapshot.json` — auditable graph metrics
-- `v231_results/V231_structural_connectome.svg` — 75 observed pre→post pairs visualized as a structural graph
-
-Open the SVG directly from the repository to inspect the current topology. The figure is explicitly labeled `STRUCTURE ONLY` and makes no biological provenance claim.
-
-## V231 structural fingerprint
-
-V231 turns the V230 artifact into a machine-checkable target: canonical SHA-256, row/coordinate counts, neuron-pair counts, bidirectionality, self-loops, connected components and degree distributions.
-
-Run:
-
-    python scripts/v231_circuit_fingerprint.py
-
-See docs/V231_STRUCTURAL_FINGERPRINT.md.
-
-## Independent verification challenge
-
-Issue #1 is an explicit public challenge to reproduce the 649 coordinate rows from the canonical FAFB v783 release: https://github.com/mafiabax/digital-life-form-flywire/issues/1
-
-## Research principle
-
-The project deliberately separates:
-
-**observed data → reproducible computation → source match → biological interpretation**
-
-No missing stage is silently promoted to a stronger claim.
-
-## V229 FlyWire skeleton recovery
-
-This repository contains the recovery runner for four exact FlyWire v783 neuron skeletons. It is designed to fail closed: a similar or guessed neuron is never accepted as a substitute.
-
-| Cell | FlyWire root ID | VFB ID |
+| Cell | Root ID | VFB |
 |---|---:|---|
 | T4a | 720575940632008007 | VFB_fw077172 |
 | T4c | 720575940616224414 | VFB_fw091869 |
 | T5a | 720575940625571465 | VFB_fw056211 |
 | T5c | 720575940617782941 | VFB_fw077474 |
 
-Recovery order: fafbseg/FlyWire → MRC precomputed → Zenodo bulk.
+V230 contains 649 coordinate rows and 75 directed pre/post pairs.
 
-## Evidence
+The 75 pairs are reproducibly reconstructed from the official Codex FAFB v783 connection table by selecting directed pairs incident to one of the four anchors and summing synapse counts.
 
-`v229_results/V229_recovery_report.json` contains recorded external-data recovery evidence for all four requested cells. It records node counts, structural validation, finite geometry and SHA-256 hashes.
+The individual 649 coordinate rows are exactly reproduced from the official Codex FAFB v783 synapse_coordinates table. The historical producer script is not preserved, so the project explicitly distinguishes historical code recovery from deterministic reproduction.
 
-Software tests are not treated as proof of external-data recovery. Those are separate evidence levels.
+## V255 — usable package
 
-## Run
+V255 makes the evidence consumable as a real package containing:
 
-    python -m py_compile v229_recovery_runner.py
-    python test_v229_recovery_runner.py
-    python v229_recovery_runner.py --route all --out v229_results --cache v229_cache
+- exact four-root identity;
+- pinned FlyWire annotation evidence from flyconnectome/flywire_annotations v3.2.0;
+- exact V229 SWC morphology with source hashes and structural validation;
+- the reproducible V254 connectivity/synapse core;
+- all 649 V230 synapse rows;
+- measured synapse-to-SWC centerline geometry;
+- package-level source/output hashes;
+- regeneration commands;
+- a ZIP artifact from GitHub Actions.
 
-## Validation
+The package never invents a biological compartment label. Geometry is reported as geometry.
 
-A recovered SWC must contain nodes, exactly one structural root, no missing parent references and finite geometry. The source neuron's real ID must match the requested root before serialization.
+## What makes the project useful
 
-## V230 synapse artifact — provenance audit
+The practical target is a researcher who already knows the neurons of interest and needs a trustworthy, portable model input.
 
-`v230_results/V230_target_synapses.csv` is a checked-in artifact with 649 rows, 33 unique presynaptic roots, 38 unique postsynaptic roots and 75 unique pre/post pairs. All four V229 target roots occur as postsynaptic roots, but the artifact also contains 34 other postsynaptic roots.
+The intended question is:
 
-The repository history proves that this CSV was introduced in commit `e57b1ccc5b9f64964af223b6bf8e853579985fe0`, whose message is `V229 FlyWire morphology recovery and V230 synapse coordinates`. That proves repository provenance, not scientific provenance.
+> Given these exact neurons and this exact FlyWire snapshot, can another researcher obtain the same circuit data and see exactly how every output was derived?
 
-The current repository does **not** contain the extraction script, source-data filename/record, query/filter code, or a reproducible command that generated the 649 rows. Therefore the following are **not established facts**:
+This supports circuit-hypothesis testing, fixed-connectome modeling, compartmental-model preparation, and reproducible sharing.
 
-- that the 649 rows were queried directly from FlyWire v783;
-- that every row is one real biological synapse;
-- that `x,y,z` are postsynaptic coordinates, presynaptic coordinates, or a particular synapse-coordinate field;
-- that the apparent minimum of 5 rows per pre/post pair came from a deliberate `>=5` synapse threshold;
-- that the artifact is complete for the four target neurons;
-- that the 649 rows are sufficient to reconstruct the V230 circuit.
+## What the project is not
 
-The data pattern is compatible with a pair-level selection followed by expansion to coordinate rows: every observed pair has 5–21 rows and all 649 coordinate triplets are unique. This is an **observation/inference, not provenance evidence**.
+It is not a claim to have reconstructed a complete biological fly brain.
 
-See `v230_results/V230_validation.json` for the machine-readable audit. Structural validation of the CSV is intentionally labeled `STRUCTURE_ONLY`, not biological PASS.
+It is also not intended to replace FlyWire/Codex access, annotation infrastructure, or whole-brain simulators. The project focuses on **exact identity + cross-layer traceability + reproducibility + simulation readiness**.
 
-## V230 exact provenance route
+## Next scientific layer
 
-The repository now includes `scripts/v230_zenodo_exact_probe.py`. It compares every V230 `(pre_root_id, post_root_id, x, y, z)` row against both coordinate sides in a local copy of the canonical public FAFB v783 `flywire_synapses_783.feather` release.
+The remaining non-trivial layer is evidence-backed biological compartment semantics. V255 deliberately leaves that unresolved until a source or validated algorithm can justify axon, dendrite, soma and related labels for each mapped synapse.
 
-The canonical public Zenodo release is 9.5 GB and has MD5 `f8f1b97c9d4b0ea9b4c8b287f6b99091`. It contains pre/post root IDs and separate pre/post XYZ coordinates. The smaller 852 MB `proofread_connections_783.feather` can validate pair-level connectivity/counts but cannot validate individual coordinate rows.
+## Useful entry points
 
-Codex's current static-download API documents an `api_token` requirement for programmatic downloads. Therefore this repository does not claim that the Codex API route is token-free.
+- v230_results/V230_target_synapses.csv
+- v230_results/V230_validation.json
+- v229_results/*.swc
+- scripts/v254_build_circuit_evidence_pack.py
+- scripts/v255_finalize_usable_circuit_evidence_pack.py
+- scripts/test_v255_finalize_usable_circuit_evidence_pack.py
+- .github/workflows/v255-usable-circuit-evidence-pack.yml
+- docs/V255_USABLE_CIRCUIT_EVIDENCE_PACK.md
 
-Example after obtaining the canonical Feather file:
+## Scientific status
 
-    python scripts/v230_zenodo_exact_probe.py /path/to/flywire_synapses_783.feather
+Research engineering project. Claims are strengthened only when source data, computation and independent reproduction support them.
 
-An `EXACT_MATCH` result would establish exact membership of the 649 V230 rows in the public FAFB v783 synapse release and identify whether V230 coordinates are pre- or post-synaptic. It would not prove the historical extraction command or completeness.
-
-## Project status
-
-V229 is a morphology-recovery milestone. V230 is currently a **provenance-unverified synapse-coordinate artifact**. The project does not claim from this CSV alone that it has recovered a verified set of 649 biological synapses or a complete T4/T5 connectivity circuit.
-
-## License
-
-No open-source license has been asserted. Normal copyright rules apply unless the project owner adds a license.
-
-## Command reference
-
-Show version:
-
-    python v229_recovery_runner.py --version
-
-Recover one target:
-
-    python v229_recovery_runner.py --route 1 --only T4a --out v229_results --cache v229_cache
-
-The runner's default output directory is `v229_recovery_results`; examples above explicitly use the repository evidence directory `v229_results`.
+No open-source license is currently asserted for this repository.
