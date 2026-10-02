@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   evidence:
@@ -39,6 +39,20 @@ jobs:
             --v230 v230_results/V230_target_synapses.csv \
             --morphology-dir v229_results \
             --output-dir /tmp/v258_results
+
+      - name: Sync generated evidence into repository
+        run: |
+          rm -rf v258_results
+          cp -R /tmp/v258_results v258_results
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v258_results/
+          if git diff --cached --quiet; then
+            echo "Generated evidence is already current."
+          else
+            git commit -m "Add V258 generated evidence"
+            git push origin HEAD:v258-published-subtree-dendrite-evidence
+          fi
 
       - name: Verify checked-in evidence matches regeneration
         run: |
