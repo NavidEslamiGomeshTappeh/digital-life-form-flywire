@@ -64,6 +64,25 @@ V256 is enforced by GitHub Actions and the current audit completed with **5/5 te
 
 See `docs/V256_COMPARTMENT_EVIDENCE_AUDIT.md` and `scripts/v256_compartment_evidence_audit.py`.
 
+## V257 — exact published dendrite provenance
+
+V257 links all four exact anchor roots to the historical T4/T5 dendrite-analysis table used by the published morphology study.
+
+All four exact root IDs occur once in the pinned source and are marked Dendrite_used=True:
+
+| Cell | Root ID | Published table row | Subtype | Dendrite used |
+|---|---:|---:|---|---|
+| T4a | 720575940632008007 | 514 | T4a | True |
+| T4c | 720575940616224414 | 2227 | T4c | True |
+| T5a | 720575940625571465 | 3171 | T5a | True |
+| T5c | 720575940617782941 | 4651 | T5c | True |
+
+This is exact-root provenance, not a nearest-neuron substitution.
+
+The published study reports extraction of T4/T5 dendritic arbors from FAFB-FlyWire. V257 establishes that the exact four project neurons were present in its historical neuron table and marked for dendrite use. It does not yet assign each V230 synapse coordinate to a specific dendrite node or segment.
+
+See `docs/V257_PUBLISHED_DENDRITE_PROVENANCE.md` and `v257_results/V257_published_dendrite_provenance.csv`.
+
 ## What makes the project useful
 
 The practical target is a researcher who already knows the neurons of interest and needs a trustworthy, portable model input.

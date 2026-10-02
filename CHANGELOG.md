@@ -1,3 +1,11 @@
+## 2026-10-03
+
+### V257 — exact published dendrite provenance
+- Linked all four exact project root IDs to the pinned historical T4/T5 dendrite-analysis neuron table.
+- Verified one exact source row per root with the expected subtype and Dendrite_used=True.
+- Recorded the source commit, path and Git blob SHA.
+- Kept individual synapse coordinate-to-dendrite-node assignment explicitly unresolved.
+
 # Changelog
 
 ## 2026-10-02

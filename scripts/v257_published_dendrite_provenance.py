@@ -15,10 +15,10 @@ SOURCE = {
     "raw_url": "https://raw.githubusercontent.com/borstlab/T4_T5_Dendrite_Morphology_Paper/56901ad1853b44aeca15504cd908fa4c31009a3e/Data/Neuron_ids.csv",
 }
 ROOTS = {
-    "720575940632008007": {"name": "T4a", "subtype": "T4a"},
-    "720575940616224414": {"name": "T4c", "subtype": "T4c"},
-    "720575940625571465": {"name": "T5a", "subtype": "T5a"},
-    "720575940617782941": {"name": "T5c", "subtype": "T5c"},
+    "720575940632008007": {"name": "T4a", "subtype": "T4a", "table_index": "514"},
+    "720575940616224414": {"name": "T4c", "subtype": "T4c", "table_index": "2227"},
+    "720575940625571465": {"name": "T5a", "subtype": "T5a", "table_index": "3171"},
+    "720575940617782941": {"name": "T5c", "subtype": "T5c", "table_index": "4651"},
 }
 
 def as_bool(value: str) -> bool:
@@ -47,13 +47,21 @@ def build(source_path: Path, output_dir: Path) -> dict:
         row = matches[0]
         subtype = row["Subtype"].strip()
         dendrite_used = as_bool(row["Dendrite_used"])
+        if row.get("", "").strip() != expected["table_index"]:
+            actual_index = row.get("", "").strip()
+            raise RuntimeError(
+                f"table-index mismatch for {rid}: expected {expected['table_index']}, got {actual_index}"
+            )
         if subtype != expected["subtype"]:
-            raise RuntimeError(f"subtype mismatch for {rid}: expected {expected["subtype"]}, got {subtype}")
+            raise RuntimeError(
+                f"subtype mismatch for {rid}: expected {expected['subtype']}, got {subtype}"
+            )
         if not dendrite_used:
             raise RuntimeError(f"Dendrite_used is not true for exact root {rid}")
         evidence.append({
             "root_id": rid,
             "project_name": expected["name"],
+            "published_table_index": row.get("", "").strip(),
             "published_neuron_id": row["Flywire_id"].strip(),
             "published_subtype": subtype,
             "published_dendrite_used": "true",
@@ -68,7 +76,7 @@ def build(source_path: Path, output_dir: Path) -> dict:
 
     output_dir.mkdir(parents=True, exist_ok=True)
     fields = [
-        "root_id", "project_name", "published_neuron_id", "published_subtype",
+        "root_id", "project_name", "published_table_index", "published_neuron_id", "published_subtype",
         "published_dendrite_used", "evidence_status", "source_repository",
         "source_commit", "source_path", "source_blob_sha", "source_url",
         "source_raw_url",
