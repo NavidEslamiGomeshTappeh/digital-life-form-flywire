@@ -73,6 +73,7 @@ jobs:
           name: V255-FAFB783-Circuit-Evidence-Pack
           path: |
             /tmp/DLF_V255_FAFB783_Circuit_Evidence_Pack.zip
+            /tmp/DLF_V255_FAFB783_Circuit_Evidence_Pack.zip.sha256
             /tmp/v255_pack/PACKAGE_MANIFEST.json
             /tmp/v255_pack/identity.csv
             /tmp/v255_pack/morphology_manifest.csv
