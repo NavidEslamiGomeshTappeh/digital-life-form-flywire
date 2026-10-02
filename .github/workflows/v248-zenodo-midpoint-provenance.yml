@@ -1,0 +1,30 @@
+name: V248 Zenodo static midpoint provenance
+on:
+  push:
+    branches: [v248-zenodo-midpoint-provenance]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  provenance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install "pyarrow>=18,<24" pytest
+      - run: python -m pytest -q scripts/test_v248_zenodo_midpoint_provenance.py
+      - name: Download frozen Zenodo v783 Feather
+        run: |
+          curl --fail --location --retry 8 --retry-all-errors             --output /tmp/flywire_synapses_783.feather             "https://zenodo.org/records/10676866/files/flywire_synapses_783.feather?download=1"
+          md5sum /tmp/flywire_synapses_783.feather
+      - name: Scan exact midpoint provenance
+        run: |
+          python scripts/v248_zenodo_midpoint_provenance.py             --source /tmp/flywire_synapses_783.feather             --target v230_results/V230_target_synapses.csv             --output /tmp/V248_zenodo_midpoint.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: V248-zenodo-midpoint-provenance
+          path: /tmp/V248_zenodo_midpoint.json
+          retention-days: 90
