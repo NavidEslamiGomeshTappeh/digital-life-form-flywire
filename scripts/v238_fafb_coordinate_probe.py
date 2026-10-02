@@ -36,11 +36,11 @@ def main():
             text=io.TextIOWrapper(gz,encoding="utf-8",newline="")
             reader=csv.DictReader(text)
             header=reader.fieldnames or []
-            required={"pre_pt_root_id","post_pt_root_id"}
-            if not required.issubset(header):
+            expected_header=["pre_root_id","post_root_id","x","y","z"]
+            if header != expected_header:
                 raise RuntimeError(f"unexpected header: {header}")
-            pre_xyz=[f"pre_pt_position_{a}" for a in "xyz"]
-            post_xyz=[f"post_pt_position_{a}" for a in "xyz"]
+            pre_xyz=["x","y","z"]
+            post_xyz=["x","y","z"]
             for r in reader:
                 pre=norm(r["pre_pt_root_id"]); post=norm(r["post_pt_root_id"])
                 if pre not in TARGETS and post not in TARGETS:
@@ -48,11 +48,10 @@ def main():
                 pair_hits[(pre,post)]=pair_hits.get((pre,post),0)+1
                 pxyz=tuple(norm(r[c]) for c in pre_xyz)
                 qxyz=tuple(norm(r[c]) for c in post_xyz)
-                for coord_kind,xyz in (("pre",pxyz),("post",qxyz)):
-                    key=(pre,post,*xyz)
-                    if key in expected:
-                        matched.setdefault(key,[]).append({
-                            "coord_kind":coord_kind,
+                key=(pre,post,*pxyz)
+                if key in expected:
+                    matched.setdefault(key,[]).append({
+                            "coord_kind":"canonical_xyz",
                             "pre_root_id":pre,
                             "post_root_id":post,
                             "x":xyz[0],"y":xyz[1],"z":xyz[2]
