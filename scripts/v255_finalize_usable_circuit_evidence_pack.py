@@ -296,7 +296,8 @@ def build(args):
             "lineage": ann.get("lineage", ""),
             "nerve": ann.get("nerve", ""),
             "hemilineage": ann.get("hemilineage", ""),
-            "vfb_id_from_annotation": ann.get("vfb_id", ann.get("VFB_ID", "")),
+            "vfb_id_from_annotation": canonical_ann_vfb,
+            "vfb_id_from_annotation_raw": ann_vfb,
             "nt_type": ann.get("nt_type", ""),
             "annotation_row_found": "true",
             "identity_match_status": "EXACT_ROOT_ID_MATCH",
@@ -306,7 +307,7 @@ def build(args):
         [
             "root_id", "name", "vfb_id_from_project", "cell_type", "cell_class",
             "cell_sub_class", "super_class", "flow", "side", "lineage", "nerve",
-            "hemilineage", "vfb_id_from_annotation", "nt_type",
+            "hemilineage", "vfb_id_from_annotation", "vfb_id_from_annotation_raw", "nt_type",
             "annotation_row_found", "identity_match_status",
         ],
         identity_rows,
