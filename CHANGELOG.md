@@ -1,5 +1,15 @@
 ## 2026-10-03
 
+### V258 — published automatic subtree algorithm on exact project SWCs
+- Recovered the published PP3 automatic subtree-extraction path.
+- Pinned the historical NeuRosetta implementation used for subtree selection.
+- Reproduced the published branch-node score on all four exact V229 SWCs.
+- Mapped all 649 V230 synapse coordinates to full morphology and algorithmic subtree candidates.
+- Separated pre/post endpoint roles so output and input geometry are not pooled.
+- Kept the result explicitly classified as a computational dendrite candidate, not direct biological compartment evidence.
+
+## 2026-10-03
+
 ### V257 — exact published dendrite provenance
 - Linked all four exact project root IDs to the pinned historical T4/T5 dendrite-analysis neuron table.
 - Verified one exact source row per root with the expected subtype and Dendrite_used=True.
