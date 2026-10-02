@@ -73,3 +73,12 @@ Also not claimed: that the V230 x/y/z field is itself an explicitly named biolog
 ## Public lineage used
 
 Codex's public data loader defines the v783 GCS data root and downloads `connections.csv.gz` and the other snapshot files from the same v783 data tree. Independent published analysis code and papers also document `synapse_coordinates.csv` as the individual-synapse coordinate product used with Codex FAFB v783.
+## Branch disposition
+
+`v243-princeton-cleft-center-provenance`, `v244-fast-princeton-midpoint-scan`, and `v247-neuropil-count-provenance` are exploratory provenance branches relative to `main`.
+
+- V243/V244 target the live Codex Princeton synapse-table representation (`fafb_v783_princeton_synapse_table.csv.gz`). Their root-ID reconstruction / coordinate assumptions do not establish V230 provenance.
+- V247 compares V230 pair counts against Princeton per-neuropil counts and is report-only; it does not identify the individual V230 source records.
+- The provenance route now established by V250/V251 is the official Codex v783 `synapse_coordinates.csv.gz` + `connections.csv.gz` pair, independently corroborated by the frozen Zenodo v783 Feather release.
+
+Therefore these three branches should be treated as historical probes, not as competing production provenance paths. They do not need separate pull requests merely because GitHub shows `Compare & pull request` after recent pushes.
