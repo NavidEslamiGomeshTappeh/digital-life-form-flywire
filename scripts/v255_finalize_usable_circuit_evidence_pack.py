@@ -276,7 +276,10 @@ def build(args):
         info = ROOT_INFO[rid]
         ann = annotation_rows[rid]
         ann_vfb = (ann.get("vfb_id") or ann.get("VFB_ID") or "").strip()
-        if ann_vfb and ann_vfb != info["vfb_id"]:
+        canonical_ann_vfb = ann_vfb
+        if canonical_ann_vfb.startswith("fw"):
+            canonical_ann_vfb = "VFB_" + canonical_ann_vfb
+        if canonical_ann_vfb and canonical_ann_vfb != info["vfb_id"]:
             raise RuntimeError(
                 f"annotation VFB ID mismatch for {rid}: expected {info['vfb_id']}, got {ann_vfb}"
             )
