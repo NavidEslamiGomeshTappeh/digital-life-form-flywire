@@ -52,7 +52,7 @@ def main():
         ctr_ok=not any(x is None for x in ctr)
         for row in rd:
             scanned+=1
-            pair=(int(row[pre_root]),int(row[post_root]))
+            pair=(720575940000000000+int(row[pre_root]),720575940000000000+int(row[post_root]))
             if pair not in tp: continue
             candidates+=1; src_pairs[pair]+=1
             px=tuple(int(float(row[c])) for c in pre); qx=tuple(int(float(row[c])) for c in post)
@@ -88,6 +88,7 @@ def main():
       "cleft_center_exact_for_all_matches": ctr_ok and ctr_equal == (len(targets)-len(missing)),
       "coordinate_derivation":"component-wise mean of canonical pre and post synaptic coordinates",
       "historical_extraction_command_proven":False,
+      "root_id_reconstruction":"720575940000000000 + 9-digit suffix from *_720575940 columns",
       "source_identifier_available":sid is not None,
       "source_identifier_column":sid,
       "mapping":[{"v230_csv_row":targets[k],"v230_xyz":list(k[2:]),"source_matches":hits[k],"ctr_matches":ctr_hits.get(k,[])} for k in sorted(targets) if k in hits],
