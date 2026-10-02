@@ -63,7 +63,7 @@ def main():
                    .group_by(["pre_root_id","post_root_id"]).len().rename({"len":"source_rows"}))
     pair_counts=pair_target.join(pair_source,on=["pre_root_id","post_root_id"],how="left").with_columns(
         pl.col("source_rows").fill_null(0)
-    )
+    ).collect(engine="streaming")
     pair_equal=bool((pair_counts["v230_rows"]==pair_counts["source_rows"]).all())
 
     mappings=(
