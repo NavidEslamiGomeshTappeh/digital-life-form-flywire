@@ -3,18 +3,40 @@ from __future__ import annotations
 import argparse, csv, json
 from collections import defaultdict
 import pyarrow.feather as feather
+import pyarrow.ipc as ipc
+
 def load_pairs(path):
     pairs=defaultdict(int)
     with open(path,newline="",encoding="utf-8") as f:
         for r in csv.DictReader(f):
             pairs[(r["pre_root_id"],r["post_root_id"])] += 1
     return pairs
+
+def scan_source(path, wanted):
+    source={}
+    matched_targets=set()
+    try:
+        reader=ipc.open_file(path)
+        for i in range(reader.num_record_batches):
+            batch=reader.get_batch(i).select(["pre_pt_root_id","post_pt_root_id","syn_count"])
+            for pre,post,n in zip(batch["pre_pt_root_id"].to_pylist(),batch["post_pt_root_id"].to_pylist(),batch["syn_count"].to_pylist()):
+                pair=(str(pre),str(post))
+                if pair in wanted:
+                    source[pair]=int(n)
+                    matched_targets.add(pair)
+    except Exception:
+        table=feather.read_table(path,columns=["pre_pt_root_id","post_pt_root_id","syn_count"])
+        for pre,post,n in zip(table["pre_pt_root_id"].to_pylist(),table["post_pt_root_id"].to_pylist(),table["syn_count"].to_pylist()):
+            pair=(str(pre),str(post))
+            if pair in wanted:
+                source[pair]=int(n)
+                matched_targets.add(pair)
+    return source
+
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--source",required=True); ap.add_argument("--target-csv",required=True); ap.add_argument("--output",required=True)
-    a=ap.parse_args(); wanted=load_pairs(a.target_csv)
-    table=feather.read_table(a.source,columns=["pre_pt_root_id","post_pt_root_id","syn_count"])
-    source={(str(pre),str(post)):int(n) for pre,post,n in zip(table["pre_pt_root_id"].to_pylist(),table["post_pt_root_id"].to_pylist(),table["syn_count"].to_pylist())}
+    a=ap.parse_args(); wanted=load_pairs(a.target_csv); source=scan_source(a.source,wanted)
     matched=[]; missing=[]; below=[]
     for pair,v in sorted(wanted.items()):
         n=source.get(pair)
