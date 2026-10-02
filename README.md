@@ -83,6 +83,22 @@ The published study reports extraction of T4/T5 dendritic arbors from FAFB-FlyWi
 
 See `docs/V257_PUBLISHED_DENDRITE_PROVENANCE.md` and `v257_results/V257_published_dendrite_provenance.csv`.
 
+## V258 — published automatic subtree algorithm on exact project SWCs
+
+V258 recovers the published computational dendrite-extraction procedure and reproduces it on the four exact V229 SWCs.
+
+The published T4/T5 preprocessing notebook calls NeuRosetta's automatic subtree extraction. The pinned implementation scores each branch-node descendant subtree as:
+
+(1 - subtree_cable / total_cable) + (subtree_leaves / total_leaves)
+
+and selects the maximum-scoring branch as the extracted subtree root.
+
+V258 maps every one of the 649 V230 synapse coordinates against both the full SWC and this algorithmic subtree candidate. Input/output roles remain separated, so dendritic-input and axon-terminal-output rows are not pooled.
+
+This is an **algorithmic dendrite candidate layer**. It does not claim bitwise identity with unpublished intermediate .nr forests, and it does not replace coordinate-level biological compartment evidence.
+
+See `docs/V258_PUBLISHED_SUBTREE_DENDRITE_EVIDENCE.md`, `scripts/v258_published_subtree_dendrite_evidence.py`, and `v258_results/V258_published_subtree_dendrite_mapping.csv`.
+
 ## What makes the project useful
 
 The practical target is a researcher who already knows the neurons of interest and needs a trustworthy, portable model input.
@@ -101,7 +117,7 @@ It is also not intended to replace FlyWire/Codex access, annotation infrastructu
 
 ## Next scientific layer
 
-The remaining non-trivial layer is evidence-backed biological compartment semantics. V255 deliberately leaves that unresolved until a source or validated algorithm can justify axon, dendrite, soma and related labels for each mapped synapse.
+V258 supplies a reproducible computational dendrite-candidate layer from the published extraction algorithm. The remaining gate is direct biological compartment evidence for individual synapse coordinates, ideally through the study's exact extracted-dendrite representation or an independently validated coordinate-to-membrane mapping.
 
 ## Useful entry points
 
@@ -113,6 +129,9 @@ The remaining non-trivial layer is evidence-backed biological compartment semant
 - scripts/test_v255_finalize_usable_circuit_evidence_pack.py
 - .github/workflows/v255-usable-circuit-evidence-pack.yml
 - docs/V255_USABLE_CIRCUIT_EVIDENCE_PACK.md
+- scripts/v258_published_subtree_dendrite_evidence.py
+- v258_results/V258_published_subtree_dendrite_mapping.csv
+- docs/V258_PUBLISHED_SUBTREE_DENDRITE_EVIDENCE.md
 
 ## Scientific status
 
