@@ -1,0 +1,58 @@
+name: V258 published subtree dendrite evidence
+
+on:
+  push:
+    branches:
+      - v258-published-subtree-dendrite-evidence
+  pull_request:
+    branches:
+      - main
+      - v258-published-subtree-dendrite-evidence
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test runner
+        run: python -m pip install --disable-pip-version-check pytest
+
+      - name: Unit and project regression tests
+        run: python -m pytest -q scripts/test_v258_published_subtree_dendrite_evidence.py
+
+      - name: Regenerate V258 evidence
+        run: |
+          rm -rf /tmp/v258_results
+          python scripts/v258_published_subtree_dendrite_evidence.py \
+            --v230 v230_results/V230_target_synapses.csv \
+            --morphology-dir v229_results \
+            --output-dir /tmp/v258_results
+
+      - name: Verify checked-in evidence matches regeneration
+        run: |
+          cmp v258_results/V258_published_subtree_dendrite_mapping.csv \
+            /tmp/v258_results/V258_published_subtree_dendrite_mapping.csv
+          cmp v258_results/V258_published_subtree_dendrite_mapping.json \
+            /tmp/v258_results/V258_published_subtree_dendrite_mapping.json
+
+      - name: Print report
+        run: cat /tmp/v258_results/V258_published_subtree_dendrite_mapping.json
+
+      - name: Upload V258 evidence artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: V258-published-subtree-dendrite-evidence
+          path: /tmp/v258_results/
+          retention-days: 90
