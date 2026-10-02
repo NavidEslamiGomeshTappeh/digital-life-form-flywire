@@ -44,7 +44,7 @@
     "extraction_script_in_repository": false,
     "source_dataset_file_or_record": "Codex FAFB v783 synapse_coordinates.csv.gz",
     "coordinate_semantics_proven": true,
-    "threshold_or_filter_proven": true,
+    "threshold_or_filter_proven": false,
     "biological_completeness_proven": false,
     "reproducible_extraction_path_proven": true,
     "status": "SOURCE_PROVEN_REPRODUCTION_ESTABLISHED",
@@ -104,7 +104,11 @@
       "exact_midpoint_matches": 649,
       "unique_mappings": 649,
       "note": "Independent frozen-source corroboration: V230 coordinates equal the component-wise midpoint of canonical pre/post positions for all 649 rows."
-    }
+    },
+    "historical_pair_selection_command_preserved": false,
+    "deterministic_pair_selection_rule_reproduced": true,
+    "deterministic_pair_selection_rule": "incident to one of the four target roots in Codex FAFB v783 connections.csv.gz; aggregate syn_count by directed pair",
+    "threshold_note": "Historical use of a >=5 filter is not proven. For this target neighborhood, thresholds 1 through 5 all produce the same 75-pair set; threshold 6 reduces the set to 57 pairs."
   },
   "observations": [
     "All 75 observed pre/post pairs contain at least 5 coordinate rows.",
@@ -113,11 +117,11 @@
     "V230 is exactly reproduced from Codex FAFB v783 synapse_coordinates.csv.gz for all 649 rows.",
     "All 75 V230 directed pairs have exact aggregate synapse counts in Codex FAFB v783 connections.csv.gz, totaling 649.",
     "Independent Zenodo FAFB v783 Feather analysis also reconstructs all 649 V230 coordinates as component-wise midpoints of the canonical pre/post points.",
-    "The original historical V230 producer script is not preserved in Git history; the exact public-data reconstruction path is nevertheless established."
+    "The original historical V230 producer script is not preserved in Git history; the exact public-data reconstruction path is nevertheless established.",
+    "The exact 75-pair set is deterministically reproduced by selecting all directed pairs incident to the four target roots in Codex FAFB v783 connections.csv.gz."
   ],
   "inference_not_proof": [
     "The repository does not preserve the original historical command that selected the 75 directed pairs.",
-    "The coordinate triple is proven to be the Codex v783 synapse-coordinate field; no biological claim that it is an explicit cleft-center field is made here.",
     "Completeness is proven for the 75 selected pairs, not as a claim that V230 represents the entire brain-wide synapse dataset."
   ],
   "validation_status": "STRUCTURE_ONLY"
