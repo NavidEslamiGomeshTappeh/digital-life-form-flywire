@@ -31,7 +31,7 @@ def test_builder_exact_fixture(tmp_path):
         f'{other},{root},11,21,31\\n',
         encoding='utf-8')
 
-    script = Path(__file__).resolve().parents[1] / 'v254_build_circuit_evidence_pack.py'
+    script = Path(__file__).resolve().parents[1] / 'scripts' / 'v254_build_circuit_evidence_pack.py'
     subprocess.run([
         sys.executable, str(script), '--connections', str(connections), '--synapses', str(synapses),
         '--reference-v230', str(reference), '--output', str(out), '--root', root
