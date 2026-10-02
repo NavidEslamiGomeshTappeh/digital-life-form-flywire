@@ -1,0 +1,40 @@
+{
+  "provenance_status": "DETERMINISTIC_FROZEN_V783_MAPPING_ESTABLISHED",
+  "target_artifact": {
+    "path": "v230_results/V230_target_synapses.csv",
+    "sha256": "507fc706cc29781457ed502ae0ebdf328a4bae33",
+    "rows": 649,
+    "unique_directed_pairs": 75
+  },
+  "frozen_source": {
+    "dataset": "FlyWire FAFB v783",
+    "file": "flywire_synapses_783.feather",
+    "zenodo_record": "10.5281/zenodo.10676866",
+    "md5": "f8f1b97c9d4b0ea9b4c8b287f6b99091",
+    "source_validation_run": 37060692378
+  },
+  "reconstruction": {
+    "method": "component-wise integer midpoint",
+    "formula": "v230_xyz = (pre_pt_position_xyz + post_pt_position_xyz) / 2",
+    "exact_midpoint_matches": 649,
+    "target_rows": 649,
+    "unique_mappings": 649,
+    "all_exact": true,
+    "independent_local_evidence": "/mnt/data/V241_extract/V242_midpoint_reconstruction_649.json",
+    "independent_local_evidence_sha256": "045183a5cbc268216c237a9708d44dd9a3ebb1d34b92e932226e7ce7e0e85d60"
+  },
+  "history": {
+    "v230_csv_first_commit": "e57b1ccc5b9f64964af223b6bf8e853579985fe0",
+    "v230_csv_first_commit_has_parent": false,
+    "historical_original_producer_script_in_git": false
+  },
+  "live_cortex_crosscheck": {
+    "current_codex_princeton_synapse_table": "fafb_v783_princeton_synapse_table.csv.gz",
+    "current_export_is_not_used_as_the_frozen_provenance_anchor": true,
+    "reason": "The project target is historically anchored to the frozen v783 Zenodo artifact; current Codex exports can be regenerated separately."
+  },
+  "interpretation": {
+    "claim": "The 649 V230 coordinates are exactly reconstructable from canonical frozen FAFB v783 synapse records using the midpoint transform.",
+    "not_claimed": "The historical producing command/program is not preserved in the repository."
+  }
+}
