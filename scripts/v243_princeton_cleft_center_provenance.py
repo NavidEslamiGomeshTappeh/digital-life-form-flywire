@@ -40,13 +40,13 @@ def main():
 
     with gzip.open(a.source,"rt",encoding="utf-8",newline="") as f:
         rd=csv.DictReader(f); fields=set(rd.fieldnames or [])
-        pre_root=pick(fields,["pre_root_id","pre_pt_root_id"])
-        post_root=pick(fields,["post_root_id","post_pt_root_id"])
+        pre_root=pick(fields,["pre_root_id","pre_root_id_720575940","pre_pt_root_id"])
+        post_root=pick(fields,["post_root_id","post_root_id_720575940","post_pt_root_id"])
         pre=tuple(pick(fields,[f"pre_{c}",f"pre_pt_position_{c}"]) for c in "xyz")
         post=tuple(pick(fields,[f"post_{c}",f"post_pt_position_{c}"]) for c in "xyz")
         ctr=tuple(pick(fields,[f"ctr_{c}",f"center_{c}",f"cleft_center_{c}"]) for c in "xyz")
         sid=pick(fields,["id","synapse_id"])
-        need=[pre_root,post_root,sid,*pre,*post]
+        need=[pre_root,post_root,*pre,*post]
         if any(x is None for x in need):
             raise RuntimeError(f"required column missing; header={rd.fieldnames}")
         ctr_ok=not any(x is None for x in ctr)
@@ -60,7 +60,7 @@ def main():
             if m is None: continue
             k=(*pair,*m)
             if k in targets:
-                rec={"source_synapse_id":int(row[sid]),"pre_xyz":list(px),"post_xyz":list(qx),"midpoint_xyz":list(m)}
+                rec={"source_synapse_id":(int(row[sid]) if sid is not None else None),"pre_xyz":list(px),"post_xyz":list(qx),"midpoint_xyz":list(m)}
                 hits[k].append(rec)
                 if ctr_ok:
                     c=tuple(int(float(row[x])) for x in ctr)
@@ -85,8 +85,11 @@ def main():
       "all_75_pair_counts_equal":pair_equal,
       "cleft_center_columns_available":ctr_ok,
       "cleft_center_equal_to_midpoint_count":ctr_equal,
+      "cleft_center_exact_for_all_matches": ctr_ok and ctr_equal == (len(targets)-len(missing)),
       "coordinate_derivation":"component-wise mean of canonical pre and post synaptic coordinates",
       "historical_extraction_command_proven":False,
+      "source_identifier_available":sid is not None,
+      "source_identifier_column":sid,
       "mapping":[{"v230_csv_row":targets[k],"v230_xyz":list(k[2:]),"source_matches":hits[k],"ctr_matches":ctr_hits.get(k,[])} for k in sorted(targets) if k in hits],
       "missing":[list(k) for k in missing[:100]],
       "pair_results":[{"pre_root_id":p[0],"post_root_id":p[1],"v230_rows":pairs[p],"canonical_rows":src_pairs[p],"exact_midpoint_matches":sum(1 for k,v in hits.items() if k[:2]==p and len(v)==1)} for p in sorted(tp)]
