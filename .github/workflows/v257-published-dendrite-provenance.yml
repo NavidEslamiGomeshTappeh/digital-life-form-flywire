@@ -1,0 +1,55 @@
+name: V257 published dendrite provenance
+
+on:
+  push:
+    branches:
+      - v257-published-dendrite-provenance
+  pull_request:
+    branches:
+      - main
+      - v257-published-dendrite-provenance
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  provenance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test runner
+        run: python -m pip install --disable-pip-version-check pytest
+
+      - name: Unit tests
+        run: python -m pytest -q scripts/test_v257_published_dendrite_provenance.py
+
+      - name: Download pinned historical neuron table
+        run: |
+          curl --fail --location --retry 4 \
+            https://raw.githubusercontent.com/borstlab/T4_T5_Dendrite_Morphology_Paper/56901ad1853b44aeca15504cd908fa4c31009a3e/Data/Neuron_ids.csv \
+            -o /tmp/Neuron_ids.csv
+
+      - name: Run exact-root provenance audit
+        run: |
+          python scripts/v257_published_dendrite_provenance.py \
+            --source /tmp/Neuron_ids.csv \
+            --output-dir /tmp/v257_results
+
+      - name: Print provenance summary
+        run: cat /tmp/v257_results/V257_published_dendrite_provenance.json
+
+      - name: Publish V257 provenance artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: V257-published-dendrite-provenance
+          path: /tmp/v257_results/
+          retention-days: 90
