@@ -1,0 +1,28 @@
+name: V235 service bridge verification
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - v235-service-bridge
+      - main
+    paths:
+      - "v235_results/V235_service_capability_ledger.json"
+      - "scripts/v235_service_bridge_check.py"
+      - "docs/V235_SERVICE_BRIDGE.md"
+      - ".github/workflows/v235-service-bridge.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-ledger:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify V235 service ledger
+        run: python scripts/v235_service_bridge_check.py

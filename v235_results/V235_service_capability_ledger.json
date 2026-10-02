@@ -1,0 +1,35 @@
+{
+  "schema": "V235-service-capability-ledger/v1",
+  "purpose": "Evidence-backed record of external service capabilities available to the Digital Life Form engineering workflow.",
+  "updated_by": "ChatGPT connected-tool verification",
+  "services": {
+    "github": {
+      "status": "VERIFIED",
+      "evidence": "GitHub connector can read and write mafiabax/digital-life-form-flywire; branch creation succeeded for v235-service-bridge.",
+      "role": "source control, evidence artifacts, CI orchestration"
+    },
+    "supabase": {
+      "status": "CONNECTED_BUT_NO_PROJECT_VISIBLE",
+      "evidence": "Both available Supabase account links returned an empty project list.",
+      "role": "database/auth/backend when a visible project is available",
+      "fail_closed": true
+    },
+    "neon": {
+      "status": "CONNECTED_TOOL_UNSCOPED",
+      "evidence": "Neon management tools are available, but the current connection requires an explicit project_id and the available tool surface does not expose project enumeration.",
+      "role": "Postgres branches, database, snapshots and backend state",
+      "fail_closed": true
+    },
+    "wolfram": {
+      "status": "VERIFIED",
+      "evidence": "Wolfram|Alpha tool returned exact and decimal results for 3732460/138584: 26.9328 and 53.8657.",
+      "role": "independent mathematical/scientific verification"
+    },
+    "tinyfish": {
+      "status": "VERIFIED",
+      "evidence": "TinyFish search returned the authoritative Zenodo FlyWire v783 connectivity dataset record at https://zenodo.org/records/10676866.",
+      "role": "Web Hand: current web search and rendered-page extraction"
+    }
+  },
+  "security_rule": "No credential is stored in this repository. Missing or unavailable service access must remain UNKNOWN/INCOMPLETE rather than being promoted to PASS."
+}
