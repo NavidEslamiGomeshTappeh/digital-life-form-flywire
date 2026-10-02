@@ -1,0 +1,30 @@
+name: V244 fast Princeton midpoint scan
+on:
+  push:
+    branches: [v244-fast-princeton-midpoint-scan]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  provenance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install "polars>=1.30,<2" pytest
+      - run: python -m pytest -q scripts/test_v244_fast_princeton_midpoint_scan.py
+      - name: Download FAFB v783 Princeton Synapse Table
+        run: |
+          curl --fail --location --retry 8 --retry-all-errors             --output /tmp/fafb_v783_princeton_synapse_table.csv.gz             "https://storage.googleapis.com/flywire-data/codex/data/fafb/783/fafb_v783_princeton_synapse_table.csv.gz"
+          gzip -t /tmp/fafb_v783_princeton_synapse_table.csv.gz
+      - name: Run vectorized exact provenance scan
+        run: |
+          python scripts/v244_fast_princeton_midpoint_scan.py             --source /tmp/fafb_v783_princeton_synapse_table.csv.gz             --target v230_results/V230_target_synapses.csv             --output /tmp/V244_fast_princeton_provenance.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: V244-fast-princeton-provenance
+          path: /tmp/V244_fast_princeton_provenance.json
+          retention-days: 90
