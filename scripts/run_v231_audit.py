@@ -47,6 +47,25 @@ def main():
             'stderr_tail': stderr[-4000:],
         })
 
+    engine_cmd = [
+        sys.executable, 'scripts/v231_evidence_engine.py',
+        '--output', str(out.parent / 'V231_evidence_engine.json'),
+    ]
+    if args.synapses:
+        engine_cmd += ['--coordinate-probe', str(out.parent / 'V230_zenodo_exact_probe.json')]
+    if args.proofread:
+        engine_cmd += ['--proofread-probe', str(out.parent / 'V230_proofread_pair_probe.json')]
+    if args.topology_csv:
+        engine_cmd += ['--topology', str(out.parent / 'V231_topology_crosscheck.json')]
+    code, stdout, stderr = run(engine_cmd)
+    results['steps'].append({
+        'name': 'evidence_engine',
+        'exit_code': code,
+        'status': 'PASS' if code == 0 else 'FAIL',
+        'stdout_tail': stdout[-4000:],
+        'stderr_tail': stderr[-4000:],
+    })
+
     results['overall_status'] = 'PASS' if all(s['exit_code'] == 0 for s in results['steps']) else 'FAIL'
     results['source_data_supplied'] = bool(args.synapses or args.proofread or args.topology_csv)
     results['note'] = 'PASS means the requested computations completed; it does not by itself establish biological provenance.'
