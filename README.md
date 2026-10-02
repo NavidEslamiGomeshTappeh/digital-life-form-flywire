@@ -2,6 +2,12 @@
 
 > An auditable pipeline for turning exact FlyWire neuron IDs into reproducible circuit evidence and, eventually, biophysically usable neuron models.
 
+## Author
+
+**نوید گُمِش تَپِّه**
+
+This project is developed as a research-engineering effort focused on reproducible connectomics evidence and downstream neural modeling.
+
 ## The problem
 
 FlyWire already has strong tools for data access, annotations, morphology and connectivity. This project targets the handoff between those layers:
