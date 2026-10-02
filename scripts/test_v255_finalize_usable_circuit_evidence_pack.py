@@ -58,20 +58,20 @@ def test_usable_pack_end_to_end(tmp_path):
     write(
         core / "connections_selected.csv",
         "pre_root_id,post_root_id,neuropil,syn_count,nt_type\n"
-        f"{ROOTS[0]},{ROOTS[1]},A,2,chol\n",
+        f"{ROOTS[0]},999,A,2,chol\n",
     )
     write(
         core / "synapses_selected.csv",
         "pre_root_id,post_root_id,x,y,z\n"
-        f"{ROOTS[0]},{ROOTS[1]},10,0,0\n"
-        f"{ROOTS[0]},{ROOTS[1]},20,0,0\n",
+        f"{ROOTS[0]},999,10,0,0\n"
+        f"{ROOTS[0]},999,20,0,0\n",
     )
     write(core / "MANIFEST.json", json.dumps({"selected_directed_pairs": 1}) + "\n")
     write(
         v230,
         "pre_root_id,post_root_id,x,y,z\n"
-        f"{ROOTS[0]},{ROOTS[1]},10,0,0\n"
-        f"{ROOTS[0]},{ROOTS[1]},20,0,0\n",
+        f"{ROOTS[0]},999,10,0,0\n"
+        f"{ROOTS[0]},999,20,0,0\n",
     )
 
     morph.mkdir()
