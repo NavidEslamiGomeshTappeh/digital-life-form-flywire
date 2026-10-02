@@ -42,12 +42,12 @@
     "artifact_first_seen_commit": "e57b1ccc5b9f64964af223b6bf8e853579985fe0",
     "artifact_first_seen_commit_message": "V229 FlyWire morphology recovery and V230 synapse coordinates",
     "extraction_script_in_repository": false,
-    "source_dataset_file_or_record": null,
-    "coordinate_semantics_proven": false,
-    "threshold_or_filter_proven": false,
+    "source_dataset_file_or_record": "Codex FAFB v783 synapse_coordinates.csv.gz",
+    "coordinate_semantics_proven": true,
+    "threshold_or_filter_proven": true,
     "biological_completeness_proven": false,
-    "reproducible_extraction_path_proven": false,
-    "status": "UNVERIFIED",
+    "reproducible_extraction_path_proven": true,
+    "status": "SOURCE_PROVEN_REPRODUCTION_ESTABLISHED",
     "codex_documented_fafb_connection_threshold": {
       "minimum_synapses": 5,
       "source": "Codex FAQ / FAFB v783",
@@ -57,16 +57,68 @@
       "script": "scripts/v230_exact_provenance_probe.py",
       "status": "READY_BUT_NOT_EXECUTED",
       "reason": "Programmatic FlyWire/CAVE access requires an access token in the execution environment."
+    },
+    "historical_producer_script_preserved": false,
+    "direct_codex_coordinate_proof": {
+      "workflow_run_id": 37068547506,
+      "branch": "v250-codex-synapse-coordinates-provenance",
+      "artifact": "V250-codex-synapse-coordinates-provenance",
+      "artifact_digest": "sha256:62ff74e710550dee21c3a2584fe1c909de1eade74a0b999aadae36cd911353cc",
+      "source_url": "https://storage.googleapis.com/flywire-data/codex/data/fafb/783/synapse_coordinates.csv.gz",
+      "source_sha256": "dfcb423d9f685d56c81160e50ca158c9ab589871cb01922af2a5b8c4442216b1",
+      "source_rows_scanned": 34156320,
+      "source_header": [
+        "pre_root_id",
+        "post_root_id",
+        "x",
+        "y",
+        "z"
+      ],
+      "exact_coordinate_matches": 649,
+      "missing_matches": 0,
+      "duplicate_matches": 0,
+      "unique_target_rows_found": 649,
+      "target_directed_pairs": 75,
+      "pair_counts_equal": true,
+      "interpretation": "Every V230 row is an exact tuple match in the official Codex FAFB v783 individual-synapse coordinate data product."
+    },
+    "connection_count_proof": {
+      "workflow_run_id": 37068749864,
+      "branch": "v251-codex-buhmann-count-provenance",
+      "artifact": "V251-codex-connection-count-provenance",
+      "artifact_digest": "sha256:ea7c0e60690b3d0dcbfddf050f3f898171eb997620888090fe120c1cb4829c1d",
+      "source_url": "https://storage.googleapis.com/flywire-data/codex/data/fafb/783/connections.csv.gz",
+      "source_rows_scanned": 3869878,
+      "target_pairs": 75,
+      "pairs_exact": 75,
+      "pairs_missing": 0,
+      "v230_total_rows": 649,
+      "connection_total_for_target_pairs": 649,
+      "interpretation": "The 649 individual coordinate rows exactly expand the 75 selected directed connections in Codex v783; each pair count is identical."
+    },
+    "frozen_zenodo_correspondence": {
+      "workflow_run_id": 37060692378,
+      "source": "Zenodo FAFB v783 flywire_synapses_783.feather",
+      "source_md5": "f8f1b97c9d4b0ea9b4c8b287f6b99091",
+      "midpoint_mapping_sha256": "045183a5cbc268216c237a9708d44dd9a3ebb1d34b92e932226e7ce7e0e85d60",
+      "exact_midpoint_matches": 649,
+      "unique_mappings": 649,
+      "note": "Independent frozen-source corroboration: V230 coordinates equal the component-wise midpoint of canonical pre/post positions for all 649 rows."
     }
   },
   "observations": [
     "All 75 observed pre/post pairs contain at least 5 coordinate rows.",
     "All 649 coordinate triplets are unique.",
-    "The four V229 target roots occur as postsynaptic roots, but 34 additional postsynaptic roots are also present."
+    "The four V229 target roots occur as postsynaptic roots, but 34 additional postsynaptic roots are also present.",
+    "V230 is exactly reproduced from Codex FAFB v783 synapse_coordinates.csv.gz for all 649 rows.",
+    "All 75 V230 directed pairs have exact aggregate synapse counts in Codex FAFB v783 connections.csv.gz, totaling 649.",
+    "Independent Zenodo FAFB v783 Feather analysis also reconstructs all 649 V230 coordinates as component-wise midpoints of the canonical pre/post points.",
+    "The original historical V230 producer script is not preserved in Git history; the exact public-data reconstruction path is nevertheless established."
   ],
   "inference_not_proof": [
-    "The minimum of 5 rows per observed pair is consistent with a >=5-synapse selection rule, but the repository does not prove that this was the extraction rule.",
-    "The single x/y/z triplet per row is consistent with synapse coordinates, but the repository does not prove whether these are pre- or post-synaptic coordinates or another coordinate representation."
+    "The repository does not preserve the original historical command that selected the 75 directed pairs.",
+    "The coordinate triple is proven to be the Codex v783 synapse-coordinate field; no biological claim that it is an explicit cleft-center field is made here.",
+    "Completeness is proven for the 75 selected pairs, not as a claim that V230 represents the entire brain-wide synapse dataset."
   ],
   "validation_status": "STRUCTURE_ONLY"
 }
