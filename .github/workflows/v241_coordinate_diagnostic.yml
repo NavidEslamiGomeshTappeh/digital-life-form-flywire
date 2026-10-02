@@ -1,0 +1,30 @@
+name: V241 canonical coordinate diagnostic
+on:
+  push:
+    branches: [main]
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install "pyarrow>=18,<24"
+      - name: Download canonical v783 synapse table
+        run: |
+          curl --fail --location --retry 5 --retry-all-errors \
+            --output /tmp/flywire_synapses_783.feather \
+            "https://zenodo.org/records/10676866/files/flywire_synapses_783.feather?download=1"
+          md5sum /tmp/flywire_synapses_783.feather
+      - name: Run coordinate diagnostic
+        run: |
+          python scripts/v241_coordinate_diagnostic.py \
+            --source /tmp/flywire_synapses_783.feather \
+            --target-csv v230_results/V230_target_synapses.csv \
+            --output /tmp/V241_coordinate_diagnostic.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: V241-canonical-coordinate-diagnostic
+          path: /tmp/V241_coordinate_diagnostic.json
+          retention-days: 90
