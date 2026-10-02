@@ -22,8 +22,9 @@ def test_exact_roots_are_marked_dendrite_used(tmp_path: Path) -> None:
     source = tmp_path / "Neuron_ids.csv"
     out = tmp_path / "out"
     lines = [",Flywire_id,Subtype,Dendrite_used"]
-    for index, (rid, subtype) in enumerate(ROOTS.items()):
-        lines.append(f"{index},{rid},{subtype},True")
+    table_indexes = {"720575940632008007": "514", "720575940616224414": "2227", "720575940625571465": "3171", "720575940617782941": "4651"}
+    for rid, subtype in ROOTS.items():
+        lines.append(f"{table_indexes[rid]},{rid},{subtype},True")
     write(source, "\n".join(lines) + "\n")
 
     report = build(source, out)
@@ -33,6 +34,7 @@ def test_exact_roots_are_marked_dendrite_used(tmp_path: Path) -> None:
     rows = list(csv.DictReader((out / "V257_published_dendrite_provenance.csv").open(encoding="utf-8")))
     assert {row["root_id"] for row in rows} == set(ROOTS)
     assert all(row["published_dendrite_used"] == "true" for row in rows)
+    assert {row["published_table_index"] for row in rows} == {"514", "2227", "3171", "4651"}
 
 def test_fails_closed_on_wrong_subtype(tmp_path: Path) -> None:
     source = tmp_path / "Neuron_ids.csv"
