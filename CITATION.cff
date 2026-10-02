@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 title: Digital Life Form — FlyWire
-version: 0.229.0
-date-released: 2026-10-01
+version: 0.231.0
+date-released: 2026-10-02
 type: software
 repository-code: https://github.com/mafiabax/digital-life-form-flywire
-abstract: Exact FlyWire v783 neuron skeleton recovery and structural validation tools.
+abstract: Provenance-first tools for exact FlyWire v783 neuron morphology recovery, synapse-coordinate validation, and reproducible evidence tracking.
