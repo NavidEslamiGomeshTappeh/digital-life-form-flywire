@@ -18,6 +18,7 @@ def main():
     p.add_argument('--artifact', default='v230_results/V230_target_synapses.csv')
     p.add_argument('--synapses', help='Local flywire_synapses_783.feather')
     p.add_argument('--proofread', help='Local proofread_connections_783.feather')
+    p.add_argument('--topology-csv', help='Local v783-derived connection table in CSV form')
     p.add_argument('--output', default='v231_results/V231_audit_report.json')
     args = p.parse_args()
 
@@ -31,6 +32,8 @@ def main():
     ]
     if args.proofread:
         steps.append(('proofread_pair_probe', [sys.executable, 'scripts/v230_proofread_pair_probe.py', args.proofread, '--artifact', args.artifact, '--output', str(out.parent / 'V230_proofread_pair_probe.json')]))
+    if args.topology_csv:
+        steps.append(('topology_crosscheck', [sys.executable, 'scripts/v231_topology_crosscheck.py', args.topology_csv, '--artifact', args.artifact, '--output', str(out.parent / 'V231_topology_crosscheck.json')]))
     if args.synapses:
         steps.append(('exact_coordinate_probe', [sys.executable, 'scripts/v230_zenodo_exact_probe.py', args.synapses, '--artifact', args.artifact, '--output', str(out.parent / 'V230_zenodo_exact_probe.json')]))
 
@@ -45,7 +48,7 @@ def main():
         })
 
     results['overall_status'] = 'PASS' if all(s['exit_code'] == 0 for s in results['steps']) else 'FAIL'
-    results['source_data_supplied'] = bool(args.synapses or args.proofread)
+    results['source_data_supplied'] = bool(args.synapses or args.proofread or args.topology_csv)
     results['note'] = 'PASS means the requested computations completed; it does not by itself establish biological provenance.'
     out.write_text(json.dumps(results, indent=2) + '\n', encoding='utf-8')
     print(json.dumps(results, indent=2))
