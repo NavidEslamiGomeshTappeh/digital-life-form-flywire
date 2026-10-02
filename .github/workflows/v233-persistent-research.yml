@@ -1,0 +1,66 @@
+name: V233 persistent research
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: v233-persistent-research
+  cancel-in-progress: false
+
+jobs:
+  worker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Restore newest V233 state artifact
+        shell: bash
+        env:
+          GH_TOKEN: \${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p v233_state
+          json="\$(gh api --paginate "/repos/\${GITHUB_REPOSITORY}/actions/artifacts?per_page=100")"
+          artifact_id="\$(printf '%s' "\$json" | jq -r '
+            .artifacts
+            | map(select(.name | startswith("v233-state-")) and (.expired | not))
+            | sort_by(.created_at)
+            | last
+            | .id // empty
+          ')"
+          if [ -n "\$artifact_id" ]; then
+            gh api "/repos/\${GITHUB_REPOSITORY}/actions/artifacts/\${artifact_id}/zip" > /tmp/v233-state.zip
+            unzip -o /tmp/v233-state.zip -d v233_state >/dev/null
+            echo "RESTORED artifact=\$artifact_id"
+          else
+            echo "NO_PREVIOUS_STATE"
+          fi
+
+      - name: Compile V233 worker
+        run: python -m py_compile scripts/v233_evidence_task_graph.py
+
+      - name: Run resumable research slice
+        run: |
+          python scripts/v233_evidence_task_graph.py \
+            --state v233_state/task_graph_state.json \
+            --plan v233_results/V233_plan.json \
+            --budget-seconds 20900
+
+      - name: Upload V233 checkpoint
+        uses: actions/upload-artifact@v4
+        with:
+          name: v233-state-\${{ github.run_id }}
+          path: v233_state/task_graph_state.json
+          retention-days: 90
+          if-no-files-found: error
