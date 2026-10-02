@@ -27,3 +27,5 @@ jobs:
           name: V246-connection-count-provenance
           path: /tmp/V246_connection_count_provenance.json
           retention-days: 90
+
+# trigger: v246 connection-count verification
