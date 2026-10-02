@@ -64,7 +64,13 @@ def test_anchor_endpoint_rule_fails_on_non_anchor_row(tmp_path: Path) -> None:
     )
     morph = tmp_path / "morph"
     for name, rid in ROOTS.items():
-        write(morph / f"{name}_{rid}.swc", "1 1 0 0 0 1 -1\n2 3 1 0 0 1 1\n")
+        write(
+            morph / f"{name}_{rid}.swc",
+            "1 1 0 0 0 1 -1\n"
+            "2 3 1 0 0 1 1\n"
+            "3 3 2 1 0 1 2\n"
+            "4 3 2 -1 0 1 2\n",
+        )
     with pytest.raises(RuntimeError, match="anchor-endpoint regression failed"):
         build(v230, morph, tmp_path / "out")
 
