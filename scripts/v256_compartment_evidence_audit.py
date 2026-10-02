@@ -173,7 +173,7 @@ def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
         writer.writeheader()
         writer.writerows(rows)
 
-def build(v230: Path, output_dir: Path) -> dict:
+def build(v230: Path, output_dir: Path, enforce_v230_regression: bool = True) -> dict:
     rows = read_v230(v230)
     mapped = [classify_row(i, row) for i, row in enumerate(rows, 1)]
 
@@ -181,15 +181,16 @@ def build(v230: Path, output_dir: Path) -> dict:
     anchor_counts = Counter(r["anchor_name"] for r in mapped)
     type_counts = Counter(r["anchor_type"] for r in mapped)
 
-    if len(mapped) != 649:
-        raise RuntimeError(
-            f"V230 regression mismatch: expected 649 rows, found {len(mapped)}"
-        )
-    if endpoint_counts != Counter({"pre": 331, "post": 318}):
-        raise RuntimeError(
-            "V230 endpoint regression mismatch: expected pre=331/post=318, "
-            f"found {dict(endpoint_counts)}"
-        )
+    if enforce_v230_regression:
+        if len(mapped) != 649:
+            raise RuntimeError(
+                f"V230 regression mismatch: expected 649 rows, found {len(mapped)}"
+            )
+        if endpoint_counts != Counter({"pre": 331, "post": 318}):
+            raise RuntimeError(
+                "V230 endpoint regression mismatch: expected pre=331/post=318, "
+                f"found {dict(endpoint_counts)}"
+            )
     if len({r["synapse_row"] for r in mapped}) != len(mapped):
         raise RuntimeError("duplicate synapse_row assignments")
     if any(r["exact_coordinate_compartment_status"] != "UNRESOLVED" for r in mapped):
@@ -205,8 +206,9 @@ def build(v230: Path, output_dir: Path) -> dict:
         "status": "PASS_CELL_LEVEL_INFERENCE_WITH_COORDINATE_UNRESOLVED",
         "input": {
             "path": str(v230),
-            "expected_rows": 649,
+            "expected_rows": 649 if enforce_v230_regression else None,
             "observed_rows": len(rows),
+            "strict_v230_regression": enforce_v230_regression,
         },
         "counts": {
             "rows": len(mapped),
