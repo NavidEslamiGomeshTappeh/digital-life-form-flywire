@@ -1,0 +1,35 @@
+name: V238 Neon evidence bridge
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "v229_results/**"
+      - "v230_results/**"
+      - "v231_results/**"
+      - "scripts/v238_neon_evidence_bridge.py"
+      - ".github/workflows/v238-neon-evidence-bridge.yml"
+permissions:
+  contents: read
+jobs:
+  bridge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      NEON_DATABASE_URL: \${{ secrets.NEON_DATABASE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install PostgreSQL driver
+        run: python -m pip install "psycopg[binary]>=3.2,<4"
+      - name: Run bridge tests
+        run: python scripts/test_v238_neon_evidence_bridge.py
+      - name: Verify secret boundary
+        run: |
+          if [ -z "\$NEON_DATABASE_URL" ]; then
+            echo "NEON_DATABASE_URL is not configured; refusing to run bridge."
+            exit 2
+          fi
+      - name: Persist repository evidence
+        run: python scripts/v238_neon_evidence_bridge.py
