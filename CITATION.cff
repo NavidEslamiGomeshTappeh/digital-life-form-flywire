@@ -4,8 +4,8 @@ version: "0.255.0"
 date-released: 2026-10-03
 type: software
 authors:
-  - given-names: "نوید"
-    family-names: "گُمِش تَپِّه"
+  - given-names: "Navid"
+    family-names: "Eslami Gomesh Tappeh"
 repository-code: "https://github.com/mafiabax/digital-life-form-flywire"
 abstract: >
   Provenance-first tools for exact FlyWire v783 neuron identity, connectivity,
