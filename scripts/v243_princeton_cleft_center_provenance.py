@@ -11,6 +11,12 @@ def mid(a,b):
     if any(v%2 for v in s): return None
     return tuple(v//2 for v in s)
 
+def reconstruct_root_id(raw):
+    s=str(raw).strip()
+    if s.endswith(".0"):
+        s=s[:-2]
+    return 720575940*(10**len(s))+int(s)
+
 def pick(fields, names):
     for n in names:
         if n in fields: return n
@@ -52,7 +58,7 @@ def main():
         ctr_ok=not any(x is None for x in ctr)
         for row in rd:
             scanned+=1
-            pair=(720575940000000000+int(row[pre_root]),720575940000000000+int(row[post_root]))
+            pair=(reconstruct_root_id(row[pre_root]),reconstruct_root_id(row[post_root]))
             if pair not in tp: continue
             candidates+=1; src_pairs[pair]+=1
             px=tuple(int(float(row[c])) for c in pre); qx=tuple(int(float(row[c])) for c in post)
