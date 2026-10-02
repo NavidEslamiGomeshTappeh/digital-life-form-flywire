@@ -275,6 +275,11 @@ def build(args):
     for rid in sorted(ROOTS):
         info = ROOT_INFO[rid]
         ann = annotation_rows[rid]
+        ann_vfb = (ann.get("vfb_id") or ann.get("VFB_ID") or "").strip()
+        if ann_vfb and ann_vfb != info["vfb_id"]:
+            raise RuntimeError(
+                f"annotation VFB ID mismatch for {rid}: expected {info['vfb_id']}, got {ann_vfb}"
+            )
         identity_rows.append({
             "root_id": rid,
             "name": info["name"],
