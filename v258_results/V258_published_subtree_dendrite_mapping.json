@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "status": "PASS_PUBLISHED_SUBTREE_ALGORITHM_REPRODUCED_ON_PROJECT_SWCS",
+  "counts": {
+    "v230_rows": 649,
+    "mapping_rows": 649,
+    "anchor_roots": 4,
+    "anchor_endpoint_regression": "PASS"
+  },
+  "algorithm_source": {
+    "repository": "NikDrummond/NeuRosetta",
+    "commit": "38f20f02194c129c234360db5a8be78a90c61db1",
+    "files": [
+      "src/NeuRosetta/ops/tree_graphs/subtrees.py",
+      "src/NeuRosetta/utils/graph_utils/subgraphs.py",
+      "src/NeuRosetta/api/forest_class.py"
+    ],
+    "study_repository_commit": "3a1aa1a2e368ff8767f40791588eaf552e6d436d",
+    "study_notebook": "Notebooks/PP3_Dendrite_extraction.ipynb"
+  },
+  "input_sources": {
+    "v230": {
+      "path": "v230_results/V230_target_synapses.csv",
+      "sha256": "1eb87ae427dacc21528ce7a105ab021babd6dc10138f526f49678cf357172d5b",
+      "expected_rows": 649
+    },
+    "morphology_stage": "V229 exact SWCs",
+    "morphology": {
+      "720575940632008007": {
+        "path": "v229_results/T4a_720575940632008007.swc",
+        "sha256": "d17623da9812d0f2ef53ab6aed4a9d89a2c2820d34aa0294af2ba434b6107c2a",
+        "node_count": 880
+      },
+      "720575940616224414": {
+        "path": "v229_results/T4c_720575940616224414.swc",
+        "sha256": "7d9cc29226e092c233f35cfcf70f75ac137b8c9f8744a1ba319264f96da3857a",
+        "node_count": 898
+      },
+      "720575940625571465": {
+        "path": "v229_results/T5a_720575940625571465.swc",
+        "sha256": "6d4d2a33cfea8525449b7a1508c6e6c2d9550034aac3774e6b2d64c4e76bae5c",
+        "node_count": 601
+      },
+      "720575940617782941": {
+        "path": "v229_results/T5c_720575940617782941.swc",
+        "sha256": "83b287e914522b0b382e3e46d39ced36494ff257d835cac11d7f4243ae1d7745",
+        "node_count": 577
+      }
+    }
+  },
+  "per_root": {
+    "T4a": {
+      "root_id": "720575940632008007",
+      "swc_sha256": "d17623da9812d0f2ef53ab6aed4a9d89a2c2820d34aa0294af2ba434b6107c2a",
+      "swc_node_count": 880,
+      "total_cable_nm": "462671.505391633313",
+      "leaf_count": 140,
+      "selected_algorithm_node_id": 292,
+      "selected_algorithm_node_row": 292,
+      "published_algorithm_score": "1.132085908818",
+      "subtree_cable_nm": "299110.428638415877",
+      "subtree_leaf_count": 109,
+      "subtree_node_count": 596,
+      "roles": {
+        "pre": {
+          "rows": 84,
+          "full_nearest_segment_inside_candidate": 11,
+          "full_nearest_segment_inside_candidate_pct": "0.130952380952",
+          "candidate_same_as_full_nearest_segment": 11,
+          "candidate_same_as_full_nearest_segment_pct": "0.130952380952",
+          "max_full_centerline_distance_nm": "721.956570023442",
+          "mean_full_centerline_distance_nm": "382.117368972392",
+          "max_candidate_centerline_distance_nm": "19038.335597787904",
+          "mean_candidate_centerline_distance_nm": "13701.869296237413"
+        },
+        "post": {
+          "rows": 113,
+          "full_nearest_segment_inside_candidate": 86,
+          "full_nearest_segment_inside_candidate_pct": "0.761061946903",
+          "candidate_same_as_full_nearest_segment": 86,
+          "candidate_same_as_full_nearest_segment_pct": "0.761061946903",
+          "max_full_centerline_distance_nm": "821.454100117566",
+          "mean_full_centerline_distance_nm": "197.668500656393",
+          "max_candidate_centerline_distance_nm": "19425.726181895960",
+          "mean_candidate_centerline_distance_nm": "3694.630542559843"
+        }
+      }
+    },
+    "T4c": {
+      "root_id": "720575940616224414",
+      "swc_sha256": "7d9cc29226e092c233f35cfcf70f75ac137b8c9f8744a1ba319264f96da3857a",
+      "swc_node_count": 898,
+      "total_cable_nm": "470874.758630730736",
+      "leaf_count": 149,
+      "selected_algorithm_node_id": 358,
+      "selected_algorithm_node_row": 358,
+      "published_algorithm_score": "1.145802863923",
+      "subtree_cable_nm": "288451.472214985813",
+      "subtree_leaf_count": 113,
+      "subtree_node_count": 570,
+      "roles": {
+        "pre": {
+          "rows": 120,
+          "full_nearest_segment_inside_candidate": 0,
+          "full_nearest_segment_inside_candidate_pct": "0.000000000000",
+          "candidate_same_as_full_nearest_segment": 0,
+          "candidate_same_as_full_nearest_segment_pct": "0.000000000000",
+          "max_full_centerline_distance_nm": "817.278679800184",
+          "mean_full_centerline_distance_nm": "357.949513030031",
+          "max_candidate_centerline_distance_nm": "27858.166372537875",
+          "mean_candidate_centerline_distance_nm": "25004.345301342259"
+        },
+        "post": {
+          "rows": 45,
+          "full_nearest_segment_inside_candidate": 35,
+          "full_nearest_segment_inside_candidate_pct": "0.777777777778",
+          "candidate_same_as_full_nearest_segment": 35,
+          "candidate_same_as_full_nearest_segment_pct": "0.777777777778",
+          "max_full_centerline_distance_nm": "528.868790855824",
+          "mean_full_centerline_distance_nm": "164.789527832878",
+          "max_candidate_centerline_distance_nm": "26232.163129067387",
+          "mean_candidate_centerline_distance_nm": "5522.443634688030"
+        }
+      }
+    },
+    "T5a": {
+      "root_id": "720575940625571465",
+      "swc_sha256": "6d4d2a33cfea8525449b7a1508c6e6c2d9550034aac3774e6b2d64c4e76bae5c",
+      "swc_node_count": 601,
+      "total_cable_nm": "331192.056015772803",
+      "leaf_count": 97,
+      "selected_algorithm_node_id": 343,
+      "selected_algorithm_node_row": 343,
+      "published_algorithm_score": "1.168327590832",
+      "subtree_cable_nm": "265200.241845148499",
+      "subtree_leaf_count": 94,
+      "subtree_node_count": 492,
+      "roles": {
+        "pre": {
+          "rows": 72,
+          "full_nearest_segment_inside_candidate": 72,
+          "full_nearest_segment_inside_candidate_pct": "1.000000000000",
+          "candidate_same_as_full_nearest_segment": 72,
+          "candidate_same_as_full_nearest_segment_pct": "1.000000000000",
+          "max_full_centerline_distance_nm": "781.036069653625",
+          "mean_full_centerline_distance_nm": "362.527980699928",
+          "max_candidate_centerline_distance_nm": "781.036069653625",
+          "mean_candidate_centerline_distance_nm": "362.527980699928"
+        },
+        "post": {
+          "rows": 91,
+          "full_nearest_segment_inside_candidate": 90,
+          "full_nearest_segment_inside_candidate_pct": "0.989010989011",
+          "candidate_same_as_full_nearest_segment": 90,
+          "candidate_same_as_full_nearest_segment_pct": "0.989010989011",
+          "max_full_centerline_distance_nm": "634.150148765619",
+          "mean_full_centerline_distance_nm": "199.517798741973",
+          "max_candidate_centerline_distance_nm": "6003.875349971864",
+          "mean_candidate_centerline_distance_nm": "263.255519040869"
+        }
+      }
+    },
+    "T5c": {
+      "root_id": "720575940617782941",
+      "swc_sha256": "83b287e914522b0b382e3e46d39ced36494ff257d835cac11d7f4243ae1d7745",
+      "swc_node_count": 577,
+      "total_cable_nm": "311563.315683767432",
+      "leaf_count": 92,
+      "selected_algorithm_node_id": 323,
+      "selected_algorithm_node_row": 323,
+      "published_algorithm_score": "1.292496110721",
+      "subtree_cable_nm": "186566.679811255977",
+      "subtree_leaf_count": 82,
+      "subtree_node_count": 362,
+      "roles": {
+        "pre": {
+          "rows": 55,
+          "full_nearest_segment_inside_candidate": 0,
+          "full_nearest_segment_inside_candidate_pct": "0.000000000000",
+          "candidate_same_as_full_nearest_segment": 0,
+          "candidate_same_as_full_nearest_segment_pct": "0.000000000000",
+          "max_full_centerline_distance_nm": "832.076123680996",
+          "mean_full_centerline_distance_nm": "468.939220131793",
+          "max_candidate_centerline_distance_nm": "25114.664267485248",
+          "mean_candidate_centerline_distance_nm": "19058.104717836995"
+        },
+        "post": {
+          "rows": 69,
+          "full_nearest_segment_inside_candidate": 59,
+          "full_nearest_segment_inside_candidate_pct": "0.855072463768",
+          "candidate_same_as_full_nearest_segment": 59,
+          "candidate_same_as_full_nearest_segment_pct": "0.855072463768",
+          "max_full_centerline_distance_nm": "1021.314108743725",
+          "mean_full_centerline_distance_nm": "241.002602367640",
+          "max_candidate_centerline_distance_nm": "24166.128087645742",
+          "mean_candidate_centerline_distance_nm": "2903.520556619387"
+        }
+      }
+    }
+  },
+  "interpretation": "The published NeuRosetta automatic subtree-selection algorithm was reproduced on the project's exact V229 SWCs. The resulting subtree is treated as a computational dendrite candidate for provenance and geometry analysis, not as direct biological membrane-compartment annotation.",
+  "not_proven": [
+    "The project's V229 SWCs were not proven bitwise identical to the study's internal skeletonized meshes.",
+    "The public repository does not expose the study's exact intermediate .nr forests for these cells.",
+    "Tree-level preprocessing flags used by the published PP3 notebook are not recoverable from the V229 SWCs.",
+    "A candidate subtree does not prove the location of an individual synaptic cleft on biological dendrite membrane."
+  ],
+  "output": {
+    "mapping_file": "V258_published_subtree_dendrite_mapping.csv",
+    "mapping_rows": 649
+  }
+}
