@@ -62,9 +62,7 @@ def main():
     args = p.parse_args()
 
     rows = read_rows(args.artifact)
-    canonical = "
-".join(canonical_row(r) for r in rows) + "
-"
+    canonical = "\n".join(canonical_row(r) for r in rows) + "\n"
     artifact_sha256 = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
     pairs = Counter((r["pre_root_id"], r["post_root_id"]) for r in rows)
