@@ -42,7 +42,7 @@ def main():
             pre_xyz=["x","y","z"]
             post_xyz=["x","y","z"]
             for r in reader:
-                pre=norm(r["pre_pt_root_id"]); post=norm(r["post_pt_root_id"])
+                pre=norm(r["pre_root_id"]); post=norm(r["post_root_id"])
                 if pre not in TARGETS and post not in TARGETS:
                     continue
                 pair_hits[(pre,post)]=pair_hits.get((pre,post),0)+1
