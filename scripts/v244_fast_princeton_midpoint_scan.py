@@ -30,7 +30,10 @@ def main():
     src=src.rename({
         "pre_root_id_720575940":"pre_root_id",
         "post_root_id_720575940":"post_root_id"
-    }).select([
+    }).with_columns([
+        (pl.lit("720575940000000000").cast(pl.Int64)+pl.col("pre_root_id").cast(pl.Int64)).cast(pl.Utf8).alias("pre_root_id"),
+        (pl.lit("720575940000000000").cast(pl.Int64)+pl.col("post_root_id").cast(pl.Int64)).cast(pl.Utf8).alias("post_root_id")
+    ]).select([
         "pre_root_id","post_root_id",
         "pre_x","pre_y","pre_z",
         "post_x","post_y","post_z",
@@ -84,6 +87,7 @@ def main():
         "ctr_equals_v230_midpoint":int(ctr_equal),
         "pair_counts_equal":pair_equal,
         "formula":"v230 xyz = (pre_xyz + post_xyz) / 2",
+        "root_id_reconstruction":"720575940000000000 + 9-digit suffix from *_720575940 columns",
         "ctr_formula_check":"ctr xyz == v230 xyz",
         "mapping":mappings,
         "pair_counts":pair_counts.sort(["pre_root_id","post_root_id"]).to_dicts()
