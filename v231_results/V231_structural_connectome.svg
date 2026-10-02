@@ -1,0 +1,227 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="920" viewBox="0 0 1200 920">
+<rect width="1200" height="920" fill="#ffffff"/>
+<text x="600" y="34" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="700">V230 — Structural Connectome Snapshot</text>
+<text x="600" y="57" text-anchor="middle" font-family="Arial,sans-serif" font-size="13">649 checked-in rows • 75 observed pairs • structure only • biological provenance UNVERIFIED</text>
+<text x="210" y="78" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="700">Presynaptic roots (33)</text>
+<text x="990" y="78" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="700">Postsynaptic roots (38)</text>
+<line x1="210" y1="432.1875" x2="990" y2="90" stroke="#8a8a8a" stroke-width="2.8" stroke-opacity="0.52"/>
+<line x1="210" y1="318.125" x2="990" y2="90" stroke="#8a8a8a" stroke-width="4.3" stroke-opacity="0.52"/>
+<line x1="210" y1="226.875" x2="990" y2="129.45945945945945" stroke="#8a8a8a" stroke-width="3.0999999999999996" stroke-opacity="0.52"/>
+<line x1="210" y1="226.875" x2="990" y2="109.72972972972973" stroke="#8a8a8a" stroke-width="4.6" stroke-opacity="0.52"/>
+<line x1="210" y1="591.875" x2="990" y2="90" stroke="#8a8a8a" stroke-width="2.5" stroke-opacity="0.52"/>
+<line x1="210" y1="660.3125" x2="990" y2="149.1891891891892" stroke="#8a8a8a" stroke-width="2.2" stroke-opacity="0.52"/>
+<line x1="210" y1="295.3125" x2="990" y2="149.1891891891892" stroke="#8a8a8a" stroke-width="4.6" stroke-opacity="0.52"/>
+<line x1="210" y1="683.125" x2="990" y2="90" stroke="#8a8a8a" stroke-width="2.2" stroke-opacity="0.52"/>
+<line x1="210" y1="455" x2="990" y2="90" stroke="#8a8a8a" stroke-width="2.8" stroke-opacity="0.52"/>
+<line x1="210" y1="340.9375" x2="990" y2="129.45945945945945" stroke="#8a8a8a" stroke-width="2.2" stroke-opacity="0.52"/>
+<line x1="210" y1="340.9375" x2="990" y2="109.72972972972973" stroke="#8a8a8a" stroke-width="2.2" stroke-opacity="0.52"/>
+<line x1="210" y1="477.8125" x2="990" y2="109.72972972972973" stroke="#8a8a8a" stroke-width="2.8" stroke-opacity="0.52"/>
+<line x1="210" y1="500.625" x2="990" y2="90" stroke="#8a8a8a" stroke-width="2.8" stroke-opacity="0.52"/>
+<line x1="210" y1="614.6875" x2="990" y2="129.45945945945945" stroke="#8a8a8a" stroke-width="2.5" stroke-opacity="0.52"/>
+<line x1="210" y1="90" x2="990" y2="484.59459459459464" stroke="#8a8a8a" stroke-width="2.8" stroke-opacity="0.52"/>
+<line x1="210" y1="90" x2="990" y2="425.4054054054054" stroke="#8a8a8a" stroke-width="3.0999999999999996" stroke-opacity="0.52"/>
+<line x1="210" y1="90" x2="990" y2="445.13513513513516" stroke="#8a8a8a" stroke-width="3.0999999999999996" stroke-opacity="0.52"/>
+<line x1="210" y1="90" x2="990" y2="366.21621621621625" stroke="#8a8a8a" stroke-width="4" stroke-opacity="0.52"/>
+<line x1="210" y1="90" x2="990" y2="307.02702702702703" stroke="#8a8a8a" stroke-width="4.6" stroke-opacity="0.52"/>
+<line x1="210" y1="90" x2="990" y2="583.2432432432432" stroke="#8a8a8a" stroke-width="2.5" stroke-opacity="0.52"/>
+<line x1="210" y1="90" x2="990" y2="602.972972972973" stroke="#8a8a8a" stroke-width="2.5" stroke-opacity="0.52"/>
+<line x1="210" y1="90" x2="990" y2="622.7027027027027" stroke="#8a8a8a" stroke-width="2.5" stroke-opacity="0.52"/>
+<line x1="210" y1="90" x2="990" y2="642.4324324324325" stroke="#8a8a8a" stroke-width="2.5" stroke-opacity="0.52"/>
+<line x1="210" y1="90" x2="990" y2="662.1621621621622" stroke="#8a8a8a" stroke-width="2.5" stroke-opacity="0.52"/>
+<line x1="210" y1="90" x2="990" y2="405.6756756756757" stroke="#8a8a8a" stroke-width="4" stroke-opacity="0.52"/>
+<line x1="210" y1="90" x2="990" y2="760.8108108108108" stroke="#8a8a8a" stroke-width="2.2" stroke-opacity="0.52"/>
+<line x1="210" y1="90" x2="990" y2="681.8918918918919" stroke="#8a8a8a" stroke-width="2.5" stroke-opacity="0.52"/>
+<line x1="210" y1="90" x2="990" y2="543.7837837837837" stroke="#8a8a8a" stroke-width="2.8" stroke-opacity="0.52"/>
+<line x1="210" y1="90" x2="990" y2="287.2972972972973" stroke="#8a8a8a" stroke-width="4.9" stroke-opacity="0.52"/>
+<line x1="210" y1="181.25" x2="990" y2="346.4864864864865" stroke="#8a8a8a" stroke-width="4" stroke-opacity="0.52"/>
+<line x1="210" y1="181.25" x2="990" y2="701.6216216216217" stroke="#8a8a8a" stroke-width="2.2" stroke-opacity="0.52"/>
+<line x1="210" y1="181.25" x2="990" y2="326.7567567567568" stroke="#8a8a8a" stroke-width="2.2" stroke-opacity="0.52"/>
+<line x1="210" y1="181.25" x2="990" y2="228.10810810810813" stroke="#8a8a8a" stroke-width="6.1" stroke-opacity="0.52"/>
+<line x1="210" y1="181.25" x2="990" y2="563.5135135135135" stroke="#8a8a8a" stroke-width="2.5" stroke-opacity="0.52"/>
+<line x1="210" y1="181.25" x2="990" y2="800.2702702702703" stroke="#8a8a8a" stroke-width="2.2" stroke-opacity="0.52"/>
+<line x1="210" y1="181.25" x2="990" y2="820" stroke="#8a8a8a" stroke-width="2.2" stroke-opacity="0.52"/>
+<line x1="210" y1="523.4375" x2="990" y2="129.45945945945945" stroke="#8a8a8a" stroke-width="2.8" stroke-opacity="0.52"/>
+<line x1="210" y1="705.9375" x2="990" y2="109.72972972972973" stroke="#8a8a8a" stroke-width="2.2" stroke-opacity="0.52"/>
+<line x1="210" y1="363.75" x2="990" y2="149.1891891891892" stroke="#8a8a8a" stroke-width="3.7" stroke-opacity="0.52"/>
+<line x1="210" y1="637.5" x2="990" y2="109.72972972972973" stroke="#8a8a8a" stroke-width="2.5" stroke-opacity="0.52"/>
+<line x1="210" y1="728.75" x2="990" y2="90" stroke="#8a8a8a" stroke-width="2.2" stroke-opacity="0.52"/>
+<line x1="210" y1="135.625" x2="990" y2="326.7567567567568" stroke="#8a8a8a" stroke-width="2.8" stroke-opacity="0.52"/>
+<line x1="210" y1="135.625" x2="990" y2="504.3243243243243" stroke="#8a8a8a" stroke-width="2.8" stroke-opacity="0.52"/>
+<line x1="210" y1="135.625" x2="990" y2="464.86486486486484" stroke="#8a8a8a" stroke-width="3.0999999999999996" stroke-opacity="0.52"/>
+<line x1="210" y1="135.625" x2="990" y2="524.0540540540541" stroke="#8a8a8a" stroke-width="2.8" stroke-opacity="0.52"/>
+<line x1="210" y1="135.625" x2="990" y2="267.5675675675676" stroke="#8a8a8a" stroke-width="3.0999999999999996" stroke-opacity="0.52"/>
+<line x1="210" y1="135.625" x2="990" y2="247.83783783783784" stroke="#8a8a8a" stroke-width="3.3999999999999995" stroke-opacity="0.52"/>
+<line x1="210" y1="135.625" x2="990" y2="780.5405405405405" stroke="#8a8a8a" stroke-width="2.2" stroke-opacity="0.52"/>
+<line x1="210" y1="135.625" x2="990" y2="168.9189189189189" stroke="#8a8a8a" stroke-width="4" stroke-opacity="0.52"/>
+<line x1="210" y1="135.625" x2="990" y2="188.64864864864865" stroke="#8a8a8a" stroke-width="3.7" stroke-opacity="0.52"/>
+<line x1="210" y1="158.4375" x2="990" y2="149.1891891891892" stroke="#8a8a8a" stroke-width="4.3" stroke-opacity="0.52"/>
+<line x1="210" y1="158.4375" x2="990" y2="129.45945945945945" stroke="#8a8a8a" stroke-width="5.5" stroke-opacity="0.52"/>
+<line x1="210" y1="158.4375" x2="990" y2="109.72972972972973" stroke="#8a8a8a" stroke-width="7" stroke-opacity="0.52"/>
+<line x1="210" y1="158.4375" x2="990" y2="90" stroke="#8a8a8a" stroke-width="4.3" stroke-opacity="0.52"/>
+<line x1="210" y1="409.375" x2="990" y2="90" stroke="#8a8a8a" stroke-width="3.0999999999999996" stroke-opacity="0.52"/>
+<line x1="210" y1="249.6875" x2="990" y2="90" stroke="#8a8a8a" stroke-width="6.1" stroke-opacity="0.52"/>
+<line x1="210" y1="546.25" x2="990" y2="90" stroke="#8a8a8a" stroke-width="2.8" stroke-opacity="0.52"/>
+<line x1="210" y1="112.8125" x2="990" y2="721.3513513513514" stroke="#8a8a8a" stroke-width="2.2" stroke-opacity="0.52"/>
+<line x1="210" y1="112.8125" x2="990" y2="208.3783783783784" stroke="#8a8a8a" stroke-width="6.1" stroke-opacity="0.52"/>
+<line x1="210" y1="112.8125" x2="990" y2="741.081081081081" stroke="#8a8a8a" stroke-width="2.2" stroke-opacity="0.52"/>
+<line x1="210" y1="112.8125" x2="990" y2="385.94594594594594" stroke="#8a8a8a" stroke-width="4" stroke-opacity="0.52"/>
+<line x1="210" y1="112.8125" x2="990" y2="267.5675675675676" stroke="#8a8a8a" stroke-width="2.8" stroke-opacity="0.52"/>
+<line x1="210" y1="112.8125" x2="990" y2="247.83783783783784" stroke="#8a8a8a" stroke-width="3.3999999999999995" stroke-opacity="0.52"/>
+<line x1="210" y1="112.8125" x2="990" y2="168.9189189189189" stroke="#8a8a8a" stroke-width="6.7" stroke-opacity="0.52"/>
+<line x1="210" y1="112.8125" x2="990" y2="188.64864864864865" stroke="#8a8a8a" stroke-width="3.3999999999999995" stroke-opacity="0.52"/>
+<line x1="210" y1="751.5625" x2="990" y2="129.45945945945945" stroke="#8a8a8a" stroke-width="2.2" stroke-opacity="0.52"/>
+<line x1="210" y1="774.375" x2="990" y2="90" stroke="#8a8a8a" stroke-width="2.2" stroke-opacity="0.52"/>
+<line x1="210" y1="204.0625" x2="990" y2="129.45945945945945" stroke="#8a8a8a" stroke-width="4" stroke-opacity="0.52"/>
+<line x1="210" y1="204.0625" x2="990" y2="109.72972972972973" stroke="#8a8a8a" stroke-width="7" stroke-opacity="0.52"/>
+<line x1="210" y1="797.1875" x2="990" y2="149.1891891891892" stroke="#8a8a8a" stroke-width="2.2" stroke-opacity="0.52"/>
+<line x1="210" y1="820" x2="990" y2="90" stroke="#8a8a8a" stroke-width="2.2" stroke-opacity="0.52"/>
+<line x1="210" y1="569.0625" x2="990" y2="109.72972972972973" stroke="#8a8a8a" stroke-width="2.8" stroke-opacity="0.52"/>
+<line x1="210" y1="272.5" x2="990" y2="129.45945945945945" stroke="#8a8a8a" stroke-width="4" stroke-opacity="0.52"/>
+<line x1="210" y1="272.5" x2="990" y2="109.72972972972973" stroke="#8a8a8a" stroke-width="2.5" stroke-opacity="0.52"/>
+<line x1="210" y1="386.5625" x2="990" y2="90" stroke="#8a8a8a" stroke-width="3.3999999999999995" stroke-opacity="0.52"/>
+<circle cx="210" cy="90" r="12" fill="#5b5b5b"><title>720575940616224414 — 120 coordinate rows as pre</title></circle>
+<text x="198" y="93" text-anchor="end" font-family="monospace" font-size="9">16224414</text>
+<circle cx="210" cy="112.8125" r="12" fill="#5b5b5b"><title>720575940632008007 — 84 coordinate rows as pre</title></circle>
+<text x="198" y="115.8125" text-anchor="end" font-family="monospace" font-size="9">32008007</text>
+<circle cx="210" cy="135.625" r="12" fill="#5b5b5b"><title>720575940625571465 — 72 coordinate rows as pre</title></circle>
+<text x="198" y="138.625" text-anchor="end" font-family="monospace" font-size="9">25571465</text>
+<circle cx="210" cy="158.4375" r="12" fill="#5b5b5b"><title>720575940626979621 — 61 coordinate rows as pre</title></circle>
+<text x="198" y="161.4375" text-anchor="end" font-family="monospace" font-size="9">26979621</text>
+<circle cx="210" cy="181.25" r="12" fill="#5b5b5b"><title>720575940617782941 — 55 coordinate rows as pre</title></circle>
+<text x="198" y="184.25" text-anchor="end" font-family="monospace" font-size="9">17782941</text>
+<circle cx="210" cy="204.0625" r="9.333333333333332" fill="#5b5b5b"><title>720575940635066798 — 32 coordinate rows as pre</title></circle>
+<text x="198" y="207.0625" text-anchor="end" font-family="monospace" font-size="9">35066798</text>
+<circle cx="210" cy="226.875" r="7.5" fill="#5b5b5b"><title>720575940608305756 — 21 coordinate rows as pre</title></circle>
+<text x="198" y="229.875" text-anchor="end" font-family="monospace" font-size="9">08305756</text>
+<circle cx="210" cy="249.6875" r="7" fill="#5b5b5b"><title>720575940630799226 — 18 coordinate rows as pre</title></circle>
+<text x="198" y="252.6875" text-anchor="end" font-family="monospace" font-size="9">30799226</text>
+<circle cx="210" cy="272.5" r="6.833333333333334" fill="#5b5b5b"><title>720575940643763656 — 17 coordinate rows as pre</title></circle>
+<text x="198" y="275.5" text-anchor="end" font-family="monospace" font-size="9">43763656</text>
+<circle cx="210" cy="295.3125" r="6.166666666666666" fill="#5b5b5b"><title>720575940612197986 — 13 coordinate rows as pre</title></circle>
+<text x="198" y="298.3125" text-anchor="end" font-family="monospace" font-size="9">12197986</text>
+<circle cx="210" cy="318.125" r="6" fill="#5b5b5b"><title>720575940607385283 — 12 coordinate rows as pre</title></circle>
+<text x="198" y="321.125" text-anchor="end" font-family="monospace" font-size="9">07385283</text>
+<circle cx="210" cy="340.9375" r="5.666666666666667" fill="#5b5b5b"><title>720575940614324130 — 10 coordinate rows as pre</title></circle>
+<text x="198" y="343.9375" text-anchor="end" font-family="monospace" font-size="9">14324130</text>
+<circle cx="210" cy="363.75" r="5.666666666666667" fill="#5b5b5b"><title>720575940618898715 — 10 coordinate rows as pre</title></circle>
+<text x="198" y="366.75" text-anchor="end" font-family="monospace" font-size="9">18898715</text>
+<circle cx="210" cy="386.5625" r="5.5" fill="#5b5b5b"><title>720575940650461561 — 9 coordinate rows as pre</title></circle>
+<text x="198" y="389.5625" text-anchor="end" font-family="monospace" font-size="9">50461561</text>
+<circle cx="210" cy="409.375" r="5.333333333333333" fill="#5b5b5b"><title>720575940628545643 — 8 coordinate rows as pre</title></circle>
+<text x="198" y="412.375" text-anchor="end" font-family="monospace" font-size="9">28545643</text>
+<circle cx="210" cy="432.1875" r="5.166666666666667" fill="#5b5b5b"><title>720575940605560678 — 7 coordinate rows as pre</title></circle>
+<text x="198" y="435.1875" text-anchor="end" font-family="monospace" font-size="9">05560678</text>
+<circle cx="210" cy="455" r="5.166666666666667" fill="#5b5b5b"><title>720575940614212258 — 7 coordinate rows as pre</title></circle>
+<text x="198" y="458" text-anchor="end" font-family="monospace" font-size="9">14212258</text>
+<circle cx="210" cy="477.8125" r="5.166666666666667" fill="#5b5b5b"><title>720575940614484530 — 7 coordinate rows as pre</title></circle>
+<text x="198" y="480.8125" text-anchor="end" font-family="monospace" font-size="9">14484530</text>
+<circle cx="210" cy="500.625" r="5.166666666666667" fill="#5b5b5b"><title>720575940615101506 — 7 coordinate rows as pre</title></circle>
+<text x="198" y="503.625" text-anchor="end" font-family="monospace" font-size="9">15101506</text>
+<circle cx="210" cy="523.4375" r="5.166666666666667" fill="#5b5b5b"><title>720575940618076902 — 7 coordinate rows as pre</title></circle>
+<text x="198" y="526.4375" text-anchor="end" font-family="monospace" font-size="9">18076902</text>
+<circle cx="210" cy="546.25" r="5.166666666666667" fill="#5b5b5b"><title>720575940631207468 — 7 coordinate rows as pre</title></circle>
+<text x="198" y="549.25" text-anchor="end" font-family="monospace" font-size="9">31207468</text>
+<circle cx="210" cy="569.0625" r="5.166666666666667" fill="#5b5b5b"><title>720575940642570125 — 7 coordinate rows as pre</title></circle>
+<text x="198" y="572.0625" text-anchor="end" font-family="monospace" font-size="9">42570125</text>
+<circle cx="210" cy="591.875" r="5" fill="#5b5b5b"><title>720575940610813816 — 6 coordinate rows as pre</title></circle>
+<text x="198" y="594.875" text-anchor="end" font-family="monospace" font-size="9">10813816</text>
+<circle cx="210" cy="614.6875" r="5" fill="#5b5b5b"><title>720575940615901115 — 6 coordinate rows as pre</title></circle>
+<text x="198" y="617.6875" text-anchor="end" font-family="monospace" font-size="9">15901115</text>
+<circle cx="210" cy="637.5" r="5" fill="#5b5b5b"><title>720575940621116807 — 6 coordinate rows as pre</title></circle>
+<text x="198" y="640.5" text-anchor="end" font-family="monospace" font-size="9">21116807</text>
+<circle cx="210" cy="660.3125" r="4.833333333333333" fill="#5b5b5b"><title>720575940610934340 — 5 coordinate rows as pre</title></circle>
+<text x="198" y="663.3125" text-anchor="end" font-family="monospace" font-size="9">10934340</text>
+<circle cx="210" cy="683.125" r="4.833333333333333" fill="#5b5b5b"><title>720575940614063587 — 5 coordinate rows as pre</title></circle>
+<text x="198" y="686.125" text-anchor="end" font-family="monospace" font-size="9">14063587</text>
+<circle cx="210" cy="705.9375" r="4.833333333333333" fill="#5b5b5b"><title>720575940618672293 — 5 coordinate rows as pre</title></circle>
+<text x="198" y="708.9375" text-anchor="end" font-family="monospace" font-size="9">18672293</text>
+<circle cx="210" cy="728.75" r="4.833333333333333" fill="#5b5b5b"><title>720575940621618209 — 5 coordinate rows as pre</title></circle>
+<text x="198" y="731.75" text-anchor="end" font-family="monospace" font-size="9">21618209</text>
+<circle cx="210" cy="751.5625" r="4.833333333333333" fill="#5b5b5b"><title>720575940633448479 — 5 coordinate rows as pre</title></circle>
+<text x="198" y="754.5625" text-anchor="end" font-family="monospace" font-size="9">33448479</text>
+<circle cx="210" cy="774.375" r="4.833333333333333" fill="#5b5b5b"><title>720575940634612194 — 5 coordinate rows as pre</title></circle>
+<text x="198" y="777.375" text-anchor="end" font-family="monospace" font-size="9">34612194</text>
+<circle cx="210" cy="797.1875" r="4.833333333333333" fill="#5b5b5b"><title>720575940638729048 — 5 coordinate rows as pre</title></circle>
+<text x="198" y="800.1875" text-anchor="end" font-family="monospace" font-size="9">38729048</text>
+<circle cx="210" cy="820" r="4.833333333333333" fill="#5b5b5b"><title>720575940639209956 — 5 coordinate rows as pre</title></circle>
+<text x="198" y="823" text-anchor="end" font-family="monospace" font-size="9">39209956</text>
+<circle cx="990" cy="90" r="11" fill="#000000" stroke="#000000" stroke-width="2"><title>720575940632008007 — 113 coordinate rows as post — V229 target</title></circle>
+<text x="1002" y="93" text-anchor="start" font-family="monospace" font-size="10" font-weight="700">TARGET 32008007</text>
+<circle cx="990" cy="109.72972972972973" r="11" fill="#000000" stroke="#000000" stroke-width="2"><title>720575940625571465 — 91 coordinate rows as post — V229 target</title></circle>
+<text x="1002" y="112.72972972972973" text-anchor="start" font-family="monospace" font-size="10" font-weight="700">TARGET 25571465</text>
+<circle cx="990" cy="129.45945945945945" r="11" fill="#000000" stroke="#000000" stroke-width="2"><title>720575940617782941 — 69 coordinate rows as post — V229 target</title></circle>
+<text x="1002" y="132.45945945945945" text-anchor="start" font-family="monospace" font-size="10" font-weight="700">TARGET 17782941</text>
+<circle cx="990" cy="149.1891891891892" r="11" fill="#000000" stroke="#000000" stroke-width="2"><title>720575940616224414 — 45 coordinate rows as post — V229 target</title></circle>
+<text x="1002" y="152.1891891891892" text-anchor="start" font-family="monospace" font-size="10" font-weight="700">TARGET 16224414</text>
+<circle cx="990" cy="168.9189189189189" r="9.166666666666668" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940632504874 — 31 coordinate rows as post</title></circle>
+<text x="1002" y="171.9189189189189" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">32504874</text>
+<circle cx="990" cy="188.64864864864865" r="7.166666666666666" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940639209956 — 19 coordinate rows as post</title></circle>
+<text x="1002" y="191.64864864864865" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">39209956</text>
+<circle cx="990" cy="208.3783783783784" r="7" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940615933919 — 18 coordinate rows as post</title></circle>
+<text x="1002" y="211.3783783783784" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">15933919</text>
+<circle cx="990" cy="228.10810810810813" r="7" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940616358722 — 18 coordinate rows as post</title></circle>
+<text x="1002" y="231.10810810810813" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">16358722</text>
+<circle cx="990" cy="247.83783783783784" r="7" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940629148007 — 18 coordinate rows as post</title></circle>
+<text x="1002" y="250.83783783783784" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">29148007</text>
+<circle cx="990" cy="267.5675675675676" r="6.5" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940627190556 — 15 coordinate rows as post</title></circle>
+<text x="1002" y="270.5675675675676" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">27190556</text>
+<circle cx="990" cy="287.2972972972973" r="6.333333333333334" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940644651812 — 14 coordinate rows as post</title></circle>
+<text x="1002" y="290.2972972972973" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">44651812</text>
+<circle cx="990" cy="307.02702702702703" r="6.166666666666666" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940618898715 — 13 coordinate rows as post</title></circle>
+<text x="1002" y="310.02702702702703" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">18898715</text>
+<circle cx="990" cy="326.7567567567568" r="6" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940614324130 — 12 coordinate rows as post</title></circle>
+<text x="1002" y="329.7567567567568" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">14324130</text>
+<circle cx="990" cy="346.4864864864865" r="5.833333333333333" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940608552405 — 11 coordinate rows as post</title></circle>
+<text x="1002" y="349.4864864864865" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">08552405</text>
+<circle cx="990" cy="366.21621621621625" r="5.833333333333333" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940617278109 — 11 coordinate rows as post</title></circle>
+<text x="1002" y="369.21621621621625" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">17278109</text>
+<circle cx="990" cy="385.94594594594594" r="5.833333333333333" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940626979621 — 11 coordinate rows as post</title></circle>
+<text x="1002" y="388.94594594594594" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">26979621</text>
+<circle cx="990" cy="405.6756756756757" r="5.833333333333333" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940630475351 — 11 coordinate rows as post</title></circle>
+<text x="1002" y="408.6756756756757" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">30475351</text>
+<circle cx="990" cy="425.4054054054054" r="5.333333333333333" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940612735205 — 8 coordinate rows as post</title></circle>
+<text x="1002" y="428.4054054054054" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">12735205</text>
+<circle cx="990" cy="445.13513513513516" r="5.333333333333333" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940613214058 — 8 coordinate rows as post</title></circle>
+<text x="1002" y="448.13513513513516" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">13214058</text>
+<circle cx="990" cy="464.86486486486484" r="5.333333333333333" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940618681709 — 8 coordinate rows as post</title></circle>
+<text x="1002" y="467.86486486486484" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">18681709</text>
+<circle cx="990" cy="484.59459459459464" r="5.166666666666667" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940605115936 — 7 coordinate rows as post</title></circle>
+<text x="1002" y="487.59459459459464" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">05115936</text>
+<circle cx="990" cy="504.3243243243243" r="5.166666666666667" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940616780683 — 7 coordinate rows as post</title></circle>
+<text x="1002" y="507.3243243243243" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">16780683</text>
+<circle cx="990" cy="524.0540540540541" r="5.166666666666667" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940621780812 — 7 coordinate rows as post</title></circle>
+<text x="1002" y="527.0540540540541" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">21780812</text>
+<circle cx="990" cy="543.7837837837837" r="5.166666666666667" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940634675819 — 7 coordinate rows as post</title></circle>
+<text x="1002" y="546.7837837837837" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">34675819</text>
+<circle cx="990" cy="563.5135135135135" r="5" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940616690482 — 6 coordinate rows as post</title></circle>
+<text x="1002" y="566.5135135135135" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">16690482</text>
+<circle cx="990" cy="583.2432432432432" r="5" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940620807919 — 6 coordinate rows as post</title></circle>
+<text x="1002" y="586.2432432432432" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">20807919</text>
+<circle cx="990" cy="602.972972972973" r="5" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940622883853 — 6 coordinate rows as post</title></circle>
+<text x="1002" y="605.972972972973" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">22883853</text>
+<circle cx="990" cy="622.7027027027027" r="5" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940625247049 — 6 coordinate rows as post</title></circle>
+<text x="1002" y="625.7027027027027" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">25247049</text>
+<circle cx="990" cy="642.4324324324325" r="5" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940627756937 — 6 coordinate rows as post</title></circle>
+<text x="1002" y="645.4324324324325" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">27756937</text>
+<circle cx="990" cy="662.1621621621622" r="5" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940629384271 — 6 coordinate rows as post</title></circle>
+<text x="1002" y="665.1621621621622" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">29384271</text>
+<circle cx="990" cy="681.8918918918919" r="5" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940634050073 — 6 coordinate rows as post</title></circle>
+<text x="1002" y="684.8918918918919" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">34050073</text>
+<circle cx="990" cy="701.6216216216217" r="4.833333333333333" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940611007534 — 5 coordinate rows as post</title></circle>
+<text x="1002" y="704.6216216216217" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">11007534</text>
+<circle cx="990" cy="721.3513513513514" r="4.833333333333333" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940613101487 — 5 coordinate rows as post</title></circle>
+<text x="1002" y="724.3513513513514" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">13101487</text>
+<circle cx="990" cy="741.081081081081" r="4.833333333333333" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940622323080 — 5 coordinate rows as post</title></circle>
+<text x="1002" y="744.081081081081" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">22323080</text>
+<circle cx="990" cy="760.8108108108108" r="4.833333333333333" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940630978602 — 5 coordinate rows as post</title></circle>
+<text x="1002" y="763.8108108108108" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">30978602</text>
+<circle cx="990" cy="780.5405405405405" r="4.833333333333333" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940631408246 — 5 coordinate rows as post</title></circle>
+<text x="1002" y="783.5405405405405" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">31408246</text>
+<circle cx="990" cy="800.2702702702703" r="4.833333333333333" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940633448479 — 5 coordinate rows as post</title></circle>
+<text x="1002" y="803.2702702702703" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">33448479</text>
+<circle cx="990" cy="820" r="4.833333333333333" fill="#b0b0b0" stroke="#777777" stroke-width="1"><title>720575940633572004 — 5 coordinate rows as post</title></circle>
+<text x="1002" y="823" text-anchor="start" font-family="monospace" font-size="9" font-weight="400">33572004</text>
+<rect x="40" y="856" width="1120" height="42" rx="8" fill="#f5f5f5" stroke="#d0d0d0"/>
+<text x="60" y="874" font-family="Arial,sans-serif" font-size="11">Edge width = number of V230 coordinate rows for the observed pre→post pair. Target posts are enlarged.</text>
+<text x="60" y="889" font-family="Arial,sans-serif" font-size="11">This figure visualizes the checked-in artifact only; it is not evidence that these rows are biological synapses.</text>
+</svg>
