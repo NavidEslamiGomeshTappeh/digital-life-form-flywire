@@ -1,0 +1,47 @@
+name: V256 compartment evidence audit
+
+on:
+  push:
+    branches:
+      - v256-compartment-evidence-audit
+  pull_request:
+    branches:
+      - main
+      - v256-compartment-evidence-audit
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test runner
+        run: python -m pip install --disable-pip-version-check pytest
+
+      - name: Unit tests
+        run: python -m pytest -q scripts/test_v256_compartment_evidence_audit.py
+
+      - name: Run biological compartment evidence audit
+        run: |
+          python scripts/v256_compartment_evidence_audit.py             --v230 v230_results/V230_target_synapses.csv             --output-dir /tmp/v256_results
+
+      - name: Print audit summary
+        run: cat /tmp/v256_results/V256_compartment_evidence.json
+
+      - name: Publish V256 audit artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: V256-compartment-evidence-audit
+          path: /tmp/v256_results/
+          retention-days: 90
