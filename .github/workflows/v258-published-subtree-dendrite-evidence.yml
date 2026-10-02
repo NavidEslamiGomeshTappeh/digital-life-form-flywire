@@ -41,6 +41,7 @@ jobs:
             --output-dir /tmp/v258_results
 
       - name: Sync generated evidence into repository
+        if: github.event_name != 'pull_request'
         run: |
           rm -rf v258_results
           cp -R /tmp/v258_results v258_results
