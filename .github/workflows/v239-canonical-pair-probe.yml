@@ -1,6 +1,10 @@
 name: V239 canonical FAFB pair probe
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/v239-canonical-pair-probe.yml"
 permissions:
   contents: read
 jobs:
