@@ -2,7 +2,7 @@ name: V262 PP3 Path Reconstruction
 
 on:
   push:
-    branches: [v262-pp3-path-reconstruction]
+    branches: ["v262-*"]
   pull_request:
     branches: [main]
   workflow_dispatch:
