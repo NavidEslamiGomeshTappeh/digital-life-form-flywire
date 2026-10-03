@@ -2,7 +2,7 @@
 name: Research Lead
 description: Coordinates evidence-first research tasks by decomposing them into provenance, connectomics, scientific-verification, and security checks before implementation.
 target: github-copilot
-tools: ["read", "search", "terminal"]
+tools: ["read", "search", "execute"]
 include-custom-instructions: true
 ---
 

@@ -2,7 +2,7 @@
 name: Connectome Engineer
 description: Builds reproducible FlyWire connectivity and morphology pipelines with exact root identity and deterministic evidence outputs.
 target: github-copilot
-tools: ["read", "edit", "search", "terminal"]
+tools: ["read", "edit", "search", "execute"]
 include-custom-instructions: true
 ---
 

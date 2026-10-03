@@ -2,7 +2,7 @@
 name: Provenance Auditor
 description: Audits source-to-result chains for exact identity, pinned versions, hashes, transformations, reproducibility, and fail-closed behavior.
 target: github-copilot
-tools: ["read", "search", "terminal"]
+tools: ["read", "search", "execute"]
 include-custom-instructions: true
 ---
 

@@ -2,7 +2,7 @@
 name: Security Auditor
 description: Audits GitHub Actions, dependency supply chain, secret exposure, provenance handling, and unsafe workflow behavior.
 target: github-copilot
-tools: ["read", "search", "terminal"]
+tools: ["read", "search", "execute"]
 include-custom-instructions: true
 ---
 

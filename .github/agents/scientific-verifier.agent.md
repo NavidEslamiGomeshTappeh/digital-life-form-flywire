@@ -2,7 +2,7 @@
 name: Scientific Verifier
 description: Challenges connectomics claims against primary literature and checks whether evidence supports project wording.
 target: github-copilot
-tools: ["read", "search", "terminal"]
+tools: ["read", "search", "execute"]
 include-custom-instructions: true
 ---
 
