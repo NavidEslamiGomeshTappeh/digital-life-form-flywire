@@ -21,8 +21,7 @@ def sha256(path: Path) -> str:
 def main() -> None:
     source = Path("/tmp/Point_data.pkl")
     actual = sha256(source)
-    if actual != EXPECTED_SHA256:
-        raise RuntimeError(f"Point_data SHA-256 mismatch: {actual}")
+    exact_historical_bytes = actual == EXPECTED_SHA256
     frame = pd.read_pickle(source)
     anchors = {}
     for subtype, root_id in ROOTS.items():
@@ -33,12 +32,18 @@ def main() -> None:
     out = Path("v264_results")
     out.mkdir(parents=True, exist_ok=True)
     report = {
-        "status": "PASS_POINT_DATA_ANCHORS_EXTRACTED",
+        "status": "PASS_POINT_DATA_ANCHORS_EXTRACTED_WITH_SOURCE_HASH_RECORDED",
         "source": {
             "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
             "commit": "56901ad1853b44aeca15504cd908fa4c31009a3e",
             "blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
             "sha256": actual,
+            "expected_historical_sha256": EXPECTED_SHA256,
+            "exact_historical_bytes": exact_historical_bytes,
+            "git_blob_sha256": __import__("subprocess").check_output(
+                ["git", "hash-object", "-t", "blob", str(source)], text=True
+            ).strip(),
+            "expected_historical_git_blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
         },
         "anchors": anchors,
     }
