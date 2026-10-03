@@ -105,7 +105,9 @@ jobs:
           assert list(ga.columns) == list(ca.columns)
           assert ga.shape == ca.shape
           for col in ga.columns:
-              if ga[col].dtype.kind in "biufc":
+              if ga[col].dtype.kind == "b":
+                  assert ga[col].tolist() == ca[col].tolist(), col
+              elif ga[col].dtype.kind in "iufc":
                   assert (ga[col] - ca[col]).abs().max() < 1e-9
               else:
                   assert ga[col].astype(str).tolist() == ca[col].astype(str).tolist()
