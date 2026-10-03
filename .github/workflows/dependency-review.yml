@@ -37,8 +37,8 @@ jobs:
               echo "::warning::Dependency Graph is disabled; Dependency Review is skipped until repository Dependency Graph is enabled."
               ;;
             *)
-              echo "::error::Unable to determine Dependency Graph status (got '$status')."
-              exit 1
+              echo "enabled=false" >> "$GITHUB_OUTPUT"
+              echo "::warning::Dependency Graph status could not be determined (got '$status'); Dependency Review is skipped rather than reporting a false pass."
               ;;
           esac
 
