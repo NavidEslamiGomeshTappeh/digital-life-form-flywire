@@ -9,6 +9,9 @@ on:
       - main
       - v255-usable-circuit-evidence-pack
 
+permissions:
+  contents: read
+
 jobs:
   build-usable-pack:
     runs-on: ubuntu-latest
