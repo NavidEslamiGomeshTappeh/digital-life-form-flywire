@@ -44,7 +44,8 @@ out=pathlib.Path("v275_results");out.mkdir(exist_ok=True);rows=[]
 for rid in IDS:
     url=f"https://flyem.mrc-lmb.cam.ac.uk/flyconnectome/flywire_skeletons_630/{rid}"
     req=urllib.request.Request(url,headers={"User-Agent":"Digital-Life-Form-V275/1.0"})
-    raw=urllib.request.urlopen(req,timeout=120).read()\n    data=gzip.decompress(raw).decode() if raw[:2]==b"\\x1f\\x8b" else raw.decode()
+    raw=urllib.request.urlopen(req,timeout=120).read()
+    data=gzip.decompress(raw).decode() if raw[:2] == b"\x1f\x8b" else raw.decode()
     ns=parse(data); q=pp3(ns); M={n["id"]:n for n in ns}
     root=np.array([M[q[0]]["x"],M[q[0]]["y"],M[q[0]]["z"]])/1000
     p=point[point.ID==rid].iloc[0];pt=np.array([p.Root_x,p.Root_y,p.Root_z])
