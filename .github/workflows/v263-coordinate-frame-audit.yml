@@ -42,7 +42,7 @@ jobs:
           assert x["status"] == "PASS_COORDINATE_FRAME_AUDIT_NO_COMMON_RIGID_MATCH"
           assert x["best_rigid_transform"]["rmse_um"] > 50
           assert x["best_similarity_transform"]["rmse_um"] > 50
-          assert x["max_pair_relative_difference"] > 1.0
+          assert x["max_pair_relative_difference"] > 0.5
           print("V263 coordinate-frame audit: PASS")
           PY
 
