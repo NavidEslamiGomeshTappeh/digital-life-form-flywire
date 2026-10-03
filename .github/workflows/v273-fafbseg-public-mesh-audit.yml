@@ -1,4 +1,4 @@
-name: V273 direct fafbseg public mesh coordinate audit
+name: V273 direct fafbseg flat 783 mesh coordinate audit
 
 on:
   pull_request:
@@ -24,5 +24,5 @@ jobs:
         run: python scripts/v273_fafbseg_public_mesh_audit.py
       - uses: actions/upload-artifact@v4
         with:
-          name: V273-fafbseg-public-mesh-audit
+          name: V273-fafbseg-flat-783-mesh-audit
           path: v273_results/
