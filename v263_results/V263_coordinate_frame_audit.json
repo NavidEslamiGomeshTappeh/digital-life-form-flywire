@@ -1,0 +1,119 @@
+{
+  "status": "PASS_COORDINATE_FRAME_AUDIT_NO_COMMON_RIGID_MATCH",
+  "pp3_root_um": [
+    [
+      789.1497,
+      263.18266,
+      210.35522
+    ],
+    [
+      788.7438,
+      272.94928,
+      205.01356
+    ],
+    [
+      717.25825,
+      222.00586,
+      211.70161
+    ],
+    [
+      713.4343,
+      216.06416,
+      213.15164
+    ]
+  ],
+  "point_data_root_um": [
+    [
+      -46.85120703125,
+      32.261150390625,
+      -111.5519921875
+    ],
+    [
+      -46.16929296875,
+      22.233228515625,
+      -116.4566640625
+    ],
+    [
+      11.981576171875,
+      50.1895,
+      120.4021328125
+    ],
+    [
+      12.7460712890625,
+      54.907804687500004,
+      117.5732734375
+    ]
+  ],
+  "pairwise": [
+    {
+      "pair": "T4a--T4c",
+      "pp3_distance_um": 11.139342556452771,
+      "point_data_distance_um": 11.183918370640704,
+      "absolute_difference_um": 0.04457581418793355,
+      "relative_difference": 0.003985383931652044
+    },
+    {
+      "pair": "T4a--T5a",
+      "pp3_distance_um": 82.85965367641003,
+      "point_data_distance_um": 239.9696610066729,
+      "absolute_difference_um": 157.11000733026285,
+      "relative_difference": 0.654707793773539
+    },
+    {
+      "pair": "T4a--T5c",
+      "pp3_distance_um": 89.22328622185134,
+      "point_data_distance_um": 237.82996842651636,
+      "absolute_difference_um": 148.60668220466502,
+      "relative_difference": 0.624849648882786
+    },
+    {
+      "pair": "T4c--T5a",
+      "pp3_distance_um": 88.03491303398553,
+      "point_data_distance_um": 245.48964612421167,
+      "absolute_difference_um": 157.45473309022614,
+      "relative_difference": 0.6415966272065585
+    },
+    {
+      "pair": "T4c--T5c",
+      "pp3_distance_um": 94.72943583570417,
+      "point_data_distance_um": 243.5336931923308,
+      "absolute_difference_um": 148.8042573566266,
+      "relative_difference": 0.6110232615746564
+    },
+    {
+      "pair": "T5a--T5c",
+      "pp3_distance_um": 7.213111637386466,
+      "point_data_distance_um": 5.554214370350984,
+      "absolute_difference_um": 1.6588972704174818,
+      "relative_difference": 0.2986736147177315
+    }
+  ],
+  "max_pair_relative_difference": 0.654707793773539,
+  "best_rigid_transform": {
+    "rmse_um": 103.76215830816186,
+    "max_residual_um": 108.36000212,
+    "per_point_residual_um": [
+      99.08878884,
+      108.36000212,
+      104.58952292,
+      102.79540628
+    ]
+  },
+  "best_similarity_transform": {
+    "scale": 2.7061317382293986,
+    "rmse_um": 115.54954141473748,
+    "max_residual_um": 126.29503351,
+    "per_point_residual_um": [
+      104.25848969,
+      126.29503351,
+      109.71122341,
+      120.62323732
+    ]
+  },
+  "interpretation": "A single rigid or similarity transform does not reconcile all four roots. The T4a/T4c and T5a/T5c intra-type separations are relatively close, while all four cross-type separations differ by roughly 148-157 um. No transform is written into project coordinates.",
+  "not_proven": [
+    "Exact historical point-wise transform from the paper .nr data to V229.",
+    "Historical manual root selection for each cell.",
+    "Identity of the exact skeletonization output used for the published reduced .nr files."
+  ]
+}
