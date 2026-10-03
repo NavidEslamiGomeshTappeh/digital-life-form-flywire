@@ -192,7 +192,8 @@ def build(point_data: Path, morphology_dir: Path, output_dir: Path,
             "published_root_nearest_node_is_legacy_selected":nearest_id==legacy["node_id"],
             "published_root_within_1nm_of_legacy_selected":selected_dist<=1.0,
             "v258_selected_node_matches_legacy":v258_match,
-            "status":"PASS_POINT_PROVENANCE_CROSSCHECK" if v258_match is not False else "FAIL_V258_ALGORITHM_REGRESSION",
+            "status":"PASS_PUBLISHED_PROVENANCE_AND_ALGORITHM_REGRESSION" if v258_match is not False else "FAIL_V258_ALGORITHM_REGRESSION",
+            "coordinate_comparison_status":"NOT_COMPARABLE_WITHOUT_FRAME_RECONCILIATION",
         }
         out_rows.append(rec); per_root[subtype]=rec
     pd.DataFrame(out_rows).to_csv(output_dir/"V259_published_point_provenance.csv",index=False)
@@ -208,7 +209,7 @@ def build(point_data: Path, morphology_dir: Path, output_dir: Path,
         "inputs":{"anchor_count":len(ROOTS),"point_data_anchor_rows":len(anchors),
                   "morphology_stage":"V229 exact project SWCs","v258_report_checked":bool(v258_json)},
         "per_root":per_root,
-        "interpretation":"The published Point_data rows for the four exact project anchor IDs were recovered from the immutable historical study-repository commit. Their published root coordinates were converted from micrometers to nanometers and compared with the exact project V229 SWCs. The historical NeuRosetta subtree-selection rule was independently re-applied and compared with the checked-in V258 selected node IDs. This is a provenance/geometry cross-check; it is not a claim that the published manual dendrite curation has been recovered.",
+        "interpretation":"The published Point_data rows for the four exact project anchor IDs were recovered from the immutable historical study-repository commit. The historical NeuRosetta subtree-selection rule was independently re-applied and compared with the checked-in V258 selected node IDs. The published and V229 coordinates are retained separately because a common coordinate frame has not been established; raw coordinate distances are diagnostic only and are not evidence of identity. This is provenance plus algorithm regression, not recovery of manual dendrite curation.",
         "not_proven":["Bitwise identity between project V229 SWCs and the study's internal skeletonized .nr forests.",
                       "Manual dendrite annotation decisions beyond the published Point_data root/metrics record.",
                       "Individual synaptic-cleft-to-membrane compartment identity."],
