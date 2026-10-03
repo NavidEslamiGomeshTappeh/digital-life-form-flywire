@@ -1,0 +1,122 @@
+name: V262 PP3 Path Reconstruction
+
+on:
+  push:
+    branches: [v262-pp3-path-reconstruction]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: v262-pp3-path-reconstruction
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check pandas pytest
+
+      - name: Unit tests
+        working-directory: scripts
+        run: python -m pytest -q test_v262_pp3_path_reconstruction.py
+
+      - name: Download immutable Point_data
+        env:
+          POINT_COMMIT: 56901ad1853b44aeca15504cd908fa4c31009a3e
+          POINT_BLOB: b85caf49f45677f2075f7b5f2c8830141cd96d02
+        run: |
+          curl -L --fail --retry 3 \
+            "https://raw.githubusercontent.com/borstlab/T4_T5_Dendrite_Morphology_Paper/\${POINT_COMMIT}/Data/Point_data.pkl" \
+            -o /tmp/Point_data.pkl
+          test -s /tmp/Point_data.pkl
+          test "$(git hash-object -t blob /tmp/Point_data.pkl)" = "\${POINT_BLOB}"
+          test "$(sha256sum /tmp/Point_data.pkl | cut -d ' ' -f 1)" = "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+
+      - name: Reconstruct PP3 path
+        run: |
+          rm -rf /tmp/v262_results
+          python scripts/v262_pp3_path_reconstruction.py \
+            --point-data /tmp/Point_data.pkl \
+            --morphology-dir v229_results \
+            --v258-json v258_results/V258_published_subtree_dendrite_mapping.json \
+            --output-dir /tmp/v262_results
+
+      - name: Validate committed V262 evidence
+        run: |
+          python - <<'PY'
+          import json
+          import math
+          import pandas as pd
+
+          generated = json.load(open("/tmp/v262_results/V262_PP3_path_reconstruction.json", encoding="utf-8"))
+          committed = json.load(open("v262_results/V262_PP3_path_reconstruction.json", encoding="utf-8"))
+
+          assert generated["status"] == committed["status"]
+          assert generated["point_data_source"]["sha256"] == committed["point_data_source"]["point_data_sha256"]
+          assert generated["point_data_source"]["sha256"] == "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+
+          assert len(generated["records"]) == 4
+          assert len(committed["records"]) == 4
+
+          for a, b in zip(generated["records"], committed["records"]):
+              assert a["subtype"] == b["subtype"]
+              for key in (
+                  "root_id",
+                  "pp3_selected_root_node_id",
+                  "v229_full_node_count",
+                  "pp3_subtree_node_count",
+                  "pp3_subtree_leaf_count",
+                  "pp3_subtree_branch_count_including_root",
+                  "pp3_reduced_node_count",
+                  "pp3_reduced_edge_count",
+                  "v261_previous_reduced_node_formula",
+                  "v261_previous_reduced_edge_formula",
+                  "v261_off_by_one_correction_nodes",
+                  "v261_off_by_one_correction_edges",
+              ):
+                  assert a[key] == b[key], (a["subtype"], key, a[key], b[key])
+              for key in (
+                  "pp3_selected_score",
+                  "pp3_score_margin",
+                  "pp3_reduced_cable_nm",
+                  "pp3_reduced_root_x_nm",
+                  "pp3_reduced_root_y_nm",
+                  "pp3_reduced_root_z_nm",
+                  "residual_norm_um",
+              ):
+                  assert math.isclose(float(a[key]), float(b[key]), rel_tol=0.0, abs_tol=1e-9), (a["subtype"], key, a[key], b[key])
+              assert a["coordinate_comparison_status"] == "NOT_COMPARABLE_WITHOUT_FRAME_RECONCILIATION"
+              assert a["v258_selected_node_matches_independent_reconstruction"] is True
+
+          ga = pd.read_csv("/tmp/v262_results/V262_PP3_path_reconstruction.csv")
+          ca = pd.read_csv("v262_results/V262_PP3_path_reconstruction.csv")
+          assert list(ga.columns) == list(ca.columns)
+          assert ga.shape == ca.shape
+          for col in ga.columns:
+              if ga[col].dtype.kind in "biufc":
+                  assert (ga[col] - ca[col]).abs().max() < 1e-9
+              else:
+                  assert ga[col].astype(str).tolist() == ca[col].astype(str).tolist()
+
+          print("V262 PP3 reconstruction evidence: PASS")
+          print("Four selected nodes:", [r["pp3_selected_root_node_id"] for r in generated["records"]])
+          print("Corrected reduced node counts:", [r["pp3_reduced_node_count"] for r in generated["records"]])
+          PY
+
+      - name: Upload V262 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: V262-PP3-Path-Reconstruction
+          path: /tmp/v262_results/
