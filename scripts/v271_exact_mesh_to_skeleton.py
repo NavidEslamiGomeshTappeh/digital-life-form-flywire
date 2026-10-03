@@ -80,6 +80,25 @@ for rid in IDS:
     if getattr(s,'units',None) is None: s.units='1 nm'
     navis.resample_skeleton(s, resample_to=100, inplace=True)
     pp3=select_pp3_root(s.nodes)
+    # Count branch points inside the selected subtree; the NeuRosetta reduction keeps
+    # the selected root, all branch points below it, and all leaves.
+    parent_map={int(r.node_id): int(r.parent_id) for r in s.nodes.itertuples(index=False)}
+    child_count={int(r.node_id): 0 for r in s.nodes.itertuples(index=False)}
+    for r in s.nodes.itertuples(index=False):
+        if int(r.parent_id) >= 0:
+            child_count[int(r.parent_id)] += 1
+    # Recover the selected subtree membership by walking downward from the PP3 root.
+    members=set([pp3["node"]]); stack=[pp3["node"]]
+    while stack:
+        cur=stack.pop()
+        kids=[n for n,p in parent_map.items() if p==cur]
+        for kid in kids:
+            if kid not in members:
+                members.add(kid); stack.append(kid)
+    subtree_branches={n for n in members if child_count[n] >= 2}
+    subtree_leaves={n for n in members if child_count[n] == 0}
+    reduced_vertices=1+len(subtree_branches-{pp3["node"]})+len(subtree_leaves)
+    reduced_edges=reduced_vertices-1
     root_row=s.nodes.set_index('node_id').loc[int(pp3["node"]), ['x','y','z']]
     root=np.asarray(root_row,dtype=float)
     rpoint=np.array([p.Root_x,p.Root_y,p.Root_z],float)
@@ -87,7 +106,10 @@ for rid in IDS:
                      mesh_vertices=int(m.vertices.shape[0]),mesh_faces=int(m.faces.shape[0]),
                      skeleton_root_node_id=int(pp3["whole_root"]),pp3_selected_root_node_id=int(pp3["node"]),
                      pp3_score=float(pp3["score"]),pp3_subtree_nodes=int(pp3["subtree_nodes"]),
-                     pp3_subtree_leaves=int(pp3["subtree_leaves"]),skel_nodes=int(len(s.nodes)),
+                     pp3_subtree_cable_nm=float(pp3["subtree_cable_nm"]),pp3_subtree_leaves=int(pp3["subtree_leaves"]),
+                     pp3_subtree_branches_including_root=int(len(subtree_branches)),
+                     reduced_vertices_numbers=int(reduced_vertices),reduced_segment_count=int(reduced_edges),
+                     skel_nodes=int(len(s.nodes)),
                      pp3_root_x=root[0]/1000,pp3_root_y=root[1]/1000,pp3_root_z=root[2]/1000,
                      residual_x=root[0]/1000-rpoint[0],residual_y=root[1]/1000-rpoint[1],residual_z=root[2]/1000-rpoint[2],
                      residual_um=float(np.linalg.norm(root/1000-rpoint))))
