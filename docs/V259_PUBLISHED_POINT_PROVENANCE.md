@@ -18,22 +18,24 @@ The study's `Metrics1_Point_data.ipynb` explicitly loads the reduced dendrites a
 
 ## What PASS means
 
-A PASS means the immutable published `Point_data.pkl` was recovered, all four exact anchor IDs were present exactly once, each published root coordinate could be compared numerically with the corresponding V229 SWC, and the independently reimplemented historical NeuRosetta subtree selector agreed with the checked-in V258 selected node ID.
+A PASS means the immutable historical `Point_data.pkl` bytes were recovered from the pinned Git commit, both the Git blob SHA and SHA-256 matched exactly, all four exact anchor IDs were present exactly once, and the independently reimplemented historical NeuRosetta subtree selector agreed with the checked-in V258 selected node ID.
 
-A PASS does `not` mean that the study's internal `.nr` tree is bitwise identical to V229, nor does it recover manual dendrite-correction decisions, nor does it assign an individual synaptic cleft to a biological membrane compartment.
+A PASS does **not** mean that the study's internal `.nr` tree is bitwise identical to V229, nor does it recover manual dendrite-correction decisions, nor does it assign an individual synaptic cleft to a biological membrane compartment.
 
 ## Reproducibility
 
-The GitHub Actions workflow fetches `Point_data.pkl` from the pinned immutable commit URL in the study repository, then computes the Git blob SHA locally and requires an exact match to the pinned blob identifier. No large Zenodo archive is required for this stage.
+V264 now recovers the binary pickle directly from the immutable historical Git commit with `git show`. It does not substitute the newer Zenodo copy when the task is historical provenance. The workflow fails closed if either the historical Git blob SHA or the SHA-256 differs.
 
-Zenodo record 10.5281/zenodo.21876510 is the published supplementary morphology-metrics dataset associated with the study; the Git history route above is used here because the exact historical file is directly addressable by immutable commit/blob identifiers.
+FlyWire IDs are serialized as strings in the evidence JSON. This is deliberate: these identifiers are 64-bit integers and must never pass through IEEE-754 floating-point conversion, which can silently alter the last digits.
+
+Zenodo record 10.5281/zenodo.21876510 remains the published supplementary morphology-metrics dataset, but it is not used as the byte-level source for this historical-anchor check.
 
 ## Security
 
-`Point_data.pkl` is a Python pickle. The workflow verifies both the immutable commit URL and the exact Git blob SHA before deserializing it. It is never accepted from an arbitrary user-supplied path in CI.
+`Point_data.pkl` is a Python pickle. The workflow verifies the immutable commit-derived bytes and exact hashes before deserializing it. It is never accepted from an arbitrary user-supplied path in CI.
 
 ## Limits
 
-- The published point data is a metric table, not the full `.nr__ topology.
-- V229 morphology remains the project's exact recovered SWC set, not a proven byte-identical copy of the study's internal `.nr__ forests.
+- The published point data is a metric table, not the full `.nr` topology.
+- V229 morphology remains the project's exact recovered SWC set, not a proven byte-identical copy of the study's internal `.nr` forests.
 - Individual synapse cleft compartment identity is still unresolved.
