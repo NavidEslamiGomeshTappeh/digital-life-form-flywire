@@ -34,6 +34,29 @@ jobs:
           python scripts/v263_coordinate_frame_audit.py
           test -s v263_results/V263_coordinate_frame_audit.json
 
+
+
+      - name: Download immutable Point_data
+        env:
+          POINT_COMMIT: 56901ad1853b44aeca15504cd908fa4c31009a3e
+          POINT_BLOB: b85caf49f45677f2075f7b5f2c8830141cd96d02
+        run: |
+          curl -L --fail --retry 3 \
+            "https://raw.githubusercontent.com/borstlab/T4_T5_Dendrite_Morphology_Paper/\${POINT_COMMIT}/Data/Point_data.pkl" \
+            -o /tmp/Point_data.pkl
+          test -s /tmp/Point_data.pkl
+          test "$(git hash-object -t blob /tmp/Point_data.pkl)" = "\${POINT_BLOB}"
+          test "$(sha256sum /tmp/Point_data.pkl | cut -d ' ' -f 1)" = "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+
+      - name: Extract four Point_data anchor rows
+        run: python scripts/v263_point_data_anchor_extract.py
+
+      - name: Upload Point_data anchors
+        uses: actions/upload-artifact@v4
+        with:
+          name: V263-Point-data-anchors
+          path: v263_results/V263_Point_data_anchor_rows.json
+
       - name: Verify expected conclusion
         run: |
           python - <<'PY'
