@@ -1,0 +1,167 @@
+{
+  "status": "PASS_ZENODO_POINT_DATA_VS_V229_TOPOLOGY_AUDIT",
+  "source": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "zenodo_record": "10.5281/zenodo.21876510",
+    "dataset_published": "2026-08-10",
+    "file_path": "Data/point_data.pkl",
+    "size_bytes": 2144531,
+    "sha256": "46772ccabc609ab0f7136854024e7665727ff0f58f53c69126ea3e641ce7f891",
+    "git_blob": "0db640c17d820bed016da793648cf6b3f27f4738",
+    "historical_git_blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+    "historical_git_sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+  },
+  "cells": {
+    "T4a": {
+      "point_data": {
+        "root_um": [
+          -46.976,
+          32.06399609375,
+          -111.552
+        ],
+        "node_count": 223,
+        "segment_count": 222,
+        "leaf_count": 115,
+        "branch_count": 108,
+        "total_cable_um": 318.835752039841
+      },
+      "v229_v258_automatic": {
+        "selected_root_node": 292,
+        "reduced_node_count": 213,
+        "reduced_leaf_count": 109,
+        "reduced_branch_count_including_root": 104,
+        "total_cable_um": 299.1104286384158
+      },
+      "deltas": {
+        "nodes": -10,
+        "leaves": -6,
+        "branches": -4,
+        "cable_um": -19.725323401425214,
+        "cable_relative": -0.06186672377619804
+      },
+      "exact_leaf_branch_match": false,
+      "nearest_count_candidate": {
+        "root_node_id": 292,
+        "node_count": 596,
+        "leaf_count": 109,
+        "branch_count": 104
+      }
+    },
+    "T4c": {
+      "point_data": {
+        "root_um": [
+          -45.888,
+          21.61599609375,
+          -116.352
+        ],
+        "node_count": 206,
+        "segment_count": 205,
+        "leaf_count": 109,
+        "branch_count": 97,
+        "total_cable_um": 301.2098678724052
+      },
+      "v229_v258_automatic": {
+        "selected_root_node": 358,
+        "reduced_node_count": 212,
+        "reduced_leaf_count": 113,
+        "reduced_branch_count_including_root": 99,
+        "total_cable_um": 288.4514722149858
+      },
+      "deltas": {
+        "nodes": 6,
+        "leaves": 4,
+        "branches": 2,
+        "cable_um": -12.758395657419385,
+        "cable_relative": -0.0423571636199646
+      },
+      "exact_leaf_branch_match": false,
+      "nearest_count_candidate": {
+        "root_node_id": 358,
+        "node_count": 570,
+        "leaf_count": 113,
+        "branch_count": 99
+      }
+    },
+    "T5a": {
+      "point_data": {
+        "root_um": [
+          13.207995117187501,
+          51.2,
+          119.616
+        ],
+        "node_count": 135,
+        "segment_count": 134,
+        "leaf_count": 72,
+        "branch_count": 63,
+        "total_cable_um": 190.18008391648746
+      },
+      "v229_v258_automatic": {
+        "selected_root_node": 343,
+        "reduced_node_count": 181,
+        "reduced_leaf_count": 94,
+        "reduced_branch_count_including_root": 87,
+        "total_cable_um": 265.2002418451485
+      },
+      "deltas": {
+        "nodes": 46,
+        "leaves": 22,
+        "branches": 24,
+        "cable_um": 75.02015792866106,
+        "cable_relative": 0.39446905471765475
+      },
+      "exact_leaf_branch_match": false,
+      "nearest_count_candidate": {
+        "root_node_id": 337,
+        "node_count": 336,
+        "leaf_count": 65,
+        "branch_count": 60
+      }
+    },
+    "T5c": {
+      "point_data": {
+        "root_um": [
+          12.1999951171875,
+          54.944,
+          117.952
+        ],
+        "node_count": 153,
+        "segment_count": 152,
+        "leaf_count": 80,
+        "branch_count": 73,
+        "total_cable_um": 195.60104983749207
+      },
+      "v229_v258_automatic": {
+        "selected_root_node": 323,
+        "reduced_node_count": 153,
+        "reduced_leaf_count": 82,
+        "reduced_branch_count_including_root": 71,
+        "total_cable_um": 186.566679811256
+      },
+      "deltas": {
+        "nodes": 0,
+        "leaves": 2,
+        "branches": -2,
+        "cable_um": -9.034370026236076,
+        "cable_relative": -0.04618773791726552
+      },
+      "exact_leaf_branch_match": false,
+      "nearest_count_candidate": {
+        "root_node_id": 323,
+        "node_count": 362,
+        "leaf_count": 82,
+        "branch_count": 71
+      }
+    }
+  },
+  "summary": {
+    "all_four_exact_leaf_branch_matches": false,
+    "current_zenodo_point_data_bytes_equal_historical_git_bytes": false,
+    "interpretation": "Current Zenodo Point_data is a distinct data generation/version from the historical Git-tracked Point_data and is not topologically identical to the automatically selected V229 PP3 subtrees. The exact cause is not assigned without the historical Reduced_dendrites .nr files and manual curation state."
+  },
+  "not_proven": [
+    "Exact historical Reduced_dendrites .nr graph identity for the four cells.",
+    "Exact manual edits applied to each morphology.",
+    "A validated point-wise coordinate transform between V229 and current Zenodo Point_data.",
+    "Exact historical NeuRosetta package/version used by the authors."
+  ]
+}
