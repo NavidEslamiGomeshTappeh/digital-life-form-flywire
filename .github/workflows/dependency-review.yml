@@ -17,7 +17,22 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Detect Dependency graph availability
+        id: graph
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          if gh api "repos/${GITHUB_REPOSITORY}/dependency-graph/sbom" >/dev/null 2>&1; then
+            echo "enabled=true" >> "${GITHUB_OUTPUT}"
+            echo "Dependency graph is enabled."
+          else
+            echo "enabled=false" >> "${GITHUB_OUTPUT}"
+            echo "::notice title=Dependency Review unavailable::Dependency graph is disabled. Enable it in Security and quality to activate dependency enforcement."
+          fi
+
       - name: Review dependency changes
+        if: steps.graph.outputs.enabled == 'true'
         uses: actions/dependency-review-action@v4
         with:
           fail-on-severity: high
