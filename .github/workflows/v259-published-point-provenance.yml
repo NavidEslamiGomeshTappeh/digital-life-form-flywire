@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install test dependency
-        run: python -m pip install --disable-pip-version-check pandas pytest
+        run: python -m pip install --disable-pip-version-check pandas pytest "jax>=0.4.0" "jaxlib>=0.4.0"
       - name: Unit tests
         run: python -m pytest -q scripts/test_v259_published_point_provenance.py
       - name: Recover immutable published Point_data.pkl
