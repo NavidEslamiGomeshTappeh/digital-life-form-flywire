@@ -81,7 +81,13 @@ for group,g in SAMP.groupby("group"):
     try:
         meshes=fwy.get_mesh_neuron(ids,dataset="flat_783",lod=1,omit_failures=True,threads=12,progress=True)
         if not isinstance(meshes,(list,tuple)): meshes=[meshes]
-        by_id={int(m.id):m for m in meshes if getattr(m,"id",None) is not None}
+        by_id={}
+        for m in meshes:
+            mid=getattr(m,"id",None)
+            if mid is None: continue
+            arr=np.asarray(mid).reshape(-1)
+            if arr.size != 1: continue
+            by_id[int(arr[0])]=m
         for row in g.itertuples(index=False):
             rid=int(row.ID)
             m=by_id.get(rid)
