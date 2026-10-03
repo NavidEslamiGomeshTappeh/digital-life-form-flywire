@@ -108,3 +108,7 @@ V262 provides an algorithmic reconstruction of the published PP3 operations that
 - the four Point_data coordinates are provenance-linked but remain in a separate, unreconciled coordinate frame.
 
 What remains unresolved is the exact historical .nr forest state, historical flag metadata, manual dendrite edits, a validated frame transform, and individual synapse biological compartment identity.
+
+## CI verification
+
+The V262 workflow downloads the immutable Point_data source, verifies its Git blob and SHA-256, reruns the PP3 reconstruction on the four exact V229 SWCs, and checks the committed machine-readable evidence.
