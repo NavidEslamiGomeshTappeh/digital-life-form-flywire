@@ -1,0 +1,52 @@
+name: V263 Coordinate Frame Audit
+
+on:
+  push:
+    branches: ["v263-*"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: python -m pip install --disable-pip-version-check numpy pytest
+
+      - name: Run regression tests
+        working-directory: scripts
+        run: python -m pytest -q test_v263_coordinate_frame_audit.py
+
+      - name: Generate audit
+        run: |
+          python scripts/v263_coordinate_frame_audit.py
+          test -s v263_results/V263_coordinate_frame_audit.json
+
+      - name: Verify expected conclusion
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open("v263_results/V263_coordinate_frame_audit.json",encoding="utf-8"))
+          assert x["status"] == "PASS_COORDINATE_FRAME_AUDIT_NO_COMMON_RIGID_MATCH"
+          assert x["best_rigid_transform"]["rmse_um"] > 50
+          assert x["best_similarity_transform"]["rmse_um"] > 50
+          assert x["max_pair_relative_difference"] > 1.0
+          print("V263 coordinate-frame audit: PASS")
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: V263-coordinate-frame-audit
+          path: v263_results/V263_coordinate_frame_audit.json
