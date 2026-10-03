@@ -1,6 +1,6 @@
-# V259 — Published Point-data Provenance Cross-check
+# V259 — Published Point-data provenance + algorithm regression
 
-V259 recovers the four exact project anchor rows from the historical study-repository commit `56901ad1853b44aeca15504cd908fa4c31009a3e`, file `Data/Point_data.pkl`, and cross-checks their published root coordinates against the exact V229 project SWCs.
+V259 recovers the four exact project anchor rows from the historical study-repository commit `56901ad1853b44aeca15504cd908fa4c31009a3e`, file `Data/Point_data.pkl`, and cross-checks their published root records against the exact project V229 workflow. Published coordinates are retained as source facts; they are not treated as being in the same coordinate frame as V229.
 
 ## Source chain
 
@@ -10,8 +10,7 @@ V259 recovers the four exact project anchor rows from the historical study-repos
 → Git blob `b85caf49f45677f2075f7b5f2c8830141cd96d02`
 → four exact FlyWire IDs
 → published root coordinates (µm)
-→ V229 exact project SWCs (nm)
-→ coordinate-to-node distance
+→ exact project V229 SWCs (nm) kept as a separate frame
 → historical NeuRosetta subtree root independently recomputed
 → V258 node regression.
 

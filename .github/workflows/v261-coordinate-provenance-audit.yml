@@ -1,0 +1,99 @@
+name: V261 Coordinate Provenance Audit
+
+on:
+  push:
+    branches: [v261-coordinate-provenance-and-skills]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: v261-coordinate-provenance-audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check pandas pytest "jax>=0.4.0" "jaxlib>=0.4.0"
+
+      - name: Unit tests
+        working-directory: scripts
+        run: python -m pytest -q test_v261_coordinate_provenance_audit.py
+
+      - name: Download immutable published Point_data
+        env:
+          POINT_COMMIT: 56901ad1853b44aeca15504cd908fa4c31009a3e
+          POINT_BLOB: b85caf49f45677f2075f7b5f2c8830141cd96d02
+        run: |
+          curl -L --fail --retry 3             "https://raw.githubusercontent.com/borstlab/T4_T5_Dendrite_Morphology_Paper/${POINT_COMMIT}/Data/Point_data.pkl"             -o /tmp/Point_data.pkl
+          test -s /tmp/Point_data.pkl
+          test "$(git hash-object -t blob /tmp/Point_data.pkl)" = "${POINT_BLOB}"
+          sha256sum /tmp/Point_data.pkl
+
+      - name: Generate V261 evidence
+        run: |
+          rm -rf /tmp/v261_results
+          python scripts/v261_coordinate_provenance_audit.py             --point-data /tmp/Point_data.pkl             --morphology-dir v229_results             --v258-json v258_results/V258_published_subtree_dendrite_mapping.json             --output-dir /tmp/v261_results
+
+      - name: Validate V261 semantic boundary
+        run: |
+          python - <<'PY'
+          import json
+          p = json.load(open("/tmp/v261_results/V261_coordinate_provenance_audit.json", encoding="utf-8"))
+          assert p["status"] == "PASS_PUBLISHED_PROVENANCE_WITH_FRAME_SEPARATION"
+          assert p["scientific_boundary"]["published_to_v229_coordinate_identity"] == "UNRESOLVED"
+          assert p["scientific_boundary"]["individual_synapse_biological_compartment"] == "UNRESOLVED"
+          assert p["inputs"]["exact_anchor_count"] == 4
+          assert p["inputs"]["v258_mapping_rows"] == 649
+          print("V261 semantic boundary: PASS")
+          PY
+
+      - name: Publish V261 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: V261-Coordinate-Provenance-Audit
+          path: /tmp/v261_results/
+
+  sync:
+    name: v261-evidence-sync
+    if: github.event_name != 'pull_request'
+    needs: audit
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v6
+
+      - name: Download V261 artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: V261-Coordinate-Provenance-Audit
+          path: /tmp/v261_results
+
+      - name: Sync generated evidence
+        run: |
+          mkdir -p v261_results
+          cp /tmp/v261_results/V261_coordinate_provenance_audit.csv v261_results/
+          cp /tmp/v261_results/V261_coordinate_provenance_audit.json v261_results/
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v261_results
+          if git diff --cached --quiet; then
+            echo "No V261 evidence changes."
+            exit 0
+          fi
+          git commit -m "V261: sync coordinate provenance evidence [skip v261 sync]"
+          git push

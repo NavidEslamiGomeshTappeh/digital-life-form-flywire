@@ -59,6 +59,11 @@ jobs:
           report = json.loads(v258.read_text(encoding="utf-8"))
           assert report["counts"]["mapping_rows"] == 649
 
+          if Path("v261_results/V261_coordinate_provenance_audit.json").exists():
+              v261 = json.loads(Path("v261_results/V261_coordinate_provenance_audit.json").read_text())
+              assert v261["status"] == "PASS_PUBLISHED_PROVENANCE_WITH_FRAME_SEPARATION"
+              assert v261["scientific_boundary"]["published_to_v229_coordinate_identity"] == "UNRESOLVED"
+
           assert len(roots) == 4
           print("research evidence invariants: PASS")
           PY
