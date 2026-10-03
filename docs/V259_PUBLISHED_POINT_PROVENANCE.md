@@ -25,13 +25,13 @@ A PASS does `not` mean that the study's internal `.nr` tree is bitwise identical
 
 ## Reproducibility
 
-The GitHub Actions workflow re-fetches the pinned historical Git commit and reconstructs the published `Point_data.pkl` with `git show`. No large Zenodo archive is required for this stage.
+The GitHub Actions workflow fetches `Point_data.pkl` from the pinned immutable commit URL in the study repository, then computes the Git blob SHA locally and requires an exact match to the pinned blob identifier. No large Zenodo archive is required for this stage.
 
 Zenodo record 10.5281/zenodo.21876510 is the published supplementary morphology-metrics dataset associated with the study; the Git history route above is used here because the exact historical file is directly addressable by immutable commit/blob identifiers.
 
 ## Security
 
-`Point_data.pkl` is a Python pickle. The workflow verifies that it came from the exact pinned Git commit and blob identifier before deserializing it. It is never accepted from an arbitrary user-supplied path in CI.
+`Point_data.pkl` is a Python pickle. The workflow verifies both the immutable commit URL and the exact Git blob SHA before deserializing it. It is never accepted from an arbitrary user-supplied path in CI.
 
 ## Limits
 
