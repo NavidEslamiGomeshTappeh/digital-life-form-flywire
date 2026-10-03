@@ -45,9 +45,21 @@ for rid in IDS:
     url=f"https://flyem.mrc-lmb.cam.ac.uk/flyconnectome/flywire_skeletons_630/{rid}"
     req=urllib.request.Request(url,headers={"User-Agent":"Digital-Life-Form-V275/1.0"})
     raw=urllib.request.urlopen(req,timeout=120).read()
-    if raw[:2] == b"\x1f\x8b": data=gzip.decompress(raw).decode()
-    elif raw[:2] == b"\x78\x9c": data=zlib.decompress(raw).decode()
-    else: data=raw.decode()
+    print("payload_prefix", raw[:16].hex())
+    decoded=None
+    for fn in (
+        lambda b: gzip.decompress(b),
+        lambda b: zlib.decompress(b),
+        lambda b: zlib.decompress(b, -zlib.MAX_WBITS),
+    ):
+        try:
+            decoded=fn(raw)
+            break
+        except Exception:
+            pass
+    if decoded is None:
+        raise RuntimeError(f"Unable to decompress historical payload; prefix={raw[:32].hex()}")
+    data=decoded.decode()
     ns=parse(data); q=pp3(ns); M={n["id"]:n for n in ns}
     root=np.array([M[q[0]]["x"],M[q[0]]["y"],M[q[0]]["z"]])/1000
     p=point[point.ID==rid].iloc[0];pt=np.array([p.Root_x,p.Root_y,p.Root_z])
