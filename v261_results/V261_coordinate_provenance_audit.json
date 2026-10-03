@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "status": "PASS_PUBLISHED_PROVENANCE_WITH_FRAME_SEPARATION",
+  "source": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "commit": "56901ad1853b44aeca15504cd908fa4c31009a3e",
+    "file": "Data/Point_data.pkl",
+    "blob_sha": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+    "raw_url": "https://raw.githubusercontent.com/borstlab/T4_T5_Dendrite_Morphology_Paper/56901ad1853b44aeca15504cd908fa4c31009a3e/Data/Point_data.pkl",
+    "notebook": "Notebooks/Metrics1_Point_data.ipynb",
+    "point_data_sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+  },
+  "inputs": {
+    "exact_anchor_count": 4,
+    "v258_mapping_rows": 649,
+    "morphology_stage": "V229 exact project SWCs"
+  },
+  "scientific_boundary": {
+    "raw_coordinate_distance_is_diagnostic_only": true,
+    "published_to_v229_coordinate_identity": "UNRESOLVED",
+    "published_manual_dendrite_curation_identity": "UNRESOLVED",
+    "individual_synapse_biological_compartment": "UNRESOLVED"
+  },
+  "interpretation": "V261 corrects V259's semantic boundary. The four exact project roots are provenance-linked to the published Point_data source, while the study-native coordinate frame is not established to be identical to the V229 frame. Raw coordinate distances therefore cannot produce PASS or FAIL. The additional metric comparison is a cross-dataset consistency check between published reduced-dendrite statistics and a V258 automatic candidate, not proof of identity or manual curation.",
+  "not_proven": [
+    "A common rigid or affine transform between the study and V229 coordinate frames.",
+    "Bitwise identity between V229 SWCs and the study's internal .nr forests.",
+    "Recovery of manual dendrite corrections.",
+    "Individual synaptic-cleft biological compartment identity."
+  ]
+}
