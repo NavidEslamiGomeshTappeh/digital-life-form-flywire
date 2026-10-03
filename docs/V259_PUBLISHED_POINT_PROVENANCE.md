@@ -1,0 +1,40 @@
+# V259 — Published Point-data Provenance Cross-check
+
+V259 recovers the four exact project anchor rows from the historical study-repository commit `56901ad1853b44aeca15504cd908fa4c31009a3e`, file `Data/Point_data.pkl`, and cross-checks their published root coordinates against the exact V229 project SWCs.
+
+## Source chain
+
+`borstlab/T4_T5_Dendrite_Morphology_Paper`
+→ commit `56901ad1853b44aeca15504cd908fa4c31009a3e`
+→ `Data/Point_data.pkl`
+→ Git blob `b85caf49f45677f2075f7b5f2c8830141cd96d02`
+→ four exact FlyWire IDs
+→ published root coordinates (µm)
+→ V229 exact project SWCs (nm)
+→ coordinate-to-node distance
+→ historical NeuRosetta subtree root independently recomputed
+→ V258 node regression.
+
+The study's `Metrics1_Point_data.ipynb` explicitly loads the reduced dendrites and records `ID, Neuron_type, Neuron_subtype, Subtype, hemisphere, root_x, root_y, root_z`, segment count, cable, node count and branch/leaf metrics. The notebook converts the loaded reduced dendrites from nm to µm before creating these point records.
+
+## What PASS means
+
+A PASS means the immutable published `Point_data.pkl` was recovered, all four exact anchor IDs were present exactly once, each published root coordinate could be compared numerically with the corresponding V229 SWC, and the independently reimplemented historical NeuRosetta subtree selector agreed with the checked-in V258 selected node ID.
+
+A PASS does `not` mean that the study's internal `.nr` tree is bitwise identical to V229, nor does it recover manual dendrite-correction decisions, nor does it assign an individual synaptic cleft to a biological membrane compartment.
+
+## Reproducibility
+
+The GitHub Actions workflow re-fetches the pinned historical Git commit and reconstructs the published `Point_data.pkl` with `git show`. No large Zenodo archive is required for this stage.
+
+Zenodo record 10.5281/zenodo.21876510 is the published supplementary morphology-metrics dataset associated with the study; the Git history route above is used here because the exact historical file is directly addressable by immutable commit/blob identifiers.
+
+## Security
+
+`Point_data.pkl` is a Python pickle. The workflow verifies that it came from the exact pinned Git commit and blob identifier before deserializing it. It is never accepted from an arbitrary user-supplied path in CI.
+
+## Limits
+
+- The published point data is a metric table, not the full `.nr__ topology.
+- V229 morphology remains the project's exact recovered SWC set, not a proven byte-identical copy of the study's internal `.nr__ forests.
+- Individual synapse cleft compartment identity is still unresolved.
