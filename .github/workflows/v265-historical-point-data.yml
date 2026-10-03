@@ -1,0 +1,54 @@
+name: V265 Historical Git Point_data Recovery
+
+on:
+  push:
+    branches: ["v265-*"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install historical pickle dependencies
+        run: python -m pip install --disable-pip-version-check pandas "jax>=0.4.0" "jaxlib>=0.4.0"
+
+      - name: Recover exact historical Git blob via public GitHub API
+        env:
+          POINT_BLOB: b85caf49f45677f2075f7b5f2c8830141cd96d02
+        run: |
+          curl -L --fail --retry 3 --connect-timeout 30 \
+            "https://api.github.com/repos/borstlab/T4_T5_Dendrite_Morphology_Paper/git/blobs/\${POINT_BLOB}" \
+            -o /tmp/point_blob.json
+          test -s /tmp/point_blob.json
+          python - <<'PY'
+          import base64, json
+          from pathlib import Path
+          x=json.load(open("/tmp/point_blob.json",encoding="utf-8"))
+          assert x["sha"] == "b85caf49f45677f2075f7b5f2c8830141cd96d02"
+          Path("/tmp/Point_data_git_historical.pkl").write_bytes(
+              base64.b64decode("".join(x["content"].split()))
+          )
+          PY
+          python scripts/v265_historical_point_data_recovery.py
+          test -s v265_results/V265_historical_Point_data_anchor_rows.json
+
+      - name: Upload historical Point_data artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: V265-Historical-Git-Point-data
+          path: |
+            /tmp/Point_data_git_historical.pkl
+            v265_results/V265_historical_Point_data_anchor_rows.json
