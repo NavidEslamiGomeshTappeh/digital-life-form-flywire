@@ -95,6 +95,14 @@ This establishes published point/root provenance and a coordinate cross-check. I
 
 See docs/V259_PUBLISHED_POINT_PROVENANCE.md, scripts/v259_published_point_provenance.py, and v259_results/V259_published_point_provenance.json.
 
+## V261 — coordinate-frame-aware provenance
+
+V261 corrects the semantic boundary of V259. The four exact project roots are recovered from the immutable published Point_data source, but raw distances between those published coordinates and V229 SWCs are diagnostic only because a common coordinate frame has not been established.
+
+V261 also compares published reduced-dendrite metrics with the V258 automatic subtree candidate without turning metric similarity into biological identity.
+
+See docs/V261_COORDINATE_PROVENANCE_AUDIT.md.
+
 ## V258 — published automatic subtree algorithm on exact project SWCs
 
 V258 recovers the published computational dendrite-extraction procedure and reproduces it on the four exact V229 SWCs.
