@@ -1,0 +1,35 @@
+name: Research evidence request
+description: Request a provenance, reproduction or scientific-evidence investigation.
+title: "[Evidence] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for source-backed research engineering work.
+  - type: input
+    id: target
+    attributes:
+      label: Exact target
+      description: FlyWire root ID, dataset, file, workflow or claim.
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Research question
+      description: What exactly needs to be demonstrated or checked?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Known evidence
+      description: Include source links, commit SHAs or artifact IDs.
+    validations:
+      required: true
+  - type: textarea
+    id: limits
+    attributes:
+      label: Known limits
+      description: State uncertainties or unavailable sources.

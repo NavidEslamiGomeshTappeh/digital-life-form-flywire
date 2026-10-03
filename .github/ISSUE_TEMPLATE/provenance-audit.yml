@@ -1,0 +1,32 @@
+name: Provenance audit
+description: Audit a source-to-result chain or challenge an evidence claim.
+title: "[Provenance] "
+labels: []
+body:
+  - type: input
+    id: source
+    attributes:
+      label: Source URL or immutable identifier
+    validations:
+      required: true
+  - type: input
+    id: result
+    attributes:
+      label: Target result
+      description: Artifact, version or claim being audited.
+    validations:
+      required: true
+  - type: textarea
+    id: chain
+    attributes:
+      label: Expected source chain
+      description: Describe the transformations you expect.
+    validations:
+      required: true
+  - type: textarea
+    id: challenge
+    attributes:
+      label: Specific challenge
+      description: What could be wrong, ambiguous or missing?
+    validations:
+      required: true
