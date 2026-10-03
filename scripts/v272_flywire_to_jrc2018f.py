@@ -47,7 +47,7 @@ for rid, raw, point in zip(ids, X, Y):
         out = navis.xform_brain(
             raw.reshape(1,3),
             source="FLYWIREum",
-            target="JRC2018Fum",
+            target="JRC2018F",
         )[0]
         err = float(np.linalg.norm(out - point))
         rows.append({
