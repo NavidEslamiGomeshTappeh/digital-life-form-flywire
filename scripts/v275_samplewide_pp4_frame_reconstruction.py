@@ -16,7 +16,7 @@ point=pickle.loads(data)
 # Use the historical Point_data hemisphere labels directly. This keeps the audit
 # independent of a live CAVE token and prevents current annotation drift.
 p=point.copy()
-p["group"]=p["Type"].astype(str)+p["Hemisphere"].astype(str).str[0]
+p["group"]=p["Subtype"].astype(str)
 p=p.drop_duplicates("ID").sort_values(["group","ID"]).reset_index(drop=True)
 
 # Deterministic farthest-point sample in Point_data's already-transformed space.
