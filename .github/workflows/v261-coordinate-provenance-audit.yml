@@ -36,10 +36,10 @@ jobs:
           POINT_BLOB: b85caf49f45677f2075f7b5f2c8830141cd96d02
         run: |
           curl -L --fail --retry 3 \
-            "https://raw.githubusercontent.com/borstlab/T4_T5_Dendrite_Morphology_Paper/\${POINT_COMMIT}/Data/Point_data.pkl" \
+            "https://raw.githubusercontent.com/borstlab/T4_T5_Dendrite_Morphology_Paper/${POINT_COMMIT}/Data/Point_data.pkl" \
             -o /tmp/Point_data.pkl
           test -s /tmp/Point_data.pkl
-          test "$(git hash-object -t blob /tmp/Point_data.pkl)" = "\${POINT_BLOB}"
+          test "$(git hash-object -t blob /tmp/Point_data.pkl)" = "${POINT_BLOB}"
           sha256sum /tmp/Point_data.pkl
 
       - name: Generate V261 evidence
