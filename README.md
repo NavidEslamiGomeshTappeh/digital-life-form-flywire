@@ -83,6 +83,18 @@ The published study reports extraction of T4/T5 dendritic arbors from FAFB-FlyWi
 
 See `docs/V257_PUBLISHED_DENDRITE_PROVENANCE.md` and `v257_results/V257_published_dendrite_provenance.csv`.
 
+## V259 — published Point_data provenance cross-check
+
+V259 connects the project to the published morphology study at another independent evidence layer.
+
+The historical study repository contains a published Point_data table derived from reduced dendrite trees. V259 recovers the exact historical Point_data.pkl from its immutable Git commit/blob, verifies the blob hash, selects the four exact project FlyWire root IDs, and cross-checks their published dendrite-root coordinates against the project's exact V229 SWCs.
+
+The audit also independently re-applies the historical NeuRosetta subtree-selection rule and regression-checks its selected branch against V258.
+
+This establishes published point/root provenance and a coordinate cross-check. It does not claim bitwise identity with the study's internal .nr forests, does not recover manual annotation decisions, and does not resolve the biological compartment of an individual synaptic cleft.
+
+See docs/V259_PUBLISHED_POINT_PROVENANCE.md, scripts/v259_published_point_provenance.py, and v259_results/V259_published_point_provenance.json.
+
 ## V258 — published automatic subtree algorithm on exact project SWCs
 
 V258 recovers the published computational dendrite-extraction procedure and reproduces it on the four exact V229 SWCs.
