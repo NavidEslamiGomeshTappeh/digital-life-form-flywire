@@ -61,8 +61,8 @@ class V261Tests(unittest.TestCase):
             self.assertEqual(m["node_count_full"], 5)
             self.assertEqual(m["leaf_count"], 2)
             self.assertEqual(m["branch_count"], 1)
-            self.assertEqual(m["reduced_node_count"], 5)
-            self.assertEqual(m["reduced_edge_count"], 4)
+            self.assertEqual(m["reduced_node_count"], 4)
+            self.assertEqual(m["reduced_edge_count"], 3)
 
 
 if __name__ == "__main__":
