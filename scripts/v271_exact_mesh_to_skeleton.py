@@ -14,7 +14,7 @@ with open("/tmp/Point_data.pkl","rb") as f: point=pickle.load(f)
 rows=[]
 for rid in IDS:
     p=point[point.ID==rid].iloc[0]
-    m=fwy.get_mesh_neuron(rid, omit_failures=False, progress=True, dataset='public')
+    m=fwy.get_mesh_neuron(rid, omit_failures=False, progress=True, dataset='flat_783')
     s=m.skeletonize()
     if getattr(s,'units',None) is None: s.units='1 nm'
     navis.resample_skeleton(s, resample_to=100, inplace=True)
