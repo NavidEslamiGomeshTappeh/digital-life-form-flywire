@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "source": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "zenodo_record": "10.5281/zenodo.21876510",
+    "archive": "T4_T5_dendrite_morphology_data.zip",
+    "dataset_published": "2026-08-10",
+    "file_path": "Data/point_data.pkl",
+    "size_bytes": 2144531,
+    "sha256": "46772ccabc609ab0f7136854024e7665727ff0f58f53c69126ea3e641ce7f891",
+    "git_blob": "0db640c17d820bed016da793648cf6b3f27f4738",
+    "historical_git_blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+    "historical_git_sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+  },
+  "anchors": {
+    "T4a": {
+      "ID": 720575940632008100,
+      "Root_x": -46.976,
+      "Root_y": 32.06399609375,
+      "Root_z": -111.552,
+      "Segment_count": 222,
+      "Total_cable": 318.835752039841,
+      "Node_count": 223,
+      "Internal_edges": 107,
+      "External_edges": 115,
+      "Leaf_count": 115,
+      "Branch_count": 108
+    },
+    "T4c": {
+      "ID": 720575940616224400,
+      "Root_x": -45.888,
+      "Root_y": 21.61599609375,
+      "Root_z": -116.352,
+      "Segment_count": 205,
+      "Total_cable": 301.2098678724052,
+      "Node_count": 206,
+      "Internal_edges": 96,
+      "External_edges": 109,
+      "Leaf_count": 109,
+      "Branch_count": 97
+    },
+    "T5a": {
+      "ID": 720575940625571500,
+      "Root_x": 13.207995117187501,
+      "Root_y": 51.2,
+      "Root_z": 119.616,
+      "Segment_count": 134,
+      "Total_cable": 190.18008391648746,
+      "Node_count": 135,
+      "Internal_edges": 62,
+      "External_edges": 72,
+      "Leaf_count": 72,
+      "Branch_count": 63
+    },
+    "T5c": {
+      "ID": 720575940617782900,
+      "Root_x": 12.1999951171875,
+      "Root_y": 54.944,
+      "Root_z": 117.952,
+      "Segment_count": 152,
+      "Total_cable": 195.60104983749207,
+      "Node_count": 153,
+      "Internal_edges": 72,
+      "External_edges": 80,
+      "Leaf_count": 80,
+      "Branch_count": 73
+    }
+  }
+}
