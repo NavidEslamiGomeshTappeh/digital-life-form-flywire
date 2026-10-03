@@ -26,7 +26,13 @@
     "subtree_score": "(1 - subtree_cable / total_cable) + (subtree_leaves / total_leaves)",
     "branch_definition": "out_degree > 1",
     "reduction_stops": "leaves + non-root branches",
-    "reduction_starts": "all branches + selected root"
+    "reduction_starts": "all branches + selected root",
+    "study_environment": {
+      "conda_environment_commit": "3a1aa1a2e368ff8767f40791588eaf552e6d436d",
+      "conda_environment_file": "conda-environment.yml",
+      "neurossetta_package_pin": null,
+      "geojax_install": "git+https://github.com/NikDrummond/GeoJax.git"
+    }
   },
   "point_data_source": {
     "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
@@ -52,7 +58,9 @@
     "published_to_v229_coordinate_identity": "UNRESOLVED",
     "manual_dendrite_curation_identity": "UNRESOLVED",
     "individual_synapse_biological_compartment": "UNRESOLVED",
-    "exact_historical_flag_state_of_v229_swc": "UNRESOLVED"
+    "exact_historical_flag_state_of_v229_swc": "UNRESOLVED",
+    "historical_neurossetta_package_version": "UNRESOLVED",
+    "neurossetta_semantics_source": "EXPLICITLY_PINNED_TO_38f20f02194c129c234360db5a8be78a90c61db1_FOR_RECONSTRUCTION"
   },
   "records": [
     {
@@ -195,5 +203,8 @@
       "v261_off_by_one_correction_nodes": -1,
       "v261_off_by_one_correction_edges": -1
     }
+  ],
+  "not_proven": [
+    "Exact historical NeuRosetta package/version used when the authors executed PP2/PP3."
   ]
 }
