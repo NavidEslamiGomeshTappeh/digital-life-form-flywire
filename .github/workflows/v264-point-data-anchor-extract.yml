@@ -26,7 +26,8 @@ jobs:
       - name: Download immutable Point_data from Zenodo archive
         env:
           ZENODO_URL: https://zenodo.org/records/21876510/files/T4_T5_dendrite_morphology_data.zip?download=1
-          POINT_BLOB: b85caf49f45677f2075f7b5f2c8830141cd96d02
+          EXPECTED_POINT_BLOB: b85caf49f45677f2075f7b5f2c8830141cd96d02
+          EXPECTED_POINT_SHA256: 76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f
         run: |
           curl -L --fail --retry 5 --retry-delay 2 --connect-timeout 30 \
             "$ZENODO_URL" \
@@ -37,11 +38,36 @@ jobs:
           echo "Point_data archive path: $POINT_PATH"
           unzip -p /tmp/T4_T5_dendrite_morphology_data.zip "$POINT_PATH" > /tmp/Point_data.pkl
           test -s /tmp/Point_data.pkl
-          test "$(git hash-object -t blob /tmp/Point_data.pkl)" = "$POINT_BLOB"
-          test "$(sha256sum /tmp/Point_data.pkl | cut -d ' ' -f 1)" = "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+
+          ACTUAL_BLOB="$(git hash-object -t blob /tmp/Point_data.pkl)"
+          ACTUAL_SHA256="$(sha256sum /tmp/Point_data.pkl | cut -d ' ' -f 1)"
+          ACTUAL_SIZE="$(stat -c '%s' /tmp/Point_data.pkl)"
+
+          printf '%s\n' \
+            "Point_data archive path=$POINT_PATH" \
+            "Point_data size=$ACTUAL_SIZE" \
+            "Point_data git-blob=$ACTUAL_BLOB" \
+            "Point_data sha256=$ACTUAL_SHA256" \
+            "Expected historical git-blob=$EXPECTED_POINT_BLOB" \
+            "Expected historical sha256=$EXPECTED_POINT_SHA256" \
+            > /tmp/point_data_hash_report.txt
+
+          if [ "$ACTUAL_BLOB" = "$EXPECTED_POINT_BLOB" ] && [ "$ACTUAL_SHA256" = "$EXPECTED_POINT_SHA256" ]; then
+            echo "Point_data exact historical bytes: MATCH"
+          else
+            echo "Point_data exact historical bytes: DIFFERENT"
+          fi
 
       - name: Extract four anchors
         run: python scripts/v264_point_data_anchor_extract.py
+
+      - name: Upload Point_data bytes and hash evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: V264-Point-data-raw-and-hash
+          path: |
+            /tmp/Point_data.pkl
+            /tmp/point_data_hash_report.txt
 
       - uses: actions/upload-artifact@v4
         with:
