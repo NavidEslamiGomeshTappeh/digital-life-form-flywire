@@ -1,0 +1,83 @@
+name: V259 published point provenance
+
+on:
+  push:
+    branches: [v259-published-point-provenance]
+  pull_request:
+    branches: [main, v259-published-point-provenance]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test dependency
+        run: python -m pip install --disable-pip-version-check pandas pytest "jax>=0.4.0" "jaxlib>=0.4.0"
+      - name: Unit tests
+        run: python -m pytest -q scripts/test_v259_published_point_provenance.py
+      - name: Recover immutable published Point_data.pkl
+        env:
+          POINT_DATA_COMMIT: 56901ad1853b44aeca15504cd908fa4c31009a3e
+          POINT_DATA_BLOB: b85caf49f45677f2075f7b5f2c8830141cd96d02
+        run: |
+          curl -L --fail --retry 3             "https://raw.githubusercontent.com/borstlab/T4_T5_Dendrite_Morphology_Paper/${POINT_DATA_COMMIT}/Data/Point_data.pkl"             -o /tmp/Point_data.pkl
+          test -s /tmp/Point_data.pkl
+          ACTUAL_BLOB="$(git hash-object -t blob /tmp/Point_data.pkl)"
+          echo "expected_git_blob=${POINT_DATA_BLOB}"
+          echo "actual_git_blob=${ACTUAL_BLOB}"
+          test "${ACTUAL_BLOB}" = "${POINT_DATA_BLOB}"
+          sha256sum /tmp/Point_data.pkl
+      - name: Regenerate V259 evidence
+        run: |
+          rm -rf /tmp/v259_results
+          python scripts/v259_published_point_provenance.py \
+            --point-data /tmp/Point_data.pkl \
+            --point-data-commit "56901ad1853b44aeca15504cd908fa4c31009a3e" \
+            --point-data-blob "b85caf49f45677f2075f7b5f2c8830141cd96d02" \
+            --morphology-dir v229_results \
+            --output-dir /tmp/v259_results \
+            --v258-json v258_results/V258_published_subtree_dendrite_mapping.json
+      - name: Sync generated V259 evidence
+        if: github.event_name != 'pull_request' && !contains(github.event.head_commit.message, '[skip v259 sync]')
+        run: |
+          mkdir -p v259_results
+          cp /tmp/v259_results/V259_published_point_provenance.csv v259_results/V259_published_point_provenance.csv
+          cp /tmp/v259_results/V259_published_point_provenance.json v259_results/V259_published_point_provenance.json
+          if git diff --quiet -- v259_results/V259_published_point_provenance.csv v259_results/V259_published_point_provenance.json; then
+            echo "No V259 evidence changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v259_results/V259_published_point_provenance.csv v259_results/V259_published_point_provenance.json
+          git commit -m "V259: sync published point provenance [skip v259 sync]"
+          git push
+      - name: Verify committed V259 evidence
+        if: github.event_name != 'pull_request'
+        run: |
+          test -s v259_results/V259_published_point_provenance.csv
+          test -s v259_results/V259_published_point_provenance.json
+      - name: Print V259 summary
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open('/tmp/v259_results/V259_published_point_provenance.json',encoding='utf-8'))
+          print(json.dumps({"status":p["status"],"point_data_sha256":p["source"]["point_data_sha256"],
+                            "point_data_blob":p["source"]["study_blob_sha"],"per_root":p["per_root"]},indent=2))
+          PY
+      - name: Upload V259 evidence artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: V259-Published-Point-Provenance
+          path: |
+            /tmp/v259_results/V259_published_point_provenance.csv
+            /tmp/v259_results/V259_published_point_provenance.json
