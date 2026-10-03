@@ -271,10 +271,21 @@ def reduce_pp3_tree(tree: dict[str, Any], selected_root: int, members: set[int])
     for stop in sorted(stops):
         current = stop
         path_length = 0.0
-        while current not in starts:
+
+        # ReduceVisitor treats every non-root branch as both a stop and a start.
+        # For a branch stop, its incoming edge must still be included in the
+        # collapsed path from its nearest ancestor start.
+        while True:
             parent = int(tree["nodes"][current]["parent"])
+            if parent == -1:
+                raise RuntimeError(f"Reduction path reached structural root unexpectedly for stop {stop}")
+
             path_length += edge_length[(parent, current)]
             current = parent
+
+            if current in starts:
+                break
+
         reduced_edges.append((int(current), int(stop), float(path_length)))
 
     root_coord = (
