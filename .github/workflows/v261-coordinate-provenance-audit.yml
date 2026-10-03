@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   audit:
@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - name: Setup Python
         uses: actions/setup-python@v6
@@ -35,9 +37,7 @@ jobs:
           POINT_COMMIT: 56901ad1853b44aeca15504cd908fa4c31009a3e
           POINT_BLOB: b85caf49f45677f2075f7b5f2c8830141cd96d02
         run: |
-          curl -L --fail --retry 3 \
-            "https://raw.githubusercontent.com/borstlab/T4_T5_Dendrite_Morphology_Paper/${POINT_COMMIT}/Data/Point_data.pkl" \
-            -o /tmp/Point_data.pkl
+          curl -L --fail --retry 3             "https://raw.githubusercontent.com/borstlab/T4_T5_Dendrite_Morphology_Paper/${POINT_COMMIT}/Data/Point_data.pkl"             -o /tmp/Point_data.pkl
           test -s /tmp/Point_data.pkl
           test "$(git hash-object -t blob /tmp/Point_data.pkl)" = "${POINT_BLOB}"
           sha256sum /tmp/Point_data.pkl
@@ -45,11 +45,7 @@ jobs:
       - name: Generate V261 evidence
         run: |
           rm -rf /tmp/v261_results
-          python scripts/v261_coordinate_provenance_audit.py \
-            --point-data /tmp/Point_data.pkl \
-            --morphology-dir v229_results \
-            --v258-json v258_results/V258_published_subtree_dendrite_mapping.json \
-            --output-dir /tmp/v261_results
+          python scripts/v261_coordinate_provenance_audit.py             --point-data /tmp/Point_data.pkl             --morphology-dir v229_results             --v258-json v258_results/V258_published_subtree_dendrite_mapping.json             --output-dir /tmp/v261_results
 
       - name: Validate V261 semantic boundary
         run: |
@@ -64,8 +60,30 @@ jobs:
           print("V261 semantic boundary: PASS")
           PY
 
-      - name: Sync generated V261 evidence
-        if: github.event_name != 'pull_request'
+      - name: Publish V261 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: V261-Coordinate-Provenance-Audit
+          path: /tmp/v261_results/
+
+  sync:
+    name: v261-evidence-sync
+    if: github.event_name != 'pull_request'
+    needs: audit
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v6
+
+      - name: Download V261 artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: V261-Coordinate-Provenance-Audit
+          path: /tmp/v261_results
+
+      - name: Sync generated evidence
         run: |
           mkdir -p v261_results
           cp /tmp/v261_results/V261_coordinate_provenance_audit.csv v261_results/
@@ -79,9 +97,3 @@ jobs:
           fi
           git commit -m "V261: sync coordinate provenance evidence [skip v261 sync]"
           git push
-
-      - name: Publish V261 artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: V261-Coordinate-Provenance-Audit
-          path: /tmp/v261_results/
