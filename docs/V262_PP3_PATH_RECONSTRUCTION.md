@@ -114,3 +114,7 @@ What remains unresolved is the exact historical .nr forest state, historical fla
 The V262 workflow downloads the immutable Point_data source, verifies its Git blob and SHA-256, reruns the PP3 reconstruction on the four exact V229 SWCs, and checks the committed machine-readable evidence.
 
 CI validation branch created from the corrected PP3 reconstruction HEAD.
+
+## Historical NeuRosetta version boundary
+
+The study commit `3a1aa1a2e368ff8767f40791588eaf552e6d436d` does not pin a NeuRosetta release or commit in `conda-environment.yml`; it only installs GeoJax from Git and states in `README.md` that NeuRosetta was an actively developed pre-release toolbox. Therefore the V262 NeuRosetta commit is an explicit semantic reconstruction source, not a claim that the exact historical package binary/version used by the authors has been recovered. The exact PP2/PP3 historical NeuRosetta version remains unresolved.
