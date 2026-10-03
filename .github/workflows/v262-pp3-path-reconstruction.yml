@@ -26,7 +26,9 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: python -m pip install --disable-pip-version-check pandas pytest "jax>=0.4.0" "jaxlib>=0.4.0"
+        env:
+          PIP_DISABLE_PIP_VERSION_CHECK: "1"
+        run: python -m pip install pandas pytest "jax>=0.4.0" "jaxlib>=0.4.0"
 
       - name: Unit tests
         working-directory: scripts
