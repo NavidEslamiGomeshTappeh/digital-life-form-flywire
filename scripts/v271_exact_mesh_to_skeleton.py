@@ -18,11 +18,16 @@ for rid in IDS:
     s=m.skeletonize()
     if getattr(s,'units',None) is None: s.units='1 nm'
     navis.resample_skeleton(s, resample_to=100, inplace=True)
-    root=s.nodes.loc[s.root, ['x','y','z']].to_numpy(dtype=float)
+    root_ids=np.atleast_1d(np.asarray(s.root)).astype(np.int64)
+    if root_ids.size != 1:
+        raise RuntimeError(f"Expected one skeleton root, got {root_ids.tolist()}")
+    root_row=s.nodes.set_index('node_id').loc[int(root_ids[0]), ['x','y','z']]
+    root=np.asarray(root_row,dtype=float)
     rpoint=np.array([p.Root_x,p.Root_y,p.Root_z],float)
     rows.append(dict(ID=rid,Subtype=p.Subtype,Point_x=rpoint[0],Point_y=rpoint[1],Point_z=rpoint[2],
                      mesh_vertices=int(m.vertices.shape[0]),mesh_faces=int(m.faces.shape[0]),
-                     skel_nodes=int(len(s.nodes)),skel_root_x=root[0]/1000,skel_root_y=root[1]/1000,skel_root_z=root[2]/1000,
+                     skeleton_root_node_id=int(root_ids[0]),skel_nodes=int(len(s.nodes)),
+                     skel_root_x=root[0]/1000,skel_root_y=root[1]/1000,skel_root_z=root[2]/1000,
                      residual_x=root[0]/1000-rpoint[0],residual_y=root[1]/1000-rpoint[1],residual_z=root[2]/1000-rpoint[2],
                      residual_um=float(np.linalg.norm(root/1000-rpoint))))
 df=pd.DataFrame(rows)
