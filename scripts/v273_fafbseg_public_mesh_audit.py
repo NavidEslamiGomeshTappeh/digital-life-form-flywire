@@ -13,7 +13,7 @@ sel={targets[0]:292,targets[1]:358,targets[2]:343,targets[3]:323}
 rows=[]
 for rid in targets:
     p=point.loc[point.ID==rid].iloc[0]
-    m=fwy.get_mesh_neuron(rid,omit_failures=False,threads=None,progress=False,dataset="public")
+    m=fwy.get_mesh_neuron(rid,omit_failures=False,threads=None,progress=False,dataset="flat_783")
     verts=np.asarray(m.vertices,dtype=float)
     # Skeletonize exactly as paper pipeline.
     s=m.skeletonize()
