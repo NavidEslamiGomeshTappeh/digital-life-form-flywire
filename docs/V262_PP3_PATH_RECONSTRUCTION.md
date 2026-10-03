@@ -112,3 +112,5 @@ What remains unresolved is the exact historical .nr forest state, historical fla
 ## CI verification
 
 The V262 workflow downloads the immutable Point_data source, verifies its Git blob and SHA-256, reruns the PP3 reconstruction on the four exact V229 SWCs, and checks the committed machine-readable evidence.
+
+CI validation branch created from the corrected PP3 reconstruction HEAD.
