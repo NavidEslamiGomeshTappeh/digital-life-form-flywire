@@ -13,15 +13,10 @@ URL="https://raw.githubusercontent.com/borstlab/T4_T5_Dendrite_Morphology_Paper/
 data=urllib.request.urlopen(URL).read(); (OUT/"Point_data.sha256.txt").write_text(__import__("hashlib").sha256(data).hexdigest())
 point=pickle.loads(data)
 
-# Current FlyWire annotation tables supply hemisphere labels for the same root IDs.
-n_types=["T4a","T4b","T4c","T4d","T5a","T5b","T5c","T5d"]
-right=fwy.search_annotations(NC(type=n_types, side="right"))
-left=fwy.search_annotations(NC(type=n_types, side="left"))
-ann=pd.concat([right,left],ignore_index=True)
-ann=ann[["root_id","cell_type","side"]].drop_duplicates("root_id")
-ann["root_id"]=ann["root_id"].astype("int64")
-p=point.merge(ann,left_on="ID",right_on="root_id",how="inner")
-p["group"]=p["Type"].astype(str)+p["side"].map({"right":"R","left":"L"})
+# Use the historical Point_data hemisphere labels directly. This keeps the audit
+# independent of a live CAVE token and prevents current annotation drift.
+p=point.copy()
+p["group"]=p["Type"].astype(str)+p["Hemisphere"].astype(str).str[0]
 p=p.drop_duplicates("ID").sort_values(["group","ID"]).reset_index(drop=True)
 
 # Deterministic farthest-point sample in Point_data's already-transformed space.
@@ -36,7 +31,7 @@ def fps(g,n):
         d=np.minimum(d,np.linalg.norm(X-X[j],axis=1))
     return g.iloc[chosen]
 
-SAMP=pd.concat([fps(g,64) for _,g in p.groupby("group")],ignore_index=True)
+SAMP=pd.concat([fps(g,8) for _,g in p.groupby("group")],ignore_index=True)
 SAMP.to_csv(OUT/"V275_sample_ids.csv",index=False)
 
 def pp3(nodes):
@@ -111,7 +106,7 @@ rawdf.to_csv(OUT/"V275_raw_pp3_vs_point.csv",index=False)
 # the documented PP4 concept on the pooled sampled skeleton node coordinates:
 # centroid/PCA alignment -> sphere fit -> recenter -> 180° Z rotation.
 summary={"versions":{"navis":navis.__version__,"skeletor":skeletor.__version__},
-         "dataset":"flat_783","sample_per_group":64,
+         "dataset":"flat_783","sample_per_group":8,
          "groups":{}, "failures":failures}
 
 def pca_align(X):
