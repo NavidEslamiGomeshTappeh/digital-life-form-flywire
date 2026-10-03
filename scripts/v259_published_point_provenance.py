@@ -26,15 +26,61 @@ def sha256_file(path: Path) -> str:
         for chunk in iter(lambda: fh.read(1024*1024), b""): h.update(chunk)
     return h.hexdigest()
 
+def _normalized_column_map(columns) -> dict[str, str]:
+    import re
+    return {re.sub(r"[^a-z0-9]+", "", str(col).lower()): str(col) for col in columns}
+
 def load_point_data(path: Path) -> pd.DataFrame:
     obj = pd.read_pickle(path)
     if not isinstance(obj, pd.DataFrame):
         raise TypeError(f"Point_data.pkl must contain a pandas DataFrame, got {type(obj).__name__}")
-    if "ID" not in obj.columns:
-        raise RuntimeError(f"Point_data.pkl has no ID column; columns={list(obj.columns)}")
-    obj = obj.copy()
-    obj["ID"] = obj["ID"].astype(str)
-    return obj
+    data = obj.copy()
+    cmap = _normalized_column_map(data.columns)
+
+    def pick(*aliases):
+        for alias in aliases:
+            key = ''.join(ch for ch in alias.lower() if ch.isalnum())
+            if key in cmap:
+                return cmap[key]
+        return None
+
+    id_col = pick("ID", "Flywire_ID", "root_id")
+    x_col = pick("root_x", "Root_x", "rootcoordx")
+    y_col = pick("root_y", "Root_y", "rootcoordy")
+    z_col = pick("root_z", "Root_z", "rootcoordz")
+    missing = [name for name, col in (("ID", id_col), ("root_x", x_col), ("root_y", y_col), ("root_z", z_col)) if col is None]
+    if missing:
+        raise RuntimeError(f"Point_data.pkl missing required fields {missing}; columns={list(data.columns)}")
+
+    data["ID"] = data[id_col].astype(str)
+    data["root_x"] = pd.to_numeric(data[x_col], errors="raise")
+    data["root_y"] = pd.to_numeric(data[y_col], errors="raise")
+    data["root_z"] = pd.to_numeric(data[z_col], errors="raise")
+
+    # Historical published files use Type/Subtype/Hemisphere, while later notebooks
+    # materialize Neuron_type/Neuron_subtype/hemisphere. Normalize both forms.
+    type_col = pick("Neuron_type", "Type", "type")
+    subtype_col = pick("Neuron_subtype", "Subtype", "subtype")
+    hemi_col = pick("hemisphere", "Hemisphere")
+    if type_col is not None:
+        data["Neuron_type"] = data[type_col].astype(str)
+    if subtype_col is not None:
+        data["Neuron_subtype"] = data[subtype_col].astype(str)
+    if hemi_col is not None:
+        data["hemisphere"] = data[hemi_col].astype(str)
+
+    if "Neuron_type" in data.columns and "Neuron_subtype" in data.columns:
+        data["Subtype"] = data["Neuron_subtype"].map(
+            lambda value: value if value.startswith("T") else ""
+        )
+        mask = data["Subtype"] == ""
+        data.loc[mask, "Subtype"] = data.loc[mask, "Neuron_type"] + data.loc[mask, "Neuron_subtype"]
+        # Keep source full subtype labels intact when already present.
+        for idx, value in data["Neuron_subtype"].items():
+            if str(value).startswith("T"):
+                data.at[idx, "Subtype"] = str(value)
+
+    return data
 
 def extract_anchor_rows(data: pd.DataFrame) -> pd.DataFrame:
     wanted = list(ROOTS.values())
@@ -46,9 +92,9 @@ def extract_anchor_rows(data: pd.DataFrame) -> pd.DataFrame:
         raise RuntimeError(f"published Point_data anchor regression failed; missing={missing}; rows={len(selected)}")
     if selected["ID"].duplicated().any():
         raise RuntimeError("published Point_data has duplicate anchor IDs")
-    for col in CORE_COLUMNS:
+    for col in ("ID", "root_x", "root_y", "root_z"):
         if col not in selected.columns:
-            raise RuntimeError(f"published Point_data missing required column {col}")
+            raise RuntimeError(f"published Point_data missing normalized required column {col}")
     return selected
 
 def parse_swc(path: Path) -> dict[str, Any]:
