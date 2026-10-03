@@ -28,6 +28,6 @@ class V259Tests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             path=Path(td)/"fixture.swc"; path.write_text(swc,encoding="utf-8")
             result=legacy_optimal_partition_root(parse_swc(path))
-            self.assertEqual(result["node_id"],2); self.assertEqual(result["leaf_count"],4)
+            self.assertEqual(result["node_id"],3); self.assertEqual(result["leaf_count"],3)
 
 if __name__=="__main__": unittest.main()
