@@ -4,7 +4,7 @@ V258 closes a reproducibility gap without pretending that an algorithmic candida
 
 ## What was recovered
 
-The published T4/T5 morphology repository uses NeuRosetta in the PP3_Dendrite_extraction notebook:
+The released T4/T5 morphology repository later published a NeuRosetta-based PP3_Dendrite_extraction notebook:
 
 1. load the full-neuron .nr forest;
 2. remove trees carrying an explicit graph-level flag;
@@ -78,6 +78,12 @@ Notebooks/PP3_Dendrite_extraction.ipynb
 
 Pinned NeuRosetta implementation commit:
 38f20f02194c129c234360db5a8be78a90c61db1
+
+## Important temporal provenance limit
+
+The NeuRosetta timeline matters. The historical `Point_data.pkl` was first committed to the study repository on 2025-12-09, while the NeuRosetta `Forest` API appeared on 2026-01-26 and `convert_forest_to_subtrees()` was introduced on 2026-04-16. Therefore V258 proves that the released PP3 algorithm can be reproduced on the exact project V229 SWCs; it does **not** yet prove that this later public PP3 implementation is the exact software that originally generated the December 2025 `Point_data.pkl`.
+
+The next provenance target is the pre-December-2025/private morphology-generation implementation or an original `.swc`/`.nr` artifact. Until that is recovered, V258 is an algorithm-regression result, not a claim of generator identity.
 
 V229 and V230 remain the exact project-side inputs.
 
