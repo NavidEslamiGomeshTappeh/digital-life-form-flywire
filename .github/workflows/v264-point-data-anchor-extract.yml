@@ -15,6 +15,7 @@ jobs:
       - uses: actions/checkout@v6
         with:
           persist-credentials: false
+          fetch-depth: 0
 
       - uses: actions/setup-python@v6
         with:
@@ -23,20 +24,15 @@ jobs:
       - name: Install historical pickle dependencies
         run: python -m pip install --disable-pip-version-check pandas "jax>=0.4.0" "jaxlib>=0.4.0"
 
-      - name: Download immutable Point_data from Zenodo archive
+      - name: Recover exact historical Point_data blob
         env:
-          ZENODO_URL: https://zenodo.org/records/21876510/files/T4_T5_dendrite_morphology_data.zip?download=1
+          STUDY_REPO: borstlab/T4_T5_Dendrite_Morphology_Paper
+          STUDY_COMMIT: 56901ad1853b44aeca15504cd908fa4c31009a3e
           EXPECTED_POINT_BLOB: b85caf49f45677f2075f7b5f2c8830141cd96d02
           EXPECTED_POINT_SHA256: 76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f
         run: |
-          curl -L --fail --retry 5 --retry-delay 2 --connect-timeout 30 \
-            "$ZENODO_URL" \
-            -o /tmp/T4_T5_dendrite_morphology_data.zip
-          test -s /tmp/T4_T5_dendrite_morphology_data.zip
-          POINT_PATH="$(unzip -Z1 /tmp/T4_T5_dendrite_morphology_data.zip | awk '$0 ~ /(^|\/)point_data\.pkl$/ {print; exit}')"
-          test -n "$POINT_PATH"
-          echo "Point_data archive path: $POINT_PATH"
-          unzip -p /tmp/T4_T5_dendrite_morphology_data.zip "$POINT_PATH" > /tmp/Point_data.pkl
+          git fetch --no-tags --depth=1 https://github.com/$STUDY_REPO.git $STUDY_COMMIT
+          git -C . show "$STUDY_COMMIT:Data/Point_data.pkl" > /tmp/Point_data.pkl
           test -s /tmp/Point_data.pkl
 
           ACTUAL_BLOB="$(git hash-object -t blob /tmp/Point_data.pkl)"
@@ -44,7 +40,6 @@ jobs:
           ACTUAL_SIZE="$(stat -c '%s' /tmp/Point_data.pkl)"
 
           printf '%s\n' \
-            "Point_data archive path=$POINT_PATH" \
             "Point_data size=$ACTUAL_SIZE" \
             "Point_data git-blob=$ACTUAL_BLOB" \
             "Point_data sha256=$ACTUAL_SHA256" \
@@ -52,11 +47,8 @@ jobs:
             "Expected historical sha256=$EXPECTED_POINT_SHA256" \
             > /tmp/point_data_hash_report.txt
 
-          if [ "$ACTUAL_BLOB" = "$EXPECTED_POINT_BLOB" ] && [ "$ACTUAL_SHA256" = "$EXPECTED_POINT_SHA256" ]; then
-            echo "Point_data exact historical bytes: MATCH"
-          else
-            echo "Point_data exact historical bytes: DIFFERENT"
-          fi
+          test "$ACTUAL_BLOB" = "$EXPECTED_POINT_BLOB"
+          test "$ACTUAL_SHA256" = "$EXPECTED_POINT_SHA256"
 
       - name: Extract four anchors
         run: python scripts/v264_point_data_anchor_extract.py
