@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import json, pathlib, pickle, urllib.request, math, gzip, io
+import json, pathlib, pickle, urllib.request, math, gzip, io, zlib
 import numpy as np, pandas as pd
 IDS=[720575940632008007,720575940616224414,720575940625571465,720575940617782941]
 SUB={IDS[0]:"T4a",IDS[1]:"T4c",IDS[2]:"T5a",IDS[3]:"T5c"}
@@ -45,7 +45,7 @@ for rid in IDS:
     url=f"https://flyem.mrc-lmb.cam.ac.uk/flyconnectome/flywire_skeletons_630/{rid}"
     req=urllib.request.Request(url,headers={"User-Agent":"Digital-Life-Form-V275/1.0"})
     raw=urllib.request.urlopen(req,timeout=120).read()
-    data=gzip.decompress(raw).decode() if raw[:2] == b"\x1f\x8b" else raw.decode()
+    if raw[:2] == b"\x1f\x8b": data=gzip.decompress(raw).decode()\n    elif raw[:2] == b"\\x78\\x9c": data=zlib.decompress(raw).decode()\n    else: data=raw.decode()
     ns=parse(data); q=pp3(ns); M={n["id"]:n for n in ns}
     root=np.array([M[q[0]]["x"],M[q[0]]["y"],M[q[0]]["z"]])/1000
     p=point[point.ID==rid].iloc[0];pt=np.array([p.Root_x,p.Root_y,p.Root_z])
