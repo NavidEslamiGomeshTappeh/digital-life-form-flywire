@@ -47,6 +47,8 @@ STUDY = {
 
 EXPECTED_POINT_SHA256 = "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
 
+# V262 final-validation marker: deterministic PP3 audit only; no historical .nr state is assumed.
+
 
 def sha256_file(path: Path) -> str:
     h = hashlib.sha256()
