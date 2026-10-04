@@ -233,7 +233,18 @@ def test_capability_executor_fails_when_capability_unavailable(tmp_path, monkeyp
         ExecutionEngine(tmp_path / "state"),
     )
     with pytest.raises(ExecutionError, match="no healthy backend"):
-        executor.execute("missing.capability", "blocked", idempotent=True)
+        executor.execute(
+            "missing.capability",
+            "blocked",
+            intent=ExecutionIntent(
+                capability="missing.capability",
+                action="run unavailable operation",
+                destination="test-process",
+                risk_tier=0,
+                permission_granted=True,
+            ),
+            idempotent=True,
+        )
 
 
 def test_policy_denies_capability_execution_before_probe(tmp_path):
