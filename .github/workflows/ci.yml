@@ -42,8 +42,8 @@ jobs:
           hand = CodeHand(Path.cwd(), "$RUNNER_TEMP/code-hand-state")
           result = hand.execute(
               "code_hand_demo.py",
-              "def add(a, b):\\n    return a + b\\n",
-              "assert add(2, 3) == 5\\nassert add(-2, 5) == 3",
+              "def add(a, b):\n    return a + b\n",
+              "assert add(2, 3) == 5\nassert add(-2, 5) == 3",
               run_id="ci-code-hand",
               permission_granted=True,
           )
