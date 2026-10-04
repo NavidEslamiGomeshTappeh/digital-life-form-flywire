@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "product_version": "1.2.0",
-  "generated_for": "Version 1.2 cross-source evidence contract",
+  "product_version": "1.2.1",
+  "generated_for": "Version 1.2.1 cross-source provenance receipt contract",
   "exclusion": [
     "evidence/artifact_manifest.json"
   ],
@@ -12,7 +12,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "26aaba0e86632e4d537006e45b0ec918d780b3b4"
+        "value": "6085e946503a10fb4d58a5c7d9a6e572c21ddd2e"
       }
     },
     {
@@ -21,7 +21,7 @@
       "role": "project_metadata",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "eb90d4544f1ce6314d531b43cc28b94690311f36"
+        "value": "dce7f6b1265dea3d044b160d00a9c4bc53cdf68e"
       }
     },
     {
@@ -30,7 +30,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "c68196d1cb0d5f0c6715cba4414a0b33fe2672c7"
+        "value": "a955fdae12bdf32b79296a3a6dd424aac3843677"
       }
     },
     {
@@ -48,7 +48,7 @@
       "role": "cross_source_validator",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "f483e259d78a5cd0a0f312ccd5f2e4204f542193"
+        "value": "559ee5a402b99c30927d0efff3c05629691c6798"
       }
     },
     {
@@ -66,7 +66,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "06b5c19413985bc17008f2550857e1bfd6002126"
+        "value": "436ba8e82b8c31fceb5f2ce996ca61ba304f84ef"
       }
     },
     {
@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "1f647f64f38c549344cd5474cbd810750eb11c93"
+        "value": "89d3e2f06930525518007570bd1f42ca9ded1424"
       }
     },
     {
@@ -84,7 +84,7 @@
       "role": "frozen_cross_source_receipts",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "1f5d3508f1267c326e35af1256e41f20e7c2be81"
+        "value": "9abccbbec69b3b206d25badfee55479882a9cc46"
       }
     },
     {

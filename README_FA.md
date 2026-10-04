@@ -12,7 +12,7 @@
 
 هستهٔ شواهد شامل 649 ردیف سیناپس دقیق، 75 زوج directed، چهار morphology دقیق SWC، شواهد provenance تاریخی، بازسازی الگوریتم dendrite subtree، و ممیزی coordinate frame است.
 
-نسخهٔ 1.1 یک claim ledger، artifact-integrity manifest و قرارداد بررسی مستقل Codex/Zenodo قابل‌بررسی ماشینی اضافه می‌کند. فرمان‌های زیر زنجیرهٔ شواهد را بررسی می‌کنند:
+نسخهٔ 1.2.1 قرارداد claim ledger، artifact-integrity manifest و بررسی مستقل Codex/Zenodo را تکمیل می‌کند و رسیدهای منجمد را به اجرای proof مشخص متصل می‌کند. فرمان‌های زیر زنجیرهٔ شواهد را بررسی می‌کنند:
 
 ```bash
 python -m dlf_flywire validate

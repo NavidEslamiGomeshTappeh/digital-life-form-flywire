@@ -1,6 +1,6 @@
 # Digital Life Form — FlyWire
 
-Version 1.2.0
+Version 1.2.1
 
 > **Project continuity / canonical research memory:** [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md)
 >
@@ -19,7 +19,7 @@ Four exact FAFB v783 neurons:
 | T5a | 720575940625571465 | VFB_fw056211 |
 | T5c | 720575940617782941 | VFB_fw077474 |
 
-The consolidated evidence contains 649 individual synapse-coordinate rows and 75 directed neuron pairs, with exact public-data reproduction, four exact SWC morphologies, published dendrite provenance, historical Point_data provenance, coordinate-frame boundaries, and the historical generator temporal boundary.
+The consolidated evidence contains 649 individual synapse-coordinate rows and 75 directed neuron pairs, with exact public-data reproduction, four exact SWC morphologies, published dendrite provenance, historical Point_data provenance, coordinate-frame boundaries, and a frozen Codex/Zenodo cross-source receipt contract tied to explicit proof executions.
 
 ## Scientific status
 

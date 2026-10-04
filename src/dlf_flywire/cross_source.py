@@ -68,7 +68,9 @@ def validate_cross_source_receipts(root: Path) -> dict[str, Any]:
         raise CrossSourceValidationError("missing canonical_reference")
 
     canonical_path_value = canonical.get("path")
-    canonical_path = root / _safe_relative_path(canonical_path_value, "canonical reference path")
+    canonical_path = root / _safe_relative_path(
+        canonical_path_value, "canonical reference path"
+    )
     if not canonical_path.is_file():
         raise CrossSourceValidationError(
             f"canonical reference artifact missing: {canonical_path_value}"
@@ -99,6 +101,7 @@ def validate_cross_source_receipts(root: Path) -> dict[str, Any]:
     source_ids: set[str] = set()
     providers: set[str] = set()
     artifacts: set[str] = set()
+    workflow_runs: set[int] = set()
     releases: set[str] = set()
     reports: list[dict[str, Any]] = []
 
@@ -110,7 +113,9 @@ def validate_cross_source_receipts(root: Path) -> dict[str, Any]:
         if not isinstance(source_id, str) or not source_id:
             raise CrossSourceValidationError("source receipt id must be non-empty")
         if source_id in source_ids:
-            raise CrossSourceValidationError(f"duplicate source receipt id: {source_id}")
+            raise CrossSourceValidationError(
+                f"duplicate source receipt id: {source_id}"
+            )
         source_ids.add(source_id)
 
         provider = source.get("provider")
@@ -131,18 +136,54 @@ def validate_cross_source_receipts(root: Path) -> dict[str, Any]:
             )
         artifacts.add(artifact)
 
+        proof = source.get("proof")
+        if not isinstance(proof, dict):
+            raise CrossSourceValidationError(f"missing proof metadata for {source_id}")
+
+        workflow_run_id = _positive_int(
+            proof.get("workflow_run_id"), f"{source_id} workflow_run_id"
+        )
+        if workflow_run_id <= 0:
+            raise CrossSourceValidationError(f"invalid workflow_run_id for {source_id}")
+        if workflow_run_id in workflow_runs:
+            raise CrossSourceValidationError(
+                f"proof workflow run ids must be distinct: {workflow_run_id}"
+            )
+        workflow_runs.add(workflow_run_id)
+
+        proof_artifact = _safe_relative_path(
+            proof.get("artifact"), f"{source_id} proof artifact"
+        )
+        proof_path = root / proof_artifact
+        if not proof_path.is_file():
+            raise CrossSourceValidationError(
+                f"missing proof artifact for {source_id}: {proof_artifact.as_posix()}"
+            )
+
+        source_url = proof.get("source_url")
+        if not isinstance(source_url, str) or not source_url.startswith(
+            ("https://", "http://")
+        ):
+            raise CrossSourceValidationError(f"invalid proof source URL for {source_id}")
+
         release = source.get("dataset")
         if not isinstance(release, str) or not release:
-            raise CrossSourceValidationError(f"missing dataset release for {source_id}")
+            raise CrossSourceValidationError(
+                f"missing dataset release for {source_id}"
+            )
         releases.add(release)
 
-        matches = _positive_int(source.get("exact_matches"), f"{source_id} exact_matches")
+        matches = _positive_int(
+            source.get("exact_matches"), f"{source_id} exact_matches"
+        )
         if matches != expected_rows:
             raise CrossSourceValidationError(
                 f"{source_id} exact match count {matches} != canonical rows {expected_rows}"
             )
 
-        missing = _positive_int(source.get("missing_matches"), f"{source_id} missing_matches")
+        missing = _positive_int(
+            source.get("missing_matches"), f"{source_id} missing_matches"
+        )
         duplicates = _positive_int(
             source.get("duplicate_matches"), f"{source_id} duplicate_matches"
         )
@@ -156,6 +197,11 @@ def validate_cross_source_receipts(root: Path) -> dict[str, Any]:
             "provider": provider,
             "artifact": artifact,
             "dataset": release,
+            "proof": {
+                "workflow_run_id": workflow_run_id,
+                "artifact": proof_artifact.as_posix(),
+                "source_url": source_url,
+            },
             "exact_matches": matches,
             "missing_matches": missing,
             "duplicate_matches": duplicates,
@@ -173,6 +219,7 @@ def validate_cross_source_receipts(root: Path) -> dict[str, Any]:
             report["mapping_sha256"] = _hex(
                 source["mapping_sha256"], 64, f"{source_id} mapping SHA-256"
             )
+
         reports.append(report)
 
     if releases != {"FAFB v783"}:
@@ -184,6 +231,10 @@ def validate_cross_source_receipts(root: Path) -> dict[str, Any]:
         raise CrossSourceValidationError(
             "source independence requires at least two distinct providers"
         )
+    if len(workflow_runs) < 2:
+        raise CrossSourceValidationError(
+            "source proof records must use distinct workflow run ids"
+        )
 
     return {
         "status": "PASS_FROZEN_CROSS_SOURCE_RECEIPTS",
@@ -193,7 +244,7 @@ def validate_cross_source_receipts(root: Path) -> dict[str, Any]:
         "independent_source_receipts": len(reports),
         "sources": reports,
         "limitation": (
-            "This validates immutable source receipts and the current canonical artifact; "
+            "This validates immutable source receipts and proof metadata; "
             "it does not re-download or re-run the 9.5 GB Zenodo source."
         ),
     }
