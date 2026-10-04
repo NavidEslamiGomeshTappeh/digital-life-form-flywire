@@ -68,6 +68,22 @@ class CapabilitySpec:
             raise ValueError(f"duplicate backend in capability {self.name}")
 
 
+@dataclass(frozen=True)
+class BackendSelection:
+    capability: CapabilitySpec
+    backend: BackendSpec
+    probe: ProbeResult
+    candidates: tuple[dict[str, object], ...]
+
+    def to_dict(self) -> dict[str, object]:
+        return {
+            "capability": self.capability.name,
+            "backend": self.backend.name,
+            "probe": self.probe.to_dict(),
+            "candidates": list(self.candidates),
+        }
+
+
 def _elapsed_ms(start: float) -> int:
     return max(0, int((time.monotonic() - start) * 1000))
 
@@ -79,6 +95,11 @@ def _resolve_executable(executable: str) -> str | None:
     ):
         return str(candidate) if candidate.is_file() else None
     return shutil.which(executable)
+
+
+def resolve_backend_executable(backend: BackendSpec) -> str | None:
+    """Resolve a declared backend without invoking it."""
+    return _resolve_executable(backend.executable)
 
 
 def probe_backend(backend: BackendSpec) -> ProbeResult:
@@ -147,6 +168,48 @@ class CapabilityDoctor:
                     break
         return tuple(backends)
 
+    def _find(self, capability_name: str) -> CapabilitySpec:
+        for spec in self._capabilities:
+            if spec.name == capability_name:
+                return spec
+        raise CapabilitySelectionError(f"unknown capability: {capability_name}")
+
+    def _probe_selection(
+        self, spec: CapabilitySpec, override: str | None = None
+    ) -> tuple[BackendSelection | None, tuple[dict[str, object], ...], tuple[ProbeStatus, ...]]:
+        candidates: list[dict[str, object]] = []
+        statuses: list[ProbeStatus] = []
+        for backend in self.ordered_backends(spec, override):
+            try:
+                result = probe_backend(backend)
+            except Exception as exc:  # isolated probe boundary  # noqa: BLE001
+                result = ProbeResult("error", output=str(exc)[:1000])
+            statuses.append(result.status)
+            candidates.append({"backend": backend.name, "probe": result.to_dict()})
+            if result.ok:
+                return (
+                    BackendSelection(
+                        capability=spec,
+                        backend=backend,
+                        probe=result,
+                        candidates=tuple(candidates),
+                    ),
+                    tuple(candidates),
+                    tuple(statuses),
+                )
+        return None, tuple(candidates), tuple(statuses)
+
+    def select(
+        self, capability_name: str, override: str | None = None
+    ) -> BackendSelection:
+        """Probe and return one healthy declared backend, or fail closed."""
+        selection, _, _ = self._probe_selection(self._find(capability_name), override)
+        if selection is None:
+            raise CapabilitySelectionError(
+                f"no healthy backend for capability {capability_name}"
+            )
+        return selection
+
     def check(self, overrides: Mapping[str, str] | None = None) -> dict[str, object]:
         """Return a point-in-time, machine-readable capability snapshot."""
 
@@ -156,25 +219,28 @@ class CapabilityDoctor:
 
         for spec in self._capabilities:
             try:
-                candidates: list[dict[str, object]] = []
-                active: str | None = None
-                statuses: list[ProbeStatus] = []
-
-                for backend in self.ordered_backends(spec, overrides.get(spec.name)):
-                    result = probe_backend(backend)
-                    statuses.append(result.status)
-                    candidates.append(
-                        {"backend": backend.name, "probe": result.to_dict()}
+                selection, candidates, statuses = self._probe_selection(
+                    spec, overrides.get(spec.name)
+                )
+                if selection is not None:
+                    results.append(
+                        {
+                            "name": spec.name,
+                            "description": spec.description,
+                            "tier": spec.tier,
+                            "status": "ok",
+                            "active_backend": selection.backend.name,
+                            "backends": list(candidates),
+                            "message": (
+                                "selected healthy backend: "
+                                f"{selection.backend.name}"
+                            ),
+                        }
                     )
-                    if result.ok:
-                        active = backend.name
-                        break
+                    continue
 
-                if active is not None:
-                    status: CapabilityStatus = "ok"
-                    message = f"selected healthy backend: {active}"
-                elif statuses and all(value == "missing" for value in statuses):
-                    status = "off"
+                if statuses and all(value == "missing" for value in statuses):
+                    status: CapabilityStatus = "off"
                     message = "no candidate backend is installed"
                 else:
                     status = "error"
@@ -186,12 +252,12 @@ class CapabilityDoctor:
                         "description": spec.description,
                         "tier": spec.tier,
                         "status": status,
-                        "active_backend": active,
-                        "backends": candidates,
+                        "active_backend": None,
+                        "backends": list(candidates),
                         "message": message,
                     }
                 )
-            except Exception as exc:  # one bad capability cannot abort the report  # noqa: BLE001
+            except Exception as exc:  # defensive boundary  # noqa: BLE001
                 results.append(
                     {
                         "name": spec.name,
@@ -203,18 +269,6 @@ class CapabilityDoctor:
                         "message": f"capability probe exception: {exc}",
                     }
                 )
-
-        counts = {
-            "ok": sum(item["status"] == "ok" for item in results),
-            "off": sum(item["status"] == "off" for item in results),
-            "error": sum(item["status"] == "error" for item in results),
-        }
-        return {
-            "schema_version": 1,
-            "observed_at": observed_at,
-            "capabilities": results,
-            "counts": counts,
-        }
 
     @staticmethod
     def format_report(report: Mapping[str, object]) -> str:

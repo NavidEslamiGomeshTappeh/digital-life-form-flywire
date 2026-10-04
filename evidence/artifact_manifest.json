@@ -350,7 +350,7 @@
       "role": "capability_doctor_engine",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d3cd6c100ddae2e2ec5a45917d57ece49a2540e9"
+        "value": "b72763ec1b4e7f598e3a2c6c0ceaa38cfd1b59fe"
       }
     },
     {
@@ -359,7 +359,25 @@
       "role": "capability_doctor_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "291e10c32d169c46c2bb1183d9d0a1a10629d644"
+        "value": "3ceb2d01514c37bdf271a58f4ec11237510b563f"
+      }
+    },
+    {
+      "id": "E-EXECUTION",
+      "path": "src/dlf_flywire/execution.py",
+      "role": "execution_checkpoint_recovery_engine",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "31075f5549855c4de52e6dcbf3137a8c24273a86"
+      }
+    },
+    {
+      "id": "E-EXECUTION-TESTS",
+      "path": "tests/test_execution.py",
+      "role": "execution_recovery_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "9aff7b1d7cbc84782d7c54dba12416dec7185332"
       }
     }
   ]

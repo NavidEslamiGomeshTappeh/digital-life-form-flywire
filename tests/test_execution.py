@@ -135,3 +135,89 @@ def test_timeout_is_recorded(tmp_path):
     )
     assert receipt.status == "timeout"
     assert receipt.returncode is None
+
+
+def test_interrupted_step_with_changed_request_is_blocked(tmp_path):
+    engine = ExecutionEngine(tmp_path / "state")
+    run_id = "fingerprint-test"
+    original = request(step_id="step")
+    cwd = str(tmp_path.resolve())
+    from dlf_flywire.execution import _request_fingerprint
+
+    engine._write_checkpoint(
+        run_id,
+        {
+            "step": {
+                "status": "running",
+                "capability": original.capability,
+                "backend": original.backend,
+                "argv": list(original.argv),
+                "request_sha256": _request_fingerprint(original, cwd),
+                "started_at": "2026-01-01T00:00:00+00:00",
+            }
+        },
+    )
+    changed = ExecutionRequest(
+        capability=original.capability,
+        backend=original.backend,
+        argv=(sys.executable, "-c", "print('changed')"),
+        step_id="step",
+        idempotent=True,
+    )
+    with pytest.raises(RecoveryBlocked, match="fingerprint changed"):
+        engine.execute(changed, run_id=run_id)
+
+
+def test_malformed_checkpoint_fails_closed(tmp_path):
+    engine = ExecutionEngine(tmp_path / "state")
+    path = tmp_path / "state" / "checkpoints" / "bad.json"
+    path.parent.mkdir(parents=True)
+    path.write_text("{not-json", encoding="utf-8")
+    with pytest.raises(RecoveryBlocked, match="unreadable or malformed"):
+        engine.execute(request(), run_id="bad")
+
+
+def test_capability_executor_probes_before_execution(tmp_path):
+    from dlf_flywire.capabilities import BackendSpec, CapabilityDoctor, CapabilitySpec
+    from dlf_flywire.execution import CapabilityExecutor
+
+    spec = CapabilitySpec(
+        "runtime.python.test",
+        "test python execution capability",
+        (BackendSpec("python", sys.executable),),
+    )
+    executor = CapabilityExecutor(
+        CapabilityDoctor((spec,)),
+        ExecutionEngine(tmp_path / "state"),
+    )
+    receipt = executor.execute(
+        "runtime.python.test",
+        "probe-first",
+        ("-c", "print('capability-routed')"),
+        idempotent=True,
+    )
+    assert receipt.status == "succeeded"
+    assert receipt.backend == "python"
+    assert receipt.capability_probe["probe"]["status"] == "ok"
+    assert receipt.stdout.strip() == "capability-routed"
+
+
+def test_capability_executor_fails_when_capability_unavailable(tmp_path, monkeypatch):
+    from dlf_flywire.capabilities import BackendSpec, CapabilityDoctor, CapabilitySpec
+    from dlf_flywire.execution import CapabilityExecutor, ExecutionError
+
+    spec = CapabilitySpec(
+        "missing.capability",
+        "missing executable",
+        (BackendSpec("missing", "definitely-not-installed-dlf"),),
+    )
+    monkeypatch.setattr(
+        "dlf_flywire.capabilities.shutil.which",
+        lambda _name: None,
+    )
+    executor = CapabilityExecutor(
+        CapabilityDoctor((spec,)),
+        ExecutionEngine(tmp_path / "state"),
+    )
+    with pytest.raises(ExecutionError, match="no healthy backend"):
+        executor.execute("missing.capability", "blocked", idempotent=True)

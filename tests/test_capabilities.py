@@ -151,3 +151,11 @@ def test_default_capabilities_are_stable():
         "package.import",
         "tool.build",
     ]
+
+
+def test_select_unknown_capability_fails_closed():
+    import pytest
+    from dlf_flywire.capabilities import CapabilitySelectionError
+
+    with pytest.raises(CapabilitySelectionError, match="unknown capability"):
+        CapabilityDoctor(default_capabilities()).select("does.not.exist")
