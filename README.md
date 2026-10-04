@@ -155,6 +155,8 @@ Therefore the current public PP1/PP3 notebooks cannot, by repository chronology 
 
 This does **not** prove that the historical generator was different. It proves that the original generator implementation is not preserved in the public study repository at the time the historical Point_data object entered Git.
 
+A second independent chronology check shows that the public NeuRosetta Forest/SWC I/O infrastructure used by the later PP2 notebook was added on **2026-01-26**, after the first Point_data commit. This still does not exclude an earlier private predecessor.
+
 See `docs/V280_HISTORICAL_GENERATOR_BOUNDARY.md`, `scripts/v280_historical_generator_boundary.py`, and `v280_results/V280_historical_generator_boundary.json`.
 
 ## What makes the project useful
