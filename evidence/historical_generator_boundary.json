@@ -1,5 +1,5 @@
 {
-  "status": "PROVEN_HISTORICAL_GENERATOR_TEMPORAL_BOUNDARY_WITH_PUBLIC_GENERATOR_RECONSTRUCTION",
+  "status": "PROVEN_HISTORICAL_INGEST_BOUNDARY_WITH_LATER_PUBLIC_RECONSTRUCTION",
   "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
   "evidence": [
     {
@@ -94,7 +94,12 @@
     "first_point_commit_has_no_pp3": true,
     "public_pp3_uses_reduced_dendrites": true,
     "public_metrics_generator_uses_get_root_coordinate": true,
-    "public_metrics_generator_and_pp3_share_commit": true
+    "public_metrics_generator_and_pp3_share_commit": true,
+    "parallel_point_commits_same_tree": true,
+    "parallel_point_commits_same_blob": true,
+    "duplicate_point_commits_merged_without_tree_change": true,
+    "neuron_ids_added_after_point_data": true,
+    "current_public_branch_list_has_no_historical_generator_branch": true
   },
   "interpretation": {
     "proven": [
@@ -103,7 +108,10 @@
       "The contemporaneous ANOVA notebook proves the artifact was consumed from a local T45_Morpho_data/Data/Pickled_data/Point_data.pkl path in a neurosetta Jupyter environment.",
       "The later public Metrics1 notebook explicitly generates the Point_data schema from Reduced_dendrites and obtains root_x/root_y/root_z from tree.get_root_coordinate().",
       "The later public PP3 notebook explicitly creates Reduced_dendrites by subtree extraction followed by reduction.",
-      "The public algorithmic morphology-to-root-coordinate path is therefore reconstructed, but its exact December 2025 revision is not recovered."
+      "The public algorithmic morphology-to-root-coordinate path is therefore reconstructed, but its exact December 2025 revision is not recovered.",
+      "The public Git DAG exposes two parallel Point_data upload commits with the same parent, same tree, and identical blob, followed by a merge that preserves the same tree.",
+      "The public neuron-ID table was added on 2025-12-16, after the Point_data artifact had already been uploaded.",
+      "As of 2026-10-04, the repository exposes only main as a public branch; no alternate public branch containing the missing producer is visible."
     ],
     "unresolved": [
       "The exact December 2025 generator script/notebook is not present in the public repository history preceding Point_data.pkl.",
@@ -112,8 +120,150 @@
       "The specific 649-coordinate V230 artifact is not yet connected end-to-end to the Point_data generator chain.",
       "The August 2026 notebooks may be revised publication versions rather than byte-identical December 2025 producer code."
     ],
-    "historical_boundary": "Public Forest/SWC infrastructure appears January 2026 and public PP3/Metrics notebooks August 2026; legacy NeuRosetta subtree functionality existed April 2025. A private/local or legacy December 2025 implementation therefore remains possible and is now the principal unresolved provenance boundary.",
+    "historical_boundary": "The public repository proves an ingest/publication boundary at 2025-12-09T19:41:50Z for Point_data.pkl and proves a local consumer path that already existed immediately beforehand. The producer itself must therefore be outside the public paper-repository history before that boundary, unless it existed only in an unexposed private/local environment. Later public preprocessing notebooks reconstruct the algorithmic path but do not recover the exact December 2025 producer.",
     "confidence_upgrade": "The temporal ordering now rules out a common overclaim: the December Point_data binary was not demonstrably produced by a producer script committed earlier in the public paper repository, because that repository did not contain such a producer before the artifact upload. The strongest public evidence is consumption lineage plus later executable reconstruction, not exact producer identity."
   },
-  "execution_note": "Verified through GitHub commit metadata, tree/blob APIs, file APIs, and the public repository notebooks."
+  "execution_note": "Verified through GitHub commit metadata, tree/blob APIs, file APIs, and the public repository notebooks.",
+  "git_dag": [
+    {
+      "sha": "79cf52212935de6bddf996c9f46c0df89f5c5442",
+      "timestamp": "2025-12-09T19:26:04Z",
+      "message": "Initial commit",
+      "parents": [],
+      "files": [
+        ".gitignore",
+        "README.md"
+      ],
+      "observation": "The public paper repository was created with only the basic repository files."
+    },
+    {
+      "sha": "61fd0f176d73932ad87ece04153945501b4c405c",
+      "timestamp": "2025-12-09T19:40:07Z",
+      "message": "ANOVA notebook",
+      "parents": [
+        "79cf52212935de6bddf996c9f46c0df89f5c5442"
+      ],
+      "files": [
+        "Notebooks/ANOVA_analysis.ipynb"
+      ],
+      "observation": "The first analysis notebook predates the Point_data upload and consumes a pre-existing local Point_data.pkl."
+    },
+    {
+      "sha": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+      "timestamp": "2025-12-09T19:41:50Z",
+      "message": "A point value metrics data",
+      "parents": [
+        "61fd0f176d73932ad87ece04153945501b4c405c"
+      ],
+      "files": [
+        "Data/Point_data.pkl"
+      ],
+      "tree": "cd10c382b3abbbe68bf00e3841959b7fb06f4c07",
+      "blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02"
+    },
+    {
+      "sha": "fe9779d4ca425613eec44b19e961610d117e7232",
+      "timestamp": "2025-12-09T19:42:19Z",
+      "message": "Point value metrics data",
+      "parents": [
+        "61fd0f176d73932ad87ece04153945501b4c405c"
+      ],
+      "files": [
+        "Data/Point_data.pkl"
+      ],
+      "tree": "cd10c382b3abbbe68bf00e3841959b7fb06f4c07",
+      "blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+      "observation": "A parallel duplicate commit points to the same tree and identical Point_data blob; it does not expose a second content revision."
+    },
+    {
+      "sha": "8a38537f55371de369f80c50778915afb5d954b4",
+      "timestamp": "2025-12-09T19:42:30Z",
+      "message": "Merge remote-tracking branch 'origin/main'",
+      "parents": [
+        "fe9779d4ca425613eec44b19e961610d117e7232",
+        "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a"
+      ],
+      "tree": "cd10c382b3abbbe68bf00e3841959b7fb06f4c07",
+      "observation": "The duplicate Point_data commits were merged immediately without changing the resulting tree."
+    },
+    {
+      "sha": "bb51268783115e50b68be3a9023525642168862b",
+      "timestamp": "2025-12-09T19:43:21Z",
+      "message": "Edge metrics data",
+      "files": [
+        "Data/Edge_data.pkl"
+      ]
+    },
+    {
+      "sha": "035c72843bd27817ca898813a4a9a4211e68edb1",
+      "timestamp": "2025-12-09T19:44:14Z",
+      "message": "Vertex metrics data",
+      "files": [
+        "Data/Vertex_data.pkl"
+      ]
+    },
+    {
+      "sha": "e8fc3a77af521649c6d86183dc615ccfac254133",
+      "timestamp": "2025-12-09T19:45:22Z",
+      "message": "Bifurcation geometry data",
+      "files": [
+        "Data/Bifurication_data.pkl"
+      ]
+    },
+    {
+      "sha": "81d864b9ebd3986247aa95517645f65659dec1b7",
+      "timestamp": "2025-12-09T19:46:14Z",
+      "message": "Edge angular deviation data",
+      "files": [
+        "Data/Segment_deviation_data.pkl"
+      ]
+    },
+    {
+      "sha": "1a36f58ff91c83c849a3b27c0fd3b6e5ce2464aa",
+      "timestamp": "2025-12-09T19:46:46Z",
+      "message": "Contour plot data",
+      "files": [
+        "Data/Contour_plot.pkl"
+      ]
+    },
+    {
+      "sha": "1007a708f0b2cd4d55875174256774a41ff5b0f4",
+      "timestamp": "2025-12-09T20:08:32Z",
+      "message": "ANOVA analysis and notebook",
+      "files": [
+        "Notebooks/ANOVA_analysis.ipynb"
+      ],
+      "observation": "The consumer notebook continued to reference the local T45_Morpho_data Point_data path and neurosetta environment."
+    },
+    {
+      "sha": "379748538deb19778cd61f3d364f8a1f09f1631c",
+      "timestamp": "2025-12-16T09:35:56Z",
+      "message": "neuron ID table and started fleshing out text",
+      "files": [
+        "Data/Neuron_ids.csv"
+      ],
+      "observation": "The public neuron-ID table was added seven days after Point_data, not before its ingest."
+    }
+  ],
+  "consumer_path_evidence": {
+    "notebook_commit": "61fd0f176d73932ad87ece04153945501b4c405c",
+    "file": "Notebooks/ANOVA_analysis.ipynb",
+    "local_path": "/home/nik/Desktop/Software/T45_Morpho_data/Data/Pickled_data/Point_data.pkl",
+    "load_expression": "pd.read_pickle(file_path)",
+    "kernel": "neurosetta",
+    "python": "3.10.17",
+    "interpretation": "This is direct evidence of a consumer reading a pre-existing local artifact. It is not producer code and does not expose the historical upstream file creation step."
+  },
+  "repository_state": {
+    "public_branches_visible_on_2026-10-04": [
+      "main"
+    ],
+    "interpretation": "No separate public historical branch containing the December 2025 Point_data producer is currently visible through the repository branch listing."
+  },
+  "release_boundary": {
+    "tag": "Submission_release",
+    "name": "Submission release v1.0.0",
+    "published": "2026-01-16T13:54:29Z",
+    "observation": "The archived v1 release contains the derived Data artifacts and downstream analysis notebooks, but does not contain PP1-PP5 preprocessing notebooks or the Reduced_dendrites intermediate trees."
+  }
 }
