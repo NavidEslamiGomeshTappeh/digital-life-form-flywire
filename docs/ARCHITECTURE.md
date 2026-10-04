@@ -1,4 +1,4 @@
-# Architecture — Version 1.3.1
+# Architecture — Version 1.4.0
 
 The project has one stable evidence chain:
 
@@ -80,3 +80,9 @@ Receipt references stored in run state are relative to the runtime state root an
 ## Leader / task orchestrator
 
 The first Leader boundary is implemented by `TaskOrchestrator`. A `RunPlan` defines explicit steps, dependencies, intent metadata, backend preference, and idempotence. The orchestrator computes a stable plan fingerprint, executes dependencies deterministically, persists run state atomically, resumes already-successful steps from verified receipts, and rejects a changed plan on resume. The independent `verify_run` path checks the run-state identity, plan fingerprint, receipt identity, receipt seal, and recorded policy decision for every successful step. This is orchestration evidence, not scientific evidence.
+
+## Code Hand
+
+Version 1.4.0 adds the first concrete Hand implementation. CodeHand builds an explicit two-step plan: create a new source file, then execute assertions against that file. Both steps use declared capabilities (code.write and code.test.python) and the same Policy Gate, capability probing, checkpoint/recovery, sealed receipts, and independent verifier as the Leader runtime.
+
+The implementation enforces a workspace-root path boundary and refuses to overwrite an existing file. The generated file is hashed again after execution. The capability is intentionally local and narrow; remote repository editing, web access, installation, and desktop control remain outside the current contract.
