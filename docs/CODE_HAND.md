@@ -57,3 +57,8 @@ The smoke-test file is created only in the ephemeral GitHub Actions workspace; i
 ## Next boundary
 
 A future Code Hand expansion can add structured edit/patch operations, language-specific test backends, repository-aware changes, and recovery of interrupted edits. Those should be added only with explicit path contracts, tests, receipts, and verifier coverage.
+## Failure-injection evidence
+
+The first end-to-end Code Hand smoke attempt intentionally exercised the real runner path and exposed two implementation defects: the generated inline Python source was encoded incorrectly, and the orchestrator did not fail closed when a step returned a non-success receipt. The source-generation path was corrected, the orchestrator now records the failed step and raises ExecutionError, and a regression test covers that failure boundary.
+
+This is retained as engineering evidence: a green test result is not treated as proof until an observed failure mode has also been handled and regression-tested.
