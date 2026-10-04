@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import subprocess
 
+import pytest
+
 from dlf_flywire.capabilities import (
     BackendSpec,
     CapabilityDoctor,
@@ -154,7 +156,6 @@ def test_default_capabilities_are_stable():
 
 
 def test_select_unknown_capability_fails_closed():
-    import pytest
     from dlf_flywire.capabilities import CapabilitySelectionError
 
     with pytest.raises(CapabilitySelectionError, match="unknown capability"):
