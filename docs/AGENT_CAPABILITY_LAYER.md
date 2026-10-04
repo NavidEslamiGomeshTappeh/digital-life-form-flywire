@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document records an external architectural reference that was inspected while designing the future execution/capability layer of Digital Life Form.
+This document records the external architectural reference and the implementation decisions it informed in Digital Life Form.
 
 It is **not** a vendored dependency, not a fork, and not a claim that Agent Reach has been integrated into the product.
 
@@ -43,7 +43,7 @@ The capability contract should remain stable even when the backend changes.
 
 Agent Reach represents backends as an ordered candidate list and exposes the backend actually selected after health checking.
 
-For our system the equivalent contract should record:
+Our implemented capability doctor records the equivalent contract:
 
 - capability name;
 - candidate backends in priority order;
@@ -76,7 +76,7 @@ Health probes must be side-effect-free and bounded by a timeout.
 
 Agent Reach's doctor collects each channel independently and converts channel exceptions into an error result instead of aborting the complete report.
 
-Our future capability doctor should therefore return a complete report even when one adapter crashes.
+Our capability doctor returns a complete report even when one backend probe crashes.
 
 ### 5. User overrides may reorder candidates, not disable safety
 
@@ -93,7 +93,7 @@ For Digital Life Form:
 
 A doctor result is evidence about a point in time, not a permanent truth.
 
-Our execution receipts should therefore carry:
+Our execution receipts carry:
 
 - probe timestamp;
 - capability state;
@@ -141,7 +141,7 @@ Our system additionally needs:
 
 A web backend being healthy does not make the scientific result valid.
 
-## Proposed Digital Life Form contract
+## Digital Life Form execution contract
 
 The future capability layer should expose a machine-readable record conceptually equivalent to:
 
@@ -174,7 +174,7 @@ CapabilityReceipt
     evidence
 ```
 
-This is deliberately a design contract, not an implementation claim.
+The local runtime now implements this contract in a bounded form: policy intent, capability probe, selected backend, execution result, checkpoint state, sealed receipt, and independent run verification.
 
 ## Relationship to the existing V1 evidence chain
 
@@ -211,7 +211,7 @@ The mapping is:
 | Verifier | challenge result, validate receipt, detect false PASS |
 | Recovery layer | resume from latest valid checkpoint |
 
-The important boundary is that **Leader selection must never become evidence by itself**. Only executed and verified receipts can support scientific claims.
+The important boundary is that **Leader selection must never become evidence by itself**. Only executed and verified receipts can support scientific claims. The current verifier also checks that the receipt intent exactly matches the immutable plan before returning PASS.
 
 ## Current decision
 
@@ -219,11 +219,11 @@ Adopt Agent Reach as an **architectural reference for capability discovery, real
 
 Do not add Agent Reach as a runtime dependency to the current V1 scientific package.
 
-Do not claim the future capability layer exists until code, tests, and execution receipts exist.
+Do not claim Web Hand or Computer Hand integrations exist until their real backends, tests, and receipts exist.
 
 ## Audit principle
 
-A future implementation should be judged against the same standard already used elsewhere in the project:
+The implemented runtime is judged against the same standard already used elsewhere in the project:
 
 - exact inputs;
 - deterministic behavior where applicable;
