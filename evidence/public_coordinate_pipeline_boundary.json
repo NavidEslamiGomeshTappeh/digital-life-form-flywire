@@ -1,0 +1,42 @@
+{
+  "status": "PROVEN_PUBLIC_PIPELINE_COORDINATE_BOUNDARY",
+  "sources": [
+    {
+      "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+      "file": "Notebooks/PP1_Fetch_flywire.ipynb",
+      "commit": "8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+      "observations": [
+        "FlyWire data are tagged as 1 nanometer.",
+        "For the public FlyWire path, no coordinate rotation/translation/scaling is applied in the shown preprocessing cell.",
+        "The skeleton is resampled to 100 nanometers before SWC output."
+      ]
+    },
+    {
+      "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+      "file": "Notebooks/PP2_nr_conversion.ipynb",
+      "commit": "8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+      "observations": [
+        "SWC files are imported with nr.import_swc.",
+        "Tree metadata are set to units='nm'.",
+        "No affine coordinate transform is shown in the conversion notebook."
+      ]
+    },
+    {
+      "repository": "NikDrummond/NeuRosetta",
+      "file": "src/neurosetta/ops/tree_graphs/tree_editing.py",
+      "commit": "2de2748ca9d4b3d17bc23b1f0f6d4e03cf012085",
+      "observation": "reduce_tree() removes transitive nodes by graph reduction; it does not apply a coordinate-frame transform. Its documented behavior preserves raw coordinates for mapped synapses."
+    }
+  ],
+  "conclusion": {
+    "proven": [
+      "The currently public PP1→PP2→reduction path does not explain the approximately hundred-micrometre-scale signed/axis-reoriented Point_data root coordinates by an implicit affine transform.",
+      "The public metrics notebook obtains Point_data root_x/root_y/root_z directly from the loaded Reduced_dendrites tree after an explicit nm-to-um conversion."
+    ],
+    "implication": "The missing December 2025 producer or an earlier/private morphology materialization step must account for the coordinate-frame difference; the public August 2026 notebooks cannot be treated as byte-identical historical producer code.",
+    "unresolved": [
+      "The exact historical coordinate transform/materialization remains unrecovered.",
+      "The public preprocessing notebooks may themselves represent a revised publication pipeline."
+    ]
+  }
+}
