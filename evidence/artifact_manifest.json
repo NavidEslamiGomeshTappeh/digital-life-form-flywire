@@ -395,7 +395,7 @@
       "role": "leader_task_orchestrator",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "aa8c115beb577440ea51c0c481b08d566b288a1e"
+        "value": "e802ff6b275a950c8b2542fe8db80732cdccb8af"
       }
     },
     {
@@ -405,6 +405,24 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "c7ebb632a2651168de69af62470856e5962c41c8"
+      }
+    }
+    {
+      "id": "E-VERIFIER",
+      "path": "src/dlf_flywire/verifier.py",
+      "role": "independent_run_verifier",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "bc15e9cafe2147fe763584619cd48519e6ed1069"
+      }
+    },
+    {
+      "id": "E-VERIFIER-TESTS",
+      "path": "tests/test_verifier.py",
+      "role": "independent_verifier_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "58df4db2c56c3f40e26f9f760ab3a349ea2e51eb"
       }
     }
   ]
