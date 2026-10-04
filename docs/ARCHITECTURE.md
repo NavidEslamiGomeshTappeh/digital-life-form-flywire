@@ -1,4 +1,4 @@
-# Architecture — Version 1.1.0
+# Architecture — Version 1.2.1
 
 The project has one stable evidence chain:
 
@@ -26,7 +26,7 @@ Every important scientific statement should be represented as a claim with:
 
 ## Artifact integrity
 
-Critical evidence artifacts are bound to immutable content identities. The V1.1 audit engine verifies raw SHA-256 where available and Git blob SHA-1 for Git-tracked text artifacts.
+Critical evidence artifacts are bound to immutable content identities. Cross-source receipts also carry provider identity, proof workflow IDs, and proof-artifact paths. The V1.1 audit engine verifies raw SHA-256 where available and Git blob SHA-1 for Git-tracked text artifacts.
 
 ## Recovery
 
