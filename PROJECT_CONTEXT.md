@@ -582,7 +582,7 @@ Stars, forks, traffic, and demos are useful for attention but are not scientific
 
 # 16. Current repository status snapshot
 
-Known V1.0.1 main commit before this documentation update:
+V1.1.0 main is the current implementation target after the provenance-audit release. The previous V1.0.1 main commit was:
 
 `26624626bd3c8291898df5c1bc844c5dba9c4172`
 
@@ -629,7 +629,7 @@ For provenance research, do not rely only on README prose. Inspect evidence file
 - V-numbered working tree was consolidated into V1.
 - Historical Git history remains available for audit.
 - V1 is the unified product line.
-- The original Point_data generator is still unresolved.
+- The original Point_data generator is still unresolved.\n- V1.1.0 adds a machine-checkable claim ledger and artifact-integrity contract.
 - The direct skeleton decoder exists partly to remove the vulnerable `fafbseg -> diskcache` runtime chain.
 - Exact reproduction is valued above "close enough".
 - Independent corroboration is valued above self-consistency.
