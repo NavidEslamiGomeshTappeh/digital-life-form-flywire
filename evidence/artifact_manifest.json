@@ -271,6 +271,15 @@
         "type": "git_blob_sha1",
         "value": "e393c48086331ea01afb25f3c677c924312ae790"
       }
+    },
+    {
+      "id": "E-LEGACY-NEUROSETTA",
+      "path": "evidence/legacy_neurosetta_context.json",
+      "role": "historical_legacy_toolchain_context",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "f2d9c66b3f1d2c5d7bcb1f7e2c7ec6ef8a8db0b2"
+      }
     }
   ]
 }
