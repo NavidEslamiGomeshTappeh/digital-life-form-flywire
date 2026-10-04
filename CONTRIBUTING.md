@@ -1,12 +1,11 @@
 # Contributing
 
-این پروژه بر اساس شواهد قابل بازتولید پیش می‌رود.
+Version 1 is the stable project baseline. Changes should improve the reusable system rather than create another milestone-specific product directory.
 
-قبل از ثبت تغییر:
-- تست‌های محلی را اجرا کنید.
-- تغییرات مربوط به identity و provenance را بررسی کنید.
-- هیچ fallback تقریبی را برای سبز کردن تست اضافه نکنید.
-- اگر داده خارجی قابل دسترس نیست، وضعیت را FAIL/UNAVAILABLE ثبت کنید.
-- برای داده‌های بازیابی‌شده hash و شناسه منبع را حفظ کنید.
+Before a pull request:
+1. python -m ruff check .
+2. python -m pytest -q
+3. python -m dlf_flywire validate
+4. confirm README, citation metadata and evidence remain consistent.
 
-تغییرات مهم باید در CHANGELOG ثبت شوند.
+Do not weaken scientific boundaries or tests merely to make CI green.

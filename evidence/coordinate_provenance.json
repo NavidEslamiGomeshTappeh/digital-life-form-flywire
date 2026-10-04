@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_FRAME_SEPARATION",
+  "published_to_project_identity": "UNRESOLVED",
+  "published_manual_dendrite_curation_identity": "UNRESOLVED",
+  "individual_synapse_biological_compartment": "UNRESOLVED",
+  "raw_coordinate_distance": "DIAGNOSTIC_ONLY",
+  "point_data_git_blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+  "point_data_sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+}

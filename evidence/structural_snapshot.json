@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_STRUCTURE",
+  "vertices": 138584,
+  "directed_edges": 3732460,
+  "reference_subcircuit": {"anchor_roots": 4, "directed_pairs": 75, "synapses": 649}
+}
