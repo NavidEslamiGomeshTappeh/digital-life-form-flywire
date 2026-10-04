@@ -69,3 +69,8 @@ The detailed adaptation is documented in [AGENT_CAPABILITY_LAYER.md](AGENT_CAPAB
 ### Capability-routed execution
 
 Local execution now has a guarded route through `CapabilityExecutor`: the capability is probed first, the selected declared backend is resolved, and only then is an executable request constructed. An unavailable capability fails closed before process execution. Recovery is bound to the original request fingerprint, so a changed command cannot inherit an interrupted step's replay permission.
+
+ 
+## Leader / task orchestrator
+
+The first Leader boundary is implemented by `TaskOrchestrator`. A `RunPlan` defines explicit steps, dependencies, intent metadata, backend preference, and idempotence. The orchestrator computes a stable plan fingerprint, executes dependencies deterministically, persists run state atomically, resumes already-successful steps from verified receipts, and rejects a changed plan on resume. The independent `verify_run` path checks the run-state identity, plan fingerprint, receipt identity, receipt seal, and recorded policy decision for every successful step. This is orchestration evidence, not scientific evidence.
