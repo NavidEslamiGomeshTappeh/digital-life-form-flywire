@@ -38,5 +38,22 @@
       "The exact historical coordinate transform/materialization remains unrecovered.",
       "The public preprocessing notebooks may themselves represent a revised publication pipeline."
     ]
+  },
+  "pp4_persistence_check": {
+    "source_repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "notebook": "Notebooks/PP4_Global_allignment.ipynb",
+    "execution_steps": [
+      "load Reduced_dendrites with set_units='nm'",
+      "forest.convert_units(target_units='um')",
+      "sub_forest.align_forest(global_=True)",
+      "sub_forest.fit_sphere(global_=True)",
+      "sub_forest.recenter_coordinates(..., global_=True, bind=True)",
+      "sub_forest.rotate_coordinates(axis=(0,0,1), angle=pi, global_=True, bind=True)",
+      "v.add_forest(sub_forest)",
+      "v.show(...).close()"
+    ],
+    "persistence_observation": "The public notebook contains no save_forest call after these global alignment/recenter/rotation operations. The transformed sub_forest is passed to a Viewer only. Therefore these PP4 transforms are not, from the public notebook alone, a persisted input state for Metrics1_Point_data.",
+    "conclusion": "PP4 is a documented geometry-analysis/viewer transformation, but it is not demonstrated as a persisted producer step for Point_data. Metrics1_Point_data independently reloads Reduced_dendrites from disk before extracting get_root_coordinate().",
+    "status": "PROVEN_PUBLIC_NOTEBOOK_NON_PERSISTENCE"
   }
 }
