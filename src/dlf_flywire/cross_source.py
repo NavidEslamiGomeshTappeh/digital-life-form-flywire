@@ -161,8 +161,8 @@ def validate_cross_source_receipts(root: Path) -> dict[str, Any]:
             )
 
         source_url = proof.get("source_url")
-        if not isinstance(source_url, str) or not (
-            source_url.startswith("https://") or source_url.startswith("http://")
+        if not isinstance(source_url, str) or not source_url.startswith(
+            ("https://", "http://")
         ):
             raise CrossSourceValidationError(f"invalid proof source URL for {source_id}")
 
