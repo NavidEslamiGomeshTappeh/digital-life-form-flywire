@@ -5,11 +5,12 @@ import shutil
 import subprocess
 import sys
 import time
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from datetime import UTC, datetime
-from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Literal
+
 
 ProbeStatus = Literal["ok", "missing", "broken", "timeout", "error"]
 CapabilityStatus = Literal["ok", "off", "error"]
