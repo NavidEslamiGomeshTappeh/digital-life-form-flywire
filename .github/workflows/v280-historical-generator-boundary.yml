@@ -1,0 +1,28 @@
+name: V280 historical generator boundary
+
+on:
+  push:
+    paths:
+      - "scripts/v280_historical_generator_boundary.py"
+      - "docs/V280_HISTORICAL_GENERATOR_BOUNDARY.md"
+      - ".github/workflows/v280-historical-generator-boundary.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v6
+
+      - name: Run historical chronology audit
+        run: python scripts/v280_historical_generator_boundary.py
+
+      - name: Publish audit result
+        uses: actions/upload-artifact@v5
+        with:
+          name: v280-historical-generator-boundary
+          path: v280_results/V280_historical_generator_boundary.json
