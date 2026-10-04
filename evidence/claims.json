@@ -13,78 +13,15 @@
     "INFERENCE_ONLY": "The statement is an interpretation rather than a directly established observation."
   },
   "claims": [
-    {
-      "id": "C-ROOT-001",
-      "statement": "The four anchor neurons are exactly the specified FAFB v783 root IDs.",
-      "classification": "SOURCE_OBSERVATION",
-      "status": "PROVEN",
-      "evidence": ["E-MANIFEST", "E-DENDRITE"]
-    },
-    {
-      "id": "C-CONNECTIVITY-001",
-      "statement": "All 649 reference synapse-coordinate rows are exact tuple matches in the official Codex FAFB v783 individual-synapse coordinate product.",
-      "classification": "DETERMINISTIC_COMPUTATION",
-      "status": "REPRODUCED",
-      "evidence": ["E-CONNECTIVITY", "E-STRUCTURAL-VALIDATION", "E-SOURCE-RECEIPTS"]
-    },
-    {
-      "id": "C-CONNECTIVITY-002",
-      "statement": "All 75 selected directed neuron pairs have exact aggregate synapse counts in the official Codex FAFB v783 connections product.",
-      "classification": "DETERMINISTIC_COMPUTATION",
-      "status": "REPRODUCED",
-      "evidence": ["E-CONNECTIVITY", "E-STRUCTURAL-VALIDATION"]
-    },
-    {
-      "id": "C-CONNECTIVITY-003",
-      "statement": "All 649 reference coordinates are independently corroborated by the frozen Zenodo FAFB v783 midpoint mapping.",
-      "classification": "INDEPENDENT_CORROBORATION",
-      "status": "INDEPENDENTLY_CORROBORATED",
-      "evidence": ["E-CONNECTIVITY", "E-STRUCTURAL-VALIDATION", "E-SOURCE-RECEIPTS"]
-    },
-    {
-      "id": "C-DENDRITE-001",
-      "statement": "Each of the four anchor roots occurs exactly once in the published dendrite-analysis table and is marked Dendrite_used=True.",
-      "classification": "SOURCE_OBSERVATION",
-      "status": "PROVEN",
-      "evidence": ["E-DENDRITE"]
-    },
-    {
-      "id": "C-DENDRITE-002",
-      "statement": "The published NeuRosetta subtree-selection algorithm was deterministically reproduced on the four retained project SWCs.",
-      "classification": "DETERMINISTIC_COMPUTATION",
-      "status": "REPRODUCED",
-      "evidence": ["E-SUBTREE", "E-MORPHOLOGY"]
-    },
-    {
-      "id": "C-POINTDATA-001",
-      "statement": "The historical Point_data.pkl artifact is identified by the recorded source commit, Git blob, and SHA-256 digest.",
-      "classification": "SOURCE_OBSERVATION",
-      "status": "PROVEN",
-      "evidence": ["E-POINTDATA", "E-POINTDATA-ANCHORS"]
-    },
-    {
-      "id": "C-POINTDATA-002",
-      "statement": "The original December 2025 implementation that generated Point_data.pkl has not been recovered from the public historical record.",
-      "classification": "UNRESOLVED",
-      "status": "UNRESOLVED",
-      "evidence": ["E-HISTORICAL-BOUNDARY", "E-POINTDATA"],
-      "caveats": ["Point_data.pkl first appeared on 2025-12-09; the public PP1–PP5 preprocessing notebooks were added only in 2026-08, while public NeuRosetta Forest/IO used by those notebooks appears in 2026-01. A separate legacy NeuRosetta repository had earlier subtree and .nr capabilities, so a private/local or legacy route cannot be excluded. The exact historical generator, software commit, morphology materialization, and execution environment remain unrecovered."]
-    },
-    {
-      "id": "C-GEOMETRY-001",
-      "statement": "The mapping from an individual synapse coordinate to a biological synaptic cleft compartment is established by geometry alone.",
-      "classification": "UNRESOLVED",
-      "status": "UNRESOLVED",
-      "evidence": ["E-COORDINATE", "E-SUBTREE"],
-      "caveats": ["Geometry is diagnostic evidence only; direct biological compartment assignment requires independent evidence."]
-    },
-    {
-      "id": "C-MORPH-001",
-      "statement": "The committed project SWCs are byte-for-byte identical to the unpublished internal morphology artifacts used by the historical study.",
-      "classification": "UNRESOLVED",
-      "status": "UNRESOLVED",
-      "evidence": ["E-MORPHOLOGY", "E-POINTDATA"],
-      "caveats": ["The public historical record does not expose the internal morphology artifact required for a bitwise comparison."]
-    }
+    {"id":"C-ROOT-001","statement":"The four anchor neurons are exactly the specified FAFB v783 root IDs.","classification":"SOURCE_OBSERVATION","status":"PROVEN","evidence":["E-MANIFEST","E-DENDRITE"]},
+    {"id":"C-CONNECTIVITY-001","statement":"All 649 reference synapse-coordinate rows are exact tuple matches in the official Codex FAFB v783 individual-synapse coordinate product.","classification":"DETERMINISTIC_COMPUTATION","status":"REPRODUCED","evidence":["E-CONNECTIVITY","E-STRUCTURAL-VALIDATION","E-SOURCE-RECEIPTS"]},
+    {"id":"C-CONNECTIVITY-002","statement":"All 75 selected directed neuron pairs have exact aggregate synapse counts in the official Codex FAFB v783 connections product.","classification":"DETERMINISTIC_COMPUTATION","status":"REPRODUCED","evidence":["E-CONNECTIVITY","E-STRUCTURAL-VALIDATION"]},
+    {"id":"C-CONNECTIVITY-003","statement":"All 649 reference coordinates are independently corroborated by the frozen Zenodo FAFB v783 midpoint mapping.","classification":"INDEPENDENT_CORROBORATION","status":"INDEPENDENTLY_CORROBORATED","evidence":["E-CONNECTIVITY","E-STRUCTURAL-VALIDATION","E-SOURCE-RECEIPTS"]},
+    {"id":"C-DENDRITE-001","statement":"Each of the four anchor roots occurs exactly once in the published dendrite-analysis table and is marked Dendrite_used=True.","classification":"SOURCE_OBSERVATION","status":"PROVEN","evidence":["E-DENDRITE"]},
+    {"id":"C-DENDRITE-002","statement":"The published NeuRosetta subtree-selection algorithm was deterministically reproduced on the four retained project SWCs.","classification":"DETERMINISTIC_COMPUTATION","status":"REPRODUCED","evidence":["E-SUBTREE","E-MORPHOLOGY"]},
+    {"id":"C-POINTDATA-001","statement":"The historical Point_data.pkl artifact is identified by the recorded source commit, Git blob, and SHA-256 digest.","classification":"SOURCE_OBSERVATION","status":"PROVEN","evidence":["E-POINTDATA","E-POINTDATA-ANCHORS"]},
+    {"id":"C-POINTDATA-002","statement":"The exact December 2025 implementation revision that generated Point_data.pkl has not been recovered from the public historical record, although the later public generator algorithm has now been reconstructed.","classification":"UNRESOLVED","status":"UNRESOLVED","evidence":["E-HISTORICAL-BOUNDARY","E-POINTDATA"],"caveats":["Point_data.pkl first appeared on 2025-12-09. Public PP1-PP5 notebooks were added only in 2026-08, while public NeuRosetta Forest/IO used by that later pipeline appears in 2026-01. The public Metrics1 notebook explicitly derives root_x/root_y/root_z from tree.get_root_coordinate() on Reduced_dendrites, and PP3 explicitly creates Reduced_dendrites by subtree extraction plus reduction. This establishes the later public algorithmic lineage but does not cryptographically prove that the exact December 2025 artifact was generated by that exact revision. A private/local or legacy route remains possible."]},
+    {"id":"C-GEOMETRY-001","statement":"The mapping from an individual synapse coordinate to a biological synaptic cleft compartment is established by geometry alone.","classification":"UNRESOLVED","status":"UNRESOLVED","evidence":["E-COORDINATE","E-SUBTREE"],"caveats":["Geometry is diagnostic evidence only; direct biological compartment assignment requires independent evidence."]},
+    {"id":"C-MORPH-001","statement":"The committed project SWCs are byte-for-byte identical to the unpublished internal morphology artifacts used by the historical study.","classification":"UNRESOLVED","status":"UNRESOLVED","evidence":["E-MORPHOLOGY","E-POINTDATA"],"caveats":["The public historical record does not expose the internal morphology artifact required for a bitwise comparison."]}
   ]
 }
