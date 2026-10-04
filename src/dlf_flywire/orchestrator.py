@@ -35,6 +35,20 @@ class PlanChanged(OrchestrationError):
     pass
 
 
+def _resolve_receipt_path(state_root: Path, run_id: str, reference: str) -> Path:
+    if not isinstance(reference, str) or not reference:
+        raise ExecutionError("receipt path is missing")
+    root = state_root.resolve()
+    allowed_root = (root / "receipts" / _safe_run_id(run_id)).resolve()
+    candidate = Path(reference)
+    if not candidate.is_absolute():
+        candidate = root / candidate
+    candidate = candidate.resolve()
+    if not candidate.is_relative_to(allowed_root):
+        raise ExecutionError("receipt path escapes the run receipt directory")
+    return candidate
+
+
 @dataclass(frozen=True)
 class TaskStep:
     step_id: str
@@ -194,7 +208,9 @@ class TaskOrchestrator:
                     raise OrchestrationError(
                         f"successful step {step.step_id!r} has no receipt path"
                     )
-                receipt = verify_receipt_file(receipt_path)
+                receipt = verify_receipt_file(
+                    _resolve_receipt_path(self.state_root, run_id, receipt_path)
+                )
                 receipts[step.step_id] = receipt
                 continue
 
@@ -236,7 +252,9 @@ class TaskOrchestrator:
             steps_state[step.step_id] = {
                 "status": receipt.status,
                 "receipt": str(
-                    self.executor.engine._receipt_path(run_id, step.step_id)
+                    self.executor.engine.receipt_path(run_id, step.step_id).relative_to(
+                        self.state_root.resolve()
+                    )
                 ),
                 "receipt_sha256": receipt.receipt_sha256,
             }
@@ -300,7 +318,7 @@ def verify_run(
             continue
         receipt_path = record.get("receipt")
         try:
-            receipt = verify_receipt_file(receipt_path)
+            receipt = verify_receipt_file(_resolve_receipt_path(root, run_id, receipt_path))
             if receipt.step_id != step.step_id:
                 raise ExecutionError("receipt step ID mismatch")
             if receipt.run_id != run_id:
