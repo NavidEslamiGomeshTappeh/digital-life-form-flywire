@@ -2,25 +2,118 @@
   "status": "PROVEN_HISTORICAL_GENERATOR_TEMPORAL_BOUNDARY_WITH_PUBLIC_GENERATOR_RECONSTRUCTION",
   "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
   "evidence": [
-    {"role":"first_point_data_commit","sha":"cd17d34afd0d46a3c2947e83a1f0fdd835a9959a","timestamp":"2025-12-09T20:41:50Z","files":["Data/Point_data.pkl"]},
-    {"role":"analysis_notebook_environment_evidence","sha":"1007a708f0b2cd4d55875174256774a41ff5b0f4","timestamp":"2025-12-09T21:08:32Z","observation":"Contemporaneous ANOVA notebook uses Jupyter kernel 'neurosetta' and an earlier version references /home/nik/Desktop/Software/T45_Morpho_data/Data/Pickled_data/Point_data.pkl."},
-    {"role":"public_point_metric_generator_reconstruction","commit":"8700efd40bccfa3e74ac7c4df02da83a968b9b52","timestamp":"2026-08-10T17:49:32Z","file":"Notebooks/Metrics1_Point_data.ipynb","file_sha":"2c31080a7f6f69d1c603bf287e4a5da7d4c3712b","generator":"process_one_point(tree)","provenance_chain":["nr.load(.../Paper_data/nr/Flywire/Reduced_dendrites/)","forest.convert_units(target_units='um')","tree.get_root_coordinate() -> root_x/root_y/root_z","tree.count_edges(), tree.get_total_cable_length(), tree.count_nodes(), tree.count_leaves(), tree.count_branches()","tree.coordinate_pca(robust=True, norm=True)","tree.get_convex_hull_volume(bind=False)","tree.get_mean_edge_angle(...) and tree.get_edge_angle_variance(...)"]},
-    {"role":"public_pp3_extraction_logic","commit":"8700efd40bccfa3e74ac7c4df02da83a968b9b52","file":"Notebooks/PP3_Dendrite_extraction.ipynb","file_sha":"67a9b41986eab50df7d540c1d40a39a2870a290d","logic":["nr.load(.../Optic_lobe_neurons/nr/Female/T4/)","forest.convert_forest_to_subtrees(max_workers=10)","forest.save_forest(.../Paper_data/nr/Flywire/Dendrites/)","forest.reduce_forest(parallel=True,max_workers=10,inplace=True)","forest.save_forest(.../Paper_data/nr/Flywire/Reduced_dendrites/)"]},
-    {"role":"public_neurosetta_forest_api","repository":"NikDrummond/NeuRosetta","sha":"2f4e52c8d0ac4f284b9a15e5d147f6a130998495","timestamp":"2026-01-26T14:20:00Z"},
-    {"role":"public_legacy_neurosetta_subtree_evidence","repository":"NikDrummond/Neurosetta_legacy_v0.0.1","sha":"94ff9e5a956d5a91c40bb386f33e3dfa60896987","timestamp":"2025-04-18T19:05:03Z"}
+    {
+      "role": "paper_repo_initial_commit",
+      "sha": "79cf52212935de6bddf996c9f46c0df89f5c5442",
+      "timestamp": "2025-12-09T19:26:04Z",
+      "observation": "The public paper repository was initialized only about 76 minutes before Point_data.pkl appeared; the initial tree contained only .gitignore and README.md."
+    },
+    {
+      "role": "contemporaneous_anova_notebook_commit",
+      "sha": "61fd0f176d73932ad87ece04153945501b4c405c",
+      "timestamp": "2025-12-09T19:40:07Z",
+      "file": "Notebooks/ANOVA_analysis.ipynb",
+      "file_sha": "93eb31b90a738f64f5d803aaecda22f80edd6178",
+      "observation": "The notebook was added immediately before Point_data.pkl and contains an executed read_pickle call against /home/nik/Desktop/Software/T45_Morpho_data/Data/Pickled_data/Point_data.pkl; metadata names the Jupyter kernel 'neurosetta' and Python 3.10.17."
+    },
+    {
+      "role": "first_point_data_commit",
+      "sha": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+      "timestamp": "2025-12-09T19:41:50Z",
+      "files": [
+        "Data/Point_data.pkl"
+      ],
+      "file_sha": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+      "size_bytes": 3049948,
+      "observation": "The artifact was added as a binary file; GitHub reports no textual additions/deletions."
+    },
+    {
+      "role": "second_point_data_commit",
+      "sha": "fe9779d4ca425613eec44b19e961610d117e7232",
+      "timestamp": "2025-12-09T19:42:19Z",
+      "files": [
+        "Data/Point_data.pkl"
+      ],
+      "file_sha": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+      "observation": "The later commit points to the same Point_data blob and same tree as the first Point_data commit; therefore no second binary content revision is exposed by Git history."
+    },
+    {
+      "role": "analysis_notebook_environment_evidence",
+      "sha": "1007a708f0b2cd4d55875174256774a41ff5b0f4",
+      "timestamp": "2025-12-09T21:08:32Z",
+      "observation": "A later notebook revision still preserves the neurosetta kernel and the local T45_Morpho_data/Point_data lineage."
+    },
+    {
+      "role": "public_point_metric_generator_reconstruction",
+      "commit": "8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+      "timestamp": "2026-08-10T17:49:32Z",
+      "file": "Notebooks/Metrics1_Point_data.ipynb",
+      "file_sha": "2c31080a7f6f69d1c603bf287e4a5da7d4c3712b",
+      "generator": "process_one_point(tree)",
+      "provenance_chain": [
+        "nr.load(.../Paper_data/nr/Flywire/Reduced_dendrites/)",
+        "forest.convert_units(target_units='um')",
+        "tree.get_root_coordinate() -> root_x/root_y/root_z",
+        "tree.count_edges(), tree.get_total_cable_length(), tree.count_nodes(), tree.count_leaves(), tree.count_branches()",
+        "tree.coordinate_pca(robust=True,norm=True)",
+        "tree.get_convex_hull_volume(bind=False)",
+        "tree.get_mean_edge_angle(...) and tree.get_edge_angle_variance(...)"
+      ]
+    },
+    {
+      "role": "public_pp3_extraction_logic",
+      "commit": "8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+      "file": "Notebooks/PP3_Dendrite_extraction.ipynb",
+      "file_sha": "67a9b41986eab50df7d540c1d40a39a2870a290d",
+      "logic": [
+        "nr.load(.../Optic_lobe_neurons/nr/Female/T4/)",
+        "forest.convert_forest_to_subtrees(max_workers=10)",
+        "forest.save_forest(.../Paper_data/nr/Flywire/Dendrites/)",
+        "forest.reduce_forest(parallel=True,max_workers=10,inplace=True)",
+        "forest.save_forest(.../Paper_data/nr/Flywire/Reduced_dendrites/)"
+      ]
+    },
+    {
+      "role": "public_neurosetta_forest_api",
+      "repository": "NikDrummond/NeuRosetta",
+      "sha": "2f4e52c8d0ac4f284b9a15e5d147f6a130998495",
+      "timestamp": "2026-01-26T14:20:00Z"
+    },
+    {
+      "role": "public_legacy_neurosetta_subtree_evidence",
+      "repository": "NikDrummond/Neurosetta_legacy_v0.0.1",
+      "sha": "94ff9e5a956d5a91c40bb386f33e3dfa60896987",
+      "timestamp": "2025-04-18T19:05:03Z"
+    }
   ],
   "checks": {
+    "repo_was_created_before_artifact": true,
+    "anova_precedes_point_data": true,
     "first_point_commit_has_point_data": true,
+    "second_point_commit_reuses_same_blob": true,
     "first_point_commit_has_no_pp3": true,
     "public_pp3_uses_reduced_dendrites": true,
     "public_metrics_generator_uses_get_root_coordinate": true,
     "public_metrics_generator_and_pp3_share_commit": true
   },
   "interpretation": {
-    "proven":["Point_data.pkl first appeared on 2025-12-09.","The contemporaneous analysis environment is directly evidenced as 'neurosetta'.","The later public Metrics1 notebook explicitly generates the Point_data schema from Reduced_dendrites and gets root coordinates with tree.get_root_coordinate().","The later public PP3 notebook explicitly creates Reduced_dendrites by subtree extraction followed by reduction.","The public algorithmic morphology-to-root-coordinate path is therefore reconstructed."],
-    "unresolved":["The exact December 2025 generator revision is not cryptographically tied to the December artifact.","The exact December 2025 extraction script/software commit remains unrecovered.","The specific 649-coordinate V230 artifact is not yet connected end-to-end to this generator chain.","The August 2026 notebooks may be revised publication versions."],
-    "historical_boundary":"Public Forest/SWC infrastructure appears January 2026 and public PP3/Metrics notebooks August 2026; legacy NeuRosetta subtree functionality existed April 2025. Thus a private/legacy December 2025 implementation remains possible.",
-    "confidence_upgrade":"The exact Point_data schema and root-coordinate operation are now in executable public source, materially strengthening the provenance reconstruction."
+    "proven": [
+      "The public paper repository began on 2025-12-09 and its first substantive analysis notebook preceded the Point_data artifact by about 1 minute 43 seconds.",
+      "Point_data.pkl was uploaded as a standalone binary artifact; the public December repository history contains no producer notebook/script before that upload.",
+      "The contemporaneous ANOVA notebook proves the artifact was consumed from a local T45_Morpho_data/Data/Pickled_data/Point_data.pkl path in a neurosetta Jupyter environment.",
+      "The later public Metrics1 notebook explicitly generates the Point_data schema from Reduced_dendrites and obtains root_x/root_y/root_z from tree.get_root_coordinate().",
+      "The later public PP3 notebook explicitly creates Reduced_dendrites by subtree extraction followed by reduction.",
+      "The public algorithmic morphology-to-root-coordinate path is therefore reconstructed, but its exact December 2025 revision is not recovered."
+    ],
+    "unresolved": [
+      "The exact December 2025 generator script/notebook is not present in the public repository history preceding Point_data.pkl.",
+      "The exact December 2025 NeuRosetta/software revision used to produce the binary artifact is not cryptographically tied to the artifact.",
+      "The historical Reduced_dendrites or equivalent intermediate morphology files used for the December artifact are not publicly recovered.",
+      "The specific 649-coordinate V230 artifact is not yet connected end-to-end to the Point_data generator chain.",
+      "The August 2026 notebooks may be revised publication versions rather than byte-identical December 2025 producer code."
+    ],
+    "historical_boundary": "Public Forest/SWC infrastructure appears January 2026 and public PP3/Metrics notebooks August 2026; legacy NeuRosetta subtree functionality existed April 2025. A private/local or legacy December 2025 implementation therefore remains possible and is now the principal unresolved provenance boundary.",
+    "confidence_upgrade": "The temporal ordering now rules out a common overclaim: the December Point_data binary was not demonstrably produced by a producer script committed earlier in the public paper repository, because that repository did not contain such a producer before the artifact upload. The strongest public evidence is consumption lineage plus later executable reconstruction, not exact producer identity."
   },
-  "execution_note":"Verified through GitHub commit metadata and file APIs."
+  "execution_note": "Verified through GitHub commit metadata, tree/blob APIs, file APIs, and the public repository notebooks."
 }
