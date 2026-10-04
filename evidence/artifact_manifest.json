@@ -61,7 +61,7 @@
       }
     },
     {
-      "id": "E-MANIFEST-SUMMARY",
+      "id": "E-MANIFEST",
       "path": "evidence/manifest.json",
       "role": "evidence_summary",
       "identity": {
