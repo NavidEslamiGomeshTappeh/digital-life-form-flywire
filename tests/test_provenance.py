@@ -83,6 +83,25 @@ def test_synapse_lineage_fails_closed_on_record_id_drift(tmp_path):
 
 
 
+def test_published_method_boundary_is_ledgered():
+    boundary = json.loads(
+        (ROOT / "evidence" / "public_method_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert boundary["status"] == "PROVEN_PUBLISHED_METHOD_BOUNDARY"
+    assert any(
+        item["stage"] == "manual_verification_and_modification"
+        for item in boundary["method_boundary"]
+    )
+    claims = json.loads(
+        (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
+    )
+    claim = next(item for item in claims["claims"] if item["id"] == "C-MORPH-002")
+    assert claim["status"] == "PROVEN"
+    assert "E-PUBLISHED-METHOD-BOUNDARY" in claim["evidence"]
+
+
 def test_historical_point_data_ingest_boundary_is_locked():
     boundary = json.loads(
         (ROOT / "evidence" / "historical_generator_boundary.json").read_text(
