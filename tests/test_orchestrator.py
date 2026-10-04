@@ -172,7 +172,9 @@ def test_verifier_rejects_receipt_tamper(tmp_path):
         (tmp_path / "state" / "plans" / f"{run_id}.json").read_text(encoding="utf-8")
     )
     receipt_path = state["steps"]["one"]["receipt"]
-    receipt = json.loads(Path(receipt_path).read_text(encoding="utf-8"))
+    receipt = json.loads(
+        (tmp_path / "state" / receipt_path).read_text(encoding="utf-8")
+    )
     receipt["stdout"] = "tampered"
     Path(receipt_path).write_text(json.dumps(receipt), encoding="utf-8")
     verification = verify_run(plan, run_id, state_root=tmp_path / "state")
