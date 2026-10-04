@@ -42,7 +42,7 @@ def test_code_hand_edits_with_exact_hash_precondition_and_verifies(tmp_path):
     updated = "def add(a, b):\n    return a + b + 1\n"
     result = hand.edit(
         "generated.py",
-        created.content_sha256,
+        created.content_sha256.upper(),
         updated,
         "assert add(2, 3) == 6",
         run_id="edit",
