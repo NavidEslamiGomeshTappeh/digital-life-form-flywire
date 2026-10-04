@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import subprocess
 import time
 import uuid
@@ -111,6 +112,8 @@ class ExecutionReceipt:
     stderr: str
     duration_ms: int
     recovered: bool
+    request_sha256: str
+    capability_probe: dict[str, Any]
     receipt_sha256: str
 
     def unsigned_dict(self) -> dict[str, Any]:
@@ -134,7 +137,6 @@ class ExecutionEngine:
         return self.checkpoint_root / f"{run_id}.json"
 
     def _receipt_path(self, run_id: str, step_id: str) -> Path:
-        safe_step = step_id.replace("/", "_")
         return self.receipt_root / run_id / f"{_safe_step_name(step_id)}.json"
 
     def _load_checkpoint(self, run_id: str) -> dict[str, Any] | None:
@@ -215,6 +217,7 @@ class ExecutionEngine:
         *,
         run_id: str | None = None,
         resume: bool = True,
+        capability_probe: dict[str, Any] | None = None,
     ) -> ExecutionReceipt:
         run_id = run_id or str(uuid.uuid4())
         cwd = str(Path(request.cwd or os.getcwd()).resolve())
