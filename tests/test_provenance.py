@@ -79,6 +79,18 @@ def test_synapse_lineage_fails_closed_on_record_id_drift(tmp_path):
         raise AssertionError("tampered synapse lineage was accepted")
 
 
+
+def test_synapse_lineage_uses_stable_tuple_identifier():
+    lineage = json.loads(
+        (ROOT / "evidence" / "synapse_lineage.json").read_text(encoding="utf-8")
+    )
+    first = lineage["records"][0]
+    expected = (
+        "syn-720575940605560678|720575940632008007|790590|265784|210220"
+    )
+    assert first["record_id"] == expected
+
+
 def test_evidence_manifest_version_is_current():
     report = validate_evidence_manifest_version(ROOT)
     assert report["product_version"] == __version__
@@ -104,7 +116,7 @@ def test_unsafe_artifact_paths_fail_closed(tmp_path):
     )
     manifest = """{
       "schema_version": 1,
-      "product_version": "1.2.2",
+      "product_version": "1.3.0",
       "artifacts": [{
         "id": "E-BAD",
         "path": "../outside.txt",
