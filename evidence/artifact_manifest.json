@@ -289,6 +289,15 @@
         "type": "git_blob_sha1",
         "value": "3cb892f6c72caa25695b241f0173d2c3a3b1f6d4"
       }
+    },
+    {
+      "id": "E-POINTDATA-MORPHOLOGY-CROSSCHECK",
+      "path": "evidence/point_data_morphology_crosscheck.json",
+      "role": "historical_point_data_morphology_metric_crosscheck",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "d4fea8bf7d76cca4883ea7275abd723bf9bf6774"
+      }
     }
   ]
 }
