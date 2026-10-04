@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.2.0 — 2026-10-04
+
+Cross-source verification release.
+
+- Added a machine-checkable frozen source-receipt contract for the 649-row FAFB v783 case.
+- Added Codex and Zenodo provider-level independence checks and release consistency checks.
+- Added `verify-sources` CLI command and integrated frozen cross-source validation into `audit`.
+- Added fail-closed canonical artifact hash/row-count validation and source receipt integrity tests.
+- Kept live Zenodo re-download out of the release because the archived source is approximately 9.5 GB; this release validates immutable receipts rather than pretending to perform a live re-run.
+
+
 ## 1.1.0 — 2026-10-04
 
 Provenance audit engine and evidence contract release.
