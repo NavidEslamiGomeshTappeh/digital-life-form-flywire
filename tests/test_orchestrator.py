@@ -118,6 +118,7 @@ def test_receipt_state_reference_is_relative_and_portable(tmp_path, monkeypatch)
     receipt_reference = state["steps"]["portable"]["receipt"]
     assert not Path(receipt_reference).is_absolute()
     assert Path(receipt_reference).parts[:2] == ("receipts", run_id)
+    assert state["steps"]["portable"]["receipt_sha256"]
     monkeypatch.chdir(tmp_path)
     verification = verify_run(plan, run_id, state_root=tmp_path / "state")
     assert verification.status == "PASS"
