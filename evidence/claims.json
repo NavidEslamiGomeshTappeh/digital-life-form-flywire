@@ -126,14 +126,15 @@
     },
     {
       "id": "C-MORPH-002",
-      "statement": "The published T4/T5 morphology method includes a post-automated manual verification/modification stage, so reproducing the automated subtree-selection root does not by itself prove morphology identity.",
+      "statement": "The published T4/T5 morphology method has two manual review boundaries around automated dendrite extraction: soma-root verification/correction before subtree selection, and a second dendrite verification that can modify the selected compartment and correct individual routing/skeletonization errors.",
       "classification": "SOURCE_OBSERVATION",
       "status": "PROVEN",
       "evidence": [
         "E-PUBLISHED-METHOD-BOUNDARY"
       ],
       "caveats": [
-        "The publication documents the existence and purpose of manual review, but no historical per-neuron edit record for the four project anchors has been recovered."
+        "The publication documents these review stages and their purpose, but no historical per-neuron edit record for the four project anchors has been recovered.",
+        "This does not prove which December 2025 software revision or GUI produced the historical edits."
       ]
     },
     {
