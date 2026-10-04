@@ -122,6 +122,18 @@
       "caveats": [
         "The public historical record does not expose the internal morphology artifact required for a bitwise comparison."
       ]
+    },
+    {
+      "id": "C-MORPH-002",
+      "statement": "The published T4/T5 morphology method includes a post-automated manual verification/modification stage, so reproducing the automated subtree-selection root does not by itself prove morphology identity.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-PUBLISHED-METHOD-BOUNDARY"
+      ],
+      "caveats": [
+        "The publication documents the existence and purpose of manual review, but no historical per-neuron edit record for the four project anchors has been recovered."
+      ]
     }
   ]
 }
