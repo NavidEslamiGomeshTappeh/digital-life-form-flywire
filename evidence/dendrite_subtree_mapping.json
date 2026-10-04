@@ -2,7 +2,7 @@
   "schema_version": 1,
   "status": "PASS_PUBLISHED_SUBTREE_ALGORITHM_REPRODUCED_ON_PROJECT_SWCS",
   "counts": {
-    "v230_rows": 649,
+    "reference_rows": 649,
     "mapping_rows": 649,
     "anchor_roots": 4,
     "anchor_endpoint_regression": "PASS"
@@ -19,30 +19,30 @@
     "study_notebook": "Notebooks/PP3_Dendrite_extraction.ipynb"
   },
   "input_sources": {
-    "v230": {
-      "path": "v230_results/V230_target_synapses.csv",
+    "reference_synapses": {
+      "path": "evidence/synapses.csv",
       "sha256": "1eb87ae427dacc21528ce7a105ab021babd6dc10138f526f49678cf357172d5b",
       "expected_rows": 649
     },
-    "morphology_stage": "V229 exact SWCs",
+    "morphology_stage": "four committed reference SWCs",
     "morphology": {
       "720575940632008007": {
-        "path": "v229_results/T4a_720575940632008007.swc",
+        "path": "data/morphology/T4a.swc",
         "sha256": "d17623da9812d0f2ef53ab6aed4a9d89a2c2820d34aa0294af2ba434b6107c2a",
         "node_count": 880
       },
       "720575940616224414": {
-        "path": "v229_results/T4c_720575940616224414.swc",
+        "path": "data/morphology/T4c.swc",
         "sha256": "7d9cc29226e092c233f35cfcf70f75ac137b8c9f8744a1ba319264f96da3857a",
         "node_count": 898
       },
       "720575940625571465": {
-        "path": "v229_results/T5a_720575940625571465.swc",
+        "path": "data/morphology/T5a.swc",
         "sha256": "6d4d2a33cfea8525449b7a1508c6e6c2d9550034aac3774e6b2d64c4e76bae5c",
         "node_count": 601
       },
       "720575940617782941": {
-        "path": "v229_results/T5c_720575940617782941.swc",
+        "path": "data/morphology/T5c.swc",
         "sha256": "83b287e914522b0b382e3e46d39ced36494ff257d835cac11d7f4243ae1d7745",
         "node_count": 577
       }
@@ -198,15 +198,15 @@
       }
     }
   },
-  "interpretation": "The published NeuRosetta automatic subtree-selection algorithm was reproduced on the project's exact V229 SWCs. The resulting subtree is treated as a computational dendrite candidate for provenance and geometry analysis, not as direct biological membrane-compartment annotation.",
+  "interpretation": "The published NeuRosetta automatic subtree-selection algorithm was reproduced on the project's four committed reference SWCs. The resulting subtree is treated as a computational dendrite candidate for provenance and geometry analysis, not as direct biological membrane-compartment annotation.",
   "not_proven": [
-    "The project's V229 SWCs were not proven bitwise identical to the study's internal skeletonized meshes.",
+    "The project's committed reference SWCs were not proven bitwise identical to the study's internal skeletonized meshes.",
     "The public repository does not expose the study's exact intermediate .nr forests for these cells.",
     "Tree-level preprocessing flags used by the published PP3 notebook are not recoverable from the V229 SWCs.",
     "A candidate subtree does not prove the location of an individual synaptic cleft on biological dendrite membrane."
   ],
   "output": {
-    "mapping_file": "V258_published_subtree_dendrite_mapping.csv",
+    "mapping_file": "evidence/dendrite_subtree_mapping.csv",
     "mapping_rows": 649
   }
 }
