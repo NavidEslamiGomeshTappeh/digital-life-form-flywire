@@ -1,0 +1,60 @@
+{
+  "status": "PROVEN_ANCHOR_ID_BRIDGE_ONLY",
+  "synapse_artifact": {
+    "path": "evidence/synapses.csv",
+    "git_blob_sha": "507fc706cc29781457ed502ae0ebdf328a4bae33",
+    "row_count": 649,
+    "unique_endpoint_root_ids": 62,
+    "unique_directed_pairs": 75
+  },
+  "point_data_anchor_roots": [
+    "720575940632008007",
+    "720575940616224414",
+    "720575940625571465",
+    "720575940617782941"
+  ],
+  "anchor_presence_in_synapse_artifact": {
+    "720575940632008007": {
+      "as_pre": 84,
+      "as_post": 113,
+      "total": 197
+    },
+    "720575940616224414": {
+      "as_pre": 120,
+      "as_post": 45,
+      "total": 165
+    },
+    "720575940625571465": {
+      "as_pre": 72,
+      "as_post": 91,
+      "total": 163
+    },
+    "720575940617782941": {
+      "as_pre": 55,
+      "as_post": 69,
+      "total": 124
+    }
+  },
+  "interpretation": {
+    "proven": [
+      "All four historical Point_data anchor root IDs occur among the endpoints of the 649 canonical synapse-coordinate rows.",
+      "The 649-row synapse artifact contains additional partner roots; it is therefore a connectivity/synapse-coordinate case around the four anchors, not a four-root-only table.",
+      "Point_data is per-neuron morphology metrics, while synapses.csv is per-synapse coordinate data; there is no row-level primary key joining a synapse row to a Point_data morphology row."
+    ],
+    "not_proven": [
+      "The 649 synapse rows do not prove which historical morphology materialization or manual dendrite correction produced Point_data.",
+      "Shared root IDs alone do not prove that the synapse-coordinate snapshot and Point_data were generated in the same software run or at the same internal data revision."
+    ]
+  },
+  "join_keys": {
+    "available": [
+      "root_id"
+    ],
+    "unavailable": [
+      "historical_reduced_morphology_artifact_hash",
+      "historical_manual_edit_id",
+      "historical_point_generation_run_id",
+      "synapse_to_morphology_row_id"
+    ]
+  }
+}
