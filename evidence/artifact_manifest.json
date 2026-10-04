@@ -442,6 +442,42 @@
         "type": "git_blob_sha1",
         "value": "58df4db2c56c3f40e26f9f760ab3a349ea2e51eb"
       }
+    },
+    {
+      "id": "E-NEURAL-GATEWAY",
+      "path": "src/dlf_flywire/neural_gateway.py",
+      "role": "bounded_neural_intent_gateway",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "7c2fc32e7dcedc914b1bbb59811c6b5f6582889c"
+      }
+    },
+    {
+      "id": "E-NEURAL-LEADER",
+      "path": "src/dlf_flywire/neural_leader.py",
+      "role": "neural_to_leader_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "353690d26755e6061adf49e124cca0f93c431e63"
+      }
+    },
+    {
+      "id": "E-NEURAL-GATEWAY-TESTS",
+      "path": "tests/test_neural_gateway.py",
+      "role": "neural_boundary_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "bb7a345a6d0ff3646500c36f0077137b6a1c6832"
+      }
+    },
+    {
+      "id": "E-NEURAL-LEADER-INTEGRATION-TEST",
+      "path": "tests/test_neural_leader_integration.py",
+      "role": "neural_to_code_hand_integration_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "816d42cd1975d52ee75b111635498ed51d8324e6"
+      }
     }
   ]
 }
