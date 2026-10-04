@@ -1,5 +1,5 @@
 {
-  "status": "PROVEN_HISTORICAL_INGEST_BOUNDARY_WITH_LATER_PUBLIC_RECONSTRUCTION",
+  "status": "PROVEN_HISTORICAL_GENERATOR_TEMPORAL_BOUNDARY",
   "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
   "evidence": [
     {
@@ -292,5 +292,6 @@
     ],
     "neurosetta_declared": "not present",
     "interpretation": "This release-era environment file was created more than one month after Point_data ingestion. It cannot establish the December 2025 producer environment, package revision, or installation source for NeuRosetta."
-  }
+  },
+  "status_refinement": "PROVEN_HISTORICAL_INGEST_BOUNDARY_WITH_LATER_PUBLIC_RECONSTRUCTION"
 }
