@@ -19,6 +19,16 @@ from .execution import (
 from .policy import ExecutionIntent
 from .verifier import RunVerification, verify_run
 
+__all__ = [
+    "OrchestrationError",
+    "PlanChanged",
+    "TaskStep",
+    "RunPlan",
+    "TaskOrchestrator",
+    "RunVerification",
+    "verify_run",
+]
+
 
 def _safe_run_id(run_id: str) -> str:
     if not run_id or not re.fullmatch(r"[A-Za-z0-9_.-]{1,128}", run_id):
