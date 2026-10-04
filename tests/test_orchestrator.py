@@ -143,3 +143,68 @@ def test_orchestrator_denies_network_by_default(tmp_path):
     )
     with pytest.raises(ExecutionError, match="network_allowed"):
         orchestrator.run(plan, run_id="network-denied")
+
+
+def test_run_plan_cli_executes_and_verifies(tmp_path):
+    from dlf_flywire.cli import main
+
+    plan_path = tmp_path / "plan.json"
+    plan_path.write_text(
+        json.dumps(
+            {
+                "steps": [
+                    {
+                        "step_id": "cli",
+                        "capability": "runtime.python",
+                        "action": "run CLI regression",
+                        "destination": "test-process",
+                        "risk_tier": 0,
+                        "permission_granted": True,
+                        "operation_args": ["-c", "print('cli-ok')"],
+                        "idempotent": True,
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    assert main(
+        [
+            "run-plan",
+            str(plan_path),
+            "--run-id",
+            "cli-run",
+            "--state-root",
+            str(tmp_path / "state"),
+        ]
+    ) == 0
+
+
+def test_run_plan_cli_rejects_string_permission(tmp_path):
+    from dlf_flywire.cli import main
+
+    plan_path = tmp_path / "unsafe.json"
+    plan_path.write_text(
+        json.dumps(
+            {
+                "steps": [
+                    {
+                        "step_id": "unsafe",
+                        "capability": "runtime.python",
+                        "action": "unsafe parsing regression",
+                        "destination": "test-process",
+                        "permission_granted": "false",
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    assert main(
+        [
+            "run-plan",
+            str(plan_path),
+            "--state-root",
+            str(tmp_path / "state"),
+        ]
+    ) == 2
