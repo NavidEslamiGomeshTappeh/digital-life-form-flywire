@@ -1,27 +1,36 @@
-# Architecture — Version 1.0.0
+# Architecture — Version 1.1.0
 
-The project has one stable product chain:
+The project has one stable evidence chain:
 
-exact root ID
-→ identity
-→ directed connectivity
-→ individual synapses
-→ exact morphology
-→ measured geometry
-→ biological evidence boundary
-→ reusable evidence package
+source identity
+→ exact dataset materialization
+→ raw/committed artifact
+→ deterministic transformation
+→ derived artifact
+→ independent validation
+→ claim status
+→ reproducible evidence package
 
 ## Identity
 
 Root IDs are first-class identifiers. Approximate or nearest-neuron substitution is forbidden.
 
+## Evidence contract
+
+Every important scientific statement should be represented as a claim with:
+- a stable claim ID;
+- a classification;
+- an explicit status;
+- references to concrete evidence artifacts;
+- caveats or unresolved boundaries where applicable.
+
+## Artifact integrity
+
+Critical evidence artifacts are bound to immutable content identities. The V1.1 audit engine verifies raw SHA-256 where available and Git blob SHA-1 for Git-tracked text artifacts.
+
 ## Recovery
 
 The recovery package retrieves FAFB v783 skeletons and rejects any response whose source root ID differs from the requested ID.
-
-## Evidence
-
-Scientific evidence is stored separately from executable code. Every important conclusion has an explicit status and source reference.
 
 ## Geometry
 
@@ -31,6 +40,6 @@ Nearest-segment mapping is a geometric operation. It is not a biological axon/de
 
 The four-neuron reference circuit is stored as stable data and evidence paths. Future analyses extend these interfaces rather than creating new milestone directories.
 
-## Next scientific extension
+## Scientific boundary
 
-The main unresolved technical boundary is registered mapping from exact synapse coordinates to biological membrane/neuropil/compartment representations.
+A reproducible coordinate or morphology mapping is not automatically a biological compartment assignment. Biological claims require independent evidence.
