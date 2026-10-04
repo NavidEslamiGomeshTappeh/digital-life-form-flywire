@@ -10,8 +10,15 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(prog="dlf-flywire")
     sub = parser.add_subparsers(dest="command", required=True)
 
-    validate = sub.add_parser("validate", help="Validate the Version 1 evidence.")
+    validate = sub.add_parser("validate", help="Validate the Version 1 evidence and provenance contract.")
     validate.add_argument(
+        "--root",
+        default=".",
+        help="Project root containing data/ and evidence/ (default: current directory).",
+    )
+
+    audit = sub.add_parser("audit", help="Audit claim, artifact, and version provenance.")
+    audit.add_argument(
         "--root",
         default=".",
         help="Project root containing data/ and evidence/ (default: current directory).",
@@ -26,11 +33,17 @@ def main(argv=None) -> int:
 
     if args.command == "validate":
         from .validation import main as validate_main
-
         return validate_main(["--root", args.root])
 
-    from .recovery import main as recovery_main
+    if args.command == "audit":
+        from .provenance import audit_provenance
+        from .validation import find_project_root
+        import json
+        root = find_project_root(args.root)
+        print(json.dumps(audit_provenance(root), indent=2))
+        return 0
 
+    from .recovery import main as recovery_main
     sys.argv = [
         "dlf-flywire-recover",
         "--dataset",
