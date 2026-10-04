@@ -108,6 +108,33 @@ def test_orchestrator_stops_on_policy_denial(tmp_path):
         orchestrator.run(plan, run_id="blocked")
 
 
+def test_receipt_state_reference_is_relative_and_portable(tmp_path, monkeypatch):
+    orchestrator = TaskOrchestrator(make_executor(tmp_path), tmp_path / "state")
+    plan = RunPlan((step("portable"),))
+    run_id, _ = orchestrator.run(plan, run_id="portable")
+    state_path = tmp_path / "state" / "plans" / f"{run_id}.json"
+    state = json.loads(state_path.read_text(encoding="utf-8"))
+    receipt_reference = state["steps"]["portable"]["receipt"]
+    assert not Path(receipt_reference).is_absolute()
+    assert Path(receipt_reference).parts[:2] == ("receipts", run_id)
+    monkeypatch.chdir(tmp_path)
+    verification = verify_run(plan, run_id, state_root=tmp_path / "state")
+    assert verification.status == "PASS"
+
+
+def test_verifier_rejects_receipt_path_escape(tmp_path):
+    orchestrator = TaskOrchestrator(make_executor(tmp_path), tmp_path / "state")
+    plan = RunPlan((step("one"),))
+    run_id, _ = orchestrator.run(plan, run_id="receipt-path")
+    state_path = tmp_path / "state" / "plans" / f"{run_id}.json"
+    state = json.loads(state_path.read_text(encoding="utf-8"))
+    state["steps"]["one"]["receipt"] = "../outside.json"
+    state_path.write_text(json.dumps(state), encoding="utf-8")
+    verification = verify_run(plan, run_id, state_root=tmp_path / "state")
+    assert verification.status == "FAIL"
+    assert any("escapes the run receipt directory" in e for e in verification.errors)
+
+
 def test_verifier_rejects_receipt_tamper(tmp_path):
     orchestrator = TaskOrchestrator(make_executor(tmp_path), tmp_path / "state")
     plan = RunPlan((step("one"),))
