@@ -493,7 +493,7 @@ This is the capability most aligned with the project's current evidence.
 
 ## 12.4 Record-level lineage
 
-Each canonical synapse tuple now has a stable SHA-256 record ID. The lineage index binds that record to the existing Codex exact-tuple and Zenodo exact-midpoint evidence receipts, while keeping biological compartment status UNRESOLVED.
+Each canonical synapse tuple now has a stable deterministic tuple identifier. The lineage index binds that record to the existing Codex exact-tuple and Zenodo exact-midpoint evidence receipts, while keeping biological compartment status UNRESOLVED.
 
 ---
 
