@@ -35,7 +35,7 @@ def test_no_milestone_product_surfaces():
 
 
 def test_github_actions_are_pinned_to_full_commit_shas():
-    pattern = re.compile(r"^\s*-\s*uses:\s+[^@\s]+@([0-9a-f]{40})\s*(?:#.*)?$")
+    pattern = re.compile(r"^\s*(?:-\s*)?uses:\s+[^@\s]+@([0-9a-f]{40})\s*(?:#.*)?$")
     workflow_dir = ROOT / ".github" / "workflows"
     assert workflow_dir.is_dir()
 
