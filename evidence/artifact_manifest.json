@@ -280,6 +280,15 @@
         "type": "git_blob_sha1",
         "value": "818d87cf38dc175f7b5f937aa9974b064a607d92"
       }
+    },
+    {
+      "id": "E-HISTORICAL-SOFTWARE",
+      "path": "evidence/historical_software_release.json",
+      "role": "earliest_public_software_release_snapshot",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "3cb892f6c72caa25695b241f0173d2c3a3b1f6d4"
+      }
     }
   ]
 }
