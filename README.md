@@ -60,6 +60,19 @@ The core package has no third-party runtime dependencies.
 python -m pip install -e ".[dev]"
 ```
 
+## Audit the evidence chain
+
+The project exposes two complementary checks:
+
+```bash
+python -m dlf_flywire validate
+python -m dlf_flywire audit
+```
+
+`validate` checks the scientific baseline and morphology invariants. `audit` additionally checks the machine-readable claim ledger, artifact identities, and version consistency.
+
+The claim ledger is at [evidence/claims.json](evidence/claims.json), with artifact fingerprints in [evidence/artifact_manifest.json](evidence/artifact_manifest.json).
+
 ## Validate
 
 ```bash
