@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "product_version": "1.3.0",
-  "generated_for": "Version 1.3.0 claim-level synapse lineage contract",
+  "product_version": "1.3.1",
+  "generated_for": "Version 1.3.1 byte-for-byte lineage regeneration contract",
   "exclusion": [
     "evidence/artifact_manifest.json"
   ],
@@ -12,7 +12,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "f0bb29e76388856b273698ae6064b0380ce5e5d2"
+        "value": "3a3cd8cc8b079cb410a465d2925b9cbd703115cb"
       }
     },
     {
@@ -21,7 +21,7 @@
       "role": "project_metadata",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "567e7df999621ac3e84c4958dc1fc5329eaef806"
+        "value": "54eb6f54895d060a9486802411952efc1fd6c5ac"
       }
     },
     {
@@ -30,7 +30,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "67bc602abf06e9bcea675fe21c56a2f3c76bc331"
+        "value": "9c73af26be70465839a5f43818dbab3f5c35571f"
       }
     },
     {
@@ -66,7 +66,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "8231afe677bc48c2ebfe37297599e063032041e2"
+        "value": "cff222c11d57ba58c579dbd8f82a5817202a5900"
       }
     },
     {
@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "4fce0acbbafb5d88fe8ba49cbc0649793058d47b"
+        "value": "e37f470b1c510fa9b678885b6468a2955330099f"
       }
     },
     {
@@ -84,7 +84,7 @@
       "role": "frozen_cross_source_receipts",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "80bed08619a04eec9179656cdfa474695dcb78f1"
+        "value": "cf847fb13cd886d13f460f510831f86ecc0bbe20"
       }
     },
     {
@@ -202,7 +202,7 @@
       "role": "record_level_synapse_lineage",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "eb8eaebbbec3e177514b2409a42b1f5225abeb92"
+        "value": "94043e01873f89e3c78f0959a053a91114a44ede"
       }
     },
     {
@@ -211,7 +211,7 @@
       "role": "lineage_builder",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d834fd3c048ed2772fb6ee72a4f1d6e4ba326395"
+        "value": "0131931c046dc79a97468f88c7f4f7262bf680e0"
       }
     },
     {
