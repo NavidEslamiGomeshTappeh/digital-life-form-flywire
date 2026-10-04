@@ -311,7 +311,7 @@ def validate_synapse_lineage(root: Path) -> dict[str, Any]:
         expected_tuple = f"{pre}|{post}|{coordinate[0]}|{coordinate[1]}|{coordinate[2]}"
         if tuple_key != expected_tuple:
             raise ProvenanceError(f"synapse tuple drift at record {index}")
-        expected_id = f"syn-{hashlib.sha256(expected_tuple.encode('utf-8')).hexdigest()}"
+        expected_id = f"syn-{expected_tuple}"
         if record_id_value != expected_id:
             raise ProvenanceError(f"synapse record ID mismatch at record {index}")
         if record.get("canonical_data_row") != index:
