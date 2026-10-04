@@ -368,7 +368,7 @@
       "role": "execution_checkpoint_recovery_engine",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "2377780316c597bdb8cae2efa516f7805ca26122"
+        "value": "0b7be253744425c070ce300d33d05b0af11dc5d7"
       }
     },
     {
@@ -377,7 +377,7 @@
       "role": "execution_recovery_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "eef3e17a7ea7550e0ebe50e84aa795c8669b373b"
+        "value": "5e293512dc5fdc54978e2cee9aab9c01f4f0e32c"
       }
     },
     {
@@ -395,7 +395,7 @@
       "role": "leader_task_orchestrator",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "50fb674e4f4253264916942e9c221f8b627caacb"
+        "value": "b2054cd409d57044a395828e0167635026abd3e8"
       }
     },
     {
@@ -404,7 +404,7 @@
       "role": "leader_orchestration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "1bd68750780880f6afa98a2f4eb80241350717c3"
+        "value": "a0770db2e3cf04d522f5aab687fa4e7dc78decef"
       }
     }
   ]
