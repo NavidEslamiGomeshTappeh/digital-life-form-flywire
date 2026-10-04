@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "a621d4e2b77eff6de4aaede9d272d0fceeffce45"
+        "value": "c80db7d75c0380c32c93b23988268160657025b2"
       }
     },
     {
@@ -260,7 +260,7 @@
       "role": "lineage_regeneration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "e0fe99f40480341498d69b0decaf21524f2cdbaa"
+        "value": "c1f2fe7712221becd0636018b2ae00949033be9f"
       }
     },
     {
@@ -306,6 +306,15 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "e193bebedccaf3e51281d2a2859d134a75b43004"
+      }
+    },
+    {
+      "id": "E-HISTORICAL-NEUROSETTA-LINEAGE",
+      "path": "evidence/historical_neurosetta_lineage_context.json",
+      "role": "pre_artifact_software_family_context",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "454d6a9a7cb4c13c7d62bda7ac1e9f46c094ae6b"
       }
     }
   ]
