@@ -186,6 +186,12 @@ def test_historical_point_data_ingest_boundary_is_locked():
     assert boundary["consumer_path_evidence"]["local_path"].endswith(
         "T45_Morpho_data/Data/Pickled_data/Point_data.pkl"
     )
+    assert boundary["initial_point_data_tree_audit"]["truncated"] is False
+    assert boundary["initial_point_data_tree_audit"]["total_blob_paths"] == 4
+    assert boundary["initial_point_data_tree_audit"]["point_related_blob_paths"] == [
+        "Data/Point_data.pkl"
+    ]
+    assert boundary["initial_point_data_tree_audit"]["producer_related_paths_present"] is False
     dag = {item["sha"]: item for item in boundary["git_dag"]}
     assert dag["cd17d34afd0d46a3c2947e83a1f0fdd835a9959a"]["blob"] == (
         "b85caf49f45677f2075f7b5f2c8830141cd96d02"
