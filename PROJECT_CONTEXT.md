@@ -183,6 +183,15 @@ The original historical generator remains **UNRESOLVED**.
 
 ### 2026-10-04 earliest-public-release finding
 
+### 2026-10-04 morphology crosscheck finding
+
+The four project SWCs were re-run through the same published/legacy subtree root-selection logic and compared against the four historical Point_data morphology anchors. The selected roots remain 292/358/343/323, but the downstream morphology metrics do not exactly match Point_data: T4a 212 vs 222 segments, T4c 211 vs 205, T5a 180 vs 134, T5c 152 vs 152; cable lengths also differ for all four. T5c is the only exact segment-count match, while leaf/branch counts still differ. This is stronger evidence of a morphology-materialization or manual-correction boundary than of an algorithm-selection boundary.
+
+The public legacy Neurosetta SWC reader was also inspected directly: it reads x/y/z into graph coordinates without an alignment or scaling step. Therefore the large Point_data coordinate-frame discrepancy cannot be attributed to an automatic legacy SWC-import transform.
+
+A global GitHub search for the exact preprocessing path, PP3 call, and related unique code fragments found only the public Borstlab paper repository, not an independent fork/copy containing the missing producer.
+
+
 A January 16, 2026 Zenodo software release was located:
 
 - Zenodo record 18269709, version Submission_release, archive MD5 6ce666c93c0d907e228442528796bc0e, about 99 MB.
