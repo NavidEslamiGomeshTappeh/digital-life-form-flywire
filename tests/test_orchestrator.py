@@ -205,7 +205,9 @@ def test_verifier_rejects_receipt_tamper(tmp_path):
         (tmp_path / "state" / receipt_path).read_text(encoding="utf-8")
     )
     receipt["stdout"] = "tampered"
-    Path(receipt_path).write_text(json.dumps(receipt), encoding="utf-8")
+    (tmp_path / "state" / receipt_path).write_text(
+        json.dumps(receipt), encoding="utf-8"
+    )
     verification = verify_run(plan, run_id, state_root=tmp_path / "state")
     assert verification.status == "FAIL"
     assert any("stdout hash mismatch" in e for e in verification.errors)
