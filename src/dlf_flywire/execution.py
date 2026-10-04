@@ -17,6 +17,7 @@ from .capabilities import (
     CapabilitySelectionError,
     resolve_backend_executable,
 )
+from .policy import ExecutionIntent, PolicyDecision, PolicyGate
 
 
 class ExecutionError(RuntimeError):
@@ -114,6 +115,7 @@ class ExecutionReceipt:
     recovered: bool
     request_sha256: str
     capability_probe: dict[str, Any]
+    policy_decision: dict[str, Any]
     receipt_sha256: str
 
     def unsigned_dict(self) -> dict[str, Any]:
@@ -205,6 +207,9 @@ class ExecutionEngine:
             "recovered": recovered,
             "request_sha256": _request_fingerprint(request, cwd),
             "capability_probe": capability_probe or {},
+            "policy_decision": (
+                policy_decision.to_dict() if policy_decision is not None else {}
+            ),
         }
         return ExecutionReceipt(
             **unsigned,
@@ -333,9 +338,11 @@ class CapabilityExecutor:
         self,
         doctor: CapabilityDoctor,
         engine: ExecutionEngine | None = None,
+        policy: PolicyGate | None = None,
     ) -> None:
         self.doctor = doctor
         self.engine = engine or ExecutionEngine()
+        self.policy = policy or PolicyGate()
 
     def execute(
         self,
@@ -343,6 +350,7 @@ class CapabilityExecutor:
         step_id: str,
         operation_args: tuple[str, ...] = (),
         *,
+        intent: ExecutionIntent,
         backend_override: str | None = None,
         cwd: str | None = None,
         timeout_seconds: float = 120.0,
@@ -351,6 +359,17 @@ class CapabilityExecutor:
         remove_env: tuple[str, ...] = (),
         run_id: str | None = None,
     ) -> ExecutionReceipt:
+        spec = next(
+            (item for item in self.doctor.capabilities if item.name == capability),
+            None,
+        )
+        if spec is None:
+            raise ExecutionError(f"unknown capability: {capability}")
+
+        decision = self.policy.evaluate(spec, intent)
+        if not decision.allowed:
+            raise ExecutionError(decision.reason)
+
         try:
             selection = self.doctor.select(capability, backend_override)
         except CapabilitySelectionError as exc:
@@ -377,6 +396,7 @@ class CapabilityExecutor:
             request,
             run_id=run_id,
             capability_probe=snapshot,
+            policy_decision=decision,
         )
 
 
@@ -401,6 +421,7 @@ def verify_receipt(receipt: dict[str, Any]) -> ExecutionReceipt:
         "recovered",
         "request_sha256",
         "capability_probe",
+        "policy_decision",
         "receipt_sha256",
     }
     missing = sorted(required - set(receipt))
@@ -437,6 +458,7 @@ def verify_receipt(receipt: dict[str, Any]) -> ExecutionReceipt:
         recovered=bool(receipt["recovered"]),
         request_sha256=str(receipt["request_sha256"]),
         capability_probe=dict(receipt["capability_probe"]),
+        policy_decision=dict(receipt["policy_decision"]),
         receipt_sha256=str(receipt["receipt_sha256"]),
     )
 
