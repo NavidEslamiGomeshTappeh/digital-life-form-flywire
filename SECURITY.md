@@ -1,11 +1,12 @@
-# Security and Integrity
+# Security and scientific integrity
 
-این پروژه به یکپارچگی داده و جلوگیری از جعل evidence حساس است.
+Software security and evidence integrity are release requirements.
 
-موارد مهم:
-- root ID نباید بدون تطبیق با منبع تغییر داده شود.
-- نورون مشابه نباید جایگزین نورون هدف شود.
-- failure سرویس خارجی نباید به PASS تبدیل شود.
-- فایل‌های evidence نباید بدون provenance یا hash معتبر ارائه شوند.
+- No secrets belong in source control.
+- Workflow permissions stay least-privilege.
+- External-source failures remain visible.
+- Historical binary evidence is hash-verified before deserialization.
+- Pickle evidence is never accepted from arbitrary user input in CI.
+- Security state never upgrades an unresolved scientific claim.
 
-برای گزارش مشکل امنیتی یا یکپارچگی، از Issue خصوصی/مسیر ارتباطی مناسب GitHub استفاده کنید و اطلاعات حساس را عمومی نکنید.
+Report software vulnerabilities through the repository's private GitHub security channel. Report provenance/scientific issues through the research-evidence issue form.

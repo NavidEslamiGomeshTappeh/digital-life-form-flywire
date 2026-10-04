@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "status": "REPRODUCED",
+  "dataset": "FAFB v783",
+  "reference_synapse_rows": 649,
+  "directed_pairs": 75,
+  "source": {
+    "connections": "Codex FAFB v783 connections.csv.gz",
+    "synapse_coordinates": "Codex FAFB v783 synapse_coordinates.csv.gz",
+    "connections_source_sha256": "ea7c0e60690b3d0dcbfddf050f3f898171eb997620888090fe120c1cb4829c1d",
+    "synapse_source_sha256": "dfcb423d9f685d56c81160e50ca158c9ab589871cb01922af2a5b8c4442216b1"
+  },
+  "reproduction": {
+    "source_synapse_rows_scanned": 34156320,
+    "coordinate_matches": 649,
+    "coordinate_missing": 0,
+    "coordinate_duplicates": 0,
+    "pair_matches": 75,
+    "pair_missing": 0,
+    "total_synapses": 649,
+    "selection_rule": "directed pair incident to one of the four exact anchor roots"
+  },
+  "independent_corroboration": {
+    "source": "Zenodo FAFB v783 flywire_synapses_783.feather",
+    "record": "10.5281/zenodo.10676866",
+    "exact_midpoint_matches": 649,
+    "unique_mappings": 649
+  },
+  "limits": [
+    "Historical producer command is not preserved.",
+    "Completeness is established for the selected 75 pairs, not for the whole brain."
+  ]
+}

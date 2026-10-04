@@ -1,5 +1,5 @@
 {
-  "name": "V229 FlyWire Recovery",
+  "name": "Digital Life Form — FlyWire V1",
   "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
   "features": {},
   "postCreateCommand": "bash scripts/bootstrap.sh",

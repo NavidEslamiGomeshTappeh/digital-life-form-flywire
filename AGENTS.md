@@ -1,17 +1,19 @@
 # Agent operating rules
 
-Digital Life Form — FlyWire is an evidence-first research repository.
+This repository is Version 1.0.0. Do not create new V-numbered product surfaces.
 
-Agents must:
-- preserve exact FlyWire root identity;
-- keep provenance attached to every derived artifact;
-- fail closed on missing, ambiguous or substituted source data;
-- never invent fallback values;
-- separate geometry, biological compartment identity and simulation semantics;
-- add deterministic tests for every new transformation;
-- report exact commit, blob, run and artifact identifiers when citing GitHub evidence;
-- use source-backed claims only;
-- leave unresolved scientific questions explicitly unresolved.
+Scientific rules:
+- exact root IDs are mandatory;
+- no approximate neuron substitution;
+- no invented coordinates, connectivity, morphology, labels, hashes or PASS states;
+- source observation, deterministic computation, biological inference and unresolved claims stay separate;
+- external failure remains FAIL or UNAVAILABLE;
+- geometry is not a biological compartment label without independent evidence.
 
-Before changing a result, inspect its source chain and regression tests.
-Before declaring success, verify the generated artifact, not only the code path.
+Engineering rules:
+- work against the V1 architecture;
+- add deterministic tests for substantive changes;
+- inspect generated artifacts;
+- keep historical research trace in Git history and consolidated evidence rather than adding milestone clutter.
+
+Release claims must match evidence.

@@ -1,28 +1,21 @@
 ## Change summary
 
-Describe the concrete change and why it is needed.
+Describe the concrete change and why it belongs in the Version 1 architecture.
 
-## Evidence / provenance
+## Scientific evidence
 - [ ] Exact source identifiers are pinned where applicable.
-- [ ] Source hashes or blob IDs are recorded where applicable.
+- [ ] Source hashes or immutable references are recorded where applicable.
 - [ ] No substitute neuron, fallback value or fabricated evidence was introduced.
-- [ ] Generated outputs were regenerated from source inputs.
-- [ ] Scientific claims are separated from computational inference.
+- [ ] Generated evidence was regenerated and inspected.
+- [ ] Biological claims are separated from geometric/computational inference.
 
 ## Validation
-- [ ] Focused tests pass.
-- [ ] Relevant GitHub Actions pass.
-- [ ] Generated evidence was inspected.
-- [ ] Remaining limitations are documented.
+- [ ] python -m ruff check .
+- [ ] python -m pytest -q
+- [ ] python -m dlf_flywire validate
 
 ## Reproducibility
+State the exact command(s) and source versions.
 
-Exact command(s):
-
-`text
-# paste exact command(s)
-`
-
-## Scientific limits
-
-State what this PR does not prove.
+## Remaining limits
+State what the change does not prove.

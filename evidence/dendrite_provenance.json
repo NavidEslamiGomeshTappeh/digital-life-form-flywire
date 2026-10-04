@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN",
+  "source": {"repository": "borstlab/T4_T5_Dendrite_Morphology_Paper", "commit": "56901ad1853b44aeca15504cd908fa4c31009a3e", "file": "Data/Neuron_ids.csv", "blob_sha": "a83e001e556f6f83ecfa41a402b07b51bd70ba95"},
+  "counts": {"requested_roots": 4, "exact_rows": 4, "dendrite_used_true": 4},
+  "anchors": {
+    "T4a": {"root_id": "720575940632008007", "table_index": 514, "subtype": "T4a", "dendrite_used": true},
+    "T4c": {"root_id": "720575940616224414", "table_index": 2227, "subtype": "T4c", "dendrite_used": true},
+    "T5a": {"root_id": "720575940625571465", "table_index": 3171, "subtype": "T5a", "dendrite_used": true},
+    "T5c": {"root_id": "720575940617782941", "table_index": 4651, "subtype": "T5c", "dendrite_used": true}
+  },
+  "limit": "Dendrite_used=True is inclusion evidence, not individual synapse compartment ground truth."
+}
