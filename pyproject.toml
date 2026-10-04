@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "digital-life-form-flywire"
+version = "1.0.0"
+description = "Provenance-first FlyWire v783 morphology, synapse validation, and reproducible circuit evidence."
+readme = "README.md"
+requires-python = ">=3.12"
+license = {file = "LICENSE"}
+authors = [{name = "Navid Eslami Gomesh Tappeh"}]
+dependencies = [
+  "fafbseg==3.2.2",
+  "navis==1.12.0",
+  "pandas>=2,<3",
+  "pyarrow>=18,<24",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<9",
+  "ruff>=0.13,<1",
+  "build>=1,<2",
+]
+
+[project.scripts]
+dlf-flywire = "dlf_flywire.cli:main"
+dlf-flywire-recover = "dlf_flywire.recovery:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
