@@ -6,9 +6,10 @@ import subprocess
 import sys
 import time
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Literal, Mapping, Sequence
+from collections.abc import Mapping, Sequence
+from typing import Literal
 
 ProbeStatus = Literal["ok", "missing", "broken", "timeout", "error"]
 CapabilityStatus = Literal["ok", "off", "error"]
@@ -101,6 +102,7 @@ def probe_backend(backend: BackendSpec) -> ProbeResult:
             timeout=backend.timeout_seconds,
             env=child_env,
             shell=False,
+            check=False,
         )
     except FileNotFoundError:
         return ProbeResult("broken", duration_ms=_elapsed_ms(start))
@@ -109,7 +111,7 @@ def probe_backend(backend: BackendSpec) -> ProbeResult:
     except subprocess.TimeoutExpired as exc:
         output = str(exc.stdout or exc.stderr or "").strip()[:1000]
         return ProbeResult("timeout", output=output, duration_ms=_elapsed_ms(start))
-    except Exception as exc:  # defensive boundary
+    except Exception as exc:  # defensive boundary  # noqa: BLE001
         return ProbeResult("error", output=str(exc)[:1000], duration_ms=_elapsed_ms(start))
 
     output = ((result.stdout or "") + (result.stderr or "")).strip()[:1000]
@@ -149,7 +151,7 @@ class CapabilityDoctor:
         """Return a point-in-time, machine-readable capability snapshot."""
 
         overrides = overrides or {}
-        observed_at = datetime.now(timezone.utc).isoformat()
+        observed_at = datetime.now(UTC).isoformat()
         results: list[dict[str, object]] = []
 
         for spec in self._capabilities:
@@ -189,7 +191,7 @@ class CapabilityDoctor:
                         "message": message,
                     }
                 )
-            except Exception as exc:  # one bad capability cannot abort the report
+            except Exception as exc:  # one bad capability cannot abort the report  # noqa: BLE001
                 results.append(
                     {
                         "name": spec.name,
