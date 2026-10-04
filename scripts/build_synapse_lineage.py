@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Build the deterministic record-level lineage index for evidence/synapses.csv."""
 
 from __future__ import annotations
