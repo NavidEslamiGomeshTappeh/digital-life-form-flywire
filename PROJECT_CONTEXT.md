@@ -178,6 +178,18 @@ Conclusion:
 
 The original historical generator remains **UNRESOLVED**.
 
+### 2026-10-04 release/internals audit
+
+Additional direct reconstruction established:
+
+- The December 9, 2025 Point_data commit cd17d34afd0d46a3c2947e83a1f0fdd835a9959a contains only Data/Point_data.pkl; the contemporaneous ANOVA_analysis.ipynb consumes that artifact but does not expose its producer.
+- The current public paper repository preprocessing notebooks PP1–PP5 and Metrics1_Point_data are published later, in the 2026-08-10 update.
+- The public Zenodo data archive contains point_data.pkl, vertex_data.pkl, edge_data.pkl, bifurcation_data.pkl, deviation_data.pkl, contour data, columns, and readme; it does not list Reduced_dendrites or .nr intermediate morphology trees.
+- The public NeuRosetta import_swc path declares units without rescaling geometry; convert_units performs explicit coordinate rescaling. align_forest performs centering/PCA rotation and does not introduce a scale factor.
+- The deterministic published-subtree root-node comparison was rerun on all four project SWCs and still fails by hundreds of micrometres against the historical Point_data roots.
+- A fitted four-point similarity transform gives about 9.6 µm RMS residual with scale about 2.7055, but this is INFERENCE_ONLY and is not accepted as historical provenance.
+
+
 New chronology finding (2026-10-04):
 - The historical `Point_data.pkl` first appeared in the source repository at commit `cd17d34afd0d46a3c2947e83a1f0fdd835a9959a` on 2025-12-09 20:41:50+01:00.
 - The public `NikDrummond/NeuRosetta` repository itself begins earlier (2025-10-21), so repository existence alone is not evidence that the December pipeline used the public implementation.
