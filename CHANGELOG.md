@@ -5,7 +5,7 @@
 Claim/manifest integrity patch.
 
 - Bound the independent-corroboration claim for the 649-row case directly to the frozen Codex/Zenodo source-receipt artifact.
-- Removed the artifact manifest's self-referential hash entry while keeping the manifest explicitly excluded from its own artifact list.
+- Added regression coverage that requires the artifact manifest to remain explicitly excluded from its own hashed artifact list.
 - Added regression tests for claim-to-receipt binding and manifest self-exclusion.
 - Synchronized package, evidence, documentation, and citation metadata to 1.2.2.
 
