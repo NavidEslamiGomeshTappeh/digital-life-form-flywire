@@ -28,7 +28,7 @@
       "relevant_commits": [
         {
           "sha": "e0de7d65c2618f06edf4ec9f3e630bab5f524399",
-          "timestamp": "2024-10-21T15:03:17Z",
+          "timestamp": "2024-10-21T17:29:51Z",
           "message": "Added functions for Transforming and Scaling neurons",
           "files": [
             "Neurosetta/transformations.py"
