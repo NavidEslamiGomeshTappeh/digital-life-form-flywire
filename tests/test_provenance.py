@@ -138,7 +138,11 @@ def test_published_method_boundary_is_ledgered():
     )
     assert boundary["status"] == "PROVEN_PUBLISHED_METHOD_BOUNDARY"
     assert any(
-        item["stage"] == "manual_verification_and_modification"
+        item["stage"] == "manual_root_verification"
+        for item in boundary["method_boundary"]
+    )
+    assert any(
+        item["stage"] == "manual_dendrite_verification_and_modification"
         for item in boundary["method_boundary"]
     )
     claims = json.loads(
