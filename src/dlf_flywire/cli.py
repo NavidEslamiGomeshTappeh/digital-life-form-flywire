@@ -17,12 +17,12 @@ def _load_run_plan(path: str):
     except (OSError, ValueError) as exc:
         raise ValueError(f"cannot read plan: {exc}") from exc
     if not isinstance(data, dict) or not isinstance(data.get("steps"), list):
-        raise ValueError("plan must be an object with a steps list")
+        raise TypeError("plan must be an object with a steps list")
 
     steps = []
     for index, item in enumerate(data["steps"]):
         if not isinstance(item, dict):
-            raise ValueError(f"step {index} must be an object")
+            raise TypeError(f"step {index} must be an object")
         required = ("step_id", "capability", "action", "destination")
         missing = [name for name in required if name not in item]
         if missing:
@@ -48,7 +48,7 @@ def _load_run_plan(path: str):
         for name in ("permission_granted", "idempotent", "network_access", "system_mutation"):
             value = item.get(name, False)
             if not isinstance(value, bool):
-                raise ValueError(f"step {index} {name} must be a JSON boolean")
+                raise TypeError(f"step {index} {name} must be a JSON boolean")
             flags[name] = value
 
         backend_override = item.get("backend_override")
@@ -165,7 +165,7 @@ def main(argv=None) -> int:
 
     if args.command == "run-plan":
         from .capabilities import CapabilityDoctor, default_capabilities
-        from .execution import CapabilityExecutor, ExecutionError, ExecutionEngine
+        from .execution import CapabilityExecutor, ExecutionEngine, ExecutionError
         from .orchestrator import OrchestrationError, TaskOrchestrator, verify_run
 
         try:
@@ -177,7 +177,7 @@ def main(argv=None) -> int:
             verification = verify_run(plan, run_id, state_root=args.state_root)
             print(json.dumps(verification.to_dict(), indent=2))
             return 0 if verification.status == "PASS" else 1
-        except (ValueError, ExecutionError, OrchestrationError) as exc:
+        except (TypeError, ValueError, ExecutionError, OrchestrationError) as exc:
             print(json.dumps({"status": "FAIL", "error": str(exc)}, indent=2))
             return 2
 
