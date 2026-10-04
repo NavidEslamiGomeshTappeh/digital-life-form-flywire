@@ -1,4 +1,5 @@
 import json
+import shutil
 from pathlib import Path
 
 from dlf_flywire import __version__
@@ -9,6 +10,7 @@ from dlf_flywire.provenance import (
     validate_artifact_manifest,
     validate_claim_ledger,
     validate_evidence_manifest_version,
+    validate_synapse_lineage,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -44,6 +46,51 @@ def test_artifact_manifest_excludes_itself():
     assert "evidence/artifact_manifest.json" in manifest["exclusion"]
 
 
+
+def test_synapse_lineage_passes():
+    report = validate_synapse_lineage(ROOT)
+    assert report["status"] == "PASS_SYNAPSE_LINEAGE"
+    assert report["records_checked"] == 649
+    assert report["unique_record_ids"] == 649
+    assert report["codex_exact_tuple_matches"] == 649
+    assert report["zenodo_exact_midpoint_matches"] == 649
+
+
+def test_synapse_lineage_fails_closed_on_record_id_drift(tmp_path):
+    (tmp_path / "evidence").mkdir()
+    (tmp_path / "src" / "dlf_flywire").mkdir(parents=True)
+    for relative in ("VERSION", "pyproject.toml", "src/dlf_flywire/__init__.py", "evidence/synapses.csv"):
+        source = ROOT / relative
+        destination = tmp_path / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, destination)
+    lineage = json.loads(
+        (ROOT / "evidence" / "synapse_lineage.json").read_text(encoding="utf-8")
+    )
+    lineage["records"][0]["record_id"] = "syn-tampered"
+    (tmp_path / "evidence" / "synapse_lineage.json").write_text(
+        json.dumps(lineage), encoding="utf-8"
+    )
+    try:
+        validate_synapse_lineage(tmp_path)
+    except ProvenanceError as exc:
+        assert "record ID mismatch" in str(exc)
+    else:
+        raise AssertionError("tampered synapse lineage was accepted")
+
+
+
+def test_synapse_lineage_uses_stable_tuple_identifier():
+    lineage = json.loads(
+        (ROOT / "evidence" / "synapse_lineage.json").read_text(encoding="utf-8")
+    )
+    first = lineage["records"][0]
+    expected = (
+        "syn-720575940605560678|720575940632008007|790590|265784|210220"
+    )
+    assert first["record_id"] == expected
+
+
 def test_evidence_manifest_version_is_current():
     report = validate_evidence_manifest_version(ROOT)
     assert report["product_version"] == __version__
@@ -69,7 +116,7 @@ def test_unsafe_artifact_paths_fail_closed(tmp_path):
     )
     manifest = """{
       "schema_version": 1,
-      "product_version": "1.2.2",
+      "product_version": "1.3.0",
       "artifacts": [{
         "id": "E-BAD",
         "path": "../outside.txt",

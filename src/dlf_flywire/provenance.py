@@ -236,6 +236,121 @@ def validate_claim_ledger(root: Path) -> dict[str, Any]:
     }
 
 
+def validate_synapse_lineage(root: Path) -> dict[str, Any]:
+    lineage_path = root / "evidence" / "synapse_lineage.json"
+    lineage = _load_json(lineage_path)
+    version = _read_project_version(root)
+
+    if lineage.get("schema_version") != 1:
+        raise ProvenanceError("unsupported synapse lineage schema")
+    if lineage.get("product_version") != version:
+        raise ProvenanceError(
+            f"synapse lineage version {lineage.get('product_version')!r} != {version!r}"
+        )
+
+    canonical = lineage.get("canonical_reference")
+    if not isinstance(canonical, dict):
+        raise ProvenanceError("synapse lineage canonical_reference must be an object")
+    if canonical.get("path") != "evidence/synapses.csv":
+        raise ProvenanceError("synapse lineage canonical path drift")
+
+    csv_path = root / "evidence" / "synapses.csv"
+    observed_sha256 = sha256_file(csv_path)
+    observed_blob = git_blob_sha1(csv_path)
+    if canonical.get("sha256") != observed_sha256:
+        raise ProvenanceError(
+            f"synapse lineage source SHA-256 mismatch: "
+            f"expected {canonical.get('sha256')}, observed {observed_sha256}"
+        )
+    if canonical.get("git_blob_sha1") != observed_blob:
+        raise ProvenanceError(
+            f"synapse lineage source Git blob mismatch: "
+            f"expected {canonical.get('git_blob_sha1')}, observed {observed_blob}"
+        )
+
+    records = lineage.get("records")
+    if not isinstance(records, list) or not records:
+        raise ProvenanceError("synapse lineage records must be a non-empty list")
+    if canonical.get("rows") != len(records):
+        raise ProvenanceError("synapse lineage canonical row count mismatch")
+
+    coverage = lineage.get("coverage")
+    if not isinstance(coverage, dict):
+        raise ProvenanceError("synapse lineage coverage must be an object")
+    if coverage.get("records") != len(records):
+        raise ProvenanceError("synapse lineage coverage record count mismatch")
+    if coverage.get("unique_record_ids") != len(records):
+        raise ProvenanceError("synapse lineage uniqueness count mismatch")
+    if coverage.get("codex_exact_tuple_matches") != len(records):
+        raise ProvenanceError("synapse lineage Codex coverage mismatch")
+    if coverage.get("codex_missing") != 0 or coverage.get("codex_duplicates") != 0:
+        raise ProvenanceError("synapse lineage Codex receipt is not exact")
+    if coverage.get("zenodo_exact_midpoint_matches") != len(records):
+        raise ProvenanceError("synapse lineage Zenodo coverage mismatch")
+    if coverage.get("zenodo_unique_mappings") != len(records):
+        raise ProvenanceError("synapse lineage Zenodo uniqueness mismatch")
+
+    claim_ids = {"C-CONNECTIVITY-001", "C-CONNECTIVITY-003"}
+    seen_ids: set[str] = set()
+    for index, record in enumerate(records, start=1):
+        if not isinstance(record, dict):
+            raise ProvenanceError("synapse lineage record must be an object")
+        record_id_value = record.get("record_id")
+        pre = record.get("pre_root_id")
+        post = record.get("post_root_id")
+        coordinate = record.get("coordinate")
+        tuple_key = record.get("tuple_key")
+        if not all(isinstance(value, str) and value for value in (record_id_value, pre, post)):
+            raise ProvenanceError(f"invalid synapse lineage identifiers at record {index}")
+        if (
+            not isinstance(coordinate, list)
+            or len(coordinate) != 3
+            or not all(isinstance(value, int) for value in coordinate)
+        ):
+            raise ProvenanceError(f"invalid synapse coordinate at record {index}")
+        expected_tuple = f"{pre}|{post}|{coordinate[0]}|{coordinate[1]}|{coordinate[2]}"
+        if tuple_key != expected_tuple:
+            raise ProvenanceError(f"synapse tuple drift at record {index}")
+        expected_id = f"syn-{expected_tuple}"
+        if record_id_value != expected_id:
+            raise ProvenanceError(f"synapse record ID mismatch at record {index}")
+        if record.get("canonical_data_row") != index:
+            raise ProvenanceError(f"canonical row numbering drift at record {index}")
+        if record.get("csv_line") != index + 1:
+            raise ProvenanceError(f"CSV line numbering drift at record {index}")
+        if record.get("status") != "INDEPENDENTLY_CORROBORATED":
+            raise ProvenanceError(f"invalid lineage status at record {index}")
+        if set(record.get("claims", [])) != claim_ids:
+            raise ProvenanceError(f"claim binding drift at record {index}")
+        source_evidence = record.get("source_evidence")
+        if not isinstance(source_evidence, dict):
+            raise ProvenanceError(f"missing source evidence at record {index}")
+        if source_evidence.get("codex") != {
+            "receipt": "E-SOURCE-RECEIPTS",
+            "match": "EXACT_TUPLE",
+        }:
+            raise ProvenanceError(f"Codex receipt binding drift at record {index}")
+        if source_evidence.get("zenodo") != {
+            "receipt": "E-SOURCE-RECEIPTS",
+            "match": "EXACT_MIDPOINT_MAPPING",
+        }:
+            raise ProvenanceError(f"Zenodo receipt binding drift at record {index}")
+        if record.get("biological_compartment") != "UNRESOLVED":
+            raise ProvenanceError(f"biological compartment status drift at record {index}")
+        if record_id_value in seen_ids:
+            raise ProvenanceError(f"duplicate synapse record ID: {record_id_value}")
+        seen_ids.add(record_id_value)
+
+    return {
+        "status": "PASS_SYNAPSE_LINEAGE",
+        "product_version": version,
+        "records_checked": len(records),
+        "unique_record_ids": len(seen_ids),
+        "codex_exact_tuple_matches": coverage["codex_exact_tuple_matches"],
+        "zenodo_exact_midpoint_matches": coverage["zenodo_exact_midpoint_matches"],
+    }
+
+
 def validate_evidence_manifest_version(root: Path) -> dict[str, str]:
     version = _read_project_version(root)
     manifest = _load_json(root / "evidence" / "manifest.json")
@@ -252,6 +367,7 @@ def audit_provenance(root: Path) -> dict[str, Any]:
     artifact = validate_artifact_manifest(root)
     claims = validate_claim_ledger(root)
     evidence_manifest = validate_evidence_manifest_version(root)
+    synapse_lineage = validate_synapse_lineage(root)
 
     from .cross_source import validate_cross_source_receipts
 
@@ -266,5 +382,6 @@ def audit_provenance(root: Path) -> dict[str, Any]:
         "artifact_manifest": artifact,
         "claim_ledger": claims,
         "evidence_manifest": evidence_manifest,
+        "synapse_lineage": synapse_lineage,
         "cross_source": cross_source,
     }

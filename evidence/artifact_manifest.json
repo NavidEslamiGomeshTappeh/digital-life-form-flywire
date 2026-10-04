@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "product_version": "1.2.2",
-  "generated_for": "Version 1.2.2 claim/receipt lineage and manifest integrity contract",
+  "product_version": "1.3.0",
+  "generated_for": "Version 1.3.0 claim-level synapse lineage contract",
   "exclusion": [
     "evidence/artifact_manifest.json"
   ],
@@ -12,7 +12,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "23aa8390630cc1ae7f102ddd472e4ba48b689844"
+        "value": "f0bb29e76388856b273698ae6064b0380ce5e5d2"
       }
     },
     {
@@ -21,7 +21,7 @@
       "role": "project_metadata",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "62517f447c4b5b35549bff2120d05afd93fe7523"
+        "value": "567e7df999621ac3e84c4958dc1fc5329eaef806"
       }
     },
     {
@@ -30,7 +30,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "bc86c944fe22d22f0a5a95996168c827d2876979"
+        "value": "67bc602abf06e9bcea675fe21c56a2f3c76bc331"
       }
     },
     {
@@ -39,7 +39,7 @@
       "role": "audit_engine",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "7ce709542ead3597abb1aec9b72c1ae7c2801fa8"
+        "value": "f7df5988de146bf722f9ca601980d55ffc29db53"
       }
     },
     {
@@ -57,7 +57,7 @@
       "role": "cli",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "683afc24759abf5bed27baa2d4eb17f9b3c0472e"
+        "value": "e7a4cb6da8fa13658cadca3e969f4e4dc628466e"
       }
     },
     {
@@ -66,7 +66,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "a4950bf2b0dffb847f5bb0243e2cd9f9b9957aff"
+        "value": "8231afe677bc48c2ebfe37297599e063032041e2"
       }
     },
     {
@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "87df6ec9ba52aabbde9c1a85e1b6c99c36c81566"
+        "value": "4fce0acbbafb5d88fe8ba49cbc0649793058d47b"
       }
     },
     {
@@ -84,7 +84,7 @@
       "role": "frozen_cross_source_receipts",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "f4fcd5da3d9d64237ac9abe45b70edb13b460457"
+        "value": "80bed08619a04eec9179656cdfa474695dcb78f1"
       }
     },
     {
@@ -195,6 +195,24 @@
         "value": "507fc706cc29781457ed502ae0ebdf328a4bae33"
       },
       "content_sha256": "1eb87ae427dacc21528ce7a105ab021babd6dc10138f526f49678cf357172d5b"
+    },
+    {
+      "id": "E-SYNAPSE-LINEAGE",
+      "path": "evidence/synapse_lineage.json",
+      "role": "record_level_synapse_lineage",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "eb8eaebbbec3e177514b2409a42b1f5225abeb92"
+      }
+    },
+    {
+      "id": "E-BUILD-SYNAPSE-LINEAGE",
+      "path": "scripts/build_synapse_lineage.py",
+      "role": "lineage_builder",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "d834fd3c048ed2772fb6ee72a4f1d6e4ba326395"
+      }
     },
     {
       "id": "E-SWC-T4A",

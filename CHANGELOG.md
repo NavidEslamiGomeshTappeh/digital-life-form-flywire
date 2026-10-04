@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.3.0 — 2026-10-04
+
+Record-level synapse lineage release.
+
+- Added a deterministic tuple identifier and lineage record for every one of the 649 canonical synapse-coordinate rows.
+- Added fail-closed lineage validation to the provenance audit.
+- Added the `lineage` CLI command.
+- Added a reproducible lineage builder script and regression coverage for record-ID drift.
+- Preserved the distinction between exact source corroboration and unresolved biological compartment assignment.
+
+
 ## 1.2.2 — 2026-10-04
 
 Claim/manifest integrity patch.

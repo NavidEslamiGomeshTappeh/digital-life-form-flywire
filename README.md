@@ -1,6 +1,6 @@
 # Digital Life Form — FlyWire
 
-Version 1.2.2
+Version 1.3.0
 
 > **Project continuity / canonical research memory:** [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md)
 >
@@ -71,7 +71,7 @@ python -m dlf_flywire audit
 
 `validate` checks the scientific baseline and morphology invariants. `audit` additionally checks the machine-readable claim ledger, artifact identities, and version consistency.
 
-The claim ledger is at [evidence/claims.json](evidence/claims.json), with artifact fingerprints in [evidence/artifact_manifest.json](evidence/artifact_manifest.json).
+The claim ledger is at [evidence/claims.json](evidence/claims.json), with artifact fingerprints in [evidence/artifact_manifest.json](evidence/artifact_manifest.json). The record-level lineage index is [evidence/synapse_lineage.json](evidence/synapse_lineage.json), with a deterministic builder at [scripts/build_synapse_lineage.py](scripts/build_synapse_lineage.py).
 
 ## Verify the cross-source chain
 
@@ -79,11 +79,15 @@ For the four-neuron FAFB v783 case, the repository also exposes a frozen-receipt
 
 ```bash
 python -m dlf_flywire verify-sources
+python -m dlf_flywire lineage
 ```
 
 This checks the 649-row canonical artifact against immutable Codex and Zenodo verification receipts, including provider-level independence, dataset-release consistency, exact match counts, and the canonical SHA-256. It does **not** re-download the approximately 9.5 GB Zenodo source, so a PASS means the recorded frozen evidence is internally consistent, not that a new live re-run was performed.
 
 ## Validate
+
+The `lineage` command validates all 649 record IDs, canonical row references, Codex/Zenodo receipt bindings, and the unresolved biological-compartment boundary.
+
 
 ```bash
 python -m dlf_flywire validate

@@ -32,6 +32,13 @@ def main(argv=None) -> int:
         help="Project root containing evidence/ (default: current directory).",
     )
 
+    lineage = sub.add_parser("lineage", help="Validate the record-level synapse lineage index.")
+    lineage.add_argument(
+        "--root",
+        default=".",
+        help="Project root containing evidence/ (default: current directory).",
+    )
+
     recover = sub.add_parser("recover", help="Recover exact FlyWire morphology.")
     recover.add_argument("--dataset", type=int, default=783)
     recover.add_argument("--output", default="data/morphology")
@@ -55,6 +62,13 @@ def main(argv=None) -> int:
         from .validation import find_project_root
         root = find_project_root(args.root)
         print(json.dumps(validate_cross_source_receipts(root), indent=2))
+        return 0
+
+    if args.command == "lineage":
+        from .provenance import validate_synapse_lineage
+        from .validation import find_project_root
+        root = find_project_root(args.root)
+        print(json.dumps(validate_synapse_lineage(root), indent=2))
         return 0
 
     from .recovery import main as recovery_main
