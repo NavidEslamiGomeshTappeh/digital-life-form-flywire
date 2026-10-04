@@ -4,7 +4,7 @@
 
 Record-level synapse lineage release.
 
-- Added a deterministic SHA-256 identifier and lineage record for every one of the 649 canonical synapse-coordinate rows.
+- Added a deterministic tuple identifier and lineage record for every one of the 649 canonical synapse-coordinate rows.
 - Added fail-closed lineage validation to the provenance audit.
 - Added the `lineage` CLI command.
 - Added a reproducible lineage builder script and regression coverage for record-ID drift.
