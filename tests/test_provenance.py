@@ -83,6 +83,24 @@ def test_synapse_lineage_fails_closed_on_record_id_drift(tmp_path):
 
 
 
+def test_archived_submission_release_boundary_is_ledgered():
+    boundary = json.loads(
+        (ROOT / "evidence" / "zenodo_submission_release_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert boundary["status"] == "PROVEN_ARCHIVED_RELEASE_CONTENT_BOUNDARY"
+    assert "Data/Point_data.pkl" in boundary["archive_observations"]["includes"]
+    assert "Notebooks/PP3_Dendrite_extraction.ipynb" in boundary["archive_observations"]["does_not_list"]
+    assert "Reduced_dendrites/" in boundary["archive_observations"]["does_not_list"]
+    claims = json.loads(
+        (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
+    )
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-004")
+    assert claim["status"] == "PROVEN"
+    assert "E-ZENODO-SUBMISSION-BOUNDARY" in claim["evidence"]
+
+
 def test_v230_point_data_bridge_is_anchor_only():
     bridge = json.loads(
         (ROOT / "evidence" / "point_data_connectivity_bridge.json").read_text(
