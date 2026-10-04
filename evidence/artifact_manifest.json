@@ -57,7 +57,7 @@
       "role": "cli",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "6df8d85559ab67e5d6d1cd6a6c0eb3694609b9cd"
+        "value": "f5026d50d4f8fd457e9e4353ff25686ae72fd346"
       }
     },
     {
@@ -404,7 +404,7 @@
       "role": "leader_orchestration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "ca6b3a35c545da0bd3f0e96644fbb87ad89f38d3"
+        "value": "1bd68750780880f6afa98a2f4eb80241350717c3"
       }
     }
   ]
