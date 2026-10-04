@@ -1,7 +1,7 @@
 {
   "schema_version":1,
   "status":"NEGATIVE_SIMPLE_FRAME_MATCH_BUT_HISTORICAL_INPUT_UNAVAILABLE",
-  "purpose":"Test whether the four committed project SWC coordinates directly reproduce the four recorded Point_data root coordinates under nm-to-um division by 1000.",
+  "purpose":"Test whether the four committed project SWCs or the deterministically reproduced published subtree roots reproduce the four recorded Point_data root coordinates under the documented nm-to-um conversion, and record any frame hypothesis without promoting it to provenance.",
   "point_data_sha256":"46772ccabc609ab0f7136854024e7665727ff0f58f53c69126ea3e641ce7f891",
   "point_data_roots":{
     "T4a":[-46.976,32.06399609375,-111.552],
@@ -15,14 +15,111 @@
     "T5a":{"swc_root_um":[727.81656,223.32773,239.6004],"residual_um":[714.6085648828125,172.12773,119.9844],"euclidean_residual_um":744.7748738257662},
     "T5c":{"swc_root_um":[736.504,210.34355,236.34111],"residual_um":[724.3040048828125,155.39955,118.38911],"euclidean_residual_um":750.1875052252442}
   },
+  "published_subtree_selected_root_test":{
+    "algorithm_source":"dendrite_subtree_mapping.json",
+    "selected_node_ids":{
+      "T4a":292,
+      "T4c":358,
+      "T5a":343,
+      "T5c":323
+    },
+    "project_swc_selected_root_um":{
+      "T4a":[789.1497,263.18266,210.35522],
+      "T4c":[788.7438,272.94928,205.01356],
+      "T5a":[717.25825,222.00586,211.70161],
+      "T5c":[713.4343,216.06416,213.15164]
+    },
+    "residual_to_point_data_um":{
+      "T4a":[836.1257,231.11866390625,321.90722],
+      "T4c":[834.6318,251.33328390625,321.36556],
+      "T5a":[704.0502548828125,170.80586,92.08561],
+      "T5c":[701.2343048828125,161.12016,95.19964]
+    },
+    "euclidean_residual_um":{
+      "T4a":925.281730768758,
+      "T4c":929.0072574121547,
+      "T5a":730.3021037762146,
+      "T5c":725.7769821088544
+    }
+  },
+  "empirical_similarity_fit_hypothesis":{
+    "status":"INFERENCE_ONLY",
+    "direction":"project_selected_root_um -> Point_data_root_um",
+    "row_vector_form":"Y = s * X * R + t",
+    "scale":2.7055126399953204,
+    "rotation_matrix":[
+      [-0.093779,0.447171,-0.889519],
+      [-0.389845,-0.838605,-0.380476],
+      [-0.916093,0.311094,0.252971]
+    ],
+    "translation":[951.473342,-494.225966,1919.476788],
+    "per_root_residual_norm_um":{
+      "T4a":9.73123,
+      "T4c":8.944369,
+      "T5a":10.745161,
+      "T5c":8.881029
+    },
+    "rms_um":9.605073279443637,
+    "warning":"This is a fitted four-point similarity transform only. No historical source, notebook, parameter, or software path found so far establishes that scale/rotation/translation was used to create Point_data. It must not be used as provenance."
+  },
   "published_generator_context":{
     "generator":"Metrics1_Point_data.ipynb/process_one_point(tree)",
     "operation":"convert Reduced_dendrites from nm to um, then tree.get_root_coordinate()",
     "upstream":"PP3 creates Reduced_dendrites through subtree extraction and forest reduction"
   },
+  "public_toolchain_semantics":{
+    "repository":"NikDrummond/NeuRosetta",
+    "commit":"2de2748ca9d4b3d17bc23b1f0f6d4e03cf012085",
+    "import_swc_finding":"import_swc reads SWC coordinates into a Tree; set_units declares spatial units without rescaling geometry.",
+    "convert_units_finding":"convert_units is the explicit operation that rescales morphology coordinates between units.",
+    "alignment_finding":"align_forest recenters pooled coordinates at the centroid and applies PCA rotation; it does not apply a scale factor."
+  },
+  "public_release_inventory":{
+    "data_record":"https://zenodo.org/records/21876510",
+    "data_release":"v1 published 2026-08-10",
+    "data_archive":"T4_T5_dendrite_morphology_data.zip",
+    "data_archive_md5":"8bbc291c2e3e3555974b7f9f6c557109",
+    "released_metric_files":[
+      "bifurcation_data.pkl",
+      "columns.pkl",
+      "contour_data.pkl",
+      "contour_data_left.pkl",
+      "contour_data_right.pkl",
+      "deviation_data.pkl",
+      "edge_data.pkl",
+      "point_data.pkl",
+      "readme.txt",
+      "vertex_data.pkl"
+    ],
+    "intermediate_morphology_not_listed":["Reduced_dendrites","NeuRosetta .nr forest files"],
+    "software_record":"https://zenodo.org/records/21876360",
+    "software_release":"v2.0.0 published 2026-08-10",
+    "software_archive_md5":"4b41a973cf55f5c21cf698b18ca62bfa",
+    "software_contains":["PP1_Fetch_flywire.ipynb","PP2_nr_conversion.ipynb","PP3_Dendrite_extraction.ipynb","PP4_Global_allignment.ipynb","PP5_Mesh_generation.ipynb","Metrics1_Point_data.ipynb"]
+  },
+  "historical_timeline":{
+    "paper_repo_initial_commit":"79cf52212935de6bddf996c9f46c0df89f5c5442",
+    "point_data_first_commit":"cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "point_data_first_commit_time":"2025-12-09T19:41:50Z",
+    "point_data_first_commit_files":["Data/Point_data.pkl"],
+    "contemporaneous_consumer":"Notebooks/ANOVA_analysis.ipynb at 61fd0f176d73932ad87ece04153945501b4c405c",
+    "contemporaneous_consumer_time":"2025-12-09T19:40:07Z",
+    "public_preprocessing_commit":"8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+    "public_preprocessing_time":"2026-08-10T17:49:32Z"
+  },
   "interpretation":{
-    "proven":["The committed SWCs do not reproduce the recorded Point_data roots by simply dividing their raw parent=-1 coordinates by 1000.","The residuals are hundreds of micrometres, not rounding noise."],
-    "not_proven":["This does not disprove historical Point_data provenance because the documented generator consumes Reduced_dendrites, while the exact December 2025 intermediate trees are unavailable.","It does not establish a coordinate transform or alternate source."],
-    "next_target":"Recover the historical Reduced_dendrite trees or another intermediate artifact containing their root coordinates, then compare directly to Point_data."
+    "proven":[
+      "The committed SWCs do not reproduce the recorded Point_data roots by simply dividing their raw parent=-1 coordinates by 1000.",
+      "The published subtree-selected nodes reproduced from the public algorithm also do not reproduce the recorded Point_data roots by simply dividing by 1000.",
+      "The public NeuRosetta import path does not contain a hidden coordinate rescaling at SWC import; explicit unit conversion is a separate operation.",
+      "The public Zenodo metric archive does not expose the Reduced_dendrites or .nr intermediate morphology trees needed for a direct historical root comparison.",
+      "The December 2025 Point_data commit itself contains only the Point_data artifact, so that commit does not reveal its producer implementation."
+    ],
+    "not_proven":[
+      "This does not disprove historical Point_data provenance because the documented producer consumed an intermediate artifact that is not publicly preserved in the examined release.",
+      "The fitted similarity transform is not a provenance result and must not be treated as the historical transform.",
+      "No exact December 2025 generator, exact source morphology materialization, or exact execution environment has yet been recovered."
+    ],
+    "next_target":"Locate any pre-August-2026 local/legacy Neurosetta or morphology materialization that can expose the actual December Reduced_dendrites root coordinates, or find an archived code revision that contains the missing producer state."
   }
 }
