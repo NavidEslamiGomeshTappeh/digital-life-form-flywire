@@ -1,5 +1,5 @@
-from pathlib import Path
 import re
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -40,7 +40,9 @@ def test_github_actions_are_pinned_to_full_commit_shas():
     assert workflow_dir.is_dir()
 
     for path in sorted(workflow_dir.glob("*.yml")):
-        for lineno, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+        for lineno, line in enumerate(
+            path.read_text(encoding="utf-8").splitlines(), start=1
+        ):
             if "uses:" not in line:
                 continue
             assert pattern.match(line), f"{path}:{lineno}: unpinned action: {line}"
