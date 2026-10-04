@@ -778,3 +778,21 @@ The critical difference is that Digital Life Form must add scientific execution 
 Therefore a healthy backend can establish **capability availability**, but can never by itself establish a scientific claim.
 
 Do not mark the capability layer implemented until actual code, tests, failure/recovery cases, and inspectable execution receipts exist.
+
+# 22. 2026-10-04 Code Hand implementation
+
+Version 1.4.0 adds the first concrete Hand implementation: src/dlf_flywire/code_hand.py.
+
+Current Code Hand contract:
+- create one new UTF-8 source file inside an explicit workspace;
+- reject absolute/traversal paths and existing targets;
+- require explicit permission;
+- execute explicit Python assertions against the generated file;
+- route both operations through PolicyGate -> CapabilityDoctor -> ExecutionEngine;
+- persist sealed receipts and checkpoint state;
+- independently verify the complete two-step run;
+- re-hash the generated file after execution.
+
+CI now exercises the real CodeHand API rather than only constructing a raw task plan. The smoke test creates code_hand_demo.py in the ephemeral GitHub Actions workspace, runs two assertions, prints both full receipts, and verifies the run with status PASS.
+
+The first implementation remains deliberately narrow. It is not yet a general autonomous coding agent, remote repository editor, web agent, installer, or desktop controller.
