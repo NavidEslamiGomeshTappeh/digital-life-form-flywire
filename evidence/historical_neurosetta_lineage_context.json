@@ -121,5 +121,15 @@
     "https://github.com/NikDrummond/Neurosetta_old",
     "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1",
     "https://github.com/NikDrummond/NeuRosetta"
-  ]
+  ],
+  "neuoptics_pipeline_check": {
+    "paper_repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "targeted_search_terms": [
+      "NeuOptics",
+      "Neuron_column_assignment"
+    ],
+    "result": "NO_PUBLIC_IMPORT_FOUND",
+    "paper_repo_observation": "The public paper repository's code/notebooks searched for these terms do not import NeuOptics; its later PP4 notebook directly calls NeuRosetta Forest alignment and sphere operations.",
+    "interpretation": "NeuOptics remains software-family context from the same author/ecosystem, not a demonstrated dependency of the paper's Point_data pipeline."
+  }
 }
