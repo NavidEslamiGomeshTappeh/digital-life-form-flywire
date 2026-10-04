@@ -7,7 +7,12 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from .capabilities import BackendSpec, CapabilityDoctor, CapabilitySpec
-from .execution import CapabilityExecutor, ExecutionEngine, ExecutionError, ExecutionReceipt
+from .execution import (
+    CapabilityExecutor,
+    ExecutionEngine,
+    ExecutionError,
+    ExecutionReceipt,
+)
 from .orchestrator import RunPlan, TaskOrchestrator, TaskStep
 from .verifier import RunVerification, verify_run
 
