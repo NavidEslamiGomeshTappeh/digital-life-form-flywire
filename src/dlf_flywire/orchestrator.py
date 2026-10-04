@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import uuid
 from dataclasses import dataclass
 from pathlib import Path
@@ -16,6 +17,15 @@ from .execution import (
     verify_receipt_file,
 )
 from .policy import ExecutionIntent
+
+
+
+def _safe_run_id(run_id: str) -> str:
+    if not run_id or not re.fullmatch(r"[A-Za-z0-9_.-]{1,128}", run_id):
+        raise ValueError(
+            "run_id must contain only letters, digits, dot, underscore, or hyphen"
+        )
+    return run_id
 
 
 class OrchestrationError(RuntimeError):
@@ -168,7 +178,7 @@ class TaskOrchestrator:
 
     def run(self, plan: RunPlan, *, run_id: str | None = None) -> tuple[str, dict[str, ExecutionReceipt]]:
         plan_sha256 = plan.fingerprint()
-        run_id = run_id or uuid.uuid4().hex
+        run_id = _safe_run_id(run_id or uuid.uuid4().hex)
         prior = self._load_state(run_id)
         steps_state: dict[str, dict[str, Any]] = {}
         if prior:
