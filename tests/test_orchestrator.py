@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import sys
+from pathlib import Path
 
 import pytest
 
@@ -15,7 +16,6 @@ from dlf_flywire.orchestrator import (
     TaskStep,
     verify_run,
 )
-from dlf_flywire.policy import ExecutionIntent
 
 
 def make_executor(tmp_path):
@@ -116,9 +116,30 @@ def test_verifier_rejects_receipt_tamper(tmp_path):
         (tmp_path / "state" / "plans" / f"{run_id}.json").read_text(encoding="utf-8")
     )
     receipt_path = state["steps"]["one"]["receipt"]
-    receipt = json.loads(open(receipt_path, encoding="utf-8").read())
+    receipt = json.loads(Path(receipt_path).read_text(encoding="utf-8"))
     receipt["stdout"] = "tampered"
-    open(receipt_path, "w", encoding="utf-8").write(json.dumps(receipt))
+    Path(receipt_path).write_text(json.dumps(receipt), encoding="utf-8")
     verification = verify_run(plan, run_id, state_root=tmp_path / "state")
     assert verification.status == "FAIL"
     assert any("stdout hash mismatch" in e for e in verification.errors)
+
+
+def test_orchestrator_denies_network_by_default(tmp_path):
+    orchestrator = TaskOrchestrator(make_executor(tmp_path), tmp_path / "state")
+    plan = RunPlan(
+        (
+            TaskStep(
+                step_id="network",
+                capability="runtime.python.test",
+                action="network test",
+                destination="remote",
+                risk_tier=0,
+                permission_granted=True,
+                network_access=True,
+                operation_args=("-c", "print('must-not-run')"),
+                idempotent=True,
+            ),
+        )
+    )
+    with pytest.raises(ExecutionError, match="network_allowed"):
+        orchestrator.run(plan, run_id="network-denied")
