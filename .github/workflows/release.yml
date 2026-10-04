@@ -19,9 +19,23 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
-      - run: python -m dlf_flywire validate
-      - run: python -m build
-      - uses: actions/upload-artifact@v7
+      - name: Install build tooling
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "pytest>=8,<9" "ruff>=0.13,<1" "build>=1,<2"
+          python -m pip install -e . --no-deps
+      - name: Validate
+        run: python -m dlf_flywire validate
+      - name: Lint
+        run: python -m ruff check .
+      - name: Build
+        run: python -m build
+      - name: Wheel install smoke test
+        run: |
+          python -m pip install dist/*.whl --no-deps
+          dlf-flywire validate
+      - name: Publish build artifacts
+        uses: actions/upload-artifact@v7
         with:
+          name: digital-life-form-${{ github.ref_name }}
           path: dist/*
