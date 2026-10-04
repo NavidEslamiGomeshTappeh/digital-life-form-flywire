@@ -260,7 +260,7 @@
       "role": "lineage_regeneration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "46f68571cfb120eaefecb28ba73df495755ca153"
+        "value": "30bef240b8975ea2d69b00a032e27bda9830899a"
       }
     },
     {
@@ -314,7 +314,7 @@
       "role": "pre_artifact_software_family_context",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "454d6a9a7cb4c13c7d62bda7ac1e9f46c094ae6b"
+        "value": "bc3793e5693404d618d11a66d55544bb72f3d871"
       }
     },
     {
