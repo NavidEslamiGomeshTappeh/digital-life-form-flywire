@@ -203,6 +203,21 @@
       "caveats": [
         "This constrains the public reconstruction; it does not identify the missing December 2025 transform or prove that the later public preprocessing implementation is byte-identical to the historical producer."
       ]
+    },
+    {
+      "id": "C-AGENT-001",
+      "statement": "A bounded neural observation can deterministically produce a capability candidate and pass that candidate into the existing Leader TaskStep contract; neural activity does not grant permission, network access, or system mutation.",
+      "classification": "DETERMINISTIC_COMPUTATION",
+      "status": "REPRODUCED",
+      "evidence": [
+        "E-NEURAL-GATEWAY",
+        "E-NEURAL-LEADER",
+        "E-NEURAL-GATEWAY-TESTS"
+      ],
+      "caveats": [
+        "The current regression uses explicitly opaque/synthetic neural channels and therefore is not evidence that a biological FlyWire neuron currently controls Code Hand.",
+        "Biological mapping from FlyWire circuit activity to an action capability remains unestablished."
+      ]
     }
   ]
 }
