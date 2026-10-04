@@ -35,46 +35,25 @@ jobs:
         run: python -m dlf_flywire doctor --json
       - name: Code Hand real-file smoke test
         run: |
-          cat > "$RUNNER_TEMP/code-hand-plan.json" <<'JSON'
-          {
-            "steps": [
-              {
-                "step_id": "create-file",
-                "capability": "runtime.python",
-                "action": "Code Hand create a real Python source file",
-                "destination": "repository-workspace",
-                "risk_tier": 0,
-                "permission_granted": true,
-                "operation_args": [
-                  "-c",
-                  "from pathlib import Path; source='def add(a, b):'+chr(10)+'    return a + b'+chr(10); p=Path('code_hand_demo.py'); p.write_text(source, encoding='utf-8'); print('CREATED', p); print('BYTES', p.stat().st_size)"
-                ],
-                "idempotent": true
-              },
-              {
-                "step_id": "test-file",
-                "capability": "runtime.python",
-                "action": "Code Hand test the generated Python source",
-                "destination": "repository-workspace",
-                "risk_tier": 0,
-                "permission_granted": true,
-                "dependencies": ["create-file"],
-                "operation_args": [
-                  "-c",
-                  "from code_hand_demo import add; assert add(2, 3) == 5; assert add(-2, 5) == 3; print('CODE_HAND_TEST_PASS')"
-                ],
-                "idempotent": true
-              }
-            ]
-          }
-          JSON
-          dlf-flywire run-plan "$RUNNER_TEMP/code-hand-plan.json"             --run-id ci-code-hand             --state-root "$RUNNER_TEMP/code-hand-state"
-          echo '--- CREATE FILE RECEIPT ---'
-          cat "$RUNNER_TEMP/code-hand-state/receipts/ci-code-hand/create-file.json"
-          echo '--- TEST FILE RECEIPT ---'
-          cat "$RUNNER_TEMP/code-hand-state/receipts/ci-code-hand/test-file.json"
-          echo '--- GENERATED FILE ---'
-          cat code_hand_demo.py
+          python - <<'PY'
+          from pathlib import Path
+          from dlf_flywire.code_hand import CodeHand
+
+          hand = CodeHand(Path.cwd(), "$RUNNER_TEMP/code-hand-state")
+          result = hand.execute(
+              "code_hand_demo.py",
+              "def add(a, b):\\n    return a + b\\n",
+              "assert add(2, 3) == 5\\nassert add(-2, 5) == 3",
+              run_id="ci-code-hand",
+              permission_granted=True,
+          )
+          print(result.to_dict()["verification"])
+          for name, receipt in result.receipts.items():
+              print(f"--- {name} receipt ---")
+              print(receipt.to_dict())
+          print("--- generated file ---")
+          print(Path(result.file_path).read_text(encoding="utf-8"), end="")
+          PY
       - name: Canonical validation
         run: python -m dlf_flywire validate
       - name: Provenance audit
