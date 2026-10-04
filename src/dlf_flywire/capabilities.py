@@ -11,7 +11,6 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Literal
 
-
 ProbeStatus = Literal["ok", "missing", "broken", "timeout", "error"]
 CapabilityStatus = Literal["ok", "off", "error"]
 
