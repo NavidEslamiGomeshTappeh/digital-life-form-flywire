@@ -96,9 +96,12 @@ def test_public_coordinate_pipeline_boundary_is_ledgered():
         for item in source.get("observations", [])
     )
     assert any(
-        "does not apply a coordinate-frame transform" in item
+        "does not apply a coordinate-frame transform" in text
         for source in boundary["sources"]
-        for item in source.get("observations", [])
+        for text in (
+            source.get("observations", [])
+            + ([source["observation"]] if "observation" in source else [])
+        )
     )
     claims = json.loads(
         (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
