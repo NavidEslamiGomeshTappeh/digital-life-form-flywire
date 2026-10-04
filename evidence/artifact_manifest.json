@@ -368,7 +368,7 @@
       "role": "execution_checkpoint_recovery_engine",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "33bb19f70bd2294c29584f132b709cec41d9ea34"
+        "value": "37a697124df8cb9cbb2fbb61cd4fd42e4df157ad"
       }
     },
     {
