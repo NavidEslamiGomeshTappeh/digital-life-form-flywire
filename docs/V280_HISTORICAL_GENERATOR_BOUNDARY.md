@@ -105,3 +105,16 @@ The script fetches the pinned immutable commits from the study repository and ve
 `v280_results/V280_historical_generator_boundary.json`
 
 The companion GitHub Actions workflow repeats the same test on every relevant repository change and on manual dispatch.
+
+
+## Additional public-toolchain evidence
+
+The current PP2 notebook uses `nr.import_swc(...)` to convert the SWC directory into a NeuRosetta Forest and then saves the forest.
+
+In the public `NikDrummond/NeuRosetta` history, commit `2f4e52c8d0ac4f284b9a15e5d147f6a130998495` on **2026-01-26 14:20:00Z** is explicitly titled:
+
+`Update to IO utils and Added Forests — read/write // Import/export(swc) now parallel, and Forest class for collections of trees added`
+
+That commit adds the public `Forest` class and SWC import/export infrastructure used by the later PP2 notebook.
+
+This is stronger temporal evidence against treating the present public PP2/PP3 stack as the preserved December 2025 generator. It still does not prove that no private predecessor of NeuRosetta existed before that date.
