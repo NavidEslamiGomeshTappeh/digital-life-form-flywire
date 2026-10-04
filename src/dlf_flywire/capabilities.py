@@ -7,8 +7,8 @@ import sys
 import time
 from dataclasses import dataclass
 from datetime import UTC, datetime
-from pathlib import Path
 from collections.abc import Mapping, Sequence
+from pathlib import Path
 from typing import Literal
 
 ProbeStatus = Literal["ok", "missing", "broken", "timeout", "error"]
