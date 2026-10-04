@@ -30,6 +30,17 @@ class ExecutionIntent:
         if self.risk_tier not in {0, 1, 2}:
             raise ValueError("risk_tier must be 0, 1, or 2")
 
+    def to_dict(self) -> dict[str, object]:
+        return {
+            "capability": self.capability,
+            "action": self.action,
+            "destination": self.destination,
+            "risk_tier": self.risk_tier,
+            "permission_granted": self.permission_granted,
+            "network_access": self.network_access,
+            "system_mutation": self.system_mutation,
+        }
+
 
 @dataclass(frozen=True)
 class PolicyDecision:
