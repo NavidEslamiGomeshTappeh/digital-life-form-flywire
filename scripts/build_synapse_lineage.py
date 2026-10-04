@@ -94,7 +94,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", default="evidence/synapses.csv")
     parser.add_argument("--output", default="evidence/synapse_lineage.json")
-    parser.add_argument("--product-version", default="1.3.1")
+    parser.add_argument("--product-version", default="1.4.0")
     args = parser.parse_args()
     build_lineage(Path(args.input), Path(args.output), args.product_version)
     return 0
