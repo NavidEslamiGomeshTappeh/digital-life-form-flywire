@@ -1,6 +1,6 @@
 # Digital Life Form — FlyWire
 
-Version 1.0.0
+Version 1.0.1
 
 Digital Life Form — FlyWire is a provenance-first research-engineering toolkit for extracting a small, exact subset of the FlyWire connectome and packaging the result as reproducible scientific evidence.
 
@@ -50,24 +50,32 @@ Historical V-numbered working files are intentionally removed from the V1 workin
 
 ## Install
 
-`bash
+The core package has no third-party runtime dependencies.
+
+```bash
 python -m pip install -e ".[dev]"
-`
+```
 
 ## Validate
 
-`bash
+```bash
 python -m dlf_flywire validate
 python -m pytest -q
-`
+```
 
 ## Recover exact morphology
 
-`bash
-dlf-flywire recover --dataset 783 --output data/morphology
-`
+V1.0.1 recovery reads the public FAFB v783 Neuroglancer precomputed skeleton endpoint directly and writes SWC without the vulnerable `fafbseg → diskcache` dependency chain.
 
-Recovery fails closed on source-root mismatch.
+```bash
+dlf-flywire recover --dataset 783 --output data/morphology
+```
+
+Recovery fails closed on malformed source data, unsupported skeleton layouts, and source-root/output validation errors.
+
+## Security
+
+Workflow actions are pinned to immutable commit SHAs. CodeQL and OpenSSF Scorecard run in CI. V1.0.1 also removes the vulnerable transitive DiskCache dependency from the core installation path.
 
 ## License
 
