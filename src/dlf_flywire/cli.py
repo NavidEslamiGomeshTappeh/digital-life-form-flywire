@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 
 from .constants import ROOTS
@@ -38,7 +39,6 @@ def main(argv=None) -> int:
     if args.command == "audit":
         from .provenance import audit_provenance
         from .validation import find_project_root
-        import json
         root = find_project_root(args.root)
         print(json.dumps(audit_provenance(root), indent=2))
         return 0
