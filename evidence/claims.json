@@ -160,6 +160,20 @@
       "caveats": [
         "The April 2026 commit explicitly refers to updating an older GUI, so an unpublished/private predecessor cannot be excluded."
       ]
+    },
+    {
+      "id": "C-CONNECTIVITY-004",
+      "statement": "The 649-row canonical V230 synapse-coordinate artifact is linked to the historical Point_data case only through the four shared anchor root IDs; it also contains partner roots and has no row-level morphology join key.",
+      "classification": "DETERMINISTIC_COMPUTATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-V230-POINTDATA-BRIDGE",
+        "E-SYNAPSES",
+        "E-POINTDATA"
+      ],
+      "caveats": [
+        "Shared root IDs do not establish common morphology materialization, common software revision, or common execution run."
+      ]
     }
   ]
 }
