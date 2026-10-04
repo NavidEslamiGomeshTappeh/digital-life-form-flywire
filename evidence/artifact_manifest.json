@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "product_version": "1.5.0",
-  "generated_for": "Version 1.5.0 guarded Code Hand edit contract",
+  "product_version": "1.5.1",
+  "generated_for": "Version 1.5.1 neural-to-Leader boundary and guarded Code Hand execution",
   "exclusion": [
     "evidence/artifact_manifest.json"
   ],
@@ -12,7 +12,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "bc80560fad66ca670bdfbd1e5c973a024d4d0325"
+        "value": "26ca594609a93d60b6543102d639fa76b50a6925"
       }
     },
     {
@@ -21,7 +21,7 @@
       "role": "project_metadata",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "34b229f7b306b0340c6c56a7ffcbca2c19c29d7f"
+        "value": "15eeb315586bcf883feb9ac62adad74eb352ce9b"
       }
     },
     {
@@ -30,7 +30,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "5b601886131b044f9738fb1a32022bb045a52787"
+        "value": "0f228f25863905a12148bddbe4cf13a44edfe2fe"
       }
     },
     {
@@ -441,6 +441,33 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "58df4db2c56c3f40e26f9f760ab3a349ea2e51eb"
+      }
+    },
+    {
+      "id": "E-NEURAL-GATEWAY",
+      "path": "src/dlf_flywire/neural_gateway.py",
+      "role": "bounded_neural_intent_gateway",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "006b0068163a9aeae9cb25c5643d78738045ece7"
+      }
+    },
+    {
+      "id": "E-NEURAL-LEADER",
+      "path": "src/dlf_flywire/neural_leader.py",
+      "role": "neural_to_leader_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "353690d26755e6061adf49e124cca0f93c431e63"
+      }
+    },
+    {
+      "id": "E-NEURAL-GATEWAY-TESTS",
+      "path": "tests/test_neural_gateway.py",
+      "role": "neural_boundary_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "bb7a345a6d0ff3646500c36f0077137b6a1c6832"
       }
     }
   ]
