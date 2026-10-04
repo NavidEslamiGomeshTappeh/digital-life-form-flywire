@@ -51,6 +51,17 @@
         "src/NeuRosetta/io_utils/io_utils.py",
         "src/NeuRosetta/io_utils/nr_utils.py"
       ]
+    },
+    {
+      "role": "public_legacy_neurosetta_subtree_evidence",
+      "repository": "NikDrummond/Neurosetta_legacy_v0.0.1",
+      "sha": "94ff9e5a956d5a91c40bb386f33e3dfa60896987",
+      "timestamp": "2025-04-18T19:05:03Z",
+      "message": "Subtrees — find and generate masks for a sub tree defined by a single vertex",
+      "relevant_files": [
+        "Neurosetta/graphs.py",
+        "Neurosetta/plotting.py"
+      ]
     }
   ],
   "checks": {
@@ -70,8 +81,9 @@
   },
   "interpretation": {
     "proven": "The currently public PP1/PP3 preprocessing notebooks were not present when Point_data.pkl was first committed.",
-    "unresolved": "The original December 2025 generator implementation itself is not recovered.",
-    "public_toolchain_evidence": "The public NeuRosetta commit that adds the Forest/SWC IO infrastructure used by the later PP2 notebook is dated 2026-01-26, after the 2025-12-09 Point_data commit. This does not exclude a private predecessor."
+    "unresolved": "The exact December 2025 generator implementation, its exact software commit, exact morphology materialization, and execution environment remain unrecovered.",
+    "public_toolchain_evidence": "The public NeuRosetta commit that adds the Forest/SWC IO infrastructure used by the later PP2 notebook is dated 2026-01-26, after the 2025-12-09 Point_data commit. This does not exclude a private predecessor.",
+    "legacy_boundary": "A separate public legacy NeuRosetta repository already contained subtree functionality in April 2025 and .nr support earlier. Therefore the chronology rules out only the later public Forest/IO pipeline as the documented historical implementation; it does not rule out a legacy or private NeuRosetta-based generator."
   },
   "execution_note": "Repository chronology was independently verified through immutable GitHub commit metadata and file trees. Local container execution of the network-fetching audit could not run because outbound DNS/network access to github.com is unavailable in the analysis environment."
 }
