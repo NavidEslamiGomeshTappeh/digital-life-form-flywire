@@ -6,7 +6,7 @@
 > When the chat changes, **read this file first** before making scientific, architectural,
 > provenance, security, or repository decisions.
 >
-> Last consolidated: **2026-10-04**
+> Last consolidated: **2026-10-05**
 > Current product line: **Version 1.x only** (no V-numbered replacement series)
 
 ---
@@ -797,3 +797,20 @@ Current Code Hand contract:
 CI exercises the real CodeHand API. The smoke test creates code_hand_demo.py, tests it, edits it using the returned content SHA-256, tests the edited version, and prints the execution receipts plus independent verification.
 
 The first Hand remains deliberately narrow. It is not yet a general autonomous coding agent, remote repository editor, web agent, installer, or desktop controller.
+
+
+## 9. Neural → Leader execution boundary — 2026-10-05
+
+Version 1.5.1 adds the first explicit software boundary between a bounded neural observation and the existing Leader/Code Hand stack.
+
+Implemented components:
+
+- src/dlf_flywire/neural_gateway.py: bounded sparse observations → deterministic intent candidates, with observation-set SHA-256 fingerprinting;
+- src/dlf_flywire/neural_leader.py: activated candidate → normal TaskStep;
+- tests/test_neural_gateway.py: deterministic selection, fail-closed behavior, mixed-window rejection, and permission-boundary tests;
+- docs/NEURAL_BOUNDARY.md: scientific and security boundaries;
+- tests/test_neural_leader_integration.py: integration regression proving the neural-selected capability can reach the existing Code Hand execution contract.
+
+Critical boundary: the current neural channels are explicitly opaque/synthetic. This proves an engineering interface, not biological control by the four FlyWire neurons. Neural activity cannot grant permission, enable network access, enable system mutation, bypass policy, or bypass independent verification.
+
+The next high-value step is a real signal adapter with preserved raw-signal hashes and evidence-backed mapping from an actual neural/circuit source to intent. Only after that should the project attempt closed-loop neural → Leader → Hand → Verifier → feedback experiments.
