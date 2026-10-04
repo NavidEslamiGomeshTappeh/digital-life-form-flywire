@@ -304,3 +304,15 @@ def test_policy_decision_is_sealed_into_receipt(tmp_path):
     assert receipt.policy_decision["status"] == "allow"
     assert receipt.policy_decision["checks"]["permission_granted"] is True
     assert verify_receipt(receipt.to_dict()).receipt_sha256 == receipt.receipt_sha256
+
+
+def test_execution_rejects_path_traversal_run_id(tmp_path):
+    engine = ExecutionEngine(tmp_path / "state")
+    with pytest.raises(ValueError, match="run_id"):
+        engine.execute(request(), run_id="../escape")
+
+
+def test_execution_rejects_overlong_run_id(tmp_path):
+    engine = ExecutionEngine(tmp_path / "state")
+    with pytest.raises(ValueError, match="run_id"):
+        engine.execute(request(), run_id="x" * 129)
