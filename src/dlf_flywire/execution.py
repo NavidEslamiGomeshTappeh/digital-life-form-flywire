@@ -186,6 +186,7 @@ class ExecutionEngine:
         duration_ms: int,
         recovered: bool,
         capability_probe: dict[str, Any] | None = None,
+        policy_decision: PolicyDecision | None = None,
     ) -> ExecutionReceipt:
         unsigned = {
             "schema_version": 1,
@@ -223,6 +224,7 @@ class ExecutionEngine:
         run_id: str | None = None,
         resume: bool = True,
         capability_probe: dict[str, Any] | None = None,
+        policy_decision: PolicyDecision | None = None,
     ) -> ExecutionReceipt:
         run_id = run_id or str(uuid.uuid4())
         cwd = str(Path(request.cwd or os.getcwd()).resolve())
@@ -311,6 +313,7 @@ class ExecutionEngine:
             duration_ms,
             recovered,
             capability_probe,
+            policy_decision,
         )
         receipt_path = self._receipt_path(run_id, request.step_id)
         _atomic_write_json(receipt_path, receipt.to_dict())
