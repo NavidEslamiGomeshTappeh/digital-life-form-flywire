@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "c6ab354179b11ee00da1ced408580433896f079a"
+        "value": "389364d325cad052935d3d75c27d798df802efbf"
       }
     },
     {
@@ -318,8 +318,8 @@
       }
     },
     {
-      "id": "E-V230-POINTDATA-BRIDGE",
-      "path": "evidence/v230_point_data_bridge.json",
+      "id": "E-POINTDATA-CONNECTIVITY-BRIDGE",
+      "path": "evidence/point_data_connectivity_bridge.json",
       "role": "v230_point_data_anchor_bridge",
       "identity": {
         "type": "git_blob_sha1",
