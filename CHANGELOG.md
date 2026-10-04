@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.2 — 2026-10-04
+
+Claim/manifest integrity patch.
+
+- Bound the independent-corroboration claim for the 649-row case directly to the frozen Codex/Zenodo source-receipt artifact.
+- Added regression coverage that requires the artifact manifest to remain explicitly excluded from its own hashed artifact list.
+- Added regression tests for claim-to-receipt binding and manifest self-exclusion.
+- Synchronized package, evidence, documentation, and citation metadata to 1.2.2.
+
+
 ## 1.2.1 — 2026-10-04
 
 Provenance receipt hardening patch.

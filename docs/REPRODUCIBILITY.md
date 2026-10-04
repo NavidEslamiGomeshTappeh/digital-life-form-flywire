@@ -1,4 +1,4 @@
-# Reproducibility — Version 1.2.1
+# Reproducibility — Version 1.2.2
 
 ## Local checks
 
@@ -21,7 +21,7 @@ relationships and structurally validated before the command reports PASS.
 
 ## Evidence
 
-The committed files in evidence/ are the canonical Version 1 scientific record. The claim ledger declares the status of each important statement, while artifact_manifest.json binds critical files to immutable content identities. CI and the local audit command verify the resulting contract.
+The committed files in evidence/ are the canonical Version 1 scientific record. The claim ledger declares the status of each important statement, while artifact_manifest.json binds critical files to immutable content identities. The manifest explicitly excludes itself from that list. CI and the local audit command verify the resulting contract.
 
 Historical external sources are referenced by immutable commits, Git blobs, dataset identifiers, and (for the two frozen cross-source receipts) the exact recorded GitHub Actions proof runs.
 

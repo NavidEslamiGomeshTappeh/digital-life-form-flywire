@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from dlf_flywire import __version__
@@ -5,6 +6,7 @@ from dlf_flywire.provenance import (
     ProvenanceError,
     audit_provenance,
     git_blob_sha1,
+    validate_artifact_manifest,
     validate_claim_ledger,
     validate_evidence_manifest_version,
 )
@@ -23,6 +25,23 @@ def test_provenance_audit_passes():
 def test_claim_ledger_contains_unresolved_boundaries():
     report = validate_claim_ledger(ROOT)
     assert report["status_counts"]["UNRESOLVED"] >= 2
+
+
+def test_independent_corroboration_claim_binds_source_receipts():
+    ledger = json.loads(
+        (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
+    )
+    claim = next(item for item in ledger["claims"] if item["id"] == "C-CONNECTIVITY-003")
+    assert "E-SOURCE-RECEIPTS" in claim["evidence"]
+
+
+def test_artifact_manifest_excludes_itself():
+    manifest = json.loads(
+        (ROOT / "evidence" / "artifact_manifest.json").read_text(encoding="utf-8")
+    )
+    paths = {item["path"] for item in manifest["artifacts"]}
+    assert "evidence/artifact_manifest.json" not in paths
+    assert "evidence/artifact_manifest.json" in manifest["exclusion"]
 
 
 def test_evidence_manifest_version_is_current():
@@ -50,7 +69,7 @@ def test_unsafe_artifact_paths_fail_closed(tmp_path):
     )
     manifest = """{
       "schema_version": 1,
-      "product_version": "1.2.1",
+      "product_version": "1.2.2",
       "artifacts": [{
         "id": "E-BAD",
         "path": "../outside.txt",
@@ -59,8 +78,6 @@ def test_unsafe_artifact_paths_fail_closed(tmp_path):
     }"""
     (evidence / "artifact_manifest.json").write_text(manifest, encoding="utf-8")
     (tmp_path / "outside.txt").write_text("unexpected", encoding="utf-8")
-
-    from dlf_flywire.provenance import validate_artifact_manifest
 
     try:
         validate_artifact_manifest(tmp_path)

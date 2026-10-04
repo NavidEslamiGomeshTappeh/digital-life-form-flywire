@@ -31,7 +31,7 @@ def test_frozen_cross_source_receipts_fail_closed_on_hash_drift(tmp_path):
 
     receipt = {
         "schema_version": 1,
-        "product_version": "1.2.1",
+        "product_version": "1.2.2",
         "canonical_reference": {
             "path": "evidence/synapses.csv",
             "rows": 1,
@@ -58,7 +58,7 @@ def test_frozen_cross_source_receipts_fail_closed_on_hash_drift(tmp_path):
         json.dumps(receipt), encoding="utf-8"
     )
 
-    (tmp_path / "VERSION").write_text("1.2.1\n", encoding="utf-8")
+    (tmp_path / "VERSION").write_text("1.2.2\n", encoding="utf-8")
 
     with pytest.raises(CrossSourceValidationError, match="SHA-256 mismatch"):
         validate_cross_source_receipts(tmp_path)

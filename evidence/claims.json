@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "product_version": "1.2.1",
+  "product_version": "1.2.2",
   "purpose": "Machine-checkable claim ledger for the consolidated FAFB v783 evidence case.",
   "status_vocabulary": {
     "PROVEN": "Direct evidence supports the stated claim within its defined scope.",
@@ -39,7 +39,7 @@
       "statement": "All 649 reference coordinates are independently corroborated by the frozen Zenodo FAFB v783 midpoint mapping.",
       "classification": "INDEPENDENT_CORROBORATION",
       "status": "INDEPENDENTLY_CORROBORATED",
-      "evidence": ["E-CONNECTIVITY", "E-STRUCTURAL-VALIDATION"]
+      "evidence": ["E-CONNECTIVITY", "E-STRUCTURAL-VALIDATION", "E-SOURCE-RECEIPTS"]
     },
     {
       "id": "C-DENDRITE-001",
