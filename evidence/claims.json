@@ -135,6 +135,31 @@
       "caveats": [
         "The publication documents the existence and purpose of manual review, but no historical per-neuron edit record for the four project anchors has been recovered."
       ]
+    },
+    {
+      "id": "C-POINTDATA-003",
+      "statement": "Public NeuRosetta-family code existed before the December 2025 Point_data artifact and included neuron simplification, subtree/root selection, and explicit coordinate transformation/scaling functionality.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-HISTORICAL-NEUROSETTA-LINEAGE"
+      ],
+      "caveats": [
+        "This establishes pre-artifact software-family context only; it does not identify the exact December 2025 producer revision or execution environment."
+      ]
+    },
+    {
+      "id": "C-MORPH-003",
+      "statement": "The public PySide6 NeuRosetta GUI implementation and explicit manual-subtree GUI operation entered that repository's public history in April 2026, after the December 2025 Point_data artifact.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-HISTORICAL-NEUROSETTA-LINEAGE",
+        "E-PUBLISHED-METHOD-BOUNDARY"
+      ],
+      "caveats": [
+        "The April 2026 commit explicitly refers to updating an older GUI, so an unpublished/private predecessor cannot be excluded."
+      ]
     }
   ]
 }
