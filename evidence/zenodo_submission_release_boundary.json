@@ -1,0 +1,60 @@
+{
+  "status": "PROVEN_ARCHIVED_RELEASE_CONTENT_BOUNDARY",
+  "source": {
+    "type": "Zenodo archived software release",
+    "record_url": "https://zenodo.org/records/18269709",
+    "version": "Submission_release",
+    "published": "2026-01-16",
+    "archive": "borstlab/T4_T5_Dendrite_Morphology_Paper-Submission_release.zip",
+    "archive_md5": "6ce666c93c0d907e228442528796bc0e",
+    "archive_size_bytes": 98998520
+  },
+  "archive_observations": {
+    "includes": [
+      "Data/Point_data.pkl",
+      "Data/Neuron_ids.csv",
+      "Data/Edge_data.pkl",
+      "Data/Vertex_data.pkl",
+      "Data/Bifurication_data.pkl",
+      "Data/Segment_deviation_data.pkl",
+      "Data/Contour_plot.pkl",
+      "Notebooks/ANOVA_analysis.ipynb",
+      "Notebooks/Figure_2.ipynb",
+      "Notebooks/Figure_3.ipynb",
+      "Notebooks/Figure_4.ipynb",
+      "Notebooks/Figure_5.ipynb",
+      "Notebooks/Figure_6.ipynb",
+      "Notebooks/Figure_7.ipynb",
+      "Notebooks/Figure_S1.ipynb",
+      "src/Nearest_neighbours.py",
+      "src/Random_bifurcations.py",
+      "src/dist_fit.py",
+      "src/figure_Tools.py",
+      "src/paper_ANOVA.py",
+      "conda-environment.yml"
+    ],
+    "does_not_list": [
+      "Notebooks/PP1_Fetch_flywire.ipynb",
+      "Notebooks/PP2_nr_conversion.ipynb",
+      "Notebooks/PP3_Dendrite_extraction.ipynb",
+      "Notebooks/PP4_Global_allignment.ipynb",
+      "Notebooks/PP5_Mesh_generation.ipynb",
+      "Reduced_dendrites/",
+      ".nr intermediate morphology trees"
+    ],
+    "history_observation": "The archive's .history tree exposes many README revisions and source-code history snapshots from December 2025, but its listed archive contents still do not include the PP1-PP5 preprocessing notebooks or the Reduced_dendrites intermediate forest."
+  },
+  "interpretation": {
+    "proven": [
+      "The January 2026 archived software release preserves Point_data and downstream analysis artifacts as a publication snapshot.",
+      "The release archive does not preserve the preprocessing notebooks or Reduced_dendrites intermediates needed to recover the exact December producer from that release."
+    ],
+    "not_proven": [
+      "Absence from this release archive does not prove the producer never existed; it establishes only that the publication snapshot does not preserve it."
+    ]
+  },
+  "relation_to_current_boundary": {
+    "strength": "INDEPENDENT_RELEASE_CORROBORATION",
+    "effect": "Strengthens the conclusion that the public publication package preserves the derived artifact and downstream consumers while omitting the upstream producer/intermediate morphology materialization."
+  }
+}
