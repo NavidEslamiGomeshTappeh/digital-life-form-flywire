@@ -8,7 +8,6 @@ from pathlib import Path
 from .constants import ROOTS
 
 
-
 def _load_run_plan(path: str):
     from .orchestrator import RunPlan, TaskStep
 
