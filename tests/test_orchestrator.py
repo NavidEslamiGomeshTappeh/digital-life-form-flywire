@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import json
 import sys
@@ -73,6 +74,28 @@ def test_orchestrator_runs_dependency_order_and_verifies(tmp_path):
     verification = verify_run(plan, run_id, state_root=tmp_path / "state")
     assert verification.status == "PASS"
     assert verification.successful_steps == 2
+
+
+def test_parallel_runs_keep_checkpoint_and_receipt_state_isolated(tmp_path):
+    executor = make_executor(tmp_path)
+    orchestrator = TaskOrchestrator(executor, tmp_path / "state")
+    plans = {
+        "parallel-a": RunPlan((step("shared-step", command="print('A')"),)),
+        "parallel-b": RunPlan((step("shared-step", command="print('B')"),)),
+    }
+
+    def run(item):
+        run_id, receipts = orchestrator.run(plans[item], run_id=item)
+        return run_id, receipts["shared-step"]
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        results = list(pool.map(run, plans))
+
+    assert {run_id for run_id, _receipt in results} == set(plans)
+    assert {receipt.stdout.strip() for _run_id, receipt in results} == {"A", "B"}
+    for run_id in plans:
+        verification = verify_run(plans[run_id], run_id, state_root=tmp_path / "state")
+        assert verification.status == "PASS"
 
 
 def test_orchestrator_recovers_after_engine_success_before_plan_commit(tmp_path, monkeypatch):
