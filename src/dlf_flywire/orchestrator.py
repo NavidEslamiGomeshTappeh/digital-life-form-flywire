@@ -22,10 +22,10 @@ from .verifier import RunVerification, verify_run
 __all__ = [
     "OrchestrationError",
     "PlanChanged",
-    "TaskStep",
     "RunPlan",
-    "TaskOrchestrator",
     "RunVerification",
+    "TaskOrchestrator",
+    "TaskStep",
     "verify_run",
 ]
 
