@@ -1,0 +1,6 @@
+[
+  {"neuron_id":"visual-channel-A","timestamp_ms":10},
+  {"neuron_id":"visual-channel-A","timestamp_ms":20},
+  {"neuron_id":"visual-channel-B","timestamp_ms":30},
+  {"neuron_id":"outside-window","timestamp_ms":150}
+]
