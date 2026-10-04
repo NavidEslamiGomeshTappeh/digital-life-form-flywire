@@ -43,7 +43,7 @@ def _b64(value: str) -> str:
 
 
 def _safe_relative_file(workspace_root: Path, relative_path: str) -> Path:
-    candidate = Path(relative_path)
+    candidate = Path(relative_path.replace("\\", "/"))
     if candidate.is_absolute():
         raise CodeHandError("Code Hand paths must be relative to the workspace")
     if not relative_path.strip():
