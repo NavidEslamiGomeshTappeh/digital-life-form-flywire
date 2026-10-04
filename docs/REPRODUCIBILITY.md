@@ -1,4 +1,4 @@
-# Reproducibility — Version 1.2.2
+# Reproducibility — Version 1.3.0
 
 ## Local checks
 
@@ -7,6 +7,7 @@ python -m pytest -q
 python -m dlf_flywire validate
 python -m dlf_flywire audit
 python -m dlf_flywire verify-sources
+python -m dlf_flywire lineage
 python -m build
 
 ## Exact morphology recovery
@@ -24,5 +25,7 @@ relationships and structurally validated before the command reports PASS.
 The committed files in evidence/ are the canonical Version 1 scientific record. The claim ledger declares the status of each important statement, while artifact_manifest.json binds critical files to immutable content identities. The manifest explicitly excludes itself from that list. CI and the local audit command verify the resulting contract.
 
 Historical external sources are referenced by immutable commits, Git blobs, dataset identifiers, and (for the two frozen cross-source receipts) the exact recorded GitHub Actions proof runs.
+
+Record-level lineage is generated deterministically from `evidence/synapses.csv` by `scripts/build_synapse_lineage.py`. The validator recomputes every record ID and checks the canonical CSV hash before accepting the lineage index.
 
 The Git history remains available for forensic reconstruction of earlier experiments, but the working tree contains only the consolidated product.
