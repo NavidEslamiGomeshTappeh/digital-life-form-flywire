@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import json
 from pathlib import Path
 
@@ -12,6 +13,7 @@ EXPECTED_SHA256 = {
     "T5c": "83b287e914522b0b382e3e46d39ced36494ff257d835cac11d7f4243ae1d7745",
 }
 
+
 def validate_project(root: Path) -> dict:
     for name, root_id in ROOTS.items():
         path = root / "data" / "morphology" / f"{name}.swc"
@@ -20,9 +22,12 @@ def validate_project(root: Path) -> dict:
             raise RuntimeError(f"{name}: invalid morphology: {report}")
         if report["sha256"] != EXPECTED_SHA256[name]:
             raise RuntimeError(f"{name}: morphology hash drift")
+
     from .evidence import validate_reference_evidence
+
     evidence = validate_reference_evidence(root / "evidence")
     return {"status": "PASS", "version": "1.0.0", **evidence}
+
 
 def main() -> int:
     root = Path(__file__).resolve().parents[2]
