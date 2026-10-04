@@ -4,14 +4,13 @@ from __future__ import annotations
 
 import argparse
 import csv
-import hashlib
 import json
 from pathlib import Path
 
 
 def record_id(pre_root_id: str, post_root_id: str, x: int, y: int, z: int) -> str:
     tuple_key = f"{pre_root_id}|{post_root_id}|{x}|{y}|{z}"
-    return f"syn-{hashlib.sha256(tuple_key.encode('utf-8')).hexdigest()}"
+    return f"syn-{tuple_key}"
 
 
 def build_lineage(csv_path: Path, output_path: Path, product_version: str) -> None:
@@ -60,7 +59,7 @@ def build_lineage(csv_path: Path, output_path: Path, product_version: str) -> No
             "sha256": source_sha256,
         },
         "record_id_contract": {
-            "algorithm": "SHA-256",
+            "algorithm": "Deterministic tuple identifier (not a cryptographic hash)",
             "input": "UTF-8 canonical tuple string pre_root_id|post_root_id|x|y|z",
             "numeric_encoding": "decimal integer text exactly as represented in evidence/synapses.csv",
             "stability": "record_id is independent of CSV row order; canonical_data_row and csv_line retain source order",
