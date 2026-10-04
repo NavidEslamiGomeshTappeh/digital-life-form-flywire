@@ -68,7 +68,7 @@
       "classification": "UNRESOLVED",
       "status": "UNRESOLVED",
       "evidence": ["E-HISTORICAL-BOUNDARY", "E-POINTDATA"],
-      "caveats": ["The public PP1/PP3 notebooks were committed after Point_data.pkl first appeared; a private predecessor cannot be excluded."]
+      "caveats": ["Point_data.pkl first appeared on 2025-12-09; the public PP1–PP5 preprocessing notebooks were added only in 2026-08, while public NeuRosetta Forest/IO used by those notebooks appears in 2026-01. A separate legacy NeuRosetta repository had earlier subtree and .nr capabilities, so a private/local or legacy route cannot be excluded. The exact historical generator, software commit, morphology materialization, and execution environment remain unrecovered."]
     },
     {
       "id": "C-GEOMETRY-001",
