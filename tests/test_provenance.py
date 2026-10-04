@@ -83,6 +83,21 @@ def test_synapse_lineage_fails_closed_on_record_id_drift(tmp_path):
 
 
 
+def test_v230_point_data_bridge_is_anchor_only():
+    bridge = json.loads(
+        (ROOT / "evidence" / "v230_point_data_bridge.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert bridge["status"] == "PROVEN_ANCHOR_ID_BRIDGE_ONLY"
+    assert bridge["synapse_artifact"]["row_count"] == 649
+    assert bridge["synapse_artifact"]["unique_endpoint_root_ids"] == 62
+    assert bridge["synapse_artifact"]["unique_directed_pairs"] == 75
+    for root_id in bridge["point_data_anchor_roots"]:
+        assert bridge["anchor_presence_in_synapse_artifact"][root_id]["total"] > 0
+    assert "historical_reduced_morphology_artifact_hash" in bridge["join_keys"]["unavailable"]
+
+
 def test_historical_neurosetta_lineage_is_context_only():
     lineage = json.loads(
         (ROOT / "evidence" / "historical_neurosetta_lineage_context.json").read_text(
