@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "1d7d09bb9b45de6edd81649764eb64dab3efa756"
+        "value": "9305e03f4b6babaade786e599f42dadf40ed82ad"
       }
     },
     {
@@ -84,7 +84,7 @@
       "role": "historical_provenance_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "1b688d875071c728cc00ea44cdb11c1519597c6d"
+        "value": "c3adbbef411db8d30aef332595b007382213e823"
       }
     },
     {
