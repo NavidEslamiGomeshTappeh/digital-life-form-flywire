@@ -1,6 +1,6 @@
 # Digital Life Form — FlyWire
 
-نسخه 1.1.0
+نسخه 1.2.0
 
 این پروژه یک سامانهٔ پژوهش-مهندسی provenance-first برای استخراج دقیق و قابل‌بازتولید بخش‌های مشخصی از connectome فای‌وایر است.
 
@@ -12,11 +12,12 @@
 
 هستهٔ شواهد شامل 649 ردیف سیناپس دقیق، 75 زوج directed، چهار morphology دقیق SWC، شواهد provenance تاریخی، بازسازی الگوریتم dendrite subtree، و ممیزی coordinate frame است.
 
-نسخهٔ 1.1 یک claim ledger و artifact-integrity manifest قابل‌بررسی ماشینی اضافه می‌کند. فرمان‌های زیر زنجیرهٔ شواهد را بررسی می‌کنند:
+نسخهٔ 1.1 یک claim ledger، artifact-integrity manifest و قرارداد بررسی مستقل Codex/Zenodo قابل‌بررسی ماشینی اضافه می‌کند. فرمان‌های زیر زنجیرهٔ شواهد را بررسی می‌کنند:
 
 ```bash
 python -m dlf_flywire validate
 python -m dlf_flywire audit
+python -m dlf_flywire verify-sources
 ```
 
 پروژه بین مشاهدهٔ منبع، محاسبهٔ قطعی، corroboration مستقل، استنباط زیستی و موارد حل‌نشده مرز مشخص می‌گذارد. نزدیک‌ترین نقطهٔ SWC به مختصات سیناپس به‌تنهایی compartment زیستی را ثابت نمی‌کند.
