@@ -247,7 +247,7 @@ def test_capability_executor_fails_when_capability_unavailable(tmp_path, monkeyp
         )
 
 
-def test_policy_denies_capability_execution_before_probe(tmp_path):
+def test_policy_denies_capability_execution_before_probe(tmp_path, monkeypatch):
     from dlf_flywire.capabilities import BackendSpec, CapabilityDoctor, CapabilitySpec
     from dlf_flywire.execution import CapabilityExecutor, ExecutionError
 
