@@ -66,7 +66,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "cff222c11d57ba58c579dbd8f82a5817202a5900"
+        "value": "b820d2fd12d59abdf3a600271b4517daebb83dc7"
       }
     },
     {
@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "30b5392a8ba54c0fcd132b2844f4d4b462dd8b0b"
+        "value": "ff468f6bd3c9b79c9f5a7d62fb3663b521c307ae"
       }
     },
     {
@@ -147,7 +147,7 @@
       "role": "frozen_cross_source_receipts",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "cf847fb13cd886d13f460f510831f86ecc0bbe20"
+        "value": "70463f6f3bbbfb0cb5ec47de85df9732ea1c0a94"
       }
     },
     {
@@ -202,7 +202,7 @@
       "role": "record_level_synapse_lineage",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "94043e01873f89e3c78f0959a053a91114a44ede"
+        "value": "9fda4283f10f966bdecc4d5ab1cae6a014ce32a8"
       }
     },
     {
@@ -211,7 +211,7 @@
       "role": "lineage_builder",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "64304263d2325bb2da19bf0aa45f350007c82af8"
+        "value": "e42d6ec4107dd93da8bb70e38c575811ecb3c286"
       }
     },
     {
@@ -413,7 +413,7 @@
       "role": "code_hand_capability",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "2b86db07954d0a0cd5e88441b8597306483b1d06"
+        "value": "1160a5b4ed25d3bd79d274d7508b18c71a11a491"
       }
     },
     {
