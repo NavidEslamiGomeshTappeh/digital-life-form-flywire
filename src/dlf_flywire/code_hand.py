@@ -99,31 +99,31 @@ def _write_script(relative_path: str, content: str) -> str:
 
 
 def _edit_script(relative_path: str, expected_sha256: str, content: str) -> str:
-    source = "\n".join([
-        "from pathlib import Path",
-        "import base64, hashlib, os, tempfile",
-        "p = Path(base64.b64decode(__PATH__).decode('utf-8')).resolve()",
-        "expected = base64.b64decode(__EXPECTED__).decode('ascii')",
-        "data = base64.b64decode(__CONTENT__)",
-        "current = p.read_bytes()",
-        "current_sha = hashlib.sha256(current).hexdigest()",
-        "assert current_sha == expected, f'stale edit precondition: {current_sha} != {expected}'",
-        "fd, tmp = tempfile.mkstemp(prefix='.dlf-edit-', dir=str(p.parent))",
-        "try:",
-        "    with os.fdopen(fd, 'wb') as stream:",
-        "        stream.write(data)",
-        "        stream.flush()",
-        "        os.fsync(stream.fileno())",
-        "    fd = -1",
-        "    os.replace(tmp, p)",
-        "    tmp = None",
-        "finally:",
-        "    if fd != -1: os.close(fd)",
-        "    if tmp and os.path.exists(tmp): os.unlink(tmp)",
-        "print('CODE_HAND_FILE_EDITED', p.as_posix())",
-        "print('OLD_CONTENT_SHA256', current_sha)",
-        "print('NEW_CONTENT_SHA256', hashlib.sha256(data).hexdigest())",
-    ])
+    source = (
+        "from pathlib import Path\n"
+        "import base64, hashlib, os, tempfile\n"
+        "p = Path(base64.b64decode(__PATH__).decode('utf-8')).resolve()\n"
+        "expected = base64.b64decode(__EXPECTED__).decode('ascii')\n"
+        "data = base64.b64decode(__CONTENT__)\n"
+        "current = p.read_bytes()\n"
+        "current_sha = hashlib.sha256(current).hexdigest()\n"
+        "assert current_sha == expected, f'stale edit precondition: {current_sha} != {expected}'\n"
+        "fd, tmp = tempfile.mkstemp(prefix='.dlf-edit-', dir=str(p.parent))\n"
+        "try:\n"
+        "    with os.fdopen(fd, 'wb') as stream:\n"
+        "        stream.write(data)\n"
+        "        stream.flush()\n"
+        "        os.fsync(stream.fileno())\n"
+        "    fd = -1\n"
+        "    os.replace(tmp, p)\n"
+        "    tmp = None\n"
+        "finally:\n"
+        "    if fd != -1: os.close(fd)\n"
+        "    if tmp and os.path.exists(tmp): os.unlink(tmp)\n"
+        "print('CODE_HAND_FILE_EDITED', p.as_posix())\n"
+        "print('OLD_CONTENT_SHA256', current_sha)\n"
+        "print('NEW_CONTENT_SHA256', hashlib.sha256(data).hexdigest())\n"
+    )
     source = source.replace('__PATH__', repr(_b64(relative_path)))
     source = source.replace('__EXPECTED__', repr(_b64(expected_sha256)))
     source = source.replace('__CONTENT__', repr(_b64(content)))
