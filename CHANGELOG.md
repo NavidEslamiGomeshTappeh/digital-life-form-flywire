@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.1 — 2026-10-04 (maintenance)
+
+- Re-synchronized the artifact manifest after the historical NeuRosetta lineage evidence update.
+- Aligned the coordinate-pipeline regression with the current evidence wording and verified both observation forms.
+- No scientific result, dataset version, or product-version semantics changed.
+
 ## 1.3.1 — 2026-10-04
 
 Lineage regeneration reproducibility patch.
