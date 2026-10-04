@@ -368,7 +368,7 @@
       "role": "execution_checkpoint_recovery_engine",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "5978924295fe9367820c20aa9d4ac66b8a2b97d9"
+        "value": "af1f6c049eb36f18adb897a58cbac592ab17ede2"
       }
     },
     {
@@ -395,7 +395,7 @@
       "role": "leader_task_orchestrator",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "c4622de27b0c01d2408e2e233726b3eae1597fc8"
+        "value": "aa8c115beb577440ea51c0c481b08d566b288a1e"
       }
     },
     {
@@ -404,7 +404,7 @@
       "role": "leader_orchestration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "19491e5c00ec5482ecaae311c27f1ef5e28923d7"
+        "value": "61c39b1ebce925673126ffa5718ed71c61629f6f"
       }
     }
   ]
