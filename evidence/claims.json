@@ -167,7 +167,7 @@
       "classification": "DETERMINISTIC_COMPUTATION",
       "status": "PROVEN",
       "evidence": [
-        "E-V230-POINTDATA-BRIDGE",
+        "E-POINTDATA-CONNECTIVITY-BRIDGE",
         "E-SYNAPSES",
         "E-POINTDATA"
       ],
