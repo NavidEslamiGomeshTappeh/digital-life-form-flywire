@@ -12,6 +12,7 @@ from dlf_flywire.execution import (
     RecoveryBlocked,
     verify_receipt,
 )
+from dlf_flywire.policy import ExecutionIntent
 
 
 def request(step_id="hello", idempotent=True):
@@ -199,6 +200,13 @@ def test_capability_executor_probes_before_execution(tmp_path):
         "runtime.python.test",
         "probe-first",
         ("-c", "print('capability-routed')"),
+        intent=ExecutionIntent(
+            capability="runtime.python.test",
+            action="print test output",
+            destination="test-process",
+            risk_tier=0,
+            permission_granted=True,
+        ),
         idempotent=True,
     )
     assert receipt.status == "succeeded"
