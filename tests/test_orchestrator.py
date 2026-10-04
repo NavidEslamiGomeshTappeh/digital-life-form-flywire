@@ -122,6 +122,30 @@ def test_receipt_state_reference_is_relative_and_portable(tmp_path, monkeypatch)
     assert verification.status == "PASS"
 
 
+def test_verifier_rejects_receipt_intent_mismatch(tmp_path):
+    orchestrator = TaskOrchestrator(make_executor(tmp_path), tmp_path / "state")
+    plan = RunPlan((step("one", command="print('intent')"),))
+    run_id, _ = orchestrator.run(plan, run_id="intent-check")
+    state_path = tmp_path / "state" / "plans" / f"{run_id}.json"
+    state = json.loads(state_path.read_text(encoding="utf-8"))
+    receipt_path = tmp_path / "state" / state["steps"]["one"]["receipt"]
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    receipt["intent"]["destination"] = "other-process"
+    payload = dict(receipt)
+    payload.pop("receipt_sha256")
+    import hashlib
+
+    receipt["receipt_sha256"] = hashlib.sha256(
+        json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    receipt_path.write_text(
+        json.dumps(receipt, ensure_ascii=False, sort_keys=True), encoding="utf-8"
+    )
+    verification = verify_run(plan, run_id, state_root=tmp_path / "state")
+    assert verification.status == "FAIL"
+    assert any("intent mismatch" in e for e in verification.errors)
+
+
 def test_verifier_rejects_receipt_path_escape(tmp_path):
     orchestrator = TaskOrchestrator(make_executor(tmp_path), tmp_path / "state")
     plan = RunPlan((step("one"),))
