@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import base64
 import hashlib
+import re
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -211,7 +212,7 @@ class CodeHand:
         target = _safe_relative_file(self.workspace_root, relative_path)
         if not target.is_file():
             raise CodeHandError(f"Code Hand edit target does not exist: {relative_path!r}")
-        if not isinstance(expected_content_sha256, str) or not __import__('re').fullmatch(
+        if not isinstance(expected_content_sha256, str) or not re.fullmatch(
             r"[0-9a-fA-F]{64}", expected_content_sha256
         ):
             raise CodeHandError(
@@ -233,7 +234,7 @@ class CodeHand:
                     permission_granted=permission_granted,
                     operation_args=(
                         "-c",
-                        _edit_script(str(target), expected_content_sha256, new_content),
+                        _edit_script(str(target), expected_content_sha256.lower(), new_content),
                     ),
                     idempotent=False,
                 ),
