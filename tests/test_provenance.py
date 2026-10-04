@@ -134,6 +134,17 @@ def test_historical_neurosetta_lineage_is_context_only():
         item["sha"] == "94ff9e5a956d5a91c40bb386f33e3dfa60896987"
         for item in legacy["relevant_commits"]
     )
+    neuoptics = next(
+        item for item in lineage["lineage"]
+        if item["repository"] == "NikDrummond/NeuOptics"
+    )
+    assert neuoptics["initial_commit"]["sha"] == (
+        "1e2c5b4653f7d5e785df98457a17c0a82a2bca99"
+    )
+    assert any(
+        item["sha"] == "d208e46aa6403a3e9502135d3b538c65ea2ab0b3"
+        for item in neuoptics["relevant_commits"]
+    )
     gui = lineage["lineage"][-1]
     assert gui["relevant_commits"][0]["sha"] == (
         "661a51d24f1f7fb96da2fbbf6fbefc9a5282a7f0"
