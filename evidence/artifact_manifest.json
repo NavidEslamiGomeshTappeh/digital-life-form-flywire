@@ -386,7 +386,7 @@
       "role": "execution_policy_gate",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "1774bcf8e36e000a9a57b18ae921622b13cd1c32"
+        "value": "0bc0d507ab25ebfaadb368585ae82087dfdebf83"
       }
     },
     {
@@ -404,7 +404,7 @@
       "role": "leader_orchestration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "61c39b1ebce925673126ffa5718ed71c61629f6f"
+        "value": "e155436b60204f7f48619580e347c8984906b5c5"
       }
     }
   ]
