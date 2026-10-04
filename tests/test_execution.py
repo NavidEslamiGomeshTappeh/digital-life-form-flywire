@@ -234,3 +234,62 @@ def test_capability_executor_fails_when_capability_unavailable(tmp_path, monkeyp
     )
     with pytest.raises(ExecutionError, match="no healthy backend"):
         executor.execute("missing.capability", "blocked", idempotent=True)
+
+
+def test_policy_denies_capability_execution_before_probe(tmp_path):
+    from dlf_flywire.capabilities import BackendSpec, CapabilityDoctor, CapabilitySpec
+    from dlf_flywire.execution import CapabilityExecutor, ExecutionError
+
+    spec = CapabilitySpec(
+        "runtime.python.policy-test",
+        "policy boundary test",
+        (BackendSpec("python", sys.executable),),
+    )
+    executor = CapabilityExecutor(
+        CapabilityDoctor((spec,)),
+        ExecutionEngine(tmp_path / "state"),
+    )
+    with pytest.raises(ExecutionError, match="permission_granted"):
+        executor.execute(
+            "runtime.python.policy-test",
+            "denied",
+            ("-c", "raise SystemExit(99)"),
+            intent=ExecutionIntent(
+                capability="runtime.python.policy-test",
+                action="run denied operation",
+                destination="test-process",
+                risk_tier=0,
+                permission_granted=False,
+            ),
+        )
+
+
+def test_policy_decision_is_sealed_into_receipt(tmp_path):
+    from dlf_flywire.capabilities import BackendSpec, CapabilityDoctor, CapabilitySpec
+    from dlf_flywire.execution import CapabilityExecutor
+
+    spec = CapabilitySpec(
+        "runtime.python.policy-receipt",
+        "policy receipt test",
+        (BackendSpec("python", sys.executable),),
+    )
+    executor = CapabilityExecutor(
+        CapabilityDoctor((spec,)),
+        ExecutionEngine(tmp_path / "state"),
+    )
+    receipt = executor.execute(
+        "runtime.python.policy-receipt",
+        "policy-receipt",
+        ("-c", "print('policy-ok')"),
+        intent=ExecutionIntent(
+            capability="runtime.python.policy-receipt",
+            action="run receipt test",
+            destination="test-process",
+            risk_tier=0,
+            permission_granted=True,
+        ),
+        idempotent=True,
+    )
+    assert receipt.policy_decision["status"] == "allow"
+    assert receipt.policy_decision["checks"]["permission_granted"] is True
+    assert verify_receipt(receipt.to_dict()).receipt_sha256 == receipt.receipt_sha256
