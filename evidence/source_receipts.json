@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "product_version": "1.2.1",
+  "product_version": "1.2.2",
   "purpose": "Frozen cross-source verification receipt for the four-neuron FAFB v783 evidence case.",
   "canonical_reference": {
     "path": "evidence/synapses.csv",
