@@ -144,8 +144,13 @@ class ExecutionEngine:
     def _checkpoint_path(self, run_id: str) -> Path:
         return self.checkpoint_root / f"{run_id}.json"
 
-    def _receipt_path(self, run_id: str, step_id: str) -> Path:
+    def receipt_path(self, run_id: str, step_id: str) -> Path:
+        """Return the canonical receipt path for a validated run and step."""
+        run_id = _safe_run_id(run_id)
         return self.receipt_root / run_id / f"{_safe_step_name(step_id)}.json"
+
+    def _receipt_path(self, run_id: str, step_id: str) -> Path:
+        return self.receipt_path(run_id, step_id)
 
     def _load_checkpoint(self, run_id: str) -> dict[str, Any] | None:
         path = self._checkpoint_path(run_id)
