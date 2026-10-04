@@ -64,3 +64,4 @@ Our implementation must extend that with scientific controls:
 A capability being healthy is not evidence that a scientific result is correct.
 
 The detailed adaptation is documented in [AGENT_CAPABILITY_LAYER.md](AGENT_CAPABILITY_LAYER.md). Agent Reach is not a current V1 runtime dependency.
+\n## Executable capability doctor\n\nThe first executable capability-layer component is `dlf-flywire doctor`. It performs bounded, side-effect-free probes, distinguishes missing/broken/timeout/error/healthy states, supports ordered fallback and explicit backend promotion, and isolates one capability failure from the rest of the report. It is an environment snapshot only; it is not a scientific validation result.\n

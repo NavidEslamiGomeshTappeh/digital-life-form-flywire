@@ -39,6 +39,18 @@ def main(argv=None) -> int:
         help="Project root containing evidence/ (default: current directory).",
     )
 
+    doctor = sub.add_parser(
+        "doctor", help="Probe local capabilities and select healthy backends."
+    )
+    doctor.add_argument("--json", action="store_true", help="Emit machine-readable JSON.")
+    doctor.add_argument(
+        "--backend",
+        action="append",
+        default=[],
+        metavar="CAPABILITY=BACKEND",
+        help="Promote an exact backend name for one capability.",
+    )
+
     recover = sub.add_parser("recover", help="Recover exact FlyWire morphology.")
     recover.add_argument("--dataset", type=int, default=783)
     recover.add_argument("--output", default="data/morphology")
@@ -69,6 +81,23 @@ def main(argv=None) -> int:
         from .validation import find_project_root
         root = find_project_root(args.root)
         print(json.dumps(validate_synapse_lineage(root), indent=2))
+        return 0
+
+    if args.command == "doctor":
+        from .capabilities import CapabilityDoctor, default_capabilities
+
+        overrides = {}
+        for value in args.backend:
+            if "=" not in value:
+                parser.error("--backend must use CAPABILITY=BACKEND")
+            capability, backend = value.split("=", 1)
+            if not capability or not backend:
+                parser.error("--backend must use CAPABILITY=BACKEND")
+            overrides[capability] = backend
+
+        doctor = CapabilityDoctor(default_capabilities())
+        report = doctor.check(overrides)
+        print(json.dumps(report, indent=2) if args.json else doctor.format_report(report))
         return 0
 
     from .recovery import main as recovery_main
