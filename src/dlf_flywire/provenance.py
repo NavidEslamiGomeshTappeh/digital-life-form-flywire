@@ -252,10 +252,19 @@ def audit_provenance(root: Path) -> dict[str, Any]:
     artifact = validate_artifact_manifest(root)
     claims = validate_claim_ledger(root)
     evidence_manifest = validate_evidence_manifest_version(root)
+
+    from .cross_source import validate_cross_source_receipts
+
+    try:
+        cross_source = validate_cross_source_receipts(root)
+    except Exception as exc:
+        raise ProvenanceError(f"cross-source audit failed: {exc}") from exc
+
     return {
         "status": "PASS",
         "product_version": version,
         "artifact_manifest": artifact,
         "claim_ledger": claims,
         "evidence_manifest": evidence_manifest,
+        "cross_source": cross_source,
     }
