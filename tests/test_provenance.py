@@ -50,7 +50,7 @@ def test_unsafe_artifact_paths_fail_closed(tmp_path):
     )
     manifest = """{
       "schema_version": 1,
-      "product_version": "1.1.0",
+      "product_version": "1.2.0",
       "artifacts": [{
         "id": "E-BAD",
         "path": "../outside.txt",

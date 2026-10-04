@@ -1,4 +1,4 @@
-# Reproducibility — Version 1.1.0
+# Reproducibility — Version 1.2.0
 
 ## Local checks
 
@@ -6,6 +6,7 @@ python -m ruff check .
 python -m pytest -q
 python -m dlf_flywire validate
 python -m dlf_flywire audit
+python -m dlf_flywire verify-sources
 python -m build
 
 ## Exact morphology recovery

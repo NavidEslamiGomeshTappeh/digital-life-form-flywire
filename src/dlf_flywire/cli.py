@@ -18,11 +18,18 @@ def main(argv=None) -> int:
         help="Project root containing data/ and evidence/ (default: current directory).",
     )
 
-    audit = sub.add_parser("audit", help="Audit claim, artifact, and version provenance.")
+    audit = sub.add_parser("audit", help="Audit claim, artifact, cross-source, and version provenance.")
     audit.add_argument(
         "--root",
         default=".",
         help="Project root containing data/ and evidence/ (default: current directory).",
+    )
+
+    verify_sources = sub.add_parser("verify-sources", help="Validate frozen Codex/Zenodo cross-source receipts.")
+    verify_sources.add_argument(
+        "--root",
+        default=".",
+        help="Project root containing evidence/ (default: current directory).",
     )
 
     recover = sub.add_parser("recover", help="Recover exact FlyWire morphology.")
@@ -41,6 +48,13 @@ def main(argv=None) -> int:
         from .validation import find_project_root
         root = find_project_root(args.root)
         print(json.dumps(audit_provenance(root), indent=2))
+        return 0
+
+    if args.command == "verify-sources":
+        from .cross_source import validate_cross_source_receipts
+        from .validation import find_project_root
+        root = find_project_root(args.root)
+        print(json.dumps(validate_cross_source_receipts(root), indent=2))
         return 0
 
     from .recovery import main as recovery_main
