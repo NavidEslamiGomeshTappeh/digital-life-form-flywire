@@ -298,16 +298,15 @@ def test_unsafe_artifact_paths_fail_closed(tmp_path):
     (package / "__init__.py").write_text(
         f'__version__ = "{__version__}"\n', encoding="utf-8"
     )
-    manifest = f"""{
-
+    manifest = """{
       "schema_version": 1,
-      "product_version": "{__version__}",
+      "product_version": "__VERSION__",
       "artifacts": [{
         "id": "E-BAD",
         "path": "../outside.txt",
         "identity": {"type": "sha256", "value": "00"}
       }]
-    }"""
+    }""".replace("__VERSION__", __version__)
     (evidence / "artifact_manifest.json").write_text(manifest, encoding="utf-8")
     (tmp_path / "outside.txt").write_text("unexpected", encoding="utf-8")
 
