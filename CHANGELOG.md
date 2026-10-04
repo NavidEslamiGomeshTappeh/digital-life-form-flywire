@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.0.1 — 2026-10-04
+
+Security and reproducibility maintenance release.
+
+- Removed third-party runtime dependencies from the core package.
+- Removed the vulnerable `fafbseg -> diskcache` dependency chain from the default installation path.
+- Replaced the live morphology recovery implementation with a direct reader for the public Neuroglancer FAFB v783 precomputed skeleton format.
+- Added deterministic binary decoding, transform handling, graph orientation, SWC writing, structural validation, and malformed-input regression tests.
+- Preserved the scientific evidence set and its exact morphology hashes.
+- Kept GitHub Action dependencies pinned to immutable commit SHAs.
+
 ## 1.0.0 — 2026-10-04
 
 Consolidated the entire current research state into one public Version 1 baseline.
