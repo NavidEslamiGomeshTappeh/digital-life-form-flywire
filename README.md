@@ -151,25 +151,38 @@ The command resumes successful steps from verified receipts and returns exit cod
 
 ## Code Hand
 
-Version 1.4.0 adds the first concrete Hand implementation.
+Version 1.5.0 extends the first concrete Hand from create-only to guarded edit execution.
 
-CodeHand can create one new UTF-8 source file inside an explicit workspace and then execute explicit Python assertions against that generated file. The operation is routed through the policy gate and capability doctor, recorded in sealed execution receipts, checkpointed, and independently verified.
+CodeHand can:
+- create one new UTF-8 source file inside an explicit workspace;
+- edit one existing source file only when its current SHA-256 exactly matches the caller's precondition;
+- execute explicit Python assertions against the resulting file.
 
-~~~python
+Every operation is routed through the policy gate, capability doctor, execution engine, checkpoint/receipt system, and independent verifier. Edit writes use a same-directory temporary file plus atomic replacement; a stale precondition fails before replacement and leaves the original bytes unchanged.
+
+```python
 from dlf_flywire.code_hand import CodeHand
 from pathlib import Path
 
 hand = CodeHand(Path.cwd())
-result = hand.execute(
+created = hand.execute(
     "example.py",
     "def add(a, b):\n    return a + b\n",
     "assert add(2, 3) == 5",
     permission_granted=True,
 )
-print(result.verification.to_dict())
-~~~
+edited = hand.edit(
+    "example.py",
+    created.content_sha256,
+    "def add(a, b):\n    return a + b + 1\n",
+    "assert add(2, 3) == 6",
+    permission_granted=True,
+)
+print(edited.verification.to_dict())
+```
 
-The Code Hand contract is documented in docs/CODE_HAND.md. The initial implementation is deliberately narrow: it does not claim remote repository editing, web access, installation, or desktop control.
+The Code Hand contract is documented in docs/CODE_HAND.md. The initial implementation remains deliberately narrow: it does not claim remote repository editing, web access, installation, or desktop control.
+
 ## Recover exact morphology
 
 V1.1.0 recovery reads the public FAFB v783 Neuroglancer precomputed skeleton endpoint directly and writes SWC without the vulnerable `fafbseg → diskcache` dependency chain.
