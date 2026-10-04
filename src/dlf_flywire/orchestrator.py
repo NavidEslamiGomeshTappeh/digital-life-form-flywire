@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import hashlib
 import json
-from dataclasses import dataclass, field
+import uuid
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -37,6 +38,8 @@ class TaskStep:
     dependencies: tuple[str, ...] = ()
     backend_override: str | None = None
     idempotent: bool = False
+    network_access: bool = False
+    system_mutation: bool = False
 
     def __post_init__(self) -> None:
         if not self.step_id.strip():
@@ -74,6 +77,8 @@ class RunPlan:
                 "dependencies": list(step.dependencies),
                 "backend_override": step.backend_override,
                 "idempotent": step.idempotent,
+                "network_access": step.network_access,
+                "system_mutation": step.system_mutation,
             }
             for step in self.steps
         ]
@@ -163,7 +168,7 @@ class TaskOrchestrator:
 
     def run(self, plan: RunPlan, *, run_id: str | None = None) -> tuple[str, dict[str, ExecutionReceipt]]:
         plan_sha256 = plan.fingerprint()
-        run_id = run_id or __import__("uuid").uuid4().hex
+        run_id = run_id or uuid.uuid4().hex
         prior = self._load_state(run_id)
         steps_state: dict[str, dict[str, Any]] = {}
         if prior:
@@ -201,6 +206,8 @@ class TaskOrchestrator:
                 destination=step.destination,
                 risk_tier=step.risk_tier,
                 permission_granted=step.permission_granted,
+                network_access=step.network_access,
+                system_mutation=step.system_mutation,
             )
             try:
                 receipt = self.executor.execute(
@@ -289,6 +296,12 @@ def verify_run(
                 raise ExecutionError("receipt step ID mismatch")
             if receipt.run_id != run_id:
                 raise ExecutionError("receipt run ID mismatch")
+            if receipt.capability != step.capability:
+                raise ExecutionError("receipt capability mismatch")
+            if receipt.policy_decision.get("status") != "allow":
+                raise ExecutionError("receipt policy decision is not allow")
+            if record.get("receipt_sha256") != receipt.receipt_sha256:
+                raise ExecutionError("run-state receipt hash mismatch")
             successful += 1
         except (ExecutionError, OSError, TypeError, ValueError) as exc:
             errors.append(f"step {step.step_id}: {exc}")
