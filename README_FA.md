@@ -12,7 +12,7 @@
 
 هستهٔ شواهد شامل 649 ردیف سیناپس دقیق، 75 زوج directed، چهار morphology دقیق SWC، شواهد provenance تاریخی، بازسازی الگوریتم dendrite subtree، و ممیزی coordinate frame است.
 
-نسخهٔ 1.2.2 اتصال مستقیم claim مربوط به corroboration مستقل به رسیدهای منبع Codex/Zenodo را تثبیت می‌کند و self-reference را از artifact manifest حذف می‌کند تا قرارداد یکپارچگی قابل‌ممیزی باقی بماند. فرمان‌های زیر زنجیرهٔ شواهد را بررسی می‌کنند:
+نسخهٔ 1.2.2 اتصال مستقیم claim مربوط به corroboration مستقل به رسیدهای منبع Codex/Zenodo را تثبیت می‌کند و برای مرز self-exclusion فایل artifact manifest هم تست regression دارد. فرمان‌های زیر زنجیرهٔ شواهد را بررسی می‌کنند:
 
 ```bash
 python -m dlf_flywire validate
