@@ -368,7 +368,7 @@
       "role": "execution_checkpoint_recovery_engine",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "efb1933dd2fad6f01eec8332b5e495c0e1fd5e14"
+        "value": "2377780316c597bdb8cae2efa516f7805ca26122"
       }
     },
     {
@@ -377,7 +377,16 @@
       "role": "execution_recovery_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "746e0860e685e9aa6872433172425875013b6cb8"
+        "value": "3ce18f172e30508931395f15ae909918508c2791"
+      }
+    },
+    {
+      "id": "E-POLICY",
+      "path": "src/dlf_flywire/policy.py",
+      "role": "execution_policy_gate",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "1774bcf8e36e000a9a57b18ae921622b13cd1c32"
       }
     }
   ]
