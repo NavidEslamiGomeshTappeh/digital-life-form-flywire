@@ -154,6 +154,13 @@ def test_orchestrator_blocks_changed_plan_on_resume(tmp_path):
         orchestrator.run(changed_plan, run_id="changed")
 
 
+def test_orchestrator_stops_on_failed_step(tmp_path):
+    orchestrator = TaskOrchestrator(make_executor(tmp_path), tmp_path / "state")
+    plan = RunPlan((step("failed", command="raise SystemExit(7)"),))
+    with pytest.raises(ExecutionError, match="ended with status='failed', returncode=7"):
+        orchestrator.run(plan, run_id="failed-step")
+
+
 def test_orchestrator_stops_on_policy_denial(tmp_path):
     orchestrator = TaskOrchestrator(make_executor(tmp_path), tmp_path / "state")
     plan = RunPlan((step("blocked", granted=False),))
