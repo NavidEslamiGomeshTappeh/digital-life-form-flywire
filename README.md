@@ -1,6 +1,6 @@
 # Digital Life Form — FlyWire
 
-Version 1.0.1
+Version 1.1.0
 
 > **Project continuity / canonical research memory:** [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md)
 >
@@ -82,7 +82,7 @@ python -m pytest -q
 
 ## Recover exact morphology
 
-V1.0.1 recovery reads the public FAFB v783 Neuroglancer precomputed skeleton endpoint directly and writes SWC without the vulnerable `fafbseg → diskcache` dependency chain.
+V1.1.0 recovery reads the public FAFB v783 Neuroglancer precomputed skeleton endpoint directly and writes SWC without the vulnerable `fafbseg → diskcache` dependency chain.
 
 ```bash
 dlf-flywire recover --dataset 783 --output data/morphology
@@ -92,7 +92,7 @@ Recovery fails closed on malformed source data, unsupported skeleton layouts, an
 
 ## Security
 
-Workflow actions are pinned to immutable commit SHAs. CodeQL and OpenSSF Scorecard run in CI. V1.0.1 also removes the vulnerable transitive DiskCache dependency from the core installation path.
+Workflow actions are pinned to immutable commit SHAs. CodeQL and OpenSSF Scorecard run in CI. V1.1.0 also removes the vulnerable transitive DiskCache dependency from the core installation path.
 
 ## License
 
