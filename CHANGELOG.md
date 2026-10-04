@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.4.0 — 2026-10-04
+
+Code Hand foundation release.
+
+- Added the first concrete CodeHand implementation with guarded workspace file creation and Python test execution.
+- Added code.write and code.test.python capabilities to the capability doctor.
+- Added explicit workspace path validation, create-only semantics, post-write SHA-256 verification, and independent run verification.
+- Added dedicated Code Hand regression tests and a real GitHub Actions end-to-end smoke test that creates and tests a temporary source file and prints sealed receipts.
+- Hardened the orchestrator to fail closed when a step returns a non-success execution receipt.
+- Bumped the package/product version to 1.4.0.
+
 ## 1.3.1 — 2026-10-04 (maintenance)
 
 - Re-synchronized the artifact manifest after the historical NeuRosetta lineage evidence update.
