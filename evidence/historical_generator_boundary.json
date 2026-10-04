@@ -115,7 +115,8 @@
       "The public neuron-ID table was added on 2025-12-16, after the Point_data artifact had already been uploaded.",
       "As of 2026-10-04, the repository exposes only main as a public branch; no alternate public branch containing the missing producer is visible.",
       "The first public conda environment file was added on 2026-01-16, after Point_data ingestion, and declares a T45_paper environment without a NeuRosetta dependency entry.",
-      "The contemporaneous December ANOVA notebook kernel metadata says neurosetta, so the later T45_paper environment file is not a cryptographic identification of that earlier runtime."
+      "The contemporaneous December ANOVA notebook kernel metadata says neurosetta, so the later T45_paper environment file is not a cryptographic identification of that earlier runtime.",
+      "The exact recursive Git tree at the first Point_data commit contains only four blob paths, and Data/Point_data.pkl is the only Point/producer-related artifact in that tree."
     ],
     "unresolved": [
       "The exact December 2025 generator script/notebook is not present in the public repository history preceding Point_data.pkl.",
@@ -293,5 +294,22 @@
     "neurosetta_declared": "not present",
     "interpretation": "This release-era environment file was created more than one month after Point_data ingestion. It cannot establish the December 2025 producer environment, package revision, or installation source for NeuRosetta."
   },
-  "status_refinement": "PROVEN_HISTORICAL_INGEST_BOUNDARY_WITH_LATER_PUBLIC_RECONSTRUCTION"
+  "status_refinement": "PROVEN_HISTORICAL_INGEST_BOUNDARY_WITH_LATER_PUBLIC_RECONSTRUCTION",
+  "initial_point_data_tree_audit": {
+    "tree_sha": "cd10c382b3abbbe68bf00e3841959b7fb06f4c07",
+    "recursive": true,
+    "truncated": false,
+    "total_blob_paths": 4,
+    "blob_paths": [
+      ".gitignore",
+      "Data/Point_data.pkl",
+      "Notebooks/ANOVA_analysis.ipynb",
+      "README.md"
+    ],
+    "point_related_blob_paths": [
+      "Data/Point_data.pkl"
+    ],
+    "producer_related_paths_present": false,
+    "interpretation": "At the exact tree introduced with the first Point_data commit, the repository contains only four blob paths; there is no producer notebook/script, PP1-PP5 preprocessing file, Reduced_dendrites artifact, or .nr intermediate."
+  }
 }
