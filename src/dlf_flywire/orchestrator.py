@@ -237,6 +237,22 @@ class TaskOrchestrator:
                 self._write_state(run_id, plan_sha256, steps_state, "failed")
                 raise
 
+            if receipt.status != "succeeded" or receipt.returncode != 0:
+                steps_state[step.step_id] = {
+                    "status": receipt.status,
+                    "receipt": str(
+                        self.executor.engine.receipt_path(run_id, step.step_id).relative_to(
+                            self.state_root.resolve()
+                        )
+                    ),
+                    "receipt_sha256": receipt.receipt_sha256,
+                }
+                self._write_state(run_id, plan_sha256, steps_state, "failed")
+                raise ExecutionError(
+                    f"step {step.step_id!r} ended with status={receipt.status!r}, "
+                    f"returncode={receipt.returncode!r}"
+                )
+
             receipts[step.step_id] = receipt
             steps_state[step.step_id] = {
                 "status": receipt.status,
