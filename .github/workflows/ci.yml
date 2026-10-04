@@ -53,6 +53,21 @@ jobs:
               print(receipt.to_dict())
           print("--- generated file ---")
           print(Path(result.file_path).read_text(encoding="utf-8"), end="")
+
+          edited = hand.edit(
+              "code_hand_demo.py",
+              result.content_sha256.upper(),
+              "def add(a, b):\n    return a + b + 1\n\n\ndef mul(a, b):\n    return a * b\n",
+              "assert add(2, 3) == 6\nassert mul(2, 3) == 6",
+              run_id="ci-code-hand-edit",
+              permission_granted=True,
+          )
+          print(edited.to_dict()["verification"])
+          for name, receipt in edited.receipts.items():
+              print(f"--- {name} edit receipt ---")
+              print(receipt.to_dict())
+          print("--- edited file ---")
+          print(Path(edited.file_path).read_text(encoding="utf-8"), end="")
           PY
       - name: Canonical validation
         run: python -m dlf_flywire validate
