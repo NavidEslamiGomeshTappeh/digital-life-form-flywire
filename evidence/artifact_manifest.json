@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "product_version": "1.3.1",
-  "generated_for": "Version 1.3.1 byte-for-byte lineage regeneration contract",
+  "product_version": "1.4.0",
+  "generated_for": "Version 1.4.0 byte-for-byte lineage regeneration contract",
   "exclusion": [
     "evidence/artifact_manifest.json"
   ],
@@ -12,7 +12,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "3a3cd8cc8b079cb410a465d2925b9cbd703115cb"
+        "value": "88c5fb891dcf1d1647d2b84bac0630cf9570d213"
       }
     },
     {
@@ -21,7 +21,7 @@
       "role": "project_metadata",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "54eb6f54895d060a9486802411952efc1fd6c5ac"
+        "value": "16fb70d36531fa3bc1628f33019652332a11e083"
       }
     },
     {
@@ -30,7 +30,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "9c73af26be70465839a5f43818dbab3f5c35571f"
+        "value": "3e8d9f94621c6b29efab723e119a73a0dbe15089"
       }
     },
     {
@@ -350,7 +350,7 @@
       "role": "capability_doctor_engine",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "8c8b9a41bb943ec51e1dd62f5f982a3f8a600a0b"
+        "value": "516e82e79f9ca5ab1b29ca94151e4d1aa95b5a5c"
       }
     },
     {
@@ -359,7 +359,7 @@
       "role": "capability_doctor_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "86390aed0c1425bd5241983d9755d7f77aa26bef"
+        "value": "77796762802488ebce9ae77d8c521131a716ee04"
       }
     },
     {
@@ -405,6 +405,24 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "bec5be671d95399cf1828e57eda9c0c6ca23cdab"
+      }
+    },
+    {
+      "id": "E-CODE-HAND",
+      "path": "src/dlf_flywire/code_hand.py",
+      "role": "code_hand_capability",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "558ce1ae840c1d6db9d298a11a7463695856bd96"
+      }
+    },
+    {
+      "id": "E-CODE-HAND-TESTS",
+      "path": "tests/test_code_hand.py",
+      "role": "code_hand_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "c3f4f8649877db4d78fab8b362543ed56cf09c46"
       }
     },
     {
