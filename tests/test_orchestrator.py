@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -133,10 +134,13 @@ def test_verifier_rejects_receipt_intent_mismatch(tmp_path):
     receipt["intent"]["destination"] = "other-process"
     payload = dict(receipt)
     payload.pop("receipt_sha256")
-    import hashlib
-
     receipt["receipt_sha256"] = hashlib.sha256(
-        json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        json.dumps(
+            payload,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
     ).hexdigest()
     receipt_path.write_text(
         json.dumps(receipt, ensure_ascii=False, sort_keys=True), encoding="utf-8"
