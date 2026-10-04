@@ -41,6 +41,15 @@ def _positive_int(value: Any, field: str) -> int:
     return value
 
 
+def _safe_relative_path(value: Any, field: str) -> Path:
+    if not isinstance(value, str) or not value:
+        raise CrossSourceValidationError(f"invalid {field}")
+    path = Path(value)
+    if path.is_absolute() or ".." in path.parts:
+        raise CrossSourceValidationError(f"unsafe {field}: {value}")
+    return path
+
+
 def validate_cross_source_receipts(root: Path) -> dict[str, Any]:
     path = root / "evidence" / "source_receipts.json"
     receipt = _load_json(path)
@@ -59,9 +68,7 @@ def validate_cross_source_receipts(root: Path) -> dict[str, Any]:
         raise CrossSourceValidationError("missing canonical_reference")
 
     canonical_path_value = canonical.get("path")
-    if not isinstance(canonical_path_value, str) or not canonical_path_value:
-        raise CrossSourceValidationError("invalid canonical reference path")
-    canonical_path = root / Path(canonical_path_value)
+    canonical_path = root / _safe_relative_path(canonical_path_value, "canonical reference path")
     if not canonical_path.is_file():
         raise CrossSourceValidationError(
             f"canonical reference artifact missing: {canonical_path_value}"
@@ -90,6 +97,8 @@ def validate_cross_source_receipts(root: Path) -> dict[str, Any]:
         )
 
     source_ids: set[str] = set()
+    providers: set[str] = set()
+    artifacts: set[str] = set()
     releases: set[str] = set()
     reports: list[dict[str, Any]] = []
 
@@ -103,6 +112,24 @@ def validate_cross_source_receipts(root: Path) -> dict[str, Any]:
         if source_id in source_ids:
             raise CrossSourceValidationError(f"duplicate source receipt id: {source_id}")
         source_ids.add(source_id)
+
+        provider = source.get("provider")
+        if not isinstance(provider, str) or not provider:
+            raise CrossSourceValidationError(f"missing provider for {source_id}")
+        if provider in providers:
+            raise CrossSourceValidationError(
+                f"source providers must be distinct: {provider}"
+            )
+        providers.add(provider)
+
+        artifact = source.get("artifact")
+        if not isinstance(artifact, str) or not artifact:
+            raise CrossSourceValidationError(f"missing artifact for {source_id}")
+        if artifact in artifacts:
+            raise CrossSourceValidationError(
+                f"source artifacts must be distinct: {artifact}"
+            )
+        artifacts.add(artifact)
 
         release = source.get("dataset")
         if not isinstance(release, str) or not release:
@@ -126,6 +153,8 @@ def validate_cross_source_receipts(root: Path) -> dict[str, Any]:
 
         report: dict[str, Any] = {
             "id": source_id,
+            "provider": provider,
+            "artifact": artifact,
             "dataset": release,
             "exact_matches": matches,
             "missing_matches": missing,
@@ -151,8 +180,10 @@ def validate_cross_source_receipts(root: Path) -> dict[str, Any]:
             f"cross-source release mismatch: {sorted(releases)}"
         )
 
-    if len(source_ids) < 2:
-        raise CrossSourceValidationError("source independence requires distinct source ids")
+    if len(source_ids) < 2 or len(providers) < 2:
+        raise CrossSourceValidationError(
+            "source independence requires at least two distinct providers"
+        )
 
     return {
         "status": "PASS_FROZEN_CROSS_SOURCE_RECEIPTS",
