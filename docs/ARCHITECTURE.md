@@ -47,3 +47,20 @@ The four-neuron reference circuit is stored as stable data and evidence paths. F
 ## Scientific boundary
 
 A reproducible coordinate or morphology mapping is not automatically a biological compartment assignment. Biological claims require independent evidence.
+
+
+## Capability layer (architectural reference)
+
+The project uses `Panniantong/Agent-Reach` as an external architectural reference for capability discovery and backend routing. The inspected main commit is `a19a171fa980a0785849596492e0af4db800c82f` (version `1.5.0` in that tree).
+
+The useful pattern is:
+
+`capability -> health probe -> ordered backends -> selected backend -> execution`
+
+Our implementation must extend that with scientific controls:
+
+`intent/policy -> capability doctor -> backend selection -> execution -> checkpoint/recovery -> artifact receipt -> independent verification -> claim`
+
+A capability being healthy is not evidence that a scientific result is correct.
+
+The detailed adaptation is documented in [AGENT_CAPABILITY_LAYER.md](AGENT_CAPABILITY_LAYER.md). Agent Reach is not a current V1 runtime dependency.
