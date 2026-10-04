@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "87df6ec9ba52aabbde9c1a85e1b6c99c36c81566"
+        "value": "4fce0acbbafb5d88fe8ba49cbc0649793058d47b"
       }
     },
     {
@@ -84,7 +84,7 @@
       "role": "frozen_cross_source_receipts",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "f4fcd5da3d9d64237ac9abe45b70edb13b460457"
+        "value": "80bed08619a04eec9179656cdfa474695dcb78f1"
       }
     },
     {
