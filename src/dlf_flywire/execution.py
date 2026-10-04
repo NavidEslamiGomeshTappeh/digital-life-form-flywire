@@ -43,6 +43,12 @@ def _sha256_bytes(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
 
 
+def _safe_run_id(run_id: str) -> str:
+    if not run_id or not re.fullmatch(r"[A-Za-z0-9_.-]{1,128}", run_id):
+        raise ValueError("run_id must contain only letters, digits, dot, underscore, or hyphen")
+    return run_id
+
+
 def _safe_step_name(step_id: str) -> str:
     safe = re.sub(r"[^A-Za-z0-9_.-]+", "_", step_id).strip("._")
     if not safe:
@@ -226,7 +232,7 @@ class ExecutionEngine:
         capability_probe: dict[str, Any] | None = None,
         policy_decision: PolicyDecision | None = None,
     ) -> ExecutionReceipt:
-        run_id = run_id or str(uuid.uuid4())
+        run_id = _safe_run_id(run_id or str(uuid.uuid4()))
         cwd = str(Path(request.cwd or os.getcwd()).resolve())
         request_sha256 = _request_fingerprint(request, cwd)
         checkpoint = self._load_checkpoint(run_id)
