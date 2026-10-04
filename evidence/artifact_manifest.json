@@ -406,7 +406,7 @@
         "type": "git_blob_sha1",
         "value": "c7ebb632a2651168de69af62470856e5962c41c8"
       }
-    }
+    },
     {
       "id": "E-VERIFIER",
       "path": "src/dlf_flywire/verifier.py",
