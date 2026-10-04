@@ -140,6 +140,17 @@ def validate_artifact_manifest(root: Path) -> dict[str, Any]:
         else:
             observed = git_blob_sha1(path)
 
+        declared_content_sha256 = artifact.get("content_sha256")
+        if declared_content_sha256 is not None:
+            if not isinstance(declared_content_sha256, str):
+                raise ProvenanceError(f"invalid content_sha256 for {artifact_id}")
+            observed_sha256 = sha256_file(path)
+            if observed_sha256 != declared_content_sha256:
+                raise ProvenanceError(
+                    f"content SHA-256 mismatch for {artifact_id}: "
+                    f"expected {declared_content_sha256}, observed {observed_sha256}"
+                )
+
         if observed != expected:
             raise ProvenanceError(
                 f"artifact integrity mismatch for {artifact_id}: "
