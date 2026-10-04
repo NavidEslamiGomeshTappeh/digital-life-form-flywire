@@ -748,3 +748,33 @@ When a new chat says only "ادامه بده", interpret it as:
 Do not restart the research from zero.
 Do not ask the user to repeat project context already recorded here.
 Do not assume old chat state is newer than the repository.
+
+
+---
+
+# 19. 2026-10-04 Agent Reach architectural reference
+
+A current inspection of `Panniantong/Agent-Reach` main at commit `a19a171fa980a0785849596492e0af4db800c82f` (version `1.5.0` in that tree) produced a useful architecture reference.
+
+Agent Reach is explicitly a **capability layer**, not a replacement for the underlying tools. Its strongest patterns for Digital Life Form are:
+
+- capability-level abstraction above concrete implementations;
+- ordered backend candidates with an observable active backend;
+- real execution probes rather than command/file existence checks;
+- explicit distinction between missing, broken, timeout, error, and healthy states;
+- per-capability fault isolation so one broken channel does not abort the full doctor report;
+- safe/default check-only behavior for environment changes;
+- dry-run and explicit authorization boundaries;
+- skills/documentation as an operational contract for agents.
+
+These patterns fit the planned Leader → Web/Computer/Code Hand → Verifier architecture, but Agent Reach itself is **not** being added as a V1 runtime dependency.
+
+The project-specific adaptation is recorded in [docs/AGENT_CAPABILITY_LAYER.md](docs/AGENT_CAPABILITY_LAYER.md).
+
+The critical difference is that Digital Life Form must add scientific execution receipts and independent verification:
+
+`intent/policy -> capability doctor -> backend selection -> execution -> checkpoint/recovery -> artifact receipt -> verifier -> claim ledger`
+
+Therefore a healthy backend can establish **capability availability**, but can never by itself establish a scientific claim.
+
+Do not mark the capability layer implemented until actual code, tests, failure/recovery cases, and inspectable execution receipts exist.
