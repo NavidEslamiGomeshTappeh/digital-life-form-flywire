@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "status": "PARTIAL_HISTORICAL_RELEASE_RECOVERY",
+  "purpose": "Record the earliest public software snapshot located after creation of the December 2025 Point_data artifact.",
+  "zenodo": {
+    "record_id": "18269709",
+    "doi": "10.5281/zenodo.18269709",
+    "publication_date": "2026-01-16",
+    "version": "Submission_release",
+    "archive_name": "borstlab/T4_T5_Dendrite_Morphology_Paper-Submission_release.zip",
+    "archive_size_bytes": 98988520,
+    "archive_md5": "6ce666c93c0d907e228442528796bc0e",
+    "related_github": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/tree/Submission_release",
+    "software_heritage_swhid": "swh:1:dir:f1b3ebe149c11f85b6face69157b9f87b315adf5;origin=https://doi.org/10.5281/zenodo.18269708;visit=swh:1:snp:13e9b8c26e755ac741fc2eac054d0c5d5053026a;anchor=swh:1:rel:dbc0b943245fed0060cac91715094f31e3bb6716;path=borstlab-T4_T5_Dendrite_Morphology_Paper-11510d8"
+  },
+  "release_inventory": {
+    "includes": [
+      "Data/Point_data.pkl",
+      "Data/Neuron_ids.csv",
+      "Data/Bifurication_data.pkl",
+      "Data/Contour_plot.pkl",
+      "Data/Edge_data.pkl",
+      "Data/Segment_deviation_data.pkl",
+      "Data/Vertex_data.pkl",
+      "Notebooks/ANOVA_analysis.ipynb",
+      "Notebooks/Figure_2.ipynb through Figure_7.ipynb",
+      "Notebooks/Figure_S1.ipynb",
+      "src/figure_Tools.py",
+      "src/paper_ANOVA.py",
+      "src/Nearest_neighbours.py",
+      "src/Random_bifurcations.py",
+      "src/dist_fit.py",
+      "conda-environment.yml"
+    ],
+    "excludes": [
+      "PP1_Fetch_flywire.ipynb",
+      "PP2_nr_conversion.ipynb",
+      "PP3_Dendrite_extraction.ipynb",
+      "PP4_Global_allignment.ipynb",
+      "PP5_Mesh_generation.ipynb"
+    ]
+  },
+  "exact_artifact_identity": {
+    "path": "Data/Point_data.pkl",
+    "git_blob_sha1": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+    "first_repository_commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "first_repository_commit_time": "2025-12-09T19:41:50Z"
+  },
+  "comparison": {
+    "point_data_commit_to_submission_release": "Submission_release is 18 commits ahead of cd17d34afd0d46a3c2947e83a1f0fdd835a9959a in the public repository.",
+    "significance": "The earliest located public software release after the Point_data artifact preserves the artifact and downstream analysis environment but not the upstream morphology-preprocessing producer."
+  },
+  "interpretation": {
+    "proven": [
+      "The exact historical Point_data blob is preserved in the January 2026 Submission_release snapshot.",
+      "That release contains a conda environment and downstream analysis notebooks that consume Point_data.",
+      "The upstream preprocessing notebooks that would directly expose Reduced_dendrites creation are absent from this January release."
+    ],
+    "not_proven": [
+      "The January release is not evidence that its downstream environment generated Point_data in December 2025.",
+      "It does not recover the missing Reduced_dendrites or .nr intermediate trees.",
+      "It does not identify the exact software commit used to create Point_data."
+    ],
+    "next_target": "Use the January release as the fixed downstream endpoint, then search its repository history/branches and the referenced Software Heritage snapshot for any deleted, untracked, or parent-history artifacts that can bridge backward into the missing preprocessing stage."
+  }
+}
