@@ -646,7 +646,7 @@ Stars, forks, traffic, and demos are useful for attention but are not scientific
 
 # 16. Current repository status snapshot
 
-V1.3.1 is the current implementation target after adding byte-for-byte lineage regeneration verification. The previous V1.0.1 main commit was:
+V1.5.0 is the current implementation target after adding the first guarded Code Hand edit operation with SHA-256 preconditions. The previous V1.0.1 main commit was:
 
 `26624626bd3c8291898df5c1bc844c5dba9c4172`
 
@@ -694,7 +694,7 @@ For provenance research, do not rely only on README prose. Inspect evidence file
 - Historical Git history remains available for audit.
 - V1 is the unified product line.
 - The original Point_data generator is still unresolved.
-- V1.1.0 added the machine-checkable claim ledger and artifact-integrity contract; V1.2.0 added frozen cross-source receipts; V1.2.1 bound those receipts to explicit proof executions; V1.2.2 bound the independent-corroboration claim directly to those receipts and added regression coverage for explicit manifest self-exclusion; V1.3.0 adds deterministic record-level lineage for all 649 canonical synapse rows; V1.3.1 adds byte-for-byte CI regeneration verification of that artifact.
+- V1.1.0 added the machine-checkable claim ledger and artifact-integrity contract; V1.2.0 added frozen cross-source receipts; V1.2.1 bound those receipts to explicit proof executions; V1.2.2 bound the independent-corroboration claim directly to those receipts and added regression coverage for explicit manifest self-exclusion; V1.3.0 adds deterministic record-level lineage for all 649 canonical synapse rows; V1.3.1 adds byte-for-byte CI regeneration verification of that artifact; V1.4.0 adds the first concrete Code Hand create/test path; V1.5.0 adds guarded Code Hand edit execution with exact SHA-256 preconditions and atomic replacement.
 - The direct skeleton decoder exists partly to remove the vulnerable `fafbseg -> diskcache` runtime chain.
 - Exact reproduction is valued above "close enough".
 - Independent corroboration is valued above self-consistency.
@@ -781,18 +781,19 @@ Do not mark the capability layer implemented until actual code, tests, failure/r
 
 # 22. 2026-10-04 Code Hand implementation
 
-Version 1.4.0 adds the first concrete Hand implementation: src/dlf_flywire/code_hand.py.
+Version 1.5.0 extends the concrete Hand implementation in src/dlf_flywire/code_hand.py.
 
 Current Code Hand contract:
 - create one new UTF-8 source file inside an explicit workspace;
-- reject absolute/traversal paths and existing targets;
+- edit one existing UTF-8 source file only when its exact SHA-256 precondition matches;
+- reject absolute/traversal paths and invalid edit targets;
 - require explicit permission;
-- execute explicit Python assertions against the generated file;
-- route both operations through PolicyGate -> CapabilityDoctor -> ExecutionEngine;
+- execute explicit Python assertions against the generated or edited file;
+- route operations through PolicyGate -> CapabilityDoctor -> ExecutionEngine -> independent verify_run();
 - persist sealed receipts and checkpoint state;
-- independently verify the complete two-step run;
-- re-hash the generated file after execution.
+- re-hash the resulting file after execution;
+- use same-directory temporary-file replacement for edits so a failed precondition does not mutate the original bytes.
 
-CI now exercises the real CodeHand API rather than only constructing a raw task plan. The smoke test creates code_hand_demo.py in the ephemeral GitHub Actions workspace, runs two assertions, prints both full receipts, and verifies the run with status PASS.
+CI exercises the real CodeHand API. The smoke test creates code_hand_demo.py, tests it, edits it using the returned content SHA-256, tests the edited version, and prints the execution receipts plus independent verification.
 
-The first implementation remains deliberately narrow. It is not yet a general autonomous coding agent, remote repository editor, web agent, installer, or desktop controller.
+The first Hand remains deliberately narrow. It is not yet a general autonomous coding agent, remote repository editor, web agent, installer, or desktop controller.
