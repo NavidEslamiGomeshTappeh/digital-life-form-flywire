@@ -1,11 +1,37 @@
 from __future__ import annotations
 
 import json
+import sys
 
-from dlf_flywire.orchestrator import RunPlan, TaskOrchestrator
+from dlf_flywire.capabilities import BackendSpec, CapabilityDoctor, CapabilitySpec
+from dlf_flywire.execution import CapabilityExecutor, ExecutionEngine
+from dlf_flywire.orchestrator import RunPlan, TaskOrchestrator, TaskStep
 from dlf_flywire.verifier import verify_run
 
-from test_orchestrator import make_executor, step
+
+def make_executor(tmp_path):
+    spec = CapabilitySpec(
+        "runtime.python.test",
+        "verifier test capability",
+        (BackendSpec("python", sys.executable),),
+    )
+    return CapabilityExecutor(
+        CapabilityDoctor((spec,)),
+        ExecutionEngine(tmp_path / "state"),
+    )
+
+
+def step(step_id):
+    return TaskStep(
+        step_id=step_id,
+        capability="runtime.python.test",
+        action=f"run {step_id}",
+        destination="test-process",
+        risk_tier=0,
+        permission_granted=True,
+        operation_args=("-c", "print('ok')"),
+        idempotent=True,
+    )
 
 
 def test_independent_verifier_requires_succeeded_run_state(tmp_path):
