@@ -127,7 +127,7 @@ def _edit_script(relative_path: str, expected_sha256: str, content: str) -> str:
     source = source.replace('__PATH__', repr(_b64(relative_path)))
     source = source.replace('__EXPECTED__', repr(_b64(expected_sha256)))
     source = source.replace('__CONTENT__', repr(_b64(content)))
-    return f"exec(base64.b64decode({_b64(source)!r}))"
+    return f"import base64; exec(base64.b64decode({_b64(source)!r}))"
 
 def _test_script(relative_path: str, test_code: str) -> str:
     return (
