@@ -118,6 +118,37 @@ python -m dlf_flywire validate
 python -m pytest -q
 ```
 
+## Run a verified task plan
+
+The executable agent-runtime layer can run a JSON plan without writing Python code. Each step must declare its capability, action, destination, risk tier, and explicit permission. By default, network access and system mutation are denied by the policy gate.
+
+Example:
+
+```json
+{
+  "steps": [
+    {
+      "step_id": "inspect",
+      "capability": "runtime.python",
+      "action": "run a bounded local inspection",
+      "destination": "local-process",
+      "risk_tier": 0,
+      "permission_granted": true,
+      "operation_args": ["-c", "print('ok')"],
+      "idempotent": true
+    }
+  ]
+}
+```
+
+Run it with:
+
+```bash
+dlf-flywire run-plan plan.json --run-id my-run
+```
+
+The command resumes successful steps from verified receipts and returns exit code zero only when the independent run verifier reports `PASS`.
+
 ## Recover exact morphology
 
 V1.1.0 recovery reads the public FAFB v783 Neuroglancer precomputed skeleton endpoint directly and writes SWC without the vulnerable `fafbseg → diskcache` dependency chain.
