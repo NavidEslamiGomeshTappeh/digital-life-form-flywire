@@ -62,6 +62,24 @@
         "Neurosetta/graphs.py",
         "Neurosetta/plotting.py"
       ]
+    },
+    {
+      "role": "analysis_notebook_environment_evidence",
+      "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+      "sha": "1007a708f0b2cd4d55875174256774a41ff5b0f4",
+      "timestamp": "2025-12-09T21:08:32Z",
+      "message": "ANOVA analysis and notebook",
+      "relevant_files": [
+        "Notebooks/ANOVA_analysis.ipynb",
+        "src/paper_ANOVA.py"
+      ],
+      "observation": "The notebook metadata names its Jupyter kernel 'neurosetta' and the earlier version of the notebook referenced an absolute local Point_data path under /home/nik/Desktop/Software/T45_Morpho_data/Data/Pickled_data/Point_data.pkl before later normalization to ../Data/Point_data.pkl."
+    },
+    {
+      "role": "data_batch_sequence",
+      "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+      "timestamp": "2025-12-09T20:41:50Z-20:46:46Z",
+      "message": "Seven analysis-data artifacts were committed sequentially within about five minutes: Point_data.pkl, Edge_data.pkl, Vertex_data.pkl, Bifurication_data.pkl, Segment_deviation_data.pkl, Contour_plot.pkl (with Point_data receiving two consecutive commits)."
     }
   ],
   "checks": {
@@ -83,7 +101,9 @@
     "proven": "The currently public PP1/PP3 preprocessing notebooks were not present when Point_data.pkl was first committed.",
     "unresolved": "The exact December 2025 generator implementation, its exact software commit, exact morphology materialization, and execution environment remain unrecovered.",
     "public_toolchain_evidence": "The public NeuRosetta commit that adds the Forest/SWC IO infrastructure used by the later PP2 notebook is dated 2026-01-26, after the 2025-12-09 Point_data commit. This does not exclude a private predecessor.",
-    "legacy_boundary": "A separate public legacy NeuRosetta repository already contained subtree functionality in April 2025 and .nr support earlier. Therefore the chronology rules out only the later public Forest/IO pipeline as the documented historical implementation; it does not rule out a legacy or private NeuRosetta-based generator."
+    "legacy_boundary": "A separate public legacy NeuRosetta repository already contained subtree functionality in April 2025 and .nr support earlier. Therefore the chronology rules out only the later public Forest/IO pipeline as the documented historical implementation; it does not rule out a legacy or private NeuRosetta-based generator.",
+    "analysis_environment": "The contemporaneous ANOVA notebook provides direct evidence that the analysis environment was named 'neurosetta' and that the source data originally lived in a local T45_Morpho_data/Pickled_data path. This strongly narrows the historical workflow toward a local Neurosetta-based research environment, but does not by itself identify the exact generator commit or morphology extraction script.",
+    "public_current_neurosetta": "The current public NeuRosetta repository's initial commit is 2025-10-21, but the Forest/SWC parallel IO infrastructure appears only in January 2026 and public subtree extraction work in April 2026. Thus the December 2025 environment, if based on NeuRosetta, was necessarily an earlier/local/legacy code state rather than the later public Forest/subtree pipeline."
   },
   "execution_note": "Repository chronology was independently verified through immutable GitHub commit metadata and file trees. Local container execution of the network-fetching audit could not run because outbound DNS/network access to github.com is unavailable in the analysis environment."
 }
