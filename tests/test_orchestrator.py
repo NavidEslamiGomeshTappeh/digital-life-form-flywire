@@ -75,6 +75,35 @@ def test_orchestrator_runs_dependency_order_and_verifies(tmp_path):
     assert verification.successful_steps == 2
 
 
+def test_orchestrator_recovers_after_engine_success_before_plan_commit(tmp_path, monkeypatch):
+    executor = make_executor(tmp_path)
+    orchestrator = TaskOrchestrator(executor, tmp_path / "state")
+    plan = RunPlan((step("boundary"),))
+    original_write_state = orchestrator._write_state
+
+    def crash_after_step_commit(run_id, plan_sha256, steps, status):
+        if steps:
+            raise RuntimeError("simulated crash after engine success")
+        original_write_state(run_id, plan_sha256, steps, status)
+
+    monkeypatch.setattr(orchestrator, "_write_state", crash_after_step_commit)
+    with pytest.raises(RuntimeError, match="simulated crash"):
+        orchestrator.run(plan, run_id="boundary")
+
+    stored_selection = executor.doctor.select("runtime.python.test")
+    monkeypatch.setattr(executor.doctor, "select", lambda *_args, **_kwargs: stored_selection)
+
+    def no_subprocess(*_args, **_kwargs):
+        raise AssertionError("subprocess was re-executed after engine checkpoint success")
+
+    monkeypatch.setattr("dlf_flywire.execution.subprocess.run", no_subprocess)
+    monkeypatch.setattr(orchestrator, "_write_state", original_write_state)
+    run_id, receipts = orchestrator.run(plan, run_id="boundary")
+    assert run_id == "boundary"
+    assert receipts["boundary"].status == "succeeded"
+    assert verify_run(plan, run_id, state_root=tmp_path / "state").status == "PASS"
+
+
 def test_orchestrator_resume_does_not_reexecute_completed_step(tmp_path, monkeypatch):
     executor = make_executor(tmp_path)
     orchestrator = TaskOrchestrator(executor, tmp_path / "state")
