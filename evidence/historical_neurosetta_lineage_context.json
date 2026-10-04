@@ -78,6 +78,33 @@
         }
       ],
       "observation": "The currently public PySide6 GUI and manual-subtree implementation enter the public NeuRosetta repository only in April 2026, after the December 2025 Point_data artifact."
+    },
+    {
+      "repository": "NikDrummond/NeuOptics",
+      "initial_commit": {
+        "sha": "1e2c5b4653f7d5e785df98457a17c0a82a2bca99",
+        "timestamp": "2025-02-15T10:51:00Z"
+      },
+      "relevant_commits": [
+        {
+          "sha": "bb188a5cb8a8fd1a785235b6c97dbdfac986fd5f",
+          "timestamp": "2025-02-15T14:39:43Z",
+          "message": "Spheres",
+          "observation": "Introduces fit_sphere and spherical projection helpers over Neurosetta Forest/Tree graphs."
+        },
+        {
+          "sha": "d208e46aa6403a3e9502135d3b538c65ea2ab0b3",
+          "timestamp": "2025-03-02T10:57:30Z",
+          "message": "neurons module",
+          "observation": "Adds assignment of neuron roots/centres to optic-lobe columns. point_type='root' uses Neurosetta get_all_roots; the docstring defines the root as the soma or first branch point of the dendritic tree."
+        }
+      ],
+      "relationship_to_paper_pipeline": [
+        "NeuOptics is explicitly described as an optional Neurosetta submodule for FlyWire optic-lobe data.",
+        "Its fit_sphere helper predates the published paper's later global population alignment notebook and shows that sphere-fitting was part of the author's broader Neurosetta/optic-lobe tooling before the Point_data artifact.",
+        "Its root/centre assignment code reinforces that 'root' can mean the soma or first dendritic branching point depending on the tree representation."
+      ],
+      "provenance_limit": "This is pre-artifact software-family/context evidence only. It does not prove NeuOptics produced the December 2025 Point_data artifact or determine the exact morphology/manual-edit pipeline."
     }
   ],
   "gui_boundary": {
