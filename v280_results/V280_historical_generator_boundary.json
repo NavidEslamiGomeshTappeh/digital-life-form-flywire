@@ -39,6 +39,18 @@
         "Notebooks/PP1_Fetch_flywire.ipynb",
         "Notebooks/PP3_Dendrite_extraction.ipynb"
       ]
+    },
+    {
+      "role": "public_neurosetta_forest_api",
+      "repository": "NikDrummond/NeuRosetta",
+      "sha": "2f4e52c8d0ac4f284b9a15e5d147f6a130998495",
+      "timestamp": "2026-01-26T14:20:00Z",
+      "message": "Update to IO utils and Added Forests — read/write // Import/export(swc) now parallel, and Forest class for collections of trees added",
+      "relevant_files": [
+        "src/NeuRosetta/classes/forest_class.py",
+        "src/NeuRosetta/io_utils/io_utils.py",
+        "src/NeuRosetta/io_utils/nr_utils.py"
+      ]
     }
   ],
   "checks": {
@@ -49,7 +61,8 @@
     "first_point_commit_has_no_pp1": true,
     "first_point_commit_has_no_pp3": true,
     "public_preprocessing_has_pp1": true,
-    "public_preprocessing_has_pp3": true
+    "public_preprocessing_has_pp3": true,
+    "public_neurosetta_forest_api_after_point_data": true
   },
   "elapsed_seconds": {
     "initial_to_first_point_data": 4546,
@@ -57,7 +70,8 @@
   },
   "interpretation": {
     "proven": "The currently public PP1/PP3 preprocessing notebooks were not present when Point_data.pkl was first committed.",
-    "unresolved": "The original December 2025 generator implementation itself is not recovered."
+    "unresolved": "The original December 2025 generator implementation itself is not recovered.",
+    "public_toolchain_evidence": "The public NeuRosetta commit that adds the Forest/SWC IO infrastructure used by the later PP2 notebook is dated 2026-01-26, after the 2025-12-09 Point_data commit. This does not exclude a private predecessor."
   },
   "execution_note": "Repository chronology was independently verified through immutable GitHub commit metadata and file trees. Local container execution of the network-fetching audit could not run because outbound DNS/network access to github.com is unavailable in the analysis environment."
 }
