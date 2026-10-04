@@ -1,0 +1,63 @@
+{
+  "status": "PROVEN_HISTORICAL_GENERATOR_TEMPORAL_BOUNDARY",
+  "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+  "evidence": [
+    {
+      "role": "initial_repository_state",
+      "sha": "79cf52212935de6bddf996c9f46c0df89f5c5442",
+      "timestamp": "2025-12-09T19:26:04Z",
+      "message": "Initial commit",
+      "files": [
+        ".gitignore",
+        "README.md"
+      ]
+    },
+    {
+      "role": "first_point_data_commit",
+      "sha": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+      "timestamp": "2025-12-09T20:41:50Z",
+      "message": "A point value metrics data",
+      "files": [
+        "Data/Point_data.pkl"
+      ]
+    },
+    {
+      "role": "second_point_data_commit",
+      "sha": "fe9779d4ca425613eec44b19e961610d117e7232",
+      "timestamp": "2025-12-09T20:42:19Z",
+      "message": "Point value metrics data",
+      "files": [
+        "Data/Point_data.pkl"
+      ]
+    },
+    {
+      "role": "public_preprocessing_release",
+      "sha": "8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+      "timestamp": "2026-08-10T17:49:32Z",
+      "message": "Paper submission update. Remove tracked Data artifacts and add preprocessing notebooks and revised analysis code.",
+      "files": [
+        "Notebooks/PP1_Fetch_flywire.ipynb",
+        "Notebooks/PP3_Dendrite_extraction.ipynb"
+      ]
+    }
+  ],
+  "checks": {
+    "initial_has_no_pp1": true,
+    "initial_has_no_pp3": true,
+    "initial_has_no_point_data": true,
+    "first_point_commit_has_point_data": true,
+    "first_point_commit_has_no_pp1": true,
+    "first_point_commit_has_no_pp3": true,
+    "public_preprocessing_has_pp1": true,
+    "public_preprocessing_has_pp3": true
+  },
+  "elapsed_seconds": {
+    "initial_to_first_point_data": 4546,
+    "first_point_data_to_public_preprocessing": 21071262
+  },
+  "interpretation": {
+    "proven": "The currently public PP1/PP3 preprocessing notebooks were not present when Point_data.pkl was first committed.",
+    "unresolved": "The original December 2025 generator implementation itself is not recovered."
+  },
+  "execution_note": "Repository chronology was independently verified through immutable GitHub commit metadata and file trees. Local container execution of the network-fetching audit could not run because outbound DNS/network access to github.com is unavailable in the analysis environment."
+}
