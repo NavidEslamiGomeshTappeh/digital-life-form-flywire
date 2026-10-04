@@ -449,7 +449,7 @@
       "role": "bounded_neural_intent_gateway",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "006b0068163a9aeae9cb25c5643d78738045ece7"
+        "value": "7c2fc32e7dcedc914b1bbb59811c6b5f6582889c"
       }
     },
     {
@@ -467,7 +467,16 @@
       "role": "neural_boundary_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "bb7a345a6d0ff3646500c36f0077137b6a1c6832"
+        "value": "6f316e0cac3c62ddcf244059473c854990a967d5"
+      }
+    },
+    {
+      "id": "E-NEURAL-LEADER-INTEGRATION-TEST",
+      "path": "tests/test_neural_leader_integration.py",
+      "role": "neural_to_code_hand_integration_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "816d42cd1975d52ee75b111635498ed51d8324e6"
       }
     }
   ]
