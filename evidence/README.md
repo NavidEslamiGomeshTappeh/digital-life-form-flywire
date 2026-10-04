@@ -13,6 +13,7 @@ Key artifacts:
 - historical_generator_boundary.json — chronology boundary.
 - claims.json — machine-checkable claim ledger for scientific statements.
 - artifact_manifest.json — machine-checkable integrity fingerprints for critical artifacts.
+- synapse_lineage.json — deterministic record-level lineage for all 649 canonical synapse rows.
 - service_capabilities.json and live_service_evidence.json — supporting infrastructure only.
 - structural_snapshot.json and structural_connectome.svg — structural reference.
 - runtime_plan.json — historical resumable execution design.
