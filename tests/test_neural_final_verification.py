@@ -1,4 +1,8 @@
-from dlf_flywire.neural_gateway import IntentRule, NeuralIntentGateway, NeuralObservation
+from dlf_flywire.neural_gateway import (
+    IntentRule,
+    NeuralIntentGateway,
+    NeuralObservation,
+)
 
 
 def test_neural_candidate_has_stable_evidence_fingerprint():
