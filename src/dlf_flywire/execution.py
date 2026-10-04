@@ -49,7 +49,7 @@ def _safe_step_name(step_id: str) -> str:
     return safe
 
 
-def _request_fingerprint(request: "ExecutionRequest", cwd: str) -> str:
+def _request_fingerprint(request: ExecutionRequest, cwd: str) -> str:
     payload = {
         "capability": request.capability,
         "backend": request.backend,
