@@ -629,7 +629,7 @@ For provenance research, do not rely only on README prose. Inspect evidence file
 - V-numbered working tree was consolidated into V1.
 - Historical Git history remains available for audit.
 - V1 is the unified product line.
-- The original Point_data generator is still unresolved.\n- V1.1.0 added the machine-checkable claim ledger and artifact-integrity contract; V1.2.0 added frozen cross-source receipts; V1.2.1 bound those receipts to explicit proof executions; V1.2.2 bound the independent-corroboration claim directly to those receipts and removed the manifest self-reference.
+- The original Point_data generator is still unresolved.\n- V1.1.0 added the machine-checkable claim ledger and artifact-integrity contract; V1.2.0 added frozen cross-source receipts; V1.2.1 bound those receipts to explicit proof executions; V1.2.2 bound the independent-corroboration claim directly to those receipts and added regression coverage for explicit manifest self-exclusion.
 - The direct skeleton decoder exists partly to remove the vulnerable `fafbseg -> diskcache` runtime chain.
 - Exact reproduction is valued above "close enough".
 - Independent corroboration is valued above self-consistency.
