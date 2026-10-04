@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.5.0 — 2026-10-04
+
+Guarded Code Hand edit release.
+
+- Added `code.edit`, a controlled replacement operation with an exact SHA-256 precondition.
+- Added atomic same-directory replacement, post-edit content hashing, stale-precondition protection, and regression coverage.
+- Extended the real GitHub Actions Code Hand smoke test to create, edit, and re-test a source file through the full Policy → Capability Doctor → Execution → Verifier path.
+
+
 ## 1.4.0 — 2026-10-04
 
 Code Hand foundation release.

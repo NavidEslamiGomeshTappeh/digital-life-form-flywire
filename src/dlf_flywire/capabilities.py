@@ -347,6 +347,11 @@ def default_capabilities() -> tuple[CapabilitySpec, ...]:
             (BackendSpec("current-python", sys.executable),),
         ),
         CapabilitySpec(
+            "code.edit",
+            "Edit one existing UTF-8 source file with an exact SHA-256 precondition",
+            (BackendSpec("current-python", sys.executable),),
+        ),
+        CapabilitySpec(
             "code.test.python",
             "Execute a generated Python source file with explicit assertions",
             (BackendSpec("current-python", sys.executable),),

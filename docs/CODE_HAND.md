@@ -2,7 +2,7 @@
 
 ## Purpose
 
-`CodeHand` is the first concrete Hand implementation in the project. It provides a narrow, guarded interface for creating a source file inside an explicit workspace and executing explicit Python assertions against that generated file.
+`CodeHand` is the first concrete Hand implementation in the project. It provides a narrow, guarded interface for creating a source file inside an explicit workspace, editing an existing source file with an exact SHA-256 precondition, and executing explicit Python assertions against the resulting file.
 
 The Hand is intentionally smaller than a general-purpose coding agent. It does not claim to edit arbitrary remote repositories, browse the web, install software, or operate a user's desktop.
 
@@ -13,7 +13,7 @@ CodeHand
   -> RunPlan
   -> PolicyGate
   -> CapabilityDoctor
-  -> code.write / code.test.python
+  -> code.write / code.edit / code.test.python
   -> Python backend
   -> checkpoint + sealed receipts
   -> independent verify_run()
@@ -29,9 +29,10 @@ It rejects:
 
 - absolute paths;
 - `..` traversal outside the workspace;
-- an existing target file (the first implementation is create-only).
+- an existing target file for create operations;
+- an edit target whose current SHA-256 does not exactly match the caller's precondition.
 
-The generated file's SHA-256 is checked again after execution against the requested source content.
+Create and edit operations both re-hash the final file after execution against the requested source content. Edits are written through a same-directory temporary file and atomic replacement.
 
 ## Permission boundary
 
@@ -44,6 +45,7 @@ A caller must explicitly grant permission for a write/test run. Network access a
 | Capability | Operation |
 |---|---|
 | `code.write` | Create one UTF-8 source file |
+| `code.edit` | Replace one existing UTF-8 source file only when its SHA-256 matches the declared precondition |
 | `code.test.python` | Execute the generated Python file with explicit assertions |
 
 Both currently use the real Python interpreter selected by the capability doctor.
@@ -52,7 +54,9 @@ Both currently use the real Python interpreter selected by the capability doctor
 
 The CI Code Hand smoke test creates a real `code_hand_demo.py`, tests `add(2, 3) == 5` and `add(-2, 5) == 3`, prints both execution receipts, and independently verifies the two-step run.
 
-The smoke-test file is created only in the ephemeral GitHub Actions workspace; it is not committed to `main`.
+The smoke-test file is created and then edited only in the ephemeral GitHub Actions workspace; it is not committed to `main`.
+
+The edit path is deliberately not a free-form patch engine. The caller supplies the complete replacement content plus the exact SHA-256 of the version being replaced. A stale precondition fails before replacement and leaves the original bytes intact.
 
 ## Next boundary
 

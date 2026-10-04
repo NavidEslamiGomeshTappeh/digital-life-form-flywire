@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "product_version": "1.4.0",
-  "generated_for": "Version 1.4.0 byte-for-byte lineage regeneration contract",
+  "product_version": "1.5.0",
+  "generated_for": "Version 1.5.0 guarded Code Hand edit contract",
   "exclusion": [
     "evidence/artifact_manifest.json"
   ],
@@ -12,7 +12,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "88c5fb891dcf1d1647d2b84bac0630cf9570d213"
+        "value": "bc80560fad66ca670bdfbd1e5c973a024d4d0325"
       }
     },
     {
@@ -21,7 +21,7 @@
       "role": "project_metadata",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "16fb70d36531fa3bc1628f33019652332a11e083"
+        "value": "34b229f7b306b0340c6c56a7ffcbca2c19c29d7f"
       }
     },
     {
@@ -30,7 +30,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "3e8d9f94621c6b29efab723e119a73a0dbe15089"
+        "value": "5b601886131b044f9738fb1a32022bb045a52787"
       }
     },
     {
@@ -66,7 +66,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b820d2fd12d59abdf3a600271b4517daebb83dc7"
+        "value": "6948b85823dc0e8d2bd7291c92da945af4bac916"
       }
     },
     {
@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "ff468f6bd3c9b79c9f5a7d62fb3663b521c307ae"
+        "value": "b233bfa313921f0d133d5770214f8b524d90334a"
       }
     },
     {
@@ -147,7 +147,7 @@
       "role": "frozen_cross_source_receipts",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "70463f6f3bbbfb0cb5ec47de85df9732ea1c0a94"
+        "value": "5b43f14edea3fb6912a4fe40797e8cbe81e8d1c2"
       }
     },
     {
@@ -202,7 +202,7 @@
       "role": "record_level_synapse_lineage",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "9fda4283f10f966bdecc4d5ab1cae6a014ce32a8"
+        "value": "4a61ac2940b0902ec1d5aafa88e946001c6b4bd8"
       }
     },
     {
@@ -350,7 +350,7 @@
       "role": "capability_doctor_engine",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "516e82e79f9ca5ab1b29ca94151e4d1aa95b5a5c"
+        "value": "7c6f724ce0ed5c769b8c1eef5b717a6e27384565"
       }
     },
     {
@@ -359,7 +359,7 @@
       "role": "capability_doctor_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "77796762802488ebce9ae77d8c521131a716ee04"
+        "value": "adc8a3f9ba048a7f59467627266d7770d2b9ba15"
       }
     },
     {
@@ -413,7 +413,7 @@
       "role": "code_hand_capability",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "1160a5b4ed25d3bd79d274d7508b18c71a11a491"
+        "value": "cfd470effffa003fb3432feda46b75d8a3b90f40"
       }
     },
     {
@@ -422,7 +422,7 @@
       "role": "code_hand_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "c3f4f8649877db4d78fab8b362543ed56cf09c46"
+        "value": "ed89109127f50a9c8f76f7fb9518220bdb620868"
       }
     },
     {

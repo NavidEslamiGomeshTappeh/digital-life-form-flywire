@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import base64
 import hashlib
+import re
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -72,6 +73,11 @@ def code_capabilities() -> tuple[CapabilitySpec, ...]:
             (backend,),
         ),
         CapabilitySpec(
+            "code.edit",
+            "Edit one existing UTF-8 source file with an exact SHA-256 precondition",
+            (backend,),
+        ),
+        CapabilitySpec(
             "code.test.python",
             "Execute a generated Python source file with explicit assertions",
             (backend,),
@@ -91,6 +97,37 @@ def _write_script(relative_path: str, content: str) -> str:
         "print('CONTENT_SHA256', __import__('hashlib').sha256(data).hexdigest())"
     )
 
+
+def _edit_script(relative_path: str, expected_sha256: str, content: str) -> str:
+    source = (
+        "from pathlib import Path\n"
+        "import base64, hashlib, os, tempfile\n"
+        "p = Path(base64.b64decode(__PATH__).decode('utf-8')).resolve()\n"
+        "expected = base64.b64decode(__EXPECTED__).decode('ascii')\n"
+        "data = base64.b64decode(__CONTENT__)\n"
+        "current = p.read_bytes()\n"
+        "current_sha = hashlib.sha256(current).hexdigest()\n"
+        "assert current_sha == expected, f'stale edit precondition: {current_sha} != {expected}'\n"
+        "fd, tmp = tempfile.mkstemp(prefix='.dlf-edit-', dir=str(p.parent))\n"
+        "try:\n"
+        "    with os.fdopen(fd, 'wb') as stream:\n"
+        "        stream.write(data)\n"
+        "        stream.flush()\n"
+        "        os.fsync(stream.fileno())\n"
+        "    fd = -1\n"
+        "    os.replace(tmp, p)\n"
+        "    tmp = None\n"
+        "finally:\n"
+        "    if fd != -1: os.close(fd)\n"
+        "    if tmp and os.path.exists(tmp): os.unlink(tmp)\n"
+        "print('CODE_HAND_FILE_EDITED', p.as_posix())\n"
+        "print('OLD_CONTENT_SHA256', current_sha)\n"
+        "print('NEW_CONTENT_SHA256', hashlib.sha256(data).hexdigest())\n"
+    )
+    source = source.replace('__PATH__', repr(_b64(relative_path)))
+    source = source.replace('__EXPECTED__', repr(_b64(expected_sha256)))
+    source = source.replace('__CONTENT__', repr(_b64(content)))
+    return f"import base64; exec(base64.b64decode({_b64(source)!r}))"
 
 def _test_script(relative_path: str, test_code: str) -> str:
     return (
@@ -166,6 +203,95 @@ class CodeHand:
                     idempotent=True,
                 ),
             )
+        )
+
+    def build_edit_plan(
+        self,
+        relative_path: str,
+        expected_content_sha256: str,
+        new_content: str,
+        test_code: str,
+        *,
+        permission_granted: bool,
+    ) -> RunPlan:
+        target = _safe_relative_file(self.workspace_root, relative_path)
+        if not target.is_file():
+            raise CodeHandError(f"Code Hand edit target does not exist: {relative_path!r}")
+        if not isinstance(expected_content_sha256, str) or not re.fullmatch(
+            r"[0-9a-fA-F]{64}", expected_content_sha256
+        ):
+            raise CodeHandError(
+                "expected_content_sha256 must be a 64-character hexadecimal SHA-256"
+            )
+        if not isinstance(new_content, str) or not new_content:
+            raise CodeHandError("Code Hand replacement content must be a non-empty string")
+        if not isinstance(test_code, str) or not test_code.strip():
+            raise CodeHandError("Code Hand test code must be a non-empty string")
+
+        return RunPlan(
+            (
+                TaskStep(
+                    step_id="edit-file",
+                    capability="code.edit",
+                    action="Code Hand edit source file with SHA-256 precondition",
+                    destination="code-workspace",
+                    risk_tier=0,
+                    permission_granted=permission_granted,
+                    operation_args=(
+                        "-c",
+                        _edit_script(str(target), expected_content_sha256.lower(), new_content),
+                    ),
+                    idempotent=False,
+                ),
+                TaskStep(
+                    step_id="test-file",
+                    capability="code.test.python",
+                    action="Code Hand execute and test edited Python file",
+                    destination="code-workspace",
+                    risk_tier=0,
+                    permission_granted=permission_granted,
+                    operation_args=("-c", _test_script(str(target), test_code)),
+                    dependencies=("edit-file",),
+                    idempotent=True,
+                ),
+            )
+        )
+
+    def edit(
+        self,
+        relative_path: str,
+        expected_content_sha256: str,
+        new_content: str,
+        test_code: str,
+        *,
+        run_id: str | None = None,
+        permission_granted: bool = False,
+    ) -> CodeHandResult:
+        plan = self.build_edit_plan(
+            relative_path,
+            expected_content_sha256,
+            new_content,
+            test_code,
+            permission_granted=permission_granted,
+        )
+        run_id, receipts = self.orchestrator.run(plan, run_id=run_id)
+        verification = verify_run(plan, run_id, state_root=self.state_root)
+        if verification.status != "PASS":
+            raise ExecutionError(
+                "Code Hand edit run did not pass independent verification: "
+                + "; ".join(verification.errors)
+            )
+        target = _safe_relative_file(self.workspace_root, relative_path)
+        expected_hash = hashlib.sha256(new_content.encode("utf-8")).hexdigest()
+        observed = target.read_bytes()
+        if hashlib.sha256(observed).hexdigest() != expected_hash:
+            raise CodeHandError("edited file content hash does not match requested content")
+        return CodeHandResult(
+            run_id=run_id,
+            file_path=str(target),
+            content_sha256=expected_hash,
+            receipts=receipts,
+            verification=verification,
         )
 
     def execute(
