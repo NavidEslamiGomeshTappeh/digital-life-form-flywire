@@ -1,0 +1,60 @@
+{
+  "status": "PROVEN_PUBLISHED_METHOD_BOUNDARY",
+  "role": "published_method_context_for_morphology_mismatch",
+  "source": {
+    "title": "Population morphology implies a common developmental blueprint for Drosophila motion detectors",
+    "authors": [
+      "Nikolas Drummond",
+      "Arthur Zhao",
+      "Alexander Borst"
+    ],
+    "journal": "PLOS Computational Biology",
+    "published": "2026-08-31",
+    "doi": "10.1371/journal.pcbi.1014657",
+    "article_url": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1014657",
+    "preprint_doi": "10.1101/2025.11.15.688637"
+  },
+  "method_boundary": [
+    {
+      "stage": "automated_subtree_selection",
+      "observation": "The published method identifies a branch node by a tree-structure metric that maximises terminal leaves while minimising subtree cable weight."
+    },
+    {
+      "stage": "manual_verification_and_modification",
+      "observation": "The publication states that every identified dendritic compartment is manually verified and can be manually modified when routing/skeletonization errors or an unsuitable single-node boundary are present.",
+      "consequence": "Matching the automated subtree-selection root does not prove that two morphology artifacts are topologically or metrically identical."
+    },
+    {
+      "stage": "global_population_alignment",
+      "observation": "The publication separately describes global alignment of dendrite populations using fitted-sphere centering followed by axis/orientation rotations.",
+      "consequence": "Global spatial alignment is a downstream coordinate operation and must not be silently assumed to be the transform used for the December 2025 Point_data artifact."
+    },
+    {
+      "stage": "individual_alignment_and_scaling",
+      "observation": "The publication separately describes robust PCA-based individual dendrite alignment and explicit scaling along eigenvectors.",
+      "consequence": "These operations are distinct from the root-selection step and from raw tree identity."
+    }
+  ],
+  "relation_to_project": {
+    "observed": "The project reproduces the published automated subtree-selection decision on the four committed SWCs, but historical Point_data morphology metrics disagree for three of the four anchors at segment/node/leaf/cable levels.",
+    "interpretation": "The published manual-review stage is a documented possible boundary for the morphology mismatch, but no historical per-neuron manual edit record has been recovered. This evidence therefore explains a plausible missing transformation stage without proving the exact historical edits.",
+    "provenance_status": "UNRESOLVED_HISTORICAL_DETAILS"
+  },
+  "source_receipts": [
+    {
+      "source_url": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1014657",
+      "sections": [
+        "T4 and T5 dendrite annotation and pre-processing",
+        "Dendrite Extraction and Data Pre-processing",
+        "Alignment and Scaling"
+      ]
+    },
+    {
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12724164/",
+      "sections": [
+        "T4 and T5 dendrite annotation and pre-processing",
+        "Alignment and Scaling"
+      ]
+    }
+  ]
+}
