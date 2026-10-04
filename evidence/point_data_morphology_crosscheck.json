@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "status": "MORPHOLOGY_MISMATCH_AT_DERIVED_METRIC_LEVEL",
+  "purpose": "Directly compare the project SWCs after the published/legacy subtree root-selection algorithm with the four historical Point_data anchor morphology metrics.",
+  "interpretation": {
+    "proven": [
+      "The selected subtree roots themselves are reproduced consistently by both the modern published and legacy public root-selection implementations.",
+      "The derived topology metrics of the project SWCs do not exactly reproduce all four Point_data anchor rows.",
+      "T5c matches Point_data on reduced node/segment count but still differs in leaf/branch counts and total cable."
+    ],
+    "not_proven": [
+      "The mismatch alone does not identify whether the historical study used a different morphology materialization, manual corrections, a different skeleton version, or additional reduction rules.",
+      "It does not establish any coordinate transform."
+    ],
+    "units_note": "Metrics1_Point_data loads Reduced_dendrites with units='nm' and immediately converts the forest to micrometres before process_one_point(), so the Point_data Total_cable values are numerically in micrometres despite older README tables that label Total_Cable as nm."
+  },
+  "cases": [
+    {
+      "cell": "T4a",
+      "selected_root_node": 292,
+      "point_data": {
+        "segments": 222,
+        "nodes": 223,
+        "leaves": 115,
+        "branches": 108,
+        "cable_um": 318.835752039841
+      },
+      "project_published_subtree": {
+        "segments": 212,
+        "nodes": 213,
+        "leaves": 109,
+        "branches": 104,
+        "cable_um": 299.1104286384161
+      },
+      "deltas": {
+        "segments": -10,
+        "nodes": -10,
+        "leaves": -6,
+        "branches": -4,
+        "cable_um": -19.725323401424873
+      },
+      "exact_topology_match": false
+    },
+    {
+      "cell": "T4c",
+      "selected_root_node": 358,
+      "point_data": {
+        "segments": 205,
+        "nodes": 206,
+        "leaves": 109,
+        "branches": 97,
+        "cable_um": 301.2098678724052
+      },
+      "project_published_subtree": {
+        "segments": 211,
+        "nodes": 212,
+        "leaves": 113,
+        "branches": 99,
+        "cable_um": 288.45147221498587
+      },
+      "deltas": {
+        "segments": 6,
+        "nodes": 6,
+        "leaves": 4,
+        "branches": 2,
+        "cable_um": -12.758395657419328
+      },
+      "exact_topology_match": false
+    },
+    {
+      "cell": "T5a",
+      "selected_root_node": 343,
+      "point_data": {
+        "segments": 134,
+        "nodes": 135,
+        "leaves": 72,
+        "branches": 63,
+        "cable_um": 190.18008391648746
+      },
+      "project_published_subtree": {
+        "segments": 180,
+        "nodes": 181,
+        "leaves": 94,
+        "branches": 87,
+        "cable_um": 265.2002418451485
+      },
+      "deltas": {
+        "segments": 46,
+        "nodes": 46,
+        "leaves": 22,
+        "branches": 24,
+        "cable_um": 75.02015792866106
+      },
+      "exact_topology_match": false
+    },
+    {
+      "cell": "T5c",
+      "selected_root_node": 323,
+      "point_data": {
+        "segments": 152,
+        "nodes": 153,
+        "leaves": 80,
+        "branches": 73,
+        "cable_um": 195.60104983749207
+      },
+      "project_published_subtree": {
+        "segments": 152,
+        "nodes": 153,
+        "leaves": 82,
+        "branches": 71,
+        "cable_um": 186.56667981125594
+      },
+      "deltas": {
+        "segments": 0,
+        "nodes": 0,
+        "leaves": 2,
+        "branches": -2,
+        "cable_um": -9.034370026236132
+      },
+      "exact_topology_match": false
+    }
+  ]
+}
