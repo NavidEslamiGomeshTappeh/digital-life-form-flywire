@@ -178,6 +178,14 @@ Conclusion:
 
 The original historical generator remains **UNRESOLVED**.
 
+New chronology finding (2026-10-04):
+- The historical `Point_data.pkl` first appeared in the source repository at commit `cd17d34afd0d46a3c2947e83a1f0fdd835a9959a` on 2025-12-09 20:41:50+01:00.
+- The public `NikDrummond/NeuRosetta` repository itself begins earlier (2025-10-21), so repository existence alone is not evidence that the December pipeline used the public implementation.
+- In that public repository, the documented Forest/parallel SWC IO used by the later paper notebooks first appears at `2f4e52c8d0ac4f284b9a15e5d147f6a130998495` on 2026-01-26; explicit current-repository subtree/reduction work appears later in April 2026.
+- A separate `NikDrummond/Neurosetta_legacy_v0.0.1` repository contains a subtree implementation by commit `94ff9e5a956d5a91c40bb386f33e3dfa60896987` dated 2025-04-18, plus earlier `.nr` support. Therefore a private/local or legacy NeuRosetta-based route before December 2025 cannot be excluded.
+- The current public paper preprocessing notebooks (`PP1`–`PP5`) were added in the 2026-08-10 repository update `8700efd40bccfa3e74ac7c4df02da83a968b9b52`, after the historical artifact already existed.
+- Conclusion: the public record now narrows the provenance problem but does not recover the exact December 2025 generator, exact software commit, exact morphology materialization, or exact execution environment. The generator remains **UNRESOLVED**.
+
 ---
 
 ## 6. The most important scientific boundary
