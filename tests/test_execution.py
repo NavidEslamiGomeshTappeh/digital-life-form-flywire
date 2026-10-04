@@ -260,6 +260,10 @@ def test_policy_denies_capability_execution_before_probe(tmp_path):
         CapabilityDoctor((spec,)),
         ExecutionEngine(tmp_path / "state"),
     )
+    def forbidden_select(*_args, **_kwargs):
+        raise AssertionError("capability probe/selection was reached before policy denial")
+
+    monkeypatch.setattr(executor.doctor, "select", forbidden_select)
     with pytest.raises(ExecutionError, match="permission_granted"):
         executor.execute(
             "runtime.python.policy-test",
