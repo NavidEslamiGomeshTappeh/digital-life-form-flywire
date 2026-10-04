@@ -175,8 +175,8 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "b6c89d790b3943bd4e316ca711eabc6b0836e51a"
-        "content_sha256": "d17623da9812d0f2ef53ab6aed4a9d89a2c2820d34aa0294af2ba434b6107c2a",
-      }
+      },
+      "content_sha256": "d17623da9812d0f2ef53ab6aed4a9d89a2c2820d34aa0294af2ba434b6107c2a"
     },
     {
       "id": "E-SWC-T4C",
@@ -185,8 +185,8 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "afc8f5a68ca6b95574f6bd750c66369b86dd223c"
-        "content_sha256": "7d9cc29226e092c233f35cfcf70f75ac137b8c9f8744a1ba319264f96da3857a",
-      }
+      },
+      "content_sha256": "7d9cc29226e092c233f35cfcf70f75ac137b8c9f8744a1ba319264f96da3857a"
     },
     {
       "id": "E-SWC-T5A",
@@ -195,8 +195,8 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "edf6eff5249b9c70b40ca6409a511fcea062262d"
-        "content_sha256": "6d4d2a33cfea8525449b7a1508c6e6c2d9550034aac3774e6b2d64c4e76bae5c",
-      }
+      },
+      "content_sha256": "6d4d2a33cfea8525449b7a1508c6e6c2d9550034aac3774e6b2d64c4e76bae5c"
     },
     {
       "id": "E-SWC-T5C",
@@ -205,8 +205,8 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "2770b37654ab07ebf3b59017fa59a10380c33ad1"
-        "content_sha256": "83b287e914522b0b382e3e46d39ced36494ff257d835cac11d7f4243ae1d7745",
-      }
+      },
+      "content_sha256": "83b287e914522b0b382e3e46d39ced36494ff257d835cac11d7f4243ae1d7745"
     }
   ]
 }
