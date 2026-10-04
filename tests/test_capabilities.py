@@ -152,6 +152,8 @@ def test_default_capabilities_are_stable():
         "runtime.git",
         "package.import",
         "tool.build",
+        "code.write",
+        "code.test.python",
     ]
 
 
