@@ -8,7 +8,8 @@ version = "1.0.0"
 description = "Provenance-first FlyWire v783 morphology, synapse validation, and reproducible circuit evidence."
 readme = "README.md"
 requires-python = ">=3.12"
-license = {file = "LICENSE"}
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [{name = "Navid Eslami Gomesh Tappeh"}]
 dependencies = [
   "fafbseg==3.2.2",
