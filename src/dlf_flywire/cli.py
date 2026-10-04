@@ -35,24 +35,42 @@ def _load_run_plan(path: str):
             raise ValueError(f"step {index} operation_args must be a string list")
         if not isinstance(deps, list) or not all(isinstance(x, str) for x in deps):
             raise ValueError(f"step {index} dependencies must be a string list")
+
+        for name in ("step_id", "capability", "action", "destination"):
+            if not isinstance(item[name], str) or not item[name].strip():
+                raise ValueError(f"step {index} {name} must be a non-empty string")
+
+        risk = item.get("risk_tier", 0)
+        if isinstance(risk, bool) or not isinstance(risk, int) or risk not in {0, 1, 2}:
+            raise ValueError(f"step {index} risk_tier must be 0, 1, or 2")
+
+        flags = {}
+        for name in ("permission_granted", "idempotent", "network_access", "system_mutation"):
+            value = item.get(name, False)
+            if not isinstance(value, bool):
+                raise ValueError(f"step {index} {name} must be a JSON boolean")
+            flags[name] = value
+
+        backend_override = item.get("backend_override")
+        if backend_override is not None and (
+            not isinstance(backend_override, str) or not backend_override.strip()
+        ):
+            raise ValueError(f"step {index} backend_override must be a string or null")
+
         steps.append(
             TaskStep(
-                step_id=str(item["step_id"]),
-                capability=str(item["capability"]),
-                action=str(item["action"]),
-                destination=str(item["destination"]),
-                risk_tier=int(item.get("risk_tier", 0)),
-                permission_granted=bool(item.get("permission_granted", False)),
+                step_id=item["step_id"],
+                capability=item["capability"],
+                action=item["action"],
+                destination=item["destination"],
+                risk_tier=risk,
+                permission_granted=flags["permission_granted"],
                 operation_args=tuple(args),
                 dependencies=tuple(deps),
-                backend_override=(
-                    str(item["backend_override"])
-                    if item.get("backend_override") is not None
-                    else None
-                ),
-                idempotent=bool(item.get("idempotent", False)),
-                network_access=bool(item.get("network_access", False)),
-                system_mutation=bool(item.get("system_mutation", False)),
+                backend_override=backend_override,
+                idempotent=flags["idempotent"],
+                network_access=flags["network_access"],
+                system_mutation=flags["system_mutation"],
             )
         )
     return RunPlan(tuple(steps))
