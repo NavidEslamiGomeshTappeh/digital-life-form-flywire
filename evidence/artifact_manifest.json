@@ -211,7 +211,7 @@
       "role": "lineage_builder",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "0131931c046dc79a97468f88c7f4f7262bf680e0"
+        "value": "64304263d2325bb2da19bf0aa45f350007c82af8"
       }
     },
     {
@@ -260,7 +260,7 @@
       "role": "lineage_regeneration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "688a273e94fe6e029a8c13298bdb4730ef411e5c"
+        "value": "6694ef26aa9dffbef863f2f452b52b59c7dea6f7"
       }
     }
   ]
