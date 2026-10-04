@@ -85,7 +85,7 @@ def test_synapse_lineage_fails_closed_on_record_id_drift(tmp_path):
 
 def test_v230_point_data_bridge_is_anchor_only():
     bridge = json.loads(
-        (ROOT / "evidence" / "v230_point_data_bridge.json").read_text(
+        (ROOT / "evidence" / "point_data_connectivity_bridge.json").read_text(
             encoding="utf-8"
         )
     )
