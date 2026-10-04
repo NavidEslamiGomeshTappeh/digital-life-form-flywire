@@ -341,4 +341,14 @@ def default_capabilities() -> tuple[CapabilitySpec, ...]:
             (BackendSpec("python-build", sys.executable, ("-m", "build", "--version")),),
             tier=1,
         ),
+        CapabilitySpec(
+            "code.write",
+            "Create one UTF-8 source file inside the declared workspace",
+            (BackendSpec("current-python", sys.executable),),
+        ),
+        CapabilitySpec(
+            "code.test.python",
+            "Execute a generated Python source file with explicit assertions",
+            (BackendSpec("current-python", sys.executable),),
+        ),
     )
