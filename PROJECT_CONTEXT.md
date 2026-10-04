@@ -179,6 +179,17 @@ Conclusion:
 The original historical generator remains **UNRESOLVED**.
 
 ### 2026-10-04 release/internals audit
+### 2026-10-04 legacy-toolchain finding
+
+A separate public repository, NikDrummond/Neurosetta_legacy_v0.0.1, provides a historically plausible but unproven predecessor path for the missing morphology stage:
+
+- Subtree extraction and dendrite-root selection existed by commit 94ff9e5a956d5a91c40bb386f33e3dfa60896987 (2025-04-18).
+- A July 29, 2025 fix (9816dad67180ebf5937ae05316ae14d1f190aae4) explicitly changed optimal_partition_root() to score a simplified graph and map the selected simplified root coordinate back to the full neuron with nearest_vertex().
+- Coordinate transformation/scaling functionality predates the Point_data artifact: commit e0de7d65c2618f06edf4ec9f3e630bab5f524399 (2024-10-21) added transforming/scaling functions, and the current legacy transformations.py contains align_neuron(), snap_to_axis(), and coordinate_scale().
+- The legacy repository's latest public commit before the December 2025 Point_data artifact is 25c911a28030deb5204eb7ab5a18ff4643363d96 on 2025-07-31.
+
+This is **contextual evidence only**. No inspected artifact links a specific legacy commit or parameter set to the December 2025 Point_data execution. The legacy path is therefore technically plausible but remains UNRESOLVED as historical provenance.
+
 
 Additional direct reconstruction established:
 
