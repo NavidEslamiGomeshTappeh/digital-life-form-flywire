@@ -71,6 +71,12 @@ The detailed adaptation is documented in [AGENT_CAPABILITY_LAYER.md](AGENT_CAPAB
 Local execution now has a guarded route through `CapabilityExecutor`: the capability is probed first, the selected declared backend is resolved, and only then is an executable request constructed. An unavailable capability fails closed before process execution. Recovery is bound to the original request fingerprint, so a changed command cannot inherit an interrupted step's replay permission.
 
  
+### Intent-bound execution receipts
+
+Execution receipts use schema version 2 and carry the exact execution intent: capability, action, destination, risk tier, explicit permission, network access, and system-mutation flags. The request fingerprint also binds this intent, so an interrupted run cannot resume with a changed intent under the same step identity. The run verifier compares the receipt intent with the immutable plan and rejects any mismatch before reporting PASS.
+
+Receipt references stored in run state are relative to the runtime state root and must resolve inside the current run's receipt directory. This prevents a corrupted run-state file from redirecting verification to an arbitrary filesystem path.
+
 ## Leader / task orchestrator
 
 The first Leader boundary is implemented by `TaskOrchestrator`. A `RunPlan` defines explicit steps, dependencies, intent metadata, backend preference, and idempotence. The orchestrator computes a stable plan fingerprint, executes dependencies deterministically, persists run state atomically, resumes already-successful steps from verified receipts, and rejects a changed plan on resume. The independent `verify_run` path checks the run-state identity, plan fingerprint, receipt identity, receipt seal, and recorded policy decision for every successful step. This is orchestration evidence, not scientific evidence.
