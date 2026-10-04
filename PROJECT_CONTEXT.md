@@ -181,6 +181,20 @@ The original historical generator remains **UNRESOLVED**.
 ### 2026-10-04 release/internals audit
 ### 2026-10-04 legacy-toolchain finding
 
+### 2026-10-04 earliest-public-release finding
+
+A January 16, 2026 Zenodo software release was located:
+
+- Zenodo record 18269709, version Submission_release, archive MD5 6ce666c93c0d907e228442528796bc0e, about 99 MB.
+- Its Data/Point_data.pkl is the exact historical Git blob b85caf49f45677f2075f7b5f2c8830141cd96d02, the same artifact first committed on 2025-12-09.
+- The release contains the downstream analysis notebooks, source modules, Neuron_ids.csv, and conda-environment.yml.
+- It does not contain PP1_Fetch_flywire, PP2_nr_conversion, PP3_Dendrite_extraction, PP4_Global_allignment, or PP5_Mesh_generation.
+- The release is 18 public Git commits ahead of the Point_data commit on the Submission_release branch, so it preserves a dated downstream snapshot without exposing the upstream morphology producer.
+- Zenodo also records a Software Heritage snapshot for this release, providing a second immutable archival route to the same historical release.
+
+Interpretation: this materially strengthens the historical endpoint for the Point_data artifact, but the upstream Reduced_dendrites/.nr generation stage is still missing from the located public release. The exact December producer remains UNRESOLVED.
+
+
 A separate public repository, NikDrummond/Neurosetta_legacy_v0.0.1, provides a historically plausible but unproven predecessor path for the missing morphology stage:
 
 - Subtree extraction and dendrite-root selection existed by commit 94ff9e5a956d5a91c40bb386f33e3dfa60896987 (2025-04-18).
