@@ -83,6 +83,30 @@ def test_synapse_lineage_fails_closed_on_record_id_drift(tmp_path):
 
 
 
+def test_public_coordinate_pipeline_boundary_is_ledgered():
+    boundary = json.loads(
+        (ROOT / "evidence" / "public_coordinate_pipeline_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert boundary["status"] == "PROVEN_PUBLIC_PIPELINE_COORDINATE_BOUNDARY"
+    assert any(
+        "No coordinate rotation/translation/scaling" in item
+        for source in boundary["sources"]
+        for item in source.get("observations", [])
+    )
+    assert any(
+        "does not apply a coordinate-frame transform" in item
+        for source in boundary["sources"]
+        for item in source.get("observations", [])
+    )
+    claims = json.loads(
+        (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
+    )
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-005")
+    assert claim["status"] == "PROVEN"
+
+
 def test_archived_submission_release_boundary_is_ledgered():
     boundary = json.loads(
         (ROOT / "evidence" / "zenodo_submission_release_boundary.json").read_text(
