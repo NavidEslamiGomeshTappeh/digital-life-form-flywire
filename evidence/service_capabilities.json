@@ -1,11 +1,11 @@
 {
-  "schema": "V235-service-capability-ledger/v1",
+  "schema": "service-capability-ledger/v1",
   "purpose": "Evidence-backed record of external service capabilities available to the Digital Life Form engineering workflow.",
   "updated_by": "ChatGPT connected-tool verification",
   "services": {
     "github": {
       "status": "VERIFIED",
-      "evidence": "GitHub connector can read and write mafiabax/digital-life-form-flywire; branch creation succeeded for v235-service-bridge.",
+      "evidence": "GitHub connector can read and write NavidEslamiGomeshTappeh/digital-life-form-flywire.",
       "role": "source control, evidence artifacts, CI orchestration"
     },
     "supabase": {

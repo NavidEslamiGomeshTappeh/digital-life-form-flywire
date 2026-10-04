@@ -1,6 +1,6 @@
 # Digital Life Form — FlyWire
 
-Version 1.0.1
+Version 1.1.0
 
 > **Project continuity / canonical research memory:** [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md)
 >
@@ -60,6 +60,19 @@ The core package has no third-party runtime dependencies.
 python -m pip install -e ".[dev]"
 ```
 
+## Audit the evidence chain
+
+The project exposes two complementary checks:
+
+```bash
+python -m dlf_flywire validate
+python -m dlf_flywire audit
+```
+
+`validate` checks the scientific baseline and morphology invariants. `audit` additionally checks the machine-readable claim ledger, artifact identities, and version consistency.
+
+The claim ledger is at [evidence/claims.json](evidence/claims.json), with artifact fingerprints in [evidence/artifact_manifest.json](evidence/artifact_manifest.json).
+
 ## Validate
 
 ```bash
@@ -69,7 +82,7 @@ python -m pytest -q
 
 ## Recover exact morphology
 
-V1.0.1 recovery reads the public FAFB v783 Neuroglancer precomputed skeleton endpoint directly and writes SWC without the vulnerable `fafbseg → diskcache` dependency chain.
+V1.1.0 recovery reads the public FAFB v783 Neuroglancer precomputed skeleton endpoint directly and writes SWC without the vulnerable `fafbseg → diskcache` dependency chain.
 
 ```bash
 dlf-flywire recover --dataset 783 --output data/morphology
@@ -79,7 +92,7 @@ Recovery fails closed on malformed source data, unsupported skeleton layouts, an
 
 ## Security
 
-Workflow actions are pinned to immutable commit SHAs. CodeQL and OpenSSF Scorecard run in CI. V1.0.1 also removes the vulnerable transitive DiskCache dependency from the core installation path.
+Workflow actions are pinned to immutable commit SHAs. CodeQL and OpenSSF Scorecard run in CI. V1.1.0 also removes the vulnerable transitive DiskCache dependency from the core installation path.
 
 ## License
 

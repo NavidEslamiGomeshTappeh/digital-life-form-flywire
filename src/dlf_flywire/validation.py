@@ -6,6 +6,7 @@ from pathlib import Path
 
 from .constants import ROOTS
 from .morphology import validate_swc_file
+from .provenance import audit_provenance
 
 EXPECTED_SHA256 = {
     "T4a": "d17623da9812d0f2ef53ab6aed4a9d89a2c2820d34aa0294af2ba434b6107c2a",
@@ -42,7 +43,8 @@ def validate_project(root: Path) -> dict:
     from .evidence import validate_reference_evidence
 
     evidence = validate_reference_evidence(root / "evidence")
-    return {"status": "PASS", "version": "1.0.0", **evidence}
+    provenance = audit_provenance(root)
+    return {"status": "PASS", "version": provenance["product_version"], **evidence, "provenance": provenance}
 
 
 def main(argv=None) -> int:

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "product_version": "1.0.0",
+  "product_version": "1.1.0",
   "dataset": "FAFB v783",
   "reference_roots": {
     "T4a": "720575940632008007",
@@ -9,7 +9,7 @@
     "T5c": "720575940617782941"
   },
   "core_counts": {"neurons": 4, "directed_pairs": 75, "synapse_rows": 649},
-  "artifact_policy": "Stable V1 paths; historical milestone names are retained only inside provenance/history evidence.",
+  "artifact_policy": "Stable Version 1 paths; historical milestone identifiers remain only where required for forensic provenance.",
   "scientific_boundary": {
     "individual_synapse_biological_compartment": "UNRESOLVED",
     "historical_generator_identity": "UNRESOLVED",

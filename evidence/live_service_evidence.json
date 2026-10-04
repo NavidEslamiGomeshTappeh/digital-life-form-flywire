@@ -1,5 +1,5 @@
 {
-  "schema":"V236-live-service-evidence/v1",
+  "schema":"live-service-evidence/v1",
   "timestamp":"2026-10-02",
   "services":{
     "tinyfish":{

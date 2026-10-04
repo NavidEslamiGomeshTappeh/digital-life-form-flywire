@@ -1,95 +1,23 @@
 {
-  "schema": "V233-plan/v1",
-  "version": 1,
-  "description": "Evidence-gated dependency graph for existing verified project stages; no biological data are invented.",
+  "schema_version": 1,
+  "product_version": "1.1.0",
+  "description": "Canonical evidence-gated execution plan for the unified Version 1 product.",
+  "policy": "Tasks refer to stable product capabilities, not milestone-numbered product surfaces.",
   "tasks": {
-    "V229_ROOT_EXACT": {
-      "kind": "PYTHON_TEST",
+    "REFERENCE_EVIDENCE": {
+      "kind": "PYTHON_VALIDATION",
       "deps": [],
-      "payload": {
-        "script": "test_v229_recovery_runner.py",
-        "timeout_seconds": 120
-      },
-      "max_attempts": 2
+      "payload": {"command": "python -m dlf_flywire validate", "timeout_seconds": 120}
     },
-    "V230_STRUCTURE": {
-      "kind": "PYTHON_TEST",
-      "deps": [
-        "V229_ROOT_EXACT"
-      ],
-      "payload": {
-        "script": "test_v230_target_synapses.py",
-        "timeout_seconds": 120
-      },
-      "max_attempts": 2
+    "PROVENANCE_AUDIT": {
+      "kind": "PYTHON_VALIDATION",
+      "deps": ["REFERENCE_EVIDENCE"],
+      "payload": {"command": "python -m dlf_flywire audit", "timeout_seconds": 120}
     },
-    "V231_FINGERPRINT": {
-      "kind": "PYTHON_TEST",
-      "deps": [
-        "V230_STRUCTURE"
-      ],
-      "payload": {
-        "script": "test_v231_circuit_fingerprint.py",
-        "timeout_seconds": 120
-      },
-      "max_attempts": 2
-    },
-    "V231_LEDGER": {
-      "kind": "PYTHON_TEST",
-      "deps": [
-        "V230_STRUCTURE"
-      ],
-      "payload": {
-        "script": "test_evidence_ledger.py",
-        "timeout_seconds": 120
-      },
-      "max_attempts": 2
-    },
-    "V231_EVIDENCE_ENGINE": {
-      "kind": "PYTHON_TEST",
-      "deps": [
-        "V231_FINGERPRINT",
-        "V231_LEDGER"
-      ],
-      "payload": {
-        "script": "test_v231_evidence_engine.py",
-        "timeout_seconds": 120
-      },
-      "max_attempts": 2
-    },
-    "V231_CAPSULE": {
-      "kind": "PYTHON_TEST",
-      "deps": [
-        "V230_STRUCTURE"
-      ],
-      "payload": {
-        "script": "scripts/test_v231_target_capsule.py",
-        "timeout_seconds": 120
-      },
-      "max_attempts": 2
-    },
-    "V232_WORKER": {
-      "kind": "PYTHON_TEST",
-      "deps": [
-        "V231_CAPSULE"
-      ],
-      "payload": {
-        "script": "scripts/test_v232_persistent_worker.py",
-        "timeout_seconds": 120
-      },
-      "max_attempts": 2
-    },
-    "V231_AUDIT": {
-      "kind": "PYTHON_TEST",
-      "deps": [
-        "V231_EVIDENCE_ENGINE",
-        "V232_WORKER"
-      ],
-      "payload": {
-        "script": "test_v231_audit.py",
-        "timeout_seconds": 180
-      },
-      "max_attempts": 2
+    "DISTRIBUTION_SMOKE": {
+      "kind": "PYTHON_VALIDATION",
+      "deps": ["PROVENANCE_AUDIT"],
+      "payload": {"command": "python -m build", "timeout_seconds": 120}
     }
   }
 }

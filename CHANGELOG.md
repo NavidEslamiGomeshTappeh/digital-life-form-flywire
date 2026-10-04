@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.1.0 — 2026-10-04
+
+Provenance audit engine and evidence contract release.
+
+- Added a machine-checkable claim ledger for source observations, deterministic computations, independent corroborations, biological inferences, and unresolved boundaries.
+- Added artifact-level integrity checks using SHA-256 and Git blob identities.
+- Added a dedicated `dlf-flywire audit` command and integrated provenance auditing into canonical validation.
+- Synchronized the canonical evidence manifest with the current semantic version.
+- Removed stale V-numbered live-product labels from current evidence metadata where they could be mistaken for active product surfaces.
+- Added regression coverage for evidence references, artifact integrity, status vocabulary, and version consistency.
+
 ## 1.0.1 — 2026-10-04
 
 Security and reproducibility maintenance release.
