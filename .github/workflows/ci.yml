@@ -47,7 +47,7 @@ jobs:
                 "permission_granted": true,
                 "operation_args": [
                   "-c",
-                  "from pathlib import Path; p=Path('code_hand_demo.py'); p.write_text('def add(a, b):\n    return a + b\n', encoding='utf-8'); print('CREATED', p); print('BYTES', p.stat().st_size)"
+                  "from pathlib import Path; source='def add(a, b):'+chr(10)+'    return a + b'+chr(10); p=Path('code_hand_demo.py'); p.write_text(source, encoding='utf-8'); print('CREATED', p); print('BYTES', p.stat().st_size)"
                 ],
                 "idempotent": true
               },
