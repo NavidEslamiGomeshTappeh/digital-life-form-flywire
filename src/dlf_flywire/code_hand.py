@@ -151,7 +151,7 @@ class CodeHand:
                     destination="code-workspace",
                     risk_tier=0,
                     permission_granted=permission_granted,
-                    operation_args=("-c", _write_script(relative_path, content)),
+                    operation_args=("-c", _write_script(str(target), content)),
                     idempotent=False,
                 ),
                 TaskStep(
@@ -161,7 +161,7 @@ class CodeHand:
                     destination="code-workspace",
                     risk_tier=0,
                     permission_granted=permission_granted,
-                    operation_args=("-c", _test_script(relative_path, test_code)),
+                    operation_args=("-c", _test_script(str(target), test_code)),
                     dependencies=("create-file",),
                     idempotent=True,
                 ),
