@@ -1,5 +1,9 @@
 from dlf_flywire.code_hand import CodeHand
-from dlf_flywire.neural_gateway import IntentRule, NeuralIntentGateway, NeuralObservation
+from dlf_flywire.neural_gateway import (
+    IntentRule,
+    NeuralIntentGateway,
+    NeuralObservation,
+)
 from dlf_flywire.neural_leader import NeuralLeaderBridge
 from dlf_flywire.orchestrator import RunPlan, TaskOrchestrator
 
@@ -37,6 +41,6 @@ def test_neural_selection_reaches_code_hand_execution_contract(tmp_path):
     neural_plan = RunPlan((neural_create, base_plan.steps[1]))
 
     orchestrator = TaskOrchestrator(hand.orchestrator.executor, tmp_path / "state")
-    run_id, receipts = orchestrator.run(neural_plan, run_id="neural-code-hand")
+    _run_id, receipts = orchestrator.run(neural_plan, run_id="neural-code-hand")
     assert receipts["create-file"].status == "succeeded"
     assert receipts["test-file"].stdout.strip() == "CODE_HAND_TEST_PASS"
