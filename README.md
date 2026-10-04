@@ -40,6 +40,16 @@ Unresolved:
 
 Geometry is never promoted to biological truth by proximity alone.
 
+### Latest coordinate/provenance audit — 2026-10-04
+
+A deeper reconstruction now tests both the committed SWC parent roots and the roots selected by the published subtree algorithm. Neither reproduces the historical Point_data roots by the documented nm-to-um division alone. The public NeuRosetta import_swc implementation also explicitly declares units without rescaling coordinates; rescaling is a separate convert_units operation. The public align_forest path performs centering/PCA rotation, not an implicit scale.
+
+The public Zenodo data release contains metric pickles (point_data, vertex_data, edge_data, etc.) but does not expose the Reduced_dendrites or .nr intermediate trees needed to compare the historical root nodes directly. The associated software release contains PP1–PP5 and Metrics1_Point_data, but it was published on 2026-08-10, long after the December 2025 Point_data artifact.
+
+An empirical four-point similarity fit from the project SWC subtree roots to the recorded Point_data roots reaches about 9.6 µm RMS residual with a fitted scale of about 2.7055. This is recorded strictly as INFERENCE_ONLY: no historical source or code currently establishes that transform as the one used to generate Point_data.
+
+Therefore the exact December 2025 producer, intermediate morphology materialization, coordinate transform, and execution environment remain UNRESOLVED.
+
 ## Repository layout
 
 src/dlf_flywire/   installable Python package
