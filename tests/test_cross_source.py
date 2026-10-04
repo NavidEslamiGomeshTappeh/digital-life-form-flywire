@@ -5,7 +5,6 @@ import pytest
 
 from dlf_flywire.cross_source import (
     CrossSourceValidationError,
-    sha256_file,
     validate_cross_source_receipts,
 )
 
