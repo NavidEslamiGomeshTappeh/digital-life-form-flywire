@@ -15,6 +15,10 @@ ProbeStatus = Literal["ok", "missing", "broken", "timeout", "error"]
 CapabilityStatus = Literal["ok", "off", "error"]
 
 
+class CapabilitySelectionError(RuntimeError):
+    pass
+
+
 @dataclass(frozen=True)
 class BackendSpec:
     name: str
@@ -269,6 +273,18 @@ class CapabilityDoctor:
                         "message": f"capability probe exception: {exc}",
                     }
                 )
+
+        counts = {
+            "ok": sum(item["status"] == "ok" for item in results),
+            "off": sum(item["status"] == "off" for item in results),
+            "error": sum(item["status"] == "error" for item in results),
+        }
+        return {
+            "schema_version": 1,
+            "observed_at": observed_at,
+            "capabilities": results,
+            "counts": counts,
+        }
 
     @staticmethod
     def format_report(report: Mapping[str, object]) -> str:
