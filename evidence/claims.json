@@ -189,6 +189,20 @@
       "caveats": [
         "This is a release-content boundary, not proof that the omitted producer never existed."
       ]
+    },
+    {
+      "id": "C-POINTDATA-005",
+      "statement": "The public PP1→PP2→reduction coordinate path does not contain an implicit affine coordinate transform sufficient to explain the historical Point_data root frame; the public Metrics1 path instead reads root coordinates from Reduced_dendrites after explicit nm-to-um conversion.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-PUBLIC-COORDINATE-PIPELINE-BOUNDARY",
+        "E-HISTORICAL-BOUNDARY",
+        "E-ROOT-COORD-COMP"
+      ],
+      "caveats": [
+        "This constrains the public reconstruction; it does not identify the missing December 2025 transform or prove that the later public preprocessing implementation is byte-identical to the historical producer."
+      ]
     }
   ]
 }
