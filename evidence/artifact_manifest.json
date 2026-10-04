@@ -350,7 +350,7 @@
       "role": "capability_doctor_engine",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b72763ec1b4e7f598e3a2c6c0ceaa38cfd1b59fe"
+        "value": "8c8b9a41bb943ec51e1dd62f5f982a3f8a600a0b"
       }
     },
     {
@@ -359,7 +359,7 @@
       "role": "capability_doctor_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "3ceb2d01514c37bdf271a58f4ec11237510b563f"
+        "value": "86390aed0c1425bd5241983d9755d7f77aa26bef"
       }
     },
     {
