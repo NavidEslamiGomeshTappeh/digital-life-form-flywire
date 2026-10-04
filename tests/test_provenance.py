@@ -1,5 +1,7 @@
 import json
 import shutil
+import subprocess
+import sys
 from pathlib import Path
 
 from dlf_flywire import __version__
@@ -78,6 +80,26 @@ def test_synapse_lineage_fails_closed_on_record_id_drift(tmp_path):
     else:
         raise AssertionError("tampered synapse lineage was accepted")
 
+
+
+
+def test_lineage_builder_reproduces_committed_artifact(tmp_path):
+    output = tmp_path / "synapse_lineage.json"
+    subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "scripts" / "build_synapse_lineage.py"),
+            "--input",
+            str(ROOT / "evidence" / "synapses.csv"),
+            "--output",
+            str(output),
+            "--product-version",
+            __version__,
+        ],
+        check=True,
+    )
+    committed = (ROOT / "evidence" / "synapse_lineage.json").read_bytes()
+    assert output.read_bytes() == committed
 
 
 def test_synapse_lineage_uses_stable_tuple_identifier():
