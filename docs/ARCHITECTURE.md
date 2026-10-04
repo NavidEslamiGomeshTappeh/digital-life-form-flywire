@@ -26,7 +26,7 @@ Every important scientific statement should be represented as a claim with:
 
 The independent-corroboration claim for the canonical 649-row case is explicitly bound to the frozen source-receipt artifact.
 
-The record-level lineage layer assigns each canonical tuple a stable SHA-256 record ID and binds that record to the existing claim IDs and frozen source receipt, without introducing an unsupported biological interpretation.
+The record-level lineage layer assigns each canonical tuple a stable deterministic tuple identifier and binds that record to the existing claim IDs and frozen source receipt, without introducing an unsupported biological interpretation.
 
 ## Artifact integrity
 
