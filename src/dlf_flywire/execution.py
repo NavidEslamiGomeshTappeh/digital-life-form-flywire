@@ -66,6 +66,7 @@ def _request_fingerprint(request: ExecutionRequest, cwd: str) -> str:
         "idempotent": request.idempotent,
         "env": dict(sorted(request.env.items())),
         "remove_env": list(request.remove_env),
+        "intent": request.intent.to_dict() if request.intent is not None else {},
     }
     return _sha256_bytes(_canonical_bytes(payload))
 
@@ -88,6 +89,7 @@ class ExecutionRequest:
     idempotent: bool = False
     env: dict[str, str] = field(default_factory=dict)
     remove_env: tuple[str, ...] = ()
+    intent: ExecutionIntent | None = None
 
     def __post_init__(self) -> None:
         if not self.capability.strip() or not self.backend.strip():
@@ -119,6 +121,7 @@ class ExecutionReceipt:
     stderr: str
     duration_ms: int
     recovered: bool
+    intent: dict[str, Any]
     request_sha256: str
     capability_probe: dict[str, Any]
     policy_decision: dict[str, Any]
@@ -200,7 +203,7 @@ class ExecutionEngine:
         policy_decision: PolicyDecision | None = None,
     ) -> ExecutionReceipt:
         unsigned = {
-            "schema_version": 1,
+            "schema_version": 2,
             "run_id": run_id,
             "step_id": request.step_id,
             "capability": request.capability,
@@ -217,6 +220,7 @@ class ExecutionEngine:
             "stderr": stderr,
             "duration_ms": duration_ms,
             "recovered": recovered,
+            "intent": request.intent.to_dict() if request.intent is not None else {},
             "request_sha256": _request_fingerprint(request, cwd),
             "capability_probe": capability_probe or {},
             "policy_decision": (
@@ -403,6 +407,7 @@ class CapabilityExecutor:
             idempotent=idempotent,
             env=env or {},
             remove_env=remove_env,
+            intent=intent,
         )
         snapshot = selection.to_dict()
         snapshot["resolved_executable"] = resolved
@@ -433,6 +438,7 @@ def verify_receipt(receipt: dict[str, Any]) -> ExecutionReceipt:
         "stderr",
         "duration_ms",
         "recovered",
+        "intent",
         "request_sha256",
         "capability_probe",
         "policy_decision",
@@ -441,6 +447,8 @@ def verify_receipt(receipt: dict[str, Any]) -> ExecutionReceipt:
     missing = sorted(required - set(receipt))
     if missing:
         raise ExecutionError(f"receipt missing fields: {', '.join(missing)}")
+    if receipt["schema_version"] != 2:
+        raise ExecutionError("unsupported receipt schema")
     expected_stdout = _sha256_bytes(str(receipt["stdout"]).encode("utf-8"))
     expected_stderr = _sha256_bytes(str(receipt["stderr"]).encode("utf-8"))
     if receipt["stdout_sha256"] != expected_stdout:
@@ -470,6 +478,7 @@ def verify_receipt(receipt: dict[str, Any]) -> ExecutionReceipt:
         stderr=str(receipt["stderr"]),
         duration_ms=int(receipt["duration_ms"]),
         recovered=bool(receipt["recovered"]),
+        intent=dict(receipt["intent"]),
         request_sha256=str(receipt["request_sha256"]),
         capability_probe=dict(receipt["capability_probe"]),
         policy_decision=dict(receipt["policy_decision"]),
