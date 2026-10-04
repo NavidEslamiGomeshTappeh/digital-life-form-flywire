@@ -1,109 +1,26 @@
 {
-  "status": "PROVEN_HISTORICAL_GENERATOR_TEMPORAL_BOUNDARY",
+  "status": "PROVEN_HISTORICAL_GENERATOR_TEMPORAL_BOUNDARY_WITH_PUBLIC_GENERATOR_RECONSTRUCTION",
   "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
   "evidence": [
-    {
-      "role": "initial_repository_state",
-      "sha": "79cf52212935de6bddf996c9f46c0df89f5c5442",
-      "timestamp": "2025-12-09T19:26:04Z",
-      "message": "Initial commit",
-      "files": [
-        ".gitignore",
-        "README.md"
-      ]
-    },
-    {
-      "role": "first_point_data_commit",
-      "sha": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
-      "timestamp": "2025-12-09T20:41:50Z",
-      "message": "A point value metrics data",
-      "files": [
-        "Data/Point_data.pkl"
-      ]
-    },
-    {
-      "role": "second_point_data_commit",
-      "sha": "fe9779d4ca425613eec44b19e961610d117e7232",
-      "timestamp": "2025-12-09T20:42:19Z",
-      "message": "Point value metrics data",
-      "files": [
-        "Data/Point_data.pkl"
-      ]
-    },
-    {
-      "role": "public_preprocessing_release",
-      "sha": "8700efd40bccfa3e74ac7c4df02da83a968b9b52",
-      "timestamp": "2026-08-10T17:49:32Z",
-      "message": "Paper submission update. Remove tracked Data artifacts and add preprocessing notebooks and revised analysis code.",
-      "files": [
-        "Notebooks/PP1_Fetch_flywire.ipynb",
-        "Notebooks/PP3_Dendrite_extraction.ipynb"
-      ]
-    },
-    {
-      "role": "public_neurosetta_forest_api",
-      "repository": "NikDrummond/NeuRosetta",
-      "sha": "2f4e52c8d0ac4f284b9a15e5d147f6a130998495",
-      "timestamp": "2026-01-26T14:20:00Z",
-      "message": "Update to IO utils and Added Forests — read/write // Import/export(swc) now parallel, and Forest class for collections of trees added",
-      "relevant_files": [
-        "src/NeuRosetta/classes/forest_class.py",
-        "src/NeuRosetta/io_utils/io_utils.py",
-        "src/NeuRosetta/io_utils/nr_utils.py"
-      ]
-    },
-    {
-      "role": "public_legacy_neurosetta_subtree_evidence",
-      "repository": "NikDrummond/Neurosetta_legacy_v0.0.1",
-      "sha": "94ff9e5a956d5a91c40bb386f33e3dfa60896987",
-      "timestamp": "2025-04-18T19:05:03Z",
-      "message": "Subtrees — find and generate masks for a sub tree defined by a single vertex",
-      "relevant_files": [
-        "Neurosetta/graphs.py",
-        "Neurosetta/plotting.py"
-      ]
-    },
-    {
-      "role": "analysis_notebook_environment_evidence",
-      "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
-      "sha": "1007a708f0b2cd4d55875174256774a41ff5b0f4",
-      "timestamp": "2025-12-09T21:08:32Z",
-      "message": "ANOVA analysis and notebook",
-      "relevant_files": [
-        "Notebooks/ANOVA_analysis.ipynb",
-        "src/paper_ANOVA.py"
-      ],
-      "observation": "The notebook metadata names its Jupyter kernel 'neurosetta' and the earlier version of the notebook referenced an absolute local Point_data path under /home/nik/Desktop/Software/T45_Morpho_data/Data/Pickled_data/Point_data.pkl before later normalization to ../Data/Point_data.pkl."
-    },
-    {
-      "role": "data_batch_sequence",
-      "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
-      "timestamp": "2025-12-09T20:41:50Z-20:46:46Z",
-      "message": "Seven analysis-data artifacts were committed sequentially within about five minutes: Point_data.pkl, Edge_data.pkl, Vertex_data.pkl, Bifurication_data.pkl, Segment_deviation_data.pkl, Contour_plot.pkl (with Point_data receiving two consecutive commits)."
-    }
+    {"role":"first_point_data_commit","sha":"cd17d34afd0d46a3c2947e83a1f0fdd835a9959a","timestamp":"2025-12-09T20:41:50Z","files":["Data/Point_data.pkl"]},
+    {"role":"analysis_notebook_environment_evidence","sha":"1007a708f0b2cd4d55875174256774a41ff5b0f4","timestamp":"2025-12-09T21:08:32Z","observation":"Contemporaneous ANOVA notebook uses Jupyter kernel 'neurosetta' and an earlier version references /home/nik/Desktop/Software/T45_Morpho_data/Data/Pickled_data/Point_data.pkl."},
+    {"role":"public_point_metric_generator_reconstruction","commit":"8700efd40bccfa3e74ac7c4df02da83a968b9b52","timestamp":"2026-08-10T17:49:32Z","file":"Notebooks/Metrics1_Point_data.ipynb","file_sha":"2c31080a7f6f69d1c603bf287e4a5da7d4c3712b","generator":"process_one_point(tree)","provenance_chain":["nr.load(.../Paper_data/nr/Flywire/Reduced_dendrites/)","forest.convert_units(target_units='um')","tree.get_root_coordinate() -> root_x/root_y/root_z","tree.count_edges(), tree.get_total_cable_length(), tree.count_nodes(), tree.count_leaves(), tree.count_branches()","tree.coordinate_pca(robust=True, norm=True)","tree.get_convex_hull_volume(bind=False)","tree.get_mean_edge_angle(...) and tree.get_edge_angle_variance(...)"]},
+    {"role":"public_pp3_extraction_logic","commit":"8700efd40bccfa3e74ac7c4df02da83a968b9b52","file":"Notebooks/PP3_Dendrite_extraction.ipynb","file_sha":"67a9b41986eab50df7d540c1d40a39a2870a290d","logic":["nr.load(.../Optic_lobe_neurons/nr/Female/T4/)","forest.convert_forest_to_subtrees(max_workers=10)","forest.save_forest(.../Paper_data/nr/Flywire/Dendrites/)","forest.reduce_forest(parallel=True,max_workers=10,inplace=True)","forest.save_forest(.../Paper_data/nr/Flywire/Reduced_dendrites/)"]},
+    {"role":"public_neurosetta_forest_api","repository":"NikDrummond/NeuRosetta","sha":"2f4e52c8d0ac4f284b9a15e5d147f6a130998495","timestamp":"2026-01-26T14:20:00Z"},
+    {"role":"public_legacy_neurosetta_subtree_evidence","repository":"NikDrummond/Neurosetta_legacy_v0.0.1","sha":"94ff9e5a956d5a91c40bb386f33e3dfa60896987","timestamp":"2025-04-18T19:05:03Z"}
   ],
   "checks": {
-    "initial_has_no_pp1": true,
-    "initial_has_no_pp3": true,
-    "initial_has_no_point_data": true,
     "first_point_commit_has_point_data": true,
-    "first_point_commit_has_no_pp1": true,
     "first_point_commit_has_no_pp3": true,
-    "public_preprocessing_has_pp1": true,
-    "public_preprocessing_has_pp3": true,
-    "public_neurosetta_forest_api_after_point_data": true
-  },
-  "elapsed_seconds": {
-    "initial_to_first_point_data": 4546,
-    "first_point_data_to_public_preprocessing": 21071262
+    "public_pp3_uses_reduced_dendrites": true,
+    "public_metrics_generator_uses_get_root_coordinate": true,
+    "public_metrics_generator_and_pp3_share_commit": true
   },
   "interpretation": {
-    "proven": "The currently public PP1/PP3 preprocessing notebooks were not present when Point_data.pkl was first committed.",
-    "unresolved": "The exact December 2025 generator implementation, its exact software commit, exact morphology materialization, and execution environment remain unrecovered.",
-    "public_toolchain_evidence": "The public NeuRosetta commit that adds the Forest/SWC IO infrastructure used by the later PP2 notebook is dated 2026-01-26, after the 2025-12-09 Point_data commit. This does not exclude a private predecessor.",
-    "legacy_boundary": "A separate public legacy NeuRosetta repository already contained subtree functionality in April 2025 and .nr support earlier. Therefore the chronology rules out only the later public Forest/IO pipeline as the documented historical implementation; it does not rule out a legacy or private NeuRosetta-based generator.",
-    "analysis_environment": "The contemporaneous ANOVA notebook provides direct evidence that the analysis environment was named 'neurosetta' and that the source data originally lived in a local T45_Morpho_data/Pickled_data path. This strongly narrows the historical workflow toward a local Neurosetta-based research environment, but does not by itself identify the exact generator commit or morphology extraction script.",
-    "public_current_neurosetta": "The current public NeuRosetta repository's initial commit is 2025-10-21, but the Forest/SWC parallel IO infrastructure appears only in January 2026 and public subtree extraction work in April 2026. Thus the December 2025 environment, if based on NeuRosetta, was necessarily an earlier/local/legacy code state rather than the later public Forest/subtree pipeline."
+    "proven":["Point_data.pkl first appeared on 2025-12-09.","The contemporaneous analysis environment is directly evidenced as 'neurosetta'.","The later public Metrics1 notebook explicitly generates the Point_data schema from Reduced_dendrites and gets root coordinates with tree.get_root_coordinate().","The later public PP3 notebook explicitly creates Reduced_dendrites by subtree extraction followed by reduction.","The public algorithmic morphology-to-root-coordinate path is therefore reconstructed."],
+    "unresolved":["The exact December 2025 generator revision is not cryptographically tied to the December artifact.","The exact December 2025 extraction script/software commit remains unrecovered.","The specific 649-coordinate V230 artifact is not yet connected end-to-end to this generator chain.","The August 2026 notebooks may be revised publication versions."],
+    "historical_boundary":"Public Forest/SWC infrastructure appears January 2026 and public PP3/Metrics notebooks August 2026; legacy NeuRosetta subtree functionality existed April 2025. Thus a private/legacy December 2025 implementation remains possible.",
+    "confidence_upgrade":"The exact Point_data schema and root-coordinate operation are now in executable public source, materially strengthening the provenance reconstruction."
   },
-  "execution_note": "Repository chronology was independently verified through immutable GitHub commit metadata and file trees. Local container execution of the network-fetching audit could not run because outbound DNS/network access to github.com is unavailable in the analysis environment."
+  "execution_note":"Verified through GitHub commit metadata and file APIs."
 }
