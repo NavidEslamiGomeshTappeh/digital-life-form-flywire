@@ -208,3 +208,9 @@ def test_run_plan_cli_rejects_string_permission(tmp_path):
             str(tmp_path / "state"),
         ]
     ) == 2
+
+
+def test_orchestrator_rejects_path_traversal_run_id(tmp_path):
+    orchestrator = TaskOrchestrator(make_executor(tmp_path), tmp_path / "state")
+    with pytest.raises(ValueError, match="run_id"):
+        orchestrator.run(RunPlan((step("safe"),)), run_id="../escape")
