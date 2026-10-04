@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "c6dd4a4a574fbee4286f5da43d2285b0af555c8d"
+        "value": "15bcc82967568a745a49e408e2cdfa474804e719"
       }
     },
     {
@@ -260,7 +260,7 @@
       "role": "lineage_regeneration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "3a338e609f14f14a640ede7473f9be2aa2cc6867"
+        "value": "0899a8a1083e517bb0ad9be4e11d4cd84be90a35"
       }
     },
     {
@@ -324,6 +324,15 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "cb4d2a278ae9bfeda5e5515fc73e62d29a918950"
+      }
+    },
+    {
+      "id": "E-ZENODO-SUBMISSION-BOUNDARY",
+      "path": "evidence/zenodo_submission_release_boundary.json",
+      "role": "archived_release_content_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "faf9a0fa2233886295a720a6f53ecb8270b01220"
       }
     }
   ]
