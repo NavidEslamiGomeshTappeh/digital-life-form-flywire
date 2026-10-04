@@ -388,6 +388,24 @@
         "type": "git_blob_sha1",
         "value": "1774bcf8e36e000a9a57b18ae921622b13cd1c32"
       }
+    },
+    {
+      "id": "E-ORCHESTRATOR",
+      "path": "src/dlf_flywire/orchestrator.py",
+      "role": "leader_task_orchestrator",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "50fb674e4f4253264916942e9c221f8b627caacb"
+      }
+    },
+    {
+      "id": "E-ORCHESTRATOR-TESTS",
+      "path": "tests/test_orchestrator.py",
+      "role": "leader_orchestration_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "ca6b3a35c545da0bd3f0e96644fbb87ad89f38d3"
+      }
     }
   ]
 }
