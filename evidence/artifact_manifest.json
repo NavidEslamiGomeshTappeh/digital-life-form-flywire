@@ -395,7 +395,7 @@
       "role": "leader_task_orchestrator",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "1d05519f620fa27f5782d33b0521e36ffb401a47"
+        "value": "b67dcc4544f825df87a36eab9eaedbeb2bac19e4"
       }
     },
     {
@@ -404,7 +404,7 @@
       "role": "leader_orchestration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "c7ebb632a2651168de69af62470856e5962c41c8"
+        "value": "bec5be671d95399cf1828e57eda9c0c6ca23cdab"
       }
     },
     {
