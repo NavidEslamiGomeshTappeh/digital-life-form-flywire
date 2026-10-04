@@ -91,7 +91,7 @@ def test_public_coordinate_pipeline_boundary_is_ledgered():
     )
     assert boundary["status"] == "PROVEN_PUBLIC_PIPELINE_COORDINATE_BOUNDARY"
     assert any(
-        "No coordinate rotation/translation/scaling" in item
+        "no coordinate rotation/translation/scaling" in item.lower()
         for source in boundary["sources"]
         for item in source.get("observations", [])
     )
