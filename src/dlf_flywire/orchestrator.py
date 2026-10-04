@@ -325,8 +325,22 @@ def verify_run(
                 raise ExecutionError("receipt run ID mismatch")
             if receipt.capability != step.capability:
                 raise ExecutionError("receipt capability mismatch")
+            expected_intent = {
+                "capability": step.capability,
+                "action": step.action,
+                "destination": step.destination,
+                "risk_tier": step.risk_tier,
+                "permission_granted": step.permission_granted,
+                "network_access": step.network_access,
+                "system_mutation": step.system_mutation,
+            }
+            if receipt.intent != expected_intent:
+                raise ExecutionError("receipt intent mismatch")
             if receipt.policy_decision.get("status") != "allow":
                 raise ExecutionError("receipt policy decision is not allow")
+            checks = receipt.policy_decision.get("checks")
+            if not isinstance(checks, dict) or not all(value is True for value in checks.values()):
+                raise ExecutionError("receipt policy checks are not all true")
             if record.get("receipt_sha256") != receipt.receipt_sha256:
                 raise ExecutionError("run-state receipt hash mismatch")
             successful += 1
