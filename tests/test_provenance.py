@@ -83,6 +83,38 @@ def test_synapse_lineage_fails_closed_on_record_id_drift(tmp_path):
 
 
 
+def test_historical_neurosetta_lineage_is_context_only():
+    lineage = json.loads(
+        (ROOT / "evidence" / "historical_neurosetta_lineage_context.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert lineage["status"] == "PROVEN_SOFTWARE_FAMILY_CONTEXT_NOT_ARTIFACT_IDENTITY"
+    assert lineage["lineage"][0]["relevant_commits"][1]["sha"] == (
+        "bb5f5ffaf435bf8d0d7fbc70238bab2c47b7ca92"
+    )
+    legacy = next(
+        item for item in lineage["lineage"]
+        if item["repository"] == "NikDrummond/Neurosetta_legacy_v0.0.1"
+    )
+    assert any(
+        item["sha"] == "94ff9e5a956d5a91c40bb386f33e3dfa60896987"
+        for item in legacy["relevant_commits"]
+    )
+    gui = lineage["lineage"][-1]
+    assert gui["relevant_commits"][0]["sha"] == (
+        "661a51d24f1f7fb96da2fbbf6fbefc9a5282a7f0"
+    )
+    assert lineage["gui_boundary"]["public_history_result"].startswith(
+        "A targeted search"
+    )
+    claims = json.loads(
+        (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
+    )
+    assert next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-003")["status"] == "PROVEN"
+    assert next(item for item in claims["claims"] if item["id"] == "C-MORPH-003")["status"] == "PROVEN"
+
+
 def test_published_method_boundary_is_ledgered():
     boundary = json.loads(
         (ROOT / "evidence" / "public_method_boundary.json").read_text(
