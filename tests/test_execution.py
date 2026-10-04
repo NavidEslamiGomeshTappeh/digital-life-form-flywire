@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import sys
+from pathlib import Path
 
 import pytest
 
@@ -87,27 +88,31 @@ def test_interrupted_non_idempotent_step_is_blocked(tmp_path):
 def test_interrupted_idempotent_step_replays_and_marks_recovery(tmp_path):
     engine = ExecutionEngine(tmp_path / "state")
     run_id = "recovery-test"
+    request_to_recover = ExecutionRequest(
+        capability="runtime.python",
+        backend="current-python",
+        argv=(sys.executable, "-c", "print('recovered')"),
+        step_id="step",
+        cwd=str(Path.cwd().resolve()),
+        idempotent=True,
+    )
+    from dlf_flywire.execution import _request_fingerprint
+
     engine._write_checkpoint(
         run_id,
         {
             "step": {
                 "status": "running",
-                "capability": "runtime.python",
-                "backend": "current-python",
-                "argv": [sys.executable, "-c", "print('recovered')"],
+                "capability": request_to_recover.capability,
+                "backend": request_to_recover.backend,
+                "argv": list(request_to_recover.argv),
+                "request_sha256": _request_fingerprint(
+                    request_to_recover, str(Path.cwd().resolve())
+                ),
             }
         },
     )
-    receipt = engine.execute(
-        ExecutionRequest(
-            capability="runtime.python",
-            backend="current-python",
-            argv=(sys.executable, "-c", "print('recovered')"),
-            step_id="step",
-            idempotent=True,
-        ),
-        run_id=run_id,
-    )
+    receipt = engine.execute(request_to_recover, run_id=run_id)
     assert receipt.status == "succeeded"
     assert receipt.recovered is True
 
