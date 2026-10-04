@@ -69,7 +69,7 @@ def build_lineage(csv_path: Path, output_path: Path, product_version: str) -> No
         },
         "record_id_contract": {
             "algorithm": "Deterministic tuple identifier (not a cryptographic hash)",
-            "input": "UTF-8 canonical tuple string pre_root_id|post_root_id|x|y|z",
+            "input": "canonical tuple string pre_root_id|post_root_id|x|y|z",
             "numeric_encoding": "decimal integer text exactly as represented in evidence/synapses.csv",
             "stability": "record_id is independent of CSV row order; canonical_data_row and csv_line retain source order",
         },
