@@ -31,7 +31,9 @@ def _validate_info(info: dict) -> list[dict]:
     if info.get("@type") != "neuroglancer_skeletons":
         raise ValueError("unsupported skeleton info @type")
     if "sharding" in info:
-        raise ValueError("sharded Neuroglancer skeletons are not supported by V1 recovery")
+        raise ValueError(
+            "sharded Neuroglancer skeletons are not supported by V1 recovery"
+        )
 
     transform = info.get("transform")
     if (
@@ -45,13 +47,15 @@ def _validate_info(info: dict) -> list[dict]:
     if isinstance(attrs, dict):
         attrs = [attrs]
     if not isinstance(attrs, list):
-        raise ValueError("invalid Neuroglancer vertex_attributes")
+        raise TypeError("invalid Neuroglancer vertex_attributes")
 
     normalized = []
     for attr in attrs:
         if not isinstance(attr, dict):
-            raise ValueError("invalid Neuroglancer vertex attribute")
-        if not all(k in attr for k in ("id", "data_type", "num_components")):
+            raise TypeError("invalid Neuroglancer vertex attribute")
+        if not all(
+            k in attr for k in ("id", "data_type", "num_components")
+        ):
             raise ValueError("incomplete Neuroglancer vertex attribute")
         if not isinstance(attr["id"], str) or attr["num_components"] < 1:
             raise ValueError("invalid Neuroglancer vertex attribute definition")
@@ -72,10 +76,17 @@ def _dtype_size(data_type: str) -> int:
     try:
         return sizes[data_type]
     except KeyError as exc:
-        raise ValueError(f"unsupported Neuroglancer attribute type: {data_type}") from exc
+        raise ValueError(
+            f"unsupported Neuroglancer attribute type: {data_type}"
+        ) from exc
 
 
-def _decode_values(payload: bytes, offset: int, count: int, data_type: str) -> tuple[list, int]:
+def _decode_values(
+    payload: bytes,
+    offset: int,
+    count: int,
+    data_type: str,
+) -> tuple[list, int]:
     formats = {
         "float32": "f",
         "int8": "b",
@@ -88,7 +99,9 @@ def _decode_values(payload: bytes, offset: int, count: int, data_type: str) -> t
     try:
         fmt = formats[data_type]
     except KeyError as exc:
-        raise ValueError(f"unsupported Neuroglancer attribute type: {data_type}") from exc
+        raise ValueError(
+            f"unsupported Neuroglancer attribute type: {data_type}"
+        ) from exc
     size = _dtype_size(data_type) * count
     end = offset + size
     if end > len(payload):
@@ -97,7 +110,9 @@ def _decode_values(payload: bytes, offset: int, count: int, data_type: str) -> t
     return [item[0] for item in values], end
 
 
-def _orient_edges(edges: list[tuple[int, int]], num_vertices: int) -> list[int]:
+def _orient_edges(
+    edges: list[tuple[int, int]], num_vertices: int
+) -> list[int]:
     if not edges:
         if num_vertices == 1:
             return [-1]
@@ -158,17 +173,19 @@ def decode_skeleton(payload: bytes, info: dict) -> list[dict]:
         raise ValueError("truncated Neuroglancer skeleton geometry")
 
     vertex_data = payload[offset : offset + vertex_bytes]
-    vertices = [item for item in struct.iter_unpack("<fff", vertex_data)]
+    vertices = list(struct.iter_unpack("<fff", vertex_data))
     offset += vertex_bytes
 
     edge_data = payload[offset : offset + edge_bytes]
-    edges = [item for item in struct.iter_unpack("<II", edge_data)]
+    edges = list(struct.iter_unpack("<II", edge_data))
     offset += edge_bytes
 
     attributes: dict[str, list] = {}
     for attr in attrs:
         count = num_vertices * int(attr["num_components"])
-        values, offset = _decode_values(payload, offset, count, attr["data_type"])
+        values, offset = _decode_values(
+            payload, offset, count, attr["data_type"]
+        )
         if int(attr["num_components"]) == 1:
             attributes[attr["id"]] = values
         else:
@@ -187,9 +204,24 @@ def decode_skeleton(payload: bytes, info: dict) -> list[dict]:
     transform = info["transform"]
     transformed = []
     for x, y, z in vertices:
-        tx = transform[0] * x + transform[1] * y + transform[2] * z + transform[3]
-        ty = transform[4] * x + transform[5] * y + transform[6] * z + transform[7]
-        tz = transform[8] * x + transform[9] * y + transform[10] * z + transform[11]
+        tx = (
+            transform[0] * x
+            + transform[1] * y
+            + transform[2] * z
+            + transform[3]
+        )
+        ty = (
+            transform[4] * x
+            + transform[5] * y
+            + transform[6] * z
+            + transform[7]
+        )
+        tz = (
+            transform[8] * x
+            + transform[9] * y
+            + transform[10] * z
+            + transform[11]
+        )
         transformed.append((tx, ty, tz))
 
     parents = _orient_edges(edges, num_vertices)
@@ -200,7 +232,14 @@ def decode_skeleton(payload: bytes, info: dict) -> list[dict]:
 
     rows = []
     for index, (x, y, z) in enumerate(transformed):
-        label = 1 if parents[index] == -1 else 5 if child_counts[index] > 1 else 6 if child_counts[index] == 0 else 0
+        if parents[index] == -1:
+            label = 1
+        elif child_counts[index] > 1:
+            label = 5
+        elif child_counts[index] == 0:
+            label = 6
+        else:
+            label = 0
         rows.append(
             {
                 "point_id": index + 1,
@@ -222,7 +261,7 @@ def write_swc(path: Path, root_id: int, rows: list[dict]) -> None:
         f'# Meta: {json.dumps({"id": str(root_id), "name": "skeleton", "units": "1 nanometer"}, separators=(", ", ": "))}',
         "# PointNo Label X Y Z Radius Parent",
         "# Labels:",
-        "# 0 = undefined, 1 = soma/root, 5 = fork point, 6 = end point",
+        "# 0 = undefined, 1 = root, 5 = fork point, 6 = end point",
     ]
     for row in rows:
         lines.append(
@@ -254,13 +293,18 @@ def recover_one(name: str, root_id: int, output: Path, timeout: float) -> dict:
 
     report = validate_swc_file(output_path, str(root_id))
     if not report.get("valid") or report.get("node_count") != len(rows):
-        raise RuntimeError(f"{name}: recovered SWC failed structural validation: {report}")
+        raise RuntimeError(
+            f"{name}: recovered SWC failed structural validation: {report}"
+        )
     return report
 
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(
-        description="Recover exact FlyWire FAFB v783 skeletons directly from the public Neuroglancer endpoint."
+        description=(
+            "Recover exact FlyWire FAFB v783 skeletons directly from "
+            "the public Neuroglancer endpoint."
+        )
     )
     parser.add_argument("--dataset", type=int, default=783)
     parser.add_argument("--output", type=Path, default=Path("data/morphology"))
@@ -269,14 +313,19 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
 
     if args.dataset != 783:
-        raise SystemExit("Version 1.0.1 recovery supports the FAFB v783 skeleton endpoint only.")
+        raise SystemExit(
+            "Version 1.0.1 recovery supports the FAFB v783 skeleton endpoint only."
+        )
     if args.timeout <= 0:
         raise SystemExit("--timeout must be positive")
 
     for name in args.root or list(ROOTS):
         root_id = ROOTS[name]
         report = recover_one(name, root_id, args.output, args.timeout)
-        print(f"PASS {name} root={root_id} nodes={report['node_count']} sha256={report['sha256']}")
+        print(
+            f"PASS {name} root={root_id} "
+            f"nodes={report['node_count']} sha256={report['sha256']}"
+        )
 
     return 0
 
