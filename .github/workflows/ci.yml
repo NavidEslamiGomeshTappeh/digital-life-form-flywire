@@ -33,25 +33,48 @@ jobs:
         run: python -m pytest -q
       - name: Agent runtime doctor smoke test
         run: python -m dlf_flywire doctor --json
-      - name: Agent runtime end-to-end smoke test
+      - name: Code Hand real-file smoke test
         run: |
-          cat > "$RUNNER_TEMP/dlf-runtime-plan.json" <<'JSON'
+          cat > "$RUNNER_TEMP/code-hand-plan.json" <<'JSON'
           {
             "steps": [
               {
-                "step_id": "e2e",
+                "step_id": "create-file",
                 "capability": "runtime.python",
-                "action": "run end-to-end runtime smoke test",
-                "destination": "local-process",
+                "action": "Code Hand create a real Python source file",
+                "destination": "repository-workspace",
                 "risk_tier": 0,
                 "permission_granted": true,
-                "operation_args": ["-c", "print('dlf-e2e-ok')"],
+                "operation_args": [
+                  "-c",
+                  "from pathlib import Path; p=Path('code_hand_demo.py'); p.write_text('def add(a, b):\n    return a + b\n', encoding='utf-8'); print('CREATED', p); print('BYTES', p.stat().st_size)"
+                ],
+                "idempotent": true
+              },
+              {
+                "step_id": "test-file",
+                "capability": "runtime.python",
+                "action": "Code Hand test the generated Python source",
+                "destination": "repository-workspace",
+                "risk_tier": 0,
+                "permission_granted": true,
+                "dependencies": ["create-file"],
+                "operation_args": [
+                  "-c",
+                  "from code_hand_demo import add; assert add(2, 3) == 5; assert add(-2, 5) == 3; print('CODE_HAND_TEST_PASS')"
+                ],
                 "idempotent": true
               }
             ]
           }
           JSON
-          dlf-flywire run-plan "$RUNNER_TEMP/dlf-runtime-plan.json"             --run-id ci-e2e             --state-root "$RUNNER_TEMP/dlf-runtime-state"
+          dlf-flywire run-plan "$RUNNER_TEMP/code-hand-plan.json"             --run-id ci-code-hand             --state-root "$RUNNER_TEMP/code-hand-state"
+          echo '--- CREATE FILE RECEIPT ---'
+          cat "$RUNNER_TEMP/code-hand-state/receipts/ci-code-hand/create-file.json"
+          echo '--- TEST FILE RECEIPT ---'
+          cat "$RUNNER_TEMP/code-hand-state/receipts/ci-code-hand/test-file.json"
+          echo '--- GENERATED FILE ---'
+          cat code_hand_demo.py
       - name: Canonical validation
         run: python -m dlf_flywire validate
       - name: Provenance audit
