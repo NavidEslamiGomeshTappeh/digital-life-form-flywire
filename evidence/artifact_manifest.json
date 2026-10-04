@@ -48,7 +48,7 @@
       "role": "cross_source_validator",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "f483e259d78a5cd0a0f312ccd5f2e4204f542193"
+        "value": "69d8ecd8e5acb7b1dd2c837f90e8cd0410763389"
       }
     },
     {
