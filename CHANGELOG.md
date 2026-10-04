@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.1 — 2026-10-04
+
+Provenance receipt hardening patch.
+
+- Bound each frozen cross-source receipt to a distinct proof workflow run and a committed proof artifact.
+- Added provider-level and proof-run independence enforcement.
+- Synchronized package/evidence/document version metadata to 1.2.1.
+- Corrected stale 1.1/1.2 documentation references.
+
+
 ## 1.2.0 — 2026-10-04
 
 Cross-source verification release.
