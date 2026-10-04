@@ -1,4 +1,4 @@
-# Reproducibility — Version 1.3.0
+# Reproducibility — Version 1.3.1
 
 ## Local checks
 
@@ -26,6 +26,6 @@ The committed files in evidence/ are the canonical Version 1 scientific record. 
 
 Historical external sources are referenced by immutable commits, Git blobs, dataset identifiers, and (for the two frozen cross-source receipts) the exact recorded GitHub Actions proof runs.
 
-Record-level lineage is generated deterministically from `evidence/synapses.csv` by `scripts/build_synapse_lineage.py`. The validator recomputes every deterministic tuple record ID and checks the canonical CSV hash before accepting the lineage index.
+Record-level lineage is generated deterministically from `evidence/synapses.csv` by `scripts/build_synapse_lineage.py`. The validator recomputes every deterministic tuple record ID and checks the canonical CSV hash before accepting the lineage index. CI also executes the public builder against the canonical CSV and requires byte-for-byte equality with the committed lineage artifact.
 
 The Git history remains available for forensic reconstruction of earlier experiments, but the working tree contains only the consolidated product.

@@ -14,6 +14,12 @@ def record_id(pre_root_id: str, post_root_id: str, x: int, y: int, z: int) -> st
     return f"syn-{tuple_key}"
 
 
+def git_blob_sha1(path: Path) -> str:
+    data = path.read_bytes()
+    header = f"blob {len(data)}\0".encode("ascii")
+    return hashlib.sha1(header + data).hexdigest()
+
+
 def build_lineage(csv_path: Path, output_path: Path, product_version: str) -> None:
     rows = []
     with csv_path.open(newline="", encoding="utf-8") as handle:
@@ -50,18 +56,20 @@ def build_lineage(csv_path: Path, output_path: Path, product_version: str) -> No
         raise ValueError("record IDs are not unique")
 
     source_sha256 = hashlib.sha256(csv_path.read_bytes()).hexdigest()
+    source_git_blob_sha1 = git_blob_sha1(csv_path)
     payload = {
         "schema_version": 1,
         "product_version": product_version,
         "purpose": "Deterministic record-level lineage index for the canonical FAFB v783 synapse-coordinate case.",
         "canonical_reference": {
             "path": "evidence/synapses.csv",
+            "git_blob_sha1": source_git_blob_sha1,
             "rows": len(rows),
             "sha256": source_sha256,
         },
         "record_id_contract": {
             "algorithm": "Deterministic tuple identifier (not a cryptographic hash)",
-            "input": "UTF-8 canonical tuple string pre_root_id|post_root_id|x|y|z",
+            "input": "canonical tuple string pre_root_id|post_root_id|x|y|z",
             "numeric_encoding": "decimal integer text exactly as represented in evidence/synapses.csv",
             "stability": "record_id is independent of CSV row order; canonical_data_row and csv_line retain source order",
         },
@@ -86,7 +94,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", default="evidence/synapses.csv")
     parser.add_argument("--output", default="evidence/synapse_lineage.json")
-    parser.add_argument("--product-version", default="1.3.0")
+    parser.add_argument("--product-version", default="1.3.1")
     args = parser.parse_args()
     build_lineage(Path(args.input), Path(args.output), args.product_version)
     return 0

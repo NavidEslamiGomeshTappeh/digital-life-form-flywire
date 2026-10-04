@@ -586,7 +586,7 @@ Stars, forks, traffic, and demos are useful for attention but are not scientific
 
 # 16. Current repository status snapshot
 
-V1.3.0 is the current implementation target after adding deterministic record-level synapse lineage. The previous V1.0.1 main commit was:
+V1.3.1 is the current implementation target after adding byte-for-byte lineage regeneration verification. The previous V1.0.1 main commit was:
 
 `26624626bd3c8291898df5c1bc844c5dba9c4172`
 
@@ -633,7 +633,7 @@ For provenance research, do not rely only on README prose. Inspect evidence file
 - V-numbered working tree was consolidated into V1.
 - Historical Git history remains available for audit.
 - V1 is the unified product line.
-- The original Point_data generator is still unresolved.\n- V1.1.0 added the machine-checkable claim ledger and artifact-integrity contract; V1.2.0 added frozen cross-source receipts; V1.2.1 bound those receipts to explicit proof executions; V1.2.2 bound the independent-corroboration claim directly to those receipts and added regression coverage for explicit manifest self-exclusion; V1.3.0 adds deterministic record-level lineage for all 649 canonical synapse rows.
+- The original Point_data generator is still unresolved.\n- V1.1.0 added the machine-checkable claim ledger and artifact-integrity contract; V1.2.0 added frozen cross-source receipts; V1.2.1 bound those receipts to explicit proof executions; V1.2.2 bound the independent-corroboration claim directly to those receipts and added regression coverage for explicit manifest self-exclusion; V1.3.0 adds deterministic record-level lineage for all 649 canonical synapse rows; V1.3.1 adds byte-for-byte CI regeneration verification of that artifact.
 - The direct skeleton decoder exists partly to remove the vulnerable `fafbseg -> diskcache` runtime chain.
 - Exact reproduction is valued above "close enough".
 - Independent corroboration is valued above self-consistency.

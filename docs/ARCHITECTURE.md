@@ -1,4 +1,4 @@
-# Architecture — Version 1.3.0
+# Architecture — Version 1.3.1
 
 The project has one stable evidence chain:
 
@@ -30,7 +30,7 @@ The record-level lineage layer assigns each canonical tuple a stable determinist
 
 ## Artifact integrity
 
-Critical evidence artifacts are bound to immutable content identities. The artifact manifest excludes itself from the hashed artifact list because a naive self-referential content hash cannot be made stable. Cross-source receipts also carry provider identity, proof workflow IDs, and proof-artifact paths. The artifact manifest registers both the lineage index and its deterministic builder.
+Critical evidence artifacts are bound to immutable content identities. The artifact manifest excludes itself from the hashed artifact list because a naive self-referential content hash cannot be made stable. Cross-source receipts also carry provider identity, proof workflow IDs, and proof-artifact paths. The artifact manifest registers both the lineage index and its deterministic builder. Reproducibility is additionally enforced by regenerating the lineage artifact in CI and comparing its bytes with the committed file.
 
 ## Recovery
 

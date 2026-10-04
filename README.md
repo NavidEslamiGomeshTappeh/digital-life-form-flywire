@@ -1,6 +1,6 @@
 # Digital Life Form — FlyWire
 
-Version 1.3.0
+Version 1.3.1
 
 > **Project continuity / canonical research memory:** [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md)
 >
@@ -71,7 +71,7 @@ python -m dlf_flywire audit
 
 `validate` checks the scientific baseline and morphology invariants. `audit` additionally checks the machine-readable claim ledger, artifact identities, and version consistency.
 
-The claim ledger is at [evidence/claims.json](evidence/claims.json), with artifact fingerprints in [evidence/artifact_manifest.json](evidence/artifact_manifest.json). The record-level lineage index is [evidence/synapse_lineage.json](evidence/synapse_lineage.json), with a deterministic builder at [scripts/build_synapse_lineage.py](scripts/build_synapse_lineage.py).
+The claim ledger is at [evidence/claims.json](evidence/claims.json), with artifact fingerprints in [evidence/artifact_manifest.json](evidence/artifact_manifest.json). The record-level lineage index is [evidence/synapse_lineage.json](evidence/synapse_lineage.json), with a deterministic builder at [scripts/build_synapse_lineage.py](scripts/build_synapse_lineage.py). CI also regenerates the index and requires byte-for-byte equality with the committed artifact.
 
 ## Verify the cross-source chain
 

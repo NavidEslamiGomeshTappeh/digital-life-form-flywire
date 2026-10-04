@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.3.1 — 2026-10-04
+
+Lineage regeneration reproducibility patch.
+
+- Builder now records the canonical CSV Git blob identity used by the lineage artifact.
+- Added a regression that executes the public builder and requires byte-for-byte equality with the committed 649-record lineage index.
+- Preserved deterministic tuple identifiers and explicit unresolved biological compartment status.
+- Synchronized package, evidence, and citation metadata to 1.3.1.
+
+
 ## 1.3.0 — 2026-10-04
 
 Record-level synapse lineage release.
