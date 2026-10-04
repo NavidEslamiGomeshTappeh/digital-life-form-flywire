@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import json
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import pytest
@@ -93,8 +93,8 @@ def test_parallel_runs_keep_checkpoint_and_receipt_state_isolated(tmp_path):
 
     assert {run_id for run_id, _receipt in results} == set(plans)
     assert {receipt.stdout.strip() for _run_id, receipt in results} == {"A", "B"}
-    for run_id in plans:
-        verification = verify_run(plans[run_id], run_id, state_root=tmp_path / "state")
+    for run_id, plan in plans.items():
+        verification = verify_run(plan, run_id, state_root=tmp_path / "state")
         assert verification.status == "PASS"
 
 
