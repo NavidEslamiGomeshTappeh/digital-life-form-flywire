@@ -153,6 +153,7 @@ def test_default_capabilities_are_stable():
         "package.import",
         "tool.build",
         "code.write",
+        "code.edit",
         "code.test.python",
     ]
 
