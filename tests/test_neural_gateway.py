@@ -60,7 +60,7 @@ def test_neural_signal_becomes_a_normal_leader_step_without_granting_permission(
 
 
 def test_neural_gateway_rejects_mixed_windows():
-    with pytest.raises(NeuralGatewayError, match="same time window"):
+    with pytest.raises(NeuralGatewayError, match="one time window"):
         gateway().evaluate(
             (
                 NeuralObservation("vision-A", 1, 100),
