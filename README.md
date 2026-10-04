@@ -1,6 +1,6 @@
 # Digital Life Form — FlyWire
 
-Version 1.3.1
+Version 1.4.0
 
 > **Project continuity / canonical research memory:** [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md)
 >
@@ -149,6 +149,27 @@ dlf-flywire run-plan plan.json --run-id my-run
 
 The command resumes successful steps from verified receipts and returns exit code zero only when the independent run verifier reports `PASS`.
 
+## Code Hand
+
+Version 1.4.0 adds the first concrete Hand implementation.
+
+CodeHand can create one new UTF-8 source file inside an explicit workspace and then execute explicit Python assertions against that generated file. The operation is routed through the policy gate and capability doctor, recorded in sealed execution receipts, checkpointed, and independently verified.
+
+~~~python
+from dlf_flywire.code_hand import CodeHand
+from pathlib import Path
+
+hand = CodeHand(Path.cwd())
+result = hand.execute(
+    "example.py",
+    "def add(a, b):\n    return a + b\n",
+    "assert add(2, 3) == 5",
+    permission_granted=True,
+)
+print(result.verification.to_dict())
+~~~
+
+The Code Hand contract is documented in docs/CODE_HAND.md. The initial implementation is deliberately narrow: it does not claim remote repository editing, web access, installation, or desktop control.
 ## Recover exact morphology
 
 V1.1.0 recovery reads the public FAFB v783 Neuroglancer precomputed skeleton endpoint directly and writes SWC without the vulnerable `fafbseg → diskcache` dependency chain.
