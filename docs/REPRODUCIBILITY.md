@@ -11,7 +11,11 @@ python -m build
 
 dlf-flywire recover --dataset 783 --output data/morphology
 
-The command validates the returned source root ID before writing each SWC.
+V1.0.1 reads the public FAFB v783 Neuroglancer skeleton endpoint directly. The
+reader implements the official precomputed skeleton binary format: vertex count,
+edge count, float32 vertex positions, uint32 edge pairs, and declared vertex
+attributes. The resulting graph is deterministically oriented into SWC parent
+relationships and structurally validated before the command reports PASS.
 
 ## Evidence
 
