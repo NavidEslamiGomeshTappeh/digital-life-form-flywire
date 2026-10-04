@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-import hashlib
 import argparse
 import csv
+import hashlib
 import json
 from pathlib import Path
 
