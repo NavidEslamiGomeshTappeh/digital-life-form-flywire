@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 
@@ -12,6 +13,21 @@ EXPECTED_SHA256 = {
     "T5a": "6d4d2a33cfea8525449b7a1508c6e6c2d9550034aac3774e6b2d64c4e76bae5c",
     "T5c": "83b287e914522b0b382e3e46d39ced36494ff257d835cac11d7f4243ae1d7745",
 }
+
+
+def find_project_root(candidate: str | Path) -> Path:
+    start = Path(candidate).resolve()
+    if start.is_file():
+        start = start.parent
+
+    for root in (start, *start.parents):
+        if (root / "evidence" / "manifest.json").is_file():
+            return root
+
+    raise RuntimeError(
+        f"Cannot find the Version 1 project root from {start}. "
+        "Expected evidence/manifest.json."
+    )
 
 
 def validate_project(root: Path) -> dict:
@@ -29,8 +45,20 @@ def validate_project(root: Path) -> dict:
     return {"status": "PASS", "version": "1.0.0", **evidence}
 
 
-def main() -> int:
-    root = Path(__file__).resolve().parents[2]
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(description="Validate the consolidated Version 1 repository.")
+    parser.add_argument(
+        "--root",
+        default=".",
+        help="Project root containing data/ and evidence/ (default: current directory).",
+    )
+    args = parser.parse_args(argv)
+
+    root = find_project_root(args.root)
     result = validate_project(root)
     print(json.dumps(result, indent=2))
     return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
