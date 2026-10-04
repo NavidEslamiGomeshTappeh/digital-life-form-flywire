@@ -57,7 +57,7 @@
       "role": "cli",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "e7a4cb6da8fa13658cadca3e969f4e4dc628466e"
+        "value": "6df8d85559ab67e5d6d1cd6a6c0eb3694609b9cd"
       }
     },
     {
@@ -342,6 +342,24 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "66f2eb9be945426d60e1201b5ccfa5b5b620b49e"
+      }
+    },
+    {
+      "id": "E-CAPABILITIES",
+      "path": "src/dlf_flywire/capabilities.py",
+      "role": "capability_doctor_engine",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "d3cd6c100ddae2e2ec5a45917d57ece49a2540e9"
+      }
+    },
+    {
+      "id": "E-CAPABILITY-TESTS",
+      "path": "tests/test_capabilities.py",
+      "role": "capability_doctor_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "291e10c32d169c46c2bb1183d9d0a1a10629d644"
       }
     }
   ]
