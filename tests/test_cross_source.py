@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 import pytest
@@ -7,7 +8,6 @@ from dlf_flywire.cross_source import (
     sha256_file,
     validate_cross_source_receipts,
 )
-
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -56,7 +56,7 @@ def test_frozen_cross_source_receipts_fail_closed_on_hash_drift(tmp_path):
         ],
     }
     (evidence / "source_receipts.json").write_text(
-        __import__("json").dumps(receipt), encoding="utf-8"
+        json.dumps(receipt), encoding="utf-8"
     )
 
     (tmp_path / "VERSION").write_text("1.2.0\n", encoding="utf-8")
