@@ -50,6 +50,8 @@ An empirical four-point similarity fit from the project SWC subtree roots to the
 
 Therefore the exact December 2025 producer, intermediate morphology materialization, coordinate transform, and execution environment remain UNRESOLVED.
 
+A separate public legacy NeuRosetta repository predates the artifact and contains subtree selection, simplified-to-full root mapping, and explicit coordinate transformation/scaling functions. This makes it a technically plausible predecessor path, but no inspected record binds it to the December 2025 execution; it is therefore contextual evidence, not recovered provenance.
+
 ## Repository layout
 
 src/dlf_flywire/   installable Python package
