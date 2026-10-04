@@ -143,6 +143,20 @@ Results are labeled separately as **PROVEN**, **REPRODUCED**, **DIAGNOSTIC**, **
 
 See the V262–V279 audit documents and workflow artifacts for the exact commands, inputs, hashes and regression results.
 
+## V280 — historical generator temporal boundary
+
+V280 establishes an additional provenance fact from immutable Git chronology:
+
+- the study repository's initial commit on **2025-12-09 19:26:04Z** contained only `.gitignore` and `README.md`;
+- `Data/Point_data.pkl` first appeared in commit `cd17d34afd0d46a3c2947e83a1f0fdd835a9959a` at **2025-12-09 20:41:50Z**;
+- the currently public PP1/PP3 preprocessing notebooks were introduced much later, in commit `8700efd40bccfa3e74ac7c4df02da83a968b9b52` at **2026-08-10 17:49:32Z**.
+
+Therefore the current public PP1/PP3 notebooks cannot, by repository chronology alone, be treated as the preserved December 2025 generator source for `Point_data.pkl`.
+
+This does **not** prove that the historical generator was different. It proves that the original generator implementation is not preserved in the public study repository at the time the historical Point_data object entered Git.
+
+See `docs/V280_HISTORICAL_GENERATOR_BOUNDARY.md`, `scripts/v280_historical_generator_boundary.py`, and `v280_results/V280_historical_generator_boundary.json`.
+
 ## What makes the project useful
 
 The practical target is a researcher who already knows the neurons of interest and needs a trustworthy, portable model input.
