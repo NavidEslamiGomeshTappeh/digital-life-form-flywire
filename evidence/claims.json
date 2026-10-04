@@ -175,6 +175,20 @@
       "caveats": [
         "Shared root IDs do not establish common morphology materialization, common software revision, or common execution run."
       ]
+    },
+    {
+      "id": "C-POINTDATA-004",
+      "statement": "The archived January 2026 Submission_release preserves Point_data and downstream analysis artifacts but does not preserve the PP1–PP5 preprocessing notebooks or the Reduced_dendrites intermediate morphology tree.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-ZENODO-SUBMISSION-BOUNDARY",
+        "E-POINTDATA",
+        "E-HISTORICAL-BOUNDARY"
+      ],
+      "caveats": [
+        "This is a release-content boundary, not proof that the omitted producer never existed."
+      ]
     }
   ]
 }
