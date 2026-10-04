@@ -2,266 +2,35 @@
   "schema_version": 1,
   "product_version": "1.3.1",
   "generated_for": "Version 1.3.1 byte-for-byte lineage regeneration contract",
-  "exclusion": [
-    "evidence/artifact_manifest.json"
-  ],
+  "exclusion": ["evidence/artifact_manifest.json"],
   "artifacts": [
-    {
-      "id": "E-VERSION",
-      "path": "VERSION",
-      "role": "project_version",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "3a3cd8cc8b079cb410a465d2925b9cbd703115cb"
-      }
-    },
-    {
-      "id": "E-PYPROJECT",
-      "path": "pyproject.toml",
-      "role": "project_metadata",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "54eb6f54895d060a9486802411952efc1fd6c5ac"
-      }
-    },
-    {
-      "id": "E-PACKAGE-INIT",
-      "path": "src/dlf_flywire/__init__.py",
-      "role": "project_version",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "9c73af26be70465839a5f43818dbab3f5c35571f"
-      }
-    },
-    {
-      "id": "E-PROVENANCE-CODE",
-      "path": "src/dlf_flywire/provenance.py",
-      "role": "audit_engine",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "f7df5988de146bf722f9ca601980d55ffc29db53"
-      }
-    },
-    {
-      "id": "E-CROSS-SOURCE-CODE",
-      "path": "src/dlf_flywire/cross_source.py",
-      "role": "cross_source_validator",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "559ee5a402b99c30927d0efff3c05629691c6798"
-      }
-    },
-    {
-      "id": "E-CLI",
-      "path": "src/dlf_flywire/cli.py",
-      "role": "cli",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "e7a4cb6da8fa13658cadca3e969f4e4dc628466e"
-      }
-    },
-    {
-      "id": "E-MANIFEST",
-      "path": "evidence/manifest.json",
-      "role": "evidence_summary",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "cff222c11d57ba58c579dbd8f82a5817202a5900"
-      }
-    },
-    {
-      "id": "E-CLAIMS",
-      "path": "evidence/claims.json",
-      "role": "claim_ledger",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "e2399e8e62567b513785abd1544a86fdbc614d3a"
-      }
-    },
-    {
-      "id": "E-SOURCE-RECEIPTS",
-      "path": "evidence/source_receipts.json",
-      "role": "frozen_cross_source_receipts",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "cf847fb13cd886d13f460f510831f86ecc0bbe20"
-      }
-    },
-    {
-      "id": "E-CONNECTIVITY",
-      "path": "evidence/connectivity.json",
-      "role": "connectivity_evidence",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "f0d13232cf0bd94c465f9de7f5ba250917c9c7d6"
-      }
-    },
-    {
-      "id": "E-COORDINATE",
-      "path": "evidence/coordinate_provenance.json",
-      "role": "coordinate_provenance",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "db2d794ffb3ccb741433b6abd752e1de06e40d80"
-      }
-    },
-    {
-      "id": "E-DENDRITE",
-      "path": "evidence/dendrite_provenance.json",
-      "role": "dendrite_source_evidence",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "36cc962450deff226f34730f2fa88fac0409fac6"
-      }
-    },
-    {
-      "id": "E-SUBTREE",
-      "path": "evidence/dendrite_subtree_mapping.json",
-      "role": "subtree_reproduction",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "5eeba75fa5e2f9442ca08bfc9c9e9518a0f017fc"
-      }
-    },
-    {
-      "id": "E-HISTORICAL-BOUNDARY",
-      "path": "evidence/historical_generator_boundary.json",
-      "role": "historical_provenance_boundary",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "924b1ff1c1d15564d0aa520a557f07b1fd3de012"
-      }
-    },
-    {
-      "id": "E-MORPHOLOGY",
-      "path": "evidence/morphology_provenance.json",
-      "role": "morphology_provenance",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "ebec78b2e3db356b425e4aeda6c854c7dcc34f20"
-      }
-    },
-    {
-      "id": "E-POINTDATA-ANCHORS",
-      "path": "evidence/point_data_anchor_rows.json",
-      "role": "point_data_anchors",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "a39ebed6126019e063b01fc9793919183c7d7858"
-      }
-    },
-    {
-      "id": "E-POINTDATA",
-      "path": "evidence/point_data_provenance.json",
-      "role": "point_data_provenance",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "2e476c6bc27e9dc0807dd10d1b542499dd9648ed"
-      }
-    },
-    {
-      "id": "E-RECOVERY",
-      "path": "evidence/recovery.json",
-      "role": "morphology_recovery",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "126e7e423f2ba79844a3f9e51bd4e6ded298b55a"
-      }
-    },
-    {
-      "id": "E-STRUCTURE",
-      "path": "evidence/structural_snapshot.json",
-      "role": "connectome_structure",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "97398d45b3885eb2062a7c513ab007208c94a7f9"
-      }
-    },
-    {
-      "id": "E-STRUCTURAL-VALIDATION",
-      "path": "evidence/structural_validation.json",
-      "role": "synapse_structure_validation",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "1581aa92f506a3264ef708dddcb1de90f6c1f326"
-      }
-    },
-    {
-      "id": "E-SYNAPSES",
-      "path": "evidence/synapses.csv",
-      "role": "canonical_synapses",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "507fc706cc29781457ed502ae0ebdf328a4bae33"
-      },
-      "content_sha256": "1eb87ae427dacc21528ce7a105ab021babd6dc10138f526f49678cf357172d5b"
-    },
-    {
-      "id": "E-SYNAPSE-LINEAGE",
-      "path": "evidence/synapse_lineage.json",
-      "role": "record_level_synapse_lineage",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "94043e01873f89e3c78f0959a053a91114a44ede"
-      }
-    },
-    {
-      "id": "E-BUILD-SYNAPSE-LINEAGE",
-      "path": "scripts/build_synapse_lineage.py",
-      "role": "lineage_builder",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "64304263d2325bb2da19bf0aa45f350007c82af8"
-      }
-    },
-    {
-      "id": "E-SWC-T4A",
-      "path": "data/morphology/T4a.swc",
-      "role": "morphology",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "b6c89d790b3943bd4e316ca711eabc6b0836e51a"
-      },
-      "content_sha256": "d17623da9812d0f2ef53ab6aed4a9d89a2c2820d34aa0294af2ba434b6107c2a"
-    },
-    {
-      "id": "E-SWC-T4C",
-      "path": "data/morphology/T4c.swc",
-      "role": "morphology",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "afc8f5a68ca6b95574f6bd750c66369b86dd223c"
-      },
-      "content_sha256": "7d9cc29226e092c233f35cfcf70f75ac137b8c9f8744a1ba319264f96da3857a"
-    },
-    {
-      "id": "E-SWC-T5A",
-      "path": "data/morphology/T5a.swc",
-      "role": "morphology",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "edf6eff5249b9c70b40ca6409a511fcea062262d"
-      },
-      "content_sha256": "6d4d2a33cfea8525449b7a1508c6e6c2d9550034aac3774e6b2d64c4e76bae5c"
-    },
-    {
-      "id": "E-SWC-T5C",
-      "path": "data/morphology/T5c.swc",
-      "role": "morphology",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "2770b37654ab07ebf3b59017fa59a10380c33ad1"
-      },
-      "content_sha256": "83b287e914522b0b382e3e46d39ced36494ff257d835cac11d7f4243ae1d7745"
-    },
-    {
-      "id": "E-LINEAGE-REGEN-TEST",
-      "path": "tests/test_provenance.py",
-      "role": "lineage_regeneration_regression",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "6694ef26aa9dffbef863f2f452b52b59c7dea6f7"
-      }
-    }
+    {"id":"E-VERSION","path":"VERSION","role":"project_version","identity":{"type":"git_blob_sha1","value":"3a3cd8cc8b079cb410a465d2925b9cbd703115cb"}},
+    {"id":"E-PYPROJECT","path":"pyproject.toml","role":"project_metadata","identity":{"type":"git_blob_sha1","value":"54eb6f54895d060a9486802411952efc1fd6c5ac"}},
+    {"id":"E-PACKAGE-INIT","path":"src/dlf_flywire/__init__.py","role":"project_version","identity":{"type":"git_blob_sha1","value":"9c73af26be70465839a5f43818dbab3f5c35571f"}},
+    {"id":"E-PROVENANCE-CODE","path":"src/dlf_flywire/provenance.py","role":"audit_engine","identity":{"type":"git_blob_sha1","value":"f7df5988de146bf722f9ca601980d55ffc29db53"}},
+    {"id":"E-CROSS-SOURCE-CODE","path":"src/dlf_flywire/cross_source.py","role":"cross_source_validator","identity":{"type":"git_blob_sha1","value":"559ee5a402b99c30927d0efff3c05629691c6798"}},
+    {"id":"E-CLI","path":"src/dlf_flywire/cli.py","role":"cli","identity":{"type":"git_blob_sha1","value":"e7a4cb6da8fa13658cadca3e969f4e4dc628466e"}},
+    {"id":"E-MANIFEST","path":"evidence/manifest.json","role":"evidence_summary","identity":{"type":"git_blob_sha1","value":"cff222c11d57ba58c579dbd8f82a5817202a5900"}},
+    {"id":"E-CLAIMS","path":"evidence/claims.json","role":"claim_ledger","identity":{"type":"git_blob_sha1","value":"e2399e8e62567b513785abd1544a86fdbc614d3a"}},
+    {"id":"E-SOURCE-RECEIPTS","path":"evidence/source_receipts.json","role":"frozen_cross_source_receipts","identity":{"type":"git_blob_sha1","value":"cf847fb13cd886d13f460f510831f86ecc0bbe20"}},
+    {"id":"E-CONNECTIVITY","path":"evidence/connectivity.json","role":"connectivity_evidence","identity":{"type":"git_blob_sha1","value":"f0d13232cf0bd94c465f9de7f5ba250917c9c7d6"}},
+    {"id":"E-COORDINATE","path":"evidence/coordinate_provenance.json","role":"coordinate_provenance","identity":{"type":"git_blob_sha1","value":"db2d794ffb3ccb741433b6abd752e1de06e40d80"}},
+    {"id":"E-DENDRITE","path":"evidence/dendrite_provenance.json","role":"dendrite_source_evidence","identity":{"type":"git_blob_sha1","value":"36cc962450deff226f34730f2fa88fac0409fac6"}},
+    {"id":"E-SUBTREE","path":"evidence/dendrite_subtree_mapping.json","role":"subtree_reproduction","identity":{"type":"git_blob_sha1","value":"5eeba75fa5e2f9442ca08bfc9c9e9518a0f017fc"}},
+    {"id":"E-HISTORICAL-BOUNDARY","path":"evidence/historical_generator_boundary.json","role":"historical_provenance_boundary","identity":{"type":"git_blob_sha1","value":"1b688d875071c728cc00ea44cdb11c1519597c6d"}},
+    {"id":"E-MORPHOLOGY","path":"evidence/morphology_provenance.json","role":"morphology_provenance","identity":{"type":"git_blob_sha1","value":"ebec78b2e3db356b425e4aeda6c854c7dcc34f20"}},
+    {"id":"E-POINTDATA-ANCHORS","path":"evidence/point_data_anchor_rows.json","role":"point_data_anchors","identity":{"type":"git_blob_sha1","value":"a39ebed6126019e063b01fc9793919183c7d7858"}},
+    {"id":"E-POINTDATA","path":"evidence/point_data_provenance.json","role":"point_data_provenance","identity":{"type":"git_blob_sha1","value":"2e476c6bc27e9dc0807dd10d1b542499dd9648ed"}},
+    {"id":"E-RECOVERY","path":"evidence/recovery.json","role":"morphology_recovery","identity":{"type":"git_blob_sha1","value":"126e7e423f2ba79844a3f9e51bd4e6ded298b55a"}},
+    {"id":"E-STRUCTURE","path":"evidence/structural_snapshot.json","role":"connectome_structure","identity":{"type":"git_blob_sha1","value":"97398d45b3885eb2062a7c513ab007208c94a7f9"}},
+    {"id":"E-STRUCTURAL-VALIDATION","path":"evidence/structural_validation.json","role":"synapse_structure_validation","identity":{"type":"git_blob_sha1","value":"1581aa92f506a3264ef708dddcb1de90f6c1f326"}},
+    {"id":"E-SYNAPSES","path":"evidence/synapses.csv","role":"canonical_synapses","identity":{"type":"git_blob_sha1","value":"507fc706cc29781457ed502ae0ebdf328a4bae33"},"content_sha256":"1eb87ae427dacc21528ce7a105ab021babd6dc10138f526f49678cf357172d5b"},
+    {"id":"E-SYNAPSE-LINEAGE","path":"evidence/synapse_lineage.json","role":"record_level_synapse_lineage","identity":{"type":"git_blob_sha1","value":"94043e01873f89e3c78f0959a053a91114a44ede"}},
+    {"id":"E-BUILD-SYNAPSE-LINEAGE","path":"scripts/build_synapse_lineage.py","role":"lineage_builder","identity":{"type":"git_blob_sha1","value":"64304263d2325bb2da19bf0aa45f350007c82af8"}},
+    {"id":"E-SWC-T4A","path":"data/morphology/T4a.swc","role":"morphology","identity":{"type":"git_blob_sha1","value":"b6c89d790b3943bd4e316ca711eabc6b0836e51a"},"content_sha256":"d17623da9812d0f2ef53ab6aed4a9d89a2c2820d34aa0294af2ba434b6107c2a"},
+    {"id":"E-SWC-T4C","path":"data/morphology/T4c.swc","role":"morphology","identity":{"type":"git_blob_sha1","value":"afc8f5a68ca6b95574f6bd750c66369b86dd223c"},"content_sha256":"7d9cc29226e092c233f35cfcf70f75ac137b8c9f8744a1ba319264f96da3857a"},
+    {"id":"E-SWC-T5A","path":"data/morphology/T5a.swc","role":"morphology","identity":{"type":"git_blob_sha1","value":"edf6eff5249b9c70b40ca6409a511fcea062262d"},"content_sha256":"6d4d2a33cfea8525449b7a1508c6e6c2d9550034aac3774e6b2d64c4e76bae5c"},
+    {"id":"E-SWC-T5C","path":"data/morphology/T5c.swc","role":"morphology","identity":{"type":"git_blob_sha1","value":"2770b37654ab07ebf3b59017fa59a10380c33ad1"},"content_sha256":"83b287e914522b0b382e3e46d39ced36494ff257d835cac11d7f4243ae1d7745"},
+    {"id":"E-LINEAGE-REGEN-TEST","path":"tests/test_provenance.py","role":"lineage_regeneration_regression","identity":{"type":"git_blob_sha1","value":"6694ef26aa9dffbef863f2f452b52b59c7dea6f7"}}
   ]
 }
