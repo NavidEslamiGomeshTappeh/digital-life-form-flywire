@@ -83,6 +83,33 @@ def test_synapse_lineage_fails_closed_on_record_id_drift(tmp_path):
 
 
 
+def test_historical_point_data_ingest_boundary_is_locked():
+    boundary = json.loads(
+        (ROOT / "evidence" / "historical_generator_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert boundary["status"].startswith("PROVEN_HISTORICAL_")
+    assert boundary["checks"]["parallel_point_commits_same_tree"] is True
+    assert boundary["checks"]["parallel_point_commits_same_blob"] is True
+    assert boundary["checks"]["duplicate_point_commits_merged_without_tree_change"] is True
+    assert boundary["checks"]["neuron_ids_added_after_point_data"] is True
+    assert boundary["consumer_path_evidence"]["kernel"] == "neurosetta"
+    assert boundary["consumer_path_evidence"]["local_path"].endswith(
+        "T45_Morpho_data/Data/Pickled_data/Point_data.pkl"
+    )
+    dag = {item["sha"]: item for item in boundary["git_dag"]}
+    assert dag["cd17d34afd0d46a3c2947e83a1f0fdd835a9959a"]["blob"] == (
+        "b85caf49f45677f2075f7b5f2c8830141cd96d02"
+    )
+    assert dag["fe9779d4ca425613eec44b19e961610d117e7232"]["blob"] == (
+        "b85caf49f45677f2075f7b5f2c8830141cd96d02"
+    )
+    assert dag["8a38537f55371de369f80c50778915afb5d954b4"]["tree"] == (
+        "cd10c382b3abbbe68bf00e3841959b7fb06f4c07"
+    )
+
+
 def test_lineage_builder_reproduces_committed_artifact(tmp_path):
     output = tmp_path / "synapse_lineage.json"
     subprocess.run(
