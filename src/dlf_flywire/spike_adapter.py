@@ -18,7 +18,11 @@ class SpikeEvent:
     def __post_init__(self) -> None:
         if not self.neuron_id.strip():
             raise SpikeAdapterError("neuron_id must not be empty")
-        if isinstance(self.timestamp_ms, bool) or self.timestamp_ms < 0:
+        if (
+            isinstance(self.timestamp_ms, bool)
+            or not isinstance(self.timestamp_ms, int)
+            or self.timestamp_ms < 0
+        ):
             raise SpikeAdapterError("timestamp_ms must be a non-negative integer")
 
 
