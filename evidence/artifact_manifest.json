@@ -12,7 +12,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "26ca594609a93d60b6543102d639fa76b50a6925"
+        "value": "ce6a70b9d84c565d0208be24d5f946dc7585880a"
       }
     },
     {
@@ -21,7 +21,7 @@
       "role": "project_metadata",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "15eeb315586bcf883feb9ac62adad74eb352ce9b"
+        "value": "ee451e1fa21190c92743de43a3c2230aaacc5098"
       }
     },
     {
@@ -30,7 +30,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "0f228f25863905a12148bddbe4cf13a44edfe2fe"
+        "value": "e4adfb83d581417957736bd5bd8ed562066b37b6"
       }
     },
     {
@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "c6131ef7cf854b593e427474c7879bc48221ec6e"
+        "value": "3841bcb09521a487f0c689f3e149688481369e5d"
       }
     },
     {
