@@ -12,7 +12,7 @@ Version 1.7.1
 >
 > **Current public evidence:** 4 exact FAFB v783 reference neurons · 649/649 synapse-coordinate reproduction · 75/75 directed-pair correspondence · pinned FlyVis runtime evidence · provenance-bearing vision input boundary · automated CI/security checks.
 >
-> **Start here:** [Scientific status](#scientific-status) · [Claim-level evidence trace](#claim-level-evidence-trace) · [Real vision input boundary](#real-vision-input-boundary) · [Audit the evidence chain](#audit-the-evidence-chain)
+> **Start here:** [Scientific status](#scientific-status) · [Claim-level evidence trace](#claim-level-evidence-trace) · [Real vision input boundary](#real-vision-input-boundary) · [Audit the evidence chain](#audit-the-evidence-chain) · [Public project overview](docs/PROJECT_OVERVIEW.md)
 
 Digital Life Form — FlyWire is a provenance-first research-engineering toolkit for extracting a small, exact subset of the FlyWire connectome and packaging the result as reproducible scientific evidence.
 
