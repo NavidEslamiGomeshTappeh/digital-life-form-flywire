@@ -147,7 +147,7 @@
       "role": "frozen_cross_source_receipts",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "5b43f14edea3fb6912a4fe40797e8cbe81e8d1c2"
+        "value": "74c199d895505246ea89701b75dc636a37acb47a"
       }
     },
     {
@@ -202,7 +202,7 @@
       "role": "record_level_synapse_lineage",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "4a61ac2940b0902ec1d5aafa88e946001c6b4bd8"
+        "value": "c11eaf93a54ab1b3673f60582dc9db58c761174f"
       }
     },
     {
