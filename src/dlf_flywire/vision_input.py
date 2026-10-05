@@ -253,3 +253,51 @@ def build_capture_receipt(
         source_locator=source_locator,
         frames=records,
     )
+
+
+
+@dataclass(frozen=True)
+class FlyVisBoxEyeFrame:
+    """One VisionFrame rendered through FlyVis' published BoxEye contract."""
+
+    source_pixel_sha256: str
+    hexal_count: int
+    rendered_shape: tuple[int, int, int, int]
+    rendered_sha256: str
+
+
+def render_with_flyvis_boxeye(
+    frame: VisionFrame,
+    *,
+    extent: int = 15,
+    kernel_size: int = 13,
+) -> FlyVisBoxEyeFrame:
+    """Render one grayscale frame through the pinned upstream BoxEye implementation."""
+    if extent <= 0 or kernel_size <= 0:
+        raise VisionInputError("extent and kernel_size must be positive")
+    try:
+        import torch
+        from flyvis.datasets.rendering import BoxEye
+    except ImportError as exc:
+        raise VisionInputError(
+            "FlyVis and PyTorch are required for BoxEye rendering; "
+            "use the pinned FlyVis integration environment"
+        ) from exc
+
+    rows = frame.to_float_rows()
+    tensor = torch.tensor([[list(row) for row in rows]], dtype=torch.float32)
+    rendered = BoxEye(extent=extent, kernel_size=kernel_size)(tensor)
+    shape = tuple(int(value) for value in rendered.shape)
+    expected_shape = (1, 1, 1, 1 + 3 * extent * (extent + 1))
+    if shape != expected_shape:
+        raise VisionInputError(
+            f"unexpected BoxEye output shape {shape}; expected {expected_shape}"
+        )
+    rendered_cpu = rendered.detach().cpu().contiguous()
+    rendered_bytes = rendered_cpu.numpy().tobytes()
+    return FlyVisBoxEyeFrame(
+        source_pixel_sha256=frame.pixels_sha256,
+        hexal_count=shape[-1],
+        rendered_shape=shape,
+        rendered_sha256=_sha256_bytes(rendered_bytes),
+    )
