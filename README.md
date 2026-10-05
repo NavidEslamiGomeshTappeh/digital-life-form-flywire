@@ -185,7 +185,26 @@ The Code Hand contract is documented in docs/CODE_HAND.md. The initial implement
 
 ## Neural → Leader boundary
 
-Version 1.5.1 adds the first explicit neural-control boundary without overstating the science.\n\nThe new NeuralIntentGateway accepts bounded sparse neural observations (neuron_id, spike count, and time window), converts them into deterministic capability candidates, and records a SHA-256 fingerprint of the observation set. NeuralLeaderBridge converts an activated candidate into the same TaskStep contract already consumed by the Leader/orchestrator.\n\nThe important safety boundary is deliberate:\n\n- neuron IDs are opaque; the gateway does not invent biological meaning for them;\n- neural activity can select a capability candidate, but cannot grant permission;\n- neural activity cannot enable network access or system mutation;\n- the Leader still owns action, execution arguments, dependency ordering, policy checks, checkpoints, and independent verification;\n- an inactive/no-threshold-crossing neural state fails closed.\n\nThis is an **architectural bridge**, not evidence that the four FlyWire neurons currently control Code Hand. The next scientific stage is to replace opaque test channels with an evidence-backed neural signal source and prove that mapping independently.\n\nThe intended verified chain is:\n\n`neural observation → intent candidate → Leader TaskStep → Policy Gateway → Hand → receipt/checkpoint → independent Verifier → feedback`\n\n## Recover exact morphology
+Version 1.5.1 now contains a bounded neural execution path plus a verified external simulator signal adapter.
+
+`NeuralIntentGateway` accepts bounded sparse observations and produces deterministic capability candidates with evidence hashing. `NeuralLeaderBridge` turns an activated candidate into the existing Leader/TaskStep contract.
+
+Stage A is implemented and externally exercised against a pinned FlyDrones revision. `FlyDronesRasterAdapter` consumes the real runtime shape `last_raster → record → connectome.body_ids`, preserves a full-source snapshot SHA-256, and keeps a separate extraction-window fingerprint. The successful end-to-end receipt is stored in [`evidence/flydrones_integration_receipt_2.json`](evidence/flydrones_integration_receipt_2.json).
+
+Stage B is partially implemented in [`evidence/neural_mapping_stage_b.json`](evidence/neural_mapping_stage_b.json): the four exact FAFB v783 project roots are linked to their T4/T5 subtype identities and literature-supported ON/OFF and canonical motion-direction properties.
+
+The safety and scientific boundaries remain deliberate:
+
+- neural activity cannot grant permission, network access, or system mutation;
+- neuron identifiers do not acquire biological meaning unless an explicit evidence-backed mapping supplies it;
+- the four exact project roots are not yet proven to be a live camera-driven neural source for this software;
+- no Stage B mapping assigns a Code Hand capability.
+
+The verified engineering chain is:
+
+`neural source → provenance snapshot → bounded observation → evidence-backed functional label → intent candidate → Leader TaskStep → Policy Gateway → Hand → receipt/checkpoint → independent Verifier`
+
+## Recover exact morphology
 
 V1.1.0 recovery reads the public FAFB v783 Neuroglancer precomputed skeleton endpoint directly and writes SWC without the vulnerable `fafbseg → diskcache` dependency chain.
 
