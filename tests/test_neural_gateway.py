@@ -74,7 +74,6 @@ def test_neural_gateway_fails_closed_when_no_intent_activates():
         gateway().select((NeuralObservation("vision-A", 0, 100),))
 
 
-
 def test_neural_observation_accepts_fractional_millisecond_windows():
     observation = NeuralObservation("vision-A", spikes=1, window_ms=0.5)
     assert observation.window_ms == 0.5
