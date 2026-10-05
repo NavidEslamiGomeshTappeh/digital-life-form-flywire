@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "94ec7afd9c40c25f3b4a607828aeedd2161e01ec"
+        "value": "92420a1d7406e63767d4e710bdd28d002cb88987"
       }
     },
     {
@@ -478,8 +478,7 @@
         "type": "git_blob_sha1",
         "value": "816d42cd1975d52ee75b111635498ed51d8324e6"
       }
-    }
-,
+    },
     {
       "id": "E-FLYDRONES-INTEGRATION-RECEIPT",
       "path": "evidence/flydrones_integration_receipt.json",
@@ -488,8 +487,7 @@
         "type": "git_blob_sha1",
         "value": "3d3736a29eaa306e90912eeb5d3d219e81d3a003"
       }
-    }
-,
+    },
     {
       "id": "E-FLYDRONES-INTEGRATION-RECEIPT-2",
       "path": "evidence/flydrones_integration_receipt_2.json",
@@ -498,8 +496,7 @@
         "type": "git_blob_sha1",
         "value": "776d63c23dd085e1c2a308834fc074baf6c4a3d5"
       }
-    }
-,
+    },
     {
       "id": "E-NEURAL-MAPPING",
       "path": "evidence/neural_mapping_stage_b.json",
@@ -508,8 +505,7 @@
         "type": "git_blob_sha1",
         "value": "0c516b97d0e83d3d2cb9437f4d1e0b73ad063395"
       }
-    }
-,
+    },
     {
       "id": "E-NEURAL-MAPPING-TESTS",
       "path": "tests/test_neural_mapping.py",
@@ -517,16 +513,6 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "4a6dad811625d09726378ff90873e64bd4e0051f"
-      }
-    }
-,
-    {
-      "id": "E-CLAIMS-UPDATED",
-      "path": "evidence/claims.json",
-      "role": "claim_ledger",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "92420a1d7406e63767d4e710bdd28d002cb88987"
       }
     }
   ]
