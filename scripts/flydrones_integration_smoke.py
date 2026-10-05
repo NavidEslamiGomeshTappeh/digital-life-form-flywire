@@ -3,14 +3,14 @@ from __future__ import annotations
 import tempfile
 from pathlib import Path
 
+from flydrones.brain.brain import Brain
+from flydrones.brain.synthetic import build_minifly
+
 from dlf_flywire.code_hand import CodeHand
 from dlf_flywire.flydrones_adapter import FlyDronesRasterAdapter
 from dlf_flywire.neural_gateway import IntentRule, NeuralIntentGateway
 from dlf_flywire.neural_leader import NeuralLeaderBridge
 from dlf_flywire.orchestrator import RunPlan, TaskOrchestrator
-
-from flydrones.brain.brain import Brain
-from flydrones.brain.synthetic import build_minifly
 
 FLYDRONES_REVISION = "6519c8c0e35ae829faa98a5a02033343dd0b82d4"
 
