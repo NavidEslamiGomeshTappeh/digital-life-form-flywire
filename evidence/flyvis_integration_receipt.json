@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "status": "OBSERVED_SUCCESS",
+  "proof_type": "LIVE_GITHUB_ACTIONS_RUN",
+  "workflow": {
+    "name": "FlyVis Integration",
+    "workflow_file": ".github/workflows/flyvis-integration.yml",
+    "run_id": 37274663229,
+    "job_id": 111648953539,
+    "job_name": "flyvis-smoke",
+    "trigger": "pull_request",
+    "pull_request": 50,
+    "head_commit": "ad3c9ab3539a752795f0d2eb53cc409fe4948446",
+    "merge_commit_checked_out": "6a207bdee5ff8be68cec13c08140da32b58f435a",
+    "conclusion": "success",
+    "observed_at": "2026-10-05T07:05:53.332843+00:00"
+  },
+  "flyvis": {
+    "release": "v1.2.0",
+    "revision": "92b3845cc426dd309a1a0e1b3890156c42e14021",
+    "pretrained_archive": "results_pretrained_models.zip",
+    "pretrained_archive_sha256": "71c78d4070556a536b13b23ee3139cd2788aa2a9d07d430a223b4edead281db1",
+    "network_path": "results/flow/0000/000",
+    "best_checkpoint": "results/flow/0000/000/chkpts/chkpt_00000",
+    "best_checkpoint_sha256": "d0e42857e738d0315897c2d50fde9eb3fb1a3fb1f071d55dfc13d53d72bccc3f"
+  },
+  "protocol": {
+    "stimulus": "MovingEdge",
+    "angles_deg": [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330],
+    "intensities": [0, 1],
+    "target_intensity": {"T4a": 1, "T4c": 1, "T5a": 0, "T5c": 0},
+    "rendered_edge_width": 80,
+    "speed": 19,
+    "offsets": [-10, 11],
+    "dt_s": 0.005,
+    "direction_tolerance_deg": 45.0
+  },
+  "direction_observations": [
+    {"cell_type": "T4a", "intensity": 1, "expected_direction_deg": 180.0, "observed_direction_deg": 180.0, "angular_error_deg": 0.0},
+    {"cell_type": "T4c", "intensity": 1, "expected_direction_deg": 90.0, "observed_direction_deg": 60.0, "angular_error_deg": 30.0},
+    {"cell_type": "T5a", "intensity": 0, "expected_direction_deg": 180.0, "observed_direction_deg": 180.0, "angular_error_deg": 0.0},
+    {"cell_type": "T5c", "intensity": 0, "expected_direction_deg": 90.0, "observed_direction_deg": 120.0, "angular_error_deg": 30.0}
+  ],
+  "continuous_trace_fingerprints": {
+    "T4a": {"start_ms": -1000.0, "dt_ms": 5.0, "frame_count": 485, "response_sha256": "293016ddfa69d94cf2d7a522f0f3afccb314f794a547fa3a86ee46df4401a8ed", "source_sha256": "b4029288b7fc88f4edeaa5b6f08f1ba85f749f8864d4ebb0ce24f41776835d04"},
+    "T4c": {"start_ms": -1000.0, "dt_ms": 5.0, "frame_count": 485, "response_sha256": "c32f39746f304a9afb49ccf25e9275666baebf46a1c50ee1f0ca8c9cb3a62278", "source_sha256": "02a877a5d07e2b5d547703d3d5781e314d5e937cae162331ff3d2975c97a1d00"},
+    "T5a": {"start_ms": -1000.0, "dt_ms": 5.0, "frame_count": 485, "response_sha256": "82113d5167c4bc0eca834d1a6b0eb8afcb74a00e7946f4a4d93f71ab4ba60df5", "source_sha256": "732f7ab9b8acb0ef8e6bb7c65dd3e433400098c87b5f68d94583237915b92665"},
+    "T5c": {"start_ms": -1000.0, "dt_ms": 5.0, "frame_count": 485, "response_sha256": "6e03d4b74bd21e652dfc5818cf21d5e288329075d83fbf2f394ee9bc79261a8a", "source_sha256": "263b2b3fe59343ad44734bbaa20aff8ddf4213b9f4f9ef1f1d335bd0cfbda695"}
+  },
+  "scientific_boundary": {
+    "continuous_model_response": true,
+    "spike_conversion": false,
+    "exact_fafb_root_identity": false,
+    "camera_activity_source": false,
+    "code_hand_capability_mapping": false,
+    "biological_control_claim": false
+  },
+  "final_assertion": "flyvis_model -> continuous_response -> direction_evidence -> provenance_adapter PASS"
+}
