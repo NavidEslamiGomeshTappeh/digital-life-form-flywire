@@ -72,3 +72,17 @@ def test_neural_gateway_rejects_mixed_windows():
 def test_neural_gateway_fails_closed_when_no_intent_activates():
     with pytest.raises(NeuralGatewayError, match="no neural intent"):
         gateway().select((NeuralObservation("vision-A", 0, 100),))
+
+
+
+def test_neural_observation_accepts_fractional_millisecond_windows():
+    observation = NeuralObservation("vision-A", spikes=1, window_ms=0.5)
+    assert observation.window_ms == 0.5
+
+
+def test_neural_observation_rejects_non_integer_spike_counts():
+    with pytest.raises(NeuralGatewayError, match="spikes"):
+        NeuralObservation("vision-A", spikes=1.5, window_ms=100)
+
+    with pytest.raises(NeuralGatewayError, match="spikes"):
+        NeuralObservation("vision-A", spikes=True, window_ms=100)
