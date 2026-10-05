@@ -4,7 +4,10 @@ import math
 
 import pytest
 
-from dlf_flywire.flyvis_adapter import FlyVisAdapterError, FlyVisResponseAdapter
+from dlf_flywire.flyvis_adapter import (
+    FlyVisAdapterError,
+    FlyVisResponseAdapter,
+)
 
 
 MODEL_SHA = "a" * 64
