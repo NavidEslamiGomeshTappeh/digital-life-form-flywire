@@ -69,8 +69,18 @@ def main() -> None:
     receipt_sha256 = capture_receipt.write(receipt_path)
 
     boxeye = render_with_flyvis_boxeye(frame)
+    boxeye_values_path = OUT / "boxeye-721-values.json"
+    boxeye_values = list(boxeye.rendered_values)
+    boxeye_values_path.write_text(
+        json.dumps(boxeye_values, separators=(",", ":")),
+        encoding="utf-8",
+    )
+    boxeye_values_sha256 = sha256_bytes(boxeye_values_path.read_bytes())
+    if len(boxeye_values) != 721:
+        raise RuntimeError(f"BoxEye returned {len(boxeye_values)} values, expected 721")
+
     receipt = {
-        "schema_version": 1,
+        "schema_version": 2,
         "status": "observed_success",
         "source": {
             "url": SOURCE_URL,
@@ -81,12 +91,16 @@ def main() -> None:
         "artifact": {
             "pgm_sha256": frame_file_sha256,
             "receipt_sha256": receipt_sha256,
+            "boxeye_values_path": str(boxeye_values_path),
+            "boxeye_values_sha256": boxeye_values_sha256,
         },
         "boxeye": {
             "hexal_count": boxeye.hexal_count,
             "rendered_shape": list(boxeye.rendered_shape),
             "rendered_sha256": boxeye.rendered_sha256,
             "source_pixel_sha256": boxeye.source_pixel_sha256,
+            "values_count": len(boxeye_values),
+            "values": boxeye_values,
         },
         "scientific_boundary": {
             "real_image_input": True,
