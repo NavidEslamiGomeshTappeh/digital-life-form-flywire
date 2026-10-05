@@ -646,7 +646,7 @@ Stars, forks, traffic, and demos are useful for attention but are not scientific
 
 # 16. Current repository status snapshot
 
-V1.5.0 is the current implementation target after adding the first guarded Code Hand edit operation with SHA-256 preconditions. The previous V1.0.1 main commit was:
+V1.5.1 is the current implementation target after adding the bounded Neural → Leader execution boundary and guarded Code Hand edit operation with SHA-256 preconditions. The previous V1.0.1 main commit was:
 
 `26624626bd3c8291898df5c1bc844c5dba9c4172`
 
