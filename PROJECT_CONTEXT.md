@@ -694,7 +694,7 @@ For provenance research, do not rely only on README prose. Inspect evidence file
 - Historical Git history remains available for audit.
 - V1 is the unified product line.
 - The original Point_data generator is still unresolved.
-- V1.1.0 added the machine-checkable claim ledger and artifact-integrity contract; V1.2.0 added frozen cross-source receipts; V1.2.1 bound those receipts to explicit proof executions; V1.2.2 bound the independent-corroboration claim directly to those receipts and added regression coverage for explicit manifest self-exclusion; V1.3.0 adds deterministic record-level lineage for all 649 canonical synapse rows; V1.3.1 adds byte-for-byte CI regeneration verification of that artifact; V1.4.0 adds the first concrete Code Hand create/test path; V1.5.0 adds guarded Code Hand edit execution with exact SHA-256 preconditions and atomic replacement.
+- V1.1.0 added the machine-checkable claim ledger and artifact-integrity contract; V1.2.0 added frozen cross-source receipts; V1.2.1 bound those receipts to explicit proof executions; V1.2.2 bound the independent-corroboration claim directly to those receipts and added regression coverage for explicit manifest self-exclusion; V1.3.0 adds deterministic record-level lineage for all 649 canonical synapse rows; V1.3.1 adds byte-for-byte CI regeneration verification of that artifact; V1.4.0 adds the first concrete Code Hand create/test path; V1.5.0 adds guarded Code Hand edit execution with exact SHA-256 preconditions and atomic replacement; V1.5.1 adds bounded Neural → Leader execution and the verified FlyDrones simulator integration boundary.
 - The direct skeleton decoder exists partly to remove the vulnerable `fafbseg -> diskcache` runtime chain.
 - Exact reproduction is valued above "close enough".
 - Independent corroboration is valued above self-consistency.
@@ -781,7 +781,7 @@ Do not mark the capability layer implemented until actual code, tests, failure/r
 
 # 22. 2026-10-04 Code Hand implementation
 
-Version 1.5.0 extends the concrete Hand implementation in src/dlf_flywire/code_hand.py.
+Version 1.5.1 maintains the concrete Hand implementation in src/dlf_flywire/code_hand.py and adds the bounded Neural → Leader path around it.
 
 Current Code Hand contract:
 - create one new UTF-8 source file inside an explicit workspace;
