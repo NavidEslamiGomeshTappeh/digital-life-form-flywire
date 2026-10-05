@@ -5,7 +5,7 @@ import json
 from datetime import UTC, datetime
 from pathlib import Path
 
-from .vision_input import OpenCVCameraSource, VisionFrame, build_capture_receipt, render_with_flyvis_boxeye
+from .vision_input import OpenCVCameraSource, build_capture_receipt, render_with_flyvis_boxeye
 
 
 CELL_TYPES = ("T4a", "T4c", "T5a", "T5c")
