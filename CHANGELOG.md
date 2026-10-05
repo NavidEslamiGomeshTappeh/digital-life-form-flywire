@@ -9,6 +9,7 @@ Neural → Leader execution boundary release.
 - Added a provenance-bearing FlyDrones raster adapter with pinned external-source CI integration and separate full-source/extraction fingerprints.
 - Added a persisted FlyDrones end-to-end receipt proving simulator signal -> neural gateway -> Leader -> Code Hand -> Verifier execution, while explicitly excluding biological-control claims.
 - Added an evidence-backed Stage B mapping for the four exact FAFB v783 T4/T5 anchor roots to subtype-level ON/OFF and canonical motion-direction properties, with machine-checkable non-claims.
+- Added the executable `EvidenceBackedNeuralMapping` decoder, which stops at a functional label and fails closed on unmapped neuron identities instead of assigning agent capabilities.
 - Synchronized version, citation, release, README, and evidence metadata to 1.5.1.
 
 
