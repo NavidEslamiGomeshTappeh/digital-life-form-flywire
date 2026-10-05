@@ -173,3 +173,34 @@ def test_flyvis_adapter_rejects_zero_or_negative_dt():
                 source_revision="rev-A",
                 model_artifact_sha256=MODEL_SHA,
             )
+
+
+def test_flyvis_signal_exposes_explicit_continuous_semantics():
+    signal = flyvis_adapter.FlyVisResponseAdapter.extract(
+        [0.0, 1.0],
+        cell_type="T4c",
+        start_ms=0.0,
+        dt_ms=5.0,
+        source_revision="rev-A",
+        model_artifact_sha256=MODEL_SHA,
+    )
+
+    assert signal.signal_kind == "continuous_voltage_response"
+    assert signal.signal_units == "arbitrary_units"
+    assert signal.spike_conversion_allowed is False
+
+
+def test_flyvis_signal_rejects_direct_spike_contract_conversion():
+    signal = flyvis_adapter.FlyVisResponseAdapter.extract(
+        [0.0, 1.0],
+        cell_type="T5c",
+        start_ms=0.0,
+        dt_ms=5.0,
+        source_revision="rev-A",
+        model_artifact_sha256=MODEL_SHA,
+    )
+
+    with pytest.raises(
+        flyvis_adapter.FlyVisAdapterError, match="direct conversion to NeuralObservation"
+    ):
+        signal.to_neural_observation()
