@@ -479,5 +479,15 @@
         "value": "816d42cd1975d52ee75b111635498ed51d8324e6"
       }
     }
+,
+    {
+      "id": "E-FLYDRONES-INTEGRATION-RECEIPT",
+      "path": "evidence/flydrones_integration_receipt.json",
+      "role": "external_flydrones_integration_receipt",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "3d3736a29eaa306e90912eeb5d3d219e81d3a003"
+      }
+    }
   ]
 }
