@@ -90,11 +90,16 @@ def build_lineage(csv_path: Path, output_path: Path, product_version: str) -> No
     output_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
+def current_product_version() -> str:
+    version_path = Path(__file__).resolve().parents[1] / "VERSION"
+    return version_path.read_text(encoding="utf-8").strip()
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", default="evidence/synapses.csv")
     parser.add_argument("--output", default="evidence/synapse_lineage.json")
-    parser.add_argument("--product-version", default="1.4.0")
+    parser.add_argument("--product-version", default=current_product_version())
     args = parser.parse_args()
     build_lineage(Path(args.input), Path(args.output), args.product_version)
     return 0
