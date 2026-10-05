@@ -39,7 +39,7 @@
       "role": "audit_engine",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "e1e5e0c7b19880a0175e99dbadf38940b9c213f1"
+        "value": "a5bfc12bd1ffabcb247c8154b20f82926ee7d67e"
       }
     },
     {
@@ -57,7 +57,7 @@
       "role": "cli",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b837518127d13cf32f79c173b363b3954deab129"
+        "value": "3646bb8303ff7b072cdbe192bf0eec954d9f7fa1"
       }
     },
     {
@@ -260,7 +260,7 @@
       "role": "lineage_regeneration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "8c10b1a47fcf23371ef7fb3bfd324d62afa5bc92"
+        "value": "3084484454efaaaaa7be89501959b23e9ef83553"
       }
     },
     {

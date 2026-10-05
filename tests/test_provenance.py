@@ -5,10 +5,12 @@ import sys
 from pathlib import Path
 
 from dlf_flywire import __version__
+from dlf_flywire.cli import main as cli_main
 from dlf_flywire.provenance import (
     ProvenanceError,
     audit_provenance,
     git_blob_sha1,
+    trace_claim,
     validate_artifact_manifest,
     validate_claim_ledger,
     validate_evidence_manifest_version,
@@ -287,6 +289,36 @@ def test_release_receipt_versions_are_current():
     assert report["product_version"] == __version__
     assert report["receipts_checked"] == 4
     assert report["historical_receipts_without_version"] == 1
+
+
+def test_flyvis_claim_traces_to_immutable_evidence():
+    report = trace_claim(ROOT, "C-FLYVIS-RUNTIME-001")
+    assert report["status"] == "PASS_CLAIM_TRACE"
+    assert report["product_version"] == __version__
+    assert report["claim"]["status"] == "REPRODUCED"
+    assert [item["id"] for item in report["evidence"]] == ["E-FLYVIS-RUNTIME"]
+    assert report["evidence"][0]["path"] == "src/dlf_flywire/flyvis_runtime.py"
+
+
+def test_claim_trace_cli_emits_verified_json(capsys):
+    assert cli_main([
+        "claim",
+        "C-FLYVIS-RUNTIME-001",
+        "--root",
+        str(ROOT),
+    ]) == 0
+    report = json.loads(capsys.readouterr().out)
+    assert report["status"] == "PASS_CLAIM_TRACE"
+    assert report["claim"]["id"] == "C-FLYVIS-RUNTIME-001"
+
+
+def test_claim_trace_fails_closed_for_unknown_claim():
+    try:
+        trace_claim(ROOT, "C-DOES-NOT-EXIST")
+    except ProvenanceError as exc:
+        assert "unknown claim id" in str(exc)
+    else:
+        raise AssertionError("unknown claim ID was accepted")
 
 
 def test_release_receipt_version_drift_fails_closed(tmp_path):

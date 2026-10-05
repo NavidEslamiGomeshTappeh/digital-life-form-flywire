@@ -93,6 +93,14 @@ def main(argv=None) -> int:
         help="Project root containing data/ and evidence/ (default: current directory).",
     )
 
+    claim = sub.add_parser("claim", help="Trace one claim to its immutable evidence artifacts.")
+    claim.add_argument("claim_id", help="Claim identifier, for example C-FLYVIS-RUNTIME-001.")
+    claim.add_argument(
+        "--root",
+        default=".",
+        help="Project root containing data/ and evidence/ (default: current directory).",
+    )
+
     verify_sources = sub.add_parser("verify-sources", help="Validate frozen Codex/Zenodo cross-source receipts.")
     verify_sources.add_argument(
         "--root",
@@ -146,6 +154,13 @@ def main(argv=None) -> int:
         from .validation import find_project_root
         root = find_project_root(args.root)
         print(json.dumps(audit_provenance(root), indent=2))
+        return 0
+
+    if args.command == "claim":
+        from .provenance import trace_claim
+        from .validation import find_project_root
+        root = find_project_root(args.root)
+        print(json.dumps(trace_claim(root, args.claim_id), indent=2))
         return 0
 
     if args.command == "verify-sources":

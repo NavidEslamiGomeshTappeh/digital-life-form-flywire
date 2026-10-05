@@ -236,6 +236,63 @@ def validate_claim_ledger(root: Path) -> dict[str, Any]:
     }
 
 
+def trace_claim(root: Path, claim_id: str) -> dict[str, Any]:
+    if not isinstance(claim_id, str) or not claim_id.strip():
+        raise ProvenanceError("claim id must be a non-empty string")
+
+    manifest_result = validate_artifact_manifest(root)
+    ledger = _load_json(root / "evidence" / "claims.json")
+    claims = ledger.get("claims", [])
+    claim = next(
+        (
+            item
+            for item in claims
+            if isinstance(item, dict) and item.get("id") == claim_id
+        ),
+        None,
+    )
+    if claim is None:
+        raise ProvenanceError(f"unknown claim id: {claim_id}")
+
+    artifact_by_id = {
+        item.get("id"): item
+        for item in _load_json(root / "evidence" / "artifact_manifest.json").get(
+            "artifacts", []
+        )
+        if isinstance(item, dict) and isinstance(item.get("id"), str)
+    }
+
+    evidence = []
+    for evidence_id in claim.get("evidence", []):
+        artifact = artifact_by_id.get(evidence_id)
+        if artifact is None:
+            raise ProvenanceError(
+                f"claim {claim_id} references unknown artifact: {evidence_id}"
+            )
+        evidence.append(
+            {
+                "id": evidence_id,
+                "path": artifact["path"],
+                "role": artifact.get("role"),
+                "identity": artifact["identity"],
+                "content_sha256": artifact.get("content_sha256"),
+            }
+        )
+
+    return {
+        "status": "PASS_CLAIM_TRACE",
+        "product_version": manifest_result["product_version"],
+        "claim": {
+            "id": claim["id"],
+            "statement": claim["statement"],
+            "classification": claim["classification"],
+            "status": claim["status"],
+            "caveats": claim.get("caveats", []),
+        },
+        "evidence": evidence,
+    }
+
+
 def validate_synapse_lineage(root: Path) -> dict[str, Any]:
     lineage_path = root / "evidence" / "synapse_lineage.json"
     lineage = _load_json(lineage_path)
