@@ -499,5 +499,35 @@
         "value": "776d63c23dd085e1c2a308834fc074baf6c4a3d5"
       }
     }
+,
+    {
+      "id": "E-NEURAL-MAPPING",
+      "path": "evidence/neural_mapping_stage_b.json",
+      "role": "evidence_backed_neural_subtype_mapping",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "0c516b97d0e83d3d2cb9437f4d1e0b73ad063395"
+      }
+    }
+,
+    {
+      "id": "E-NEURAL-MAPPING-TESTS",
+      "path": "tests/test_neural_mapping.py",
+      "role": "neural_mapping_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "4a6dad811625d09726378ff90873e64bd4e0051f"
+      }
+    }
+,
+    {
+      "id": "E-CLAIMS-UPDATED",
+      "path": "evidence/claims.json",
+      "role": "claim_ledger",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "92420a1d7406e63767d4e710bdd28d002cb88987"
+      }
+    }
   ]
 }
