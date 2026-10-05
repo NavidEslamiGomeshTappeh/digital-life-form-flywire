@@ -141,3 +141,30 @@ def test_boxeye_bridge_fails_closed_when_optional_runtime_is_unavailable(monkeyp
     monkeypatch.setattr("builtins.__import__", blocked_import)
     with pytest.raises(VisionInputError, match="FlyVis and PyTorch"):
         render_with_flyvis_boxeye(frame)
+
+
+
+def test_capture_receipt_rejects_duplicate_frame_indices():
+    frames = (
+        VisionFrame.from_gray8(
+            frame_index=0,
+            width=1,
+            height=1,
+            pixels_gray8=b"\x01",
+            captured_at_utc="2026-10-05T10:30:00+00:00",
+        ),
+        VisionFrame.from_gray8(
+            frame_index=0,
+            width=1,
+            height=1,
+            pixels_gray8=b"\x02",
+            captured_at_utc="2026-10-05T10:30:00.005000+00:00",
+        ),
+    )
+    with pytest.raises(VisionInputError, match="duplicate receipt frame_index"):
+        build_capture_receipt(
+            frames,
+            source_kind="camera/opencv",
+            source_locator="device-index:0",
+            artifact_paths=("frames/0000.pgm", "frames/0001.pgm"),
+        )
