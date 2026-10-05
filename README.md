@@ -226,6 +226,15 @@ The FlyVis BoxEye bridge is validated against the pinned upstream implementation
 
 See [docs/VISION_INPUT_BOUNDARY.md](docs/VISION_INPUT_BOUNDARY.md).
 
+For a physical camera, install the optional vision dependency and capture a bounded set of frames:
+
+```bash
+python -m pip install -e ".[vision]"
+dlf-flywire capture-camera --device 0 --frames 10 --output data/vision/capture
+```
+
+The command writes exact gray8 PGM frames plus `receipt.json`. It does not upload the camera data.
+
 ## Recover exact morphology
 
 V1.1.0 recovery reads the public FAFB v783 Neuroglancer precomputed skeleton endpoint directly and writes SWC without the vulnerable `fafbseg → diskcache` dependency chain.
