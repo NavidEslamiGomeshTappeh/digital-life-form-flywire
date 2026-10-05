@@ -9,6 +9,23 @@ from dlf_flywire import flyvis_adapter
 MODEL_SHA = "a" * 64
 
 
+class _ArrayBackedTrace:
+    def __init__(self, values):
+        self._values = tuple(values)
+
+    def __bool__(self):
+        raise ValueError("ambiguous truth value")
+
+    def tolist(self):
+        return list(self._values)
+
+
+class _XarrayLikeResponse:
+    def __init__(self, values):
+        self.values = _ArrayBackedTrace(values)
+
+
+
 def test_flyvis_adapter_preserves_continuous_trace_without_spike_conversion():
     signal = flyvis_adapter.FlyVisResponseAdapter.extract(
         [0.25, -0.5, 1.0],
@@ -27,6 +44,19 @@ def test_flyvis_adapter_preserves_continuous_trace_without_spike_conversion():
     assert len(signal.response_sha256) == 64
     assert len(signal.source_sha256) == 64
     assert signal.response_sha256 != signal.source_sha256
+
+
+def test_flyvis_adapter_accepts_xarray_like_array_backed_trace():
+    signal = flyvis_adapter.FlyVisResponseAdapter.extract(
+        _XarrayLikeResponse([0.25, -0.5, 1.0]),
+        cell_type="T4c",
+        start_ms=0.0,
+        dt_ms=5.0,
+        source_revision="rev-A",
+        model_artifact_sha256=MODEL_SHA,
+    )
+
+    assert signal.responses == (0.25, -0.5, 1.0)
 
 
 def test_flyvis_response_fingerprint_is_deterministic():
