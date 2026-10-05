@@ -1,0 +1,23 @@
+{
+  "title": "Digital Life Form — FlyWire",
+  "description": "Provenance-first research-engineering toolkit for exact FlyWire v783 neuron identity, connectivity, synapse coordinates, morphology binding, reproducible evidence packs, and guarded vision/FlyVis integration.",
+  "creators": [
+    {
+      "name": "Navid Eslami Gomesh Tappeh"
+    }
+  ],
+  "keywords": [
+    "FlyWire",
+    "FAFB",
+    "connectomics",
+    "neuroscience",
+    "FlyVis",
+    "computer vision",
+    "provenance",
+    "reproducibility",
+    "synapse",
+    "morphology",
+    "research software"
+  ],
+  "license": "MIT"
+}

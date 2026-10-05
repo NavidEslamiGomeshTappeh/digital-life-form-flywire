@@ -19,6 +19,9 @@ dev = [
   "ruff>=0.13,<1",
   "build>=1,<2",
 ]
+vision = [
+  "opencv-python>=4.10,<5",
+]
 
 [project.scripts]
 dlf-flywire = "dlf_flywire.cli:main"

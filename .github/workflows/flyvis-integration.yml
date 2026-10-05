@@ -10,6 +10,13 @@ on:
       - "tests/test_flyvis_adapter.py"
       - "tests/test_flyvis_runtime.py"
       - "docs/FLYVIS_ACTIVITY_BOUNDARY.md"
+      - "src/dlf_flywire/vision_input.py"
+      - "scripts/flyvis_vision_input_smoke.py"
+      - "scripts/real_vision_sample_boxeye.py"
+      - "scripts/real_vision_sample_flyvis_response.py"
+      - "scripts/Run-Camera-FlyVis.ps1"
+      - "Run-Camera-FlyVis.bat"
+      - "tests/test_vision_input.py"
       - ".github/workflows/flyvis-integration.yml"
   pull_request:
     branches: [main]
@@ -20,6 +27,12 @@ on:
       - "tests/test_flyvis_adapter.py"
       - "tests/test_flyvis_runtime.py"
       - "docs/FLYVIS_ACTIVITY_BOUNDARY.md"
+      - "docs/VISION_INPUT_BOUNDARY.md"
+      - "src/dlf_flywire/vision_input.py"
+      - "scripts/flyvis_vision_input_smoke.py"
+      - "scripts/real_vision_sample_boxeye.py"
+      - "scripts/real_vision_sample_flyvis_response.py"
+      - "tests/test_vision_input.py"
       - ".github/workflows/flyvis-integration.yml"
   workflow_dispatch:
 
@@ -28,7 +41,7 @@ permissions:
 
 jobs:
   flyvis-smoke:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -43,6 +56,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install -e . --no-deps
+          python -m pip install --require-hashes -r .github/vision-ci-requirements.txt
 
       - name: Install pinned FlyVis source
         env:
@@ -67,3 +81,28 @@ jobs:
           FLYVIS_ROOT_DIR: ${{ runner.temp }}/flyvis
           PYTHONPATH: src
         run: python scripts/flyvis_integration_smoke.py
+
+      - name: Verify grayscale frame -> FlyVis BoxEye contract
+        env:
+          FLYVIS_ROOT_DIR: ${{ runner.temp }}/flyvis
+          PYTHONPATH: src
+        run: python scripts/flyvis_vision_input_smoke.py
+
+      - name: Run real public image -> VisionFrame -> BoxEye evidence receipt
+        env:
+          PYTHONPATH: src
+        run: python scripts/real_vision_sample_boxeye.py
+
+      - name: Run real image -> FlyVis network response
+        env:
+          FLYVIS_ROOT_DIR: ${{ runner.temp }}/flyvis
+          PYTHONPATH: src
+        run: python scripts/real_vision_sample_flyvis_response.py
+
+      - name: Upload real vision evidence artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: real-vision-sample-flyvis-evidence
+          path: artifacts/vision-real-sample/
+          if-no-files-found: error
+          retention-days: 30

@@ -1,5 +1,7 @@
 # Digital Life Form — FlyWire
 
+[![CI](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/ci.yml/badge.svg)](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/ci.yml) [![Security](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/security.yml/badge.svg)](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/security.yml) [![FlyVis Integration](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/flyvis-integration.yml/badge.svg)](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/flyvis-integration.yml) [![FlyDrones Integration](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/flydrones-integration.yml/badge.svg)](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/flydrones-integration.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 Version 1.7.1
 
 [![CI](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/ci.yml/badge.svg)](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/ci.yml)
@@ -40,6 +42,14 @@ This repository is not presented as a finished artificial brain. It is a **publi
 > **Project continuity / canonical research memory:** [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md)
 >
 > This is the first file to read when continuing the project in a new chat or agent session. It contains the current scientific boundaries, verified evidence, ecosystem research, architecture direction, unresolved items, and continuation rules.
+
+> **See the project in one minute**
+>
+> **Digital Life Form** is a reproducible research-engineering project connecting exact FlyWire/FAFB evidence, morphology, vision-model experiments, and a guarded agent runtime. The repository is built around one rule: **an interesting result is not promoted to a scientific claim until the implementation and evidence can be inspected and reproduced.**
+>
+> **Current public evidence:** 4 exact FAFB v783 reference neurons · 649/649 synapse-coordinate reproduction · 75/75 directed-pair correspondence · pinned FlyVis runtime evidence · provenance-bearing vision input boundary · automated CI/security checks.
+>
+> **Start here:** [Scientific status](#scientific-status) · [Claim-level evidence trace](#claim-level-evidence-trace) · [Real vision input boundary](#real-vision-input-boundary) · [Audit the evidence chain](#audit-the-evidence-chain) · [Public project overview](docs/PROJECT_OVERVIEW.md)
 
 Digital Life Form — FlyWire is a provenance-first research-engineering toolkit for extracting a small, exact subset of the FlyWire connectome and packaging the result as reproducible scientific evidence.
 
@@ -248,6 +258,35 @@ The safety and scientific boundaries remain deliberate:
 The verified engineering chain is:
 
 `neural source → provenance snapshot → bounded observation → evidence-backed functional label → intent candidate → Leader TaskStep → Policy Gateway → Hand → receipt/checkpoint → independent Verifier`
+
+## Real vision input boundary
+
+The V1 runtime now exposes a provenance-bearing visual input path:
+
+`physical camera -> gray8 VisionFrame -> exact PGM artifact -> capture receipt -> FlyVis BoxEye`
+
+The physical camera adapter uses optional OpenCV and is bounded to an explicit frame count. Each captured frame records its UTC timestamp, dimensions, exact grayscale payload fingerprint, and optional artifact path.
+
+The FlyVis BoxEye bridge is validated against the pinned upstream implementation and checks the expected 721-hexal output shape. This is an input/rendering contract only; it is **not** evidence of exact-root FAFB electrical activity, spike conversion, or camera-driven biological control.
+
+See [docs/VISION_INPUT_BOUNDARY.md](docs/VISION_INPUT_BOUNDARY.md).
+
+For a physical camera, install the optional vision dependency and capture a bounded set of frames:
+
+```bash
+python -m pip install -e ".[vision]"
+dlf-flywire capture-camera --device 0 --frames 10 --output data/vision/capture
+```
+
+The command writes exact gray8 PGM frames plus `receipt.json`. It does not upload the camera data.
+
+To cross the physical-camera boundary into the pinned FlyVis model locally:
+
+```bash
+dlf-flywire camera-flyvis --device 0 --frames 20 --output data/vision/camera-flyvis
+```
+
+A successful run proves a real device opened, returned bounded frames, produced 721 BoxEye receptor values, and generated continuous FlyVis model responses. It does **not** prove exact FAFB root-level electrical activity, spike conversion, or biological control.
 
 ## Recover exact morphology
 

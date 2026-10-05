@@ -138,6 +138,29 @@ def main(argv=None) -> int:
         help="Directory for checkpoints, receipts, and run state.",
     )
 
+    capture_camera = sub.add_parser(
+        "capture-camera",
+        help="Capture bounded physical-camera frames with provenance receipts.",
+    )
+    capture_camera.add_argument("--device", type=int, default=0)
+    capture_camera.add_argument("--frames", type=int, default=1)
+    capture_camera.add_argument("--output", default="data/vision/capture")
+    capture_camera.add_argument("--width", type=int, default=None)
+    capture_camera.add_argument("--height", type=int, default=None)
+    capture_camera.add_argument("--timeout", type=float, default=5.0)
+
+    camera_flyvis = sub.add_parser(
+        "camera-flyvis",
+        help="Capture physical-camera frames and run them through pinned FlyVis.",
+    )
+    camera_flyvis.add_argument("--device", type=int, default=0)
+    camera_flyvis.add_argument("--frames", type=int, default=20)
+    camera_flyvis.add_argument("--output", default="data/vision/camera-flyvis")
+    camera_flyvis.add_argument("--width", type=int, default=None)
+    camera_flyvis.add_argument("--height", type=int, default=None)
+    camera_flyvis.add_argument("--timeout", type=float, default=5.0)
+    camera_flyvis.add_argument("--dt", type=float, default=1 / 100)
+
     recover = sub.add_parser("recover", help="Recover exact FlyWire morphology.")
     recover.add_argument("--dataset", type=int, default=783)
     recover.add_argument("--output", default="data/morphology")
@@ -176,6 +199,71 @@ def main(argv=None) -> int:
         root = find_project_root(args.root)
         print(json.dumps(validate_synapse_lineage(root), indent=2))
         return 0
+
+    if args.command == "capture-camera":
+        from .vision_input import (
+            OpenCVCameraSource,
+            VisionInputError,
+            build_capture_receipt,
+        )
+
+        try:
+            output = Path(args.output)
+            output.mkdir(parents=True, exist_ok=True)
+            frames = OpenCVCameraSource(
+                device_index=args.device,
+                width=args.width,
+                height=args.height,
+                per_frame_timeout_s=args.timeout,
+            ).capture(args.frames)
+            artifact_paths = []
+            for frame in frames:
+                name = f"frame-{frame.frame_index:06d}.pgm"
+                frame.write_pgm(output / name)
+                artifact_paths.append((output / name).as_posix())
+            receipt = build_capture_receipt(
+                frames,
+                source_kind="camera/opencv",
+                source_locator=f"device-index:{args.device}",
+                artifact_paths=artifact_paths,
+            )
+            receipt_path = output / "receipt.json"
+            receipt_sha256 = receipt.write(receipt_path)
+            print(
+                json.dumps(
+                    {
+                        "status": "PASS",
+                        "frame_count": len(frames),
+                        "output": output.as_posix(),
+                        "receipt": receipt_path.as_posix(),
+                        "receipt_sha256": receipt_sha256,
+                    },
+                    indent=2,
+                )
+            )
+            return 0
+        except (TypeError, ValueError, VisionInputError) as exc:
+            print(json.dumps({"status": "FAIL", "error": str(exc)}, indent=2))
+            return 2
+
+    if args.command == "camera-flyvis":
+        from .camera_flyvis import CameraFlyVisError, run_camera_to_flyvis
+
+        try:
+            receipt = run_camera_to_flyvis(
+                device_index=args.device,
+                frame_count=args.frames,
+                output=args.output,
+                width=args.width,
+                height=args.height,
+                per_frame_timeout_s=args.timeout,
+                dt_s=args.dt,
+            )
+            print(json.dumps(receipt, indent=2, sort_keys=True))
+            return 0
+        except (TypeError, ValueError, CameraFlyVisError) as exc:
+            print(json.dumps({"status": "FAIL", "error": str(exc)}, indent=2))
+            return 2
 
     if args.command == "run-plan":
         from .capabilities import CapabilityDoctor, default_capabilities
