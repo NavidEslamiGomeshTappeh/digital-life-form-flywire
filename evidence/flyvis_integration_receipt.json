@@ -5,15 +5,14 @@
   "workflow": {
     "name": "FlyVis Integration",
     "workflow_file": ".github/workflows/flyvis-integration.yml",
-    "run_id": 37274663229,
-    "job_id": 111648953539,
+    "run_id": 37279335325,
+    "job_id": 111663483046,
     "job_name": "flyvis-smoke",
     "trigger": "pull_request",
-    "pull_request": 50,
-    "head_commit": "ad3c9ab3539a752795f0d2eb53cc409fe4948446",
-    "merge_commit_checked_out": "6a207bdee5ff8be68cec13c08140da32b58f435a",
+    "pull_request": 51,
+    "head_commit": "e012af15a2804db4fb04eec0ff6441a744cd694e",
     "conclusion": "success",
-    "observed_at": "2026-10-05T07:05:53.332843+00:00"
+    "observed_at": "2026-10-05T07:55:20.000000+00:00"
   },
   "flyvis": {
     "release": "v1.2.0",
@@ -26,26 +25,110 @@
   },
   "protocol": {
     "stimulus": "MovingEdge",
-    "angles_deg": [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330],
-    "intensities": [0, 1],
-    "target_intensity": {"T4a": 1, "T4c": 1, "T5a": 0, "T5c": 0},
+    "angles_deg": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150,
+      180,
+      210,
+      240,
+      270,
+      300,
+      330
+    ],
+    "intensities": [
+      0,
+      1
+    ],
+    "target_intensity": {
+      "T4a": 1,
+      "T4c": 1,
+      "T5a": 0,
+      "T5c": 0
+    },
     "rendered_edge_width": 80,
     "speed": 19,
-    "offsets": [-10, 11],
+    "offsets": [
+      -10,
+      11
+    ],
     "dt_s": 0.005,
-    "direction_tolerance_deg": 45.0
+    "direction_tolerance_deg": 45
   },
   "direction_observations": [
-    {"cell_type": "T4a", "intensity": 1, "expected_direction_deg": 180.0, "observed_direction_deg": 180.0, "angular_error_deg": 0.0},
-    {"cell_type": "T4c", "intensity": 1, "expected_direction_deg": 90.0, "observed_direction_deg": 60.0, "angular_error_deg": 30.0},
-    {"cell_type": "T5a", "intensity": 0, "expected_direction_deg": 180.0, "observed_direction_deg": 180.0, "angular_error_deg": 0.0},
-    {"cell_type": "T5c", "intensity": 0, "expected_direction_deg": 90.0, "observed_direction_deg": 120.0, "angular_error_deg": 30.0}
+    {
+      "cell_type": "T4a",
+      "expected_direction_deg": 180,
+      "intensity": 1,
+      "observed_direction_deg": 176.475866203647,
+      "angular_error_deg": 3.5241337963529986,
+      "manual_peak_direction_deg": 180,
+      "manual_peak_angular_error_deg": 0,
+      "manual_vs_official_error_deg": 3.5241337963529986
+    },
+    {
+      "cell_type": "T4c",
+      "expected_direction_deg": 90,
+      "intensity": 1,
+      "observed_direction_deg": 56.23589457056419,
+      "angular_error_deg": 33.7641054294358,
+      "manual_peak_direction_deg": 60,
+      "manual_peak_angular_error_deg": 30,
+      "manual_vs_official_error_deg": 3.7641054294358014
+    },
+    {
+      "cell_type": "T5a",
+      "expected_direction_deg": 180,
+      "intensity": 0,
+      "observed_direction_deg": 185.69074451562017,
+      "angular_error_deg": 5.6907445156201675,
+      "manual_peak_direction_deg": 180,
+      "manual_peak_angular_error_deg": 0,
+      "manual_vs_official_error_deg": 5.6907445156201675
+    },
+    {
+      "cell_type": "T5c",
+      "expected_direction_deg": 90,
+      "intensity": 0,
+      "observed_direction_deg": 104.39762312821055,
+      "angular_error_deg": 14.397623128210569,
+      "manual_peak_direction_deg": 120,
+      "manual_peak_angular_error_deg": 30,
+      "manual_vs_official_error_deg": 15.602376871789431
+    }
   ],
   "continuous_trace_fingerprints": {
-    "T4a": {"start_ms": -1000.0, "dt_ms": 5.0, "frame_count": 485, "response_sha256": "293016ddfa69d94cf2d7a522f0f3afccb314f794a547fa3a86ee46df4401a8ed", "source_sha256": "b4029288b7fc88f4edeaa5b6f08f1ba85f749f8864d4ebb0ce24f41776835d04"},
-    "T4c": {"start_ms": -1000.0, "dt_ms": 5.0, "frame_count": 485, "response_sha256": "c32f39746f304a9afb49ccf25e9275666baebf46a1c50ee1f0ca8c9cb3a62278", "source_sha256": "02a877a5d07e2b5d547703d3d5781e314d5e937cae162331ff3d2975c97a1d00"},
-    "T5a": {"start_ms": -1000.0, "dt_ms": 5.0, "frame_count": 485, "response_sha256": "82113d5167c4bc0eca834d1a6b0eb8afcb74a00e7946f4a4d93f71ab4ba60df5", "source_sha256": "732f7ab9b8acb0ef8e6bb7c65dd3e433400098c87b5f68d94583237915b92665"},
-    "T5c": {"start_ms": -1000.0, "dt_ms": 5.0, "frame_count": 485, "response_sha256": "6e03d4b74bd21e652dfc5818cf21d5e288329075d83fbf2f394ee9bc79261a8a", "source_sha256": "263b2b3fe59343ad44734bbaa20aff8ddf4213b9f4f9ef1f1d335bd0cfbda695"}
+    "T4a": {
+      "start_ms": -1000,
+      "dt_ms": 5,
+      "frame_count": 485,
+      "response_sha256": "401d1065957f8b81ba2eddd9dfbc5db65679c63e9d2f3d02814dce1be475e407",
+      "source_sha256": "e6ddd660efbfbbad6fe8d85bd78b6dc5e2cf7dbd86dcc564eeae2ea53fce299d"
+    },
+    "T4c": {
+      "start_ms": -1000,
+      "dt_ms": 5,
+      "frame_count": 485,
+      "response_sha256": "cb96cc09b91fe5acda5f7dd3121c403d4459ff06f6e3ea6b331eba2954c0e2ba",
+      "source_sha256": "8f072bdc5460ca68ba31bf534bccfa0bddfa4d60e879fc7f52100925798bc04c"
+    },
+    "T5a": {
+      "start_ms": -1000,
+      "dt_ms": 5,
+      "frame_count": 485,
+      "response_sha256": "46ad56504a4e65f3d1c94a4b6c1d456056e3e2f376c4b8544f1b4792c2737878",
+      "source_sha256": "851f57f2415bfec564dd7833634ab19a1fbd8445db5be6924dc5d0128265dfd1"
+    },
+    "T5c": {
+      "start_ms": -1000,
+      "dt_ms": 5,
+      "frame_count": 485,
+      "response_sha256": "fa1e341de906d8eed748e41ae26d95467a5a7d40d31b2dca1bd60522dc613902",
+      "source_sha256": "c16501929fbf7e1d3ab7056fb122ac2f998bac8f9171351843168b240a3839a7"
+    }
   },
   "scientific_boundary": {
     "continuous_model_response": true,
