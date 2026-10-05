@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from collections.abc import Mapping
 from dataclasses import dataclass
 
@@ -14,15 +15,19 @@ class NeuralGatewayError(ValueError):
 class NeuralObservation:
     neuron_id: str
     spikes: int
-    window_ms: int
+    window_ms: float
 
     def __post_init__(self) -> None:
         if not self.neuron_id.strip():
             raise NeuralGatewayError("neuron_id must not be empty")
-        if isinstance(self.spikes, bool) or self.spikes < 0:
+        if type(self.spikes) is not int or self.spikes < 0:
             raise NeuralGatewayError("spikes must be a non-negative integer")
-        if isinstance(self.window_ms, bool) or self.window_ms <= 0:
-            raise NeuralGatewayError("window_ms must be a positive integer")
+        if (
+            type(self.window_ms) not in (int, float)
+            or not math.isfinite(float(self.window_ms))
+            or self.window_ms <= 0
+        ):
+            raise NeuralGatewayError("window_ms must be a positive finite number")
 
 
 @dataclass(frozen=True)
