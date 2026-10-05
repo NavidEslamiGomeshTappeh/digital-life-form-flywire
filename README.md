@@ -214,6 +214,18 @@ The verified engineering chain is:
 
 `neural source → provenance snapshot → bounded observation → evidence-backed functional label → intent candidate → Leader TaskStep → Policy Gateway → Hand → receipt/checkpoint → independent Verifier`
 
+## Real vision input boundary
+
+The V1 runtime now exposes a provenance-bearing visual input path:
+
+`physical camera -> gray8 VisionFrame -> exact PGM artifact -> capture receipt -> FlyVis BoxEye`
+
+The physical camera adapter uses optional OpenCV and is bounded to an explicit frame count. Each captured frame records its UTC timestamp, dimensions, exact grayscale payload fingerprint, and optional artifact path.
+
+The FlyVis BoxEye bridge is validated against the pinned upstream implementation and checks the expected 721-hexal output shape. This is an input/rendering contract only; it is **not** evidence of exact-root FAFB electrical activity, spike conversion, or camera-driven biological control.
+
+See [docs/VISION_INPUT_BOUNDARY.md](docs/VISION_INPUT_BOUNDARY.md).
+
 ## Recover exact morphology
 
 V1.1.0 recovery reads the public FAFB v783 Neuroglancer precomputed skeleton endpoint directly and writes SWC without the vulnerable `fafbseg → diskcache` dependency chain.
