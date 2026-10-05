@@ -27,7 +27,8 @@ def sha256_bytes(data: bytes) -> str:
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     source_path = OUT / "source.jpg"
-    with urllib.request.urlopen(SOURCE_URL, timeout=30) as response:
+    request = urllib.request.Request(SOURCE_URL, headers={"User-Agent": "Digital-Life-Form-FlyWire/1.0 (GitHub Actions; provenance test)"})
+    with urllib.request.urlopen(request, timeout=30) as response:
         source_bytes = response.read()
     source_path.write_bytes(source_bytes)
     source_sha256 = sha256_bytes(source_bytes)
