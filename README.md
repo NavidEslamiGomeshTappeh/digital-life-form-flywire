@@ -185,13 +185,13 @@ The Code Hand contract is documented in docs/CODE_HAND.md. The initial implement
 
 ## Neural → Leader boundary
 
-Version 1.5.1 now contains a bounded neural execution path plus provenance-bearing external simulator signal adapters. The FlyDrones path has a persisted external integration receipt; the FlyVis path is currently adapter-level and does not claim a live FlyVis execution receipt.
+Version 1.5.1 now contains a bounded neural execution path plus provenance-bearing external simulator signal adapters. The FlyDrones path has a persisted external integration receipt; the FlyVis path now also has a persisted live runtime receipt from GitHub Actions.
 
 `NeuralIntentGateway` accepts bounded sparse observations and produces deterministic capability candidates with evidence hashing. `NeuralLeaderBridge` turns an activated candidate into the existing Leader/TaskStep contract.
 
 Stage A is implemented and externally exercised against a pinned FlyDrones revision. `FlyDronesRasterAdapter` consumes the real runtime shape `last_raster → record → connectome.body_ids`, preserves a full-source snapshot SHA-256, and keeps a separate extraction-window fingerprint. The successful end-to-end receipt is stored in [`evidence/flydrones_integration_receipt_2.json`](evidence/flydrones_integration_receipt_2.json).
 
-Stage B is partially implemented in [`evidence/neural_mapping_stage_b.json`](evidence/neural_mapping_stage_b.json): the four exact FAFB v783 project roots are linked to their T4/T5 subtype identities and literature-supported ON/OFF and canonical motion-direction properties.
+Stage B is partially implemented in [`evidence/neural_mapping_stage_b.json`](evidence/neural_mapping_stage_b.json): the four exact FAFB v783 project roots are linked to their T4/T5 subtype identities and literature-supported ON/OFF and canonical motion-direction properties. The real pinned FlyVis runtime proof is persisted in [`evidence/flyvis_integration_receipt.json`](evidence/flyvis_integration_receipt.json); it demonstrates continuous model responses and preferred-direction evidence, not exact-root electrical activity.
 
 The safety and scientific boundaries remain deliberate:
 
