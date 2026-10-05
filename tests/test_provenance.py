@@ -296,8 +296,17 @@ def test_flyvis_claim_traces_to_immutable_evidence():
     assert report["status"] == "PASS_CLAIM_TRACE"
     assert report["product_version"] == __version__
     assert report["claim"]["status"] == "REPRODUCED"
-    assert [item["id"] for item in report["evidence"]] == ["E-FLYVIS-RUNTIME"]
-    assert report["evidence"][0]["path"] == "src/dlf_flywire/flyvis_runtime.py"
+    assert [item["id"] for item in report["evidence"]] == [
+        "E-FLYVIS-RUNTIME",
+        "E-FLYVIS-RUNTIME-SMOKE",
+        "E-FLYVIS-WORKFLOW",
+        "E-FLYVIS-RUNTIME-RECEIPT",
+    ]
+    evidence_by_id = {item["id"]: item for item in report["evidence"]}
+    assert evidence_by_id["E-FLYVIS-RUNTIME"]["path"] == "src/dlf_flywire/flyvis_runtime.py"
+    assert evidence_by_id["E-FLYVIS-RUNTIME-SMOKE"]["path"] == "scripts/flyvis_integration_smoke.py"
+    assert evidence_by_id["E-FLYVIS-WORKFLOW"]["path"] == ".github/workflows/flyvis-integration.yml"
+    assert evidence_by_id["E-FLYVIS-RUNTIME-RECEIPT"]["path"] == "evidence/flyvis_integration_receipt.json"
 
 
 def test_claim_trace_cli_emits_verified_json(capsys):
