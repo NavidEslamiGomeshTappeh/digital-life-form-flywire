@@ -75,7 +75,7 @@ def main() -> None:
         neural_plan = RunPlan((neural_create, base_plan.steps[1]))
         orchestrator = TaskOrchestrator(
             hand.orchestrator.executor,
-            root / "orchestrator-state",
+            root / "state",
         )
         run_id, receipts = orchestrator.run(
             neural_plan,
