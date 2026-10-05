@@ -2,11 +2,11 @@ from __future__ import annotations
 
 import hashlib
 import json
+from collections.abc import Sequence
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from time import monotonic
-from collections.abc import Sequence
 
 
 class VisionInputError(ValueError):
