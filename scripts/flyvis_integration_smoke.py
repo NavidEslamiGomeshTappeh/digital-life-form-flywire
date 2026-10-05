@@ -189,6 +189,7 @@ def main() -> None:
 
         signal = extract_trace_signal(
             response_dataset,
+            dataset,
             cell_type,
             intensity,
             expected_direction_deg,
