@@ -241,7 +241,10 @@
       "classification": "DETERMINISTIC_COMPUTATION",
       "status": "REPRODUCED",
       "evidence": [
-        "E-FLYVIS-RUNTIME"
+        "E-FLYVIS-RUNTIME",
+        "E-FLYVIS-RUNTIME-SMOKE",
+        "E-FLYVIS-WORKFLOW",
+        "E-FLYVIS-RUNTIME-RECEIPT"
       ],
       "caveats": [
         "This is a model-level runtime result, not an electrical recording of the four exact FAFB v783 root IDs.",
