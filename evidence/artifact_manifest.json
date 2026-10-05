@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "product_version": "1.5.1",
-  "generated_for": "Version 1.5.1 Neural → Leader execution boundary",
+  "generated_for": "Version 1.5.1 Neural → Leader execution boundary with live FlyVis runtime evidence",
   "exclusion": [
     "evidence/artifact_manifest.json"
   ],
@@ -558,6 +558,51 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "2a777493718c25a0f2f933d9a403472971691278"
+      }
+    },
+    {
+      "id": "E-FLYVIS-RUNTIME",
+      "path": "src/dlf_flywire/flyvis_runtime.py",
+      "role": "real_FlyVis_runtime_contract",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "26dbdbb52f09aaba32842683cd44d4cdafbfb253"
+      }
+    },
+    {
+      "id": "E-FLYVIS-RUNTIME-SMOKE",
+      "path": "scripts/flyvis_integration_smoke.py",
+      "role": "real_FlyVis_runtime_smoke",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "f1f214a4595e91b82ccd0e246c9f84002f92882c"
+      }
+    },
+    {
+      "id": "E-FLYVIS-RUNTIME-TESTS",
+      "path": "tests/test_flyvis_runtime.py",
+      "role": "real_FlyVis_runtime_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "68bac4fc91e5a1f350699291efee34bf01f906e3"
+      }
+    },
+    {
+      "id": "E-FLYVIS-WORKFLOW",
+      "path": ".github/workflows/flyvis-integration.yml",
+      "role": "real_FlyVis_integration_workflow",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "b6bfc7bf517f3d5055ad09fce3f625f27e61964e"
+      }
+    },
+    {
+      "id": "E-FLYVIS-RUNTIME-RECEIPT",
+      "path": "evidence/flyvis_integration_receipt.json",
+      "role": "real_FlyVis_runtime_proof_receipt",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "ecd1eb805a1449c9049a0f972e5c1085fe466e1c"
       }
     }
   ]
