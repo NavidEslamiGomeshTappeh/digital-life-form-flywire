@@ -6,7 +6,9 @@ Neural → Leader execution boundary release.
 
 - Added the bounded NeuralIntentGateway and NeuralLeaderBridge path from sparse neural observations to the existing Leader TaskStep contract.
 - Added deterministic observation-set hashing, fail-closed threshold/window checks, explicit permission separation, and neural-to-Code Hand integration regression coverage.
-- Documented the scientific boundary: current neural channels are opaque/synthetic and do not establish biological control of Code Hand or any mapping from the four FlyWire neurons to execution intent.
+- Added a provenance-bearing FlyDrones raster adapter with pinned external-source CI integration and separate full-source/extraction fingerprints.
+- Added a persisted FlyDrones end-to-end receipt proving simulator signal -> neural gateway -> Leader -> Code Hand -> Verifier execution, while explicitly excluding biological-control claims.
+- Added an evidence-backed Stage B mapping for the four exact FAFB v783 T4/T5 anchor roots to subtype-level ON/OFF and canonical motion-direction properties, with machine-checkable non-claims.
 - Synchronized version, citation, release, README, and evidence metadata to 1.5.1.
 
 
