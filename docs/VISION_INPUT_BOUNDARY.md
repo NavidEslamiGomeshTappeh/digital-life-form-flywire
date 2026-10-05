@@ -35,3 +35,21 @@ The output is deliberately a grayscale image frame. It does not:
 - claim camera-driven biological control.
 
 The next integration stage is a separate, provenance-bearing bridge from grayscale frame sequences into the pinned FlyVis `BoxEye` rendering contract. That bridge must preserve the source frame hashes and prove the resulting tensor shape/ordering against the upstream implementation before any neural-activity claim is made.
+
+## Physical camera -> FlyVis
+
+The runtime also exposes an end-to-end local bridge:
+
+`physical camera -> gray8 frames -> PGM + capture receipt -> BoxEye (721) -> pinned FlyVis network -> continuous responses`
+
+Run it with:
+
+```bash
+dlf-flywire camera-flyvis --device 0 --frames 20 --output data/vision/camera-flyvis
+```
+
+This command is intentionally bounded. It only returns success after the camera opens and all requested frames are read, each frame is fingerprinted, BoxEye returns the expected 721-receptor contract, and the pinned FlyVis network produces finite responses.
+
+The resulting `camera-flyvis-receipt.json` records the physical device index, frame hashes, BoxEye hashes, pinned FlyVis revision/checkpoint hash, response hash, and the scientific boundary flags.
+
+A successful local run is evidence of a real camera-to-model software path. It is not evidence of exact FAFB v783 root-level electrical activity, biological spikes, or biological control.
