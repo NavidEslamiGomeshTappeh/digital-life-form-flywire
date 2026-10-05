@@ -5,13 +5,41 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "digital-life-form-flywire"
 version = "1.7.1"
-description = "Provenance-first FlyWire v783 morphology, synapse validation, and reproducible circuit evidence."
+description = "Provenance-first FlyWire/FAFB connectomics evidence, morphology validation, reproducible FlyVis vision experiments, and guarded neural-agent runtime."
 readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"
 license-files = ["LICENSE"]
-authors = [{name = "Navid Eslami Gomesh Tappeh"}]
-dependencies = []
+authors = [{name = "Navid Eslami Gomesh Tappeh"]
+]
+keywords = [
+  "flywire",
+  "fafb",
+  "connectomics",
+  "neuroscience",
+  "flyvis",
+  "computer-vision",
+  "neural-circuits",
+  "provenance",
+  "reproducibility",
+  "research-software",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Developers",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: MIT License",
+]
+[project.urls]
+Homepage = "https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire"
+Repository = "https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire"
+Documentation = "https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/tree/main/docs"
+Issues = "https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/issues"
 
 [project.optional-dependencies]
 dev = [
