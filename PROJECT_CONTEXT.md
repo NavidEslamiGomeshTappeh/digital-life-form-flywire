@@ -827,6 +827,6 @@ The real GitHub Actions integration receipt is recorded at `evidence/flydrones_i
 
 This is a real simulator-to-runtime integration result. MiniFly is synthetic; the receipt is not evidence that the four FAFB v783 T4/T5 neurons biologically control Code Hand.
 
-Stage B is now partially implemented in `evidence/neural_mapping_stage_b.json`: the four exact project roots are linked to their T4/T5 subtype identities and literature-supported ON/OFF plus canonical motion-direction properties. This establishes subtype-level functional evidence, not individual electrical recordings and not a Code Hand command mapping.
+Stage B is now partially implemented in `evidence/neural_mapping_stage_b.json`: the four exact project roots are linked to their T4/T5 subtype identities and literature-supported ON/OFF plus canonical motion-direction properties. `src/dlf_flywire/neural_mapping.py` provides an executable `EvidenceBackedNeuralMapping` decoder for those labels and fails closed on unmapped identities. This establishes subtype-level functional evidence and a reproducible software decoder, not individual electrical recordings and not a Code Hand command mapping.
 
 The next scientific boundary remains evidence-backed mapping from observed activity in these identities to a functional intent, followed by controlled closed-loop experiments.
