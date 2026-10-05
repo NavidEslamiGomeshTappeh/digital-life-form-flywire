@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "92420a1d7406e63767d4e710bdd28d002cb88987"
+        "value": "b3c158c88930f9e087d3840f658484c49f4a4ec0"
       }
     },
     {
@@ -513,6 +513,24 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "68697fff46af94c072fd68972c5fb38b03fd6388"
+      }
+    },
+    {
+      "id": "E-NEURAL-MAPPING-DECODER",
+      "path": "src/dlf_flywire/neural_mapping.py",
+      "role": "evidence_backed_neural_functional_decoder",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "949bd70bfef1d283736823d63311d7e8d8f1fbf8"
+      }
+    },
+    {
+      "id": "E-NEURAL-MAPPING-DECODER-TESTS",
+      "path": "tests/test_neural_mapping_decoder.py",
+      "role": "neural_mapping_decoder_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "f253022fe6caffd48a01f9d33941cf14c6ab4d19"
       }
     }
   ]
