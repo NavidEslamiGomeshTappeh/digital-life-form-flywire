@@ -39,6 +39,8 @@ def test_flydrones_raster_maps_recorded_positions_to_connectome_body_ids():
     assert signal.observations[1].spikes == 2
     assert signal.observations[0].window_ms == 10.0
     assert len(signal.source_sha256) == 64
+    assert len(signal.extraction_sha256) == 64
+    assert signal.source_sha256 != signal.extraction_sha256
 
 
 def test_flydrones_signal_fingerprint_is_deterministic():
@@ -128,3 +130,33 @@ def test_flydrones_signal_fingerprint_changes_with_source_revision():
         fake_brain(), start_ms=10.0, end_ms=20.0, source_revision="rev-B"
     )
     assert first.source_sha256 != second.source_sha256
+
+def test_source_snapshot_hash_changes_for_events_outside_extraction_window():
+    first = fake_brain()
+    second = fake_brain()
+    second.last_raster.append((99.0, [0]))
+
+    a = FlyDronesRasterAdapter.extract(
+        first, start_ms=10.0, end_ms=20.0, source_revision="rev-A"
+    )
+    b = FlyDronesRasterAdapter.extract(
+        second, start_ms=10.0, end_ms=20.0, source_revision="rev-A"
+    )
+
+    assert a.extraction_sha256 == b.extraction_sha256
+    assert a.source_sha256 != b.source_sha256
+
+
+def test_source_snapshot_hash_changes_when_record_mapping_changes():
+    first = fake_brain()
+    second = fake_brain()
+    second.record = [0, 2]
+
+    a = FlyDronesRasterAdapter.extract(
+        first, start_ms=10.0, end_ms=20.0, source_revision="rev-A"
+    )
+    b = FlyDronesRasterAdapter.extract(
+        second, start_ms=10.0, end_ms=20.0, source_revision="rev-A"
+    )
+
+    assert a.source_sha256 != b.source_sha256
