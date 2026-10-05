@@ -235,6 +235,14 @@ dlf-flywire capture-camera --device 0 --frames 10 --output data/vision/capture
 
 The command writes exact gray8 PGM frames plus `receipt.json`. It does not upload the camera data.
 
+To cross the physical-camera boundary into the pinned FlyVis model locally:
+
+```bash
+dlf-flywire camera-flyvis --device 0 --frames 20 --output data/vision/camera-flyvis
+```
+
+A successful run proves a real device opened, returned bounded frames, produced 721 BoxEye receptor values, and generated continuous FlyVis model responses. It does **not** prove exact FAFB root-level electrical activity, spike conversion, or biological control.
+
 ## Recover exact morphology
 
 V1.1.0 recovery reads the public FAFB v783 Neuroglancer precomputed skeleton endpoint directly and writes SWC without the vulnerable `fafbseg → diskcache` dependency chain.
