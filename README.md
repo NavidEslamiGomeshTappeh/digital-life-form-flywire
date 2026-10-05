@@ -151,7 +151,7 @@ The command resumes successful steps from verified receipts and returns exit cod
 
 ## Code Hand
 
-Version 1.5.0 extends the first concrete Hand from create-only to guarded edit execution.
+Version 1.5.1 extends the concrete Hand boundary with guarded edit execution plus the bounded Neural → Leader path and verified FlyDrones simulator integration.
 
 CodeHand can:
 - create one new UTF-8 source file inside an explicit workspace;
