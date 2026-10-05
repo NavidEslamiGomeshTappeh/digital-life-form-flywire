@@ -22,6 +22,7 @@ class FlyDronesSignal:
     end_ms: float
     source_revision: str
     source_sha256: str
+    extraction_sha256: str
     adapter_version: str
 
 
@@ -67,6 +68,7 @@ class FlyDronesRasterAdapter:
         except TypeError as exc:
             raise FlyDronesAdapterError("body_ids and record must be sized sequences") from exc
 
+        raw_raster: list[tuple[float, list[int]]] = []
         events: list[tuple[float, str]] = []
         for entry in raster:
             try:
@@ -86,12 +88,14 @@ class FlyDronesRasterAdapter:
             except TypeError as exc:
                 raise FlyDronesAdapterError("recorded_positions must be iterable") from exc
 
+            canonical_positions: list[int] = []
             for position in iterator:
                 if isinstance(position, bool) or not isinstance(position, Integral):
                     raise FlyDronesAdapterError(
                         "raster record position must be an integer"
                     )
                 record_position = int(position)
+                canonical_positions.append(record_position)
                 if not 0 <= record_position < record_count:
                     raise FlyDronesAdapterError(
                         f"record position {record_position} is outside Brain.record"
@@ -114,6 +118,7 @@ class FlyDronesRasterAdapter:
                         "connectome.body_ids must contain integer body IDs"
                     )
                 events.append((timestamp, f"malecns-body:{int(body_id)}"))
+            raw_raster.append((timestamp, canonical_positions))
 
         duration_ms = float(end_ms) - float(start_ms)
         counts: dict[str, int] = {}
@@ -124,7 +129,13 @@ class FlyDronesRasterAdapter:
             NeuralObservation(neuron_id, count, duration_ms)
             for neuron_id, count in sorted(counts.items())
         )
-        source_sha256 = cls._fingerprint(
+        source_sha256 = cls._source_snapshot_fingerprint(
+            source_revision,
+            tuple(int(body_id) for body_id in body_ids),
+            tuple(int(neuron_index) for neuron_index in record),
+            tuple(raw_raster),
+        )
+        extraction_sha256 = cls._extraction_fingerprint(
             source_revision,
             float(start_ms),
             float(end_ms),
@@ -136,6 +147,7 @@ class FlyDronesRasterAdapter:
             end_ms=float(end_ms),
             source_revision=source_revision,
             source_sha256=source_sha256,
+            extraction_sha256=extraction_sha256,
             adapter_version=cls.VERSION,
         )
 
@@ -162,24 +174,8 @@ class FlyDronesRasterAdapter:
         ):
             raise FlyDronesAdapterError("raster timestamp_ms must be a finite non-negative real value")
 
-    @classmethod
-    def _fingerprint(
-        cls,
-        source_revision: str,
-        start_ms: float,
-        end_ms: float,
-        events: tuple[tuple[float, str], ...],
-    ) -> str:
-        payload = {
-            "adapter_version": cls.VERSION,
-            "end_ms": end_ms,
-            "events": [
-                {"neuron_id": neuron_id, "timestamp_ms": timestamp}
-                for timestamp, neuron_id in events
-            ],
-            "source_revision": source_revision,
-            "start_ms": start_ms,
-        }
+    @staticmethod
+    def _hash_payload(payload: dict[str, object]) -> str:
         return hashlib.sha256(
             json.dumps(
                 payload,
@@ -188,3 +184,45 @@ class FlyDronesRasterAdapter:
                 separators=(",", ":"),
             ).encode("utf-8")
         ).hexdigest()
+
+    @classmethod
+    def _source_snapshot_fingerprint(
+        cls,
+        source_revision: str,
+        body_ids: tuple[int, ...],
+        record: tuple[int, ...],
+        raster: tuple[tuple[float, list[int]], ...],
+    ) -> str:
+        return cls._hash_payload(
+            {
+                "adapter_version": cls.VERSION,
+                "body_ids": list(body_ids),
+                "raster": [
+                    {"positions": positions, "timestamp_ms": timestamp}
+                    for timestamp, positions in raster
+                ],
+                "record": list(record),
+                "source_revision": source_revision,
+            }
+        )
+
+    @classmethod
+    def _extraction_fingerprint(
+        cls,
+        source_revision: str,
+        start_ms: float,
+        end_ms: float,
+        events: tuple[tuple[float, str], ...],
+    ) -> str:
+        return cls._hash_payload(
+            {
+                "adapter_version": cls.VERSION,
+                "end_ms": end_ms,
+                "events": [
+                    {"neuron_id": neuron_id, "timestamp_ms": timestamp}
+                    for timestamp, neuron_id in events
+                ],
+                "source_revision": source_revision,
+                "start_ms": start_ms,
+            }
+        )
