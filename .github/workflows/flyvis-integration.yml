@@ -1,0 +1,62 @@
+name: FlyVis Integration
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/dlf_flywire/flyvis_adapter.py"
+      - "src/dlf_flywire/flyvis_runtime.py"
+      - "scripts/flyvis_integration_smoke.py"
+      - "tests/test_flyvis_adapter.py"
+      - "tests/test_flyvis_runtime.py"
+      - "docs/FLYVIS_ACTIVITY_BOUNDARY.md"
+      - ".github/workflows/flyvis-integration.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "src/dlf_flywire/flyvis_adapter.py"
+      - "src/dlf_flywire/flyvis_runtime.py"
+      - "scripts/flyvis_integration_smoke.py"
+      - "tests/test_flyvis_adapter.py"
+      - "tests/test_flyvis_runtime.py"
+      - "docs/FLYVIS_ACTIVITY_BOUNDARY.md"
+      - ".github/workflows/flyvis-integration.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  flyvis-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.12"
+
+      - name: Install Digital Life Form
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e . --no-deps
+
+      - name: Install pinned FlyVis
+        run: |
+          python -m pip install \
+            "git+https://github.com/TuragaLab/flyvis.git@92b3845cc426dd309a1a0e1b3890156c42e14021"
+
+      - name: Download pinned FlyVis pretrained models
+        env:
+          FLYVIS_ROOT_DIR: ${{ runner.temp }}/flyvis
+        run: |
+          flyvis download-pretrained
+
+      - name: Run real FlyVis -> Digital Life Form integration smoke test
+        env:
+          FLYVIS_ROOT_DIR: ${{ runner.temp }}/flyvis
+          PYTHONPATH: src
+        run: python scripts/flyvis_integration_smoke.py
