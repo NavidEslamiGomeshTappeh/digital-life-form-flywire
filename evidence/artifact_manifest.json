@@ -449,7 +449,7 @@
       "role": "bounded_neural_intent_gateway",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "7c2fc32e7dcedc914b1bbb59811c6b5f6582889c"
+        "value": "cc49a75a01b1a44cec50e91e8583eba630b12c90"
       }
     },
     {
