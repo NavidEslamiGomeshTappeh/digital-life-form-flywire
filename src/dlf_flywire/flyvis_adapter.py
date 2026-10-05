@@ -4,7 +4,6 @@ import hashlib
 import json
 import math
 import re
-from collections.abc import Sequence
 from dataclasses import dataclass
 from numbers import Real
 
@@ -46,7 +45,7 @@ class FlyVisResponseAdapter:
     @classmethod
     def extract(
         cls,
-        responses: Sequence[Real],
+        responses: object,
         *,
         cell_type: str,
         start_ms: Real,
@@ -59,21 +58,7 @@ class FlyVisResponseAdapter:
         cls._validate_revision(source_revision)
         cls._validate_digest(model_artifact_sha256, "model_artifact_sha256")
 
-        if not responses:
-            raise FlyVisAdapterError("responses must not be empty")
-
-        normalized: list[float] = []
-        for index, value in enumerate(responses):
-            if isinstance(value, bool) or not isinstance(value, Real):
-                raise FlyVisAdapterError(
-                    f"response value {index} must be a finite real number"
-                )
-            value_float = float(value)
-            if not math.isfinite(value_float):
-                raise FlyVisAdapterError(
-                    f"response value {index} must be a finite real number"
-                )
-            normalized.append(value_float)
+        normalized = cls._normalize_responses(responses)
 
         response_payload = {
             "adapter_version": cls.VERSION,
@@ -101,6 +86,45 @@ class FlyVisResponseAdapter:
             source_sha256=source_sha256,
             adapter_version=cls.VERSION,
         )
+
+    @staticmethod
+    def _normalize_responses(responses: object) -> list[float]:
+        # FlyVis response selections are commonly xarray-backed and expose
+        # their numeric payload through ".values". PyTorch tensors expose
+        # ".tolist()". Support both without adding those packages as runtime
+        # dependencies.
+        candidate = getattr(responses, "values", responses)
+        tolist = getattr(candidate, "tolist", None)
+        if callable(tolist):
+            candidate = tolist()
+
+        if isinstance(candidate, (str, bytes)):
+            raise FlyVisAdapterError("responses must be a one-dimensional numeric trace")
+
+        try:
+            values = list(iter(candidate))
+        except TypeError as exc:
+            raise FlyVisAdapterError(
+                "responses must be a one-dimensional numeric trace"
+            ) from exc
+
+        if not values:
+            raise FlyVisAdapterError("responses must not be empty")
+
+        normalized: list[float] = []
+        for index, value in enumerate(values):
+            if isinstance(value, bool) or not isinstance(value, Real):
+                raise FlyVisAdapterError(
+                    f"response value {index} must be a finite real number"
+                )
+            value_float = float(value)
+            if not math.isfinite(value_float):
+                raise FlyVisAdapterError(
+                    f"response value {index} must be a finite real number"
+                )
+            normalized.append(value_float)
+
+        return normalized
 
     @classmethod
     def _validate_cell_type(cls, cell_type: str) -> None:
