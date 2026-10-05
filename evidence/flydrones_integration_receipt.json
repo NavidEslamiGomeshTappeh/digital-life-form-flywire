@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "product_version": "1.5.1",
+  "product_version": "1.6.0",
   "kind": "external_ci_integration_receipt",
   "status": "observed_success",
   "observed_at": "2026-10-05T05:42:46Z",
