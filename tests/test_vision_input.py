@@ -9,6 +9,7 @@ from dlf_flywire.vision_input import (
     VisionFrame,
     VisionInputError,
     build_capture_receipt,
+    render_with_flyvis_boxeye,
 )
 
 
