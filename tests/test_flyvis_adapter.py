@@ -8,7 +8,6 @@ from dlf_flywire.flyvis_adapter import (
     FlyVisResponseAdapter,
 )
 
-
 MODEL_SHA = "a" * 64
 
 
