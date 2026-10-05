@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.5.1 — 2026-10-05
+
+Neural → Leader execution boundary release.
+
+- Added the bounded NeuralIntentGateway and NeuralLeaderBridge path from sparse neural observations to the existing Leader TaskStep contract.
+- Added deterministic observation-set hashing, fail-closed threshold/window checks, explicit permission separation, and neural-to-Code Hand integration regression coverage.
+- Documented the scientific boundary: current neural channels are opaque/synthetic and do not establish biological control of Code Hand or any mapping from the four FlyWire neurons to execution intent.
+- Synchronized version, citation, release, README, and evidence metadata to 1.5.1.
+
+
 ## 1.5.0 — 2026-10-04
 
 Guarded Code Hand edit release.
