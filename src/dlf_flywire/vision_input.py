@@ -309,7 +309,7 @@ def render_with_flyvis_boxeye(
         ) from exc
 
     rows = frame.to_float_rows()
-    tensor = torch.tensor([[list(row) for row in rows]], dtype=torch.float32)
+    tensor = torch.tensor([[list(row) for row in rows]], dtype=torch.float32).unsqueeze(1)
     rendered = BoxEye(extent=extent, kernel_size=kernel_size)(tensor)
     shape = tuple(int(value) for value in rendered.shape)
     expected_shape = (1, 1, 1, 1 + 3 * extent * (extent + 1))
