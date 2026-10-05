@@ -539,7 +539,7 @@
       "role": "continuous_model_response_adapter",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "ff2cddd27dfe23c9215c2584504d5b0b7dadb3f3"
+        "value": "b2c799efca49573fcbf7d178185ef732e7951f57"
       }
     },
     {
@@ -548,7 +548,7 @@
       "role": "continuous_model_response_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "edefdedf302efd3282fdf285c066f12db4e11499"
+        "value": "c2e920a7331b5077b9840d5524ce0003fbd38635"
       }
     },
     {
