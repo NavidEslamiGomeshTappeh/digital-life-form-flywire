@@ -35,6 +35,11 @@ def run_camera_to_flyvis(
     per_frame_timeout_s: float = 5.0,
     dt_s: float = 1 / 100,
 ) -> dict[str, object]:
+    if frame_count <= 0:
+        raise CameraFlyVisError("frame_count must be positive")
+    if dt_s <= 0:
+        raise CameraFlyVisError("dt_s must be positive")
+
     try:
         import flyvis
         import numpy as np
@@ -46,11 +51,6 @@ def run_camera_to_flyvis(
             "FlyVis, PyTorch, and their runtime dependencies are required; "
             "install the pinned FlyVis environment first"
         ) from exc
-
-    if frame_count <= 0:
-        raise CameraFlyVisError("frame_count must be positive")
-    if dt_s <= 0:
-        raise CameraFlyVisError("dt_s must be positive")
 
     output_path = Path(output)
     output_path.mkdir(parents=True, exist_ok=True)
@@ -94,7 +94,7 @@ def run_camera_to_flyvis(
         ],
         dtype=np.float32,
     )
-    movie_input = torch.from_numpy(movie_input_np)
+    movie_input = torch.from_numpy(movie_input_np).to(flyvis.device)
     network_root = Path(flyvis.results_dir) / "flow" / "0000" / "000"
     network_view = NetworkView(network_root)
     checkpoint_path = Path(network_view.get_checkpoint("best"))
