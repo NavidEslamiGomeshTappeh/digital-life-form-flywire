@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.7.1 — 2026-10-05
+
+FlyVis continuous-activity semantics guard.
+
+- Added explicit signal semantics: continuous voltage response, arbitrary units, and no direct spike conversion.
+- Added fail-closed rejection of direct FlyVis-response to `NeuralObservation` conversion until a separately evidenced encoder exists.
+- Synchronized public version metadata in `ABOUT.md` and `CITATION.cff`.
+
 ## 1.7.0 — 2026-10-05
 
 Claim-level evidence tracing release.

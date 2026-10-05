@@ -1,6 +1,6 @@
 # Digital Life Form — FlyWire
 
-Version 1.7.0
+Version 1.7.1
 
 > **Project continuity / canonical research memory:** [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md)
 >

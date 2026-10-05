@@ -30,6 +30,29 @@ class FlyVisResponseSignal:
     source_sha256: str
     adapter_version: str
 
+    @property
+    def signal_kind(self) -> str:
+        """Return the explicit non-spiking semantics of this signal."""
+        return "continuous_voltage_response"
+
+    @property
+    def signal_units(self) -> str:
+        """Return the upstream units declared for FlyVis responses."""
+        return "arbitrary_units"
+
+    @property
+    def spike_conversion_allowed(self) -> bool:
+        """Return whether this signal may enter the spike contract directly."""
+        return False
+
+    def to_neural_observation(self, *args: object, **kwargs: object) -> object:
+        """Reject direct conversion into the spike-based neural contract."""
+        raise FlyVisAdapterError(
+            "FlyVis responses are continuous non-spiking model values in arbitrary "
+            "units; no evidence-backed spike encoder is declared, so direct "
+            "conversion to NeuralObservation is prohibited"
+        )
+
 
 class FlyVisResponseAdapter:
     """Validate and fingerprint FlyVis cell-type response traces.

@@ -31,6 +31,18 @@ It accepts a validated continuous response trace for one supported T4/T5 subtype
 
 The adapter deliberately imports no FlyVis package and has no new runtime dependency.
 
+## Activity semantics contract
+
+FlyVis response values are continuous model responses / voltage-like activities reported in arbitrary units in the published analysis. The published model uses passive, leaky, linear, **non-spiking** voltage dynamics; the project therefore preserves this signal class instead of silently interpreting it as spikes.
+
+`FlyVisResponseSignal` exposes three explicit semantics:
+
+- `signal_kind = continuous_voltage_response`
+- `signal_units = arbitrary_units`
+- `spike_conversion_allowed = false`
+
+A direct `to_neural_observation()` conversion is deliberately fail-closed. A future spike/rate encoder must be introduced as a separate, evidence-backed modeling artifact with its own assumptions, calibration, tests, and provenance.
+
 ## Hard boundary
 
 FlyVis response values are continuous model responses, reported in arbitrary units in the published analysis. They are not treated as spike counts here.
