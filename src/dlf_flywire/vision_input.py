@@ -122,6 +122,28 @@ class VisionCaptureReceipt:
             raise VisionInputError("source metadata must not be empty")
         if not self.frames:
             raise VisionInputError("capture receipt must contain at least one frame")
+        seen_indices: set[int] = set()
+        for record in self.frames:
+            if not isinstance(record, dict):
+                raise VisionInputError("each receipt frame must be an object")
+            frame_index = record.get("frame_index")
+            if (
+                isinstance(frame_index, bool)
+                or not isinstance(frame_index, int)
+                or frame_index < 0
+            ):
+                raise VisionInputError("receipt frame_index must be non-negative")
+            if frame_index in seen_indices:
+                raise VisionInputError(
+                    f"duplicate receipt frame_index: {frame_index}"
+                )
+            seen_indices.add(frame_index)
+            for field in ("captured_at_utc", "encoding", "pixel_sha256"):
+                value = record.get(field)
+                if not isinstance(value, str) or not value.strip():
+                    raise VisionInputError(
+                        f"receipt frame field {field} must be a non-empty string"
+                    )
 
     def to_dict(self) -> dict[str, object]:
         return {
