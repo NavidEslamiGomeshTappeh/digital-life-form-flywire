@@ -44,10 +44,17 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -e . --no-deps
 
-      - name: Install pinned FlyVis
+      - name: Install pinned FlyVis source
+        env:
+          FLYVIS_REVISION: 92b3845cc426dd309a1a0e1b3890156c42e14021
+          FLYVIS_SRC: ${{ runner.temp }}/flyvis-src
         run: |
-          python -m pip install \
-            "git+https://github.com/TuragaLab/flyvis.git@92b3845cc426dd309a1a0e1b3890156c42e14021"
+          git init "$FLYVIS_SRC"
+          git -C "$FLYVIS_SRC" remote add origin https://github.com/TuragaLab/flyvis.git
+          git -C "$FLYVIS_SRC" fetch --depth=1 origin "$FLYVIS_REVISION"
+          git -C "$FLYVIS_SRC" checkout --detach "$FLYVIS_REVISION"
+          test "$(git -C "$FLYVIS_SRC" rev-parse HEAD)" = "$FLYVIS_REVISION"
+          python -m pip install "$FLYVIS_SRC"
 
       - name: Download pinned FlyVis pretrained models
         env:

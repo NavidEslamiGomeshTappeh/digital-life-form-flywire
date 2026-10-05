@@ -575,7 +575,7 @@
       "role": "real_FlyVis_runtime_smoke",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "4257e756aa6fd27a6cf1d0e9ab676bcaf545050e"
+        "value": "a3a7c7f96a7ec0220752ad08ab17fdf259381c8f"
       }
     },
     {
@@ -593,7 +593,7 @@
       "role": "real_FlyVis_integration_workflow",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b6bfc7bf517f3d5055ad09fce3f625f27e61964e"
+        "value": "b32d782ddfb9138c24ab397a8e40ecf1b9539041"
       }
     },
     {
@@ -602,7 +602,7 @@
       "role": "real_FlyVis_runtime_proof_receipt",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "ecd1eb805a1449c9049a0f972e5c1085fe466e1c"
+        "value": "5d1208e9296cb57175d14cd5771de1df86ee251d"
       }
     }
   ]
