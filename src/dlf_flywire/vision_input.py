@@ -87,7 +87,7 @@ class VisionFrame:
         """Persist the exact gray8 payload as a binary PGM and return file SHA-256."""
         destination = Path(path)
         destination.parent.mkdir(parents=True, exist_ok=True)
-        header = f"P5\\n{self.width} {self.height}\\n255\\n".encode("ascii")
+        header = f"P5\n{self.width} {self.height}\n255\n".encode("ascii")
         raw = header + self.pixels_gray8
         destination.write_bytes(raw)
         return _sha256_bytes(raw)
