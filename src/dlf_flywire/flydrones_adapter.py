@@ -80,8 +80,7 @@ class FlyDronesRasterAdapter:
 
             cls._validate_timestamp(timestamp_ms)
             timestamp = float(timestamp_ms)
-            if not float(start_ms) <= timestamp < float(end_ms):
-                continue
+            in_window = float(start_ms) <= timestamp < float(end_ms)
 
             try:
                 iterator = iter(positions)
@@ -117,7 +116,8 @@ class FlyDronesRasterAdapter:
                     raise FlyDronesAdapterError(
                         "connectome.body_ids must contain integer body IDs"
                     )
-                events.append((timestamp, f"malecns-body:{int(body_id)}"))
+                if in_window:
+                    events.append((timestamp, f"malecns-body:{int(body_id)}"))
             raw_raster.append((timestamp, canonical_positions))
 
         duration_ms = float(end_ms) - float(start_ms)
