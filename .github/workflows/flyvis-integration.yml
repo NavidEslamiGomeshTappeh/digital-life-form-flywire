@@ -13,6 +13,7 @@ on:
       - "src/dlf_flywire/vision_input.py"
       - "scripts/flyvis_vision_input_smoke.py"
       - "scripts/real_vision_sample_boxeye.py"
+      - "scripts/real_vision_sample_flyvis_response.py"
       - "tests/test_vision_input.py"
       - ".github/workflows/flyvis-integration.yml"
   pull_request:
@@ -89,10 +90,16 @@ jobs:
           PYTHONPATH: src
         run: python scripts/real_vision_sample_boxeye.py
 
+      - name: Run real image -> FlyVis network response
+        env:
+          FLYVIS_ROOT_DIR: ${{ runner.temp }}/flyvis
+          PYTHONPATH: src
+        run: python scripts/real_vision_sample_flyvis_response.py
+
       - name: Upload real vision evidence artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: real-vision-sample-boxeye-receipt
+          name: real-vision-sample-flyvis-evidence
           path: artifacts/vision-real-sample/
           if-no-files-found: error
           retention-days: 30
