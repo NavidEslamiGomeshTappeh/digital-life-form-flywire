@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "product_version": "1.5.1",
+  "status": "EVIDENCE_BACKED_MAPPING",
+  "scope": "Four exact FAFB v783 project anchor roots mapped to their published T4/T5 subtype-level motion properties.",
+  "anchors": [
+    {
+      "root_id": "720575940632008007",
+      "subtype": "T4a",
+      "contrast_path": "ON",
+      "canonical_motion_direction": "front-to-back",
+      "identity_evidence": ["E-DENDRITE"],
+      "functional_evidence": {
+        "status": "LITERATURE_SUPPORTED_GENERAL_TYPE",
+        "sources": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5435463/",
+          "https://www.nature.com/articles/s41586-024-07939-3"
+        ]
+      }
+    },
+    {
+      "root_id": "720575940616224414",
+      "subtype": "T4c",
+      "contrast_path": "ON",
+      "canonical_motion_direction": "upward",
+      "identity_evidence": ["E-DENDRITE"],
+      "functional_evidence": {
+        "status": "LITERATURE_SUPPORTED_GENERAL_TYPE",
+        "sources": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6338461/",
+          "https://www.nature.com/articles/s41586-024-07939-3"
+        ]
+      }
+    },
+    {
+      "root_id": "720575940625571465",
+      "subtype": "T5a",
+      "contrast_path": "OFF",
+      "canonical_motion_direction": "front-to-back",
+      "identity_evidence": ["E-DENDRITE"],
+      "functional_evidence": {
+        "status": "LITERATURE_SUPPORTED_GENERAL_TYPE",
+        "sources": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6338461/",
+          "https://www.nature.com/articles/s41586-024-07939-3"
+        ]
+      }
+    },
+    {
+      "root_id": "720575940617782941",
+      "subtype": "T5c",
+      "contrast_path": "OFF",
+      "canonical_motion_direction": "upward",
+      "identity_evidence": ["E-DENDRITE"],
+      "functional_evidence": {
+        "status": "LITERATURE_SUPPORTED_GENERAL_TYPE",
+        "sources": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6338461/",
+          "https://www.nature.com/articles/s41586-024-07939-3"
+        ]
+      }
+    }
+  ],
+  "non_claims": [
+    "The mapping does not establish that these individual root IDs were electrically recorded during the cited functional experiments.",
+    "The mapping does not establish that a camera currently drives these individual neurons in this project.",
+    "The mapping does not map any neural signal directly to a Code Hand capability.",
+    "The mapping does not establish biological control of Leader, Code Hand, or Verifier."
+  ],
+  "next_evidence_requirement": "Obtain an actual neural activity source for these identities or a defensible circuit-level activity model, then validate the direction/contrast mapping against observed or independently reproduced responses."
+}
