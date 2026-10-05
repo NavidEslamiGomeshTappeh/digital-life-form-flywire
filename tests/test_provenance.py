@@ -10,10 +10,10 @@ from dlf_flywire.provenance import (
     ProvenanceError,
     audit_provenance,
     git_blob_sha1,
+    trace_claim,
     validate_artifact_manifest,
     validate_claim_ledger,
     validate_evidence_manifest_version,
-    trace_claim,
     validate_release_receipt_versions,
     validate_synapse_lineage,
 )
