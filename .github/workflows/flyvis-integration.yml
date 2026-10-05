@@ -29,6 +29,7 @@ on:
       - "src/dlf_flywire/vision_input.py"
       - "scripts/flyvis_vision_input_smoke.py"
       - "scripts/real_vision_sample_boxeye.py"
+      - "scripts/real_vision_sample_flyvis_response.py"
       - "tests/test_vision_input.py"
       - ".github/workflows/flyvis-integration.yml"
   workflow_dispatch:
