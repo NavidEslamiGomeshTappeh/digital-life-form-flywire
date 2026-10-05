@@ -222,7 +222,7 @@
     {
       "id": "C-NEURAL-MAPPING-001",
       "statement": "The four project anchor roots are identified as T4a, T4c, T5a, and T5c, and the published Drosophila T4/T5 motion-system literature supports their subtype-level ON/OFF and canonical motion-direction properties: T4/T5 a=front-to-back, c=upward.",
-      "classification": "SOURCE_EVIDENCE",
+      "classification": "SOURCE_OBSERVATION",
       "status": "PROVEN",
       "evidence": [
         "E-DENDRITE",
