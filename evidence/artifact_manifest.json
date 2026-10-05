@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "279c5fef20b44a6828e6255ba6e3516e586b9518"
+        "value": "c6131ef7cf854b593e427474c7879bc48221ec6e"
       }
     },
     {
@@ -575,7 +575,7 @@
       "role": "real_FlyVis_runtime_smoke",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "f1f214a4595e91b82ccd0e246c9f84002f92882c"
+        "value": "4257e756aa6fd27a6cf1d0e9ab676bcaf545050e"
       }
     },
     {
