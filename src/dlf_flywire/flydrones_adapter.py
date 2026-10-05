@@ -50,10 +50,10 @@ class FlyDronesRasterAdapter:
             raise FlyDronesAdapterError("source_revision must not be empty")
 
         try:
-            connectome = getattr(brain, "connectome")
-            body_ids = getattr(connectome, "body_ids")
-            record = getattr(brain, "record")
-            raster = getattr(brain, "last_raster")
+            connectome = brain.connectome
+            body_ids = connectome.body_ids
+            record = brain.record
+            raster = brain.last_raster
         except AttributeError as exc:
             raise FlyDronesAdapterError(
                 "brain must expose connectome.body_ids, record, and last_raster"
