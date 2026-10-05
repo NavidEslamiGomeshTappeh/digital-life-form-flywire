@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 
 from dlf_flywire.flydrones_adapter import FlyDronesAdapterError, FlyDronesRasterAdapter
+from dlf_flywire.neural_gateway import IntentRule, NeuralIntentGateway
 
 
 def fake_brain():
@@ -99,3 +100,32 @@ def test_flydrones_adapter_requires_non_empty_revision():
             end_ms=10.0,
             source_revision="",
         )
+
+
+def test_flydrones_signal_reaches_neural_gateway_without_biological_claim():
+    signal = FlyDronesRasterAdapter.extract(
+        fake_brain(), start_ms=10.0, end_ms=20.0, source_revision="rev-A"
+    )
+    gateway = NeuralIntentGateway((
+        IntentRule(
+            capability="bounded.test",
+            neuron_weights={"malecns-body:303": 1.0},
+            threshold=0.01,
+        ),
+    ))
+
+    candidate = gateway.select(signal.observations)
+
+    assert candidate.capability == "bounded.test"
+    assert candidate.activated is True
+    assert candidate.evidence_sha256
+
+
+def test_flydrones_signal_fingerprint_changes_with_source_revision():
+    first = FlyDronesRasterAdapter.extract(
+        fake_brain(), start_ms=10.0, end_ms=20.0, source_revision="rev-A"
+    )
+    second = FlyDronesRasterAdapter.extract(
+        fake_brain(), start_ms=10.0, end_ms=20.0, source_revision="rev-B"
+    )
+    assert first.source_sha256 != second.source_sha256
