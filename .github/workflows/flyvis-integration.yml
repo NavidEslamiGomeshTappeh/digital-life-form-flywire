@@ -14,6 +14,8 @@ on:
       - "scripts/flyvis_vision_input_smoke.py"
       - "scripts/real_vision_sample_boxeye.py"
       - "scripts/real_vision_sample_flyvis_response.py"
+      - "scripts/Run-Camera-FlyVis.ps1"
+      - "Run-Camera-FlyVis.bat"
       - "tests/test_vision_input.py"
       - ".github/workflows/flyvis-integration.yml"
   pull_request:
