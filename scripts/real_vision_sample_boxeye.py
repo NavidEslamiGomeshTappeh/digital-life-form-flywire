@@ -32,7 +32,9 @@ def main() -> None:
     request = urllib.request.Request(
         SOURCE_URL,
         headers={
-            "User-Agent": "Digital-Life-Form-FlyWire/1.0 (GitHub Actions; provenance test)"
+            "User-Agent": "Mozilla/5.0 (compatible; Digital-Life-Form-FlyWire/1.0; +https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire)",
+            "Referer": "https://commons.wikimedia.org/",
+            "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"
         },
     )
     with urllib.request.urlopen(request, timeout=30) as response:
