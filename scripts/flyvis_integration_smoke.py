@@ -96,7 +96,7 @@ def extract_trace_signal(
     matches = stimulus_dataset.arg_df[
         (stimulus_dataset.arg_df["angle"] == expected_direction_deg)
         & (stimulus_dataset.arg_df["intensity"] == intensity)
-        & (stimulus_dataset.arg_df["width"] == 1)
+        & (stimulus_dataset.arg_df["width"] == 80)
         & (stimulus_dataset.arg_df["speed"] == 19)
     ]
     if len(matches) != 1:
@@ -232,7 +232,7 @@ def main() -> None:
             "angles_deg": ANGLES_DEG,
             "intensities": [0, 1],
             "target_intensity": TARGET_INTENSITY,
-            "widths": [1],
+            "rendered_edge_width": 80,
             "speed": 19,
             "offsets": [-10, 11],
             "dt_s": 1 / 200,
