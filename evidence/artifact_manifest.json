@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "product_version": "1.5.0",
-  "generated_for": "Version 1.5.0 guarded Code Hand edit contract",
+  "product_version": "1.5.1",
+  "generated_for": "Version 1.5.1 Neural → Leader execution boundary",
   "exclusion": [
     "evidence/artifact_manifest.json"
   ],
@@ -12,7 +12,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "bc80560fad66ca670bdfbd1e5c973a024d4d0325"
+        "value": "26ca594609a93d60b6543102d639fa76b50a6925"
       }
     },
     {
@@ -21,7 +21,7 @@
       "role": "project_metadata",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "34b229f7b306b0340c6c56a7ffcbca2c19c29d7f"
+        "value": "15eeb315586bcf883feb9ac62adad74eb352ce9b"
       }
     },
     {
@@ -30,7 +30,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "5b601886131b044f9738fb1a32022bb045a52787"
+        "value": "0f228f25863905a12148bddbe4cf13a44edfe2fe"
       }
     },
     {
@@ -66,7 +66,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "6948b85823dc0e8d2bd7291c92da945af4bac916"
+        "value": "14e9be979e41aff37b5d3971597bb7f67a06a629"
       }
     },
     {
@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "f4b1cdb7d5af0d25364b84b7509d0ca892e49d3b"
+        "value": "94ec7afd9c40c25f3b4a607828aeedd2161e01ec"
       }
     },
     {
