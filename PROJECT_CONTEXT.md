@@ -683,6 +683,7 @@ Start here:
 8. `evidence/` — canonical machine-readable evidence.
 9. `data/morphology/` — four exact SWCs.
 10. `tests/` — regression contract.
+11. `docs/FLYVIS_ACTIVITY_BOUNDARY.md` — continuous model-response boundary and upstream pin.
 
 For provenance research, do not rely only on README prose. Inspect evidence files and code paths.
 
@@ -694,7 +695,7 @@ For provenance research, do not rely only on README prose. Inspect evidence file
 - Historical Git history remains available for audit.
 - V1 is the unified product line.
 - The original Point_data generator is still unresolved.
-- V1.1.0 added the machine-checkable claim ledger and artifact-integrity contract; V1.2.0 added frozen cross-source receipts; V1.2.1 bound those receipts to explicit proof executions; V1.2.2 bound the independent-corroboration claim directly to those receipts and added regression coverage for explicit manifest self-exclusion; V1.3.0 adds deterministic record-level lineage for all 649 canonical synapse rows; V1.3.1 adds byte-for-byte CI regeneration verification of that artifact; V1.4.0 adds the first concrete Code Hand create/test path; V1.5.0 adds guarded Code Hand edit execution with exact SHA-256 preconditions and atomic replacement; V1.5.1 adds bounded Neural → Leader execution and the verified FlyDrones simulator integration boundary.
+- V1.1.0 added the machine-checkable claim ledger and artifact-integrity contract; V1.2.0 added frozen cross-source receipts; V1.2.1 bound those receipts to explicit proof executions; V1.2.2 bound the independent-corroboration claim directly to those receipts and added regression coverage for explicit manifest self-exclusion; V1.3.0 adds deterministic record-level lineage for all 649 canonical synapse rows; V1.3.1 adds byte-for-byte CI regeneration verification of that artifact; V1.4.0 adds the first concrete Code Hand create/test path; V1.5.0 adds guarded Code Hand edit execution with exact SHA-256 preconditions and atomic replacement; V1.5.1 adds bounded Neural → Leader execution, the verified FlyDrones simulator integration boundary, and a separate FlyVis continuous-response provenance boundary.
 - The direct skeleton decoder exists partly to remove the vulnerable `fafbseg -> diskcache` runtime chain.
 - Exact reproduction is valued above "close enough".
 - Independent corroboration is valued above self-consistency.
@@ -722,6 +723,7 @@ These repositories are useful references for future design reviews:
 | Neurotransmitter consistency audit | https://github.com/jsonljn/flywire-nt-consistency |
 | FlyWire annotations | https://github.com/flyconnectome/flywire_annotations |
 | Robotics demo | https://github.com/SpikeCalls/FlyDrones |
+| Connectome-constrained visual response model | https://github.com/TuragaLab/flyvis |
 | Browser whole-brain demo | https://github.com/snedea/flybrain |
 | Deterministic Apple Silicon sim | https://github.com/mikewolak/flysim |
 | One-interaction neuron probing | https://github.com/vshapenko/flypoke |
@@ -828,5 +830,7 @@ The real GitHub Actions integration receipt is recorded at `evidence/flydrones_i
 This is a real simulator-to-runtime integration result. MiniFly is synthetic; the receipt is not evidence that the four FAFB v783 T4/T5 neurons biologically control Code Hand.
 
 Stage B is now partially implemented in `evidence/neural_mapping_stage_b.json`: the four exact project roots are linked to their T4/T5 subtype identities and literature-supported ON/OFF plus canonical motion-direction properties. `src/dlf_flywire/neural_mapping.py` provides an executable `EvidenceBackedNeuralMapping` decoder for those labels and fails closed on unmapped identities. This establishes subtype-level functional evidence and a reproducible software decoder, not individual electrical recordings and not a Code Hand command mapping.
+
+A separate FlyVis boundary is now implemented as `src/dlf_flywire/flyvis_adapter.py`. Frozen upstream reference: `TuragaLab/flyvis` v1.2.0, commit `92b3845cc426dd309a1a0e1b3890156c42e14021`, pretrained-model archive SHA-256 `71c78d4070556a536b13b23ee3139cd2788aa2a9d07d430a223b4edead281db1`. The adapter accepts continuous T4a/T4c/T5a/T5c model-response traces and records separate trace/source fingerprints. It deliberately does not create `NeuralObservation`, because the published FlyVis responses are continuous values in arbitrary units. This is model/cell-type evidence, not individual activity evidence for the four exact FAFB roots and not a Code Hand capability assignment. See `docs/FLYVIS_ACTIVITY_BOUNDARY.md`.
 
 The next scientific boundary remains evidence-backed mapping from observed activity in these identities to a functional intent, followed by controlled closed-loop experiments.

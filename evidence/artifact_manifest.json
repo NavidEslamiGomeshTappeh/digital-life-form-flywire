@@ -532,6 +532,33 @@
         "type": "git_blob_sha1",
         "value": "c303d3a538f4869ea8bac696cff16e07469c082c"
       }
+    },
+    {
+      "id": "E-FLYVIS-ADAPTER",
+      "path": "src/dlf_flywire/flyvis_adapter.py",
+      "role": "continuous_model_response_adapter",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "ff2cddd27dfe23c9215c2584504d5b0b7dadb3f3"
+      }
+    },
+    {
+      "id": "E-FLYVIS-ADAPTER-TESTS",
+      "path": "tests/test_flyvis_adapter.py",
+      "role": "continuous_model_response_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "d91d8a5b983134c9e962e8c9ef993e2a69702337"
+      }
+    },
+    {
+      "id": "E-FLYVIS-ACTIVITY-BOUNDARY",
+      "path": "docs/FLYVIS_ACTIVITY_BOUNDARY.md",
+      "role": "continuous_model_response_scientific_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "2a777493718c25a0f2f933d9a403472971691278"
+      }
     }
   ]
 }
