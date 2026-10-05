@@ -813,4 +813,15 @@ Implemented components:
 
 Critical boundary: the current neural channels are explicitly opaque/synthetic. This proves an engineering interface, not biological control by the four FlyWire neurons. Neural activity cannot grant permission, enable network access, enable system mutation, bypass policy, or bypass independent verification.
 
-The next high-value step is a real signal adapter with preserved raw-signal hashes and evidence-backed mapping from an actual neural/circuit source to intent. Only after that should the project attempt closed-loop neural → Leader → Hand → Verifier → feedback experiments.
+Stage A is now implemented and externally executed against the pinned FlyDrones simulator source.
+
+The real GitHub Actions integration receipt is recorded at `evidence/flydrones_integration_receipt.json`:
+- DLF commit under test: `f265f5c6531758ebf1d0a9f9db272bac4ac159b7`;
+- FlyDrones source: `6519c8c0e35ae829faa98a5a02033343dd0b82d4`;
+- workflow run: `37268962019`, job `111631676624`;
+- observed FlyDrones model: 850 neurons, 63 recorded neurons, 384 raster events, 48 mapped observations;
+- adapter fingerprint: `2b11ad4d17e5f52c49e13a346c89cfff00831dd97ea44c561c3c356ff85aaa69`;
+- neural evidence fingerprint: `25edb4d54032e54e15806f11d2aa23c6ec84e587ce328c2a3f4f9ed21dea169f`;
+- final execution assertion: `neural_intent -> leader -> code_hand -> verifier PASS`.
+
+This is a real simulator-to-runtime integration result. MiniFly is synthetic; the receipt is not evidence that the four FAFB v783 T4/T5 neurons biologically control Code Hand. The next scientific boundary remains evidence-backed mapping from an appropriate circuit source to functional intent, followed by controlled closed-loop experiments.
