@@ -226,7 +226,8 @@
       "status": "PROVEN",
       "evidence": [
         "E-DENDRITE",
-        "E-NEURAL-MAPPING"
+        "E-NEURAL-MAPPING",
+        "E-NEURAL-MAPPING-DECODER"
       ],
       "caveats": [
         "The functional properties are supported at the cell-type/subtype level; this does not mean that the four exact project root IDs were individually recorded in those functional experiments.",
