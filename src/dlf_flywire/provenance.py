@@ -362,12 +362,49 @@ def validate_evidence_manifest_version(root: Path) -> dict[str, str]:
     return {"status": "PASS", "product_version": version}
 
 
+RELEASE_VERSIONED_RECEIPTS = (
+    "evidence/source_receipts.json",
+    "evidence/synapse_lineage.json",
+    "evidence/flydrones_integration_receipt.json",
+    "evidence/flydrones_integration_receipt_2.json",
+    "evidence/flyvis_integration_receipt.json",
+)
+
+
+def validate_release_receipt_versions(root: Path) -> dict[str, Any]:
+    version = _read_project_version(root)
+    checked = 0
+    historical = 0
+    for relative_text in RELEASE_VERSIONED_RECEIPTS:
+        path = root / relative_text
+        if not path.is_file():
+            raise ProvenanceError(f"missing release receipt: {relative_text}")
+        receipt = _load_json(path)
+        observed = receipt.get("product_version")
+        if observed is None:
+            historical += 1
+            continue
+        if observed != version:
+            raise ProvenanceError(
+                f"{relative_text} version {observed!r} != {version!r}"
+            )
+        checked += 1
+    return {
+        "status": "PASS_RELEASE_RECEIPTS",
+        "product_version": version,
+        "receipts_checked": checked,
+        "historical_receipts_without_version": historical,
+        "receipts": list(RELEASE_VERSIONED_RECEIPTS),
+    }
+
+
 def audit_provenance(root: Path) -> dict[str, Any]:
     version = _read_project_version(root)
     artifact = validate_artifact_manifest(root)
     claims = validate_claim_ledger(root)
     evidence_manifest = validate_evidence_manifest_version(root)
     synapse_lineage = validate_synapse_lineage(root)
+    release_receipts = validate_release_receipt_versions(root)
 
     from .cross_source import validate_cross_source_receipts
 
@@ -383,5 +420,6 @@ def audit_provenance(root: Path) -> dict[str, Any]:
         "claim_ledger": claims,
         "evidence_manifest": evidence_manifest,
         "synapse_lineage": synapse_lineage,
+        "release_receipts": release_receipts,
         "cross_source": cross_source,
     }
