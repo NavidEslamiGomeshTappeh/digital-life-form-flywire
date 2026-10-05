@@ -287,7 +287,7 @@ def test_release_receipt_versions_are_current():
     report = validate_release_receipt_versions(ROOT)
     assert report["status"] == "PASS_RELEASE_RECEIPTS"
     assert report["product_version"] == __version__
-    assert report["receipts_checked"] == 4
+    assert report["receipts_checked"] == 5
     assert report["historical_receipts_without_version"] == 1
 
 
