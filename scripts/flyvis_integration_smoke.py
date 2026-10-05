@@ -8,8 +8,6 @@ from pathlib import Path
 
 import flyvis
 import numpy as np
-from flyvis import NetworkView
-from flyvis.datasets.moving_bar import MovingEdge
 
 from dlf_flywire.flyvis_adapter import FlyVisResponseAdapter
 from dlf_flywire.flyvis_runtime import (
@@ -22,6 +20,8 @@ from dlf_flywire.flyvis_runtime import (
     angular_distance_deg,
     validate_direction_observation,
 )
+from flyvis import NetworkView
+from flyvis.datasets.moving_bar import MovingEdge
 
 
 TARGET_INTENSITY = {
