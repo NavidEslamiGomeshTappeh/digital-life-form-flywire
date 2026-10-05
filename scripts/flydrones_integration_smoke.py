@@ -1,4 +1,13 @@
+from __future__ import annotations
+
+import tempfile
+from pathlib import Path
+
+from dlf_flywire.code_hand import CodeHand
 from dlf_flywire.flydrones_adapter import FlyDronesRasterAdapter
+from dlf_flywire.neural_gateway import IntentRule, NeuralIntentGateway
+from dlf_flywire.neural_leader import NeuralLeaderBridge
+from dlf_flywire.orchestrator import RunPlan, TaskOrchestrator
 
 from flydrones.brain.brain import Brain
 from flydrones.brain.synthetic import build_minifly
@@ -15,6 +24,7 @@ def main() -> None:
     brain = Brain(build_minifly(seed=7), cfg, seed=7)
     assert brain.connectome.body_ids is not None
     assert len(brain.record) > 0
+
     brain.stimulate("t4a-left", hz=10000.0, ms=20.0)
     assert brain.last_raster, "FlyDrones produced no recorded spikes"
 
@@ -27,9 +37,63 @@ def main() -> None:
     assert signal.observations
     assert signal.source_sha256
     assert all(obs.neuron_id.startswith("malecns-body:") for obs in signal.observations)
-    print(f"FLYDrones integration PASS: neurons={brain.n_neurons} records={len(brain.record)}")
-    print(f"raster_events={sum(len(pos) for _t, pos in brain.last_raster)} observations={len(signal.observations)}")
+
+    selected_observation = signal.observations[0]
+    gateway = NeuralIntentGateway(
+        (
+            IntentRule(
+                capability="code.write",
+                neuron_weights={selected_observation.neuron_id: 1.0},
+                threshold=0.001,
+                destination="code-workspace",
+            ),
+        )
+    )
+    candidate = gateway.select(signal.observations)
+
+    with tempfile.TemporaryDirectory(prefix="dlf-flydrones-") as raw_dir:
+        root = Path(raw_dir)
+        hand = CodeHand(root, root / "state")
+        base_plan = hand.build_plan(
+            "flydrones_neural.py",
+            "def add(a, b):\n    return a + b\n",
+            "assert add(2, 3) == 5",
+            permission_granted=True,
+        )
+        neural_create = NeuralLeaderBridge().build_step(
+            candidate,
+            step_id=base_plan.steps[0].step_id,
+            action=base_plan.steps[0].action,
+            operation_args=base_plan.steps[0].operation_args,
+            permission_granted=True,
+            dependencies=base_plan.steps[0].dependencies,
+            idempotent=base_plan.steps[0].idempotent,
+        )
+        neural_plan = RunPlan((neural_create, base_plan.steps[1]))
+        orchestrator = TaskOrchestrator(
+            hand.orchestrator.executor,
+            root / "orchestrator-state",
+        )
+        run_id, receipts = orchestrator.run(
+            neural_plan,
+            run_id="flydrones-neural-code-hand",
+        )
+
+        assert run_id == "flydrones-neural-code-hand"
+        assert receipts["create-file"].status == "succeeded"
+        assert receipts["test-file"].stdout.strip() == "CODE_HAND_TEST_PASS"
+
+    print(
+        "FlyDrones integration PASS: "
+        f"neurons={brain.n_neurons} records={len(brain.record)} "
+        f"raster_events={sum(len(pos) for _t, pos in brain.last_raster)} "
+        f"observations={len(signal.observations)}"
+    )
+    print(f"source_revision={signal.source_revision}")
     print(f"adapter_sha256={signal.source_sha256}")
+    print(f"selected_neuron={selected_observation.neuron_id}")
+    print(f"neural_evidence_sha256={candidate.evidence_sha256}")
+    print("neural_intent -> leader -> code_hand -> verifier PASS")
 
 
 if __name__ == "__main__":
