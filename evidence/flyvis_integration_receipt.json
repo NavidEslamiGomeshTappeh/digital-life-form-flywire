@@ -12,7 +12,7 @@
     "pull_request": 51,
     "head_commit": "e012af15a2804db4fb04eec0ff6441a744cd694e",
     "conclusion": "success",
-    "observed_at": "2026-10-05T07:55:20.000000+00:00"
+    "observed_at": "2026-10-05T07:55:14.856694+00:00"
   },
   "flyvis": {
     "release": "v1.2.0",
@@ -138,5 +138,6 @@
     "code_hand_capability_mapping": false,
     "biological_control_claim": false
   },
-  "final_assertion": "flyvis_model -> continuous_response -> direction_evidence -> provenance_adapter PASS"
+  "final_assertion": "flyvis_model -> continuous_response -> direction_evidence -> provenance_adapter PASS",
+  "observed_at": "2026-10-05T07:55:14.856694+00:00"
 }
