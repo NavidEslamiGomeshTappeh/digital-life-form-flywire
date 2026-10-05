@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "product_version": "1.5.1",
+  "product_version": "1.6.0",
   "generated_for": "Version 1.5.1 Neural → Leader execution boundary with live FlyVis runtime evidence",
   "exclusion": [
     "evidence/artifact_manifest.json"
@@ -12,7 +12,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "26ca594609a93d60b6543102d639fa76b50a6925"
+        "value": "ce6a70b9d84c565d0208be24d5f946dc7585880a"
       }
     },
     {
@@ -21,7 +21,7 @@
       "role": "project_metadata",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "15eeb315586bcf883feb9ac62adad74eb352ce9b"
+        "value": "ee451e1fa21190c92743de43a3c2230aaacc5098"
       }
     },
     {
@@ -30,7 +30,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "0f228f25863905a12148bddbe4cf13a44edfe2fe"
+        "value": "e4adfb83d581417957736bd5bd8ed562066b37b6"
       }
     },
     {
@@ -66,7 +66,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "14e9be979e41aff37b5d3971597bb7f67a06a629"
+        "value": "9395633a1d6abcaefcebb02e7314bfcebab10ed9"
       }
     },
     {
@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "c6131ef7cf854b593e427474c7879bc48221ec6e"
+        "value": "3841bcb09521a487f0c689f3e149688481369e5d"
       }
     },
     {
@@ -147,7 +147,7 @@
       "role": "frozen_cross_source_receipts",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "74c199d895505246ea89701b75dc636a37acb47a"
+        "value": "a0ab96684a3caf04d137738820b961a402ce58dd"
       }
     },
     {
@@ -202,7 +202,7 @@
       "role": "record_level_synapse_lineage",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "c11eaf93a54ab1b3673f60582dc9db58c761174f"
+        "value": "6375b4c0dc49df400599dfee80f280127edf73cd"
       }
     },
     {
@@ -485,7 +485,7 @@
       "role": "external_flydrones_integration_receipt",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "3d3736a29eaa306e90912eeb5d3d219e81d3a003"
+        "value": "a4e1cd54b74d8b369161e9e1eeb83460aa6b5c5c"
       }
     },
     {
@@ -494,7 +494,7 @@
       "role": "external_flydrones_full_source_provenance_receipt",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "776d63c23dd085e1c2a308834fc074baf6c4a3d5"
+        "value": "867e6a12d4acc8caadf11e717225214b7b8cd383"
       }
     },
     {
