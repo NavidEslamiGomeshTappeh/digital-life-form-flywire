@@ -3,12 +3,13 @@ from __future__ import annotations
 import hashlib
 import json
 import os
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
-import numpy as np
 import flyvis
+import numpy as np
 from flyvis import NetworkView
+from flyvis.datasets.moving_bar import MovingEdge
 
 from dlf_flywire.flyvis_adapter import FlyVisResponseAdapter
 from dlf_flywire.flyvis_runtime import (
@@ -21,7 +22,6 @@ from dlf_flywire.flyvis_runtime import (
     angular_distance_deg,
     validate_direction_observation,
 )
-from flyvis.datasets.moving_bar import MovingEdge
 
 
 TARGET_INTENSITY = {
@@ -206,7 +206,7 @@ def main() -> None:
     receipt = {
         "schema_version": 1,
         "status": "observed_success",
-        "observed_at": datetime.now(timezone.utc).isoformat(),
+        "observed_at": datetime.now(UTC).isoformat(),
         "dlf_commit": os.environ.get("GITHUB_SHA", "local"),
         "flyvis": {
             "release": FLYVIS_RELEASE,
