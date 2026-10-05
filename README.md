@@ -1,6 +1,6 @@
 # Digital Life Form — FlyWire
 
-Version 1.6.0
+Version 1.7.0
 
 > **Project continuity / canonical research memory:** [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md)
 >
@@ -37,6 +37,16 @@ Unresolved:
 - the original December 2025 Point_data generator implementation;
 - a common coordinate transform between study-native and project-native frames;
 - direct biological compartment assignment for an individual synaptic cleft.
+
+### Claim-level evidence trace
+
+Every machine-checkable claim can now be traced directly to its immutable evidence artifacts.
+
+Example:
+
+    dlf-flywire claim C-FLYVIS-RUNTIME-001
+
+The command returns the claim statement, classification, status, caveats, and the referenced artifact paths, roles, and immutable identities. Unknown claim IDs fail closed.
 
 Geometry is never promoted to biological truth by proximity alone.
 
