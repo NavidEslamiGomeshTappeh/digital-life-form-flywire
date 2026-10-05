@@ -2,12 +2,6 @@
 
 [![CI](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/ci.yml/badge.svg)](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/ci.yml) [![Security](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/security.yml/badge.svg)](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/security.yml) [![FlyVis Integration](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/flyvis-integration.yml/badge.svg)](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/flyvis-integration.yml) [![FlyDrones Integration](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/flydrones-integration.yml/badge.svg)](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/flydrones-integration.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-Version 1.7.1
-
-[![CI](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/ci.yml/badge.svg)](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/ci.yml)
-[![Security](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/security.yml/badge.svg)](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/security.yml)
-[![License](https://img.shields.io/github/license/NavidEslamiGomeshTappeh/digital-life-form-flywire)](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/blob/main/LICENSE)
-
 > **A provenance-first attempt to connect exact FlyWire connectome evidence, reproducible neural-model execution, and a real visual-input boundary.**
 
 ### 👁️ Why this project is worth looking at
@@ -33,7 +27,7 @@ This repository is not presented as a finished artificial brain. It is a **publi
 | Audit the evidence chain | `python -m dlf_flywire audit` |
 | Inspect the FlyVis proof | [FlyVis receipt](evidence/flyvis_integration_receipt.json) |
 | Inspect the vision boundary | [Vision input docs](docs/VISION_INPUT_BOUNDARY.md) |
-| See the current vision implementation | [PR #59](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/pull/59) |
+| See the merged vision implementation | [Vision input docs](docs/VISION_INPUT_BOUNDARY.md) |
 
 **Scientific rule:** if an experiment has not been performed, this repository does not label it as performed.
 
