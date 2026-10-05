@@ -823,5 +823,6 @@ The real GitHub Actions integration receipt is recorded at `evidence/flydrones_i
 - adapter fingerprint: `2b11ad4d17e5f52c49e13a346c89cfff00831dd97ea44c561c3c356ff85aaa69`;
 - neural evidence fingerprint: `25edb4d54032e54e15806f11d2aa23c6ec84e587ce328c2a3f4f9ed21dea169f`;
 - final execution assertion: `neural_intent -> leader -> code_hand -> verifier PASS`.
+- the newer full-source receipt is stored at `evidence/flydrones_integration_receipt_2.json`; its source snapshot SHA-256 is `d647d6d4ab9adfdd546de74dfae3db8f273b860eebff289044118cd4fd6f30eb`, while the extraction fingerprint is `2b11ad4d17e5f52c49e13a346c89cfff00831dd97ea44c561c3c356ff85aaa69`.
 
 This is a real simulator-to-runtime integration result. MiniFly is synthetic; the receipt is not evidence that the four FAFB v783 T4/T5 neurons biologically control Code Hand. The next scientific boundary remains evidence-backed mapping from an appropriate circuit source to functional intent, followed by controlled closed-loop experiments.
