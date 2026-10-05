@@ -18,7 +18,7 @@ def _sha256_bytes(data: bytes) -> str:
 
 
 def _utc_now_iso() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 @dataclass(frozen=True)
@@ -62,7 +62,7 @@ class VisionFrame:
         height: int,
         pixels_gray8: bytes,
         captured_at_utc: str | None = None,
-    ) -> "VisionFrame":
+    ) -> VisionFrame:
         payload = bytes(pixels_gray8)
         return cls(
             frame_index=frame_index,
