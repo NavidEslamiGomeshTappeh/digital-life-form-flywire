@@ -128,6 +128,17 @@ def test_camera_source_validates_bounds_before_optional_dependency():
 
 
 
+def test_camera_flyvis_rejects_invalid_bounds_before_optional_runtime():
+    from dlf_flywire.camera_flyvis import CameraFlyVisError, run_camera_to_flyvis
+
+    with pytest.raises(CameraFlyVisError, match="frame_count must be positive"):
+        run_camera_to_flyvis(
+            device_index=0,
+            frame_count=0,
+            output="unused",
+        )
+
+
 def test_boxeye_bridge_fails_closed_when_optional_runtime_is_unavailable(monkeypatch):
     frame = VisionFrame.from_gray8(
         frame_index=0,
