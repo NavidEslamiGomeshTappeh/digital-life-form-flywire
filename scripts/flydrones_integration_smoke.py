@@ -1,5 +1,3 @@
-from pathlib import Path
-
 from dlf_flywire.flydrones_adapter import FlyDronesRasterAdapter
 
 from flydrones.brain.brain import Brain
