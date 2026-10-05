@@ -521,7 +521,7 @@
       "role": "evidence_backed_neural_functional_decoder",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "949bd70bfef1d283736823d63311d7e8d8f1fbf8"
+        "value": "d31145c581a60eaed3ba8100f1d7194e362df5be"
       }
     },
     {
@@ -530,7 +530,7 @@
       "role": "neural_mapping_decoder_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "f253022fe6caffd48a01f9d33941cf14c6ab4d19"
+        "value": "c303d3a538f4869ea8bac696cff16e07469c082c"
       }
     }
   ]
