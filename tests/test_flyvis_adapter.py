@@ -3,6 +3,7 @@ from __future__ import annotations
 import math
 
 import pytest
+
 from dlf_flywire import flyvis_adapter
 
 MODEL_SHA = "a" * 64
