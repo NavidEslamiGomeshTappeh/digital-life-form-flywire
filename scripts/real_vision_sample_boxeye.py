@@ -10,7 +10,11 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-from dlf_flywire.vision_input import VisionFrame, build_capture_receipt, render_with_flyvis_boxeye
+from dlf_flywire.vision_input import (
+    VisionFrame,
+    build_capture_receipt,
+    render_with_flyvis_boxeye,
+)
 
 SOURCE_URL = "https://upload.wikimedia.org/wikipedia/commons/0/01/Street_city.jpg"
 OUT = Path(os.environ.get("VISION_SAMPLE_OUT", "artifacts/vision-real-sample"))
@@ -39,8 +43,8 @@ def main() -> None:
         decoded = cv2.resize(
             decoded,
             (
-                max(1, int(round(decoded.shape[1] * scale))),
-                max(1, int(round(decoded.shape[0] * scale))),
+                max(1, round(decoded.shape[1] * scale)),
+                max(1, round(decoded.shape[0] * scale)),
             ),
             interpolation=cv2.INTER_AREA,
         )
@@ -48,8 +52,8 @@ def main() -> None:
     height, width = decoded.shape[:2]
     frame = VisionFrame.from_gray8(
         frame_index=0,
-        width=int(width),
-        height=int(height),
+        width=width,
+        height=height,
         pixels_gray8=decoded.tobytes(),
         captured_at_utc=captured_at,
     )
