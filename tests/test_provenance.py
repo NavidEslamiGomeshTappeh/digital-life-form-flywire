@@ -5,6 +5,7 @@ import sys
 from pathlib import Path
 
 from dlf_flywire import __version__
+from dlf_flywire.cli import main as cli_main
 from dlf_flywire.provenance import (
     ProvenanceError,
     audit_provenance,
@@ -297,6 +298,18 @@ def test_flyvis_claim_traces_to_immutable_evidence():
     assert report["claim"]["status"] == "REPRODUCED"
     assert [item["id"] for item in report["evidence"]] == ["E-FLYVIS-RUNTIME"]
     assert report["evidence"][0]["path"] == "src/dlf_flywire/flyvis_runtime.py"
+
+
+def test_claim_trace_cli_emits_verified_json(capsys):
+    assert cli_main([
+        "claim",
+        "C-FLYVIS-RUNTIME-001",
+        "--root",
+        str(ROOT),
+    ]) == 0
+    report = json.loads(capsys.readouterr().out)
+    assert report["status"] == "PASS_CLAIM_TRACE"
+    assert report["claim"]["id"] == "C-FLYVIS-RUNTIME-001"
 
 
 def test_claim_trace_fails_closed_for_unknown_claim():
