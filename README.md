@@ -1,5 +1,7 @@
 # Digital Life Form — FlyWire
 
+[![CI](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/ci.yml/badge.svg)](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/ci.yml) [![Security](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/security.yml/badge.svg)](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/security.yml) [![FlyVis Integration](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/flyvis-integration.yml/badge.svg)](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/flyvis-integration.yml) [![FlyDrones Integration](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/flydrones-integration.yml/badge.svg)](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/flydrones-integration.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 Version 1.7.1
 
 > **Project continuity / canonical research memory:** [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md)
