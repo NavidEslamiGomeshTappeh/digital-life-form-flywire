@@ -95,7 +95,7 @@ def main() -> None:
         initial_state=stationary_state,
     ).detach().cpu()
 
-    if tuple(responses.shape) != (1, N_FRAMES, network.connectome.n_nodes):
+    if tuple(responses.shape) != (1, N_FRAMES, network.n_nodes):
         raise RuntimeError(
             f"unexpected FlyVis response shape {tuple(responses.shape)}; "
             f"expected (1, {N_FRAMES}, {network.connectome.n_nodes})"
