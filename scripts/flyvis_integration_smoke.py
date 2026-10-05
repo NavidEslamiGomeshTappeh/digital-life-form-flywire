@@ -10,6 +10,7 @@ import flyvis
 import numpy as np
 from flyvis import NetworkView
 from flyvis.datasets.moving_bar import MovingEdge
+from flyvis.analysis.moving_bar_responses import preferred_direction
 
 from dlf_flywire.flyvis_adapter import FlyVisResponseAdapter
 from dlf_flywire.flyvis_runtime import (
@@ -165,6 +166,7 @@ def main() -> None:
         dataset=dataset,
         batch_size=4,
     )
+    official_preferred_directions = preferred_direction(response_dataset)
 
     observed = []
     trace_receipts = {}
@@ -178,6 +180,19 @@ def main() -> None:
         angular_error_deg = angular_distance_deg(
             observed_direction_deg, expected_direction_deg
         )
+        official_direction_rad = official_preferred_directions.custom.where(
+            cell_type=cell_type, intensity=intensity
+        ).item()
+        official_direction_deg = float(np.degrees(official_direction_rad) % 360.0)
+        extraction_crosscheck_error_deg = angular_distance_deg(
+            observed_direction_deg, official_direction_deg
+        )
+        if extraction_crosscheck_error_deg > 15.0:
+            raise RuntimeError(
+                f"manual preferred-direction extraction disagrees with official FlyVis "
+                f"preferred_direction for {cell_type}: "
+                f"{extraction_crosscheck_error_deg:.2f} degrees"
+            )
         direction_observation = FlyVisDirectionObservation(
             cell_type=cell_type,
             intensity=intensity,
@@ -209,6 +224,8 @@ def main() -> None:
                 "expected_direction_deg": expected_direction_deg,
                 "observed_direction_deg": observed_direction_deg,
                 "angular_error_deg": angular_error_deg,
+                "official_preferred_direction_deg": official_direction_deg,
+                "extraction_crosscheck_error_deg": extraction_crosscheck_error_deg,
                 "peak_values": peak_values,
             }
         )
