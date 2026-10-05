@@ -234,6 +234,20 @@
         "This mapping does not establish that these cells currently receive camera input in this project.",
         "This mapping does not assign a Code Hand capability or prove biological control of the software agent stack."
       ]
+    },
+    {
+      "id": "C-FLYVIS-RUNTIME-001",
+      "statement": "A live GitHub Actions execution of the pinned TuragaLab/flyvis v1.2.0 model produced continuous MovingEdge response traces for T4a, T4c, T5a, and T5c, and all four observed preferred directions were within the declared 45 degree validation bound.",
+      "classification": "DETERMINISTIC_COMPUTATION",
+      "status": "REPRODUCED",
+      "evidence": [
+        "E-FLYVIS-RUNTIME"
+      ],
+      "caveats": [
+        "This is a model-level runtime result, not an electrical recording of the four exact FAFB v783 root IDs.",
+        "Continuous model responses are not converted into spikes in this evidence path.",
+        "The result does not establish a camera-driven biological activity source, Code Hand capability mapping, or biological control."
+      ]
     }
   ]
 }
