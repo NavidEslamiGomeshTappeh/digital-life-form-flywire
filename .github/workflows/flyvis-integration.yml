@@ -24,8 +24,10 @@ on:
       - "tests/test_flyvis_adapter.py"
       - "tests/test_flyvis_runtime.py"
       - "docs/FLYVIS_ACTIVITY_BOUNDARY.md"
+      - "docs/VISION_INPUT_BOUNDARY.md"
       - "src/dlf_flywire/vision_input.py"
       - "scripts/flyvis_vision_input_smoke.py"
+      - "scripts/real_vision_sample_boxeye.py"
       - "tests/test_vision_input.py"
       - ".github/workflows/flyvis-integration.yml"
   workflow_dispatch:
@@ -86,3 +88,11 @@ jobs:
         env:
           PYTHONPATH: src
         run: python scripts/real_vision_sample_boxeye.py
+
+      - name: Upload real vision evidence artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: real-vision-sample-boxeye-receipt
+          path: artifacts/vision-real-sample/
+          if-no-files-found: error
+          retention-days: 30
