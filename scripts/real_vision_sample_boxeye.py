@@ -17,6 +17,8 @@ from dlf_flywire.vision_input import (
 )
 
 SOURCE_URL = "https://upload.wikimedia.org/wikipedia/commons/0/01/Street_city.jpg"
+SOURCE_SHA256 = "33e32880c36d3cd589bb620498ced8bf77d5796d32141a297624039d37355707"
+SOURCE_BYTES = 425857
 OUT = Path(os.environ.get("VISION_SAMPLE_OUT", "artifacts/vision-real-sample"))
 
 
@@ -27,14 +29,31 @@ def sha256_bytes(data: bytes) -> str:
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     source_path = OUT / "source.jpg"
-    request = urllib.request.Request(SOURCE_URL, headers={"User-Agent": "Digital-Life-Form-FlyWire/1.0 (GitHub Actions; provenance test)"})
+    request = urllib.request.Request(
+        SOURCE_URL,
+        headers={
+            "User-Agent": "Digital-Life-Form-FlyWire/1.0 (GitHub Actions; provenance test)"
+        },
+    )
     with urllib.request.urlopen(request, timeout=30) as response:
         source_bytes = response.read()
     source_path.write_bytes(source_bytes)
-    source_sha256 = sha256_bytes(source_bytes)
+    observed_source_sha256 = sha256_bytes(source_bytes)
+    if len(source_bytes) != SOURCE_BYTES:
+        raise RuntimeError(
+            f"real sample byte count changed: observed {len(source_bytes)}, "
+            f"expected {SOURCE_BYTES}"
+        )
+    if observed_source_sha256 != SOURCE_SHA256:
+        raise RuntimeError(
+            "real sample SHA-256 changed: "
+            f"observed {observed_source_sha256}, expected {SOURCE_SHA256}"
+        )
 
     captured_at = datetime.now(UTC).isoformat()
-    decoded = cv2.imdecode(np.frombuffer(source_bytes, dtype=np.uint8), cv2.IMREAD_GRAYSCALE)
+    decoded = cv2.imdecode(
+        np.frombuffer(source_bytes, dtype=np.uint8), cv2.IMREAD_GRAYSCALE
+    )
     if decoded is None:
         raise RuntimeError("OpenCV could not decode the real sample image")
 
@@ -78,14 +97,16 @@ def main() -> None:
     )
     boxeye_values_sha256 = sha256_bytes(boxeye_values_path.read_bytes())
     if len(boxeye_values) != 721:
-        raise RuntimeError(f"BoxEye returned {len(boxeye_values)} values, expected 721")
+        raise RuntimeError(
+            f"BoxEye returned {len(boxeye_values)} values, expected 721"
+        )
 
     receipt = {
         "schema_version": 2,
         "status": "observed_success",
         "source": {
             "url": SOURCE_URL,
-            "source_file_sha256": source_sha256,
+            "source_file_sha256": observed_source_sha256,
             "source_bytes": len(source_bytes),
         },
         "capture": capture_receipt.to_dict(),
@@ -113,7 +134,10 @@ def main() -> None:
         },
     }
     final_path = OUT / "boxeye-receipt.json"
-    final_path.write_text(json.dumps(receipt, indent=2, sort_keys=True), encoding="utf-8")
+    final_path.write_text(
+        json.dumps(receipt, indent=2, sort_keys=True),
+        encoding="utf-8",
+    )
     print("REAL_VISION_SAMPLE_RECEIPT_BEGIN")
     print(json.dumps(receipt, indent=2, sort_keys=True))
     print("REAL_VISION_SAMPLE_RECEIPT_END")
