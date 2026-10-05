@@ -8,7 +8,6 @@ import pytest
 from dlf_flywire.neural_gateway import NeuralObservation
 from dlf_flywire.neural_mapping import EvidenceBackedNeuralMapping, NeuralMappingError
 
-
 ROOT = Path(__file__).resolve().parents[1]
 MAPPING_PATH = ROOT / "evidence" / "neural_mapping_stage_b.json"
 
