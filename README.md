@@ -1,6 +1,6 @@
 # Digital Life Form — FlyWire
 
-Version 1.5.0
+Version 1.5.1
 
 > **Project continuity / canonical research memory:** [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md)
 >
@@ -183,7 +183,9 @@ print(edited.verification.to_dict())
 
 The Code Hand contract is documented in docs/CODE_HAND.md. The initial implementation remains deliberately narrow: it does not claim remote repository editing, web access, installation, or desktop control.
 
-## Neural → Leader boundary\n\nThe current working tree adds the first explicit neural-control boundary without overstating the science.\n\nThe new NeuralIntentGateway accepts bounded sparse neural observations (neuron_id, spike count, and time window), converts them into deterministic capability candidates, and records a SHA-256 fingerprint of the observation set. NeuralLeaderBridge converts an activated candidate into the same TaskStep contract already consumed by the Leader/orchestrator.\n\nThe important safety boundary is deliberate:\n\n- neuron IDs are opaque; the gateway does not invent biological meaning for them;\n- neural activity can select a capability candidate, but cannot grant permission;\n- neural activity cannot enable network access or system mutation;\n- the Leader still owns action, execution arguments, dependency ordering, policy checks, checkpoints, and independent verification;\n- an inactive/no-threshold-crossing neural state fails closed.\n\nThis is an **architectural bridge**, not evidence that the four FlyWire neurons currently control Code Hand. The next scientific stage is to replace opaque test channels with an evidence-backed neural signal source and prove that mapping independently.\n\nThe intended verified chain is:\n\n`neural observation → intent candidate → Leader TaskStep → Policy Gateway → Hand → receipt/checkpoint → independent Verifier → feedback`\n\n## Recover exact morphology
+## Neural → Leader boundary
+
+Version 1.5.1 adds the first explicit neural-control boundary without overstating the science.\n\nThe new NeuralIntentGateway accepts bounded sparse neural observations (neuron_id, spike count, and time window), converts them into deterministic capability candidates, and records a SHA-256 fingerprint of the observation set. NeuralLeaderBridge converts an activated candidate into the same TaskStep contract already consumed by the Leader/orchestrator.\n\nThe important safety boundary is deliberate:\n\n- neuron IDs are opaque; the gateway does not invent biological meaning for them;\n- neural activity can select a capability candidate, but cannot grant permission;\n- neural activity cannot enable network access or system mutation;\n- the Leader still owns action, execution arguments, dependency ordering, policy checks, checkpoints, and independent verification;\n- an inactive/no-threshold-crossing neural state fails closed.\n\nThis is an **architectural bridge**, not evidence that the four FlyWire neurons currently control Code Hand. The next scientific stage is to replace opaque test channels with an evidence-backed neural signal source and prove that mapping independently.\n\nThe intended verified chain is:\n\n`neural observation → intent candidate → Leader TaskStep → Policy Gateway → Hand → receipt/checkpoint → independent Verifier → feedback`\n\n## Recover exact morphology
 
 V1.1.0 recovery reads the public FAFB v783 Neuroglancer precomputed skeleton endpoint directly and writes SWC without the vulnerable `fafbseg → diskcache` dependency chain.
 
