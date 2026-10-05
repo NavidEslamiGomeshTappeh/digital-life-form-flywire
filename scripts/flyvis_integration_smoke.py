@@ -13,12 +13,12 @@ from flyvis.datasets.moving_bar import MovingEdge
 
 from dlf_flywire.flyvis_adapter import FlyVisResponseAdapter
 from dlf_flywire.flyvis_runtime import (
+    FlyVisDirectionObservation,
     DEFAULT_DIRECTION_TOLERANCE_DEG,
     EXPECTED_PREFERRED_DIRECTION_DEG,
     FLYVIS_RELEASE,
     FLYVIS_REVISION,
     PRETRAINED_ARCHIVE_SHA256,
-    FlyVisDirectionObservation,
     angular_distance_deg,
     validate_direction_observation,
 )
