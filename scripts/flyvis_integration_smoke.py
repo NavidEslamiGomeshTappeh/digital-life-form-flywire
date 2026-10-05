@@ -83,6 +83,7 @@ def summarize_direction(
 
 def extract_trace_signal(
     responses,
+    stimulus_dataset,
     cell_type: str,
     intensity: int,
     expected_direction_deg: float,
@@ -91,18 +92,26 @@ def extract_trace_signal(
     cell_mask = responses["cell_type"] == cell_type
     response_da = responses["responses"].sel(network_id=0)
     selected = response_da.where(cell_mask, drop=True)
-    match = np.flatnonzero(
-        (responses["angle"].values == expected_direction_deg)
-        & (responses["intensity"].values == intensity)
-        & (responses["width"].values == 1)
-        & (responses["speed"].values == 19)
-    )
-    if len(match) != 1:
+
+    matches = stimulus_dataset.arg_df[
+        (stimulus_dataset.arg_df["angle"] == expected_direction_deg)
+        & (stimulus_dataset.arg_df["intensity"] == intensity)
+        & (stimulus_dataset.arg_df["width"] == 1)
+        & (stimulus_dataset.arg_df["speed"] == 19)
+    ]
+    if len(matches) != 1:
         raise RuntimeError(
-            f"expected one trace sample for {cell_type}, found {len(match)}"
+            f"expected one trace row in FlyVis stimulus dataset for {cell_type}, "
+            f"found {len(matches)}"
         )
 
-    trace = selected.isel(sample=int(match[0])).mean(dim="neuron").values
+    sample_index = int(matches.index[0])
+    if sample_index >= selected.sizes.get("sample", 0):
+        raise RuntimeError(
+            f"FlyVis response sample index {sample_index} is outside the response dataset"
+        )
+
+    trace = selected.isel(sample=sample_index).mean(dim="neuron").values
     time_ms = responses["time"].values.astype(float) * 1000.0
     if len(time_ms) < 2:
         raise RuntimeError("FlyVis response trace must contain at least two frames")
