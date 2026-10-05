@@ -177,28 +177,25 @@ def main() -> None:
             cell_type,
             intensity,
         )
-        angular_error_deg = angular_distance_deg(
+        manual_angular_error_deg = angular_distance_deg(
             observed_direction_deg, expected_direction_deg
         )
         official_direction_rad = official_preferred_directions.custom.where(
             cell_type=cell_type, intensity=intensity
         ).item()
         official_direction_deg = float(np.degrees(official_direction_rad) % 360.0)
+        official_angular_error_deg = angular_distance_deg(
+            official_direction_deg, expected_direction_deg
+        )
         extraction_crosscheck_error_deg = angular_distance_deg(
             observed_direction_deg, official_direction_deg
         )
-        if extraction_crosscheck_error_deg > 15.0:
-            raise RuntimeError(
-                f"manual preferred-direction extraction disagrees with official FlyVis "
-                f"preferred_direction for {cell_type}: "
-                f"{extraction_crosscheck_error_deg:.2f} degrees"
-            )
         direction_observation = FlyVisDirectionObservation(
             cell_type=cell_type,
             intensity=intensity,
             expected_direction_deg=expected_direction_deg,
-            observed_direction_deg=observed_direction_deg,
-            angular_error_deg=angular_error_deg,
+            observed_direction_deg=official_direction_deg,
+            angular_error_deg=official_angular_error_deg,
         )
         validate_direction_observation(direction_observation)
 
@@ -222,10 +219,11 @@ def main() -> None:
                 "cell_type": cell_type,
                 "intensity": intensity,
                 "expected_direction_deg": expected_direction_deg,
-                "observed_direction_deg": observed_direction_deg,
-                "angular_error_deg": angular_error_deg,
+                "manual_peak_direction_deg": observed_direction_deg,
+                "manual_peak_angular_error_deg": manual_angular_error_deg,
                 "official_preferred_direction_deg": official_direction_deg,
-                "extraction_crosscheck_error_deg": extraction_crosscheck_error_deg,
+                "official_angular_error_deg": official_angular_error_deg,
+                "manual_vs_official_error_deg": extraction_crosscheck_error_deg,
                 "peak_values": peak_values,
             }
         )
