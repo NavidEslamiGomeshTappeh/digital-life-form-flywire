@@ -129,12 +129,12 @@ def extract_trace_signal(
 
 def main() -> None:
     flyvis_version = str(getattr(flyvis, "__version__", ""))
-    revision_token = FLYVIS_REVISION[:10]
-    if flyvis_version != "1.2.0" and f"+g{revision_token}" not in flyvis_version:
+    git_version_prefix = f"+g{FLYVIS_REVISION[:9]}"
+    if flyvis_version != "1.2.0" and git_version_prefix not in flyvis_version:
         raise RuntimeError(
             "FlyVis package identity mismatch: "
-            f"expected release {FLYVIS_RELEASE} or git revision token "
-            f"{revision_token!r}, got {flyvis_version!r}"
+            f"expected release {FLYVIS_RELEASE} or git revision prefix "
+            f"{git_version_prefix!r}, got {flyvis_version!r}"
         )
 
     flyvis_root = Path(flyvis.root_dir).resolve()
