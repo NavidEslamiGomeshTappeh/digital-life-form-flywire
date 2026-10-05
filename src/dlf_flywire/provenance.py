@@ -425,6 +425,7 @@ RELEASE_VERSIONED_RECEIPTS = (
     "evidence/flydrones_integration_receipt.json",
     "evidence/flydrones_integration_receipt_2.json",
     "evidence/flyvis_integration_receipt.json",
+    "evidence/neural_mapping_stage_b.json",
 )
 
 
