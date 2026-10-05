@@ -12,6 +12,7 @@ from dlf_flywire.provenance import (
     validate_artifact_manifest,
     validate_claim_ledger,
     validate_evidence_manifest_version,
+    validate_release_receipt_versions,
     validate_synapse_lineage,
 )
 
@@ -278,6 +279,47 @@ def test_synapse_lineage_uses_stable_tuple_identifier():
 def test_evidence_manifest_version_is_current():
     report = validate_evidence_manifest_version(ROOT)
     assert report["product_version"] == __version__
+
+
+def test_release_receipt_versions_are_current():
+    report = validate_release_receipt_versions(ROOT)
+    assert report["status"] == "PASS_RELEASE_RECEIPTS"
+    assert report["product_version"] == __version__
+    assert report["receipts_checked"] == 5
+
+
+def test_release_receipt_version_drift_fails_closed(tmp_path):
+    receipt = ROOT / "evidence" / "flyvis_integration_receipt.json"
+    target = tmp_path / receipt.relative_to(ROOT)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    payload = json.loads(receipt.read_text(encoding="utf-8"))
+    payload["product_version"] = "0.0.0"
+    target.write_text(json.dumps(payload), encoding="utf-8")
+
+    for relative in (
+        "evidence/source_receipts.json",
+        "evidence/synapse_lineage.json",
+        "evidence/flydrones_integration_receipt.json",
+        "evidence/flydrones_integration_receipt_2.json",
+    ):
+        source = ROOT / relative
+        destination = tmp_path / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, destination)
+
+    for relative in ("VERSION", "pyproject.toml", "src/dlf_flywire/__init__.py"):
+        source = ROOT / relative
+        destination = tmp_path / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, destination)
+
+    try:
+        validate_release_receipt_versions(tmp_path)
+    except ProvenanceError as exc:
+        assert "flyvis_integration_receipt.json version" in str(exc)
+        assert "'0.0.0'" in str(exc)
+    else:
+        raise AssertionError("release receipt version drift was accepted")
 
 
 def test_git_blob_sha1_matches_known_vector(tmp_path):
