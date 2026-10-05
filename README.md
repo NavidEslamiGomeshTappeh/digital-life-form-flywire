@@ -6,6 +6,14 @@ Version 1.7.1
 >
 > This is the first file to read when continuing the project in a new chat or agent session. It contains the current scientific boundaries, verified evidence, ecosystem research, architecture direction, unresolved items, and continuation rules.
 
+> **See the project in one minute**
+>
+> **Digital Life Form** is a reproducible research-engineering project connecting exact FlyWire/FAFB evidence, morphology, vision-model experiments, and a guarded agent runtime. The repository is built around one rule: **an interesting result is not promoted to a scientific claim until the implementation and evidence can be inspected and reproduced.**
+>
+> **Current public evidence:** 4 exact FAFB v783 reference neurons · 649/649 synapse-coordinate reproduction · 75/75 directed-pair correspondence · pinned FlyVis runtime evidence · provenance-bearing vision input boundary · automated CI/security checks.
+>
+> **Start here:** [Scientific status](#scientific-status) · [Claim-level evidence trace](#claim-level-evidence-trace) · [Real vision input boundary](#real-vision-input-boundary) · [Audit the evidence chain](#audit-the-evidence-chain)
+
 Digital Life Form — FlyWire is a provenance-first research-engineering toolkit for extracting a small, exact subset of the FlyWire connectome and packaging the result as reproducible scientific evidence.
 
 ## Current validated core
