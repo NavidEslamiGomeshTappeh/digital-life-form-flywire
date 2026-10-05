@@ -81,16 +81,16 @@ def main() -> None:
     checkpoint_sha256 = sha256_file(checkpoint_path)
 
     movie_input = torch.from_numpy(
-        np.repeat(boxeye_values.reshape(1, 1, 721), N_FRAMES, axis=1)
-    )
-    stationary_state = network_view.init_network().fade_in_state(
+        np.repeat(boxeye_values.reshape(1, 721), N_FRAMES, axis=0)
+    ).unsqueeze(1)
+    network = network_view.init_network()
+    stationary_state = network.fade_in_state(
         1.0,
         DT_S,
-        movie_input[:, :1],
+        movie_input[:1],
     )
-    network = network_view.init_network()
     responses = network.simulate(
-        movie_input,
+        movie_input[None],
         DT_S,
         initial_state=stationary_state,
     ).detach().cpu()
