@@ -2,6 +2,41 @@
 
 Version 1.7.1
 
+[![CI](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/ci.yml/badge.svg)](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/ci.yml)
+[![Security](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/security.yml/badge.svg)](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/workflows/security.yml)
+[![License](https://img.shields.io/github/license/NavidEslamiGomeshTappeh/digital-life-form-flywire)](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/blob/main/LICENSE)
+
+> **A provenance-first attempt to connect exact FlyWire connectome evidence, reproducible neural-model execution, and a real visual-input boundary.**
+
+### 👁️ Why this project is worth looking at
+
+This repository is not presented as a finished artificial brain. It is a **public, auditable research-engineering project** where every major claim is tied to code, data fingerprints, receipts, and tests.
+
+**What is already real and checkable:**
+- 🧠 **4 exact FAFB v783 neuron roots** — T4a, T4c, T5a, T5c.
+- 🔗 **649/649 synapse-coordinate reproduction** and **75/75 directed-pair correspondence** against the recorded public products.
+- 🧬 **4 exact project SWC morphologies** with deterministic analysis tooling.
+- ⚙️ **Pinned FlyVis runtime integration** exercised in GitHub Actions.
+- 👁️ **Real vision-input boundary implemented**: physical camera → gray8 frame → exact PGM artifact → provenance receipt → FlyVis BoxEye.
+- 🧪 **Fail-closed evidence model**: unresolved scientific questions stay explicitly unresolved.
+- 🤖 **Code Hand / Neural → Leader engineering boundaries** are implemented as constrained, testable components rather than claimed as autonomous intelligence.
+
+### 🚀 Start here
+
+| If you want to… | Open |
+|---|---|
+| Understand the project in 2 minutes | [Showcase](docs/SHOWCASE.md) |
+| Inspect the scientific evidence | [evidence/claims.json](evidence/claims.json) |
+| Re-run the core validation | `python -m dlf_flywire validate` |
+| Audit the evidence chain | `python -m dlf_flywire audit` |
+| Inspect the FlyVis proof | [FlyVis receipt](evidence/flyvis_integration_receipt.json) |
+| Inspect the vision boundary | [Vision input docs](docs/VISION_INPUT_BOUNDARY.md) |
+| See the current vision implementation | [PR #59](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/pull/59) |
+
+**Scientific rule:** if an experiment has not been performed, this repository does not label it as performed.
+
+---
+
 > **Project continuity / canonical research memory:** [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md)
 >
 > This is the first file to read when continuing the project in a new chat or agent session. It contains the current scientific boundaries, verified evidence, ecosystem research, architecture direction, unresolved items, and continuation rules.
