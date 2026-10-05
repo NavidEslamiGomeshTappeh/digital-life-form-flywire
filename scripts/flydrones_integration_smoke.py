@@ -18,7 +18,10 @@ FLYDRONES_REVISION = "6519c8c0e35ae829faa98a5a02033343dd0b82d4"
 def main() -> None:
     cfg = {
         "inputs": {"t4a-left": {"types": ["^T4a$"], "side": "L"}},
-        "outputs": {"dng02-left": {"types": ["^DNg02$"], "side": "L"}},
+        "outputs": {
+            "dng02-left": {"types": ["^DNg02$"], "side": "L"},
+            "t4a-left-record": {"types": ["^T4a$"], "side": "L"},
+        },
         "brain": {"record_neurons": 32, "seed": 7},
     }
     brain = Brain(build_minifly(seed=7), cfg, seed=7)
