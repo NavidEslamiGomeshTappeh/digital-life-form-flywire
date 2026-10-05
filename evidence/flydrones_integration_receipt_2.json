@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "product_version": "1.5.1",
+  "kind": "external_ci_integration_receipt",
+  "status": "observed_success",
+  "observed_at": "2026-10-05T05:50:12Z",
+  "dlf_commit": "f3ac0d62e379bd99cfc82f70c31760e2ca2fc169",
+  "workflow": {
+    "name": "FlyDrones Integration",
+    "run_id": 37269509461,
+    "job_id": 111633310904
+  },
+  "external_source": {
+    "repository": "SpikeCalls/FlyDrones",
+    "revision": "6519c8c0e35ae829faa98a5a02033343dd0b82d4",
+    "revision_verification": "git rev-parse exact commit then detached checkout"
+  },
+  "observed_execution": {
+    "flydrones_neurons": 850,
+    "recorded_neurons": 63,
+    "raster_events": 384,
+    "observations": 48,
+    "selected_neuron": "malecns-body:100",
+    "source_snapshot_sha256": "d647d6d4ab9adfdd546de74dfae3db8f273b860eebff289044118cd4fd6f30eb",
+    "extraction_sha256": "2b11ad4d17e5f52c49e13a346c89cfff00831dd97ea44c561c3c356ff85aaa69",
+    "neural_evidence_sha256": "25edb4d54032e54e15806f11d2aa23c6ec84e587ce328c2a3f4f9ed21dea169f",
+    "final_assertion": "neural_intent -> leader -> code_hand -> verifier PASS"
+  },
+  "scientific_boundary": {
+    "miniFly_is_synthetic": true,
+    "biological_FlyWire_control_claim": false,
+    "note": "The receipt proves a real FlyDrones runtime integration path and complete-source snapshot hashing. It does not establish biological equivalence or prove that the four FAFB v783 T4/T5 neurons control Code Hand."
+  }
+}
