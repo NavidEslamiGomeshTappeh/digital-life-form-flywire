@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.7.0 — 2026-10-05
+
+Claim-level evidence tracing release.
+
+- Added trace_claim() to resolve a claim into its immutable evidence artifacts.
+- Added the dlf-flywire claim <CLAIM_ID> command with fail-closed unknown-claim handling.
+- Added regression coverage for claim tracing and CLI output.
+
 ## 1.6.0 — 2026-10-05
 
 Validated FlyVis runtime proof release.
