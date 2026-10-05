@@ -134,9 +134,7 @@ class VisionCaptureReceipt:
             ):
                 raise VisionInputError("receipt frame_index must be non-negative")
             if frame_index in seen_indices:
-                raise VisionInputError(
-                    f"duplicate receipt frame_index: {frame_index}"
-                )
+                raise VisionInputError(f"duplicate receipt frame_index: {frame_index}")
             seen_indices.add(frame_index)
             for field in ("captured_at_utc", "encoding", "pixel_sha256"):
                 value = record.get(field)
@@ -225,9 +223,7 @@ class OpenCVCameraSource:
                 ok, frame = camera.read()
                 elapsed = monotonic() - started
                 if not ok or frame is None:
-                    raise VisionInputError(
-                        f"camera read failed at frame {frame_index}"
-                    )
+                    raise VisionInputError(f"camera read failed at frame {frame_index}")
                 if elapsed > self.per_frame_timeout_s:
                     raise VisionInputError(
                         f"camera read exceeded timeout at frame {frame_index}: "
@@ -277,7 +273,6 @@ def build_capture_receipt(
     )
 
 
-
 @dataclass(frozen=True)
 class FlyVisBoxEyeFrame:
     """One VisionFrame rendered through FlyVis' published BoxEye contract."""
@@ -286,6 +281,13 @@ class FlyVisBoxEyeFrame:
     hexal_count: int
     rendered_shape: tuple[int, int, int, int]
     rendered_sha256: str
+    rendered_values: tuple[float, ...]
+
+    def __post_init__(self) -> None:
+        if len(self.rendered_values) != self.hexal_count:
+            raise VisionInputError(
+                "BoxEye value count does not match the declared receiver count"
+            )
 
 
 def render_with_flyvis_boxeye(
@@ -317,9 +319,11 @@ def render_with_flyvis_boxeye(
         )
     rendered_cpu = rendered.detach().cpu().contiguous()
     rendered_bytes = rendered_cpu.numpy().tobytes()
+    rendered_values = tuple(float(value) for value in rendered_cpu.reshape(-1).tolist())
     return FlyVisBoxEyeFrame(
         source_pixel_sha256=frame.pixels_sha256,
         hexal_count=shape[-1],
         rendered_shape=shape,
         rendered_sha256=_sha256_bytes(rendered_bytes),
+        rendered_values=rendered_values,
     )
