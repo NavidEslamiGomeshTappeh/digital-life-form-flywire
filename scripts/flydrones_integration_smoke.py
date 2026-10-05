@@ -93,7 +93,8 @@ def main() -> None:
         f"observations={len(signal.observations)}"
     )
     print(f"source_revision={signal.source_revision}")
-    print(f"adapter_sha256={signal.source_sha256}")
+    print(f"source_snapshot_sha256={signal.source_sha256}")
+    print(f"extraction_sha256={signal.extraction_sha256}")
     print(f"selected_neuron={selected_observation.neuron_id}")
     print(f"neural_evidence_sha256={candidate.evidence_sha256}")
     print("neural_intent -> leader -> code_hand -> verifier PASS")
