@@ -124,3 +124,19 @@ def test_camera_source_validates_bounds_before_optional_dependency():
     source = OpenCVCameraSource(device_index=0)
     with pytest.raises(VisionInputError, match="frame_count must be positive"):
         source.capture(frame_count=0)
+
+
+
+def test_boxeye_bridge_fails_closed_when_optional_runtime_is_unavailable(monkeypatch):
+    frame = VisionFrame.from_gray8(
+        frame_index=0,
+        width=1,
+        height=1,
+        pixels_gray8=b"\x80",
+        captured_at_utc="2026-10-05T10:30:00+00:00",
+    )
+    def blocked_import(*args, **kwargs):
+        raise ImportError("blocked")
+    monkeypatch.setattr("builtins.__import__", blocked_import)
+    with pytest.raises(VisionInputError, match="FlyVis and PyTorch"):
+        render_with_flyvis_boxeye(frame)
