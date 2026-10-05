@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b3c158c88930f9e087d3840f658484c49f4a4ec0"
+        "value": "279c5fef20b44a6828e6255ba6e3516e586b9518"
       }
     },
     {
