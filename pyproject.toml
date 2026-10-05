@@ -10,8 +10,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"
 license-files = ["LICENSE"]
-authors = [{name = "Navid Eslami Gomesh Tappeh"]
-]
+authors = [{ name = "Navid Eslami Gomesh Tappeh" }]
 keywords = [
   "flywire",
   "fafb",
@@ -31,6 +30,7 @@ classifiers = [
   "Topic :: Scientific/Engineering",
   "Topic :: Scientific/Engineering :: Artificial Intelligence",
   "Topic :: Scientific/Engineering :: Bio-Informatics",
+  "Programming Language :: Python",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
   "License :: OSI Approved :: MIT License",
