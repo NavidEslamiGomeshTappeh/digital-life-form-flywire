@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "product_version": "1.7.0",
-  "generated_for": "Version 1.7.0 claim-level evidence tracing with live FlyVis runtime evidence",
+  "product_version": "1.7.1",
+  "generated_for": "Version 1.7.1 FlyVis continuous-activity semantics guard and claim-level evidence tracing",
   "exclusion": [
     "evidence/artifact_manifest.json"
   ],
@@ -12,7 +12,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "9dbb0c0052e7faadf95b950ef3313918bf9c14f7"
+        "value": "943f9cbc4ec7ee28e6febd1d4451df4c39bcb193"
       }
     },
     {
@@ -21,7 +21,7 @@
       "role": "project_metadata",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "adcc792218af54466e4b9c58e3a90e694d7a2096"
+        "value": "d74a64760131f3a961421683f9f2551a5a92f313"
       }
     },
     {
@@ -30,7 +30,7 @@
       "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "14d9d2f583a956d17d0191e80336d1db6fd648df"
+        "value": "3c1e9cbd302a4df7ac0ee47e577f5c5895b69e1a"
       }
     },
     {
@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "e56f3a23a866448876a845dd07415c7f2ae68d76"
+        "value": "afc036449b2e875b825ef1f5ff324cff33aad49a"
       }
     },
     {
@@ -539,7 +539,7 @@
       "role": "continuous_model_response_adapter",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b2c799efca49573fcbf7d178185ef732e7951f57"
+        "value": "9268ed4f2117607c61c09272679a38d1847d237c"
       }
     },
     {
@@ -548,7 +548,7 @@
       "role": "continuous_model_response_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "c2e920a7331b5077b9840d5524ce0003fbd38635"
+        "value": "7b068f826df11b4a82646386d415ac73508c9ea1"
       }
     },
     {
@@ -557,7 +557,7 @@
       "role": "continuous_model_response_scientific_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "2a777493718c25a0f2f933d9a403472971691278"
+        "value": "970ca6019579b2e3718754002c76a6a80d01da9e"
       }
     },
     {
