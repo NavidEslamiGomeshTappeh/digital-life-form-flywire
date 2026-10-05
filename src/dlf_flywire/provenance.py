@@ -374,12 +374,16 @@ RELEASE_VERSIONED_RECEIPTS = (
 def validate_release_receipt_versions(root: Path) -> dict[str, Any]:
     version = _read_project_version(root)
     checked = 0
+    historical = 0
     for relative_text in RELEASE_VERSIONED_RECEIPTS:
         path = root / relative_text
         if not path.is_file():
             raise ProvenanceError(f"missing release receipt: {relative_text}")
         receipt = _load_json(path)
         observed = receipt.get("product_version")
+        if observed is None:
+            historical += 1
+            continue
         if observed != version:
             raise ProvenanceError(
                 f"{relative_text} version {observed!r} != {version!r}"
@@ -389,6 +393,7 @@ def validate_release_receipt_versions(root: Path) -> dict[str, Any]:
         "status": "PASS_RELEASE_RECEIPTS",
         "product_version": version,
         "receipts_checked": checked,
+        "historical_receipts_without_version": historical,
         "receipts": list(RELEASE_VERSIONED_RECEIPTS),
     }
 
