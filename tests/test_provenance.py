@@ -176,6 +176,31 @@ def test_public_point_data_ingest_dag_boundary_is_ledgered():
     assert evidence["derived_intervals"]["point_data_to_first_src_seconds"] == 1602
 
 
+def test_historical_neurosetta_runtime_family_fingerprint_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "legacy_jax_geometry_context.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    legacy = evidence["sources"]["legacy_neurosetta"]
+    assert legacy["commit_date"] == "2025-07-31T14:40:07Z"
+    assert legacy["environment"] == {
+        "name": "neurosetta",
+        "python": "3.10",
+        "jax": True,
+        "source": "environment.yml",
+        "blob": "05cf1967baea026f1bb251b99eabd454bfa302b0",
+    }
+    consumer = evidence["sources"]["paper_repository"]["observed_files"][
+        "historical_consumer_notebook"
+    ]
+    assert consumer["kernelspec"] == "neurosetta"
+    assert consumer["python"] == "3.10.17"
+    assert evidence["relationship_to_historical_point_data"][
+        "historical_decoded_jax_arrayimpl_cells"
+    ] == 46624
+
+
 def test_point_data_exact_id_decode_receipt_is_ledgered():
     evidence = json.loads(
         (ROOT / "evidence" / "point_data_pickle_decode_receipt.json").read_text(
