@@ -8,20 +8,32 @@
       "sha": "79cf52212935de6bddf996c9f46c0df89f5c5442",
       "timestamp": "2025-12-09T19:26:04Z",
       "message": "Initial commit",
-      "root_entries": [".gitignore", "README.md"]
+      "root_entries": [
+        ".gitignore",
+        "README.md"
+      ]
     },
     {
       "sha": "61fd0f176d73932ad87ece04153945501b4c405c",
       "timestamp": "2025-12-09T19:40:07Z",
       "message": "ANOVA notebook",
-      "root_entries": [".gitignore", "Notebooks/", "README.md"],
+      "root_entries": [
+        ".gitignore",
+        "Notebooks/",
+        "README.md"
+      ],
       "notebook_sha": "93eb31b90a738f64f5d803aaecda22f80edd6178"
     },
     {
       "sha": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
       "timestamp": "2025-12-09T19:41:50Z",
       "message": "A point value metrics data",
-      "root_entries": [".gitignore", "Data/", "Notebooks/", "README.md"],
+      "root_entries": [
+        ".gitignore",
+        "Data/",
+        "Notebooks/",
+        "README.md"
+      ],
       "data_directory_tree_sha": "b662158bcb571136b108af6dac38254c95e1d5f4",
       "point_data_blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
       "observation": "At the exact first Point_data commit, src/ is absent."
@@ -30,7 +42,12 @@
       "sha": "fe9779d4ca425613eec44b19e961610d117e7232",
       "timestamp": "2025-12-09T19:42:19Z",
       "message": "Point value metrics data",
-      "root_entries": [".gitignore", "Data/", "Notebooks/", "README.md"],
+      "root_entries": [
+        ".gitignore",
+        "Data/",
+        "Notebooks/",
+        "README.md"
+      ],
       "data_directory_tree_sha": "b662158bcb571136b108af6dac38254c95e1d5f4",
       "point_data_blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
       "observation": "The parallel second Point_data commit has the same tree and identical binary blob."
@@ -76,7 +93,13 @@
       "sha": "1007a708f0b2cd4d55875174256774a41ff5b0f4",
       "timestamp": "2025-12-09T20:08:32Z",
       "message": "ANOVA analysis and notebook",
-      "root_entries": [".gitignore", "Data/", "Notebooks/", "README.md", "src/"],
+      "root_entries": [
+        ".gitignore",
+        "Data/",
+        "Notebooks/",
+        "README.md",
+        "src/"
+      ],
       "src_directory_tree_sha": "a27435358ffb5416fa6f2c4020db7698d37b119c",
       "src_files_at_that_commit": [
         {
@@ -99,12 +122,51 @@
       "The public paper repository had no src/ directory at the exact first Point_data upload commit.",
       "The first public src/ commit appears 1,602 seconds after the first Point_data upload and adds only paper_ANOVA.py.",
       "The public repository therefore does not expose a morphology producer implementation before or at the historical Point_data ingest boundary.",
-      "The first Point_data commit and parallel duplicate point to the same binary blob."
+      "The first Point_data commit and parallel duplicate point to the same binary blob.",
+      "The exact recursive directory listings at the first Point_data commit show Data/Point_data.pkl as the only Data file and the earlier tree shows ANOVA_analysis.ipynb as the only notebook.",
+      "The first public ANOVA notebook explicitly declares the neurosetta kernel and Python 3.10.17 and reads a pre-existing local Point_data.pkl."
     ],
     "not_proven": [
       "This does not prove that the producer did not exist on the author's workstation, another private repository, or an unarchived environment.",
       "This does not identify the exact code revision or software package installation that produced Point_data.",
       "The later public PP1-PP5/Metrics1 notebooks remain reconstruction evidence, not recovered historical producer code."
     ]
+  },
+  "tree_level_verification": {
+    "first_point_data_commit_data_directory": [
+      {
+        "path": "Data/Point_data.pkl",
+        "blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+        "size": 3049948
+      }
+    ],
+    "pre_point_data_notebooks_directory": [
+      {
+        "path": "Notebooks/ANOVA_analysis.ipynb",
+        "blob": "93eb31b90a738f64f5d803aaecda22f80edd6178",
+        "size": 45297
+      }
+    ],
+    "later_first_src_directory": [
+      {
+        "path": "src/paper_ANOVA.py",
+        "blob": "0f806edd292478db76cf330955b6c81c230f7059",
+        "size": 65189
+      }
+    ]
+  },
+  "consumer_notebook": {
+    "commit": "61fd0f176d73932ad87ece04153945501b4c405c",
+    "path": "Notebooks/ANOVA_analysis.ipynb",
+    "blob": "93eb31b90a738f64f5d803aaecda22f80edd6178",
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "neurosetta"
+    },
+    "python": "3.10.17",
+    "load_expression": "pd.read_pickle(file_path)",
+    "local_path": "/home/nik/Desktop/Software/T45_Morpho_data/Data/Pickled_data/Point_data.pkl",
+    "role": "consumer_only",
+    "observation": "The first public notebook reads an already-existing local Point_data.pkl; it contains no public morphology extraction/reduction producer code."
   }
 }
