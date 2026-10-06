@@ -161,7 +161,7 @@ Do not turn the SWC result into a claim about the exact historical internal morp
 Historical artifact:
 
 - Repository: `borstlab/T4_T5_Dendrite_Morphology_Paper`
-- Source commit: `56901ad1853b44aeca15504cd908fa4c31009a3e`
+- Source commit: `cd17d34afd0d46a3c2947e83a1f0fdd835a9959a`
 - Git blob: `b85caf49f45677f2075f7b5f2c8830141cd96d02`
 - SHA-256: `76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f`
 
