@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_PUBLIC_DAG_INGEST_BOUNDARY",
+  "purpose": "Machine-readable reconstruction of the public paper repository immediately around the historical Point_data ingest.",
+  "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+  "key_commits": [
+    {
+      "sha": "79cf52212935de6bddf996c9f46c0df89f5c5442",
+      "timestamp": "2025-12-09T19:26:04Z",
+      "message": "Initial commit",
+      "root_entries": [".gitignore", "README.md"]
+    },
+    {
+      "sha": "61fd0f176d73932ad87ece04153945501b4c405c",
+      "timestamp": "2025-12-09T19:40:07Z",
+      "message": "ANOVA notebook",
+      "root_entries": [".gitignore", "Notebooks/", "README.md"],
+      "notebook_sha": "93eb31b90a738f64f5d803aaecda22f80edd6178"
+    },
+    {
+      "sha": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+      "timestamp": "2025-12-09T19:41:50Z",
+      "message": "A point value metrics data",
+      "root_entries": [".gitignore", "Data/", "Notebooks/", "README.md"],
+      "data_directory_tree_sha": "b662158bcb571136b108af6dac38254c95e1d5f4",
+      "point_data_blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+      "observation": "At the exact first Point_data commit, src/ is absent."
+    },
+    {
+      "sha": "fe9779d4ca425613eec44b19e961610d117e7232",
+      "timestamp": "2025-12-09T19:42:19Z",
+      "message": "Point value metrics data",
+      "root_entries": [".gitignore", "Data/", "Notebooks/", "README.md"],
+      "data_directory_tree_sha": "b662158bcb571136b108af6dac38254c95e1d5f4",
+      "point_data_blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+      "observation": "The parallel second Point_data commit has the same tree and identical binary blob."
+    },
+    {
+      "sha": "8a38537f55371de369f80c50778915afb5d954b4",
+      "timestamp": "2025-12-09T19:42:30Z",
+      "message": "Merge remote-tracking branch 'origin/main'",
+      "root_tree_sha": "cd10c382b3abbbe68bf00e3841959b7fb06f4c07",
+      "observation": "The duplicate Point_data upload commits are merged with no tree change."
+    },
+    {
+      "sha": "bb51268783115e50b68be3a9023525642168862b",
+      "timestamp": "2025-12-09T19:43:21Z",
+      "message": "Edge metrics data",
+      "added_file": "Data/Edge_data.pkl"
+    },
+    {
+      "sha": "035c72843bd27817ca898813a4a9a4211e68edb1",
+      "timestamp": "2025-12-09T19:44:14Z",
+      "message": "Vertex metrics data",
+      "added_file": "Data/Vertex_data.pkl"
+    },
+    {
+      "sha": "e8fc3a77af521649c6d86183dc615ccfac254133",
+      "timestamp": "2025-12-09T19:45:22Z",
+      "message": "Bifurcation geometry data",
+      "added_file": "Data/Bifurication_data.pkl"
+    },
+    {
+      "sha": "81d864b9ebd3986247aa95517645f65659dec1b7",
+      "timestamp": "2025-12-09T19:46:14Z",
+      "message": "Edge angular deviation data",
+      "added_file": "Data/Segment_deviation_data.pkl"
+    },
+    {
+      "sha": "1a36f58ff91c83c849a3b27c0fd3b6e5ce2464aa",
+      "timestamp": "2025-12-09T19:46:46Z",
+      "message": "Contour plot data",
+      "added_file": "Data/Contour_plot.pkl"
+    },
+    {
+      "sha": "1007a708f0b2cd4d55875174256774a41ff5b0f4",
+      "timestamp": "2025-12-09T20:08:32Z",
+      "message": "ANOVA analysis and notebook",
+      "root_entries": [".gitignore", "Data/", "Notebooks/", "README.md", "src/"],
+      "src_directory_tree_sha": "a27435358ffb5416fa6f2c4020db7698d37b119c",
+      "src_files_at_that_commit": [
+        {
+          "path": "src/paper_ANOVA.py",
+          "blob": "0f806edd292478db76cf330955b6c81c230f7059"
+        }
+      ],
+      "observation": "The first public src/ tree contains only paper_ANOVA.py, which is a downstream statistical consumer; no morphology extraction/reduction producer appears."
+    }
+  ],
+  "derived_intervals": {
+    "repository_creation_to_point_data_seconds": 94 * 60 + 46,
+    "anova_to_point_data_seconds": 103,
+    "point_data_to_first_src_seconds": 1602,
+    "all_metric_ingests_before_src_seconds": 1602,
+    "point_data_upload_to_neuron_ids_seconds": 6 * 24 * 3600 + 13 * 3600 + 54 * 60 + 6
+  },
+  "conclusions": {
+    "proven": [
+      "The public paper repository had no src/ directory at the exact first Point_data upload commit.",
+      "The first public src/ commit appears 1,602 seconds after the first Point_data upload and adds only paper_ANOVA.py.",
+      "The public repository therefore does not expose a morphology producer implementation before or at the historical Point_data ingest boundary.",
+      "The first Point_data commit and parallel duplicate point to the same binary blob."
+    ],
+    "not_proven": [
+      "This does not prove that the producer did not exist on the author's workstation, another private repository, or an unarchived environment.",
+      "This does not identify the exact code revision or software package installation that produced Point_data.",
+      "The later public PP1-PP5/Metrics1 notebooks remain reconstruction evidence, not recovered historical producer code."
+    ]
+  }
+}
