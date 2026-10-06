@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "status": "HISTORICAL_SOFTWARE_CAPABILITY_CONTEXT_NOT_DIRECT_PROVENANCE",
+  "purpose": "Record independently verified public Git-DAG evidence that legacy Neurosetta contained morphology geometry, subtree, root-coordinate, and scaling/alignment capabilities before the December 2025 Point_data artifact.",
+  "artifact_boundary": {
+    "point_data_commit_sha": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "point_data_commit_time_utc": "2025-12-09T19:41:50Z",
+    "artifact_sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+  },
+  "repository": "NikDrummond/Neurosetta_legacy_v0.0.1",
+  "latest_pre_artifact_snapshot": {
+    "sha": "25c911a28030deb5204eb7ab5a18ff4643363d96",
+    "pushed_at_utc": "2025-07-31T14:40:11Z"
+  },
+  "verified_capability_timeline": [
+    {
+      "date_utc": "2024-10-21T17:29:51Z",
+      "commit": "e0de7d65c2618f06edf4ec9f3e630bab5f524399",
+      "message": "Added functions for Transforming and Scaling neurons",
+      "file": "Neurosetta/transformations.py",
+      "observed_capabilities": [
+        "coordinate_scale",
+        "snap_to_axis",
+        "align_neuron",
+        "PCA/eigen-axis alignment"
+      ]
+    },
+    {
+      "date_utc": "2025-01-30T16:31:00Z",
+      "commit": "c9f537d519d783f1b6fc1ac8eee6f2df2626b89e",
+      "message": "patch broken imports from previous push",
+      "file": "Neurosetta/transformations.py",
+      "observed_capabilities": [
+        "pre-artifact transformation/scaling implementation remains present in the public history"
+      ]
+    },
+    {
+      "date_utc": "2025-02-20T15:33:25Z",
+      "commit": "27170b03c41d21c6f3694cb725cd284e0a7a31dc",
+      "message": "Get root coordinates",
+      "file": "Neurosetta/forests.py",
+      "observed_capabilities": [
+        "Forest-level root-coordinate extraction"
+      ]
+    },
+    {
+      "date_utc": "2025-02-21T00:01:37Z",
+      "commit": "a34548915eb557deb572355969ef9bb9802b4acb",
+      "message": "Function to get the centre of mass from all neurons in a Forest",
+      "file": "Neurosetta/forests.py",
+      "observed_capabilities": [
+        "Forest-level centre-of-mass calculation"
+      ]
+    },
+    {
+      "date_utc": "2025-02-27T10:25:59Z",
+      "commit": "5972d6d872f1a81f01fd3531a1c9ab36c5f2be42",
+      "message": "vp to ep mapping",
+      "file": "Neurosetta/forests.py",
+      "observed_capabilities": [
+        "Forest graph property propagation"
+      ]
+    },
+    {
+      "date_utc": "2025-07-29T10:18:50Z",
+      "commit": "9816dad67180ebf5937ae05316ae14d1f190aae4",
+      "message": "fix to subtree identification",
+      "file": "Neurosetta/graphs.py",
+      "observed_capabilities": [
+        "simplified-to-full-neuron vertex-index mapping fix for subtree identification"
+      ]
+    },
+    {
+      "date_utc": "2025-07-31T14:40:07Z",
+      "commit": "25c911a28030deb5204eb7ab5a18ff4643363d96",
+      "message": "mainly load mesh file added and fixes to sub tree identification",
+      "file": "Neurosetta/graphs.py",
+      "observed_capabilities": [
+        "subtree identification fixes remain in the latest public pre-artifact snapshot"
+      ]
+    }
+  ],
+  "pre_artifact_public_api_observation": {
+    "transformations_file": {
+      "source": "Neurosetta/transformations.py at 25c911a28030deb5204eb7ab5a18ff4643363d96",
+      "observed_behavior": [
+        "align_neuron centers coordinates on the mean",
+        "snap_to_axis aligns coordinate principal axes through eigen decomposition",
+        "align_neuron can apply coordinate_scale",
+        "coordinate_scale performs per-axis linear scaling and can invert factors"
+      ]
+    },
+    "graph_file": {
+      "source": "Neurosetta/graphs.py at 25c911a28030deb5204eb7ab5a18ff4643363d96",
+      "observed_behavior": [
+        "optimal_partition_root simplifies the neuron, scores candidate branch roots, and maps the winning simplified coordinate back to the full graph",
+        "g_subtree and g_subtree_mask materialize downstream subtree selections"
+      ]
+    }
+  },
+  "interpretation": {
+    "strengthens": [
+      "A substantial legacy software capability chain existed publicly before the December 2025 artifact.",
+      "Root-coordinate extraction, subtree identification, PCA/eigen-axis alignment, centering, and explicit scaling were all independently observable before the artifact boundary."
+    ],
+    "does_not_prove": [
+      "The December 2025 Point_data.pkl was produced by any specific legacy commit.",
+      "The exact December 2025 local/private Neurosetta installation or revision.",
+      "That the public legacy functions were invoked with the parameters actually used to generate Point_data.pkl.",
+      "That the historical Point_data rows came from the currently public four project SWCs."
+    ]
+  },
+  "next_target": "Recover an execution-level bridge: historical notebook/script, environment lock, local archive, or other artifact that binds Point_data.pkl to a concrete Neurosetta/GeoJax revision and input morphology materialization."
+}
