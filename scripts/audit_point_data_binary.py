@@ -124,7 +124,7 @@ def rows_by_anchor(obj: pd.DataFrame, snapshot: str) -> dict:
         out[subtype] = {
             "expected_root_id": expected_id,
             "selected_index_by_exact_id": int(id_matches.index[0]),
-            "id_match_count": int(len(id_matches)),
+            "id_match_count": len(id_matches),
             "distance_to_expected_snapshot_root": distance,
             "row": {
                 str(k): (None if pd.isna(v) else v.item() if hasattr(v, "item") else v)
