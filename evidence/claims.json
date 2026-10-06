@@ -281,15 +281,16 @@
     },
     {
       "id": "C-POINTDATA-008",
-      "statement": "A public GeoJax/legacy-Neurosetta software family contained JAX-backed geometry and PCA operations in snapshots predating the historical Point_data artifact; this is technically compatible context for the historical pickle's JAX ArrayImpl values.",
+      "statement": "A pre-artifact public Neurosetta legacy environment used the name `neurosetta`, Python 3.10, and JAX, while its graph code imported GeoJax for geometry metrics; this is technically compatible context for the historical Point_data JAX ArrayImpl values.",
       "classification": "SOURCE_OBSERVATION",
-      "status": "PROVEN",
+      "status": "DOCUMENTED",
       "evidence": [
         "E-LEGACY-JAX-CONTEXT"
       ],
       "caveats": [
-        "No exact historical Point_data execution is cryptographically bound to these software snapshots.",
-        "Compatibility does not establish producer identity or causation."
+        "The historical December execution is not cryptographically bound to the July 2025 legacy environment or the cited GeoJax snapshot.",
+        "Matching environment name and Python major/minor identify a compatibility signal, not environment identity.",
+        "Compatibility does not establish producer causation."
       ]
     },
     {
@@ -303,6 +304,20 @@
       "caveats": [
         "This excludes a producer from the exposed public paper-repository DAG at that boundary; it does not exclude private/local or unarchived producer code.",
         "The conclusion is about public repository contents, not the author's workstation or external repositories."
+      ]
+    },
+    {
+      "id": "C-POINTDATA-010",
+      "statement": "The contemporaneous December 9, 2025 Point_data consumer notebook used a `neurosetta` Jupyter kernel on Python 3.10.17, while a public July 2025 Neurosetta legacy environment also declares `name: neurosetta`, `python=3.10`, and `jax`; this forms a strong runtime-family compatibility fingerprint but not an exact execution identity.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "DOCUMENTED",
+      "evidence": [
+        "E-LEGACY-JAX-CONTEXT",
+        "E-POINTDATA-DAG-BOUNDARY"
+      ],
+      "caveats": [
+        "The exact December 2025 environment export is not recovered.",
+        "The name match may be coincidental or reflect a later installation; no lockfile pins the historical package revisions."
       ]
     }
   ]
