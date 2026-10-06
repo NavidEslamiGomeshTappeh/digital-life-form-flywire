@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_BOUNDED_PUBLIC_CODE_SEARCH_NEGATIVE",
+  "purpose": "Record bounded GitHub public-code searches for the historical Point_data-specific Subtype_evDir schema.",
+  "search_date": "2026-10-06",
+  "queries": [
+    {
+      "query": "\"Subtype_evDir\"",
+      "total_count": 3,
+      "external_matches": 0
+    },
+    {
+      "query": "Subtype_evDir",
+      "total_count": 3,
+      "external_matches": 0
+    },
+    {
+      "query": "\"PC1_angle\" \"Subtype_evDir_x\"",
+      "total_count": 3,
+      "external_matches": 0
+    },
+    {
+      "query": "\"Root_x\" \"Subtype_evDir_x\" Point_data",
+      "total_count": 0,
+      "external_matches": 0
+    }
+  ],
+  "returned_repositories": "All returned hits were in NavidEslamiGomeshTappeh/digital-life-form-flywire evidence/test files; no external public repository was returned by the GitHub code-search API for these exact queries.",
+  "interpretation": {
+    "proven": [
+      "The tested GitHub public-code queries did not recover an external public implementation containing the historical Subtype_evDir schema."
+    ],
+    "not_proven": [
+      "This is not proof that no external/private/unindexed copy exists.",
+      "GitHub code search coverage and indexing can change."
+    ],
+    "value": "This strengthens the public provenance gap: the three historical Subtype_evDir fields have no recovered external public producer code in the bounded search performed."
+  }
+}
