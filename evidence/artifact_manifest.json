@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "c6ff95a4433723607d92ce9df6c2c0fd9bedc599"
+        "value": "67fd626f443a36c4e687e8ffa3f566a1de65e5e2"
       }
     },
     {
@@ -111,7 +111,16 @@
       "role": "historical_vs_zenodo_point_data_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b055df122eb3ca9fa3e4b667907fa5d6c76af1af"
+        "value": "0186e39f4c8a35459838a2ae9b0b163033b5ddca"
+      }
+    },
+    {
+      "id": "E-POINTDATA-DECODE",
+      "path": "evidence/point_data_pickle_decode_receipt.json",
+      "role": "exact_id_point_data_decode_and_serialization_receipt",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "067aa460f1ab12ab47dbc7fc215b0aa16050b7f6"
       }
     },
     {
@@ -278,7 +287,7 @@
       "role": "root_coordinate_direct_comparison",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "aa33c7bc2ea2973e09b2909aff0bce76db9c4b89"
+        "value": "af34b06373d75425a6823a34393815708f826cc9"
       }
     },
     {
