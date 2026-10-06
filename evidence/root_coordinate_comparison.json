@@ -1,197 +1,85 @@
 {
-  "schema_version": 2,
-  "status": "NEGATIVE_PRE_ALIGNMENT_BASELINE_ONLY",
-  "purpose": "Test the four committed project SWCs against the four recorded Point_data root coordinates under simple nm-to-um conversion, while explicitly preserving the published population-alignment boundary. This is a pre-alignment baseline and is not a provenance rejection.",
-  "point_data_sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
-  "point_data_roots": {
-    "T4a": [
-      -46.976,
-      32.06399609375,
-      -111.552
-    ],
-    "T4c": [
-      -45.888,
-      21.61599609375,
-      -116.352
-    ],
-    "T5a": [
-      13.207995117187501,
-      51.2,
-      119.616
-    ],
-    "T5c": [
-      12.1999951171875,
-      54.944,
-      117.952
-    ]
+  "schema_version":1,
+  "status":"NEGATIVE_SIMPLE_FRAME_MATCH_BUT_HISTORICAL_INPUT_UNAVAILABLE",
+  "purpose":"Test whether the four committed project SWCs or the deterministically reproduced published subtree roots reproduce the four recorded Point_data root coordinates under the documented nm-to-um conversion, and record any frame hypothesis without promoting it to provenance.",
+  "point_data_sha256":"76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+  "point_data_roots":{
+    "T4a":[-46.976,32.06399609375,-111.552],
+    "T4c":[-45.888,21.61599609375,-116.352],
+    "T5a":[13.207995117187501,51.2,119.616],
+    "T5c":[12.1999951171875,54.944,117.952]
   },
-  "raw_swc_parent_minus_one_test": {
-    "T4a": {
-      "swc_root_um": [
-        775.5551,
-        249.46997,
-        236.08077
-      ],
-      "residual_um": [
-        822.5311,
-        217.40597390625,
-        347.63277
-      ],
-      "euclidean_residual_um": 919.0600147624788
+  "raw_swc_parent_minus_one_test":{
+    "T4a":{"swc_root_um":[775.5551,249.46997,236.08077],"residual_um":[822.5311,217.40597390625,347.63277],"euclidean_residual_um":919.0600147624788},
+    "T4c":{"swc_root_um":[771.35644,279.0513,233.02545],"residual_um":[817.24444,257.43530390625,349.37745],"euclidean_residual_um":925.3248148497474},
+    "T5a":{"swc_root_um":[727.81656,223.32773,239.6004],"residual_um":[714.6085648828125,172.12773,119.9844],"euclidean_residual_um":744.7748738257662},
+    "T5c":{"swc_root_um":[736.504,210.34355,236.34111],"residual_um":[724.3040048828125,155.39955,118.38911],"euclidean_residual_um":750.1875052252442}
+  },
+  "published_subtree_selected_root_test":{
+    "algorithm_source":"dendrite_subtree_mapping.json",
+    "selected_node_ids":{
+      "T4a":292,
+      "T4c":358,
+      "T5a":343,
+      "T5c":323
     },
-    "T4c": {
-      "swc_root_um": [
-        771.35644,
-        279.0513,
-        233.02545
-      ],
-      "residual_um": [
-        817.24444,
-        257.43530390625,
-        349.37745
-      ],
-      "euclidean_residual_um": 925.3248148497474
+    "project_swc_selected_root_um":{
+      "T4a":[789.1497,263.18266,210.35522],
+      "T4c":[788.7438,272.94928,205.01356],
+      "T5a":[717.25825,222.00586,211.70161],
+      "T5c":[713.4343,216.06416,213.15164]
     },
-    "T5a": {
-      "swc_root_um": [
-        727.81656,
-        223.32773,
-        239.6004
-      ],
-      "residual_um": [
-        714.6085648828125,
-        172.12773,
-        119.9844
-      ],
-      "euclidean_residual_um": 744.7748738257662
+    "residual_to_point_data_um":{
+      "T4a":[836.1257,231.11866390625,321.90722],
+      "T4c":[834.6318,251.33328390625,321.36556],
+      "T5a":[704.0502548828125,170.80586,92.08561],
+      "T5c":[701.2343048828125,161.12016,95.19964]
     },
-    "T5c": {
-      "swc_root_um": [
-        736.504,
-        210.34355,
-        236.34111
-      ],
-      "residual_um": [
-        724.3040048828125,
-        155.39955,
-        118.38911
-      ],
-      "euclidean_residual_um": 750.1875052252442
+    "euclidean_residual_um":{
+      "T4a":925.281730768758,
+      "T4c":929.0072574121547,
+      "T5a":730.3021037762146,
+      "T5c":725.7769821088544
     }
   },
-  "published_subtree_selected_root_test": {
-    "algorithm_source": "dendrite_subtree_mapping.json",
-    "selected_node_ids": {
-      "T4a": 292,
-      "T4c": 358,
-      "T5a": 343,
-      "T5c": 323
-    },
-    "project_swc_selected_root_um": {
-      "T4a": [
-        789.1497,
-        263.18266,
-        210.35522
-      ],
-      "T4c": [
-        788.7438,
-        272.94928,
-        205.01356
-      ],
-      "T5a": [
-        717.25825,
-        222.00586,
-        211.70161
-      ],
-      "T5c": [
-        713.4343,
-        216.06416,
-        213.15164
-      ]
-    },
-    "residual_to_point_data_um": {
-      "T4a": [
-        836.1257,
-        231.11866390625,
-        321.90722
-      ],
-      "T4c": [
-        834.6318,
-        251.33328390625,
-        321.36556
-      ],
-      "T5a": [
-        704.0502548828125,
-        170.80586,
-        92.08561
-      ],
-      "T5c": [
-        701.2343048828125,
-        161.12016,
-        95.19964
-      ]
-    },
-    "euclidean_residual_um": {
-      "T4a": 925.281730768758,
-      "T4c": 929.0072574121547,
-      "T5a": 730.3021037762146,
-      "T5c": 725.7769821088544
-    }
-  },
-  "empirical_similarity_fit_hypothesis": {
-    "status": "INFERENCE_ONLY",
-    "direction": "project_selected_root_um -> Point_data_root_um",
-    "row_vector_form": "Y = s * X * R + t",
-    "scale": 2.7055126399953204,
-    "rotation_matrix": [
-      [
-        -0.093779,
-        0.447171,
-        -0.889519
-      ],
-      [
-        -0.389845,
-        -0.838605,
-        -0.380476
-      ],
-      [
-        -0.916093,
-        0.311094,
-        0.252971
-      ]
+  "empirical_similarity_fit_hypothesis":{
+    "status":"INFERENCE_ONLY",
+    "direction":"project_selected_root_um -> Point_data_root_um",
+    "row_vector_form":"Y = s * X * R + t",
+    "scale":2.7055126399953204,
+    "rotation_matrix":[
+      [-0.093779,0.447171,-0.889519],
+      [-0.389845,-0.838605,-0.380476],
+      [-0.916093,0.311094,0.252971]
     ],
-    "translation": [
-      951.473342,
-      -494.225966,
-      1919.476788
-    ],
-    "per_root_residual_norm_um": {
-      "T4a": 9.73123,
-      "T4c": 8.944369,
-      "T5a": 10.745161,
-      "T5c": 8.881029
+    "translation":[951.473342,-494.225966,1919.476788],
+    "per_root_residual_norm_um":{
+      "T4a":9.73123,
+      "T4c":8.944369,
+      "T5a":10.745161,
+      "T5c":8.881029
     },
-    "rms_um": 9.605073279443637,
-    "warning": "This is a fitted four-point similarity transform only. No historical source, notebook, parameter, or software path found so far establishes that scale/rotation/translation was used to create Point_data. It must not be used as provenance."
+    "rms_um":9.605073279443637,
+    "warning":"This is a fitted four-point similarity transform only. No historical source, notebook, parameter, or software path found so far establishes that scale/rotation/translation was used to create Point_data. It must not be used as provenance."
   },
-  "published_generator_context": {
-    "generator": "Metrics1_Point_data.ipynb/process_one_point(tree)",
-    "operation": "convert Reduced_dendrites from nm to um, then tree.get_root_coordinate()",
-    "upstream": "PP3 creates Reduced_dendrites through subtree extraction and forest reduction"
+  "published_generator_context":{
+    "generator":"Metrics1_Point_data.ipynb/process_one_point(tree)",
+    "operation":"convert Reduced_dendrites from nm to um, then tree.get_root_coordinate()",
+    "upstream":"PP3 creates Reduced_dendrites through subtree extraction and forest reduction"
   },
-  "public_toolchain_semantics": {
-    "repository": "NikDrummond/NeuRosetta",
-    "commit": "2de2748ca9d4b3d17bc23b1f0f6d4e03cf012085",
-    "import_swc_finding": "import_swc reads SWC coordinates into a Tree; set_units declares spatial units without rescaling geometry.",
-    "convert_units_finding": "convert_units is the explicit operation that rescales morphology coordinates between units.",
-    "alignment_finding": "align_forest recenters pooled coordinates at the centroid and applies PCA rotation; it does not apply a scale factor."
+  "public_toolchain_semantics":{
+    "repository":"NikDrummond/NeuRosetta",
+    "commit":"2de2748ca9d4b3d17bc23b1f0f6d4e03cf012085",
+    "import_swc_finding":"import_swc reads SWC coordinates into a Tree; set_units declares spatial units without rescaling geometry.",
+    "convert_units_finding":"convert_units is the explicit operation that rescales morphology coordinates between units.",
+    "alignment_finding":"align_forest recenters pooled coordinates at the centroid and applies PCA rotation; it does not apply a scale factor."
   },
-  "public_release_inventory": {
-    "data_record": "https://zenodo.org/records/21876510",
-    "data_release": "v1 published 2026-08-10",
-    "data_archive": "T4_T5_dendrite_morphology_data.zip",
-    "data_archive_md5": "8bbc291c2e3e3555974b7f9f6c557109",
-    "released_metric_files": [
+  "public_release_inventory":{
+    "data_record":"https://zenodo.org/records/21876510",
+    "data_release":"v1 published 2026-08-10",
+    "data_archive":"T4_T5_dendrite_morphology_data.zip",
+    "data_archive_md5":"8bbc291c2e3e3555974b7f9f6c557109",
+    "released_metric_files":[
       "bifurcation_data.pkl",
       "columns.pkl",
       "contour_data.pkl",
@@ -203,74 +91,35 @@
       "readme.txt",
       "vertex_data.pkl"
     ],
-    "intermediate_morphology_not_listed": [
-      "Reduced_dendrites",
-      "NeuRosetta .nr forest files"
-    ],
-    "software_record": "https://zenodo.org/records/21876360",
-    "software_release": "v2.0.0 published 2026-08-10",
-    "software_archive_md5": "4b41a973cf55f5c21cf698b18ca62bfa",
-    "software_contains": [
-      "PP1_Fetch_flywire.ipynb",
-      "PP2_nr_conversion.ipynb",
-      "PP3_Dendrite_extraction.ipynb",
-      "PP4_Global_allignment.ipynb",
-      "PP5_Mesh_generation.ipynb",
-      "Metrics1_Point_data.ipynb"
-    ]
+    "intermediate_morphology_not_listed":["Reduced_dendrites","NeuRosetta .nr forest files"],
+    "software_record":"https://zenodo.org/records/21876360",
+    "software_release":"v2.0.0 published 2026-08-10",
+    "software_archive_md5":"4b41a973cf55f5c21cf698b18ca62bfa",
+    "software_contains":["PP1_Fetch_flywire.ipynb","PP2_nr_conversion.ipynb","PP3_Dendrite_extraction.ipynb","PP4_Global_allignment.ipynb","PP5_Mesh_generation.ipynb","Metrics1_Point_data.ipynb"]
   },
-  "historical_timeline": {
-    "paper_repo_initial_commit": "79cf52212935de6bddf996c9f46c0df89f5c5442",
-    "point_data_first_commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
-    "point_data_first_commit_time": "2025-12-09T19:41:50Z",
-    "point_data_first_commit_files": [
-      "Data/Point_data.pkl"
-    ],
-    "contemporaneous_consumer": "Notebooks/ANOVA_analysis.ipynb at 61fd0f176d73932ad87ece04153945501b4c405c",
-    "contemporaneous_consumer_time": "2025-12-09T19:40:07Z",
-    "public_preprocessing_commit": "8700efd40bccfa3e74ac7c4df02da83a968b9b52",
-    "public_preprocessing_time": "2026-08-10T17:49:32Z"
+  "historical_timeline":{
+    "paper_repo_initial_commit":"79cf52212935de6bddf996c9f46c0df89f5c5442",
+    "point_data_first_commit":"cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "point_data_first_commit_time":"2025-12-09T19:41:50Z",
+    "point_data_first_commit_files":["Data/Point_data.pkl"],
+    "contemporaneous_consumer":"Notebooks/ANOVA_analysis.ipynb at 61fd0f176d73932ad87ece04153945501b4c405c",
+    "contemporaneous_consumer_time":"2025-12-09T19:40:07Z",
+    "public_preprocessing_commit":"8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+    "public_preprocessing_time":"2026-08-10T17:49:32Z"
   },
-  "interpretation": {
-    "proven": [
-      "The committed SWCs do not reproduce the recorded Point_data roots by simply dividing their raw parent=-1 coordinates by 1000; this remains a valid pre-alignment baseline result.",
-      "The published subtree-selected nodes reproduced from the public algorithm also do not reproduce the recorded Point_data roots by simply dividing by 1000; this remains a pre-alignment baseline result.",
+  "interpretation":{
+    "proven":[
+      "The committed SWCs do not reproduce the recorded Point_data roots by simply dividing their raw parent=-1 coordinates by 1000.",
+      "The published subtree-selected nodes reproduced from the public algorithm also do not reproduce the recorded Point_data roots by simply dividing by 1000.",
       "The public NeuRosetta import path does not contain a hidden coordinate rescaling at SWC import; explicit unit conversion is a separate operation.",
-      "The public study defines global alignment separately for dendrite populations/hemispheres, including recentering and rotation, so raw project coordinates and Point_data coordinates are not an apples-to-apples frame comparison.",
-      "The public PP4 notebook applies those alignment operations in memory and does not persist the transformed forest in the shown notebook.",
-      "The public Zenodo metric archive does not expose the Reduced_dendrites or .nr intermediate morphology trees needed for direct recovery of the historical aligned root state.",
+      "The public Zenodo metric archive does not expose the Reduced_dendrites or .nr intermediate morphology trees needed for a direct historical root comparison.",
       "The December 2025 Point_data commit itself contains only the Point_data artifact, so that commit does not reveal its producer implementation."
     ],
-    "not_proven": [
-      "This pre-alignment mismatch does not disprove historical Point_data provenance.",
+    "not_proven":[
+      "This does not disprove historical Point_data provenance because the documented producer consumed an intermediate artifact that is not publicly preserved in the examined release.",
       "The fitted similarity transform is not a provenance result and must not be treated as the historical transform.",
-      "No exact December 2025 generator, exact aligned source morphology materialization, historical save point after population alignment, or exact execution environment has yet been recovered."
+      "No exact December 2025 generator, exact source morphology materialization, or exact execution environment has yet been recovered."
     ],
-    "next_target": "Recover a historical or locally materialized population-aligned Reduced_dendrites state (or an exact December 2025 alignment/save notebook) and compare the four Point_data anchors in their correct population-specific frame."
-  },
-  "alignment_confounded": true,
-  "alignment_boundary_evidence": {
-    "evidence_id": "E-GLOBAL-ALIGNMENT-BOUNDARY",
-    "source_type": "published_method_plus_public_notebook",
-    "article_url": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1014657",
-    "method_summary": "The study aligns dendrite populations separately for each population/hemisphere using mean-centering, PCA/eigendecomposition, fitted-sphere centering, and final axis/orientation rotations before spatial analysis.",
-    "notebook": "Notebooks/PP4_Global_allignment.ipynb",
-    "notebook_commit": "3a1aa1a2e368ff8767f40791588eaf552e6d436d",
-    "notebook_steps": [
-      "forest.convert_units(target_units='um')",
-      "sub_forest.align_forest(global_=True)",
-      "sub_forest.fit_sphere(global_=True)",
-      "sub_forest.recenter_coordinates(center=center, global_=True, bind=True)",
-      "sub_forest.rotate_coordinates(axis=(0,0,1), angle=pi, global_=True, bind=True)"
-    ],
-    "persistence_observation": "The public PP4 notebook has no save_forest call after the global alignment/recenter/rotation operations; it sends the transformed sub_forest to a viewer instead.",
-    "metrics1_observation": "Metrics1_Point_data independently reloads Reduced_dendrites and then obtains root_x/root_y/root_z from tree.get_root_coordinate() after nm-to-um conversion.",
-    "implication": "A raw V229 SWC root-versus-Point_data root mismatch cannot by itself adjudicate provenance because the published study defines a population-specific aligned coordinate frame and the exact historical persisted input state is not recovered."
-  },
-  "comparison_scope": {
-    "project_coordinates": "V229_PROJECT_SWC_NATIVE",
-    "point_data_coordinates": "STUDY_NATIVE_FLYWIRE_PIPELINE",
-    "frame_relation": "PRE_ALIGNMENT_PROJECT_BASELINE_VS_PUBLISHED_POINTDATA",
-    "provenance_decision": "NON_DECISIVE"
+    "next_target":"Locate any pre-August-2026 local/legacy Neurosetta or morphology materialization that can expose the actual December Reduced_dendrites root coordinates, or find an archived code revision that contains the missing producer state."
   }
 }

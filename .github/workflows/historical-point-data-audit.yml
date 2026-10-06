@@ -1,0 +1,28 @@
+name: Historical Point_data binary audit
+
+on:
+  push:
+    branches: [audit/decode-historical-point-data]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install runtime
+        run: python -m pip install --disable-pip-version-check pandas
+      - name: Decode historical Point_data
+        run: |
+          python scripts/audit_point_data_binary.py
+      - name: Upload audit receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: historical-point-data-binary-audit
+          path: point_data_binary_audit.json

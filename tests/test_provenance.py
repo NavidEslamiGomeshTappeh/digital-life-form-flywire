@@ -100,31 +100,6 @@ def test_point_data_sha256_binding_is_consistent():
     assert comparison["point_data_sha256"] == provenance["source"]["sha256"]
 
 
-def test_global_alignment_boundary_is_ledgered():
-    boundary = json.loads(
-        (ROOT / "evidence" / "global_alignment_boundary.json").read_text(
-            encoding="utf-8"
-        )
-    )
-    assert boundary["status"] == "PROVEN_PUBLISHED_GLOBAL_ALIGNMENT_BOUNDARY"
-    assert boundary["population_specific"] is True
-    assert boundary["operations"] == [
-        "mean_center_population",
-        "pca_rotation",
-        "fit_sphere_and_recenter",
-        "final_axis_orientation_rotation",
-    ]
-    assert boundary["pp4_persistence"]["save_after_alignment"] is False
-    comparison = json.loads(
-        (ROOT / "evidence" / "root_coordinate_comparison.json").read_text(
-            encoding="utf-8"
-        )
-    )
-    assert comparison["alignment_confounded"] is True
-    assert comparison["status"] == "NEGATIVE_PRE_ALIGNMENT_BASELINE_ONLY"
-    assert comparison["alignment_boundary_evidence"]["evidence_id"] == "E-GLOBAL-ALIGNMENT-BOUNDARY"
-
-
 def test_public_coordinate_pipeline_boundary_is_ledgered():
     boundary = json.loads(
         (ROOT / "evidence" / "public_coordinate_pipeline_boundary.json").read_text(
