@@ -1,0 +1,27 @@
+name: Historical morphology metric consistency audit
+
+on:
+  push:
+    branches: [audit/decode-historical-point-data]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install runtime
+        run: python -m pip install --disable-pip-version-check pandas jax jaxlib
+      - name: Audit historical metric artifacts
+        run: python scripts/audit_historical_morphology_metrics.py
+      - name: Upload consistency receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: historical-morphology-metric-consistency
+          path: historical_morphology_metric_consistency.json
