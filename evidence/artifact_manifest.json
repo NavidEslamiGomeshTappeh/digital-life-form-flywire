@@ -111,7 +111,7 @@
       "role": "historical_vs_zenodo_point_data_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "0186e39f4c8a35459838a2ae9b0b163033b5ddca"
+        "value": "36889100b3b8567da133d9e5abce70009abaa950"
       }
     },
     {
@@ -287,7 +287,7 @@
       "role": "root_coordinate_direct_comparison",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "af34b06373d75425a6823a34393815708f826cc9"
+        "value": "2ed1aadd6d9c93a5bb9f11eed653fc2bd774ac01"
       }
     },
     {
