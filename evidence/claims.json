@@ -385,6 +385,19 @@
         "The consumer notebook does not cryptographically prove it is the producer environment.",
         "A private/forked JAX build or a separate producer environment could violate this conditional bound."
       ]
+    },
+    {
+      "id": "C-POINTDATA-016",
+      "statement": "A bounded GitHub public-code search on 2026-10-06 for the historical `Subtype_evDir` schema and combinations with `PC1_angle`/`Point_data` returned no external public repository implementation; all returned hits were within the project's own evidence/tests.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "NEGATIVE_RESULT",
+      "evidence": [
+        "E-POINTDATA-SUBTYPE-EVDIR-SEARCH"
+      ],
+      "caveats": [
+        "This is a bounded negative search result, not proof of nonexistence.",
+        "Private, deleted, unindexed, or differently named implementations may still exist."
+      ]
     }
   ]
 }
