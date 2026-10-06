@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "c4ad1af1e3519f70a5a6df045ba7f6bc76574db3"
+        "value": "3fd71864af86d52ca043e86256b8a59afd9eaed4"
       }
     },
     {
@@ -675,6 +675,15 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "f79fcd755321fbd499bc73b6b0f0bcdd1c169a9f"
+      }
+    },
+    {
+      "id": "E-POINTDATA-SUBTYPE-EVDIR-SEARCH",
+      "path": "evidence/public_subtype_evdir_search.json",
+      "role": "bounded_public_code_search_negative",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "aa-placeholder"
       }
     }
   ]
