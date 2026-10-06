@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "status": "CANDIDATE_REVISION_NOT_DIRECTLY_BOUND",
+  "purpose": "Rank public NeuRosetta/GeoJax revision candidates and plausible execution parameters for the December 2025 Point_data artifact without falsely claiming historical producer recovery.",
+  "artifact_boundary": {
+    "point_data_commit_sha": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "point_data_commit_time_utc": "2025-12-09T19:41:50Z",
+    "artifact_sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+    "historical_consumer_notebook_commit": "61fd0f176d73932ad87ece04153945501b4c405c",
+    "historical_consumer_kernel": "neurosetta",
+    "historical_consumer_python": "3.10.17",
+    "historical_consumer_path": "/home/nik/Desktop/Software/T45_Morpho_data/Data/Pickled_data/Point_data.pkl"
+  },
+  "candidates": {
+    "geojax": {
+      "best_public_unpinned_head_candidate": "33b0f8727ab447eff86e35a69c60c1f33b4d1513",
+      "date_utc": "2025-05-02T13:36:30Z",
+      "message": "Bounds module update",
+      "basis": [
+        "It is the latest public GeoJax commit before the Point_data artifact boundary.",
+        "The public GeoJax history shows no later commits before 2026-01-16.",
+        "The paper's contemporaneous 2025-12-10 Random_bifurcations history imports GeoJax as gj and directly uses gj.cross/gj.angle/gj.normalize while reading Point_data-derived PCA columns.",
+        "GeoJax/alignment.py has the same blob SHA 53560fd7de0463a51e1283b4a9c0e0db5bb33e8e at both 2025-04-23 v0.2 and 2025-05-02, so the robust PCA implementation was unchanged through the pre-artifact head.",
+        "GeoJax/angles.py at the pre-artifact head has the Apr-30 signed-angle arctan2 implementation, which is later consistent with the contemporaneous paper's angle consumers."
+      ],
+      "confidence": {
+        "as_dependency_head_candidate": "HIGH",
+        "as_exact_historical_producer_binding": "LOW"
+      }
+    },
+    "legacy_neurosetta": {
+      "latest_public_pre_artifact": "25c911a28030deb5204eb7ab5a18ff4643363d96",
+      "date_utc": "2025-07-31T14:40:07Z",
+      "geo_jax_dependency_present_by": {
+        "commit": "beea421fb235364f9289e7d68fc8a050f12a2372",
+        "date_utc": "2025-02-21T00:01:37Z",
+        "message": "Branching Angles; Also now has GeoJax as a dependency"
+      },
+      "subtree_fix": {
+        "commit": "9816dad67180ebf5937ae05316ae14d1f190aae4",
+        "date_utc": "2025-07-29T10:18:50Z",
+        "significance": "optimal_partition_root maps the winning simplified-root coordinate back to the full graph using nearest_vertex"
+      },
+      "confidence": {
+        "as_pre_artifact_software_family_context": "HIGH",
+        "as_exact_Point_data_producer_revision": "LOW"
+      }
+    },
+    "current_neurosetta": {
+      "public_repo": "NikDrummond/NeuRosetta",
+      "public_coordinate_pca_first_observed_commit": "958502da2f3e5bf74a2ede755c21357c8b7fdf3a",
+      "public_coordinate_pca_first_observed_date_utc": "2026-08-15T19:45:56Z",
+      "early_package_python_line": "3.11",
+      "conclusion": "The currently public implementation that exposes coordinate_pca is not a direct public December-2025 match to the recorded neurosetta/Python 3.10.17 runtime."
+    }
+  },
+  "plausible_parameter_bundle": {
+    "pca": {
+      "robust": true,
+      "normalize_eigenvalues": true,
+      "center": "likely mean-centering at the geometry/PCA boundary; exact historical call remains unresolved",
+      "sort_descending": true,
+      "transpose_eigenvectors": true
+    },
+    "robust_covariance_m_estimator": {
+      "c": 1.5,
+      "tol": 0.000001,
+      "max_iter": 100,
+      "covariance_inverse_regularizer": 0.000001,
+      "status": "directly observed in public GeoJax pre-artifact code; exact historical invocation remains unresolved"
+    },
+    "signed_angle": {
+      "method": "project vectors to plane and use atan2(y,x)",
+      "output": "radians by default",
+      "degrees_flag": false,
+      "status": "directly observed in GeoJax pre-artifact code; exact historical call remains unresolved"
+    },
+    "morphology_io_and_subtree": {
+      "likely_units": "raw morphology coordinates preserved at import, with explicit unit conversion separate from import",
+      "likely_root_selection": "automated subtree/root selection consistent with legacy Neurosetta capability",
+      "manual_root_correction": "possible/likely from published method, but not recoverable from public December artifact boundary",
+      "post_selection_manual_review": "possible/likely from published method, but not recoverable",
+      "exact_morphology_materialization": "UNRESOLVED"
+    },
+    "parallelism": {
+      "later_public_pipeline_pattern": "parallel=True, max_workers=10",
+      "historical_december_value": "UNRESOLVED"
+    }
+  },
+  "decisive_unresolved_items": [
+    "Exact NeuRosetta revision/SHA used on 2025-12-09.",
+    "Exact GeoJax installation source and whether it resolved to public HEAD 33b0f872... or a local/private checkout.",
+    "Exact JAX and jaxlib versions.",
+    "Exact producer notebook/script that created Data/Point_data.pkl.",
+    "Exact input T45 morphology materialization and per-neuron manual corrections.",
+    "Exact parameter values passed to subtree selection, PCA, alignment, scaling, and metric generation.",
+    "Execution receipt binding all of the above to the exact Point_data SHA-256."
+  ],
+  "next_high_value_test": "Use the later public Metrics1_Point_data algorithm plus the pre-artifact GeoJax parameter semantics to attempt value-level reproduction on any recovered historical morphology/intermediate; treat a value match as computation-path evidence, not producer identity."
+}
