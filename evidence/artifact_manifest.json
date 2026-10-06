@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "67fd626f443a36c4e687e8ffa3f566a1de65e5e2"
+        "value": "9f18871cac46fb78f41a36deb96e63ae852f2b6f"
       }
     },
     {
@@ -111,7 +111,7 @@
       "role": "historical_vs_zenodo_point_data_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "36889100b3b8567da133d9e5abce70009abaa950"
+        "value": "ca7a6374d37b8d1d26c01814ff7af35797025655"
       }
     },
     {
@@ -287,7 +287,7 @@
       "role": "root_coordinate_direct_comparison",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "2ed1aadd6d9c93a5bb9f11eed653fc2bd774ac01"
+        "value": "707b3bf8a22b9f57740ea8e34aa88382604ca88f"
       }
     },
     {
@@ -630,6 +630,15 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "5d1208e9296cb57175d14cd5771de1df86ee251d"
+      }
+    },
+    {
+      "id": "E-LEGACY-JAX-CONTEXT",
+      "path": "evidence/legacy_jax_geometry_context.json",
+      "role": "contextual_legacy_jax_geometry_compatibility",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "c55cda013c27c19b411a119b0cd1505bd7587e34"
       }
     }
   ]
