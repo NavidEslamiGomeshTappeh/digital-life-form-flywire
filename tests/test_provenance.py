@@ -168,10 +168,10 @@ def test_point_data_exact_id_decode_receipt_is_ledgered():
         assert per_column[column] == {"jaxlib._jax.ArrayImpl": 5828}
     assert evidence["decode_runtime"]["pattern_check"]["exact"] is True
     expected_ids = {
-        "T4a": 720575940632008007,
-        "T4c": 720575940616224414,
-        "T5a": 720575940625571465,
-        "T5c": 720575940617782941,
+        "T4a": "720575940632008007",
+        "T4c": "720575940616224414",
+        "T5a": "720575940625571465",
+        "T5c": "720575940617782941",
     }
     for subtype, root_id in expected_ids.items():
         anchor = evidence["anchor_selection"]["anchors"][subtype]
@@ -182,6 +182,9 @@ def test_point_data_exact_id_decode_receipt_is_ledgered():
     claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-007")
     assert claim["status"] == "REPRODUCED"
     assert "E-POINTDATA-DECODE" in claim["evidence"]
+    claim_context = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-008")
+    assert claim_context["classification"] == "SOURCE_OBSERVATION"
+    assert claim_context["status"] == "PROVEN"
 
 
 def test_point_data_snapshot_anchor_ids_are_exact_and_unique():
@@ -197,6 +200,7 @@ def test_point_data_snapshot_anchor_ids_are_exact_and_unique():
         "T5c": 720575940617782941,
     }
     assert evidence["verification"]["anchor_selection_method"] == "exact_root_id"
+    assert evidence["verification"]["exact_id_storage"] == "string"
     assert evidence["verification"]["unique_historical_rows"] == 4
     assert evidence["verification"]["unique_zenodo_rows"] == 4
     assert evidence["verification"]["previous_nearest_coordinate_selector_corrected"] is True
