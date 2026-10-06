@@ -260,7 +260,7 @@
       "role": "lineage_regeneration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "34cbad98389ad07fb3e9612d248717c89d7b5c38"
+        "value": "80602bd618aaccd17b3d058013fce05d65d0dabf"
       }
     },
     {
@@ -269,7 +269,7 @@
       "role": "root_coordinate_direct_comparison",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "e393c48086331ea01afb25f3c677c924312ae790"
+        "value": "813c2aac192ee816d0afda7e3deb26f13a909fb9"
       }
     },
     {
