@@ -1,10 +1,8 @@
 from __future__ import annotations
 
 import hashlib
-import io
 import json
 import pickle
-import pickletools
 import urllib.request
 import zipfile
 from pathlib import Path
@@ -47,7 +45,7 @@ def rows_by_anchor(obj: pd.DataFrame) -> dict:
         rec = {
             "expected_root_id": exp["root_id"],
             "expected_root": list(exp["root"]),
-            "candidate_count_for_subtype": int(len(subset)),
+            "candidate_count_for_subtype": len(subset),
             "selected_index_by_expected_root": int(idx),
             "distance_to_expected_root": float(distances.loc[idx]),
             "row": {
