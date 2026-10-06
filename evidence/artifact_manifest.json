@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "9f18871cac46fb78f41a36deb96e63ae852f2b6f"
+        "value": "32e790ffd82fd76f16a03f4515e2e23b8931de63"
       }
     },
     {
@@ -111,7 +111,7 @@
       "role": "historical_vs_zenodo_point_data_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "ca7a6374d37b8d1d26c01814ff7af35797025655"
+        "value": "a00dbf2d62ba5976d9c2b90bd692f2dc30d2b636"
       }
     },
     {
@@ -120,7 +120,7 @@
       "role": "exact_id_point_data_decode_and_serialization_receipt",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "8824f3227b73c2393f88ccfdb9ded8472aab5db2"
+        "value": "665c7937b41c1b4bfe86903a55c6981b7952c074"
       }
     },
     {
@@ -278,7 +278,7 @@
       "role": "lineage_regeneration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "69d6ee554e786281e8346c6b3aadbcd304294581"
+        "value": "ad6972acbe27761a92508862e6931c4a5b9e2254"
       }
     },
     {
@@ -287,7 +287,7 @@
       "role": "root_coordinate_direct_comparison",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "707b3bf8a22b9f57740ea8e34aa88382604ca88f"
+        "value": "900a318ab7ec21107845c0f014ec7f17b5c2e8b3"
       }
     },
     {
