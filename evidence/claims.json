@@ -319,6 +319,19 @@
         "The exact December 2025 environment export is not recovered.",
         "The name match may be coincidental or reflect a later installation; no lockfile pins the historical package revisions."
       ]
+    },
+    {
+      "id": "C-POINTDATA-011",
+      "statement": "The public Neurosetta legacy lineage had adopted GeoJax by February 21, 2025 and was still evolving against newer GeoJax in June 2025; by July 2025 its public environment was named `neurosetta`, used Python 3.10, and included JAX. This predates the December 9, 2025 historical Point_data artifact and matches its broad JAX-backed runtime family.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "DOCUMENTED",
+      "evidence": [
+        "E-LEGACY-JAX-CONTEXT"
+      ],
+      "caveats": [
+        "This establishes a pre-artifact software-family/runtime precedent, not the exact Point_data producer.",
+        "The exact December 2025 package versions and GeoJax/Neurosetta revisions remain unresolved."
+      ]
     }
   ]
 }
