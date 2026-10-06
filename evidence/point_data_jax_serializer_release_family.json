@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_POINTDATA_JAX_SERIALIZER_RELEASE_FAMILY",
+  "purpose": "Bound the historical Point_data pickle's JAX ArrayImpl serialization contract against public JAX release tags.",
+  "historical_signature": {
+    "pickle_global": "jax._src.array._reconstruct_array",
+    "aval_state_keys_observed": ["weak_type"],
+    "aval_state_example": {"weak_type": false},
+    "object_type": "jaxlib._jax.ArrayImpl"
+  },
+  "public_release_checks": [
+    {
+      "release_ref": "jax-v0.4.30",
+      "file": "jax/_src/array.py",
+      "git_blob": "514c10f7f0ba57971d91bbac852514ec64ee0510",
+      "array_reduce_observation": "aval_state = {'weak_type': self.aval.weak_type, 'named_shape': self.aval.named_shape}",
+      "historical_compatibility": false,
+      "reason": "The historical pickle's serialized aval_state contains weak_type only; the standard v0.4.30 reducer includes named_shape."
+    },
+    {
+      "release_ref": "jax-v0.4.31",
+      "file": "jax/_src/array.py",
+      "git_blob": "03b0e49d3201bd7eb29b3b032e7de3ecd4bf5319",
+      "array_reduce_observation": "aval_state = {'weak_type': self.aval.weak_type}",
+      "historical_compatibility": true
+    },
+    {
+      "release_ref": "jax-v0.5.0",
+      "file": "jax/_src/array.py",
+      "git_blob": "802a3f5f6a5d40ebf6e10702fc372b119ad5a9fc",
+      "array_reduce_observation": "aval_state = {'weak_type': self.aval.weak_type}",
+      "historical_compatibility": true
+    },
+    {
+      "release_ref": "jax-v0.6.2",
+      "file": "jax/_src/array.py",
+      "git_blob": "2514502c27d068f3cfb26513e304bde6b8b1b485",
+      "array_reduce_observation": "aval_state = {'weak_type': self.aval.weak_type}",
+      "historical_compatibility": true
+    },
+    {
+      "release_ref": "jax-v0.7.0",
+      "file": "jax/_src/array.py",
+      "git_blob": "69c2d1b7b0c2b3c19e5cc2521cdc22d4d02302be",
+      "array_reduce_observation": "aval_state = {'weak_type': self.aval.weak_type}",
+      "historical_compatibility": true
+    },
+    {
+      "release_ref": "jax-v0.7.2",
+      "file": "jax/_src/array.py",
+      "git_blob": "2264ad6e83a3ddfe82ac80ff41f4904f652f1770",
+      "array_reduce_observation": "aval_state = {'weak_type': self.aval.weak_type}",
+      "historical_compatibility": true
+    },
+    {
+      "release_ref": "jax-v0.8.0",
+      "file": "jax/_src/array.py",
+      "git_blob": "13ca89fb25d798a8a6827c31bdccbd724eeb8b46",
+      "array_reduce_observation": "aval_state = {'weak_type': self.aval.weak_type}",
+      "historical_compatibility": true
+    }
+  ],
+  "conclusion": {
+    "proven": [
+      "The historical pickle uses a serialization signature directly compatible with the standard JAX ArrayImpl reducer used in released JAX tags from v0.4.31 through v0.8.0.",
+      "The historical weak_type-only aval_state is not compatible with the standard JAX v0.4.30 reducer because v0.4.30 includes named_shape."
+    ],
+    "limits": [
+      "This is a release-family constraint, not exact version identification.",
+      "A private/forked JAX build could differ from the released tags.",
+      "The exact December 2025 producer and exact package lock remain unresolved."
+    ]
+  }
+}
