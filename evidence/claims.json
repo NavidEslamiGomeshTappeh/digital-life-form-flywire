@@ -332,6 +332,19 @@
         "This establishes a pre-artifact software-family/runtime precedent, not the exact Point_data producer.",
         "The exact December 2025 package versions and GeoJax/Neurosetta revisions remain unresolved."
       ]
+    },
+    {
+      "id": "C-POINTDATA-012",
+      "statement": "Byte-level inspection of the historical December 2025 Point_data.pkl explicitly finds the private JAX serializer callable `jax._src.array._reconstruct_array`; all eight PCA/angle/direction-vector metric columns are scalar float32 jaxlib._jax.ArrayImpl values across all 5,828 rows.",
+      "classification": "DETERMINISTIC_COMPUTATION",
+      "status": "REPRODUCED",
+      "evidence": [
+        "E-POINTDATA-PICKLE-GLOBALS"
+      ],
+      "caveats": [
+        "The serializer reference identifies the serialization mechanism, not the exact producer code path.",
+        "The exact December 2025 JAX version and execution environment remain unresolved."
+      ]
     }
   ]
 }
