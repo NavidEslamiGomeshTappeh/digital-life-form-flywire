@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "8ffb2e1ea62308c70bfc596d0e867bbcd4a52980"
+        "value": "489102fbc6d9223100fec6b1e2f3c14642abaf79"
       }
     },
     {
@@ -674,7 +674,7 @@
       "role": "jax_release_family_serializer_compatibility",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "254485ee024ff72a06ceb182ba68957ccc72883f"
+        "value": "f79fcd755321fbd499bc73b6b0f0bcdd1c169a9f"
       }
     }
   ]
