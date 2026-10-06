@@ -206,6 +206,34 @@ def test_historical_neurosetta_runtime_family_fingerprint_is_ledgered():
     assert lineage[2]["commit"] == "25c911a28030deb5204eb7ab5a18ff4643363d96"
 
 
+def test_point_data_pickle_globals_receipt_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_pickle_globals_receipt.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_POINTDATA_PICKLE_GLOBALS"
+    assert evidence["source"]["sha256"] == (
+        "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+    )
+    assert evidence["pickle_globals"]["stack_global_count"] == 11
+    assert "jax._src.array._reconstruct_array" in evidence["pickle_globals"]["exact_globals"]
+    assert evidence["pickle_globals"]["jax_globals"][0]["pickle_byte_position"] == 717551
+    fp = evidence["jax_value_fingerprint"]
+    assert fp["object_type"] == "jaxlib._jax.ArrayImpl"
+    assert fp["array_values_total"] == 46624
+    assert fp["exact_count_match"] is True
+    assert fp["shape"] == "()"
+    assert fp["dtype"] == "float32"
+    assert all(value == 5828 for value in fp["per_column_count"].values())
+    claims = json.loads(
+        (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
+    )
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-012")
+    assert claim["status"] == "REPRODUCED"
+    assert "E-POINTDATA-PICKLE-GLOBALS" in claim["evidence"]
+
+
 def test_point_data_exact_id_decode_receipt_is_ledgered():
     evidence = json.loads(
         (ROOT / "evidence" / "point_data_pickle_decode_receipt.json").read_text(
