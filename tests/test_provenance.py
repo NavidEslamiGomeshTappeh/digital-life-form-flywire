@@ -149,6 +149,28 @@ def test_point_data_snapshot_delta_is_ledgered():
     assert "E-POINTDATA-VERSION-DELTA" in claim["evidence"]
 
 
+def test_point_data_jax_serializer_byte_alignment_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_jax_serializer_compatibility.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["historical_artifact"]["pickle_global"] == (
+        "jax._src.array._reconstruct_array"
+    )
+    alignment = evidence["historical_byte_alignment"]
+    assert alignment["pickle_byte_position"] == 717551
+    assert alignment["opcode"] == "STACK_GLOBAL"
+    assert alignment["preceding_strings"][-2:] == [
+        "jax._src.array",
+        "_reconstruct_array",
+    ]
+    assert (
+        alignment["independent_local_recheck"]["sha256"]
+        == "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+    )
+
+
 def test_public_point_data_ingest_dag_boundary_is_ledgered():
     evidence = json.loads(
         (ROOT / "evidence" / "public_point_data_ingest_boundary.json").read_text(
