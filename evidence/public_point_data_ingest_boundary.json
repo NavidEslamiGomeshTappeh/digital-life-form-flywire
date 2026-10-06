@@ -88,11 +88,11 @@
     }
   ],
   "derived_intervals": {
-    "repository_creation_to_point_data_seconds": 94 * 60 + 46,
+    "repository_creation_to_point_data_seconds": 5686,
     "anova_to_point_data_seconds": 103,
     "point_data_to_first_src_seconds": 1602,
     "all_metric_ingests_before_src_seconds": 1602,
-    "point_data_upload_to_neuron_ids_seconds": 6 * 24 * 3600 + 13 * 3600 + 54 * 60 + 6
+    "point_data_upload_to_neuron_ids_seconds": 568446
   },
   "conclusions": {
     "proven": [
