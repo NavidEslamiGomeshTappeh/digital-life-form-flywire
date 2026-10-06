@@ -278,6 +278,19 @@
         "The decoded JAX object type identifies a serialization/runtime dependency but does not identify the producer code path that constructed the arrays.",
         "This does not recover the missing December 2025 population-aligned Reduced_dendrites state."
       ]
+    },
+    {
+      "id": "C-POINTDATA-008",
+      "statement": "A public GeoJax/legacy-Neurosetta software family contained JAX-backed geometry and PCA operations in snapshots predating the historical Point_data artifact; this is technically compatible context for the historical pickle's JAX ArrayImpl values.",
+      "classification": "CONTEXT_ONLY",
+      "status": "DOCUMENTED",
+      "evidence": [
+        "E-LEGACY-JAX-CONTEXT"
+      ],
+      "caveats": [
+        "No exact historical Point_data execution is cryptographically bound to these software snapshots.",
+        "Compatibility does not establish producer identity or causation."
+      ]
     }
   ]
 }
