@@ -5,6 +5,7 @@ on:
     branches:
       - audit/decode-historical-point-data
       - audit/point-data-anchor-integrity
+      - audit/point-data-pickle-globals
   pull_request:
     branches:
       - main
