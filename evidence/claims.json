@@ -398,6 +398,19 @@
         "This is a bounded negative search result, not proof of nonexistence.",
         "Private, deleted, unindexed, or differently named implementations may still exist."
       ]
+    },
+    {
+      "id": "C-POINTDATA-017",
+      "statement": "The historical Point_data.pkl contains one distinct normalized 3D Subtype_evDir vector per row across all 5,828 neurons: each of the eight subtype groups has unique triplets under exact float comparison and unit-norm error below 4.7e-7.",
+      "classification": "DETERMINISTIC_COMPUTATION",
+      "status": "REPRODUCED",
+      "evidence": [
+        "E-POINTDATA-EVDIR-STRUCTURE"
+      ],
+      "caveats": [
+        "This establishes the numerical structure of the stored vectors, not their semantic origin.",
+        "The exact producer operation that generated Subtype_evDir_x/y/z remains unresolved."
+      ]
     }
   ]
 }
