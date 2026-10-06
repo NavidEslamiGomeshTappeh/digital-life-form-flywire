@@ -358,6 +358,19 @@
         "The match establishes serializer-format compatibility, not the exact JAX release or execution environment.",
         "It does not recover the morphology producer script."
       ]
+    },
+    {
+      "id": "C-POINTDATA-014",
+      "statement": "Under the standard released JAX ArrayImpl serializer, the historical Point_data pickle's weak_type-only aval_state is compatible with JAX v0.4.31 through v0.8.0, while v0.4.30 is incompatible because its reducer includes named_shape.",
+      "classification": "DETERMINISTIC_COMPUTATION",
+      "status": "REPRODUCED",
+      "evidence": [
+        "E-POINTDATA-JAX-SERIALIZER-RELEASE-FAMILY"
+      ],
+      "caveats": [
+        "This is not exact JAX version identification.",
+        "Private/forked JAX builds and nonstandard serialization paths are outside this release-tag comparison."
+      ]
     }
   ]
 }
