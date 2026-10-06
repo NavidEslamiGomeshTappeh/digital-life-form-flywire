@@ -683,7 +683,7 @@
       "role": "bounded_public_code_search_negative",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "aa-placeholder"
+        "value": "175bf1eaaacbd404b43a0cd66a0a643260aafcfb"
       }
     }
   ]
