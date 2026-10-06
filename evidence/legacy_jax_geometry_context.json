@@ -39,6 +39,31 @@
         "imports GeoJax",
         "uses GeoJax.normalise/cross/signed_angle/angle for geometry metrics"
       ]
+    },
+    "paper_repository": {
+      "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+      "snapshot": "3a1aa1a2e368ff8767f40791588eaf552e6d436d",
+      "observed_files": {
+        "condaenv.kigyxrh9.requirements.txt": {
+          "git_blob": "6adae9b8c58cce0893ecc3377b08841621387d88",
+          "contents": [
+            "fitter>=1.5.0",
+            "jax>=0.4.0",
+            "jaxlib>=0.4.0",
+            "git+https://github.com/NikDrummond/GeoJax.git"
+          ]
+        },
+        "src/Nearest_neighbours.py": {
+          "observation": "imports jax and jax.numpy; computes distance matrices with jnp.asarray",
+          "note": "This is a public/release snapshot observation. The file's .history variants are timestamped 2025-12-10, so they are later than the 2025-12-09 historical Point_data commit and are not asserted as its producer."
+        }
+      },
+      "external_corrobation": {
+        "source": "OSCR code/paper tracing record",
+        "url": "https://openscicode.org/paper/doi_10.1371_journal.pcbi.1014657/?repo=zenodo%3A21876360",
+        "observation": "OSCR independently inventories the Zenodo code archive as containing 21 JAX-using files and lists the 2025-12-10 Nearest_neighbours history files.",
+        "classification": "independent_archival_context"
+      }
     }
   },
   "relationship_to_historical_point_data": {
@@ -62,5 +87,6 @@
     "No exact December 2025 producer script has been recovered.",
     "No exact December 2025 dependency lockfile or environment export has been recovered.",
     "The compatibility observation does not establish causation or execution identity."
-  ]
+  ],
+  "compatibility_observation": "The historical artifact's exact 8-column JAX ArrayImpl fingerprint is technically compatible with the JAX-backed geometry/PCA ecosystem represented both by GeoJax/legacy-Neurosetta and by the published paper repository's JAX dependency snapshot."
 }
