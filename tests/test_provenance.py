@@ -125,6 +125,30 @@ def test_global_alignment_boundary_is_ledgered():
     assert comparison["alignment_boundary_evidence"]["evidence_id"] == "E-GLOBAL-ALIGNMENT-BOUNDARY"
 
 
+def test_point_data_snapshot_delta_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_version_delta.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_POINTDATA_MULTI_SNAPSHOT_BOUNDARY"
+    assert evidence["sources"]["historical_git"]["sha256"] != evidence["sources"]["zenodo_release"]["sha256"]
+    assert evidence["sources"]["historical_git"]["rows"] == 5828
+    assert evidence["sources"]["zenodo_release"]["rows"] == 11838
+    assert len(evidence["anchor_comparison"]) == 4
+    assert all(item["id"] > 0 for item in evidence["anchor_comparison"])
+    assert all(
+        item["historical_root"] != item["zenodo_root"]
+        for item in evidence["anchor_comparison"]
+    )
+    claims = json.loads(
+        (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
+    )
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-006")
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-VERSION-DELTA" in claim["evidence"]
+
+
 def test_public_coordinate_pipeline_boundary_is_ledgered():
     boundary = json.loads(
         (ROOT / "evidence" / "public_coordinate_pipeline_boundary.json").read_text(

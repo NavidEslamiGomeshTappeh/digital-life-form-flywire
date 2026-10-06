@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "afc036449b2e875b825ef1f5ff324cff33aad49a"
+        "value": "c6ff95a4433723607d92ce9df6c2c0fd9bedc599"
       }
     },
     {
@@ -103,6 +103,15 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "5eeba75fa5e2f9442ca08bfc9c9e9518a0f017fc"
+      }
+    },
+    {
+      "id": "E-POINTDATA-VERSION-DELTA",
+      "path": "evidence/point_data_version_delta.json",
+      "role": "historical_vs_zenodo_point_data_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "b055df122eb3ca9fa3e4b667907fa5d6c76af1af"
       }
     },
     {
@@ -260,7 +269,7 @@
       "role": "lineage_regeneration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "8cd30ca3852478c29455ad9d201188e5d9a2fc93"
+        "value": "d945271056edce3bd062c54122df65251fdc89b2"
       }
     },
     {
@@ -269,7 +278,7 @@
       "role": "root_coordinate_direct_comparison",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "f59ddc89cc01f80a72fab7727f344807c7f7cf10"
+        "value": "aa33c7bc2ea2973e09b2909aff0bce76db9c4b89"
       }
     },
     {
