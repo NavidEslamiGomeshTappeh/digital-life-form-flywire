@@ -647,7 +647,7 @@
       "role": "public_git_dag_point_data_ingest_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "a8f3ec1a500438fd6f6a2c34a3b7d0dbd9f0b942"
+        "value": "b0712507659d5ca74d5774df98bc75075e12698a"
       }
     }
   ]
