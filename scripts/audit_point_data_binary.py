@@ -106,22 +106,25 @@ report = {
 for subtype in EXPECTED:
     h = report["historical_git"]["anchors"][subtype]
     z = report["zenodo_release"]["anchors"][subtype]
-    report["id_and_coordinate_deltas"][subtype] = {
-        "same_id": h["row"]["ID"] == z["row"]["ID"],
-        "same_subtype": h["row"]["Subtype"] == z["row"]["Subtype"],
-        "historical_root": [h["row"]["Root_x"], h["row"]["Root_y"], h["row"]["Root_z"]],
-        "zenodo_root": [z["row"]["Root_x"], z["row"]["Root_y"], z["row"]["Root_z"]],
-        "root_delta_zenodo_minus_historical": [
-            z["row"]["Root_x"] - h["row"]["Root_x"],
-            z["row"]["Root_y"] - h["row"]["Root_y"],
-            z["row"]["Root_z"] - h["row"]["Root_z"],
-        ],
-        "same_segment_count": h["row"]["Segment_Count"] == z["row"]["Segment_Count"],
-        "historical_segment_count": h["row"]["Segment_Count"],
-        "zenodo_segment_count": z["row"]["Segment_Count"],
-        "same_total_cable": h["row"]["Total_Cable"] == z["row"]["Total_Cable"],
-        "historical_total_cable": h["row"]["Total_Cable"],
-        "zenodo_total_cable": z["row"]["Total_Cable"],
+    hr, zr = h["row"], z["row"]
+    common = sorted(set(hr) & set(zr))
+    deltas = {}
+    for key in common:
+        hv, zv = hr[key], zr[key]
+        if isinstance(hv, (int, float)) and isinstance(zv, (int, float)):
+            deltas[key] = {"historical": hv, "zenodo": zv, "delta_zenodo_minus_historical": zv - hv}
+        elif hv != zv:
+            deltas[key] = {"historical": hv, "zenodo": zv}
+
+    report.setdefault("id_and_coordinate_deltas", {})[subtype] = {
+        "same_id": hr.get("ID") == zr.get("ID"),
+        "historical_id": hr.get("ID"),
+        "zenodo_id": zr.get("ID"),
+        "same_subtype": hr.get("Subtype") == zr.get("Subtype"),
+        "historical_root": [hr.get("Root_x"), hr.get("Root_y"), hr.get("Root_z")],
+        "zenodo_root": [zr.get("Root_x"), zr.get("Root_y"), zr.get("Root_z")],
+        "common_column_deltas": deltas,
+        "common_columns": common,
     }
 
 OUT.write_text(json.dumps(report, indent=2, default=str), encoding="utf-8")
