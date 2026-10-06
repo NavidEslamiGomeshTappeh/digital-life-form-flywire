@@ -4,18 +4,22 @@
   "purpose": "Execution receipt proving that the historical and later Point_data.pkl snapshots were decoded in GitHub Actions and that the four project anchors were selected by exact Root ID, with one unique row per anchor.",
   "workflow": {
     "repository": "NavidEslamiGomeshTappeh/digital-life-form-flywire",
-    "run_id": 37481554712,
-    "run_number": 17,
-    "head_sha": "1470bd774f680b42e5921f90264d7567d417bb5d",
+    "run_id": 37483737773,
+    "run_number": 53,
+    "head_sha": "899b8c1e2b1bbc33884afe610985dc691b5efa5e",
     "workflow_file": ".github/workflows/historical-point-data-audit.yml",
-    "artifact_id": 11421422196,
+    "artifact_id": 11421848388,
     "artifact_name": "historical-and-zenodo-point-data-audit",
-    "artifact_sha256": "d31a81d5dc6415aeb4c2c690ed92f22f0b42f100d1e611611f2762f6795e614e",
+    "artifact_sha256": "d567cb1316e1d68bfa354eb5854a8d348109399a62617da42ea8d5907a894ca0",
     "conclusion": "success"
   },
   "decode_runtime": {
     "python": "3.12",
-    "installed_packages": ["pandas", "jax", "jaxlib"],
+    "installed_packages": [
+      "pandas",
+      "jax",
+      "jaxlib"
+    ],
     "historical_pickle_protocol": 5,
     "historical_stack_global_count": 11,
     "historical_ascii_marker_counts": {
@@ -29,7 +33,46 @@
       "jaxlib._jax.ArrayImpl": 46624,
       "builtins.str": 11656
     },
-    "note": "The qualified JAX array type count is direct runtime evidence from decoded object cells. The static pickle stream also contains one 'jax' marker and eleven STACK_GLOBAL opcodes."
+    "note": "The exact per-column breakdown shows that every value in PC1/PC2/PC3/PC1_angle/Mean_segment_angle/Subtype_evDir_x/y/z is a decoded jaxlib._jax.ArrayImpl object in the historical pickle; Type and Subtype are built-in strings.",
+    "historical_per_column_object_value_types": {
+      "Type": {
+        "builtins.str": 5828
+      },
+      "Subtype": {
+        "builtins.str": 5828
+      },
+      "PC1": {
+        "jaxlib._jax.ArrayImpl": 5828
+      },
+      "PC2": {
+        "jaxlib._jax.ArrayImpl": 5828
+      },
+      "PC3": {
+        "jaxlib._jax.ArrayImpl": 5828
+      },
+      "PC1_angle": {
+        "jaxlib._jax.ArrayImpl": 5828
+      },
+      "Mean_segment_angle": {
+        "jaxlib._jax.ArrayImpl": 5828
+      },
+      "Subtype_evDir_x": {
+        "jaxlib._jax.ArrayImpl": 5828
+      },
+      "Subtype_evDir_y": {
+        "jaxlib._jax.ArrayImpl": 5828
+      },
+      "Subtype_evDir_z": {
+        "jaxlib._jax.ArrayImpl": 5828
+      }
+    },
+    "pattern_check": {
+      "jax_metric_columns": 8,
+      "rows": 5828,
+      "expected_arrayimpl_cells": 46624,
+      "observed_arrayimpl_cells": 46624,
+      "exact": true
+    }
   },
   "historical_source": {
     "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
@@ -51,56 +94,88 @@
     "uniqueness_required": true,
     "anchors": {
       "T4a": {
-        "root_id": 720575940632008007,
-        "historical_root": [-46.85120703125, 32.261150390625, -111.5519921875],
+        "root_id": 720575940632008100,
+        "historical_root": [
+          -46.85120703125,
+          32.261150390625,
+          -111.5519921875
+        ],
         "historical_segment_count": 220,
         "historical_total_cable_native": 315401.4197947359,
         "historical_nodes": 221,
         "historical_leaves": 114,
         "historical_branches": 107,
-        "zenodo_root": [-46.976, 32.06399609375, -111.552],
+        "zenodo_root": [
+          -46.976,
+          32.06399609375,
+          -111.552
+        ],
         "zenodo_segment_count": 222,
         "zenodo_nodes": 223,
         "zenodo_leaves": 115,
         "zenodo_branches": 108
       },
       "T4c": {
-        "root_id": 720575940616224414,
-        "historical_root": [-46.16929296875, 22.233228515625, -116.4566640625],
+        "root_id": 720575940616224400,
+        "historical_root": [
+          -46.16929296875,
+          22.233228515625,
+          -116.4566640625
+        ],
         "historical_segment_count": 207,
         "historical_total_cable_native": 299437.2647060053,
         "historical_nodes": 208,
         "historical_leaves": 110,
         "historical_branches": 98,
-        "zenodo_root": [-45.888, 21.61599609375, -116.352],
+        "zenodo_root": [
+          -45.888,
+          21.61599609375,
+          -116.352
+        ],
         "zenodo_segment_count": 205,
         "zenodo_nodes": 206,
         "zenodo_leaves": 109,
         "zenodo_branches": 97
       },
       "T5a": {
-        "root_id": 720575940625571465,
-        "historical_root": [11.981576171875, 50.1895, 120.4021328125],
+        "root_id": 720575940625571500,
+        "historical_root": [
+          11.981576171875,
+          50.1895,
+          120.4021328125
+        ],
         "historical_segment_count": 138,
         "historical_total_cable_native": 198019.15260825388,
         "historical_nodes": 139,
         "historical_leaves": 74,
         "historical_branches": 65,
-        "zenodo_root": [13.207995117187501, 51.2, 119.616],
+        "zenodo_root": [
+          13.207995117187501,
+          51.2,
+          119.616
+        ],
         "zenodo_segment_count": 134,
         "zenodo_nodes": 135,
         "zenodo_leaves": 72,
         "zenodo_branches": 63
       },
       "T5c": {
-        "root_id": 720575940617782941,
-        "historical_root": [12.7460712890625, 54.907804687500004, 117.5732734375],
+        "root_id": 720575940617782900,
+        "historical_root": [
+          12.7460712890625,
+          54.907804687500004,
+          117.5732734375
+        ],
         "historical_segment_count": 148,
         "historical_total_cable_native": 194809.52475041276,
         "historical_nodes": 149,
         "historical_leaves": 80,
         "historical_branches": 69,
-        "zenodo_root": [12.1999951171875, 54.944, 117.952],
+        "zenodo_root": [
+          12.1999951171875,
+          54.944,
+          117.952
+        ],
         "zenodo_segment_count": 152,
         "zenodo_nodes": 153,
         "zenodo_leaves": 80,
