@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "489102fbc6d9223100fec6b1e2f3c14642abaf79"
+        "value": "c4ad1af1e3519f70a5a6df045ba7f6bc76574db3"
       }
     },
     {
@@ -278,7 +278,7 @@
       "role": "lineage_regeneration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "8c9662af11a9c7208b63d7a583e61da3982ad925"
+        "value": "4959350de3e1b0e38d1e306773d9f3a784223091"
       }
     },
     {
@@ -665,7 +665,7 @@
       "role": "historical_jax_serializer_contract_compatibility",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "4cdc91956d5612eb99e6ec5cf2a19144ce765497"
+        "value": "aea737a522fbf7db62815c197c6be490eef1f7bf"
       }
     },
     {
