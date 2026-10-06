@@ -106,6 +106,15 @@
       }
     },
     {
+      "id": "E-POINTDATA-VERSION-DELTA",
+      "path": "evidence/point_data_version_delta.json",
+      "role": "historical_vs_zenodo_point_data_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "b055df122eb3ca9fa3e4b667907fa5d6c76af1af"
+      }
+    },
+    {
       "id": "E-POINTDATA",
       "path": "evidence/point_data_provenance.json",
       "role": "point_data_provenance",
@@ -260,7 +269,7 @@
       "role": "lineage_regeneration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "80602bd618aaccd17b3d058013fce05d65d0dabf"
+        "value": "d945271056edce3bd062c54122df65251fdc89b2"
       }
     },
     {
@@ -269,7 +278,7 @@
       "role": "root_coordinate_direct_comparison",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "813c2aac192ee816d0afda7e3deb26f13a909fb9"
+        "value": "f59ddc89cc01f80a72fab7727f344807c7f7cf10"
       }
     },
     {
@@ -315,6 +324,15 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "83149aa1e88174289c86a73ba094ba71ff5f1102"
+      }
+    },
+    {
+      "id": "E-GLOBAL-ALIGNMENT-BOUNDARY",
+      "path": "evidence/global_alignment_boundary.json",
+      "role": "published_global_alignment_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "3b0247125008e533b8b906ece2e44b12c2973218"
       }
     },
     {

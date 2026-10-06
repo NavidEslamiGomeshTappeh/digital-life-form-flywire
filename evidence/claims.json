@@ -251,6 +251,19 @@
         "Continuous model responses are not converted into spikes in this evidence path.",
         "The result does not establish a camera-driven biological activity source, Code Hand capability mapping, or biological control."
       ]
+    },
+    {
+      "id": "C-POINTDATA-006",
+      "statement": "The historical December 2025 Point_data.pkl and the August 2026 Zenodo point_data.pkl are distinct materializations: they preserve the same four anchor IDs and subtype labels but have different binary hashes, row counts/schema, root coordinates, and morphology metrics.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-VERSION-DELTA"
+      ],
+      "caveats": [
+        "The comparison proves artifact-level divergence, not which morphology producer or alignment step caused the divergence.",
+        "The historical file stores Total_Cable in a numerically nanometre-scale representation (~315401 nm for T4a), while the later Metrics1-generated Zenodo values are in micrometre-scale numbers (~318.836); unit interpretation is therefore snapshot-specific."
+      ]
     }
   ]
 }
