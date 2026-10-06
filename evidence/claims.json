@@ -282,8 +282,8 @@
     {
       "id": "C-POINTDATA-008",
       "statement": "A public GeoJax/legacy-Neurosetta software family contained JAX-backed geometry and PCA operations in snapshots predating the historical Point_data artifact; this is technically compatible context for the historical pickle's JAX ArrayImpl values.",
-      "classification": "CONTEXT_ONLY",
-      "status": "DOCUMENTED",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
       "evidence": [
         "E-LEGACY-JAX-CONTEXT"
       ],
