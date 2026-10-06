@@ -149,6 +149,17 @@ def test_point_data_snapshot_delta_is_ledgered():
     assert "E-POINTDATA-VERSION-DELTA" in claim["evidence"]
 
 
+def test_public_subtype_evdir_search_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "public_subtype_evdir_search.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_BOUNDED_PUBLIC_CODE_SEARCH_NEGATIVE"
+    assert evidence["search_date"] == "2026-10-06"
+    assert all(item["external_matches"] == 0 for item in evidence["queries"])
+
+
 def test_point_data_jax_serializer_byte_alignment_is_ledgered():
     evidence = json.loads(
         (ROOT / "evidence" / "point_data_jax_serializer_compatibility.json").read_text(
