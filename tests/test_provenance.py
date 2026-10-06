@@ -136,7 +136,7 @@ def test_point_data_snapshot_delta_is_ledgered():
     assert evidence["sources"]["historical_git"]["rows"] == 5828
     assert evidence["sources"]["zenodo_release"]["rows"] == 11838
     assert len(evidence["anchor_comparison"]) == 4
-    assert all(item["id"] > 0 for item in evidence["anchor_comparison"])
+    assert all(isinstance(item["id"], str) and item["id"].isdigit() for item in evidence["anchor_comparison"])
     assert all(
         item["historical_root"] != item["zenodo_root"]
         for item in evidence["anchor_comparison"]
@@ -194,10 +194,10 @@ def test_point_data_snapshot_anchor_ids_are_exact_and_unique():
         )
     )
     expected_ids = {
-        "T4a": 720575940632008007,
-        "T4c": 720575940616224414,
-        "T5a": 720575940625571465,
-        "T5c": 720575940617782941,
+        "T4a": "720575940632008007",
+        "T4c": "720575940616224414",
+        "T5a": "720575940625571465",
+        "T5c": "720575940617782941",
     }
     assert evidence["verification"]["anchor_selection_method"] == "exact_root_id"
     assert evidence["verification"]["exact_id_storage"] == "string"
