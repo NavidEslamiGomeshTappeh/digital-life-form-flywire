@@ -120,7 +120,7 @@
       "role": "exact_id_point_data_decode_and_serialization_receipt",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "067aa460f1ab12ab47dbc7fc215b0aa16050b7f6"
+        "value": "8824f3227b73c2393f88ccfdb9ded8472aab5db2"
       }
     },
     {
@@ -278,7 +278,7 @@
       "role": "lineage_regeneration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "3940878f54ef4de559a79a22521fbf4a7dfc0fde"
+        "value": "69d6ee554e786281e8346c6b3aadbcd304294581"
       }
     },
     {
