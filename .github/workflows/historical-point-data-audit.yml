@@ -1,4 +1,5 @@
 name: Historical and Zenodo Point_data binary audit
+# Exact-ID, byte-level, and release-family provenance audit.
 
 on:
   push:
