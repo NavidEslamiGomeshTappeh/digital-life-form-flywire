@@ -203,6 +203,12 @@ A January 16, 2026 Zenodo software release was located:
 
 Interpretation: this materially strengthens the historical endpoint for the Point_data artifact, but the upstream Reduced_dendrites/.nr generation stage is still missing from the located public release. The exact December producer remains UNRESOLVED.
 
+A GitHub Actions binary/decode audit now reselected all four anchors by exact FAFB v783 Root ID, requiring one unique row per anchor in both snapshots. Run 37481554712 completed successfully. The historical pickle is Protocol 5 and contains 46,624 decoded `jaxlib._jax.ArrayImpl` cells across the eight PCA/angle/vector metric columns (exactly 5,828 rows × 8 columns), plus 11,656 string cells. This proves a concrete JAX serialization/runtime boundary in the historical artifact, but it does not identify the code path that produced those arrays.
+
+The snapshot ledger was corrected to preserve the full 64-bit Root IDs without numeric coercion. The four verified IDs are 720575940632008007, 720575940616224414, 720575940625571465, and 720575940617782941. The exact-ID receipt is stored in `evidence/point_data_pickle_decode_receipt.json`.
+
+The previous nearest-coordinate row-selection method is now explicitly superseded for this boundary. Coordinate proximity remains a diagnostic only; anchor identity in the evidence ledger is ID-exact.
+
 
 A separate public repository, NikDrummond/Neurosetta_legacy_v0.0.1, provides a historically plausible but unproven predecessor path for the missing morphology stage:
 
