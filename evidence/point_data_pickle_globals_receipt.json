@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_POINTDATA_PICKLE_GLOBALS",
+  "purpose": "Byte-level receipt for the historical December 2025 Point_data.pkl pickle stream, independently recovered from the successful GitHub Actions audit artifact.",
+  "source": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+    "sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+    "bytes": 3049948,
+    "pickle_protocol": 5
+  },
+  "execution": {
+    "audit_workflow_run": 37493230637,
+    "audit_job": 112371055948,
+    "audit_head_sha": "b8c5a368f9c776952f3eb39d5a28bf681695fa9c",
+    "audit_result": "success",
+    "artifact_id": 11427350099,
+    "artifact_digest": "sha256:63ea1ccc42895a0d5fe174d9a8e2b8a9a65c006eb0ebe1392573b822fff21d8c",
+    "artifact_contents": [
+      "point_data_binary_audit.json",
+      "Point_data_historical.pkl"
+    ]
+  },
+  "pickle_globals": {
+    "stack_global_count": 11,
+    "exact_globals": [
+      "pandas.core.frame.DataFrame",
+      "pandas.core.internals.managers.BlockManager",
+      "pandas._libs.internals._unpickle_block",
+      "numpy.core.numeric._frombuffer",
+      "numpy.dtype",
+      "numpy.core.multiarray._reconstruct",
+      "numpy.ndarray",
+      "jax._src.array._reconstruct_array",
+      "pandas.core.indexes.base._new_Index",
+      "pandas.core.indexes.base.Index",
+      "pandas.core.indexes.range.RangeIndex"
+    ],
+    "jax_globals": [
+      {
+        "module": "jax._src.array",
+        "name": "_reconstruct_array",
+        "fully_qualified": "jax._src.array._reconstruct_array",
+        "pickle_opcode_index": 23538,
+        "pickle_byte_position": 717551,
+        "preceding_context_strings": [
+          "T4a",
+          "T4b",
+          "jax._src.array",
+          "_reconstruct_array"
+        ]
+      }
+    ]
+  },
+  "jax_value_fingerprint": {
+    "object_type": "jaxlib._jax.ArrayImpl",
+    "columns": [
+      "PC1",
+      "PC2",
+      "PC3",
+      "PC1_angle",
+      "Mean_segment_angle",
+      "Subtype_evDir_x",
+      "Subtype_evDir_y",
+      "Subtype_evDir_z"
+    ],
+    "row_count": 5828,
+    "array_values_total": 46624,
+    "expected_rows_times_columns": 46624,
+    "exact_count_match": true,
+    "shape": "()",
+    "dtype": "float32",
+    "per_column_count": {
+      "PC1": 5828,
+      "PC2": 5828,
+      "PC3": 5828,
+      "PC1_angle": 5828,
+      "Mean_segment_angle": 5828,
+      "Subtype_evDir_x": 5828,
+      "Subtype_evDir_y": 5828,
+      "Subtype_evDir_z": 5828
+    }
+  },
+  "independent_local_recheck": {
+    "method": "pickletools.genops over the preserved historical binary",
+    "observed_protocol": 5,
+    "observed_stack_global_count": 11,
+    "observed_jax_reconstruct_global": "jax._src.array._reconstruct_array",
+    "observed_all_eight_metric_columns_scalar_float32": true
+  },
+  "interpretation": {
+    "proven": [
+      "The historical Point_data.pkl explicitly references jax._src.array._reconstruct_array in its pickle opcode stream.",
+      "All eight PCA/angle/direction-vector metric columns contain scalar float32 jaxlib._jax.ArrayImpl values for all 5,828 rows.",
+      "The same pickle stream also contains the pandas and numpy reconstruction globals expected for a pandas DataFrame."
+    ],
+    "not_proven": [
+      "The exact December 2025 producer script or notebook is still not recovered.",
+      "The exact JAX version is still not recovered.",
+      "The serializer reference does not identify which code path computed the eight metric columns."
+    ]
+  }
+}
