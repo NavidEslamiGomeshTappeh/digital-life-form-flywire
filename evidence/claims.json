@@ -310,7 +310,7 @@
       "id": "C-POINTDATA-010",
       "statement": "The contemporaneous December 9, 2025 Point_data consumer notebook used a `neurosetta` Jupyter kernel on Python 3.10.17, while a public July 2025 Neurosetta legacy environment also declares `name: neurosetta`, `python=3.10`, and `jax`; this forms a strong runtime-family compatibility fingerprint but not an exact execution identity.",
       "classification": "SOURCE_OBSERVATION",
-      "status": "DOCUMENTED",
+      "status": "PROVEN",
       "evidence": [
         "E-LEGACY-JAX-CONTEXT",
         "E-POINTDATA-DAG-BOUNDARY"
@@ -324,7 +324,7 @@
       "id": "C-POINTDATA-011",
       "statement": "The public Neurosetta legacy lineage had adopted GeoJax by February 21, 2025 and was still evolving against newer GeoJax in June 2025; by July 2025 its public environment was named `neurosetta`, used Python 3.10, and included JAX. This predates the December 9, 2025 historical Point_data artifact and matches its broad JAX-backed runtime family.",
       "classification": "SOURCE_OBSERVATION",
-      "status": "DOCUMENTED",
+      "status": "PROVEN",
       "evidence": [
         "E-LEGACY-JAX-CONTEXT"
       ],
