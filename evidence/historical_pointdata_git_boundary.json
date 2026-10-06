@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_PUBLIC_GIT_PRODUCER_BOUNDARY",
+  "purpose": "Pin the public Git history boundary around the historical December 2025 Point_data.pkl artifact and distinguish the artifact commit from later public preprocessing/analysis code.",
+  "historical_point_data": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "commit_a": {
+      "sha": "fe9779d4ca425613eec44b19e961610d117e7232",
+      "date": "2025-12-09T19:41:50Z",
+      "message": "Point value metrics data",
+      "changed_files": [
+        "Data/Point_data.pkl"
+      ],
+      "blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02"
+    },
+    "commit_b": {
+      "sha": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+      "date": "2025-12-09T19:41:50Z",
+      "message": "A point value metrics data",
+      "changed_files": [
+        "Data/Point_data.pkl"
+      ],
+      "blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02"
+    },
+    "common_parent": {
+      "sha": "61fd0f176d73932ad87ece04153945501b4c405c",
+      "date": "2025-12-09T19:40:07Z",
+      "message": "ANOVA notebook",
+      "changed_files": [
+        "Notebooks/ANOVA_analysis.ipynb"
+      ]
+    },
+    "merge": {
+      "sha": "8a38537f55371de369f80c50778915afb5d954b4",
+      "date": "2025-12-09T19:42:30Z",
+      "message": "Merge remote-tracking branch 'origin/main'"
+    }
+  },
+  "later_public_code_boundaries": {
+    "nearest_neighbours": {
+      "sha": "56eba689b18bb7a485ed4a312e06c42f98a7f035",
+      "date": "2025-12-10T18:04:58Z",
+      "message": "Figure 4 and nn matching",
+      "changed_files": [
+        "src/Nearest_neighbours.py"
+      ],
+      "gap_after_point_data_seconds": 81068
+    },
+    "pp3_dendrite_extraction": {
+      "public_commit": "8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+      "date": "2026-08-10T15:49:32Z",
+      "file": "Notebooks/PP3_Dendrite_extraction.ipynb"
+    },
+    "metrics1_point_data": {
+      "public_commit": "8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+      "date": "2026-08-10T15:49:32Z",
+      "file": "Notebooks/Metrics1_Point_data.ipynb"
+    },
+    "environment_snapshot": {
+      "file": "condaenv.kigyxrh9.requirements.txt",
+      "public_commit": "56901ad1853b44aeca15504cd908fa4c31009a3e",
+      "date": "2026-01-16T14:00:50Z",
+      "contains": [
+        "jax>=0.4.0",
+        "jaxlib>=0.4.0",
+        "git+https://github.com/NikDrummond/GeoJax.git"
+      ]
+    }
+  },
+  "deterministic_observations": [
+    "The two parallel Point_data commits add only Data/Point_data.pkl and point to the same Git blob.",
+    "The common parent immediately before those commits contains an ANOVA notebook but no public preprocessing producer for Point_data.",
+    "The first tracked Nearest_neighbours implementation is committed on 2025-12-10, after the Point_data artifact was already added.",
+    "The tracked PP3 and Metrics1 notebooks arrive only in the August 2026 paper-submission update."
+  ],
+  "interpretation": {
+    "proven": "The public paper repository does not preserve the historical Point_data producer script/notebook in Git at or before the artifact commit.",
+    "unresolved": "The actual producer may have existed in a private/local workspace, an untracked notebook, another repository, or a prior unpublished software revision."
+  },
+  "sources": [
+    "https://api.github.com/repos/borstlab/T4_T5_Dendrite_Morphology_Paper/commits/fe9779d4ca425613eec44b19e961610d117e7232",
+    "https://api.github.com/repos/borstlab/T4_T5_Dendrite_Morphology_Paper/commits/cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "https://api.github.com/repos/borstlab/T4_T5_Dendrite_Morphology_Paper/commits/56eba689b18bb7a485ed4a312e06c42f98a7f035",
+    "https://api.github.com/repos/borstlab/T4_T5_Dendrite_Morphology_Paper/commits/8700efd40bccfa3e74ac7c4df02da83a968b9b52"
+  ]
+}
