@@ -121,6 +121,7 @@ def static_pickle_globals(path: Path) -> dict:
 
     # The rolling string context is intentionally conservative: it fingerprints
     # serialized dependency names without attempting to emulate the full pickle VM.
+    # The workflow also preserves the historical binary for independent review.
     context_flat = [item for context in stack_global_context for item in context]
     candidate_module_names = [
         value for value in context_flat
