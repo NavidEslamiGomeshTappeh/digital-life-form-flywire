@@ -376,7 +376,7 @@
       "id": "C-POINTDATA-015",
       "statement": "If the December 2025 Point_data producer used the same Python 3.10 runtime represented by the contemporaneous neurosetta consumer notebook, then JAX 0.7.x and later are excluded by JAX's Python-version requirement, leaving JAX 0.6.2 or earlier within the released reducer family observed here.",
       "classification": "SOURCE_OBSERVATION",
-      "status": "CONDITIONAL",
+      "status": "INFERENCE_ONLY",
       "evidence": [
         "E-POINTDATA-JAX-SERIALIZER-RELEASE-FAMILY",
         "E-POINTDATA-DAG-BOUNDARY"
