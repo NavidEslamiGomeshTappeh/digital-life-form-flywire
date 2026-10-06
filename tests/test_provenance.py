@@ -86,6 +86,20 @@ def test_synapse_lineage_fails_closed_on_record_id_drift(tmp_path):
 
 
 
+def test_point_data_sha256_binding_is_consistent():
+    comparison = json.loads(
+        (ROOT / "evidence" / "root_coordinate_comparison.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    provenance = json.loads(
+        (ROOT / "evidence" / "point_data_provenance.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert comparison["point_data_sha256"] == provenance["source"]["sha256"]
+
+
 def test_public_coordinate_pipeline_boundary_is_ledgered():
     boundary = json.loads(
         (ROOT / "evidence" / "public_coordinate_pipeline_boundary.json").read_text(
