@@ -47,7 +47,35 @@
         "source": "environment.yml",
         "blob": "05cf1967baea026f1bb251b99eabd454bfa302b0"
       },
-      "contemporaneous_observation": "The same public legacy repository combines a neurosetta Python 3.10 environment with JAX and a graphs.py implementation importing GeoJax for geometry metrics; its latest cited public commit is 2025-07-31, before the historical Point_data ingest."
+      "contemporaneous_observation": "The same public legacy repository combines a neurosetta Python 3.10 environment with JAX and a graphs.py implementation importing GeoJax for geometry metrics; its latest cited public commit is 2025-07-31, before the historical Point_data ingest.",
+      "pre_artifact_lineage": [
+        {
+          "commit": "beea421fb235364f9289e7d68fc8a050f12a2372",
+          "date": "2025-02-21T11:36:49Z",
+          "message": "Branching Angles ... Also now has GeoJax as a dependency",
+          "observation": "The public legacy repository explicitly recorded GeoJax as a dependency months before the historical Point_data ingest."
+        },
+        {
+          "commit": "b32a340a96d71b97ff094d13f95904c5b2646a8d",
+          "date": "2025-06-24T10:51:57Z",
+          "message": "Update bifuricartion angles for newer GeoJax",
+          "observation": "The legacy codebase continued to evolve against a newer GeoJax dependency before the July 2025 public snapshot."
+        },
+        {
+          "commit": "25c911a28030deb5204eb7ab5a18ff4643363d96",
+          "date": "2025-07-31T14:40:07Z",
+          "message": "mainly load mesh file added and fixes to sub tree identification",
+          "observation": "The latest cited pre-artifact legacy snapshot retains GeoJax imports and a neurosetta Python 3.10/JAX environment."
+        }
+      ],
+      "environment_history": [
+        {
+          "commit": "edc1afb444e286c75126de8781b428bc6d06a72b",
+          "date": "2025-07-23T08:28:11Z",
+          "message": "Windows plotting crash note and update requirements",
+          "observed": "environment.yml retained the neurosetta environment name, Python 3.10, and JAX."
+        }
+      ]
     },
     "paper_repository": {
       "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
@@ -97,7 +125,7 @@
       "Subtype_evDir_y",
       "Subtype_evDir_z"
     ],
-    "compatibility_observation": "The historical artifact's decoded JAX ArrayImpl pattern is technically compatible with a JAX-backed geometry/PCA stack of this family.",
+    "compatibility_observation": "The historical artifact's exact 8-column JAX ArrayImpl fingerprint is technically compatible with a pre-artifact Neurosetta lineage that explicitly adopted GeoJax in February 2025, updated against newer GeoJax in June 2025, and maintained a `neurosetta` Python 3.10 environment with JAX in July 2025. The contemporaneous December consumer notebook also names `neurosetta` and Python 3.10.17. This is a strong runtime-family compatibility fingerprint, but not a cryptographic execution identity.",
     "not_proof": "No inspected record binds the historical Point_data file to these exact GeoJax or Neurosetta commits, so this evidence remains contextual only."
   },
   "limits": [
