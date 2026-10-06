@@ -136,7 +136,7 @@ def test_point_data_snapshot_delta_is_ledgered():
     assert evidence["sources"]["historical_git"]["rows"] == 5828
     assert evidence["sources"]["zenodo_release"]["rows"] == 11838
     assert len(evidence["anchor_comparison"]) == 4
-    assert all(item["id"] > 0 for item in evidence["anchor_comparison"])
+    assert all(isinstance(item["id"], str) and item["id"].isdigit() for item in evidence["anchor_comparison"])
     assert all(
         item["historical_root"] != item["zenodo_root"]
         for item in evidence["anchor_comparison"]
@@ -147,6 +147,65 @@ def test_point_data_snapshot_delta_is_ledgered():
     claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-006")
     assert claim["status"] == "PROVEN"
     assert "E-POINTDATA-VERSION-DELTA" in claim["evidence"]
+
+
+def test_point_data_exact_id_decode_receipt_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_pickle_decode_receipt.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_POINTDATA_EXACT_ID_DECODE"
+    assert evidence["workflow"]["run_id"] == 37483737773
+    assert evidence["workflow"]["conclusion"] == "success"
+    assert evidence["decode_runtime"]["historical_pickle_protocol"] == 5
+    assert evidence["decode_runtime"]["historical_stack_global_count"] == 11
+    assert evidence["decode_runtime"]["historical_object_cell_types"][
+        "jaxlib._jax.ArrayImpl"
+    ] == 46624
+    per_column = evidence["decode_runtime"]["historical_per_column_object_value_types"]
+    for column in ("PC1", "PC2", "PC3", "PC1_angle", "Mean_segment_angle", "Subtype_evDir_x", "Subtype_evDir_y", "Subtype_evDir_z"):
+        assert per_column[column] == {"jaxlib._jax.ArrayImpl": 5828}
+    assert evidence["decode_runtime"]["pattern_check"]["exact"] is True
+    expected_ids = {
+        "T4a": "720575940632008007",
+        "T4c": "720575940616224414",
+        "T5a": "720575940625571465",
+        "T5c": "720575940617782941",
+    }
+    for subtype, root_id in expected_ids.items():
+        anchor = evidence["anchor_selection"]["anchors"][subtype]
+        assert anchor["root_id"] == root_id
+    claims = json.loads(
+        (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
+    )
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-007")
+    assert claim["status"] == "REPRODUCED"
+    assert "E-POINTDATA-DECODE" in claim["evidence"]
+    claim_context = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-008")
+    assert claim_context["classification"] == "SOURCE_OBSERVATION"
+    assert claim_context["status"] == "PROVEN"
+
+
+def test_point_data_snapshot_anchor_ids_are_exact_and_unique():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_version_delta.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    expected_ids = {
+        "T4a": "720575940632008007",
+        "T4c": "720575940616224414",
+        "T5a": "720575940625571465",
+        "T5c": "720575940617782941",
+    }
+    assert evidence["verification"]["anchor_selection_method"] == "exact_root_id"
+    assert evidence["verification"]["exact_id_storage"] == "string"
+    assert evidence["verification"]["unique_historical_rows"] == 4
+    assert evidence["verification"]["unique_zenodo_rows"] == 4
+    assert evidence["verification"]["previous_nearest_coordinate_selector_corrected"] is True
+    for item in evidence["anchor_comparison"]:
+        assert item["id"] == expected_ids[item["subtype"]]
 
 
 def test_public_coordinate_pipeline_boundary_is_ledgered():

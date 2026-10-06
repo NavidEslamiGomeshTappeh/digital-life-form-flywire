@@ -289,7 +289,8 @@
         "sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
         "bytes": 3049948,
         "rows": 5828,
-        "columns": 24
+        "columns": 24,
+        "anchor_selection": "exact Root ID"
       },
       "zenodo_release": {
         "record": "10.5281/zenodo.21876510",
@@ -297,13 +298,14 @@
         "sha256": "46772ccabc609ab0f7136854024e7665727ff0f58f53c69126ea3e641ce7f891",
         "bytes": 2144531,
         "rows": 11838,
-        "columns": 24
+        "columns": 24,
+        "anchor_selection": "exact Root ID"
       }
     },
     "anchor_comparison": [
       {
         "subtype": "T4a",
-        "id": 720575940632008100,
+        "id": "720575940632008007",
         "historical_root": [
           -46.85120703125,
           32.261150390625,
@@ -328,7 +330,7 @@
       },
       {
         "subtype": "T4c",
-        "id": 720575940616224400,
+        "id": "720575940616224414",
         "historical_root": [
           -46.16929296875,
           22.233228515625,
@@ -353,7 +355,7 @@
       },
       {
         "subtype": "T5a",
-        "id": 720575940625571500,
+        "id": "720575940625571465",
         "historical_root": [
           11.981576171875,
           50.1895,
@@ -378,7 +380,7 @@
       },
       {
         "subtype": "T5c",
-        "id": 720575940617782900,
+        "id": "720575940617782941",
         "historical_root": [
           12.7460712890625,
           54.907804687500004,
@@ -416,6 +418,19 @@
         "The delta does not prove whether the changed morphology arose from new source skeletons, manual corrections, reduction parameters, coordinate materialization, or a combination.",
         "The exact December 2025 producer remains unrecovered."
       ]
+    },
+    "verification": {
+      "anchor_selection_method": "exact_root_id",
+      "unique_historical_rows": 4,
+      "unique_zenodo_rows": 4,
+      "workflow_run": 37483737773,
+      "decode_receipt_evidence_id": "E-POINTDATA-DECODE",
+      "previous_nearest_coordinate_selector_corrected": true,
+      "correction_scope": "The earlier audit evidence selected subtype rows by nearest root coordinate to the later Zenodo root. This snapshot evidence is now hardened by exact ID selection; the four decoded anchor rows were reselected by Root ID and each matched exactly once.",
+      "workflow_head_sha": "899b8c1e2b1bbc33884afe610985dc691b5efa5e",
+      "decode_artifact_id": 11421848388,
+      "exact_id_storage": "string",
+      "reason": "FlyWire Root IDs are 64-bit identifiers and must not be coerced through JavaScript Number."
     }
   }
 }

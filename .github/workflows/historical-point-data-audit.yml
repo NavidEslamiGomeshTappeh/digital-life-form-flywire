@@ -2,7 +2,12 @@ name: Historical and Zenodo Point_data binary audit
 
 on:
   push:
-    branches: [audit/decode-historical-point-data]
+    branches:
+      - audit/decode-historical-point-data
+      - audit/point-data-anchor-integrity
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -18,7 +23,7 @@ jobs:
           python-version: "3.12"
       - name: Install runtime
         run: python -m pip install --disable-pip-version-check pandas jax jaxlib
-      - name: Decode historical and Zenodo Point_data
+      - name: Decode and statically inspect historical and Zenodo Point_data
         run: python scripts/audit_point_data_binary.py
       - name: Upload audit receipt
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1

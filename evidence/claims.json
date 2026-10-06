@@ -262,7 +262,34 @@
       ],
       "caveats": [
         "The comparison proves artifact-level divergence, not which morphology producer or alignment step caused the divergence.",
+        "The four anchor rows in the updated evidence are selected by exact Root ID with one unique row per anchor in each snapshot.",
         "The historical file stores Total_Cable in a numerically nanometre-scale representation (~315401 nm for T4a), while the later Metrics1-generated Zenodo values are in micrometre-scale numbers (~318.836); unit interpretation is therefore snapshot-specific."
+      ]
+    },
+    {
+      "id": "C-POINTDATA-007",
+      "statement": "The four project Point_data anchors are selected by exact FAFB v783 Root ID, with exactly one row per anchor in both the historical December 2025 and later Zenodo snapshots; the historical pickle also contains decoded JAX ArrayImpl object cells.",
+      "classification": "DETERMINISTIC_COMPUTATION",
+      "status": "REPRODUCED",
+      "evidence": [
+        "E-POINTDATA-DECODE"
+      ],
+      "caveats": [
+        "The decoded JAX object type identifies a serialization/runtime dependency but does not identify the producer code path that constructed the arrays.",
+        "This does not recover the missing December 2025 population-aligned Reduced_dendrites state."
+      ]
+    },
+    {
+      "id": "C-POINTDATA-008",
+      "statement": "A public GeoJax/legacy-Neurosetta software family contained JAX-backed geometry and PCA operations in snapshots predating the historical Point_data artifact; this is technically compatible context for the historical pickle's JAX ArrayImpl values.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-LEGACY-JAX-CONTEXT"
+      ],
+      "caveats": [
+        "No exact historical Point_data execution is cryptographically bound to these software snapshots.",
+        "Compatibility does not establish producer identity or causation."
       ]
     }
   ]

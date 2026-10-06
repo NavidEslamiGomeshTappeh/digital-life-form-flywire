@@ -45,6 +45,10 @@ The historical Point_data object first appeared in the study repository on 2025-
 
 Therefore the currently public toolchain is not a complete preserved historical generator record for the December 2025 Point_data object. The original generator remains unresolved.
 
+A dedicated GitHub Actions binary audit subsequently decoded the historical and later Point_data snapshots and selected the four project anchors by exact FAFB v783 Root ID, with one unique row per anchor in each snapshot. The historical pickle is Protocol 5 and contains 46,624 `jaxlib._jax.ArrayImpl` values across the eight PCA/angle/vector metric columns, exactly 5,828 rows × 8 columns. This is direct serialization evidence of a JAX-backed historical artifact. It still does not identify the producer code path, the exact NeuRosetta revision, or the missing Reduced_dendrites/.nr materialization.
+
+The snapshot ledger was hardened after detecting that coordinate-nearest row selection was insufficient for 64-bit FlyWire IDs. The current evidence uses exact Root ID matching only, and the four verified IDs are 720575940632008007, 720575940616224414, 720575940625571465, and 720575940617782941. See `evidence/point_data_pickle_decode_receipt.json`.
+
 ## Biological compartment boundary
 
 For the 649 reference rows:

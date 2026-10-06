@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "status": "CONTEXT_ONLY_JAX_GEOMETRY_COMPATIBILITY",
+  "purpose": "Record public software-family evidence showing that JAX-backed geometry operations existed in the relevant NeuRosetta/GeoJax ecosystem before the historical Point_data artifact, without asserting that this code generated the artifact.",
+  "sources": {
+    "geojax": {
+      "repository": "NikDrummond/GeoJax",
+      "snapshot": "b224d82901e5c59a40321e9798752ec329b10f2a",
+      "files": {
+        "angles": {
+          "path": "GeoJax/angles/angles.py",
+          "git_blob": "35fa7ef0ac709dc93ad1da7e39fe91a0c8f74691",
+          "observed": [
+            "imports jax and jax.numpy",
+            "angle() accepts and returns jnp.ndarray",
+            "signed_angle() is JAX-jitted and computes with jnp operations"
+          ]
+        },
+        "alignment": {
+          "path": "GeoJax/alignment/alignment.py",
+          "git_blob": "2e5e5405a360258eb32de2d98d5cd4a27e97669b",
+          "observed": [
+            "imports jax and jax.numpy",
+            "coord_eig_decomp() operates on jnp.ndarray",
+            "robust covariance uses jnp operations",
+            "eigendecomposition uses jnp.linalg.eigh",
+            "PCA normalization and eigenvalue sorting return JAX arrays"
+          ]
+        }
+      }
+    },
+    "legacy_neurosetta": {
+      "repository": "NikDrummond/Neurosetta_legacy_v0.0.1",
+      "snapshot": "25c911a28030deb5204eb7ab5a18ff4643363d96",
+      "environment_file_blob": "05cf1967baea026f1bb251b99eabd454bfa302b0",
+      "environment_observation": "environment.yml explicitly includes jax",
+      "graphs_file_blob": "4406880c0fd8711d29f05fea006fa9c84ecf58b7",
+      "graphs_observation": [
+        "imports GeoJax",
+        "uses GeoJax.normalise/cross/signed_angle/angle for geometry metrics"
+      ]
+    },
+    "paper_repository": {
+      "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+      "snapshot": "3a1aa1a2e368ff8767f40791588eaf552e6d436d",
+      "observed_files": {
+        "condaenv.kigyxrh9.requirements.txt": {
+          "git_blob": "6adae9b8c58cce0893ecc3377b08841621387d88",
+          "contents": [
+            "fitter>=1.5.0",
+            "jax>=0.4.0",
+            "jaxlib>=0.4.0",
+            "git+https://github.com/NikDrummond/GeoJax.git"
+          ]
+        },
+        "src/Nearest_neighbours.py": {
+          "observation": "imports jax and jax.numpy; computes distance matrices with jnp.asarray",
+          "note": "This is a public/release snapshot observation. The file's .history variants are timestamped 2025-12-10, so they are later than the 2025-12-09 historical Point_data commit and are not asserted as its producer."
+        }
+      },
+      "external_corrobation": {
+        "source": "OSCR code/paper tracing record",
+        "url": "https://openscicode.org/paper/doi_10.1371_journal.pcbi.1014657/?repo=zenodo%3A21876360",
+        "observation": "OSCR independently inventories the Zenodo code archive as containing 21 JAX-using files and lists the 2025-12-10 Nearest_neighbours history files.",
+        "classification": "independent_archival_context"
+      }
+    }
+  },
+  "relationship_to_historical_point_data": {
+    "historical_pickle_sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+    "historical_pickle_protocol": 5,
+    "historical_decoded_jax_arrayimpl_cells": 46624,
+    "historical_jax_metric_columns": [
+      "PC1",
+      "PC2",
+      "PC3",
+      "PC1_angle",
+      "Mean_segment_angle",
+      "Subtype_evDir_x",
+      "Subtype_evDir_y",
+      "Subtype_evDir_z"
+    ],
+    "compatibility_observation": "The historical artifact's decoded JAX ArrayImpl pattern is technically compatible with a JAX-backed geometry/PCA stack of this family.",
+    "not_proof": "No inspected record binds the historical Point_data file to these exact GeoJax or Neurosetta commits, so this evidence remains contextual only."
+  },
+  "limits": [
+    "No exact December 2025 producer script has been recovered.",
+    "No exact December 2025 dependency lockfile or environment export has been recovered.",
+    "The compatibility observation does not establish causation or execution identity."
+  ],
+  "compatibility_observation": "The historical artifact's exact 8-column JAX ArrayImpl fingerprint is technically compatible with the JAX-backed geometry/PCA ecosystem represented both by GeoJax/legacy-Neurosetta and by the published paper repository's JAX dependency snapshot."
+}

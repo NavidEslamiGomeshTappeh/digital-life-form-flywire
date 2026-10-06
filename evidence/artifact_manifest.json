@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "c6ff95a4433723607d92ce9df6c2c0fd9bedc599"
+        "value": "32e790ffd82fd76f16a03f4515e2e23b8931de63"
       }
     },
     {
@@ -111,7 +111,16 @@
       "role": "historical_vs_zenodo_point_data_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b055df122eb3ca9fa3e4b667907fa5d6c76af1af"
+        "value": "a00dbf2d62ba5976d9c2b90bd692f2dc30d2b636"
+      }
+    },
+    {
+      "id": "E-POINTDATA-DECODE",
+      "path": "evidence/point_data_pickle_decode_receipt.json",
+      "role": "exact_id_point_data_decode_and_serialization_receipt",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "665c7937b41c1b4bfe86903a55c6981b7952c074"
       }
     },
     {
@@ -269,7 +278,7 @@
       "role": "lineage_regeneration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d945271056edce3bd062c54122df65251fdc89b2"
+        "value": "b645e3f4e34980ede88adebe33ee5176d8d51e85"
       }
     },
     {
@@ -278,7 +287,7 @@
       "role": "root_coordinate_direct_comparison",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "aa33c7bc2ea2973e09b2909aff0bce76db9c4b89"
+        "value": "900a318ab7ec21107845c0f014ec7f17b5c2e8b3"
       }
     },
     {
@@ -621,6 +630,15 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "5d1208e9296cb57175d14cd5771de1df86ee251d"
+      }
+    },
+    {
+      "id": "E-LEGACY-JAX-CONTEXT",
+      "path": "evidence/legacy_jax_geometry_context.json",
+      "role": "contextual_legacy_jax_geometry_compatibility",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "b260b0947374076af73a99ce37d552362c1c42ad"
       }
     }
   ]
