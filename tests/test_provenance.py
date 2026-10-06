@@ -156,13 +156,17 @@ def test_point_data_exact_id_decode_receipt_is_ledgered():
         )
     )
     assert evidence["status"] == "PROVEN_POINTDATA_EXACT_ID_DECODE"
-    assert evidence["workflow"]["run_id"] == 37481554712
+    assert evidence["workflow"]["run_id"] == 37483737773
     assert evidence["workflow"]["conclusion"] == "success"
     assert evidence["decode_runtime"]["historical_pickle_protocol"] == 5
     assert evidence["decode_runtime"]["historical_stack_global_count"] == 11
     assert evidence["decode_runtime"]["historical_object_cell_types"][
         "jaxlib._jax.ArrayImpl"
     ] == 46624
+    per_column = evidence["decode_runtime"]["historical_per_column_object_value_types"]
+    for column in ("PC1", "PC2", "PC3", "PC1_angle", "Mean_segment_angle", "Subtype_evDir_x", "Subtype_evDir_y", "Subtype_evDir_z"):
+        assert per_column[column] == {"jaxlib._jax.ArrayImpl": 5828}
+    assert evidence["decode_runtime"]["pattern_check"]["exact"] is True
     expected_ids = {
         "T4a": 720575940632008007,
         "T4c": 720575940616224414,
