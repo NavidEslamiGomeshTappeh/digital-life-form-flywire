@@ -291,6 +291,19 @@
         "No exact historical Point_data execution is cryptographically bound to these software snapshots.",
         "Compatibility does not establish producer identity or causation."
       ]
+    },
+    {
+      "id": "C-POINTDATA-009",
+      "statement": "The public paper repository's exact Git DAG shows a publication/ingest boundary around the historical Point_data artifact: the first Point_data commit has no src/ tree, and the first public src/ commit 1,602 seconds later adds only downstream paper_ANOVA.py.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-DAG-BOUNDARY"
+      ],
+      "caveats": [
+        "This excludes a producer from the exposed public paper-repository DAG at that boundary; it does not exclude private/local or unarchived producer code.",
+        "The conclusion is about public repository contents, not the author's workstation or external repositories."
+      ]
     }
   ]
 }
