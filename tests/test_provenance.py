@@ -149,6 +149,24 @@ def test_point_data_snapshot_delta_is_ledgered():
     assert "E-POINTDATA-VERSION-DELTA" in claim["evidence"]
 
 
+def test_point_data_evdir_structure_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_evdir_structure.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_POINTDATA_EVDIR_STRUCTURE"
+    assert evidence["global"]["rows"] == 5828
+    assert evidence["global"]["exact_vector_count"] == 5828
+    assert evidence["global"]["scalar_dtype"] == "float32"
+    assert evidence["global"]["columns"] == 3
+    assert all(
+        item["rows"] == item["unique_exact"]
+        for item in evidence["by_subtype"].values()
+    )
+    assert evidence["global"]["global_max_abs_unit_norm_error"] < 5e-7
+
+
 def test_public_subtype_evdir_search_is_ledgered():
     evidence = json.loads(
         (ROOT / "evidence" / "public_subtype_evdir_search.json").read_text(
