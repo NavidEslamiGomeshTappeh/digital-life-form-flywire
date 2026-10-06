@@ -119,6 +119,8 @@ def static_pickle_globals(path: Path) -> dict:
     for marker in (b"jax", b"jax.numpy", b"jaxlib", b"pandas", b"numpy"):
         ascii_markers[marker.decode()] = len(re.findall(re.escape(marker), data))
 
+    # The rolling string context is intentionally conservative: it fingerprints
+    # serialized dependency names without attempting to emulate the full pickle VM.
     context_flat = [item for context in stack_global_context for item in context]
     candidate_module_names = [
         value for value in context_flat
