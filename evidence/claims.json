@@ -371,6 +371,20 @@
         "This is not exact JAX version identification.",
         "Private/forked JAX builds and nonstandard serialization paths are outside this release-tag comparison."
       ]
+    },
+    {
+      "id": "C-POINTDATA-015",
+      "statement": "If the December 2025 Point_data producer used the same Python 3.10 runtime represented by the contemporaneous neurosetta consumer notebook, then JAX 0.7.x and later are excluded by JAX's Python-version requirement, leaving JAX 0.6.2 or earlier within the released reducer family observed here.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "CONDITIONAL",
+      "evidence": [
+        "E-POINTDATA-JAX-SERIALIZER-RELEASE-FAMILY",
+        "E-POINTDATA-DAG-BOUNDARY"
+      ],
+      "caveats": [
+        "The consumer notebook does not cryptographically prove it is the producer environment.",
+        "A private/forked JAX build or a separate producer environment could violate this conditional bound."
+      ]
     }
   ]
 }
