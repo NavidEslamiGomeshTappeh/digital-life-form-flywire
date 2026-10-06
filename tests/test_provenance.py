@@ -149,6 +149,28 @@ def test_point_data_snapshot_delta_is_ledgered():
     assert "E-POINTDATA-VERSION-DELTA" in claim["evidence"]
 
 
+def test_public_point_data_ingest_dag_boundary_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "public_point_data_ingest_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_PUBLIC_DAG_INGEST_BOUNDARY"
+    assert evidence["conclusions"]["proven"][0].startswith(
+        "The public paper repository had no src/"
+    )
+    assert evidence["key_commits"][2]["point_data_blob"] == (
+        "b85caf49f45677f2075f7b5f2c8830141cd96d02"
+    )
+    assert evidence["key_commits"][9]["src_files_at_that_commit"] == [
+        {
+            "path": "src/paper_ANOVA.py",
+            "blob": "0f806edd292478db76cf330955b6c81c230f7059",
+        }
+    ]
+    assert evidence["derived_intervals"]["point_data_to_first_src_seconds"] == 1602
+
+
 def test_point_data_exact_id_decode_receipt_is_ledgered():
     evidence = json.loads(
         (ROOT / "evidence" / "point_data_pickle_decode_receipt.json").read_text(
