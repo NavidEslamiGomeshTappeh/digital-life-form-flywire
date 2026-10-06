@@ -5,7 +5,8 @@ Software security and evidence integrity are release requirements.
 ## Reporting a software vulnerability
 
 Please report a suspected software vulnerability through the repository's
-private GitHub security channel rather than a public issue. Include:
+[private GitHub security channel](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/security/advisories)
+rather than a public issue. Include:
 
 - the affected component or file;
 - the shortest reproducible description;
@@ -19,8 +20,8 @@ coordinated fix or advisory when appropriate.
 ## Reporting scientific/provenance problems
 
 Report evidence, provenance, coordinate, or interpretation problems through a
-research-evidence GitHub issue. Security issues must remain in the private
-security channel.
+[research-evidence issue](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/issues/new).
+Security issues must remain in the private security channel.
 
 ## Security controls
 
@@ -32,8 +33,8 @@ security channel.
 - Security state never upgrades an unresolved scientific claim.
 - GitHub Action dependencies are pinned to immutable full commit SHAs.
 
-See docs/SECURITY_HARDENING.md for the current control record and the remaining
-GitHub platform settings.
+See the [Security Hardening Record](https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/blob/main/docs/SECURITY_HARDENING.md)
+for the current control record and the remaining GitHub platform settings.
 
 ## Scope boundary
 
