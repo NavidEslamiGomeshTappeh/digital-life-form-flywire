@@ -72,7 +72,7 @@ def summarize_object_cells(obj: pd.DataFrame) -> dict:
         "object_columns": object_columns,
         "non_null_object_value_types": dict(type_counts.most_common()),
         "jax_related_types": {
-            key: value for key, value in type_counts.items() if key.startswith("jax.")
+            key: value for key, value in type_counts.items() if key.startswith(("jax.", "jaxlib."))
         },
     }
 
