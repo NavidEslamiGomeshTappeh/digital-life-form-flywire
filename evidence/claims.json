@@ -283,7 +283,7 @@
       "id": "C-POINTDATA-008",
       "statement": "A pre-artifact public Neurosetta legacy environment used the name `neurosetta`, Python 3.10, and JAX, while its graph code imported GeoJax for geometry metrics; this is technically compatible context for the historical Point_data JAX ArrayImpl values.",
       "classification": "SOURCE_OBSERVATION",
-      "status": "DOCUMENTED",
+      "status": "PROVEN",
       "evidence": [
         "E-LEGACY-JAX-CONTEXT"
       ],
