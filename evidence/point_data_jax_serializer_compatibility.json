@@ -52,5 +52,31 @@
       "The exact December 2025 producer code remains unresolved.",
       "Format compatibility does not establish that the cited JAX commit was the runtime used to create the artifact."
     ]
+  },
+  "historical_byte_alignment": {
+    "pickle_byte_position": 717551,
+    "opcode": "STACK_GLOBAL",
+    "preceding_strings": [
+      "T4a",
+      "T4b",
+      "jax._src.array",
+      "_reconstruct_array"
+    ],
+    "post_opcode_sequence": [
+      "MEMOIZE",
+      "MARK",
+      "BINGET 50",
+      "BINGET 52",
+      "BININT1 0",
+      "TUPLE1",
+      "MEMOIZE",
+      "BINGET 54",
+      "TUPLE3",
+      "MEMOIZE"
+    ],
+    "independent_local_recheck": {
+      "binary_path": "/mnt/data/pointdata_audit/tmp/Point_data_historical.pkl",
+      "sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+    }
   }
 }
