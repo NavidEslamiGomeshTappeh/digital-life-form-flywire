@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "status": "CONTEXT_ONLY_JAX_GEOMETRY_COMPATIBILITY",
-  "purpose": "Record public software-family evidence showing that JAX-backed geometry operations existed in the relevant NeuRosetta/GeoJax ecosystem before the historical Point_data artifact, without asserting that this code generated the artifact.",
+  "purpose": "Record public software-family and runtime compatibility evidence for the historical Point_data JAX serialization pattern, without asserting that any cited public snapshot is the exact producer.",
   "sources": {
     "geojax": {
       "repository": "NikDrummond/GeoJax",
@@ -38,7 +38,16 @@
       "graphs_observation": [
         "imports GeoJax",
         "uses GeoJax.normalise/cross/signed_angle/angle for geometry metrics"
-      ]
+      ],
+      "commit_date": "2025-07-31T14:40:07Z",
+      "environment": {
+        "name": "neurosetta",
+        "python": "3.10",
+        "jax": true,
+        "source": "environment.yml",
+        "blob": "05cf1967baea026f1bb251b99eabd454bfa302b0"
+      },
+      "contemporaneous_observation": "The same public legacy repository combines a neurosetta Python 3.10 environment with JAX and a graphs.py implementation importing GeoJax for geometry metrics; its latest cited public commit is 2025-07-31, before the historical Point_data ingest."
     },
     "paper_repository": {
       "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
@@ -56,6 +65,14 @@
         "src/Nearest_neighbours.py": {
           "observation": "imports jax and jax.numpy; computes distance matrices with jnp.asarray",
           "note": "This is a public/release snapshot observation. The file's .history variants are timestamped 2025-12-10, so they are later than the 2025-12-09 historical Point_data commit and are not asserted as its producer."
+        },
+        "historical_consumer_notebook": {
+          "commit": "61fd0f176d73932ad87ece04153945501b4c405c",
+          "blob": "93eb31b90a738f64f5d803aaecda22f80edd6178",
+          "kernelspec": "neurosetta",
+          "python": "3.10.17",
+          "local_point_data_path": "/home/nik/Desktop/Software/T45_Morpho_data/Data/Pickled_data/Point_data.pkl",
+          "observation": "The contemporaneous consumer notebook names the neurosetta kernel and Python 3.10.17."
         }
       },
       "external_corrobation": {
@@ -88,5 +105,5 @@
     "No exact December 2025 dependency lockfile or environment export has been recovered.",
     "The compatibility observation does not establish causation or execution identity."
   ],
-  "compatibility_observation": "The historical artifact's exact 8-column JAX ArrayImpl fingerprint is technically compatible with the JAX-backed geometry/PCA ecosystem represented both by GeoJax/legacy-Neurosetta and by the published paper repository's JAX dependency snapshot."
+  "compatibility_observation": "The historical artifact's exact 8-column JAX ArrayImpl fingerprint is technically compatible with the JAX-backed geometry ecosystem documented by the pre-artifact legacy Neurosetta runtime (name neurosetta, Python 3.10, JAX, GeoJax import) and the later public GeoJax/Paper snapshots. The matching environment name/Python major-minor is a compatibility signal, not an execution identity proof."
 }
