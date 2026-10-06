@@ -206,6 +206,30 @@ def test_historical_neurosetta_runtime_family_fingerprint_is_ledgered():
     assert lineage[2]["commit"] == "25c911a28030deb5204eb7ab5a18ff4643363d96"
 
 
+def test_point_data_jax_serializer_release_family_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_jax_serializer_release_family.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_POINTDATA_JAX_SERIALIZER_RELEASE_FAMILY"
+    checks = {
+        item["release_ref"]: item["historical_compatibility"]
+        for item in evidence["public_release_checks"]
+    }
+    assert checks["jax-v0.4.30"] is False
+    for release in (
+        "jax-v0.4.31",
+        "jax-v0.5.0",
+        "jax-v0.6.2",
+        "jax-v0.7.0",
+        "jax-v0.7.2",
+        "jax-v0.8.0",
+    ):
+        assert checks[release] is True
+    assert evidence["historical_signature"]["aval_state_keys_observed"] == ["weak_type"]
+
+
 def test_point_data_jax_serializer_contract_is_ledgered():
     evidence = json.loads(
         (ROOT / "evidence" / "point_data_jax_serializer_compatibility.json").read_text(
