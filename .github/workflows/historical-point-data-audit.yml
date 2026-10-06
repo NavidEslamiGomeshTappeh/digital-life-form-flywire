@@ -1,4 +1,4 @@
-name: Historical Point_data binary audit
+name: Historical and Zenodo Point_data binary audit
 
 on:
   push:
@@ -18,11 +18,10 @@ jobs:
           python-version: "3.12"
       - name: Install runtime
         run: python -m pip install --disable-pip-version-check pandas jax jaxlib
-      - name: Decode historical Point_data
-        run: |
-          python scripts/audit_point_data_binary.py
+      - name: Decode historical and Zenodo Point_data
+        run: python scripts/audit_point_data_binary.py
       - name: Upload audit receipt
         uses: actions/upload-artifact@v4
         with:
-          name: historical-point-data-binary-audit
+          name: historical-and-zenodo-point-data-audit
           path: point_data_binary_audit.json
