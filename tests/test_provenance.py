@@ -206,6 +206,32 @@ def test_historical_neurosetta_runtime_family_fingerprint_is_ledgered():
     assert lineage[2]["commit"] == "25c911a28030deb5204eb7ab5a18ff4643363d96"
 
 
+def test_point_data_jax_serializer_contract_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_jax_serializer_compatibility.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_POINTDATA_JAX_SERIALIZER_COMPATIBILITY"
+    historical = evidence["historical_artifact"]
+    assert historical["pickle_global"] == "jax._src.array._reconstruct_array"
+    assert historical["aval_state_observed"] == {"weak_type": False}
+    for snapshot in evidence["public_jax_snapshots"]:
+        assert snapshot["observed_reconstruct_signature"] == (
+            "def _reconstruct_array(fun, args, arr_state, aval_state)"
+        )
+        assert snapshot["observed_reduce_signature"] == (
+            "return (_reconstruct_array, (fun, args, arr_state, aval_state))"
+        )
+        assert snapshot["observed_aval_state"] == "{'weak_type': self.aval.weak_type}"
+    claims = json.loads(
+        (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
+    )
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-013")
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-JAX-SERIALIZER" in claim["evidence"]
+
+
 def test_point_data_pickle_globals_receipt_is_ledgered():
     evidence = json.loads(
         (ROOT / "evidence" / "point_data_pickle_globals_receipt.json").read_text(
