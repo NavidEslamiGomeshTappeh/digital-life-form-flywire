@@ -162,7 +162,12 @@ def test_public_point_data_ingest_dag_boundary_is_ledgered():
     assert evidence["key_commits"][2]["point_data_blob"] == (
         "b85caf49f45677f2075f7b5f2c8830141cd96d02"
     )
-    assert evidence["key_commits"][9]["src_files_at_that_commit"] == [
+    first_src = next(
+        item
+        for item in evidence["key_commits"]
+        if item["sha"] == "1007a708f0b2cd4d55875174256774a41ff5b0f4"
+    )
+    assert first_src["src_files_at_that_commit"] == [
         {
             "path": "src/paper_ANOVA.py",
             "blob": "0f806edd292478db76cf330955b6c81c230f7059",
