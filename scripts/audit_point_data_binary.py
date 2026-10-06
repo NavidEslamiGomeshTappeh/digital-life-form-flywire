@@ -63,14 +63,22 @@ def qualified_type(value: object) -> str:
 
 def summarize_object_cells(obj: pd.DataFrame) -> dict:
     type_counts: Counter[str] = Counter()
+    per_column: dict[str, Counter[str]] = {}
     object_columns = [str(c) for c in obj.columns if str(obj[c].dtype) == "object"]
     for column in object_columns:
+        column_counts: Counter[str] = Counter()
         for value in obj[column].tolist():
             if value is not None:
-                type_counts[qualified_type(value)] += 1
+                value_type = qualified_type(value)
+                type_counts[value_type] += 1
+                column_counts[value_type] += 1
+        per_column[column] = column_counts
     return {
         "object_columns": object_columns,
         "non_null_object_value_types": dict(type_counts.most_common()),
+        "per_column_object_value_types": {
+            column: dict(counts.most_common()) for column, counts in per_column.items()
+        },
         "jax_related_types": {
             key: value for key, value in type_counts.items() if key.startswith(("jax.", "jaxlib."))
         },
