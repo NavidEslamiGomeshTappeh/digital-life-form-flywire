@@ -36,7 +36,19 @@ urllib.request.urlretrieve(URL, path)
 raw = path.read_bytes()
 sha = hashlib.sha256(raw).hexdigest()
 
-with path.open("rb") as fh:
+
+# Print the pickle's referenced GLOBAL-like opcodes without importing its modules.
+def pickle_globals(raw: bytes):
+    import io
+    import pickletools
+    found = []
+    for opcode, arg, _pos in pickletools.genops(io.BytesIO(raw)):
+        if opcode.name in {"GLOBAL", "STACK_GLOBAL"} and arg is not None:
+            found.append({"opcode": opcode.name, "arg": str(arg)})
+    return found[:500]
+
+report["pickle_protocol_globals"] = pickle_globals(raw)
+\nwith path.open("rb") as fh:
     obj = pickle.load(fh)
 
 if not isinstance(obj, pd.DataFrame):
