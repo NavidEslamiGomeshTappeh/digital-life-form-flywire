@@ -305,7 +305,7 @@
     "anchor_comparison": [
       {
         "subtype": "T4a",
-        "id": 720575940632008100,
+        "id": "720575940632008007",
         "historical_root": [
           -46.85120703125,
           32.261150390625,
@@ -330,7 +330,7 @@
       },
       {
         "subtype": "T4c",
-        "id": 720575940616224400,
+        "id": "720575940616224414",
         "historical_root": [
           -46.16929296875,
           22.233228515625,
@@ -355,7 +355,7 @@
       },
       {
         "subtype": "T5a",
-        "id": 720575940625571500,
+        "id": "720575940625571465",
         "historical_root": [
           11.981576171875,
           50.1895,
@@ -380,7 +380,7 @@
       },
       {
         "subtype": "T5c",
-        "id": 720575940617782900,
+        "id": "720575940617782941",
         "historical_root": [
           12.7460712890625,
           54.907804687500004,
@@ -428,7 +428,9 @@
       "previous_nearest_coordinate_selector_corrected": true,
       "correction_scope": "The earlier audit evidence selected subtype rows by nearest root coordinate to the later Zenodo root. This snapshot evidence is now hardened by exact ID selection; the four decoded anchor rows were reselected by Root ID and each matched exactly once.",
       "workflow_head_sha": "899b8c1e2b1bbc33884afe610985dc691b5efa5e",
-      "decode_artifact_id": 11421848388
+      "decode_artifact_id": 11421848388,
+      "exact_id_storage": "string",
+      "reason": "FlyWire Root IDs are 64-bit identifiers and must not be coerced through JavaScript Number."
     }
   }
 }
