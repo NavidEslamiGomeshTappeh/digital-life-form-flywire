@@ -4,8 +4,12 @@
   "purpose": "Bound the historical Point_data pickle's JAX ArrayImpl serialization contract against public JAX release tags.",
   "historical_signature": {
     "pickle_global": "jax._src.array._reconstruct_array",
-    "aval_state_keys_observed": ["weak_type"],
-    "aval_state_example": {"weak_type": false},
+    "aval_state_keys_observed": [
+      "weak_type"
+    ],
+    "aval_state_example": {
+      "weak_type": false
+    },
     "object_type": "jaxlib._jax.ArrayImpl"
   },
   "public_release_checks": [
@@ -70,5 +74,12 @@
       "A private/forked JAX build could differ from the released tags.",
       "The exact December 2025 producer and exact package lock remain unresolved."
     ]
+  },
+  "python_runtime_constraint": {
+    "historical_consumer_python": "3.10.17",
+    "public_legacy_environment_python": "3.10",
+    "JAX_release_constraint": "JAX 0.7.0 and later raised the minimum Python version to 3.11; JAX 0.6.2 supports Python >=3.10.",
+    "conditional_interpretation": "If the December producer used the same Python environment as the contemporaneous neurosetta consumer notebook, JAX 0.7.x and 0.8.x are excluded, leaving the standard released reducer family through 0.6.2.",
+    "status": "CONDITIONAL_ONLY"
   }
 }
