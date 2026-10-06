@@ -199,6 +199,11 @@ def test_historical_neurosetta_runtime_family_fingerprint_is_ledgered():
     assert evidence["relationship_to_historical_point_data"][
         "historical_decoded_jax_arrayimpl_cells"
     ] == 46624
+    lineage = evidence["sources"]["legacy_neurosetta"]["pre_artifact_lineage"]
+    assert lineage[0]["commit"] == "beea421fb235364f9289e7d68fc8a050f12a2372"
+    assert lineage[0]["date"] == "2025-02-21T11:36:49Z"
+    assert lineage[1]["commit"] == "b32a340a96d71b97ff094d13f95904c5b2646a8d"
+    assert lineage[2]["commit"] == "25c911a28030deb5204eb7ab5a18ff4643363d96"
 
 
 def test_point_data_exact_id_decode_receipt_is_ledgered():
