@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_PUBLISHED_GLOBAL_ALIGNMENT_BOUNDARY",
+  "role": "coordinate_frame_boundary_for_point_data_root_comparison",
+  "population_specific": true,
+  "population_definition": "A dendrite population is the same neuron type within one hemisphere/neuropil population; the published method aligns these populations separately before spatial analysis.",
+  "operations": [
+    "mean_center_population",
+    "pca_rotation",
+    "fit_sphere_and_recenter",
+    "final_axis_orientation_rotation"
+  ],
+  "published_method": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "article_url": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1014657",
+    "public_notebook": "Notebooks/PP4_Global_allignment.ipynb",
+    "notebook_commit": "3a1aa1a2e368ff8767f40791588eaf552e6d436d"
+  },
+  "pp4_persistence": {
+    "load_path": "/home/ndrummond@neuro.mpg.de/Datasets/Paper_data/nr/Flywire/Reduced_dendrites/",
+    "load_units": "nm",
+    "convert_to_units": "um",
+    "calls": [
+      "align_forest(global_=True)",
+      "fit_sphere(global_=True)",
+      "recenter_coordinates(center=center, global_=True, bind=True)",
+      "rotate_coordinates(axis=(0,0,1), angle=pi, global_=True, bind=True)"
+    ],
+    "save_after_alignment": false,
+    "observation": "The shown PP4 notebook sends the transformed sub_forest to the Viewer and contains no save_forest call after the alignment/recenter/rotation sequence."
+  },
+  "metrics1_boundary": {
+    "notebook": "Notebooks/Metrics1_Point_data.ipynb",
+    "operation": "load Reduced_dendrites with set_units='nm', convert_units(target_units='um'), then tree.get_root_coordinate()",
+    "implication": "The public notebook evidence does not establish that the PP4-transformed in-memory state was the persisted source for Point_data."
+  },
+  "interpretation": {
+    "proven": [
+      "The study defines a population-specific global coordinate alignment step.",
+      "The alignment is not a simple unit conversion; it changes coordinate origin and orientation.",
+      "The public PP4 notebook does not persist the transformed forest after these operations.",
+      "Therefore a raw V229 SWC versus Point_data root mismatch is a pre-alignment baseline, not a provenance rejection."
+    ],
+    "unresolved": [
+      "The exact December 2025 population-aligned morphology state is not recovered.",
+      "The exact historical persistence/save point between PP4-style alignment and Point_data generation is not recovered.",
+      "The historical manual root/dendrite corrections are not recovered."
+    ]
+  }
+}
