@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_CONTEMPORANEOUS_POINTDATA_GEOJAX_CONSUMER",
+  "purpose": "Record a contemporaneous December 2025 consumer bridge: a Figure 5 notebook reads Point_data.pkl, consumes PC1/PC2/PC3, and imports a Random_bifurcations module whose same-date source imports GeoJax and uses its vector geometry API.",
+  "source": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "commit": "07b468181ceb3e43d1cb3647b5bac79d531acd18",
+    "commit_date": "2025-12-10T16:32:19Z",
+    "message": "Figures 5 + 6 notebooks and functions",
+    "figure5_notebook": {
+      "path": "Notebooks/Figure_5.ipynb",
+      "blob_sha1": "a65df260ce2b118d44e58388349b91a6c9483333"
+    },
+    "random_bifurcations_history": {
+      "path": ".history/src/Random_bifurcations_20251210164127.py",
+      "blob_sha1": "6d3739e9c8fdf72a3a8c0de493af6f7e24bd7aa2"
+    }
+  },
+  "figure5_observations": {
+    "kernelspec": "neurosetta",
+    "python": "3.10.17",
+    "point_data_load": "pd.read_pickle(\"../Data/Point_data.pkl\")",
+    "pca_consumption": [
+      "df_point.Type == 'T4' -> mean(PC1), mean(PC2), mean(PC3)",
+      "df_point.Type == 'T5' -> mean(PC1), mean(PC2), mean(PC3)"
+    ],
+    "downstream_call": "generate_random_bifurication(10000, pc1, pc2, pc3)"
+  },
+  "random_bifurcations_observations": {
+    "import": "import GeoJax as gj",
+    "geo_api_calls": [
+      "gj.cross",
+      "gj.angle",
+      "gj.normalize"
+    ],
+    "role": "Geometry for random-bifurcation construction and angle calculations."
+  },
+  "interpretation": {
+    "proven": [
+      "On 2025-12-10, the public Figure_5 notebook directly loaded Point_data.pkl and consumed its PC1/PC2/PC3 columns.",
+      "The same commit added a Random_bifurcations source whose historical revision imports GeoJax and calls its vector geometry functions.",
+      "The notebook and source share the neurosetta/Python 3.10.17 context."
+    ],
+    "not_proven": [
+      "GeoJax generated PC1/PC2/PC3.",
+      "The producer of Point_data.pkl was the Random_bifurcations module.",
+      "The exact GeoJax commit installed in the 2025-12-10 environment."
+    ]
+  }
+}
