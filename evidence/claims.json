@@ -291,6 +291,15 @@
         "No exact historical Point_data execution is cryptographically bound to these software snapshots.",
         "Compatibility does not establish producer identity or causation."
       ]
+    },
+    {
+      "id": "C-MORPH-004",
+      "classification": "DETERMINISTIC_COMPUTATION",
+      "status": "REPRODUCED",
+      "statement": "A later public PP3 implementation was executed successfully in GitHub Actions on all four project V229 SWCs: it reproduced the expected subtree-selection node IDs, while the resulting root coordinates did not exactly match the historical Point_data roots; a rigid transform also failed to reconcile all four pairs.",
+      "evidence": [
+        "E-HISTORICAL-PP3-LATER-RECONSTRUCTION"
+      ]
     }
   ]
 }
