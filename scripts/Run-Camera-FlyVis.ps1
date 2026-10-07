@@ -11,11 +11,18 @@ if (-not $Python) {
 }
 
 $Venv = Join-Path $Root ".venv-camera-flyvis"
-if (-not (Test-Path (Join-Path $Venv "Scripts/python.exe"))) {
+$VenvPython = Join-Path $Venv "Scripts\python.exe"
+$FlyVisCli = Join-Path $Venv "Scripts\flyvis.exe"
+$DlfCli = Join-Path $Venv "Scripts\dlf-flywire.exe"
+
+if (-not (Test-Path $VenvPython)) {
     & $Python.Source -3.12 -m venv $Venv
 }
 
-$Py = Join-Path $Venv "Scripts/python.exe"
+if (-not (Test-Path $VenvPython)) {
+    throw "Camera/FlyVis virtual environment was not created: $VenvPython"
+}
+
 $FlyVisRev = "92b3845cc426dd309a1a0e1b3890156c42e14021"
 $FlyVisSrc = Join-Path $Root ".runtime/flyvis-src"
 $FlyVisRoot = Join-Path $Root ".runtime/flyvis-data"
@@ -25,8 +32,8 @@ New-Item -ItemType Directory -Force (Split-Path $FlyVisSrc) | Out-Null
 New-Item -ItemType Directory -Force $FlyVisRoot | Out-Null
 New-Item -ItemType Directory -Force $Output | Out-Null
 
-& $Py -m pip install --upgrade pip
-& $Py -m pip install -e ".[vision]"
+& $VenvPython -m pip install --upgrade pip
+& $VenvPython -m pip install -e ".[vision]"
 
 if (-not (Test-Path (Join-Path $FlyVisSrc ".git"))) {
     & git init $FlyVisSrc
@@ -38,12 +45,23 @@ $Observed = (& git -C $FlyVisSrc rev-parse HEAD).Trim()
 if ($Observed -ne $FlyVisRev) {
     throw "FlyVis revision mismatch: expected $FlyVisRev, got $Observed"
 }
-& $Py -m pip install $FlyVisSrc
+& $VenvPython -m pip install $FlyVisSrc
 
 $env:FLYVIS_ROOT_DIR = $FlyVisRoot
-& $VenvScriptslyvis.exe download-pretrained
+if (-not (Test-Path $FlyVisCli)) {
+    throw "FlyVis CLI was not installed: $FlyVisCli"
+}
+& $FlyVisCli download-pretrained
 
-& $VenvScriptsdlf-flywire.exe camera-flyvis --device 0 --frames 20 --output $Output
+if (-not (Test-Path $DlfCli)) {
+    throw "Digital Life Form CLI was not installed: $DlfCli"
+}
+& $DlfCli camera-flyvis --device 0 --frames 20 --output $Output
+
+$Receipt = Join-Path $Output "camera-flyvis-receipt.json"
+if (-not (Test-Path $Receipt)) {
+    throw "Camera/FlyVis receipt was not created: $Receipt"
+}
 
 Write-Host ""
-Write-Host "SUCCESS: inspect $Outputcamera-flyvis-receipt.json"
+Write-Host "SUCCESS: inspect $Receipt"
