@@ -175,21 +175,42 @@ Invoke-NativeChecked "Discovering ONVIF cameras" {
 Write-Host ""
 Write-Host "Discovery receipt: $DiscoveryOutput"
 
-if (-not $env:DLF_CAMERA_HOST) {
-    Write-Host ""
-    Write-Host "No DLF_CAMERA_HOST is set. Discovery completed; inspect the receipt for the camera host/port."
-    Write-Host "Then set DLF_CAMERA_HOST, DLF_CAMERA_USERNAME and DLF_CAMERA_PASSWORD and run this launcher again."
-    exit 0
+$CameraHost = $env:DLF_CAMERA_HOST
+$CameraPort = 80
+
+if (-not $CameraHost) {
+    $Discovery = Get-Content -Raw -Path $DiscoveryOutput | ConvertFrom-Json
+    $Devices = @($Discovery.devices | Where-Object { $_.host -and $_.port })
+    if ($Devices.Count -eq 1) {
+        $CameraHost = [string]$Devices[0].host
+        $CameraPort = [int]$Devices[0].port
+        Write-Host ("Selected discovered camera: " + $CameraHost + ":" + $CameraPort)
+    } elseif ($Devices.Count -eq 0) {
+        Write-Host "Discovery found no usable camera endpoint. The launcher will stop here."
+        exit 0
+    } else {
+        Write-Host "Discovery found multiple camera endpoints. Set DLF_CAMERA_HOST explicitly and run again."
+        exit 0
+    }
+}
+
+$env:DLF_CAMERA_HOST = $CameraHost
+if (-not $env:DLF_CAMERA_USERNAME) {
+    $env:DLF_CAMERA_USERNAME = Read-Host "Enter the ONVIF username"
+}
+if (-not $env:DLF_CAMERA_PASSWORD) {
+    $SecurePassword = Read-Host "Enter the ONVIF password" -AsSecureString
+    $env:DLF_CAMERA_PASSWORD = [System.Net.NetworkCredential]::new("", $SecurePassword).Password
 }
 
 if (-not $env:DLF_CAMERA_USERNAME -or -not $env:DLF_CAMERA_PASSWORD) {
-    throw "Set DLF_CAMERA_USERNAME and DLF_CAMERA_PASSWORD before the ONVIF-to-FlyVis run."
+    throw "ONVIF username and password are required for stream resolution."
 }
 
 Write-Host ""
 Write-Host "ONVIF -> RTSP URI -> BoxEye -> FlyVis:"
 Invoke-NativeChecked "Running network-camera/FlyVis pipeline" {
-    & $DlfCli camera-flyvis --onvif-host-env DLF_CAMERA_HOST --onvif-port 80 --onvif-username-env DLF_CAMERA_USERNAME --onvif-password-env DLF_CAMERA_PASSWORD --frames 20 --output $Output
+    & $DlfCli camera-flyvis --onvif-host-env DLF_CAMERA_HOST --onvif-port $CameraPort --onvif-username-env DLF_CAMERA_USERNAME --onvif-password-env DLF_CAMERA_PASSWORD --frames 20 --output $Output
 }
 
 $Receipt = Join-Path $Output "camera-flyvis-receipt.json"
