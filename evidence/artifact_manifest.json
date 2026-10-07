@@ -57,7 +57,7 @@
       "role": "cli",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "7754b0090adfee8e402e23b18420c2b514a2126c"
+        "value": "1c9b28accb053c87bd46ffbda544302d3d3e52ba"
       }
     },
     {
@@ -701,7 +701,7 @@
       "role": "bounded_RTSP_network_camera_adapter",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "336025b11e7ff3071666076cf26004cedc76378f"
+        "value": "899b3c81654b8966fe91f05a3454bf4d6019df84"
       }
     },
     {
@@ -710,7 +710,7 @@
       "role": "RTSP_network_camera_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "0f8c143e94e6358ba7d654c4e5161993acb9a971"
+        "value": "a3eb5596d8fff3bc9f499d207ca1db5b0046c82a"
       }
     },
     {
@@ -719,7 +719,7 @@
       "role": "RTSP_network_camera_cli_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "33d43ca91bd625d410d3ee747987a25f43706c8a"
+        "value": "e34bcabc364a3c459edf8cfd877b267ae62c3bc6"
       }
     },
     {
