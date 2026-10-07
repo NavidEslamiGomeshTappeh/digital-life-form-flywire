@@ -640,6 +640,15 @@
         "type": "git_blob_sha1",
         "value": "b260b0947374076af73a99ce37d552362c1c42ad"
       }
+    },
+    {
+      "id": "E-HISTORICAL-PP3-LATER-RECONSTRUCTION",
+      "path": "evidence/historical_pp3_later_reconstruction_receipt.json",
+      "role": "later_public_pp3_execution_receipt",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "d16848cbc34fac2bb1c503809964a11a3b501eed"
+      }
     }
   ]
 }
