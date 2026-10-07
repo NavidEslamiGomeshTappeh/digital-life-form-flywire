@@ -339,6 +339,23 @@
         "Legacy/internal is an interpretation of the lifecycle evidence, not proof of the private producer implementation.",
         "The exact writer and mathematical definition remain unresolved."
       ]
+    },
+    {
+      "id": "C-NETWORK-CAMERA-001",
+      "statement": "A local Windows execution observed a physical Uniarch Uho-S2E network-camera stream pass through ONVIF discovery, RTSP capture, the 721-receptor BoxEye bridge, and the pinned FlyVis network, producing a finite 20-frame continuous model response.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-NETWORK-CAMERA-OBSERVED",
+        "E-CAMERA-FLYVIS",
+        "E-NETWORK-CAMERA",
+        "E-NETWORK-DISCOVERY"
+      ],
+      "caveats": [
+        "The observation was performed on a user's local Windows machine and is not an independently reproduced physical-camera run in GitHub Actions.",
+        "Private LAN endpoint, credentials, and device serial information are intentionally omitted from the public evidence artifact.",
+        "The claim is limited to the observed software path and does not establish exact FAFB v783 root-level electrical activity, biological spikes, or biological control."
+      ]
     }
   ]
 }
