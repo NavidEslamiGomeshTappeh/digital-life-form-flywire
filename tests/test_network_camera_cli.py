@@ -121,3 +121,85 @@ def test_camera_flyvis_cli_forwards_rtsp_environment_url(monkeypatch, tmp_path):
     )
     assert observed["frame_count"] == 3
     assert observed["device_index"] == 0
+
+
+def test_camera_flyvis_cli_resolves_rtsp_through_onvif(monkeypatch, tmp_path):
+    observed = {}
+
+    class Resolution:
+        connection_uri = "rtsp://admin:secret@192.168.1.20:554/live/main"
+
+    def fake_resolve(**kwargs):
+        observed.update(kwargs)
+        return Resolution()
+
+    def fake_run_camera_to_flyvis(**kwargs):
+        observed["pipeline"] = kwargs
+        return {
+            "status": "observed_success",
+            "physical_source": {
+                "source_kind": "camera/rtsp",
+                "source_locator": "rtsp://192.168.1.20:554/live/main",
+            },
+        }
+
+    monkeypatch.delenv("TEST_DLF_RTSP_URL", raising=False)
+    monkeypatch.setenv("TEST_CAMERA_HOST", "192.168.1.20")
+    monkeypatch.setenv("TEST_CAMERA_USER", "admin")
+    monkeypatch.setenv("TEST_CAMERA_PASS", "secret")
+    monkeypatch.setattr(
+        "dlf_flywire.network_camera.resolve_rtsp_stream",
+        fake_resolve,
+    )
+    monkeypatch.setattr(
+        "dlf_flywire.camera_flyvis.run_camera_to_flyvis",
+        fake_run_camera_to_flyvis,
+    )
+
+    assert (
+        cli.main(
+            [
+                "camera-flyvis",
+                "--onvif-host-env",
+                "TEST_CAMERA_HOST",
+                "--onvif-username-env",
+                "TEST_CAMERA_USER",
+                "--onvif-password-env",
+                "TEST_CAMERA_PASS",
+                "--frames",
+                "2",
+                "--output",
+                str(tmp_path / "flyvis"),
+            ]
+        )
+        == 0
+    )
+
+    assert observed["host"] == "192.168.1.20"
+    assert observed["port"] == 80
+    assert observed["username"] == "admin"
+    assert observed["password"] == "secret"
+    assert observed["pipeline"]["stream_url"] == Resolution.connection_uri
+
+
+def test_camera_flyvis_cli_rejects_mixed_rtsp_and_onvif_inputs(monkeypatch, tmp_path):
+    monkeypatch.setenv("TEST_DLF_RTSP_URL", "rtsp://example.local/live")
+
+    assert (
+        cli.main(
+            [
+                "camera-flyvis",
+                "--rtsp-url-env",
+                "TEST_DLF_RTSP_URL",
+                "--onvif-host",
+                "192.168.1.20",
+                "--onvif-username-env",
+                "TEST_CAMERA_USER",
+                "--onvif-password-env",
+                "TEST_CAMERA_PASS",
+                "--output",
+                str(tmp_path / "flyvis"),
+            ]
+        )
+        == 2
+    )
