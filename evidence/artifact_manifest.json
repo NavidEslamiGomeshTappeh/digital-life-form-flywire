@@ -658,6 +658,24 @@
         "type": "git_blob_sha1",
         "value": "899ba72e94fe3695d3e9e8188aa434c0957ef9c8"
       }
+    },
+    {
+      "id": "E-POINTDATA-PUBLIC-GENERATOR-GAP",
+      "path": "evidence/point_data_public_generator_gap.json",
+      "role": "public_metrics_generator_gap",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "9723e2e867708c6d01edb63a82b7b4ea0c0f183e"
+      }
+    },
+    {
+      "id": "E-POINTDATA-REVISION-CANDIDATES",
+      "path": "evidence/point_data_revision_candidate_matrix.json",
+      "role": "point_data_revision_candidate_matrix",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "97ca1e7d41b68c48a7e81897840d08b374d2940b"
+      }
     }
   ]
 }
