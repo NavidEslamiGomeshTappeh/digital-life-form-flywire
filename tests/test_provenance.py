@@ -913,3 +913,33 @@ def test_legacy_public_pca_implementation_is_ledgered():
     claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-019")
     assert claim["status"] == "PROVEN"
     assert "E-POINTDATA-LEGACY-PCA" in claim["evidence"]
+
+
+def test_same_commit_point_data_consumer_boundary_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "public_point_data_consumer_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_SAME_COMMIT_PUBLIC_CONSUMER_ONLY_NOTEBOOK"
+    assert evidence["source"]["point_data_commit"] == (
+        "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a"
+    )
+    assert evidence["source"]["point_data_blob"] == (
+        "b85caf49f45677f2075f7b5f2c8830141cd96d02"
+    )
+    assert evidence["source"]["notebook_blob_sha1"] == (
+        "93eb31b90a738f64f5d803aaecda22f80edd6178"
+    )
+    assert evidence["notebook_environment"] == {
+        "kernelspec": "neurosetta",
+        "python": "3.10.17",
+    }
+    assert evidence["observed_code"]["point_data_operation"] == "pd.read_pickle(file_path)"
+    assert evidence["same_commit_tree"]["producer_code_paths_observed"] is False
+    claims = json.loads(
+        (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
+    )
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-020")
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-SAME-COMMIT-CONSUMER" in claim["evidence"]

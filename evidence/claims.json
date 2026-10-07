@@ -465,6 +465,20 @@
         "The legacy function's exact dependency versions at artifact-production time are not established.",
         "The historical JAX scalar serialization could result from downstream wrapping or a different producer path."
       ]
+    },
+    {
+      "id": "C-POINTDATA-020",
+      "statement": "The first public commit containing the historical Point_data.pkl also contains only a consumer/analysis notebook, ANOVA_analysis.ipynb, which reads Point_data.pkl with pandas.read_pickle and performs downstream ANOVA/ANCOVA analysis; the same commit tree contains no public producer code path.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-SAME-COMMIT-CONSUMER",
+        "E-POINTDATA-DAG-BOUNDARY"
+      ],
+      "caveats": [
+        "This proves only the contents of the public commit tree inspected at the ingest boundary.",
+        "It does not exclude private producer code or uncommitted local notebooks outside the public repository."
+      ]
     }
   ]
 }
