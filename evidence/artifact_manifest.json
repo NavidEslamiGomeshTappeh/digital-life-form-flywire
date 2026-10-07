@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "519c8a9589cfbfe80209cb14d2202d7e62e6373c"
+        "value": "25e48ab0a4dc41b9884731dde0c36783d2c5b1d4"
       }
     },
     {
@@ -278,7 +278,7 @@
       "role": "lineage_regeneration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "7f915f9579c1091a08646bdc5115b39c90047e7a"
+        "value": "b9a82770364126d2a5fece32f265831f0349a814"
       }
     },
     {
@@ -638,7 +638,7 @@
       "role": "contextual_legacy_jax_geometry_compatibility",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b260b0947374076af73a99ce37d552362c1c42ad"
+        "value": "e105d9f5804103cc704c0f9d261d57dd43045580"
       }
     },
     {
@@ -828,6 +828,60 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "40e51b9e5499ab295b1962e8eee25ad32abd05e1"
+      }
+    },
+    {
+      "id": "E-POINTDATA-DAG-BOUNDARY",
+      "path": "evidence/public_point_data_ingest_boundary.json",
+      "role": "public_git_dag_point_data_ingest_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "2bdd011ea602213cd369d8281dc4a38d4ddac6af"
+      }
+    },
+    {
+      "id": "E-POINTDATA-PICKLE-GLOBALS",
+      "path": "evidence/point_data_pickle_globals_receipt.json",
+      "role": "byte_level_historical_point_data_pickle_globals",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "25e290d60c36c16bb4e44821d3c3ea31d311fa3f"
+      }
+    },
+    {
+      "id": "E-POINTDATA-JAX-SERIALIZER",
+      "path": "evidence/point_data_jax_serializer_compatibility.json",
+      "role": "historical_jax_serializer_contract_compatibility",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "aea737a522fbf7db62815c197c6be490eef1f7bf"
+      }
+    },
+    {
+      "id": "E-POINTDATA-JAX-SERIALIZER-RELEASE-FAMILY",
+      "path": "evidence/point_data_jax_serializer_release_family.json",
+      "role": "jax_release_family_serializer_compatibility",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "f79fcd755321fbd499bc73b6b0f0bcdd1c169a9f"
+      }
+    },
+    {
+      "id": "E-POINTDATA-SUBTYPE-EVDIR-SEARCH",
+      "path": "evidence/public_subtype_evdir_search.json",
+      "role": "bounded_public_code_search_negative",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "175bf1eaaacbd404b43a0cd66a0a643260aafcfb"
+      }
+    },
+    {
+      "id": "E-POINTDATA-EVDIR-STRUCTURE",
+      "path": "evidence/point_data_evdir_structure.json",
+      "role": "historical_subtype_evdir_structure",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "47efb4ab2229fa39c40306619fc3a6629915d042"
       }
     }
   ]
