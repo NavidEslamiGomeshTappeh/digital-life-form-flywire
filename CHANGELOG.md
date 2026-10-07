@@ -1,5 +1,14 @@
 # Changelog
 
+
+## Unreleased maintenance — 2026-10-07
+
+- Hardened Neuroglancer skeleton recovery to fail closed on self-edges, invalid endpoints, disconnected graphs, cycles, and non-tree edge counts.
+- Repaired the Windows camera/FlyVis launcher path construction and Python 3.12 environment handling.
+- Made native `pip`/`git`/FlyVis/`dlf-flywire` launcher failures explicit instead of allowing partial execution to continue.
+- Added regression coverage for the Windows launcher contract and recovery topology rejection.
+
+
 ## 1.7.1 — 2026-10-05
 
 FlyVis continuous-activity semantics guard.
