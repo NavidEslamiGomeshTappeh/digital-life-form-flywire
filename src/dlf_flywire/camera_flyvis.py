@@ -50,8 +50,9 @@ def run_camera_to_flyvis(
         from flyvis.utils.activity_utils import LayerActivity
     except ImportError as exc:
         raise CameraFlyVisError(
-            "FlyVis, PyTorch, and their runtime dependencies are required; "
-            "install the pinned FlyVis environment first"
+            "FlyVis runtime import failed: "
+            f"{type(exc).__name__}: {exc}. "
+            "The pinned FlyVis environment was installed, but one runtime import is not usable."
         ) from exc
 
     output_path = Path(output)
