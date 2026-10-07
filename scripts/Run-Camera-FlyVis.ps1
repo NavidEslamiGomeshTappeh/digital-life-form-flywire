@@ -15,8 +15,13 @@ $VenvPython = Join-Path $Venv "Scripts\python.exe"
 $FlyVisCli = Join-Path $Venv "Scripts\flyvis.exe"
 $DlfCli = Join-Path $Venv "Scripts\dlf-flywire.exe"
 
+$PythonVersionProbe = & $Python.Source -c "import sys; raise SystemExit(0 if sys.version_info >= (3,12) else 1)"
+if ($LASTEXITCODE -ne 0) {
+    throw "Python 3.12+ is required for the camera/FlyVis environment."
+}
+
 if (-not (Test-Path $VenvPython)) {
-    & $Python.Source -3.12 -m venv $Venv
+    & $Python.Source -m venv $Venv
 }
 
 if (-not (Test-Path $VenvPython)) {
