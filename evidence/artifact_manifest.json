@@ -21,7 +21,7 @@
       "role": "project_metadata",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "8541e8c96f1a5be7037bfb186c9532ba8b392e10"
+        "value": "adce2148d8ed47a7bbe09da5a60d4aa4eece71dc"
       }
     },
     {
@@ -57,7 +57,7 @@
       "role": "cli",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "f89998bd0bfe5ef33b2262f2e327fea0cbc85f48"
+        "value": "d36ee0c9ab671dace735f6be8067f4e59ffd6771"
       }
     },
     {
@@ -720,6 +720,33 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "b2040ef4c9447a9b687794569fd92227b09663e2"
+      }
+    },
+    {
+      "id": "E-NETWORK-PTZ",
+      "path": "src/dlf_flywire/network_ptz.py",
+      "role": "read_only_ONVIF_PTZ_probe",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "6d18e7263c956a12368f8cb130705707bf62c73e"
+      }
+    },
+    {
+      "id": "E-NETWORK-PTZ-TESTS",
+      "path": "tests/test_network_ptz.py",
+      "role": "ONVIF_PTZ_probe_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "e8fb47549a29ae7f1c6841eb54e5c2590fb1b42f"
+      }
+    },
+    {
+      "id": "E-NETWORK-PTZ-CLI-TESTS",
+      "path": "tests/test_network_ptz_cli.py",
+      "role": "ONVIF_PTZ_probe_cli_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "b370275af18f680f4a34e399b857c2bed57b9098"
       }
     }
   ]
