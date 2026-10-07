@@ -338,6 +338,27 @@ def test_published_method_boundary_is_ledgered():
     assert "E-PUBLISHED-METHOD-BOUNDARY" in claim["evidence"]
 
 
+def test_point_data_evdir_lifecycle_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_evdir_legacy_lifecycle.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_POINTDATA_EVDIR_LEGACY_COLUMN_LIFECYCLE"
+    assert evidence["historical"]["columns"] == [
+        "Subtype_evDir_x",
+        "Subtype_evDir_y",
+        "Subtype_evDir_z",
+    ]
+    assert evidence["december_public_readme"]["documented_column_count"] == 21
+    assert evidence["december_public_readme"]["historical_extra_columns_not_documented"] == evidence["historical"]["columns"]
+    assert evidence["later_zenodo"]["has_subtype_evdir_columns"] is False
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-011")
+    assert claim["status"] == "PROVEN"
+    assert claim["evidence"] == ["E-POINTDATA-EVDIR-LIFECYCLE"]
+
+
 def test_point_data_evdir_anchor_vectors_are_unit_norm():
     evidence = json.loads(
         (ROOT / "evidence" / "point_data_evdir_anchor_vectors.json").read_text(
