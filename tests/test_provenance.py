@@ -1029,3 +1029,32 @@ def test_contemporaneous_pointdata_geojax_consumer_is_ledgered():
     claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-022")
     assert claim["status"] == "PROVEN"
     assert "E-POINTDATA-CONTEMPORANEOUS-GEOJAX-CONSUMER" in claim["evidence"]
+
+
+def test_exact_pointdata_blob_consumer_binding_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "exact_pointdata_blob_consumer_binding.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_EXACT_POINTDATA_BLOB_CONSUMPTION"
+    assert evidence["artifact"]["first_public_ingest_commit"] == (
+        "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a"
+    )
+    assert evidence["artifact"]["point_data_blob_sha1"] == (
+        "b85caf49f45677f2075f7b5f2c8830141cd96d02"
+    )
+    assert evidence["consumer"]["commit"] == (
+        "07b468181ceb3e43d1cb3647b5bac79d531acd18"
+    )
+    assert evidence["consumer"]["resolved_point_data_blob_sha1"] == (
+        "b85caf49f45677f2075f7b5f2c8830141cd96d02"
+    )
+    assert evidence["exact_binding"]["first_ingest_blob_equals_consumer_blob"] is True
+    assert evidence["exact_binding"]["elapsed_seconds_from_ingest"] == 75029
+    claims = json.loads(
+        (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
+    )
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-023")
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-EXACT-BLOB-CONSUMER" in claim["evidence"]
