@@ -28,7 +28,7 @@
   },
   "exact_binding": {
     "first_ingest_blob_equals_consumer_blob": true,
-    "elapsed_seconds_from_ingest": 74829,
+    "elapsed_seconds_from_ingest": 75029,
     "note": "The consumer snapshot resolves to the exact same Git blob, not merely a file with the same name."
   },
   "boundary": {
