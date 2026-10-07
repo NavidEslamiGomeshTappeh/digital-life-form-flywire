@@ -649,6 +649,15 @@
         "type": "git_blob_sha1",
         "value": "d16848cbc34fac2bb1c503809964a11a3b501eed"
       }
+    },
+    {
+      "id": "E-GITHUB-PLATFORM-AUDIT",
+      "path": "evidence/github_platform_october_2026_audit.json",
+      "role": "live_github_platform_feature_and_state_audit",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "899ba72e94fe3695d3e9e8188aa434c0957ef9c8"
+      }
     }
   ]
 }
