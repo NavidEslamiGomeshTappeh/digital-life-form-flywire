@@ -6,7 +6,7 @@
 > When the chat changes, **read this file first** before making scientific, architectural,
 > provenance, security, or repository decisions.
 >
-> Last consolidated: **2026-10-05**
+> Last consolidated: **2026-10-07**
 > Current product line: **Version 1.x only** (no V-numbered replacement series)
 
 ---
