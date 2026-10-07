@@ -16,7 +16,11 @@ def test_windows_camera_launcher_uses_defined_venv_entrypoints():
     assert '$DlfCli = Join-Path $Venv "Scripts\\dlf-flywire.exe"' in script
 
     assert '$PyLauncher = Get-Command py -ErrorAction SilentlyContinue' in script
-    assert '& $PyLauncher.Source -3.12 -c "import sys; raise SystemExit(0 if sys.version_info[:2] == (3,12) else 1)"' in script
+    assert 'function Test-Python312Runtime {' in script
+    assert '& $PyLauncher.Source -3.12 -c "import sys; raise SystemExit(0 if sys.version_info[:2] == (3,12) else 1)" 2>$null' in script
+    assert '$Winget = Get-Command winget -ErrorAction SilentlyContinue' in script
+    assert 'winget.Source install --id Python.Python.3.12 --exact --scope user --silent' in script
+    assert 'Automatic Python 3.12 installation failed' in script
     assert '$PythonArgs = @("-3.12")' in script
     assert '& $Python.Source @PythonArgs -m venv $Venv' in script
     assert 'Existing camera/FlyVis environment is not Python 3.12; rebuilding it.' in script
