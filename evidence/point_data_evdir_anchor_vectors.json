@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_HISTORICAL_SUBTYPE_EVDIR_VECTOR_EXTRACTION",
+  "purpose": "Record exact Subtype_evDir vector values recovered from the successful V273 GitHub Actions artifact for the four project anchors.",
+  "source_execution": {
+    "workflow_run_id": 37158492856,
+    "workflow_head_sha": "12507d634819a52cefcc2144f30a31f1ca275b0e",
+    "artifact_id": 11287455154,
+    "artifact_name": "V273-historical-target-rows",
+    "artifact_sha256": "416d86f3166f2a650a0274d14397544443fae163c118c930c7a2db8d9082dead",
+    "source_artifact_file": "V273_historical_target_rows.csv",
+    "source_historical_point_data_sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+    "source_historical_point_data_git_blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02"
+  },
+  "anchor_vectors": [
+    {
+      "subtype": "T4a",
+      "root_id": "720575940632008007",
+      "vector": [
+        -0.72969925,
+        0.3455741,
+        0.5900147
+      ],
+      "norm": 0.9999999001287263,
+      "norm_error": 9.987127365141273e-8
+    },
+    {
+      "subtype": "T4c",
+      "root_id": "720575940616224414",
+      "vector": [
+        0.013583472,
+        0.9834365,
+        0.18074304
+      ],
+      "norm": 0.9999999533761321,
+      "norm_error": 4.662386792143709e-8
+    },
+    {
+      "subtype": "T5a",
+      "root_id": "720575940625571465",
+      "vector": [
+        0.9838239,
+        0.095761664,
+        -0.15139462
+      ],
+      "norm": 1.0000000467341006,
+      "norm_error": 4.673410061428171e-8
+    },
+    {
+      "subtype": "T5c",
+      "root_id": "720575940617782941",
+      "vector": [
+        0.17444624,
+        0.9661792,
+        -0.18991017
+      ],
+      "norm": 0.9999998049160842,
+      "norm_error": 1.9518391582390084e-7
+    }
+  ],
+  "observations": [
+    "All four recovered vectors are numerically unit-length to better than 2e-7 in Euclidean norm.",
+    "The vectors are represented in the historical Point_data artifact's stored coordinates; this evidence does not establish the exact computation or provenance of the vectors.",
+    "The public Metrics1 notebook does not expose the Subtype_evDir columns or their writer."
+  ],
+  "interpretation": {
+    "proven": "The four anchor rows recovered from the successful V273 execution contain three Subtype_evDir coordinates that form unit-length direction vectors to numerical precision.",
+    "not_proven": [
+      "That Subtype_evDir is specifically the mean first eigenvector of each subtype population.",
+      "The exact algorithm, sign convention, aggregation population, or code revision that generated these vectors.",
+      "That the vectors are identical for all rows of a subtype; only the four anchor values have been re-established here."
+    ]
+  }
+}
