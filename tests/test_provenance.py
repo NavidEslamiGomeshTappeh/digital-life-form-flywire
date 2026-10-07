@@ -847,3 +847,40 @@ def test_point_data_pickle_globals_receipt_is_ledgered():
     assert "E-POINTDATA-PICKLE-GLOBALS" in claim["evidence"]
 
 
+
+
+def test_public_metrics1_pipeline_snapshot_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "public_metrics1_pipeline_snapshot.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_PUBLIC_METRICS1_PIPELINE_SNAPSHOT"
+    assert evidence["source"]["commit"] == (
+        "3a1aa1a2e368ff8767f40791588eaf552e6d436d"
+    )
+    assert evidence["source"]["notebook_blob_sha1"] == (
+        "2c31080a7f6f69d1c603bf287e4a5da7d4c3712b"
+    )
+    assert evidence["observed_pipeline"]["load"]["set_units"] == "nm"
+    assert evidence["observed_pipeline"]["load"]["convert_target_units"] == "um"
+    assert evidence["observed_pipeline"]["load"]["load_max_workers"] == 10
+    assert evidence["observed_pipeline"]["pca"]["call"] == (
+        "tree.coordinate_pca(robust=True, norm=True)"
+    )
+    assert evidence["historical_gap_observation"]["public_metrics1_missing_historical_fields"] == [
+        "Subtype_evDir_x",
+        "Subtype_evDir_y",
+        "Subtype_evDir_z",
+    ]
+    assert evidence["historical_gap_observation"]["producer_persistence_observation"][
+        "code_save_operation_observed"
+    ] is False
+    claims = json.loads(
+        (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
+    )
+    claim = next(
+        item for item in claims["claims"] if item["id"] == "C-POINTDATA-018"
+    )
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-PUBLIC-METRICS1-PIPELINE" in claim["evidence"]
