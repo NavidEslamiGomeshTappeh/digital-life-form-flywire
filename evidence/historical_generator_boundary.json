@@ -17,6 +17,16 @@
       "observation": "The notebook was added immediately before Point_data.pkl and contains an executed read_pickle call against /home/nik/Desktop/Software/T45_Morpho_data/Data/Pickled_data/Point_data.pkl; metadata names the Jupyter kernel 'neurosetta' and Python 3.10.17."
     },
     {
+      "role": "preserved_anova_execution_metadata",
+      "source_notebook_commit": "61fd0f176d73932ad87ece04153945501b4c405c",
+      "notebook_file": "Notebooks/ANOVA_analysis.ipynb",
+      "preserved_execution_count": 7,
+      "preserved_output_date": "09 Dec 2025",
+      "preserved_output_time": "18:05:30",
+      "timezone": "not encoded in notebook metadata",
+      "observation": "The committed notebook preserves executed ANOVA output with a 2025-12-09 18:05:30 timestamp while the notebook itself was committed at 19:40:07Z. The absolute timezone of the displayed output timestamp is not encoded, so this is temporal/context evidence rather than a cryptographic execution receipt."
+    },
+    {
       "role": "first_point_data_commit",
       "sha": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
       "timestamp": "2025-12-09T19:41:50Z",
@@ -99,9 +109,20 @@
     "parallel_point_commits_same_blob": true,
     "duplicate_point_commits_merged_without_tree_change": true,
     "neuron_ids_added_after_point_data": true,
-    "current_public_branch_list_has_no_historical_generator_branch": true,
     "conda_environment_added_after_point_data": true,
-    "release_environment_does_not_pin_neurosetta": true
+    "release_environment_does_not_pin_neurosetta": true,
+    "anova_output_execution_metadata_present": true,
+    "public_branch_listing_verified": true,
+    "public_branch_count": 63,
+    "relevant_point_data_branches_visible": [
+      "audit/decode-historical-point-data",
+      "audit/point-data-anchor-integrity",
+      "audit/point-data-pickle-globals",
+      "audit/point-data-version-boundary",
+      "fix/point-data-sha-binding",
+      "v265-historical-point-data",
+      "v268-point-data-provenance-repair"
+    ]
   },
   "interpretation": {
     "proven": [
@@ -116,7 +137,9 @@
       "As of 2026-10-04, the repository exposes only main as a public branch; no alternate public branch containing the missing producer is visible.",
       "The first public conda environment file was added on 2026-01-16, after Point_data ingestion, and declares a T45_paper environment without a NeuRosetta dependency entry.",
       "The contemporaneous December ANOVA notebook kernel metadata says neurosetta, so the later T45_paper environment file is not a cryptographic identification of that earlier runtime.",
-      "The exact recursive Git tree at the first Point_data commit contains only four blob paths, and Data/Point_data.pkl is the only Point/producer-related artifact in that tree."
+      "The exact recursive Git tree at the first Point_data commit contains only four blob paths, and Data/Point_data.pkl is the only Point/producer-related artifact in that tree.",
+      "The committed ANOVA notebook preserves executed output dated 2025-12-09 18:05:30; the notebook does not encode the timezone, so the timestamp is supporting temporal/context evidence rather than an absolute-time receipt.",
+      "The current project repository has 63 visible public branches, including multiple historical Point_data audit branches; branch absence cannot be used as evidence that no public audit branches exist."
     ],
     "unresolved": [
       "The exact December 2025 generator script/notebook is not present in the public repository history preceding Point_data.pkl.",
@@ -124,9 +147,10 @@
       "The historical Reduced_dendrites or equivalent intermediate morphology files used for the December artifact are not publicly recovered.",
       "The specific 649-coordinate V230 artifact is not yet connected end-to-end to the Point_data generator chain.",
       "The August 2026 notebooks may be revised publication versions rather than byte-identical December 2025 producer code.",
-      "The December 2025 neurosetta kernel environment, including its NeuRosetta installation source and exact package revision, is not publicly recovered."
+      "The December 2025 neurosetta kernel environment, including its NeuRosetta installation source and exact package revision, is not publicly recovered.",
+      "The contents of every historical project branch are not equivalent to the missing producer: branch names identify audit work, not historical producer identity. No branch inspected so far is named as an explicit producer branch."
     ],
-    "historical_boundary": "The public repository proves an ingest/publication boundary at 2025-12-09T19:41:50Z for Point_data.pkl and proves a local consumer path that already existed immediately beforehand. The producer itself must therefore be outside the public paper-repository history before that boundary, unless it existed only in an unexposed private/local environment. Later public preprocessing notebooks reconstruct the algorithmic path but do not recover the exact December 2025 producer.",
+    "historical_boundary": "The public paper repository proves an ingest/publication boundary at 2025-12-09T19:41:50Z for Point_data.pkl and proves a local consumer path that existed immediately beforehand. The committed ANOVA notebook also preserves an executed output timestamp of 18:05:30 on the same date, but its timezone is not encoded. The producer itself remains outside the exposed public paper-repository history before the artifact boundary, unless it existed only in an unexposed private/local environment. Later public preprocessing notebooks reconstruct the algorithmic path but do not recover the exact December 2025 producer.",
     "confidence_upgrade": "The temporal ordering now rules out a common overclaim: the December Point_data binary was not demonstrably produced by a producer script committed earlier in the public paper repository, because that repository did not contain such a producer before the artifact upload. The strongest public evidence is consumption lineage plus later executable reconstruction, not exact producer identity."
   },
   "execution_note": "Verified through GitHub commit metadata, tree/blob APIs, file APIs, and the public repository notebooks.",
@@ -261,10 +285,17 @@
     "interpretation": "This is direct evidence of a consumer reading a pre-existing local artifact. It is not producer code and does not expose the historical upstream file creation step."
   },
   "repository_state": {
-    "public_branches_visible_on_2026-10-04": [
-      "main"
+    "public_branches_visible_on_2026_10_07": 63,
+    "relevant_point_data_branches": [
+      "audit/decode-historical-point-data",
+      "audit/point-data-anchor-integrity",
+      "audit/point-data-pickle-globals",
+      "audit/point-data-version-boundary",
+      "fix/point-data-sha-binding",
+      "v265-historical-point-data",
+      "v268-point-data-provenance-repair"
     ],
-    "interpretation": "No separate public historical branch containing the December 2025 Point_data producer is currently visible through the repository branch listing."
+    "interpretation": "The project repository has multiple public historical/audit branches. Their existence does not recover a December producer; branch names alone are not producer evidence."
   },
   "release_boundary": {
     "tag": "Submission_release",
