@@ -202,7 +202,7 @@ from pathlib import Path
 import h5py
 
 root = Path(os.environ["DLF_FLYVIS_CONNECTOME_CACHE"])
-files = sorted(root.glob("*.h5"))
+files = sorted(root.glob(chr(42) + chr(46) + chr(104) + chr(53)))
 
 if not files:
     print("FlyVis connectome cache contains no HDF5 artifacts.")
