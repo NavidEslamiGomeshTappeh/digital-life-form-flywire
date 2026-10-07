@@ -183,3 +183,5 @@ Engineering consolidation:
 - version-specific scripts, workflows, result folders and root ZIP artifacts removed from the V1 working tree.
 
 Historical Git commits remain available for forensic audit. Future development continues from 1.0.0 using normal semantic versioning rather than milestone-specific public surfaces.
+
+- Historical provenance refinement: Figure_5 is now explicitly bound to the exact historical Point_data Git blob; same-week GeoJax usage is recorded as consumer/dependency evidence, while producer identity remains unresolved.
