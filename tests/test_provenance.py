@@ -990,3 +990,42 @@ def test_public_geojax_preartifact_jax_pca_is_ledgered():
     claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-021")
     assert claim["status"] == "PROVEN"
     assert "E-POINTDATA-GEOJAX-PREARTIFACT" in claim["evidence"]
+
+
+def test_contemporaneous_pointdata_geojax_consumer_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "contemporaneous_pointdata_geojax_consumer.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_CONTEMPORANEOUS_POINTDATA_GEOJAX_CONSUMER"
+    assert evidence["source"]["commit"] == (
+        "07b468181ceb3e43d1cb3647b5bac79d531acd18"
+    )
+    assert evidence["source"]["commit_date"] == "2025-12-10T16:32:19Z"
+    assert evidence["source"]["figure5_notebook"]["blob_sha1"] == (
+        "a65df260ce2b118d44e58388349b91a6c9483333"
+    )
+    assert evidence["figure5_observations"]["kernelspec"] == "neurosetta"
+    assert evidence["figure5_observations"]["python"] == "3.10.17"
+    assert evidence["figure5_observations"]["point_data_load"] == (
+        'pd.read_pickle("../Data/Point_data.pkl")'
+    )
+    assert evidence["figure5_observations"]["pca_consumption"] == [
+        "df_point.Type == 'T4' -> mean(PC1), mean(PC2), mean(PC3)",
+        "df_point.Type == 'T5' -> mean(PC1), mean(PC2), mean(PC3)",
+    ]
+    assert evidence["random_bifurcations_observations"]["import"] == (
+        "import GeoJax as gj"
+    )
+    assert evidence["random_bifurcations_observations"]["geo_api_calls"] == [
+        "gj.cross",
+        "gj.angle",
+        "gj.normalize",
+    ]
+    claims = json.loads(
+        (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
+    )
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-022")
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-CONTEMPORANEOUS-GEOJAX-CONSUMER" in claim["evidence"]
