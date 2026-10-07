@@ -25,7 +25,7 @@ function Test-Python312Runtime {
     param([string]$LauncherPath, [string[]]$LauncherArgs)
     if (-not $LauncherPath) { return $false }
     try {
-        & $LauncherPath @LauncherArgs -c "import sys; raise SystemExit(0 if sys.version_info[:2] == (3,12) else 1)" 2>$null
+        $ProbeOutput = & $LauncherPath @LauncherArgs -c "import sys; raise SystemExit(0 if sys.version_info[:2] == (3,12) else 1)" 2>&1
         return ($LASTEXITCODE -eq 0)
     } catch {
         return $false
@@ -46,8 +46,9 @@ if ($PyLauncher -and (Test-Python312Runtime $PyLauncher.Source @("-3.12"))) {
 
     Write-Host "Python 3.12 was not found. Installing Python 3.12.10 from the Python Software Foundation package via winget..."
     try {
-        & $Winget.Source install --id Python.Python.3.12 --exact --scope user --silent --accept-package-agreements --accept-source-agreements
+        $WingetOutput = & $Winget.Source install --id Python.Python.3.12 --exact --scope user --silent --accept-package-agreements --accept-source-agreements 2>&1
         $WingetExit = $LASTEXITCODE
+        $WingetOutput | ForEach-Object { Write-Host $_ }
     } catch {
         throw "Automatic Python 3.12 installation failed: $($_.Exception.Message)"
     }
