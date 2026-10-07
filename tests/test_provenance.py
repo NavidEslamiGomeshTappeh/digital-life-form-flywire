@@ -884,3 +884,32 @@ def test_public_metrics1_pipeline_snapshot_is_ledgered():
     )
     assert claim["status"] == "PROVEN"
     assert "E-POINTDATA-PUBLIC-METRICS1-PIPELINE" in claim["evidence"]
+
+
+def test_legacy_public_pca_implementation_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "legacy_public_pca_implementation.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_LEGACY_PUBLIC_PCA_IMPLEMENTATION"
+    assert evidence["source"]["commit"] == (
+        "9c27f226128d98ea5420e7a3a32acf2adc8ce138"
+    )
+    assert evidence["source"]["commit_date"] == "2025-01-15T11:30:24Z"
+    assert evidence["implementation"]["covariance"]["robust"] == (
+        "sklearn.covariance.MinCovDet().fit(coords).covariance_"
+    )
+    assert evidence["implementation"]["eigendecomposition"] == "numpy.linalg.eig"
+    assert evidence["implementation"]["normalization"] == (
+        "evals /= evals.sum() when PCA=True"
+    )
+    assert evidence["implementation"]["orientation"] == (
+        "eigenvectors transposed when transpose=True"
+    )
+    claims = json.loads(
+        (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
+    )
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-019")
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-LEGACY-PCA" in claim["evidence"]
