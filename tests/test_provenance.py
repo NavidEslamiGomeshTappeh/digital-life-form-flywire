@@ -943,3 +943,50 @@ def test_same_commit_point_data_consumer_boundary_is_ledgered():
     claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-020")
     assert claim["status"] == "PROVEN"
     assert "E-POINTDATA-SAME-COMMIT-CONSUMER" in claim["evidence"]
+
+
+def test_public_geojax_preartifact_jax_pca_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "public_geojax_preartifact_jax_pca.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_PRE_ARTIFACT_PUBLIC_GEOJAX_JAX_PCA"
+    assert evidence["source"]["commit"] == (
+        "4dfc82bbc6dbe37b64a540758d6ea3ed6c9829aa"
+    )
+    assert evidence["source"]["commit_date"] == "2025-02-12T15:02:47Z"
+    assert evidence["source"]["core_blob_sha1"] == (
+        "2874922c65288ed90695eb2b68881c44989c9d3f"
+    )
+    assert evidence["source"]["requirements_blob_sha1"] == (
+        "455eefc7452c2f1ea52f2d96ce421d397f897645"
+    )
+    assert evidence["lineage"]["first_pca_commit"] == (
+        "4dfc82bbc6dbe37b64a540758d6ea3ed6c9829aa"
+    )
+    assert evidence["lineage"]["pre_artifact_public_head"] == (
+        "33b0f8727ab447eff86e35a69c60c1f33b4d1513"
+    )
+    assert evidence["lineage"]["post_head_gap_check"]["public_commits_found"] == 0
+    assert evidence["jax_contract"]["requires_jax"] is True
+    assert evidence["jax_contract"]["robust_covariance"]["defaults"] == {
+        "c": 1.5,
+        "tol": 0.000001,
+        "max_iter": 100,
+    }
+    assert evidence["jax_contract"]["coord_eig_decomp"]["eigendecomposition"] == (
+        "jnp.linalg.eigh"
+    )
+    assert evidence["jax_contract"]["coord_eig_decomp"]["signature"] == (
+        "coord_eig_decomp(coords, robust=True, center=False, PCA=True, sort=True, transpose=True)"
+    )
+    assert evidence["relation_to_historical_point_data"]["historical_artifact"][
+        "all_eight_metric_columns_are_jax_arrayimpl"
+    ] is True
+    claims = json.loads(
+        (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
+    )
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-021")
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-GEOJAX-PREARTIFACT" in claim["evidence"]
