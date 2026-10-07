@@ -701,7 +701,7 @@
       "role": "bounded_RTSP_network_camera_adapter",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "899b3c81654b8966fe91f05a3454bf4d6019df84"
+        "value": "7fd29e75dd7bd821edceb96da941eaad7aca4c01"
       }
     },
     {
@@ -782,7 +782,7 @@
       "role": "double_click_network_camera_launcher",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "8e40c5de42828d96272d0661df2d65566c6466a9"
+        "value": "75b1b23476bdcc01edb0532c304b3f80405bd2ab"
       }
     },
     {
@@ -800,7 +800,7 @@
       "role": "camera_launcher_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "e43ae6e61064cf4ce9316224a1481afd787eb03a"
+        "value": "e57fd5684912787dc941a418a5a7a6b208ceb43b"
       }
     },
     {
