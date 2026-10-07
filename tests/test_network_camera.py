@@ -122,3 +122,64 @@ def test_network_camera_releases_capture_when_open_fails(monkeypatch):
         source.capture()
 
     assert capture.released is True
+
+
+def test_resolve_rtsp_stream_uses_current_onvif_client_and_redacts_credentials(
+    monkeypatch,
+):
+    class FakeProfile:
+        token = "profile-7"
+        VideoSourceConfiguration = object()
+        VideoEncoderConfiguration = object()
+
+    class FakeMedia:
+        def GetProfiles(self):
+            return [FakeProfile()]
+
+        def GetStreamUri(self, **kwargs):
+            assert kwargs["ProfileToken"] == "profile-7"
+            assert kwargs["StreamSetup"] == {
+                "Stream": "RTP-Unicast",
+                "Transport": {"Protocol": "RTSP"},
+            }
+            return types.SimpleNamespace(
+                Uri="rtsp://192.168.1.20:554/live/main"
+            )
+
+    class FakeClient:
+        def __init__(self, host, port, username, password):
+            assert (host, port, username, password) == (
+                "192.168.1.20",
+                80,
+                "admin",
+                "secret",
+            )
+
+        def media(self):
+            return FakeMedia()
+
+    import types
+
+    monkeypatch.setitem(
+        sys.modules,
+        "onvif",
+        types.SimpleNamespace(ONVIFClient=FakeClient),
+    )
+
+    from dlf_flywire.network_camera import resolve_rtsp_stream
+
+    result = resolve_rtsp_stream(
+        host="192.168.1.20",
+        port=80,
+        username="admin",
+        password="secret",
+    )
+
+    assert result.profile_token == "profile-7"
+    assert result.source_uri == "rtsp://192.168.1.20:554/live/main"
+    assert result.connection_uri == "rtsp://admin:secret@192.168.1.20:554/live/main"
+    assert result.to_dict() == {
+        "profile_token": "profile-7",
+        "source_uri": "rtsp://192.168.1.20:554/live/main",
+        "connection_uri": "rtsp://192.168.1.20:554/live/main",
+    }
