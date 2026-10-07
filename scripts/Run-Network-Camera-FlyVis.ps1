@@ -34,6 +34,31 @@ $VenvPython = Join-Path $Venv "Scripts\python.exe"
 $DlfCli = Join-Path $Venv "Scripts\dlf-flywire.exe"
 $FlyVisSrc = Join-Path $Root ".runtime/flyvis-src"
 $FlyVisRoot = Join-Path $Root ".runtime/flyvis-data"
+$PipIndexes = @(
+    "https://mirrors.aliyun.com/pypi/simple/",
+    "https://pypi.tuna.tsinghua.edu.cn/simple/",
+    "https://pypi.org/simple/"
+)
+
+function Invoke-PipChecked {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Description,
+        [Parameter(Mandatory = $true)]
+        [string[]]$Arguments
+    )
+
+    foreach ($Index in $PipIndexes) {
+        Write-Host "Trying Python package index: $Index"
+        & $VenvPython -m pip @Arguments --index-url $Index --retries 3 --timeout 60
+        if ($LASTEXITCODE -eq 0) {
+            return
+        }
+        Write-Warning "$Description failed against $Index; trying the next package index."
+    }
+
+    throw "$Description failed against all configured Python package indexes."
+}
 $DiscoveryOutput = Join-Path $Root "data/vision/onvif-discovery.json"
 $Output = Join-Path $Root "data/vision/network-camera-flyvis"
 
@@ -45,9 +70,9 @@ if (-not (Test-Path $VenvPython)) {
     throw "Network-camera virtual environment was not created: $VenvPython"
 }
 
-Invoke-NativeChecked "Installing Python build tooling" { & $VenvPython -m pip install --retries 8 --timeout 60 "setuptools>=68" }
-Invoke-NativeChecked "Installing Digital Life Form camera dependencies" { & $VenvPython -m pip install --retries 8 --timeout 60 --no-build-isolation "opencv-python>=4.10,<5" "onvif-python==0.4.4" }
-Invoke-NativeChecked "Installing Digital Life Form package" { & $VenvPython -m pip install --no-deps --no-build-isolation -e . }
+Invoke-PipChecked "Installing Python build tooling" @("install", "setuptools>=68")
+Invoke-PipChecked "Installing Digital Life Form camera dependencies" @("install", "--no-build-isolation", "opencv-python>=4.10,<5", "onvif-python==0.4.4")
+Invoke-NativeChecked "Installing Digital Life Form package" { & $VenvPython -m pip install --no-index --no-deps --no-build-isolation -e . }
 
 $FlyVisRev = "92b3845cc426dd309a1a0e1b3890156c42e14021"
 New-Item -ItemType Directory -Force (Split-Path $FlyVisSrc) | Out-Null
@@ -67,7 +92,7 @@ if ($Observed -ne $FlyVisRev) {
     throw "FlyVis revision mismatch: expected $FlyVisRev, got $Observed"
 }
 
-Invoke-NativeChecked "Installing pinned FlyVis source" { & $VenvPython -m pip install $FlyVisSrc }
+Invoke-PipChecked "Installing pinned FlyVis source" @("install", "--no-build-isolation", $FlyVisSrc)
 
 $env:FLYVIS_ROOT_DIR = $FlyVisRoot
 
