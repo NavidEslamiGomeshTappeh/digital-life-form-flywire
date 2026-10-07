@@ -96,6 +96,13 @@ At the start of a new project chat:
 ---
 
 ## 2.5 Current 2026-10-07 maintenance state
+## 2.6 Physical network-camera observation — 2026-10-07
+
+- A real local Windows run now completes the full physical network-camera path: ONVIF WS-Discovery -> RTSP -> 20 real frames -> BoxEye (721) -> pinned FlyVis 1.2.0.
+- The observed FlyVis response shape was **[1, 20, 45669]** with recorded frame, BoxEye, checkpoint, response, and central-trace fingerprints.
+- The public receipt is sanitized: credentials, private LAN endpoint, and camera serial are excluded.
+- This is a **SOURCE_OBSERVATION**. It is not an independently reproduced physical-camera run in GitHub Actions, and it does not establish exact FAFB-root electrical activity, spike conversion, or biological control.
+
 
 - Main remains on the unified Version 1.x line; current released metadata remains **1.7.1**.
 - `recovery.py` now rejects self-edges, invalid endpoints, disconnected skeletons, cycles, and non-tree edge counts before graph orientation. Regression coverage exists for invalid, disconnected, and cyclic skeleton inputs.
