@@ -38,19 +38,15 @@ def test_ptz_probe_reads_status_and_velocity_ranges_without_moving(monkeypatch):
             return [profile]
 
     class FakePTZ:
-        def create_type(self, name):
-            assert name == "GetConfigurationOptions"
-            return FakeValue(ConfigurationToken=None)
-
-        def GetStatus(self, request):
-            assert request == {"ProfileToken": "profile-1"}
+        def GetStatus(self, ProfileToken):
+            assert ProfileToken == "profile-1"
             return status
 
-        def GetConfigurationOptions(self, request):
-            assert request.ConfigurationToken == "ptz-config-1"
+        def GetConfigurationOptions(self, ConfigurationToken):
+            assert ConfigurationToken == "ptz-config-1"
             return options
 
-    class FakeCamera:
+    class FakeClient:
         def __init__(self, host, port, username, password):
             assert (host, port, username, password) == (
                 "192.168.1.20",
@@ -59,16 +55,16 @@ def test_ptz_probe_reads_status_and_velocity_ranges_without_moving(monkeypatch):
                 "secret",
             )
 
-        def create_media_service(self):
+        def media(self):
             return FakeMedia()
 
-        def create_ptz_service(self):
+        def ptz(self):
             return FakePTZ()
 
     monkeypatch.setitem(
         sys.modules,
         "onvif",
-        types.SimpleNamespace(ONVIFCamera=FakeCamera),
+        types.SimpleNamespace(ONVIFClient=FakeClient),
     )
 
     result = probe_onvif_ptz(
