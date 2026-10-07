@@ -58,6 +58,26 @@ def test_decode_rejects_invalid_edge():
         decode_skeleton(payload, _info())
 
 
+def test_decode_rejects_disconnected_skeleton():
+    payload = _payload(
+        [(0, 0, 0), (1, 0, 0), (10, 0, 0), (11, 0, 0)],
+        [(0, 1), (2, 3)],
+        [1, 1, 1, 1],
+    )
+    with pytest.raises(ValueError, match="single tree"):
+        decode_skeleton(payload, _info())
+
+
+def test_decode_rejects_cycle():
+    payload = _payload(
+        [(0, 0, 0), (1, 0, 0), (0, 1, 0)],
+        [(0, 1), (1, 2), (2, 0)],
+        [1, 1, 1],
+    )
+    with pytest.raises(ValueError, match="single tree"):
+        decode_skeleton(payload, _info())
+
+
 def test_decode_rejects_trailing_bytes():
     payload = _payload([(0, 0, 0)], [], [1]) + b"junk"
     with pytest.raises(ValueError, match="trailing"):
