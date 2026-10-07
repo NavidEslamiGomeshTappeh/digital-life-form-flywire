@@ -103,6 +103,7 @@ At the start of a new project chat:
 - `tests/test_camera_launcher.py` statically guards the Windows launcher contract and its fail-closed native-command handling.
 - GitHub Actions evidence at the latest completed point: **CI PASS** and **Security PASS** for commit `d03e3230a74ba02e2052b11f16c854d721d8ca6a`.
 - The physical camera launcher remains a local-machine execution boundary; static CI coverage is not a claim that a physical camera was exercised by GitHub Actions.
+- A bounded `NetworkCameraSource` now accepts explicit `rtsp://` or `rtsps://` endpoints through OpenCV, converts frames into the existing `VisionFrame` contract, redacts credentials/query secrets from provenance locators, and is exposed through `capture-network-camera`.
 
 ## 3. The current scientific anchor case
 
