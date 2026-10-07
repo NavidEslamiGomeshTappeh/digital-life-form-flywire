@@ -782,7 +782,7 @@
       "role": "double_click_network_camera_launcher",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "7d3582461820ffdcffd428eee3b986db0bd79c8b"
+        "value": "f39f457d0adc6beb8eee01124784d3dae77c7afd"
       }
     },
     {
@@ -800,7 +800,7 @@
       "role": "camera_launcher_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b56d1dd0538d86d982bbf6be37ff6b88738d0cbf"
+        "value": "42fbae8d954b6e66550c98f5931c49409eb07615"
       }
     },
     {
