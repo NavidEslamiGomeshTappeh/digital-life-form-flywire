@@ -509,6 +509,19 @@
         "The exact GeoJax revision installed in the December 2025 environment remains unresolved.",
         "Random_bifurcations consumes PCA values; it is not evidence that it generated them."
       ]
+    },
+    {
+      "id": "C-POINTDATA-023",
+      "statement": "The Figure_5 notebook committed on 2025-12-10 resolves Data/Point_data.pkl to exactly the same Git blob b85caf49f45677f2075f7b5f2c8830141cd96d02 that first entered the public repository at the 2025-12-09 Point_data ingest boundary.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-EXACT-BLOB-CONSUMER"
+      ],
+      "caveats": [
+        "This proves exact artifact consumption by the contemporaneous public notebook.",
+        "It does not recover the producer of the artifact or prove the algorithm that created PC1/PC2/PC3."
+      ]
     }
   ]
 }
