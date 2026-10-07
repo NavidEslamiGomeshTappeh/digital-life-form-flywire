@@ -98,6 +98,7 @@ def test_point_data_sha256_binding_is_consistent():
         )
     )
     assert comparison["point_data_sha256"] == provenance["source"]["sha256"]
+    assert provenance["source"]["commit"] == "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a"
 
 
 def test_global_alignment_boundary_is_ledgered():
