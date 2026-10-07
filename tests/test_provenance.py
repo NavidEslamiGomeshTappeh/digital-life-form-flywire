@@ -664,6 +664,7 @@ def test_point_data_evdir_structure_is_ledgered():
     )
     assert evidence["global"]["global_max_abs_unit_norm_error"] < 5e-7
 
+
 def test_public_subtype_evdir_search_is_ledgered():
     evidence = json.loads(
         (ROOT / "evidence" / "public_subtype_evdir_search.json").read_text(
@@ -673,6 +674,7 @@ def test_public_subtype_evdir_search_is_ledgered():
     assert evidence["status"] == "PROVEN_BOUNDED_PUBLIC_CODE_SEARCH_NEGATIVE"
     assert evidence["search_date"] == "2026-10-06"
     assert all(item["external_matches"] == 0 for item in evidence["queries"])
+
 
 def test_point_data_jax_serializer_byte_alignment_is_ledgered():
     evidence = json.loads(
@@ -694,6 +696,7 @@ def test_point_data_jax_serializer_byte_alignment_is_ledgered():
         alignment["independent_local_recheck"]["sha256"]
         == "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
     )
+
 
 def test_public_point_data_ingest_dag_boundary_is_ledgered():
     evidence = json.loads(
@@ -721,6 +724,7 @@ def test_public_point_data_ingest_dag_boundary_is_ledgered():
     ]
     assert evidence["derived_intervals"]["point_data_to_first_src_seconds"] == 1602
 
+
 def test_historical_neurosetta_runtime_family_fingerprint_is_ledgered():
     evidence = json.loads(
         (ROOT / "evidence" / "legacy_jax_geometry_context.json").read_text(
@@ -728,7 +732,31 @@ def test_historical_neurosetta_runtime_family_fingerprint_is_ledgered():
         )
     )
     legacy = evidence["sources"]["legacy_neurosetta"]
-    assert legacy["commit_date"] == "2025-07-31T14:40:07
+    assert legacy["commit_date"] == "2025-07-31T14:40:07Z"
+    assert legacy["environment"] == {
+        "name": "neurosetta",
+        "python": "3.10",
+        "jax": True,
+        "source": "environment.yml",
+        "blob": "05cf1967baea026f1bb251b99eabd454bfa302b0",
+    }
+    consumer = evidence["sources"]["paper_repository"]["observed_files"][
+        "historical_consumer_notebook"
+    ]
+    assert consumer["kernelspec"] == "neurosetta"
+    assert consumer["python"] == "3.10.17"
+    assert (
+        evidence["relationship_to_historical_point_data"][
+            "historical_decoded_jax_arrayimpl_cells"
+        ]
+        == 46624
+    )
+    lineage = evidence["sources"]["legacy_neurosetta"]["pre_artifact_lineage"]
+    assert lineage[0]["commit"] == "beea421fb235364f9289e7d68fc8a050f12a2372"
+    assert lineage[0]["date"] == "2025-02-21T11:36:49Z"
+    assert lineage[1]["commit"] == "b32a340a96d71b97ff094d13f95904c5b2646a8d"
+    assert lineage[2]["commit"] == "25c911a28030deb5204eb7ab5a18ff4643363d96"
+
 
 def test_point_data_jax_serializer_release_family_is_ledgered():
     evidence = json.loads(
@@ -736,7 +764,23 @@ def test_point_data_jax_serializer_release_family_is_ledgered():
             encoding="utf-8"
         )
     )
-    assert evidence["status"] == "PROVEN_POINTDATA_JAX_SERIALI
+    assert evidence["status"] == "PROVEN_POINTDATA_JAX_SERIALIZER_RELEASE_FAMILY"
+    checks = {
+        item["release_ref"]: item["historical_compatibility"]
+        for item in evidence["public_release_checks"]
+    }
+    assert checks["jax-v0.4.30"] is False
+    for release in (
+        "jax-v0.4.31",
+        "jax-v0.5.0",
+        "jax-v0.6.2",
+        "jax-v0.7.0",
+        "jax-v0.7.2",
+        "jax-v0.8.0",
+    ):
+        assert checks[release] is True
+    assert evidence["historical_signature"]["aval_state_keys_observed"] == ["weak_type"]
+
 
 def test_point_data_jax_serializer_contract_is_ledgered():
     evidence = json.loads(
@@ -744,7 +788,29 @@ def test_point_data_jax_serializer_contract_is_ledgered():
             encoding="utf-8"
         )
     )
-    assert evidence["status"] == "PROVEN_POINTDATA_JAX_SERIALI
+    assert evidence["status"] == "PROVEN_POINTDATA_JAX_SERIALIZER_COMPATIBILITY"
+    historical = evidence["historical_artifact"]
+    assert historical["pickle_global"] == "jax._src.array._reconstruct_array"
+    assert historical["aval_state_observed"] == {"weak_type": False}
+    for snapshot in evidence["public_jax_snapshots"]:
+        assert snapshot["observed_reconstruct_signature"] == (
+            "def _reconstruct_array(fun, args, arr_state, aval_state)"
+        )
+        assert snapshot["observed_reduce_signature"] == (
+            "return (_reconstruct_array, (fun, args, arr_state, aval_state))"
+        )
+        assert snapshot["observed_aval_state"] == "{'weak_type': self.aval.weak_type}"
+    pointdata_claims = json.loads(
+        (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
+    )
+    claim = next(
+        item
+        for item in pointdata_claims["claims"]
+        if item["id"] == "C-POINTDATA-013"
+    )
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-JAX-SERIALIZER" in claim["evidence"]
+
 
 def test_point_data_pickle_globals_receipt_is_ledgered():
     evidence = json.loads(
@@ -757,7 +823,10 @@ def test_point_data_pickle_globals_receipt_is_ledgered():
         "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
     )
     assert evidence["pickle_globals"]["stack_global_count"] == 11
-    assert "jax._src.array._reconstruct_array" in evidence["pickle_globals"]["exact_globals"]
+    assert (
+        "jax._src.array._reconstruct_array"
+        in evidence["pickle_globals"]["exact_globals"]
+    )
     assert evidence["pickle_globals"]["jax_globals"][0]["pickle_byte_position"] == 717551
     fp = evidence["jax_value_fingerprint"]
     assert fp["object_type"] == "jaxlib._jax.ArrayImpl"
@@ -766,10 +835,15 @@ def test_point_data_pickle_globals_receipt_is_ledgered():
     assert fp["shape"] == "()"
     assert fp["dtype"] == "float32"
     assert all(value == 5828 for value in fp["per_column_count"].values())
-    claims = json.loads(
+    pointdata_claims = json.loads(
         (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
     )
-    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-012")
+    claim = next(
+        item
+        for item in pointdata_claims["claims"]
+        if item["id"] == "C-POINTDATA-012"
+    )
     assert claim["status"] == "REPRODUCED"
     assert "E-POINTDATA-PICKLE-GLOBALS" in claim["evidence"]
+
 
