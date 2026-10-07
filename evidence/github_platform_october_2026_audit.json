@@ -3,12 +3,14 @@
   "repository_live_state": {
     "visibility": "public",
     "default_branch": "main",
-    "main_head": "da2cb9c60dfe8105d47059f918aaa2e5e40bcc14",
+    "main_head": "a867738499b473e99500c20da73bb992ee172745",
     "branch_protection_enabled": false,
     "required_status_checks": [],
     "repository_rulesets": [],
     "open_issues": 2,
-    "description": null
+    "description": null,
+    "public_branch_count": 63,
+    "note": "Live GitHub repository API state captured on 2026-10-07 after the historical-provenance corrections; branch listing currently shows 63 public branches."
   },
   "github_features_relevant_to_project": [
     {
@@ -68,12 +70,12 @@
     "Verify secret scanning and user/repository push protection in the public repository.",
     "Use star-history API later for objective growth telemetry rather than relying only on visible star count snapshots."
   ],
-  "important_live_correction": "Issue #16 currently contains a stale checked item claiming repository description is verified, but the live GitHub repository API reports description=null on 2026-10-07. This must remain unresolved until rechecked after a real repository metadata write.",
+  "important_live_correction": "Issue #16 was corrected on 2026-10-07: the repository description checkbox is now unresolved because the live repository API still reports description=null.",
   "sources_checked": [
     "https://github.blog/changelog/month/10-2026/",
     "https://github.blog/changelog/month/09-2026/",
     "https://docs.github.com/en/actions/how-tos/administer/control-workflow-execution",
     "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-security-and-analysis-settings-for-your-repository"
   ],
-  "checked_at_utc": "2026-10-07T05:39:17Z"
+  "checked_at_utc": "2026-10-07T06:17:12Z"
 }
