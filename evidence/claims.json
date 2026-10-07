@@ -479,6 +479,21 @@
         "This proves only the contents of the public commit tree inspected at the ingest boundary.",
         "It does not exclude private producer code or uncommitted local notebooks outside the public repository."
       ]
+    },
+    {
+      "id": "C-POINTDATA-021",
+      "statement": "A public GeoJax commit from 2025-02-12 added a JAX-based robust covariance/eigendecomposition and signed-angle geometry family, including coord_eig_decomp with robust=True, PCA normalization, descending eigenvalue ordering, and transposed eigenvectors; this is strongly compatible with the JAX ArrayImpl type and PCA family observed in the historical Point_data pickle, but does not establish the exact December 2025 producer.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-GEOJAX-PREARTIFACT",
+        "E-POINTDATA-PICKLE-GLOBALS"
+      ],
+      "caveats": [
+        "The exact GeoJax revision used by the December 2025 producer is not recovered.",
+        "The historical Subtype_evDir_x/y/z computation remains unresolved.",
+        "Type/algorithm compatibility is not producer identity."
+      ]
     }
   ]
 }
