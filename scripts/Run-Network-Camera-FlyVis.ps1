@@ -30,8 +30,8 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 $Venv = Join-Path $Root ".venv-camera-flyvis"
-$VenvPython = Join-Path $Venv "Scripts\\python.exe"
-$DlfCli = Join-Path $Venv "Scripts\\dlf-flywire.exe"
+$VenvPython = Join-Path $Venv "Scripts\python.exe"
+$DlfCli = Join-Path $Venv "Scripts\dlf-flywire.exe"
 $FlyVisSrc = Join-Path $Root ".runtime/flyvis-src"
 $FlyVisRoot = Join-Path $Root ".runtime/flyvis-data"
 $DiscoveryOutput = Join-Path $Root "data/vision/onvif-discovery.json"
