@@ -32,3 +32,24 @@ def test_windows_camera_launcher_uses_defined_venv_entrypoints():
     assert "$VenvScripts" not in script
     assert "$Outputcamera-flyvis-receipt.json" not in script
     assert 'Join-Path $Output "camera-flyvis-receipt.json"' in script
+
+
+def test_windows_network_camera_launcher_contract():
+    script = (
+        ROOT / "scripts" / "Run-Network-Camera-FlyVis.ps1"
+    ).read_text(encoding="utf-8")
+
+    assert 'function Invoke-NativeChecked {' in script
+    assert '$VenvPython = Join-Path $Venv "Scripts\\python.exe"' in script
+    assert '$DlfCli = Join-Path $Venv "Scripts\\dlf-flywire.exe"' in script
+    assert '& $VenvPython -m pip install -e ".[vision,ptz]"' in script
+    assert '$FlyVisRev = "92b3845cc426dd309a1a0e1b3890156c42e14021"' in script
+    assert 'discover-network-cameras --search Uho-S2E --timeout 5' in script
+    assert 'camera-flyvis --onvif-host-env DLF_CAMERA_HOST' in script
+    assert '--onvif-username-env DLF_CAMERA_USERNAME' in script
+    assert '--onvif-password-env DLF_CAMERA_PASSWORD' in script
+    assert '$env:DLF_CAMERA_PASSWORD' in script
+    assert 'Invoke-NativeChecked "Discovering ONVIF cameras"' in script
+    assert 'Invoke-NativeChecked "Running network-camera/FlyVis pipeline"' in script
+    assert 'Join-Path $Output "camera-flyvis-receipt.json"' in script
+    assert '$Output' in script
