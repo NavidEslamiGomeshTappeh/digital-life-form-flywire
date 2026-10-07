@@ -147,6 +147,33 @@ def main(argv=None) -> int:
         "capture-network-camera",
         help="Capture bounded RTSP network-camera frames with secret-safe provenance.",
     )
+    probe_camera_ptz = sub.add_parser(
+        "probe-camera-ptz",
+        help="Inspect ONVIF PTZ capability and position without moving the camera.",
+    )
+    probe_camera_ptz.add_argument(
+        "--host",
+        default=None,
+        help="ONVIF camera host; prefer --host-env when convenient.",
+    )
+    probe_camera_ptz.add_argument(
+        "--host-env",
+        default="DLF_CAMERA_HOST",
+        help="Environment variable containing the ONVIF camera host.",
+    )
+    probe_camera_ptz.add_argument("--port", type=int, default=80)
+    probe_camera_ptz.add_argument(
+        "--username-env",
+        default="DLF_CAMERA_USERNAME",
+        help="Environment variable containing the ONVIF username.",
+    )
+    probe_camera_ptz.add_argument(
+        "--password-env",
+        default="DLF_CAMERA_PASSWORD",
+        help="Environment variable containing the ONVIF password.",
+    )
+    probe_camera_ptz.add_argument("--output", default="data/vision/ptz-probe.json")
+
     capture_network_camera.add_argument(
         "--url",
         default=None,
@@ -220,6 +247,46 @@ def main(argv=None) -> int:
         root = find_project_root(args.root)
         print(json.dumps(validate_synapse_lineage(root), indent=2))
         return 0
+
+    if args.command == "probe-camera-ptz":
+        from .network_ptz import PTZProbeError, probe_onvif_ptz
+
+        try:
+            host = args.host or os.environ.get(args.host_env)
+            username = os.environ.get(args.username_env)
+            password = os.environ.get(args.password_env)
+            if not host:
+                raise PTZProbeError(
+                    f"no ONVIF host supplied; pass --host or set {args.host_env}"
+                )
+            if not username:
+                raise PTZProbeError(
+                    f"missing ONVIF username environment variable: {args.username_env}"
+                )
+            if not password:
+                raise PTZProbeError(
+                    f"missing ONVIF password environment variable: {args.password_env}"
+                )
+            result = probe_onvif_ptz(
+                host=host,
+                port=args.port,
+                username=username,
+                password=password,
+            )
+            output = Path(args.output)
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text(
+                json.dumps(result.to_dict(), indent=2, sort_keys=True),
+                encoding="utf-8",
+            )
+            payload = result.to_dict()
+            payload["status"] = "PASS"
+            payload["output"] = output.as_posix()
+            print(json.dumps(payload, indent=2, sort_keys=True))
+            return 0
+        except (TypeError, ValueError, PTZProbeError) as exc:
+            print(json.dumps({"status": "FAIL", "error": str(exc)}, indent=2))
+            return 2
 
     if args.command == "capture-network-camera":
         from .network_camera import NetworkCameraSource
