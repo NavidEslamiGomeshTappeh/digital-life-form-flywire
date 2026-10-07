@@ -26,6 +26,21 @@
       "confidence": {
         "as_dependency_head_candidate": "HIGH",
         "as_exact_historical_producer_binding": "LOW"
+      },
+      "public_api_narrowing": {
+        "finding": "Legacy Neurosetta commit b32a340a96d71b97ff094d13f95904c5b2646a8d (2025-06-24) says it updated bifurcation angles for a newer GeoJax and changes calls from normalise/perpendicular to normalize/cross.",
+        "implication": "This places the compatible GeoJax API at or after public commit f44d45295a27edc4cd5154d1df2318b66de324eb, where the public GeoJax code had normalize/cross. The public GeoJax history then shows 33b0f8727ab447eff86e35a69c60c1f33b4d1513 on 2025-05-02 as the last public commit before the December artifact.",
+        "candidate_range": [
+          "f44d45295a27edc4cd5154d1df2318b66de324eb",
+          "75d79d65c930acd8fb97bedb2aa88f1cb4d41b28",
+          "f4b583c62175a109ff21e9424ab58ee52ebd36cb",
+          "4f05ab16e4946f16b08d235856fafc075fd667b6",
+          "1e3637ee8a24e6d63d4f09abcc8d738020ac8e3f",
+          "f37df09f29dde6b799f01f157dd8dee4caf72aad",
+          "33b0f8727ab447eff86e35a69c60c1f33b4d1513"
+        ],
+        "strongest_public_candidate": "33b0f8727ab447eff86e35a69c60c1f33b4d1513",
+        "caveat": "The June wording does not prove which exact GeoJax SHA was installed; the developer may have been using a local checkout, an unpushed revision, or a package state not preserved in public Git."
       }
     },
     "legacy_neurosetta": {
