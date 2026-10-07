@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "62ad155c82bcb02fbe2125b9efae05e5af79f454"
+        "value": "cfd36d9cc5bdf9a34fee4930d3f09b9bf208bf9e"
       }
     },
     {
@@ -278,7 +278,7 @@
       "role": "lineage_regeneration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "daff70f879567b4fe233a551bb3379a9acbebf1f"
+        "value": "faefdeb0a5fff00355f0f16477deda3897ebbbba"
       }
     },
     {
@@ -927,6 +927,15 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "5ad98d6f2d993564bcc932e40df27989dd97cc93"
+      }
+    },
+    {
+      "id": "E-POINTDATA-EXACT-BLOB-CONSUMER",
+      "path": "evidence/exact_pointdata_blob_consumer_binding.json",
+      "role": "exact_historical_pointdata_blob_consumer_binding",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "bce05f14f9461f65821a9a013742891efe3f43ee"
       }
     }
   ]
