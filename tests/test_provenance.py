@@ -962,6 +962,13 @@ def test_public_geojax_preartifact_jax_pca_is_ledgered():
     assert evidence["source"]["requirements_blob_sha1"] == (
         "455eefc7452c2f1ea52f2d96ce421d397f897645"
     )
+    assert evidence["lineage"]["first_pca_commit"] == (
+        "4dfc82bbc6dbe37b64a540758d6ea3ed6c9829aa"
+    )
+    assert evidence["lineage"]["pre_artifact_public_head"] == (
+        "33b0f8727ab447eff86e35a69c60c1f33b4d1513"
+    )
+    assert evidence["lineage"]["post_head_gap_check"]["public_commits_found"] == 0
     assert evidence["jax_contract"]["requires_jax"] is True
     assert evidence["jax_contract"]["robust_covariance"]["defaults"] == {
         "c": 1.5,
