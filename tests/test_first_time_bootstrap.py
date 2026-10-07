@@ -15,4 +15,4 @@ def test_first_time_bootstrap_downloads_and_starts_network_launcher():
     assert "Expand-Archive" in script
     assert r"digital-life-form-flywire-main\scripts\Run-Network-Camera-FlyVis.bat" in script
     assert r'call "%PROJECT%\scripts\Run-Network-Camera-FlyVis.bat"' in script
-    assert "set "DLF_CAMERA_PASSWORD"" not in script
+    assert 'set "DLF_CAMERA_PASSWORD"' not in script
