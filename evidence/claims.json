@@ -450,6 +450,21 @@
         "The notebook markdown says the dataframe is to be saved as pickle, but the inspected code snapshot has no active save/to_pickle operation.",
         "A private or earlier revision may still differ."
       ]
+    },
+    {
+      "id": "C-POINTDATA-019",
+      "statement": "A public Neurosetta_legacy_v0.0.1 implementation predating the historical Point_data artifact exposes coord_eig_decomp with robust MinCovDet covariance, eigenvalue normalization, descending sorting, and transposed eigenvectors; this establishes a pre-artifact PCA/eigenvector computational family but does not prove it was the December 2025 producer because the historical pickle serialized all eight metric columns as JAX ArrayImpl values while this function returns NumPy arrays.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-LEGACY-PCA",
+        "E-POINTDATA-PICKLE-GLOBALS"
+      ],
+      "caveats": [
+        "The exact December 2025 producer remains unresolved.",
+        "The legacy function's exact dependency versions at artifact-production time are not established.",
+        "The historical JAX scalar serialization could result from downstream wrapping or a different producer path."
+      ]
     }
   ]
 }
