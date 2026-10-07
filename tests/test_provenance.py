@@ -928,4 +928,18 @@ def test_same_commit_point_data_consumer_boundary_is_ledgered():
     assert evidence["source"]["point_data_blob"] == (
         "b85caf49f45677f2075f7b5f2c8830141cd96d02"
     )
-    assert evidence["notebook_blob_sha1"] if False else True
+    assert evidence["source"]["notebook_blob_sha1"] == (
+        "93eb31b90a738f64f5d803aaecda22f80edd6178"
+    )
+    assert evidence["notebook_environment"] == {
+        "kernelspec": "neurosetta",
+        "python": "3.10.17",
+    }
+    assert evidence["observed_code"]["point_data_operation"] == "pd.read_pickle(file_path)"
+    assert evidence["same_commit_tree"]["producer_code_paths_observed"] is False
+    claims = json.loads(
+        (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
+    )
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-020")
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-SAME-COMMIT-CONSUMER" in claim["evidence"]
