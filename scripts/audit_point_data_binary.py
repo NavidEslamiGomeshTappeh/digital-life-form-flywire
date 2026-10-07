@@ -12,7 +12,7 @@ from pathlib import Path
 
 import pandas as pd
 
-HIST_URL = "https://raw.githubusercontent.com/borstlab/T4_T5_Dendrite_Morphology_Paper/56901ad1853b44aeca15504cd908fa4c31009a3e/Data/Point_data.pkl"
+HIST_URL = "https://raw.githubusercontent.com/borstlab/T4_T5_Dendrite_Morphology_Paper/cd17d34afd0d46a3c2947e83a1f0fdd835a9959a/Data/Point_data.pkl"
 ZENODO_URL = "https://zenodo.org/records/21876510/files/T4_T5_dendrite_morphology_data.zip?download=1"
 OUT = Path("point_data_binary_audit.json")
 
