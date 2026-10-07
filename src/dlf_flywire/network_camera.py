@@ -111,3 +111,126 @@ class NetworkCameraSource:
             return tuple(frames)
         finally:
             camera.release()
+
+
+
+@dataclass(frozen=True)
+class ONVIFStreamResolution:
+    profile_token: str
+    source_uri: str
+    connection_uri: str
+
+    def to_dict(self) -> dict[str, str]:
+        return {
+            "profile_token": self.profile_token,
+            "source_uri": redact_stream_url(self.source_uri),
+            "connection_uri": redact_stream_url(self.connection_uri),
+        }
+
+
+def _uri_field(value: object) -> str:
+    uri = getattr(value, "Uri", None)
+    if uri is None and isinstance(value, dict):
+        uri = value.get("Uri")
+    if not isinstance(uri, str) or not uri.strip():
+        raise VisionInputError("ONVIF GetStreamUri returned no RTSP URI")
+    return uri.strip()
+
+
+def _profile_token(profile: object) -> str:
+    token = getattr(profile, "token", None)
+    if token is None:
+        token = getattr(profile, "_token", None)
+    if not isinstance(token, str) or not token.strip():
+        raise VisionInputError("ONVIF media profile has no token")
+    return token.strip()
+
+
+def _with_rtsp_credentials(
+    uri: str,
+    username: str,
+    password: str,
+) -> str:
+    parsed = urlsplit(uri)
+    if parsed.scheme.lower() not in {"rtsp", "rtsps"} or not parsed.hostname:
+        raise VisionInputError("ONVIF returned an invalid RTSP URI")
+    if parsed.username is not None or parsed.password is not None:
+        return uri
+
+    from urllib.parse import quote
+
+    user = quote(username, safe="")
+    secret = quote(password, safe="")
+    host = parsed.hostname
+    if ":" in host and not host.startswith("["):
+        host = f"[{host}]"
+    if parsed.port is not None:
+        host = f"{host}:{parsed.port}"
+    return urlunsplit(
+        (parsed.scheme, f"{user}:{secret}@{host}", parsed.path, parsed.query, "")
+    )
+
+
+def resolve_rtsp_stream(
+    *,
+    host: str,
+    port: int,
+    username: str,
+    password: str,
+) -> ONVIFStreamResolution:
+    if not isinstance(host, str) or not host.strip():
+        raise VisionInputError("ONVIF host must be a non-empty string")
+    if isinstance(port, bool) or not isinstance(port, int) or not (1 <= port <= 65535):
+        raise VisionInputError("ONVIF port must be between 1 and 65535")
+    if not isinstance(username, str) or not username:
+        raise VisionInputError("ONVIF username must not be empty")
+    if not isinstance(password, str) or not password:
+        raise VisionInputError("ONVIF password must not be empty")
+
+    try:
+        from onvif import ONVIFClient
+    except ImportError as exc:
+        raise VisionInputError(
+            "onvif-python==0.4.4 is required for ONVIF stream resolution; "
+            "install the optional ptz runtime"
+        ) from exc
+
+    try:
+        client = ONVIFClient(host.strip(), port, username, password)
+        media = client.media()
+        profiles = list(media.GetProfiles())
+        if not profiles:
+            raise VisionInputError("ONVIF camera returned no media profiles")
+
+        profile = next(
+            (
+                item
+                for item in profiles
+                if getattr(item, "VideoSourceConfiguration", None) is not None
+                and getattr(item, "VideoEncoderConfiguration", None) is not None
+            ),
+            profiles[0],
+        )
+        token = _profile_token(profile)
+        stream = media.GetStreamUri(
+            ProfileToken=token,
+            StreamSetup={
+                "Stream": "RTP-Unicast",
+                "Transport": {"Protocol": "RTSP"},
+            },
+        )
+        source_uri = _uri_field(stream)
+        connection_uri = _with_rtsp_credentials(
+            source_uri,
+            username,
+            password,
+        )
+        return ONVIFStreamResolution(
+            profile_token=token,
+            source_uri=source_uri,
+            connection_uri=connection_uri,
+        )
+    except VisionInputError:
+        raise
+    except Exception as exc:
+        raise VisionInputError(f"ONVIF stream resolution failed: {exc}") from exc
