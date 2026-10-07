@@ -30,7 +30,11 @@ def test_windows_camera_launcher_uses_defined_venv_entrypoints():
     assert 'Invoke-NativeChecked "Fetching pinned FlyVis revision"' in script
     assert 'Invoke-NativeChecked "Checking out pinned FlyVis revision"' in script
     assert 'Invoke-NativeChecked "Installing pinned FlyVis source"' in script
+    assert '$FlyVisCli = Join-Path $Venv "Scripts\\flyvis.exe"' in script
+    assert '$NetworkDir = Join-Path $FlyVisRoot "results\\flow\\0000\\000"' in script
     assert 'Invoke-NativeChecked "Downloading pinned FlyVis pretrained assets"' in script
+    assert '& $FlyVisCli download-pretrained --skip_large_files' in script
+    assert 'FlyVis pretrained model was not installed at' in script
     assert 'Invoke-NativeChecked "Running camera/FlyVis pipeline"' in script
     assert 'git -C $FlyVisSrc fetch --depth=1 origin $FlyVisRev' in script
     assert "& $FlyVisCli download-pretrained" in script
