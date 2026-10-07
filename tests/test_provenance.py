@@ -349,6 +349,10 @@ def test_historical_point_data_ingest_boundary_is_locked():
     assert boundary["checks"]["parallel_point_commits_same_blob"] is True
     assert boundary["checks"]["duplicate_point_commits_merged_without_tree_change"] is True
     assert boundary["checks"]["neuron_ids_added_after_point_data"] is True
+    assert boundary["checks"]["anova_output_execution_metadata_present"] is True
+    assert boundary["checks"]["public_branch_listing_verified"] is True
+    assert boundary["checks"]["public_branch_count"] == 63
+    assert "v268-point-data-provenance-repair" in boundary["checks"]["relevant_point_data_branches_visible"]
     assert boundary["consumer_path_evidence"]["kernel"] == "neurosetta"
     assert boundary["consumer_path_evidence"]["local_path"].endswith(
         "T45_Morpho_data/Data/Pickled_data/Point_data.pkl"
