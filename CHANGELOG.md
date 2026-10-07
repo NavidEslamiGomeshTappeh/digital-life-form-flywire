@@ -2,6 +2,7 @@
 
 
 ## Unreleased maintenance — 2026-10-07
+- Deepened historical Point_data provenance: byte-level pickle/JAX inspection, public Metrics1 pipeline parameter snapshot, public DAG ingest boundary, and bounded `Subtype_evDir_*` producer search.
 - Recorded a sanitized local Windows physical-camera execution receipt: Uniarch Uho-S2E -> ONVIF -> RTSP -> BoxEye (721) -> pinned FlyVis 1.2.0, 20 real frames, observed response shape `[1, 20, 45669]`.
 - Pinned the upstream datamate Windows HDF5 resource-leak fix at commit 3b9792c3c90fb29d741f8185c7aca912aa0c0942; the FlyVis launcher no longer relies on datamate 1.0.0's Windows-incompatible _write_h5 cleanup path.
 - Added Windows FlyVis connectome-cache preflight repair: incomplete datamate HDF5 artifacts from interrupted runs are detected before the physical-camera pipeline and safely rebuilt instead of surfacing the Windows file-lock failure path.
