@@ -105,6 +105,7 @@ At the start of a new project chat:
 - The physical camera launcher remains a local-machine execution boundary; static CI coverage is not a claim that a physical camera was exercised by GitHub Actions.
 - A bounded `NetworkCameraSource` now accepts explicit `rtsp://` or `rtsps://` endpoints through OpenCV, converts frames into the existing `VisionFrame` contract, redacts credentials/query secrets from provenance locators, and is exposed through `capture-network-camera`.
 - A read-only `probe-camera-ptz` boundary now uses pinned `onvif-python==0.4.4` to inspect ONVIF PTZ profile/configuration tokens, current position/status, and continuous velocity ranges. It intentionally issues **no movement command**.
+- A read-only `discover-network-cameras` boundary now uses ONVIF WS-Discovery to locate cameras on the local LAN without requiring a known IP address. Discovered host/port, XAddrs, types/scopes, and services are returned as a provenance receipt; no PTZ or configuration commands are issued.
 
 ## 3. The current scientific anchor case
 
