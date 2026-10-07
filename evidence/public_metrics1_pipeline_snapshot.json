@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_PUBLIC_METRICS1_PIPELINE_SNAPSHOT",
+  "purpose": "Exact source-level snapshot of the later public Metrics1_Point_data notebook parameters relevant to historical Point_data reconstruction, without asserting producer identity.",
+  "source": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "commit": "3a1aa1a2e368ff8767f40791588eaf552e6d436d",
+    "notebook": "Notebooks/Metrics1_Point_data.ipynb",
+    "notebook_blob_sha1": "2c31080a7f6f69d1c603bf287e4a5da7d4c3712b"
+  },
+  "observed_pipeline": {
+    "load": {
+      "path": "/home/ndrummond@neuro.mpg.de/Datasets/Paper_data/nr/Flywire/Reduced_dendrites/",
+      "set_units": "nm",
+      "load_parallel": true,
+      "load_max_workers": 10,
+      "convert_target_units": "um",
+      "convert_parallel": true,
+      "convert_max_workers": 10
+    },
+    "geometry_helpers": [
+      "NeuRosetta.utils.geometry_utils.basis.basis",
+      "NeuRosetta.utils.geometry_utils.angles.signed_angle",
+      "NeuRosetta.utils.geometry_utils.angles.align_with"
+    ],
+    "pca": {
+      "call": "tree.coordinate_pca(robust=True, norm=True)",
+      "eigenvalue_columns": [
+        "PC1",
+        "PC2",
+        "PC3"
+      ]
+    },
+    "pc1_angle": {
+      "vector": "evecs[:,0]",
+      "alignment": "align_with(*evecs[:,0], *basis.y)",
+      "angle": "signed_angle(*aligned_ev1, *basis.y, *basis.z)"
+    },
+    "segment_orientation": {
+      "vector": "evecs[:,-1]",
+      "mean_angle": "tree.get_mean_edge_angle(basis.x, evecs[:,-1], basis.neg_z)",
+      "variance": "tree.get_edge_angle_variance(basis.x, evecs[:,-1], basis.neg_z)"
+    },
+    "other_metrics": {
+      "convex_hull": "tree.get_convex_hull_volume(bind=False)",
+      "scale": "Hull_volume / mesh.volume()",
+      "mesh_mapping": {
+        "T4R": "ME10_R",
+        "T4L": "ME10_L",
+        "T5R": "LO1_R",
+        "T5L": "LO1_L"
+      }
+    }
+  },
+  "historical_gap_observation": {
+    "historical_columns": [
+      "PC1",
+      "PC2",
+      "PC3",
+      "PC1_angle",
+      "Mean_segment_angle",
+      "Subtype_evDir_x",
+      "Subtype_evDir_y",
+      "Subtype_evDir_z"
+    ],
+    "public_metrics1_columns_observed": 23,
+    "public_metrics1_missing_historical_fields": [
+      "Subtype_evDir_x",
+      "Subtype_evDir_y",
+      "Subtype_evDir_z"
+    ],
+    "producer_persistence_observation": {
+      "markdown_mentions": "Create a dataframe of single value metrics for each dendrite and save as pickle",
+      "code_save_operation_observed": false,
+      "apply_and_concat_lines_in_code_commented": true,
+      "return_operation": "return df"
+    }
+  },
+  "interpretation": {
+    "proven": [
+      "The later public Metrics1 notebook exposes exact unit-conversion, PCA, basis, angle, mesh, and worker-count parameters.",
+      "The same public notebook does not expose the three historical Subtype_evDir columns.",
+      "The inspected code snapshot does not contain an active Point_data pickle persistence call."
+    ],
+    "not_proven": [
+      "These public parameters are not cryptographic proof of the December 2025 producer.",
+      "A private or earlier notebook revision may have added Subtype_evDir fields or performed persistence outside the inspected code."
+    ]
+  }
+}
