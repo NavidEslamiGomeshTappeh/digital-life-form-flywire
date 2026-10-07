@@ -97,6 +97,8 @@ At the start of a new project chat:
 
 ## 2.5 Current 2026-10-07 maintenance state
 
+- PR #68 (`7babe99dff6fca58fdcc81a1059801b907042b1d`) merged the deep historical Point_data provenance audit after CI, Security, and Historical/Zenodo checks all passed.
+- The stale divergent PR #64 was closed as superseded; its useful scientific findings were rebuilt directly on current `main` rather than merging its unrelated history.
 - Main remains on the unified Version 1.x line; current released metadata remains **1.7.1**.
 - `recovery.py` now rejects self-edges, invalid endpoints, disconnected skeletons, cycles, and non-tree edge counts before graph orientation. Regression coverage exists for invalid, disconnected, and cyclic skeleton inputs.
 - `scripts/Run-Camera-FlyVis.ps1` uses explicit venv entrypoints and checks native `pip`/`git`/FlyVis/`dlf-flywire` command exit codes so a failed command cannot silently lead to a later partial run.
@@ -116,6 +118,14 @@ At the start of a new project chat:
 - The observed FlyVis response shape was **[1, 20, 45669]** with recorded frame, BoxEye, checkpoint, response, and central-trace fingerprints.
 - The public receipt is sanitized: credentials, private LAN endpoint, and camera serial are excluded.
 - This is a **SOURCE_OBSERVATION**. It is not an independently reproduced physical-camera run in GitHub Actions, and it does not establish exact FAFB-root electrical activity, spike conversion, or biological control.
+
+## 2.7 Point_data provenance state — 2026-10-07
+
+- The historical `Point_data.pkl` is now inspected at byte level, including pickle protocol, STACK_GLOBAL context, and JAX `ArrayImpl` value fingerprints.
+- The later public `Metrics1_Point_data.ipynb` pipeline is recorded with exact parameters: `set_units='nm'`, `convert_units(target_units='um')`, `coordinate_pca(robust=True, norm=True)`, the basis/angle operations, and worker count 10.
+- The later public pipeline does not expose the historical `Subtype_evDir_x/y/z` fields or an active pickle persistence call in the inspected snapshot.
+- The current public NeuRosetta PCA implementation is not treated as a December 2025 producer: its current path lineage begins after the historical artifact, so its Huber parameters remain contextual, not historical producer proof.
+- The exact December 2025 producer, execution environment, intermediate morphology artifact, and historical coordinate transform remain **UNRESOLVED**.
 
 ## 3. The current scientific anchor case
 
