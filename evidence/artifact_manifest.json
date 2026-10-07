@@ -57,7 +57,7 @@
       "role": "cli",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d36ee0c9ab671dace735f6be8067f4e59ffd6771"
+        "value": "4ae31aa10251fd4b9b6bf30bb5cec8264917cb7e"
       }
     },
     {
@@ -719,7 +719,7 @@
       "role": "RTSP_network_camera_cli_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b2040ef4c9447a9b687794569fd92227b09663e2"
+        "value": "33d43ca91bd625d410d3ee747987a25f43706c8a"
       }
     },
     {
@@ -747,6 +747,15 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "b370275af18f680f4a34e399b857c2bed57b9098"
+      }
+    },
+    {
+      "id": "E-CAMERA-FLYVIS",
+      "path": "src/dlf_flywire/camera_flyvis.py",
+      "role": "physical_camera_to_FlyVis_pipeline",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "3b143e45cd30bfe143ed6ac24a8cb7d114f8cb7d"
       }
     }
   ]
