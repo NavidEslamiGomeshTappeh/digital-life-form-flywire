@@ -42,7 +42,13 @@ def test_windows_network_camera_launcher_contract():
     assert 'function Invoke-NativeChecked {' in script
     assert '$VenvPython = Join-Path $Venv "Scripts\\python.exe"' in script
     assert '$DlfCli = Join-Path $Venv "Scripts\\dlf-flywire.exe"' in script
-    assert '& $VenvPython -m pip install --retries 8 --timeout 60 "setuptools>=68"' in script
+    assert '$PipIndexes = @(' in script
+    assert 'https://mirrors.aliyun.com/pypi/simple/' in script
+    assert 'https://pypi.tuna.tsinghua.edu.cn/simple/' in script
+    assert 'https://pypi.org/simple/' in script
+    assert 'function Invoke-PipChecked {' in script
+    assert '--index-url $Index --retries 3 --timeout 60' in script
+    assert '& $VenvPython -m pip @Arguments' in script
     assert '& $VenvPython -m pip install --retries 8 --timeout 60 --no-build-isolation "opencv-python>=4.10,<5" "onvif-python==0.4.4"' in script
     assert '& $VenvPython -m pip install --no-deps --no-build-isolation -e .' in script
     assert '$FlyVisRev = "92b3845cc426dd309a1a0e1b3890156c42e14021"' in script
