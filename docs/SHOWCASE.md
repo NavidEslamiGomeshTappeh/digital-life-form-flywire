@@ -49,7 +49,9 @@ then:
 
 `dlf-flywire camera-flyvis --device 0 --frames 20 --output data/vision/camera-flyvis`
 
-A successful local run is the evidence boundary for **actual hardware capture**. GitHub Actions cannot access a user's physical camera, so CI does not pretend otherwise.
+The network-camera Windows launcher adds an ONVIF discovery path before RTSP capture. On 2026-10-07, a real local Uniarch Uho-S2E run completed the network path through **20 real frames → BoxEye (721) → pinned FlyVis 1.2.0**, producing response shape `[1, 20, 45669]`.
+
+The sanitized execution receipt is [here](../evidence/network_camera_flyvis_windows_receipt.json). It excludes private LAN endpoint details, credentials, and the camera serial. GitHub Actions cannot access a user's physical camera, so CI does not pretend otherwise.
 
 ### 4. Evidence before claims
 
