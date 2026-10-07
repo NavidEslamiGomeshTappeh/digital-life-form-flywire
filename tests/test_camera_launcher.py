@@ -1,3 +1,11 @@
+from __future__ import annotations  # noqa: I001
+
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
 def test_windows_camera_launcher_uses_defined_venv_entrypoints():
     script = (ROOT / "scripts" / "Run-Camera-FlyVis.ps1").read_text(encoding="utf-8")
 
