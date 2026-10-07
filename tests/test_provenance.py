@@ -338,6 +338,33 @@ def test_published_method_boundary_is_ledgered():
     assert "E-PUBLISHED-METHOD-BOUNDARY" in claim["evidence"]
 
 
+def test_later_public_pp3_reconstruction_receipt_is_ledgered():
+    receipt = json.loads(
+        (ROOT / "evidence" / "historical_pp3_later_reconstruction_receipt.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert receipt["status"] == "PROVEN_LATER_PUBLIC_PP3_EXECUTION_RECONSTRUCTION"
+    assert receipt["workflow"]["run_id"] == 37158493013
+    assert receipt["workflow"]["conclusion"] == "success"
+    assert receipt["historical_artifact_identity"]["exact_first_git_commit"] == (
+        "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a"
+    )
+    assert receipt["results"]["selected_nodes_match_expected"] == {
+        "T4a": 292,
+        "T4c": 358,
+        "T5a": 343,
+        "T5c": 323,
+    }
+    assert receipt["results"]["direct_selected_root_exact_match"] is False
+    assert receipt["results"]["rigid_rms_um"] > 70
+    assert receipt["results"]["similarity_rms_um"] < 11
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    claim = next(item for item in claims["claims"] if item["id"] == "C-MORPH-004")
+    assert claim["status"] == "REPRODUCED"
+    assert "E-HISTORICAL-PP3-LATER-RECONSTRUCTION" in claim["evidence"]
+
+
 def test_historical_point_data_ingest_boundary_is_locked():
     boundary = json.loads(
         (ROOT / "evidence" / "historical_generator_boundary.json").read_text(
