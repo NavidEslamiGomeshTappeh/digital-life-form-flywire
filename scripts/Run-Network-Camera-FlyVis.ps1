@@ -24,8 +24,12 @@ $PythonArgs = @()
 function Test-Python312Runtime {
     param([string]$LauncherPath, [string[]]$LauncherArgs)
     if (-not $LauncherPath) { return $false }
-    & $LauncherPath @LauncherArgs -c "import sys; raise SystemExit(0 if sys.version_info[:2] == (3,12) else 1)" 2>$null
-    return ($LASTEXITCODE -eq 0)
+    try {
+        & $LauncherPath @LauncherArgs -c "import sys; raise SystemExit(0 if sys.version_info[:2] == (3,12) else 1)" 2>$null
+        return ($LASTEXITCODE -eq 0)
+    } catch {
+        return $false
+    }
 }
 
 if ($PyLauncher -and (Test-Python312Runtime $PyLauncher.Source @("-3.12"))) {
@@ -41,9 +45,14 @@ if ($PyLauncher -and (Test-Python312Runtime $PyLauncher.Source @("-3.12"))) {
     }
 
     Write-Host "Python 3.12 was not found. Installing Python 3.12.10 from the Python Software Foundation package via winget..."
-    & $Winget.Source install --id Python.Python.3.12 --exact --scope user --silent --accept-package-agreements --accept-source-agreements
-    if ($LASTEXITCODE -ne 0) {
-        throw "Automatic Python 3.12 installation failed with exit code $LASTEXITCODE."
+    try {
+        & $Winget.Source install --id Python.Python.3.12 --exact --scope user --silent --accept-package-agreements --accept-source-agreements
+        $WingetExit = $LASTEXITCODE
+    } catch {
+        throw "Automatic Python 3.12 installation failed: $($_.Exception.Message)"
+    }
+    if ($WingetExit -ne 0) {
+        throw "Automatic Python 3.12 installation failed with exit code $WingetExit."
     }
 
     $PyLauncher = Get-Command py -ErrorAction SilentlyContinue
@@ -52,10 +61,28 @@ if ($PyLauncher -and (Test-Python312Runtime $PyLauncher.Source @("-3.12"))) {
         $PythonArgs = @("-3.12")
     } else {
         $Python = Get-Command python -ErrorAction SilentlyContinue
-        if (-not $Python -or -not (Test-Python312Runtime $Python.Source @())) {
-            throw "Python 3.12 installation completed but the runtime could not be detected. Open a new Command Prompt and run this launcher again."
+        $PythonFound = $false
+        if ($Python -and (Test-Python312Runtime $Python.Source @())) {
+            $PythonFound = $true
+            $PythonArgs = @()
+        } else {
+            $CandidatePaths = @(
+                (Join-Path $env:LocalAppData "Programs\Python\Python312\python.exe"),
+                (Join-Path $env:ProgramFiles "Python312\python.exe"),
+                "C:\Python312\python.exe"
+            )
+            foreach ($Candidate in $CandidatePaths) {
+                if (Test-Path $Candidate -and (Test-Python312Runtime $Candidate @())) {
+                    $Python = Get-Command $Candidate
+                    $PythonFound = $true
+                    $PythonArgs = @()
+                    break
+                }
+            }
         }
-        $PythonArgs = @()
+        if (-not $PythonFound) {
+            throw "Python 3.12 installation completed but the runtime could not be detected. Close and reopen the launcher once so Windows refreshes the new installation."
+        }
     }
 }
 
