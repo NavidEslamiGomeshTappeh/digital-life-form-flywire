@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_PRE_ARTIFACT_PUBLIC_GEOJAX_JAX_PCA",
+  "purpose": "Record a concrete pre-December-2025 public JAX geometry/PCA implementation that is strongly compatible with the JAX ArrayImpl and PCA family observed in the historical Point_data artifact, without claiming historical producer identity.",
+  "source": {
+    "repository": "NikDrummond/GeoJax",
+    "commit": "4dfc82bbc6dbe37b64a540758d6ea3ed6c9829aa",
+    "commit_date": "2025-02-12T15:02:47Z",
+    "commit_message": "Eigen Decomposition",
+    "core_file": "NeuGeometry/core.py",
+    "core_blob_sha1": "2874922c65288ed90695eb2b68881c44989c9d3f",
+    "requirements_file": "requirements.txt",
+    "requirements_blob_sha1": "455eefc7452c2f1ea52f2d96ce421d397f897645"
+  },
+  "jax_contract": {
+    "requires_jax": true,
+    "functions": [
+      "normalise",
+      "magnitude",
+      "reject",
+      "angle",
+      "signed_angle",
+      "robust_covariance_mest",
+      "coord_eig_decomp"
+    ],
+    "robust_covariance": {
+      "function": "robust_covariance_mest",
+      "defaults": {
+        "c": 1.5,
+        "tol": 0.000001,
+        "max_iter": 100
+      },
+      "method": "Huber-like M-estimator"
+    },
+    "coord_eig_decomp": {
+      "signature": "coord_eig_decomp(coords, robust=True, center=False, PCA=True, sort=True, transpose=True)",
+      "covariance_when_robust": true,
+      "eigendecomposition": "jnp.linalg.eigh",
+      "eigenvalue_normalization": "evals / evals.sum() when PCA=True",
+      "ordering": "descending when sort=True",
+      "eigenvector_orientation": "rows when transpose=True",
+      "return_type": "jnp.ndarray"
+    },
+    "signed_angle_present": true
+  },
+  "relation_to_historical_point_data": {
+    "historical_artifact": {
+      "source_commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+      "all_eight_metric_columns_are_jax_arrayimpl": true,
+      "dtype": "float32"
+    },
+    "compatibility_assessment": "strong type and algorithm-family compatibility",
+    "temporal_relation": "the GeoJax implementation predates the December 2025 Point_data ingest by approximately 10 months",
+    "not_proven": [
+      "The exact December 2025 producer used this GeoJax commit.",
+      "The exact GeoJax revision installed in the producer environment.",
+      "The exact implementation of Subtype_evDir_x/y/z.",
+      "The exact conversion path from vector results to scalar JAX ArrayImpl DataFrame cells."
+    ]
+  }
+}
