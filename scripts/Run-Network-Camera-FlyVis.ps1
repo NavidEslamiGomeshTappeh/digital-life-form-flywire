@@ -224,11 +224,18 @@ if invalid:
     raise SystemExit(3)
 '@
 
+    $ProbePath = Join-Path ([System.IO.Path]::GetTempPath()) ("dlf-flyvis-connectome-cache-probe-" + $PID + ".py")
     try {
-        & $PythonPath -c $ProbeCode
+        [System.IO.File]::WriteAllText(
+            $ProbePath,
+            $ProbeCode,
+            [System.Text.UTF8Encoding]::new($false)
+        )
+        & $PythonPath $ProbePath
         $ProbeExit = $LASTEXITCODE
     } finally {
         Remove-Item Env:DLF_FLYVIS_CONNECTOME_CACHE -ErrorAction SilentlyContinue
+        Remove-Item $ProbePath -Force -ErrorAction SilentlyContinue
     }
 
     if ($ProbeExit -eq 0) {
