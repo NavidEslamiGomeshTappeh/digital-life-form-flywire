@@ -20,6 +20,12 @@ def test_windows_camera_launcher_uses_defined_venv_entrypoints():
     assert 'Invoke-PipChecked "Installing Python build tooling" @("install", "setuptools>=68", "setuptools_scm[toml]>=3.4")' in script
     assert '$FlyVisCli = Join-Path $Venv "Scripts\\flyvis.exe"' in script
     assert '$NetworkDir = Join-Path $FlyVisRoot "results\\flow\\0000\\000"' in script
+    assert '$ConnectomeCache = Join-Path $FlyVisRoot "connectome\\ConnectomeFromAvgFilters_0000"' in script
+    assert 'function Repair-FlyVisConnectomeCache {' in script
+    assert 'import h5py' in script
+    assert 'Incomplete FlyVis connectome artifact: ' in script
+    assert 'Remove-Item -Recurse -Force $ConnectomeCache' in script
+    assert 'Close any Python/FlyVis process using the cache' in script
     assert '& $FlyVisCli download-pretrained --skip_large_files' in script
 
     assert '$PythonVersionProbe = & $Python.Source -c "import sys; raise SystemExit(0 if sys.version_info >= (3,12) else 1)"' in script
