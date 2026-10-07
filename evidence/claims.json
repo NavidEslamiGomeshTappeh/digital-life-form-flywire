@@ -435,6 +435,21 @@
         "This establishes the numerical structure of the stored vectors, not their semantic origin.",
         "The exact producer operation that generated Subtype_evDir_x/y/z remains unresolved."
       ]
+    },
+    {
+      "id": "C-POINTDATA-018",
+      "statement": "The later public Metrics1_Point_data notebook exposes exact unit-conversion, PCA, basis/angle, mesh, and worker-count parameters, but its inspected code snapshot does not compute the historical Subtype_evDir_x/y/z fields and contains no active Point_data pickle persistence call.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-PUBLIC-METRICS1-PIPELINE",
+        "E-POINTDATA-PUBLIC-GENERATOR-GAP"
+      ],
+      "caveats": [
+        "This is a later public code snapshot, not recovered December 2025 producer code.",
+        "The notebook markdown says the dataframe is to be saved as pickle, but the inspected code snapshot has no active save/to_pickle operation.",
+        "A private or earlier revision may still differ."
+      ]
     }
   ]
 }
