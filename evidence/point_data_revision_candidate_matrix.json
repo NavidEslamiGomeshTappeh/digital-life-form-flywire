@@ -111,5 +111,14 @@
     "Exact parameter values passed to subtree selection, PCA, alignment, scaling, and metric generation.",
     "Execution receipt binding all of the above to the exact Point_data SHA-256."
   ],
-  "next_high_value_test": "Use the later public Metrics1_Point_data algorithm plus the pre-artifact GeoJax parameter semantics to attempt value-level reproduction on any recovered historical morphology/intermediate; treat a value match as computation-path evidence, not producer identity."
+  "next_high_value_test": "Use the later public Metrics1_Point_data algorithm plus the pre-artifact GeoJax parameter semantics to attempt value-level reproduction on any recovered historical morphology/intermediate; treat a value match as computation-path evidence, not producer identity.",
+  "decisions": [
+    {
+      "date_utc": "2026-10-07",
+      "finding": "Public Metrics1 generator gap",
+      "status": "PROVEN_PUBLIC_NOTEBOOK_NON_IDENTITY",
+      "details": "Public Metrics1_Point_data.ipynb at commit 3a1aa1a... contains a 23-column per-tree function and no persistence call; historical Point_data has 24 columns including Subtype_evDir_x/y/z. Indexed public code search returned zero hits for evDir/Subtype_evDir/to_pickle.",
+      "impact": "Do not label the public Metrics1 notebook as the exact historical Point_data producer."
+    }
+  ]
 }
