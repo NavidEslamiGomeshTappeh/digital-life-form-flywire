@@ -20,7 +20,7 @@ def test_capture_network_camera_cli_uses_environment_url_and_writes_receipt(
 
     class FakeSource:
         def __init__(self, stream_url, **kwargs):
-            assert stream_url == "rtsp://user:secret@example.local:554/live/main"
+            assert stream_url == "rtsp://user:secret@example.local:554/live/main?token=hidden"
             assert kwargs["width"] == 640
             assert kwargs["height"] == 360
             self.source_locator = redact_stream_url(stream_url)
