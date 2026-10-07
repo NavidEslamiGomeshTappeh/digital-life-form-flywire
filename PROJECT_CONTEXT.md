@@ -874,3 +874,10 @@ Stage B is now partially implemented in `evidence/neural_mapping_stage_b.json`: 
 A separate FlyVis boundary is now implemented as `src/dlf_flywire/flyvis_adapter.py`. Frozen upstream reference: `TuragaLab/flyvis` v1.2.0, commit `92b3845cc426dd309a1a0e1b3890156c42e14021`, pretrained-model archive SHA-256 `71c78d4070556a536b13b23ee3139cd2788aa2a9d07d430a223b4edead281db1`. The adapter accepts continuous T4a/T4c/T5a/T5c model-response traces and records separate trace/source fingerprints. It deliberately does not create `NeuralObservation`, because the published FlyVis responses are continuous values in arbitrary units. This is model/cell-type evidence, not individual activity evidence for the four exact FAFB roots and not a Code Hand capability assignment. See `docs/FLYVIS_ACTIVITY_BOUNDARY.md`.
 
 The next scientific boundary remains evidence-backed mapping from observed activity in these identities to a functional intent, followed by controlled closed-loop experiments.
+
+## 2.8 Point_data consumer bridge — 2026-10-07
+
+- The historical Point_data Git blob `b85caf49f45677f2075f7b5f2c8830141cd96d02` is now bound exactly to the public Figure_5 consumer commit `07b468181ceb3e43d1cb3647b5bac79d531acd18`, 75,029 seconds after first ingest.
+- That notebook runs in the recorded `neurosetta` / Python 3.10.17 context and consumes PC1/PC2/PC3.
+- The same-week `Random_bifurcations` source imports GeoJax and calls `gj.cross`, `gj.angle`, and `gj.normalize`.
+- This is a contemporaneous consumer/dependency bridge, not recovery of the Point_data producer. `Subtype_evDir_*`, exact producer code, and exact installed JAX/GeoJax revisions remain UNRESOLVED.
