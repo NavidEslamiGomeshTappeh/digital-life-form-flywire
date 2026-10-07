@@ -15,8 +15,11 @@ def test_windows_camera_launcher_uses_defined_venv_entrypoints():
     assert '$FlyVisCli = Join-Path $Venv "Scripts\\flyvis.exe"' in script
     assert '$DlfCli = Join-Path $Venv "Scripts\\dlf-flywire.exe"' in script
 
-    assert '$PythonVersionProbe = & $Python.Source -c "import sys; raise SystemExit(0 if sys.version_info >= (3,12) else 1)"' in script
-    assert '& $Python.Source -m venv $Venv' in script
+    assert '$PyLauncher = Get-Command py -ErrorAction SilentlyContinue' in script
+    assert '& $PyLauncher.Source -3.12 -c "import sys; raise SystemExit(0 if sys.version_info[:2] == (3,12) else 1)"' in script
+    assert '$PythonArgs = @("-3.12")' in script
+    assert '& $Python.Source @PythonArgs -m venv $Venv' in script
+    assert 'Existing camera/FlyVis environment is not Python 3.12; rebuilding it.' in script
     assert '& $VenvPython -m pip install -e ".[vision]"' in script
     assert 'Invoke-NativeChecked "Upgrading camera/FlyVis pip"' in script
     assert 'Invoke-NativeChecked "Installing Digital Life Form vision dependencies"' in script
