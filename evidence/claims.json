@@ -482,7 +482,7 @@
     },
     {
       "id": "C-POINTDATA-021",
-      "statement": "A public GeoJax commit from 2025-02-12 added a JAX-based robust covariance/eigendecomposition and signed-angle geometry family, including coord_eig_decomp with robust=True, PCA normalization, descending eigenvalue ordering, and transposed eigenvectors; this is strongly compatible with the JAX ArrayImpl type and PCA family observed in the historical Point_data pickle, but does not establish the exact December 2025 producer.",
+      "statement": "The public GeoJax history shows that its JAX-based robust covariance/eigendecomposition and signed-angle geometry family entered at commit 4dfc82bbc6dbe37b64a540758d6ea3ed6c9829aa on 2025-02-12 and remained observable through the last public pre-artifact head 33b0f8727ab447eff86e35a69c60c1f33b4d1513 on 2025-05-02; this lineage is strongly compatible with the JAX ArrayImpl type and PCA family observed in historical Point_data, but does not establish the exact December 2025 producer.",
       "classification": "SOURCE_OBSERVATION",
       "status": "PROVEN",
       "evidence": [
