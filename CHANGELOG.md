@@ -2,6 +2,7 @@
 
 
 ## Unreleased maintenance — 2026-10-07
+- Added Windows FlyVis connectome-cache preflight repair: incomplete datamate HDF5 artifacts from interrupted runs are detected before the physical-camera pipeline and safely rebuilt instead of surfacing the Windows file-lock failure path.
 
 - Hardened Neuroglancer skeleton recovery to fail closed on self-edges, invalid endpoints, disconnected graphs, cycles, and non-tree edge counts.
 - Repaired the Windows camera/FlyVis launcher path construction and Python 3.12 environment handling.
