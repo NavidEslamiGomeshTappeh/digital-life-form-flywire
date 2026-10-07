@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_POINTDATA_EVDIR_STRUCTURE",
+  "purpose": "Deterministic structure audit of the three historical Subtype_evDir columns in the December 2025 Point_data.pkl.",
+  "source": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+    "sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+  },
+  "columns": [
+    "Subtype_evDir_x",
+    "Subtype_evDir_y",
+    "Subtype_evDir_z"
+  ],
+  "global": {
+    "rows": 5828,
+    "columns": 3,
+    "all_values_decoded_as": "jaxlib._jax.ArrayImpl",
+    "scalar_dtype": "float32",
+    "exact_vector_count": 5828,
+    "global_max_abs_unit_norm_error": 4.6288777533209924e-7
+  },
+  "by_subtype": {
+    "T4a": {
+      "rows": 713,
+      "unique_exact": 713,
+      "max_abs_norm_error": 2.795080265016736e-7
+    },
+    "T4b": {
+      "rows": 722,
+      "unique_exact": 722,
+      "max_abs_norm_error": 3.359403111247161e-7
+    },
+    "T4c": {
+      "rows": 825,
+      "unique_exact": 825,
+      "max_abs_norm_error": 3.760718327860957e-7
+    },
+    "T4d": {
+      "rows": 766,
+      "unique_exact": 766,
+      "max_abs_norm_error": 3.805885926411179e-7
+    },
+    "T5a": {
+      "rows": 684,
+      "unique_exact": 684,
+      "max_abs_norm_error": 2.8605916757573624e-7
+    },
+    "T5b": {
+      "rows": 713,
+      "unique_exact": 713,
+      "max_abs_norm_error": 3.4562136019822276e-7
+    },
+    "T5c": {
+      "rows": 719,
+      "unique_exact": 719,
+      "max_abs_norm_error": 4.6288777533209924e-7
+    },
+    "T5d": {
+      "rows": 686,
+      "unique_exact": 686,
+      "max_abs_norm_error": 4.233110753038005e-7
+    }
+  },
+  "anchor_samples": {
+    "T4a": {
+      "vector": [
+        -0.7296992540359497,
+        0.34557411074638367,
+        0.5900146961212158
+      ],
+      "norm": 0.9999999044988884,
+      "pc1_angle": 0.5527681708335876
+    },
+    "T4c": {
+      "vector": [
+        0.01358347199857235,
+        0.9834365248680115,
+        0.1807430386543274
+      ],
+      "norm": 0.999999977589003,
+      "pc1_angle": 0.013811364769935608
+    },
+    "T5a": {
+      "vector": [
+        0.9838238954544067,
+        0.09576166421175003,
+        -0.15139462053775787
+      ],
+      "norm": 1.0000000423637285,
+      "pc1_angle": -0.12169674038887024
+    },
+    "T5c": {
+      "vector": [
+        0.174446240067482,
+        0.9661791920661926,
+        -0.1899101734161377
+      ],
+      "norm": 0.9999997979111345,
+      "pc1_angle": 0.1786271035671234
+    }
+  },
+  "interpretation": {
+    "proven": [
+      "Each of the 8 subtype groups has one distinct vector triplet per row under exact float-value comparison; no subtype has repeated triplets in this artifact.",
+      "The three columns form unit-length 3D vectors to float32 numerical precision.",
+      "The vectors are therefore not a small fixed lookup table shared by subtype labels."
+    ],
+    "not_proven": [
+      "The artifact alone does not prove whether these vectors are PCA eigenvectors, subtype reference vectors, or another normalized direction calculation.",
+      "The exact producer code for these vectors is not recovered."
+    ]
+  }
+}

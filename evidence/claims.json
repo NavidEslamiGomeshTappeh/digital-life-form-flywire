@@ -356,6 +356,100 @@
         "Private LAN endpoint, credentials, and device serial information are intentionally omitted from the public evidence artifact.",
         "The claim is limited to the observed software path and does not establish exact FAFB v783 root-level electrical activity, biological spikes, or biological control."
       ]
+    },
+    {
+      "id": "C-POINTDATA-012",
+      "statement": "Byte-level inspection of the historical December 2025 Point_data.pkl explicitly finds the private JAX serializer callable `jax._src.array._reconstruct_array`; all eight PCA/angle/direction-vector metric columns are scalar float32 jaxlib._jax.ArrayImpl values across all 5,828 rows.",
+      "classification": "DETERMINISTIC_COMPUTATION",
+      "status": "REPRODUCED",
+      "evidence": [
+        "E-POINTDATA-PICKLE-GLOBALS"
+      ],
+      "caveats": [
+        "The serializer reference identifies the serialization mechanism, not the exact producer code path.",
+        "The exact December 2025 JAX version and execution environment remain unresolved."
+      ]
+    },
+    {
+      "id": "C-POINTDATA-013",
+      "statement": "The historical Point_data.pkl serialization contract matches public JAX source snapshots immediately before and on the artifact date: both expose jax._src.array._reconstruct_array(fun, args, arr_state, aval_state) and ArrayImpl.__reduce__ with aval_state containing weak_type.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-JAX-SERIALIZER"
+      ],
+      "caveats": [
+        "The match establishes serializer-format compatibility, not the exact JAX release or execution environment.",
+        "It does not recover the morphology producer script."
+      ]
+    },
+    {
+      "id": "C-POINTDATA-014",
+      "statement": "Under the standard released JAX ArrayImpl serializer, the historical Point_data pickle's weak_type-only aval_state is compatible with JAX v0.4.31 through v0.8.0, while v0.4.30 is incompatible because its reducer includes named_shape.",
+      "classification": "DETERMINISTIC_COMPUTATION",
+      "status": "REPRODUCED",
+      "evidence": [
+        "E-POINTDATA-JAX-SERIALIZER-RELEASE-FAMILY"
+      ],
+      "caveats": [
+        "This is not exact JAX version identification.",
+        "Private/forked JAX builds and nonstandard serialization paths are outside this release-tag comparison."
+      ]
+    },
+    {
+      "id": "C-POINTDATA-015",
+      "statement": "If the December 2025 Point_data producer used the same Python 3.10 runtime represented by the contemporaneous neurosetta consumer notebook, then JAX 0.7.x and later are excluded by JAX's Python-version requirement, leaving JAX 0.6.2 or earlier within the released reducer family observed here.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "INFERENCE_ONLY",
+      "evidence": [
+        "E-POINTDATA-JAX-SERIALIZER-RELEASE-FAMILY",
+        "E-POINTDATA-DAG-BOUNDARY"
+      ],
+      "caveats": [
+        "The consumer notebook does not cryptographically prove it is the producer environment.",
+        "A private/forked JAX build or a separate producer environment could violate this conditional bound."
+      ]
+    },
+    {
+      "id": "C-POINTDATA-016",
+      "statement": "A bounded GitHub public-code search on 2026-10-06 for the historical `Subtype_evDir` schema and combinations with `PC1_angle`/`Point_data` returned no external public repository implementation; all returned hits were within the project's own evidence/tests.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "NEGATIVE_RESULT",
+      "evidence": [
+        "E-POINTDATA-SUBTYPE-EVDIR-SEARCH"
+      ],
+      "caveats": [
+        "This is a bounded negative search result, not proof of nonexistence.",
+        "Private, deleted, unindexed, or differently named implementations may still exist."
+      ]
+    },
+    {
+      "id": "C-POINTDATA-017",
+      "statement": "The historical Point_data.pkl contains one distinct normalized 3D Subtype_evDir vector per row across all 5,828 neurons: each of the eight subtype groups has unique triplets under exact float comparison and unit-norm error below 4.7e-7.",
+      "classification": "DETERMINISTIC_COMPUTATION",
+      "status": "REPRODUCED",
+      "evidence": [
+        "E-POINTDATA-EVDIR-STRUCTURE"
+      ],
+      "caveats": [
+        "This establishes the numerical structure of the stored vectors, not their semantic origin.",
+        "The exact producer operation that generated Subtype_evDir_x/y/z remains unresolved."
+      ]
+    },
+    {
+      "id": "C-POINTDATA-018",
+      "statement": "The later public Metrics1_Point_data notebook exposes exact unit-conversion, PCA, basis/angle, mesh, and worker-count parameters, but its inspected code snapshot does not compute the historical Subtype_evDir_x/y/z fields and contains no active Point_data pickle persistence call.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-PUBLIC-METRICS1-PIPELINE",
+        "E-POINTDATA-PUBLIC-GENERATOR-GAP"
+      ],
+      "caveats": [
+        "This is a later public code snapshot, not recovered December 2025 producer code.",
+        "The notebook markdown says the dataframe is to be saved as pickle, but the inspected code snapshot has no active save/to_pickle operation.",
+        "A private or earlier revision may still differ."
+      ]
     }
   ]
 }

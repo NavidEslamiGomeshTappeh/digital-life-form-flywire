@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_POINTDATA_JAX_SERIALIZER_COMPATIBILITY",
+  "purpose": "Compare the historical Point_data pickle serialization contract with public JAX source snapshots near and before the artifact date.",
+  "historical_artifact": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+    "pickle_global": "jax._src.array._reconstruct_array",
+    "aval_state_observed": {
+      "weak_type": false
+    },
+    "metric_value_fingerprint": {
+      "object_type": "jaxlib._jax.ArrayImpl",
+      "dtype": "float32",
+      "shape": "()",
+      "columns": 8,
+      "rows": 5828
+    }
+  },
+  "public_jax_snapshots": [
+    {
+      "repository": "jax-ml/jax",
+      "file": "jax/_src/array.py",
+      "commit": "249b7a7347e62527cf5263e8bc59e9b4321a7020",
+      "commit_date": "2025-12-09T03:25:49Z",
+      "file_blob": "50185186306f0b647b22a79268775e93ef39ef3f",
+      "observed_reconstruct_signature": "def _reconstruct_array(fun, args, arr_state, aval_state)",
+      "observed_reduce_signature": "return (_reconstruct_array, (fun, args, arr_state, aval_state))",
+      "observed_aval_state": "{'weak_type': self.aval.weak_type}",
+      "relationship": "The public JAX source on the same calendar date exposes the same private reconstruction callable and the same weak_type-only aval state shape seen in the historical pickle."
+    },
+    {
+      "repository": "jax-ml/jax",
+      "file": "jax/_src/array.py",
+      "commit": "eb46eb1f2d48f78b82e913faa8f834fe2fe8dbc3",
+      "commit_date": "2025-07-25T15:03:04Z",
+      "file_blob": "fe90978a4376993ec2a9d4610347bdef3ac0ca40",
+      "observed_reconstruct_signature": "def _reconstruct_array(fun, args, arr_state, aval_state)",
+      "observed_reduce_signature": "return (_reconstruct_array, (fun, args, arr_state, aval_state))",
+      "observed_aval_state": "{'weak_type': self.aval.weak_type}",
+      "relationship": "The same serialization contract is present in a pre-artifact JAX source snapshot."
+    }
+  ],
+  "interpretation": {
+    "proven": [
+      "The historical pickle uses the same JAX private reconstruction callable and weak_type-only aval-state contract exposed by public JAX source snapshots immediately before and on the artifact date.",
+      "This makes the historical JAX serialization format directly compatible with JAX source that existed before the Point_data ingest."
+    ],
+    "not_proven": [
+      "The exact JAX release/version used on the author's machine is not identified.",
+      "The exact December 2025 producer code remains unresolved.",
+      "Format compatibility does not establish that the cited JAX commit was the runtime used to create the artifact."
+    ]
+  },
+  "historical_byte_alignment": {
+    "pickle_byte_position": 717551,
+    "opcode": "STACK_GLOBAL",
+    "preceding_strings": [
+      "T4a",
+      "T4b",
+      "jax._src.array",
+      "_reconstruct_array"
+    ],
+    "post_opcode_sequence": [
+      "MEMOIZE",
+      "MARK",
+      "BINGET 50",
+      "BINGET 52",
+      "BININT1 0",
+      "TUPLE1",
+      "MEMOIZE",
+      "BINGET 54",
+      "TUPLE3",
+      "MEMOIZE"
+    ],
+    "independent_local_recheck": {
+      "binary_path": "/mnt/data/pointdata_audit/tmp/Point_data_historical.pkl",
+      "sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+    }
+  }
+}
