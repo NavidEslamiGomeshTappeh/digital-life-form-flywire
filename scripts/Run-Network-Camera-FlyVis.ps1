@@ -21,22 +21,41 @@ $PyLauncher = Get-Command py -ErrorAction SilentlyContinue
 $Python = Get-Command python -ErrorAction SilentlyContinue
 $PythonArgs = @()
 
-if ($PyLauncher) {
-    & $PyLauncher.Source -3.12 -c "import sys; raise SystemExit(0 if sys.version_info[:2] == (3,12) else 1)"
-    if ($LASTEXITCODE -eq 0) {
-        $Python = $PyLauncher
-        $PythonArgs = @("-3.12")
-    }
+function Test-Python312Runtime {
+    param([string]$LauncherPath, [string[]]$LauncherArgs)
+    if (-not $LauncherPath) { return $false }
+    & $LauncherPath @LauncherArgs -c "import sys; raise SystemExit(0 if sys.version_info[:2] == (3,12) else 1)" 2>$null
+    return ($LASTEXITCODE -eq 0)
 }
 
-if (-not $Python -or $PythonArgs.Count -eq 0) {
-    if (-not $Python) {
-        Write-Error "Python 3.12 is required for the network-camera/FlyVis environment. Install Python 3.12 (x64) and run this launcher again."
+if ($PyLauncher -and (Test-Python312Runtime $PyLauncher.Source @("-3.12"))) {
+    $Python = $PyLauncher
+    $PythonArgs = @("-3.12")
+} elseif ($Python -and (Test-Python312Runtime $Python.Source @())) {
+    $PythonArgs = @()
+} else {
+    $Winget = Get-Command winget -ErrorAction SilentlyContinue
+    if (-not $Winget) {
+        Write-Error "Python 3.12 is required, and neither Python 3.12 nor winget was found. Install Python 3.12.10 and run this launcher again."
         exit 2
     }
-    & $Python.Source -c "import sys; raise SystemExit(0 if sys.version_info[:2] == (3,12) else 1)"
+
+    Write-Host "Python 3.12 was not found. Installing Python 3.12.10 from the Python Software Foundation package via winget..."
+    & $Winget.Source install --id Python.Python.3.12 --exact --scope user --silent --accept-package-agreements --accept-source-agreements
     if ($LASTEXITCODE -ne 0) {
-        throw "Python 3.12 is required for the network-camera/FlyVis environment. The detected Python is not 3.12."
+        throw "Automatic Python 3.12 installation failed with exit code $LASTEXITCODE."
+    }
+
+    $PyLauncher = Get-Command py -ErrorAction SilentlyContinue
+    if ($PyLauncher -and (Test-Python312Runtime $PyLauncher.Source @("-3.12"))) {
+        $Python = $PyLauncher
+        $PythonArgs = @("-3.12")
+    } else {
+        $Python = Get-Command python -ErrorAction SilentlyContinue
+        if (-not $Python -or -not (Test-Python312Runtime $Python.Source @())) {
+            throw "Python 3.12 installation completed but the runtime could not be detected. Open a new Command Prompt and run this launcher again."
+        }
+        $PythonArgs = @()
     }
 }
 
