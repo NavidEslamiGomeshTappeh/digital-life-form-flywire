@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "25e48ab0a4dc41b9884731dde0c36783d2c5b1d4"
+        "value": "6c47c4c48ab6af15d954f9883c1784ba838b8983"
       }
     },
     {
@@ -278,7 +278,7 @@
       "role": "lineage_regeneration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b9a82770364126d2a5fece32f265831f0349a814"
+        "value": "941e635950d91f53f1e00e913fa13fdaaaff0aa9"
       }
     },
     {
