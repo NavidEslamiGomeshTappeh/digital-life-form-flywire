@@ -719,7 +719,7 @@
       "role": "RTSP_network_camera_cli_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "ac2b368efba2fb245d1fb7b57e4a74e7ea77c367"
+        "value": "b2040ef4c9447a9b687794569fd92227b09663e2"
       }
     }
   ]
