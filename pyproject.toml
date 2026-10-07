@@ -49,6 +49,9 @@ dev = [
 vision = [
   "opencv-python>=4.10,<5",
 ]
+ptz = [
+  "onvif-python==0.4.4",
+]
 
 [project.scripts]
 dlf-flywire = "dlf_flywire.cli:main"
