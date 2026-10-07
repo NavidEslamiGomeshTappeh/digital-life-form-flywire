@@ -802,6 +802,24 @@
         "type": "git_blob_sha1",
         "value": "b56d1dd0538d86d982bbf6be37ff6b88738d0cbf"
       }
+    },
+    {
+      "id": "E-FIRST-TIME-BOOTSTRAP",
+      "path": "Run-Uho-S2E-First-Time.bat",
+      "role": "first_time_github_bootstrap",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "853451f2cfc5f00cbe9bc432c14eb8bba9726734"
+      }
+    },
+    {
+      "id": "E-FIRST-TIME-BOOTSTRAP-TEST",
+      "path": "tests/test_first_time_bootstrap.py",
+      "role": "first_time_bootstrap_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "546bb7c49a786f3c38b5fa6a3cd8580cf7d9004b"
+      }
     }
   ]
 }
