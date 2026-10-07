@@ -126,6 +126,7 @@ At the start of a new project chat:
 - The later public pipeline does not expose the historical `Subtype_evDir_x/y/z` fields or an active pickle persistence call in the inspected snapshot.
 - The current public NeuRosetta PCA implementation is not treated as a December 2025 producer: its current path lineage begins after the historical artifact, so its Huber parameters remain contextual, not historical producer proof.
 - The exact GeoJax `coord_eig_decomp` snapshot inspected during this audit is commit `b224d82901e5c59a40321e9798752ec329b10f2a`, dated 2026-01-19; it is therefore also **not** evidence of the December 2025 implementation. What is pre-artifact is the separate legacy Neurosetta evidence that its environment included JAX and its code imported GeoJax, but the exact dependency revision was not pinned.
+- A stronger pre-artifact GeoJax lineage is now established: commit `4dfc82bbc6dbe37b64a540758d6ea3ed6c9829aa` (2025-02-12) introduced the JAX robust PCA/eigendecomposition family, and `33b0f8727ab447eff86e35a69c60c1f33b4d1513` (2025-05-02) is the last public GeoJax head before the December Point_data ingest; no public GeoJax commits were found in the interval between that head and the artifact timestamp. This is strong compatibility evidence, not recovered producer identity.
 - The exact December 2025 producer, execution environment, intermediate morphology artifact, and historical coordinate transform remain **UNRESOLVED**.
 
 ## 3. The current scientific anchor case

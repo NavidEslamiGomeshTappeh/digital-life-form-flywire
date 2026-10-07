@@ -92,6 +92,8 @@ The command returns the claim statement, classification, status, caveats, and th
 Geometry is never promoted to biological truth by proximity alone.
 
 ## Historical Point_data provenance — 2026-10-07
+The strongest public pre-artifact GeoJax candidate is commit `33b0f8727ab447eff86e35a69c60c1f33b4d1513` (2025-05-02), with PCA/robust/JAX functionality introduced earlier at `4dfc82bbc6dbe37b64a540758d6ea3ed6c9829aa`. No public GeoJax commits were found between that head and the December 2025 Point_data ingest. This narrows the candidate dependency family but does not recover the exact producer or `Subtype_evDir_*` calculation.
+
 
 The repository now records a deeper public-history audit of the December 2025 `Point_data.pkl` artifact: pickle globals, JAX serialization fingerprints, public DAG ingestion timing, later `Metrics1_Point_data` parameters, and a bounded search for the historical `Subtype_evDir_*` producer.
 
