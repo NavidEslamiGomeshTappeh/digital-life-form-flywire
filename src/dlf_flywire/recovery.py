@@ -115,11 +115,6 @@ def _orient_edges(
 ) -> list[int]:
     if num_vertices <= 0:
         raise ValueError("skeleton must contain at least one vertex")
-    if len(edges) != num_vertices - 1:
-        raise ValueError(
-            "skeleton must describe a single tree: "
-            f"expected {num_vertices - 1} edges, observed {len(edges)}"
-        )
 
     root_hints: list[int] | None = None
     for child_column in (0, 1):
@@ -138,6 +133,12 @@ def _orient_edges(
             raise ValueError("skeleton edge references an invalid vertex")
         adjacency[a].append(b)
         adjacency[b].append(a)
+
+    if len(edges) != num_vertices - 1:
+        raise ValueError(
+            "skeleton must describe a single tree: "
+            f"expected {num_vertices - 1} edges, observed {len(edges)}"
+        )
 
     for neighbors in adjacency:
         neighbors.sort()
