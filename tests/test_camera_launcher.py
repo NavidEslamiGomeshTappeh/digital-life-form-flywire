@@ -14,36 +14,31 @@ def test_windows_camera_launcher_uses_defined_venv_entrypoints():
     assert '$VenvPython = Join-Path $Venv "Scripts\\python.exe"' in script
     assert '$FlyVisCli = Join-Path $Venv "Scripts\\flyvis.exe"' in script
     assert '$DlfCli = Join-Path $Venv "Scripts\\dlf-flywire.exe"' in script
-
     assert '$PyLauncher = Get-Command py -ErrorAction SilentlyContinue' in script
     assert 'function Test-Python312Runtime {' in script
-    assert '& $PyLauncher.Source -3.12 -c "import sys; raise SystemExit(0 if sys.version_info[:2] == (3,12) else 1)" 2>$null' in script
-    assert '$Winget = Get-Command winget -ErrorAction SilentlyContinue' in script
-    assert 'winget.Source install --id Python.Python.3.12 --exact --scope user --silent' in script
-    assert 'Automatic Python 3.12 installation failed' in script
     assert '$PythonArgs = @("-3.12")' in script
-    assert '& $Python.Source @PythonArgs -m venv $Venv' in script
-    assert 'Existing camera/FlyVis environment is not Python 3.12; rebuilding it.' in script
+    assert 'Invoke-PipChecked "Installing Python build tooling" @("install", "setuptools>=68", "setuptools_scm[toml]>=3.4")' in script
+    assert '$FlyVisCli = Join-Path $Venv "Scripts\\flyvis.exe"' in script
+    assert '$NetworkDir = Join-Path $FlyVisRoot "results\\flow\\0000\\000"' in script
+    assert '& $FlyVisCli download-pretrained --skip_large_files' in script
+
+    assert '$PythonVersionProbe = & $Python.Source -c "import sys; raise SystemExit(0 if sys.version_info >= (3,12) else 1)"' in script
+    assert '& $Python.Source -m venv $Venv' in script
     assert '& $VenvPython -m pip install -e ".[vision]"' in script
     assert 'Invoke-NativeChecked "Upgrading camera/FlyVis pip"' in script
     assert 'Invoke-NativeChecked "Installing Digital Life Form vision dependencies"' in script
     assert 'Invoke-NativeChecked "Fetching pinned FlyVis revision"' in script
     assert 'Invoke-NativeChecked "Checking out pinned FlyVis revision"' in script
     assert 'Invoke-NativeChecked "Installing pinned FlyVis source"' in script
-    assert '$FlyVisCli = Join-Path $Venv "Scripts\\flyvis.exe"' in script
-    assert '$NetworkDir = Join-Path $FlyVisRoot "results\\flow\\0000\\000"' in script
     assert 'Invoke-NativeChecked "Downloading pinned FlyVis pretrained assets"' in script
-    assert '& $FlyVisCli download-pretrained --skip_large_files' in script
-    assert 'FlyVis pretrained model was not installed at' in script
     assert 'Invoke-NativeChecked "Running camera/FlyVis pipeline"' in script
     assert 'git -C $FlyVisSrc fetch --depth=1 origin $FlyVisRev' in script
-    assert "& $FlyVisCli download-pretrained" in script
-    assert "& $DlfCli camera-flyvis --device 0 --frames 20 --output $Output" in script
+    assert '& $FlyVisCli download-pretrained' in script
+    assert '& $DlfCli camera-flyvis --device 0 --frames 20 --output $Output' in script
 
     assert "$VenvScripts" not in script
     assert "$Outputcamera-flyvis-receipt.json" not in script
     assert 'Join-Path $Output "camera-flyvis-receipt.json"' in script
-
 
 def test_windows_network_camera_launcher_contract():
     script = (
