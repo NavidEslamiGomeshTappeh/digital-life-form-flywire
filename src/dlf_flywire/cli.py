@@ -147,6 +147,27 @@ def main(argv=None) -> int:
         "capture-network-camera",
         help="Capture bounded RTSP network-camera frames with secret-safe provenance.",
     )
+    discover_cameras = sub.add_parser(
+        "discover-network-cameras",
+        help="Discover ONVIF cameras on the local network without moving or configuring them.",
+    )
+    discover_cameras.add_argument("--timeout", type=int, default=4)
+    discover_cameras.add_argument(
+        "--interface",
+        default=None,
+        help="Local interface IP to use for multicast discovery.",
+    )
+    discover_cameras.add_argument(
+        "--search",
+        default=None,
+        help="Optional ONVIF type/scope filter such as Uho-S2E.",
+    )
+    discover_cameras.add_argument("--https", action="store_true")
+    discover_cameras.add_argument(
+        "--output",
+        default="data/vision/onvif-discovery.json",
+    )
+
     probe_camera_ptz = sub.add_parser(
         "probe-camera-ptz",
         help="Inspect ONVIF PTZ capability and position without moving the camera.",
@@ -257,6 +278,40 @@ def main(argv=None) -> int:
         root = find_project_root(args.root)
         print(json.dumps(validate_synapse_lineage(root), indent=2))
         return 0
+
+    if args.command == "discover-network-cameras":
+        from .network_discovery import (
+            NetworkDiscoveryError,
+            build_discovery_receipt,
+            discover_onvif_devices,
+        )
+
+        try:
+            devices = discover_onvif_devices(
+                timeout_s=args.timeout,
+                interface=args.interface,
+                search=args.search,
+                prefer_https=args.https,
+            )
+            receipt = build_discovery_receipt(
+                devices=devices,
+                timeout_s=args.timeout,
+                interface=args.interface,
+                search=args.search,
+            )
+            output = Path(args.output)
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text(
+                json.dumps(receipt, indent=2, sort_keys=True),
+                encoding="utf-8",
+            )
+            payload = dict(receipt)
+            payload["output"] = output.as_posix()
+            print(json.dumps(payload, indent=2, sort_keys=True))
+            return 0
+        except (TypeError, ValueError, NetworkDiscoveryError) as exc:
+            print(json.dumps({"status": "FAIL", "error": str(exc)}, indent=2))
+            return 2
 
     if args.command == "probe-camera-ptz":
         from .network_ptz import PTZProbeError, probe_onvif_ptz
