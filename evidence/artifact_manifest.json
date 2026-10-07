@@ -57,7 +57,7 @@
       "role": "cli",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "e1d9fa2b1b843b8c65417a5d18fd4289af40e0a7"
+        "value": "f89998bd0bfe5ef33b2262f2e327fea0cbc85f48"
       }
     },
     {
@@ -693,6 +693,33 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "2a828b751fb8805e9af9cf197fd8e53d5d649820"
+      }
+    },
+    {
+      "id": "E-NETWORK-CAMERA",
+      "path": "src/dlf_flywire/network_camera.py",
+      "role": "bounded_RTSP_network_camera_adapter",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "336025b11e7ff3071666076cf26004cedc76378f"
+      }
+    },
+    {
+      "id": "E-NETWORK-CAMERA-TESTS",
+      "path": "tests/test_network_camera.py",
+      "role": "RTSP_network_camera_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "0f8c143e94e6358ba7d654c4e5161993acb9a971"
+      }
+    },
+    {
+      "id": "E-NETWORK-CAMERA-CLI-TESTS",
+      "path": "tests/test_network_camera_cli.py",
+      "role": "RTSP_network_camera_cli_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "ac2b368efba2fb245d1fb7b57e4a74e7ea77c367"
       }
     }
   ]
