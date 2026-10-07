@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_SAME_COMMIT_PUBLIC_CONSUMER_ONLY_NOTEBOOK",
+  "purpose": "Record the exact public notebook present alongside the first Point_data commit and distinguish consumption from production.",
+  "source": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "point_data_commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "point_data_blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+    "notebook_path": "Notebooks/ANOVA_analysis.ipynb",
+    "notebook_blob_sha1": "93eb31b90a738f64f5d803aaecda22f80edd6178"
+  },
+  "notebook_environment": {
+    "kernelspec": "neurosetta",
+    "python": "3.10.17"
+  },
+  "observed_code": {
+    "imports": [
+      "pandas",
+      "PhD_tools.paper_ANOVA"
+    ],
+    "point_data_operation": "pd.read_pickle(file_path)",
+    "point_data_local_path": "/home/nik/Desktop/Software/T45_Morpho_data/Data/Pickled_data/Point_data.pkl",
+    "downstream_use": [
+      "stats_dataframe",
+      "ANOVAModel"
+    ]
+  },
+  "same_commit_tree": {
+    "paths": [
+      ".gitignore",
+      "Data",
+      "Data/Point_data.pkl",
+      "Notebooks",
+      "Notebooks/ANOVA_analysis.ipynb",
+      "README.md"
+    ],
+    "producer_code_paths_observed": false
+  },
+  "interpretation": {
+    "proven": [
+      "The public notebook present in the same Point_data ingest commit is a consumer/analysis notebook.",
+      "It reads Point_data.pkl from a local filesystem path and then performs statistical analysis.",
+      "No producer operation for constructing Point_data is present in the inspected notebook."
+    ],
+    "not_proven": [
+      "The producer did not exist elsewhere outside this public commit tree.",
+      "The local producer code did not exist in a private environment."
+    ]
+  }
+}
