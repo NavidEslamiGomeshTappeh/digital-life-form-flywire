@@ -95,6 +95,15 @@ At the start of a new project chat:
 
 ---
 
+## 2.5 Current 2026-10-07 maintenance state
+
+- Main remains on the unified Version 1.x line; current released metadata remains **1.7.1**.
+- `recovery.py` now rejects self-edges, invalid endpoints, disconnected skeletons, cycles, and non-tree edge counts before graph orientation. Regression coverage exists for invalid, disconnected, and cyclic skeleton inputs.
+- `scripts/Run-Camera-FlyVis.ps1` now uses explicit venv entrypoints and checks native `pip`/`git`/FlyVis/`dlf-flywire` command exit codes so a failed command cannot silently lead to a later partial run.
+- `tests/test_camera_launcher.py` statically guards the Windows launcher contract and its fail-closed native-command handling.
+- GitHub Actions evidence at the latest completed point: **CI PASS** and **Security PASS** for commit `d03e3230a74ba02e2052b11f16c854d721d8ca6a`.
+- The physical camera launcher remains a local-machine execution boundary; static CI coverage is not a claim that a physical camera was exercised by GitHub Actions.
+
 ## 3. The current scientific anchor case
 
 The initial verified case consists of **four exact FAFB v783 neurons**:
