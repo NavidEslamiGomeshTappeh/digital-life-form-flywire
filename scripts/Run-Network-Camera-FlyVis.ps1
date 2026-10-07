@@ -168,6 +168,7 @@ if (-not (Test-Path $FlyVisCli)) {
 }
 
 $NetworkDir = Join-Path $FlyVisRoot "results\flow\0000\000"
+$ConnectomeCache = Join-Path $FlyVisRoot "connectome\ConnectomeFromAvgFilters_0000"
 if (-not (Test-Path $NetworkDir)) {
     Write-Host ""
     Write-Host "FlyVis pretrained model is not present. Downloading the pinned pretrained archive..."
@@ -179,6 +180,76 @@ if (-not (Test-Path $NetworkDir)) {
 if (-not (Test-Path $NetworkDir)) {
     throw "FlyVis pretrained model was not installed at $NetworkDir"
 }
+function Repair-FlyVisConnectomeCache {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$PythonPath,
+        [Parameter(Mandatory = $true)]
+        [string]$ConnectomeCache
+    )
+
+    if (-not (Test-Path $ConnectomeCache)) {
+        return
+    }
+
+    $env:DLF_FLYVIS_CONNECTOME_CACHE = $ConnectomeCache
+    $ProbeCode = @'
+import os
+from pathlib import Path
+
+import h5py
+
+root = Path(os.environ["DLF_FLYVIS_CONNECTOME_CACHE"])
+files = sorted(root.glob("*.h5"))
+
+if not files:
+    print("FlyVis connectome cache contains no HDF5 artifacts.")
+    raise SystemExit(3)
+
+invalid = []
+for path in files:
+    try:
+        with h5py.File(path, "r") as handle:
+            if "data" not in handle:
+                invalid.append(str(path))
+    except Exception as exc:
+        print(f"Cannot validate {path}: {type(exc).__name__}: {exc}")
+        raise SystemExit(4)
+
+if invalid:
+    for path in invalid:
+        print(f"Incomplete FlyVis connectome artifact: {path}")
+    raise SystemExit(3)
+'@
+
+    try {
+        & $PythonPath -c $ProbeCode
+        $ProbeExit = $LASTEXITCODE
+    } finally {
+        Remove-Item Env:DLF_FLYVIS_CONNECTOME_CACHE -ErrorAction SilentlyContinue
+    }
+
+    if ($ProbeExit -eq 0) {
+        return
+    }
+    if ($ProbeExit -ne 3) {
+        throw "FlyVis connectome cache could not be safely validated. A concurrent FlyVis/Python process may be holding an HDF5 file open."
+    }
+
+    Write-Host "Detected an incomplete FlyVis connectome cache from an earlier interrupted build. Removing it before the network-camera run..."
+    try {
+        Remove-Item -Recurse -Force $ConnectomeCache
+    } catch {
+        throw "FlyVis connectome cache is incomplete but Windows could not remove it. Close any Python/FlyVis process using the cache, then run the launcher again. Path: $ConnectomeCache"
+    }
+
+    if (Test-Path $ConnectomeCache) {
+        throw "FlyVis connectome cache cleanup did not complete: $ConnectomeCache"
+    }
+}
+
+Repair-FlyVisConnectomeCache -PythonPath $VenvPython -ConnectomeCache $ConnectomeCache
+
 if (-not (Test-Path $DlfCli)) {
     throw "Digital Life Form CLI was not installed: $DlfCli"
 }
