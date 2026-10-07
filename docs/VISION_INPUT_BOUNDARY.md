@@ -76,3 +76,22 @@ The exact RTSP stream path is intentionally not hard-coded because the public Uh
 A successful run proves only that the configured RTSP endpoint returned bounded frames and that those frames entered the project's provenance-bearing gray8 pipeline. It does not prove PTZ control, internet reachability, human detection correctness, or camera-driven biological control.
 
 The next hardware-integration layer is a separate PTZ controller. It should use an explicit ONVIF/API contract, record the requested and observed camera position, and remain independent from the vision-frame provenance path.
+
+## Read-only PTZ inspection
+
+The project also exposes a read-only ONVIF PTZ probe for the network camera boundary. It does not issue ContinuousMove, RelativeMove, AbsoluteMove, Stop, preset, or home-position commands.
+
+The probe uses the optional `onvif-python==0.4.4` runtime. The current release is available on PyPI, is MIT-licensed, and its publishing artifact was uploaded through Trusted Publishing. The version is pinned in this project so the PTZ integration surface remains reproducible. The vendor's Uho-S2E datasheet documents ONVIF integration and PTZ capability for the exact model family inspected here.
+
+Use environment variables for credentials:
+
+```powershell
+$env:DLF_CAMERA_HOST = "192.168.1.20"
+$env:DLF_CAMERA_USERNAME = "USERNAME"
+$env:DLF_CAMERA_PASSWORD = "PASSWORD"
+dlf-flywire probe-camera-ptz --host-env DLF_CAMERA_HOST --username-env DLF_CAMERA_USERNAME --password-env DLF_CAMERA_PASSWORD --output data/vision/ptz-probe.json
+```
+
+The resulting record contains the ONVIF media profile token, PTZ configuration token, reported pan/tilt position when available, move status, and the advertised continuous velocity ranges. Passwords are never written to the result.
+
+The probe is deliberately the next stage before any motor-control implementation. ONVIF defines PTZ operations such as GetStatus, ContinuousMove, Stop, RelativeMove, and AbsoluteMove; the project will not issue those commands automatically until the device-specific ranges and behavior are observed and recorded first.
