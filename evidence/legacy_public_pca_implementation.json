@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_LEGACY_PUBLIC_PCA_IMPLEMENTATION",
+  "purpose": "Record the pre-artifact public Neurosetta legacy PCA implementation and its temporal boundary relative to the historical Point_data pickle.",
+  "source": {
+    "repository": "NikDrummond/Neurosetta_legacy_v0.0.1",
+    "commit": "9c27f226128d98ea5420e7a3a32acf2adc8ce138",
+    "commit_date": "2025-01-15T11:30:24Z",
+    "commit_message": "rotations module>?",
+    "file": "Neurosetta/rotations.py",
+    "file_blob_sha1": "b27b095090f5d54b54834709a4b33d6ec39f1f1f"
+  },
+  "implementation": {
+    "function": "coord_eig_decomp",
+    "signature": "coord_eig_decomp(coords, robust=True, center=False, PCA=True, sort=True, transpose=True)",
+    "covariance": {
+      "robust": "sklearn.covariance.MinCovDet().fit(coords).covariance_",
+      "non_robust": "sklearn.covariance.EmpiricalCovariance().fit(coords).covariance_"
+    },
+    "eigendecomposition": "numpy.linalg.eig",
+    "normalization": "evals /= evals.sum() when PCA=True",
+    "ordering": "np.argsort(evals)[::-1] when sort=True",
+    "orientation": "eigenvectors transposed when transpose=True"
+  },
+  "relationship_to_historical_point_data": {
+    "temporal": "The implementation predates the December 2025 Point_data artifact.",
+    "compatibility_observation": "The public implementation can explain a plausible PCA/eigenvector computational family used before the artifact.",
+    "serialization_boundary": "The historical Point_data pickle stores all eight PCA/angle/direction columns as scalar float32 jaxlib._jax.ArrayImpl values; the inspected legacy coord_eig_decomp implementation itself returns NumPy arrays, so this implementation is not by itself proof of the historical producer.",
+    "unresolved": [
+      "exact December 2025 producer script or notebook",
+      "exact dependency revisions used by the producer",
+      "exact conversion/wrapping path from PCA vectors to serialized JAX scalar values",
+      "exact computation of Subtype_evDir_x/y/z"
+    ]
+  }
+}

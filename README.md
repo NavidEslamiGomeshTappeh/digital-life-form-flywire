@@ -28,6 +28,7 @@ This repository is not presented as a finished artificial brain. It is a **publi
 | Audit the evidence chain | `python -m dlf_flywire audit` |
 | Inspect the FlyVis proof | [FlyVis receipt](evidence/flyvis_integration_receipt.json) |
 | Inspect the vision boundary | [Vision input docs](docs/VISION_INPUT_BOUNDARY.md) |
+| Inspect the historical Point_data audit | [Point_data provenance evidence](evidence/public_metrics1_pipeline_snapshot.json) |
 | See the merged vision implementation | [Vision input docs](docs/VISION_INPUT_BOUNDARY.md) |
 
 **Scientific rule:** if an experiment has not been performed, this repository does not label it as performed.
@@ -89,6 +90,14 @@ Example:
 The command returns the claim statement, classification, status, caveats, and the referenced artifact paths, roles, and immutable identities. Unknown claim IDs fail closed.
 
 Geometry is never promoted to biological truth by proximity alone.
+
+## Historical Point_data provenance — 2026-10-07
+
+The repository now records a deeper public-history audit of the December 2025 `Point_data.pkl` artifact: pickle globals, JAX serialization fingerprints, public DAG ingestion timing, later `Metrics1_Point_data` parameters, and a bounded search for the historical `Subtype_evDir_*` producer.
+
+The strongest current conclusion is deliberately limited: the later public Metrics1 notebook documents reproducible geometry/PCA parameters, but it does not contain the three historical `Subtype_evDir_x/y/z` fields or an active pickle write step. The exact December 2025 producer remains unresolved.
+
+See the machine-checkable claim [C-POINTDATA-018](evidence/claims.json).
 
 ## Physical network-camera execution — 2026-10-07
 
