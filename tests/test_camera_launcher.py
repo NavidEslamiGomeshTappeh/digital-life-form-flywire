@@ -13,6 +13,8 @@ def test_windows_camera_launcher_uses_defined_venv_entrypoints():
     assert '$FlyVisCli = Join-Path $Venv "Scripts\\flyvis.exe"' in script
     assert '$DlfCli = Join-Path $Venv "Scripts\\dlf-flywire.exe"' in script
 
+    assert '$PythonVersionProbe = & $Python.Source -c "import sys; raise SystemExit(0 if sys.version_info >= (3,12) else 1)"' in script
+    assert '& $Python.Source -m venv $Venv' in script
     assert '& $VenvPython -m pip install -e ".[vision]"' in script
     assert "& $VenvPython -m pip install $FlyVisSrc" in script
     assert "& $FlyVisCli download-pretrained" in script
