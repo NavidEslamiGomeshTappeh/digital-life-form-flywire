@@ -338,6 +338,22 @@ def test_published_method_boundary_is_ledgered():
     assert "E-PUBLISHED-METHOD-BOUNDARY" in claim["evidence"]
 
 
+def test_point_data_evdir_anchor_vectors_are_unit_norm():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_evdir_anchor_vectors.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_HISTORICAL_SUBTYPE_EVDIR_VECTOR_EXTRACTION"
+    assert len(evidence["anchor_vectors"]) == 4
+    for item in evidence["anchor_vectors"]:
+        assert item["norm_error"] < 2e-7
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-010")
+    assert claim["status"] == "PROVEN"
+    assert claim["evidence"] == ["E-POINTDATA-EVDIR-ANCHORS"]
+
+
 def test_point_data_producer_gap_claim_is_unresolved():
     claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
     claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-009")
