@@ -54,6 +54,11 @@ def test_windows_network_camera_launcher_contract():
     assert 'Read-Host "Enter the ONVIF password" -AsSecureString' in script
     assert '--onvif-port $CameraPort' in script
     assert '$FlyVisRev = "92b3845cc426dd309a1a0e1b3890156c42e14021"' in script
+    assert '$DatamateRev = "3b9792c3c90fb29d741f8185c7aca912aa0c0942"' in script
+    assert 'Invoke-PipChecked "Installing fixed datamate source"' in script
+    assert 'git+https://github.com/flyvis/datamate.git@$DatamateRev' in script
+    assert "$ProbePath = Join-Path ([System.IO.Path]::GetTempPath())" in script
+    assert '& $PythonPath $ProbePath' in script
     assert 'discover-network-cameras --search Uho-S2E --timeout 5' in script
     assert 'camera-flyvis --onvif-host-env DLF_CAMERA_HOST' in script
     assert '--onvif-username-env DLF_CAMERA_USERNAME' in script

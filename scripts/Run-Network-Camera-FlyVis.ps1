@@ -142,6 +142,7 @@ Invoke-PipChecked "Installing Digital Life Form camera dependencies" @("install"
 Invoke-NativeChecked "Installing Digital Life Form package" { & $VenvPython -m pip install --no-index --no-deps --no-build-isolation -e . }
 
 $FlyVisRev = "92b3845cc426dd309a1a0e1b3890156c42e14021"
+$DatamateRev = "3b9792c3c90fb29d741f8185c7aca912aa0c0942"
 New-Item -ItemType Directory -Force (Split-Path $FlyVisSrc) | Out-Null
 New-Item -ItemType Directory -Force $FlyVisRoot | Out-Null
 New-Item -ItemType Directory -Force (Split-Path $DiscoveryOutput) | Out-Null
@@ -160,6 +161,7 @@ if ($Observed -ne $FlyVisRev) {
 }
 
 Invoke-PipChecked "Installing pinned FlyVis source" @("install", "--no-build-isolation", $FlyVisSrc)
+Invoke-PipChecked "Installing fixed datamate source" @("install", "--no-build-isolation", "git+https://github.com/flyvis/datamate.git@$DatamateRev")
 
 $env:FLYVIS_ROOT_DIR = $FlyVisRoot
 
@@ -200,7 +202,7 @@ from pathlib import Path
 import h5py
 
 root = Path(os.environ["DLF_FLYVIS_CONNECTOME_CACHE"])
-files = sorted(root.glob("*.h5"))
+files = sorted(root.glob(chr(42) + chr(46) + chr(104) + chr(53)))
 
 if not files:
     print("FlyVis connectome cache contains no HDF5 artifacts.")
@@ -222,11 +224,18 @@ if invalid:
     raise SystemExit(3)
 '@
 
+    $ProbePath = Join-Path ([System.IO.Path]::GetTempPath()) ("dlf-flyvis-connectome-cache-probe-" + $PID + ".py")
     try {
-        & $PythonPath -c $ProbeCode
+        [System.IO.File]::WriteAllText(
+            $ProbePath,
+            $ProbeCode,
+            [System.Text.UTF8Encoding]::new($false)
+        )
+        & $PythonPath $ProbePath
         $ProbeExit = $LASTEXITCODE
     } finally {
         Remove-Item Env:DLF_FLYVIS_CONNECTOME_CACHE -ErrorAction SilentlyContinue
+        Remove-Item $ProbePath -Force -ErrorAction SilentlyContinue
     }
 
     if ($ProbeExit -eq 0) {
