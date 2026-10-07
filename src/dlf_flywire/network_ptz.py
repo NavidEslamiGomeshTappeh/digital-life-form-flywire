@@ -120,7 +120,10 @@ def probe_onvif_ptz(
         options = ptz.GetConfigurationOptions(request)
         spaces = _field(options, "Spaces")
         velocity_spaces = _field(spaces, "ContinuousPanTiltVelocitySpace") or []
-        velocity_space = list(velocity_spaces)[0] if velocity_spaces else None
+        if isinstance(velocity_spaces, (list, tuple)):
+            velocity_space = next(iter(velocity_spaces), None)
+        else:
+            velocity_space = velocity_spaces
         x_range = _field(velocity_space, "XRange")
         y_range = _field(velocity_space, "YRange")
 
