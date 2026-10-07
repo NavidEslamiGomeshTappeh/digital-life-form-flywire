@@ -14,6 +14,7 @@ This repository is not presented as a finished artificial brain. It is a **publi
 - 🧬 **4 exact project SWC morphologies** with deterministic analysis tooling.
 - ⚙️ **Pinned FlyVis runtime integration** exercised in GitHub Actions.
 - 👁️ **Real vision-input boundary implemented**: physical camera → gray8 frame → exact PGM artifact → provenance receipt → FlyVis BoxEye.
+- 📷 **Physical network-camera run observed locally**: Uniarch Uho-S2E → ONVIF → RTSP → 721-receptor BoxEye → pinned FlyVis, 20 frames, response shape `[1, 20, 45669]`; public receipt excludes private endpoint and credentials.
 - 🧪 **Fail-closed evidence model**: unresolved scientific questions stay explicitly unresolved.
 - 🤖 **Code Hand / Neural → Leader engineering boundaries** are implemented as constrained, testable components rather than claimed as autonomous intelligence.
 
@@ -88,6 +89,18 @@ Example:
 The command returns the claim statement, classification, status, caveats, and the referenced artifact paths, roles, and immutable identities. Unknown claim IDs fail closed.
 
 Geometry is never promoted to biological truth by proximity alone.
+
+## Physical network-camera execution — 2026-10-07
+
+A bounded local Windows run exercised the network-camera path against a physical **Uniarch Uho-S2E**. The recorded path was:
+
+`ONVIF WS-Discovery → GetStreamUri → RTSP → 20 real frames → BoxEye (721) → FlyVis 1.2.0`
+
+The run completed with `observed_success` and produced a FlyVis response with shape `[1, 20, 45669]`. The public receipt records frame/BoxEye fingerprints, the FlyVis revision and checkpoint fingerprint, the response fingerprint, and the scientific boundary flags while deliberately omitting private LAN endpoint details, credentials, and the camera serial.
+
+[Physical camera execution receipt](evidence/network_camera_flyvis_windows_receipt.json)
+
+This is a **local source observation**, not an independent GitHub-hosted camera reproduction. It proves the observed camera-to-model software path under the recorded conditions; it does not establish exact FAFB-root electrical activity, spike conversion, or biological control.
 
 ### Latest coordinate/provenance audit — 2026-10-04
 
