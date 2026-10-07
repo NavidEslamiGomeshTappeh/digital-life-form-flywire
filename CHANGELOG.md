@@ -9,6 +9,7 @@
 - Added regression coverage for the Windows launcher contract and recovery topology rejection.
 - Added a bounded RTSP network-camera source, secret-safe URL provenance, CLI capture command, and regression coverage for real network-camera input.
 - Added a read-only ONVIF PTZ probe with pinned `onvif-python==0.4.4`, environment-based credential handling, capability/range inspection, and regression coverage; no PTZ movement commands are issued.
+- Added read-only ONVIF LAN discovery using WS-Discovery, with machine-readable discovery receipts and regression coverage; no camera movement or configuration changes are issued.
 
 
 ## 1.7.1 — 2026-10-05
