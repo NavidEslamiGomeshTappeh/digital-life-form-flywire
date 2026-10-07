@@ -676,6 +676,15 @@
         "type": "git_blob_sha1",
         "value": "97ca1e7d41b68c48a7e81897840d08b374d2940b"
       }
+    },
+    {
+      "id": "E-POINTDATA-EVDIR-ANCHORS",
+      "path": "evidence/point_data_evdir_anchor_vectors.json",
+      "role": "historical_point_data_evdir_anchor_vectors",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "f729e4fe6cf6208dd23b365b09b2c01cfde8a958"
+      }
     }
   ]
 }
