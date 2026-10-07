@@ -326,6 +326,19 @@
         "This proves the stored vector values and their norm, not the algorithm that generated them.",
         "The exact historical computation of Subtype_evDir remains unresolved."
       ]
+    },
+    {
+      "id": "C-POINTDATA-011",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "statement": "The three historical Subtype_evDir_x/y/z columns are legacy/transitional fields at the public-snapshot level: they exist in the December 2025 Point_data artifact but are absent from the December public README schema and absent from the later August 2026 Zenodo Point_data schema.",
+      "evidence": [
+        "E-POINTDATA-EVDIR-LIFECYCLE"
+      ],
+      "caveats": [
+        "Legacy/internal is an interpretation of the lifecycle evidence, not proof of the private producer implementation.",
+        "The exact writer and mathematical definition remain unresolved."
+      ]
     }
   ]
 }
