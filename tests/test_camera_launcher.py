@@ -42,7 +42,9 @@ def test_windows_network_camera_launcher_contract():
     assert 'function Invoke-NativeChecked {' in script
     assert '$VenvPython = Join-Path $Venv "Scripts\\python.exe"' in script
     assert '$DlfCli = Join-Path $Venv "Scripts\\dlf-flywire.exe"' in script
-    assert '& $VenvPython -m pip install -e ".[vision,ptz]"' in script
+    assert '& $VenvPython -m pip install --retries 8 --timeout 60 "setuptools>=68"' in script
+    assert '& $VenvPython -m pip install --retries 8 --timeout 60 --no-build-isolation "opencv-python>=4.10,<5" "onvif-python==0.4.4"' in script
+    assert '& $VenvPython -m pip install --no-deps --no-build-isolation -e .' in script
     assert '$FlyVisRev = "92b3845cc426dd309a1a0e1b3890156c42e14021"' in script
     assert 'discover-network-cameras --search Uho-S2E --timeout 5' in script
     assert 'camera-flyvis --onvif-host-env DLF_CAMERA_HOST' in script
