@@ -300,6 +300,19 @@
       "evidence": [
         "E-HISTORICAL-PP3-LATER-RECONSTRUCTION"
       ]
+    },
+    {
+      "id": "C-POINTDATA-009",
+      "classification": "UNRESOLVED",
+      "status": "UNRESOLVED",
+      "statement": "The exact historical producer of Point_data.pkl remains unresolved: the public Metrics1 notebook exposes a 23-column metric computation with no persistence call, while the historical artifact has 24 columns including Subtype_evDir_x/y/z that are not exposed by the public notebook or indexed public source.",
+      "evidence": [
+        "E-POINTDATA-PUBLIC-GENERATOR-GAP"
+      ],
+      "caveats": [
+        "The mismatch establishes that the current public Metrics1 notebook is not a complete textual producer for the historical artifact.",
+        "It does not by itself identify whether the missing three direction columns were computed by a private/local script, an earlier notebook revision, an uncommitted cell, or a separate augmentation step."
+      ]
     }
   ]
 }
