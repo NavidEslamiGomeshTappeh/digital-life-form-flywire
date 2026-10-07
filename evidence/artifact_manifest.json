@@ -21,7 +21,7 @@
       "role": "project_metadata",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "adce2148d8ed47a7bbe09da5a60d4aa4eece71dc"
+        "value": "8cc334adf8c4ac5657372bc0bcbe4dccc1206cec"
       }
     },
     {
@@ -800,7 +800,7 @@
       "role": "camera_launcher_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "e57fd5684912787dc941a418a5a7a6b208ceb43b"
+        "value": "758ffa4f6c6228c429103c505b3563b007a74e4f"
       }
     },
     {
