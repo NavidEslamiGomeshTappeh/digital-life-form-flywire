@@ -77,3 +77,47 @@ def test_capture_network_camera_cli_fails_when_url_is_missing(monkeypatch, tmp_p
         )
         == 2
     )
+
+
+def test_camera_flyvis_cli_forwards_rtsp_environment_url(monkeypatch, tmp_path):
+    observed = {}
+
+    def fake_run_camera_to_flyvis(**kwargs):
+        observed.update(kwargs)
+        return {
+            "status": "observed_success",
+            "physical_source": {
+                "source_kind": "camera/rtsp",
+                "source_locator": "rtsp://example.local/live/main",
+            },
+        }
+
+    monkeypatch.setenv(
+        "TEST_DLF_RTSP_URL",
+        "rtsp://user:secret@example.local:554/live/main?token=hidden",
+    )
+    monkeypatch.setattr(
+        "dlf_flywire.camera_flyvis.run_camera_to_flyvis",
+        fake_run_camera_to_flyvis,
+    )
+
+    assert (
+        cli.main(
+            [
+                "camera-flyvis",
+                "--rtsp-url-env",
+                "TEST_DLF_RTSP_URL",
+                "--frames",
+                "3",
+                "--output",
+                str(tmp_path / "flyvis"),
+            ]
+        )
+        == 0
+    )
+
+    assert observed["stream_url"] == (
+        "rtsp://user:secret@example.local:554/live/main?token=hidden"
+    )
+    assert observed["frame_count"] == 3
+    assert observed["device_index"] == 0
