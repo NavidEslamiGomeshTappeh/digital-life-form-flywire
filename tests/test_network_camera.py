@@ -183,3 +183,44 @@ def test_resolve_rtsp_stream_uses_current_onvif_client_and_redacts_credentials(
         "source_uri": "rtsp://192.168.1.20:554/live/main",
         "connection_uri": "rtsp://192.168.1.20:554/live/main",
     }
+
+
+def test_resolve_rtsp_stream_prefers_h264_profile(monkeypatch):
+    class FakeProfile:
+        def __init__(self, token, encoding):
+            self.token = token
+            self.VideoSourceConfiguration = object()
+            self.VideoEncoderConfiguration = types.SimpleNamespace(Encoding=encoding)
+
+    class FakeMedia:
+        def GetProfiles(self):
+            return [FakeProfile("hevc-profile", "H265"), FakeProfile("h264-profile", "H264")]
+
+        def GetStreamUri(self, **kwargs):
+            assert kwargs["ProfileToken"] == "h264-profile"
+            return types.SimpleNamespace(Uri="rtsp://192.168.1.20:554/live/h264")
+
+    class FakeClient:
+        def __init__(self, host, port, username, password):
+            assert (host, port, username, password) == ("192.168.1.20", 80, "admin", "secret")
+
+        def media(self):
+            return FakeMedia()
+
+    monkeypatch.setitem(
+        sys.modules,
+        "onvif",
+        types.SimpleNamespace(ONVIFClient=FakeClient),
+    )
+
+    from dlf_flywire.network_camera import resolve_rtsp_stream
+
+    result = resolve_rtsp_stream(
+        host="192.168.1.20",
+        port=80,
+        username="admin",
+        password="secret",
+    )
+
+    assert result.profile_token == "h264-profile"
+    assert result.source_uri == "rtsp://192.168.1.20:554/live/h264"
