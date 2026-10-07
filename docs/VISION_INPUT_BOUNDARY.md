@@ -95,3 +95,17 @@ dlf-flywire probe-camera-ptz --host-env DLF_CAMERA_HOST --username-env DLF_CAMER
 The resulting record contains the ONVIF media profile token, PTZ configuration token, reported pan/tilt position when available, move status, and the advertised continuous velocity ranges. Passwords are never written to the result.
 
 The probe is deliberately the next stage before any motor-control implementation. ONVIF defines PTZ operations such as GetStatus, ContinuousMove, Stop, RelativeMove, and AbsoluteMove; the project will not issue those commands automatically until the device-specific ranges and behavior are observed and recorded first.
+
+## Read-only ONVIF LAN discovery
+
+Because the exact LAN address of a physical Uho-S2E is not yet known, the project exposes a read-only WS-Discovery path. `discover-network-cameras` uses the ONVIF discovery capability supplied by pinned `onvif-python==0.4.4` and records discovered host/port, XAddrs, ONVIF types/scopes, services, and optional device metadata.
+
+Example:
+
+```powershell
+dlf-flywire discover-network-cameras --search Uho-S2E --timeout 5 --output data/vision/onvif-discovery.json
+```
+
+The discovery process is local-network discovery. It does not issue PTZ movement commands and does not write camera configuration. ONVIF discovery uses WS-Discovery multicast and may require the computer and camera to be on the same subnet and local firewall/multicast traffic to allow discovery.
+
+If the discovery result identifies the Uho-S2E host, the same host can be supplied to `probe-camera-ptz`; the discovered ONVIF XAddrs can also be used to select the device-service endpoint. An exact RTSP media URL is still device/firmware/configuration-specific and is not inferred from the discovery result.
