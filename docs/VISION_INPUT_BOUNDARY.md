@@ -53,3 +53,26 @@ This command is intentionally bounded. It only returns success after the camera 
 The resulting `camera-flyvis-receipt.json` records the physical device index, frame hashes, BoxEye hashes, pinned FlyVis revision/checkpoint hash, response hash, and the scientific boundary flags.
 
 A successful local run is evidence of a real camera-to-model software path. It is not evidence of exact FAFB v783 root-level electrical activity, biological spikes, or biological control.
+
+## Uho-S2E network camera boundary
+
+The repository now includes a bounded RTSP network-camera adapter for cameras that expose an RTSP stream.
+
+The identified office camera is **Uniarch Uho-S2E**. Uniarch's published datasheet specifies 2 MP imaging, RJ45 Ethernet, 2.4 GHz Wi-Fi, H.264/H.265 video, RTSP authentication, ONVIF/API integration, human-body and motion detection, auto tracking, and Pan 360° / Tilt 105° for the Uho-S2E datasheet revision inspected by the project. The vendor also documents RTSP as a supported network protocol. These upstream capabilities are the basis for the network-camera integration; they are not treated as evidence that the user's physical device has already been connected or exercised.
+
+NetworkCameraSource opens an explicit rtsp:// or rtsps:// URL through OpenCV, captures a bounded frame count, converts each frame to the same VisionFrame contract used by the local-camera path, and releases the stream in all exit paths.
+
+For secret hygiene, the provenance locator strips RTSP username/password, query strings, and fragments before recording the source in a receipt. Credentials should preferably be supplied through an environment variable rather than a shell argument.
+
+Example on the user's local machine:
+
+```powershell
+$env:DLF_RTSP_URL = "rtsp://USERNAME:PASSWORD@CAMERA-IP:554/STREAM-PATH"
+dlf-flywire capture-network-camera --url-env DLF_RTSP_URL --frames 10 --output data/vision/network-capture
+```
+
+The exact RTSP stream path is intentionally not hard-coded because the public Uho-S2E datasheet confirms RTSP support but does not establish one universal stream URL for every firmware/configuration.
+
+A successful run proves only that the configured RTSP endpoint returned bounded frames and that those frames entered the project's provenance-bearing gray8 pipeline. It does not prove PTZ control, internet reachability, human detection correctness, or camera-driven biological control.
+
+The next hardware-integration layer is a separate PTZ controller. It should use an explicit ONVIF/API contract, record the requested and observed camera position, and remain independent from the vision-frame provenance path.
