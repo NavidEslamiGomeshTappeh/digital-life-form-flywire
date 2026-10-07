@@ -110,7 +110,7 @@ def probe_onvif_ptz(
 
         ptz = client.ptz()
 
-        status = ptz.GetStatus({"ProfileToken": profile_token})
+        status = ptz.GetStatus(profile_token)
         position = _field(status, "Position")
         pan_tilt = _field(position, "PanTilt")
         move_status = _field(status, "MoveStatus")
