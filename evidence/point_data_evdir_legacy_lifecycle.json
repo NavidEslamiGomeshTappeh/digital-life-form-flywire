@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_POINTDATA_EVDIR_LEGACY_COLUMN_LIFECYCLE",
+  "purpose": "Track the public-documentation and snapshot lifecycle of the three historical Subtype_evDir columns.",
+  "historical": {
+    "artifact_commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "artifact_sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+    "columns": [
+      "Subtype_evDir_x",
+      "Subtype_evDir_y",
+      "Subtype_evDir_z"
+    ],
+    "rows": 5828
+  },
+  "december_public_readme": {
+    "path": ".history/README_20251218163157.md",
+    "observed_documented_point_columns": [
+      "ID",
+      "Type",
+      "Subtype",
+      "Root_x",
+      "Root_y",
+      "Root_z",
+      "Segment_Count",
+      "Total_Cable",
+      "Vertices_numbers",
+      "External_edge_count",
+      "Internal_edge_count",
+      "Leaf_number",
+      "Branch_number",
+      "PC1",
+      "PC2",
+      "PC3",
+      "PC1_angle",
+      "Hull_volume",
+      "Scaled_hull_volume",
+      "Mean_segment_angle",
+      "Segment_angle_var"
+    ],
+    "documented_column_count": 21,
+    "historical_extra_columns_not_documented": [
+      "Subtype_evDir_x",
+      "Subtype_evDir_y",
+      "Subtype_evDir_z"
+    ],
+    "observation": "The 2025-12-18 public README schema documents 21 Point_data columns and does not document the three historical Subtype_evDir columns."
+  },
+  "later_zenodo": {
+    "record": "10.5281/zenodo.21876510",
+    "file": "Data/point_data.pkl",
+    "sha256": "46772ccabc609ab0f7136854024e7665727ff0f58f53c69126ea3e641ce7f891",
+    "rows": 11838,
+    "columns": 24,
+    "has_subtype_evdir_columns": false,
+    "replacement_or_additional_schema_fields": [
+      "N_type",
+      "N_subtype",
+      "Hemisphere",
+      "Area_2d",
+      "scaled_hull_volume",
+      "Subtype"
+    ],
+    "observation": "The later Zenodo snapshot still has 24 columns but does not contain Subtype_evDir_x/y/z; its schema uses renamed type/hemisphere/metric fields and adds Area_2d."
+  },
+  "numerical_anchor_observation": {
+    "source_execution_artifact": "V273-historical-target-rows",
+    "artifact_id": 11287455154,
+    "artifact_sha256": "416d86f3166f2a650a0274d14397544443fae163c118c930c7a2db8d9082dead",
+    "four_anchor_vectors_are_unit_norm": true
+  },
+  "conclusion": {
+    "proven": [
+      "The three Subtype_evDir columns are present in the December 2025 binary artifact.",
+      "They were not part of the 21-column Point_data schema documented in the public December 18 README snapshot.",
+      "They are absent from the later August 2026 Zenodo point_data schema."
+    ],
+    "interpretation": "This lifecycle is consistent with legacy/internal or transitional analysis fields that were later removed or replaced. It narrows the search target toward historical analysis code rather than the final public Metrics1 notebook.",
+    "not_proven": [
+      "The exact computation or writer that created the columns.",
+      "Whether the columns were subtype means, eigenvector representatives, or another direction statistic.",
+      "The exact revision/environment that produced the historical artifact."
+    ]
+  }
+}
