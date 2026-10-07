@@ -98,6 +98,7 @@ if (Test-Path $VenvPython) {
     }
 }
 $DlfCli = Join-Path $Venv "Scripts\dlf-flywire.exe"
+$FlyVisCli = Join-Path $Venv "Scripts\flyvis.exe"
 $FlyVisSrc = Join-Path $Root ".runtime/flyvis-src"
 $FlyVisRoot = Join-Path $Root ".runtime/flyvis-data"
 $PipIndexes = @(
@@ -162,6 +163,22 @@ Invoke-PipChecked "Installing pinned FlyVis source" @("install", "--no-build-iso
 
 $env:FLYVIS_ROOT_DIR = $FlyVisRoot
 
+if (-not (Test-Path $FlyVisCli)) {
+    throw "FlyVis CLI was not installed: $FlyVisCli"
+}
+
+$NetworkDir = Join-Path $FlyVisRoot "results\flow\0000\000"
+if (-not (Test-Path $NetworkDir)) {
+    Write-Host ""
+    Write-Host "FlyVis pretrained model is not present. Downloading the pinned pretrained archive..."
+    Invoke-NativeChecked "Downloading pinned FlyVis pretrained assets" {
+        & $FlyVisCli download-pretrained --skip_large_files
+    }
+}
+
+if (-not (Test-Path $NetworkDir)) {
+    throw "FlyVis pretrained model was not installed at $NetworkDir"
+}
 if (-not (Test-Path $DlfCli)) {
     throw "Digital Life Form CLI was not installed: $DlfCli"
 }
