@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -142,6 +143,26 @@ def main(argv=None) -> int:
         "capture-camera",
         help="Capture bounded physical-camera frames with provenance receipts.",
     )
+    capture_network_camera = sub.add_parser(
+        "capture-network-camera",
+        help="Capture bounded RTSP network-camera frames with secret-safe provenance.",
+    )
+    capture_network_camera.add_argument(
+        "--url",
+        default=None,
+        help="RTSP URL; prefer --url-env so credentials do not enter shell history.",
+    )
+    capture_network_camera.add_argument(
+        "--url-env",
+        default="DLF_RTSP_URL",
+        help="Environment variable containing the RTSP URL (default: DLF_RTSP_URL).",
+    )
+    capture_network_camera.add_argument("--frames", type=int, default=1)
+    capture_network_camera.add_argument("--output", default="data/vision/network-capture")
+    capture_network_camera.add_argument("--width", type=int, default=None)
+    capture_network_camera.add_argument("--height", type=int, default=None)
+    capture_network_camera.add_argument("--timeout", type=float, default=5.0)
+
     capture_camera.add_argument("--device", type=int, default=0)
     capture_camera.add_argument("--frames", type=int, default=1)
     capture_camera.add_argument("--output", default="data/vision/capture")
@@ -199,6 +220,56 @@ def main(argv=None) -> int:
         root = find_project_root(args.root)
         print(json.dumps(validate_synapse_lineage(root), indent=2))
         return 0
+
+    if args.command == "capture-network-camera":
+        from .network_camera import NetworkCameraSource
+        from .vision_input import VisionInputError, build_capture_receipt
+
+        try:
+            stream_url = args.url or os.environ.get(args.url_env)
+            if not stream_url:
+                raise VisionInputError(
+                    f"no RTSP URL supplied; pass --url or set {args.url_env}"
+                )
+            output = Path(args.output)
+            output.mkdir(parents=True, exist_ok=True)
+            source = NetworkCameraSource(
+                stream_url,
+                width=args.width,
+                height=args.height,
+                per_frame_timeout_s=args.timeout,
+            )
+            frames = source.capture(args.frames)
+            artifact_paths = []
+            for frame in frames:
+                name = f"frame-{frame.frame_index:06d}.pgm"
+                frame.write_pgm(output / name)
+                artifact_paths.append((output / name).as_posix())
+            receipt = build_capture_receipt(
+                frames,
+                source_kind="camera/rtsp",
+                source_locator=source.source_locator,
+                artifact_paths=artifact_paths,
+            )
+            receipt_path = output / "receipt.json"
+            receipt_sha256 = receipt.write(receipt_path)
+            print(
+                json.dumps(
+                    {
+                        "status": "PASS",
+                        "frame_count": len(frames),
+                        "source": source.source_locator,
+                        "output": output.as_posix(),
+                        "receipt": receipt_path.as_posix(),
+                        "receipt_sha256": receipt_sha256,
+                    },
+                    indent=2,
+                )
+            )
+            return 0
+        except (TypeError, ValueError, VisionInputError) as exc:
+            print(json.dumps({"status": "FAIL", "error": str(exc)}, indent=2))
+            return 2
 
     if args.command == "capture-camera":
         from .vision_input import (
