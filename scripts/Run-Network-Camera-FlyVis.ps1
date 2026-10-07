@@ -17,20 +17,39 @@ function Invoke-NativeChecked {
 $Root = Split-Path -Parent $PSScriptRoot
 Set-Location $Root
 
-$Python = Get-Command py -ErrorAction SilentlyContinue
-if (-not $Python) { $Python = Get-Command python -ErrorAction SilentlyContinue }
-if (-not $Python) {
-    Write-Error "Python 3.12+ was not found."
-    exit 2
+$PyLauncher = Get-Command py -ErrorAction SilentlyContinue
+$Python = Get-Command python -ErrorAction SilentlyContinue
+$PythonArgs = @()
+
+if ($PyLauncher) {
+    & $PyLauncher.Source -3.12 -c "import sys; raise SystemExit(0 if sys.version_info[:2] == (3,12) else 1)"
+    if ($LASTEXITCODE -eq 0) {
+        $Python = $PyLauncher
+        $PythonArgs = @("-3.12")
+    }
 }
 
-$PythonVersionProbe = & $Python.Source -c "import sys; raise SystemExit(0 if sys.version_info >= (3,12) else 1)"
-if ($LASTEXITCODE -ne 0) {
-    throw "Python 3.12+ is required for the network-camera/FlyVis environment."
+if (-not $Python -or $PythonArgs.Count -eq 0) {
+    if (-not $Python) {
+        Write-Error "Python 3.12 is required for the network-camera/FlyVis environment. Install Python 3.12 (x64) and run this launcher again."
+        exit 2
+    }
+    & $Python.Source -c "import sys; raise SystemExit(0 if sys.version_info[:2] == (3,12) else 1)"
+    if ($LASTEXITCODE -ne 0) {
+        throw "Python 3.12 is required for the network-camera/FlyVis environment. The detected Python is not 3.12."
+    }
 }
 
 $Venv = Join-Path $Root ".venv-camera-flyvis"
 $VenvPython = Join-Path $Venv "Scripts\python.exe"
+
+if (Test-Path $VenvPython) {
+    & $VenvPython -c "import sys; raise SystemExit(0 if sys.version_info[:2] == (3,12) else 1)"
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "Existing camera/FlyVis environment is not Python 3.12; rebuilding it."
+        Remove-Item -Recurse -Force $Venv
+    }
+}
 $DlfCli = Join-Path $Venv "Scripts\dlf-flywire.exe"
 $FlyVisSrc = Join-Path $Root ".runtime/flyvis-src"
 $FlyVisRoot = Join-Path $Root ".runtime/flyvis-data"
@@ -63,7 +82,7 @@ $DiscoveryOutput = Join-Path $Root "data/vision/onvif-discovery.json"
 $Output = Join-Path $Root "data/vision/network-camera-flyvis"
 
 if (-not (Test-Path $VenvPython)) {
-    Invoke-NativeChecked "Creating Python virtual environment" { & $Python.Source -m venv $Venv }
+    Invoke-NativeChecked "Creating Python virtual environment" { & $Python.Source @PythonArgs -m venv $Venv }
 }
 
 if (-not (Test-Path $VenvPython)) {
