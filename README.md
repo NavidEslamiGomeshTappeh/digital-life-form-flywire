@@ -276,6 +276,17 @@ dlf-flywire capture-camera --device 0 --frames 10 --output data/vision/capture
 
 The command writes exact gray8 PGM frames plus `receipt.json`. It does not upload the camera data.
 
+For the identified office camera, **Uniarch Uho-S2E**, the repository also exposes a bounded RTSP network-camera path. The vendor's Uho-S2E datasheet specifies RJ45 networking, RTSP authentication, ONVIF/API integration, motion/human detection, auto tracking, and pan/tilt capability. The project intentionally does not hard-code a universal RTSP path because firmware/configuration can vary.
+
+Set the stream URL outside the repository and prefer an environment variable so credentials do not enter shell history:
+
+```powershell
+$env:DLF_RTSP_URL = "rtsp://USERNAME:PASSWORD@CAMERA-IP:554/STREAM-PATH"
+dlf-flywire capture-network-camera --url-env DLF_RTSP_URL --frames 10 --output data/vision/network-capture
+```
+
+A successful network-camera capture proves only that the configured RTSP endpoint returned bounded frames and those frames entered the same gray8/provenance boundary. It does not prove PTZ control or camera-driven biological control.
+
 To cross the physical-camera boundary into the pinned FlyVis model locally:
 
 ```bash
