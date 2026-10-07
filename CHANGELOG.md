@@ -10,6 +10,7 @@
 - Added a bounded RTSP network-camera source, secret-safe URL provenance, CLI capture command, and regression coverage for real network-camera input.
 - Added a read-only ONVIF PTZ probe with pinned `onvif-python==0.4.4`, environment-based credential handling, capability/range inspection, and regression coverage; no PTZ movement commands are issued.
 - Added read-only ONVIF LAN discovery using WS-Discovery, with machine-readable discovery receipts and regression coverage; no camera movement or configuration changes are issued.
+- Added ONVIF `GetStreamUri` resolution for direct camera-to-FlyVis runs, plus a double-click Windows launcher for the Uho-S2E network-camera path.
 
 
 ## 1.7.1 — 2026-10-05
