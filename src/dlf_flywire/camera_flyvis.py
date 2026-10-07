@@ -5,7 +5,8 @@ import json
 from datetime import UTC, datetime
 from pathlib import Path
 
-from .vision_input import OpenCVCameraSource, build_capture_receipt, render_with_flyvis_boxeye
+from .network_camera import NetworkCameraSource
+from .vision_input import OpenCVCameraSource, VisionInputError, build_capture_receipt, render_with_flyvis_boxeye
 
 
 CELL_TYPES = ("T4a", "T4c", "T5a", "T5c")
@@ -30,6 +31,7 @@ def run_camera_to_flyvis(
     device_index: int,
     frame_count: int,
     output: str | Path,
+    stream_url: str | None = None,
     width: int | None = None,
     height: int | None = None,
     per_frame_timeout_s: float = 5.0,
@@ -57,12 +59,29 @@ def run_camera_to_flyvis(
     frame_dir = output_path / "frames"
     frame_dir.mkdir(parents=True, exist_ok=True)
 
-    frames = OpenCVCameraSource(
-        device_index=device_index,
-        width=width,
-        height=height,
-        per_frame_timeout_s=per_frame_timeout_s,
-    ).capture(frame_count)
+    source_kind = "camera/opencv"
+    source_locator = f"device-index:{device_index}"
+    if stream_url is not None and stream_url.strip():
+        source = NetworkCameraSource(
+            stream_url,
+            width=width,
+            height=height,
+            per_frame_timeout_s=per_frame_timeout_s,
+        )
+        source_kind = "camera/rtsp"
+        source_locator = source.source_locator
+    else:
+        source = OpenCVCameraSource(
+            device_index=device_index,
+            width=width,
+            height=height,
+            per_frame_timeout_s=per_frame_timeout_s,
+        )
+
+    try:
+        frames = source.capture(frame_count)
+    except VisionInputError as exc:
+        raise CameraFlyVisError(str(exc)) from exc
 
     artifact_paths: list[str] = []
     for frame in frames:
@@ -72,8 +91,8 @@ def run_camera_to_flyvis(
 
     capture_receipt = build_capture_receipt(
         frames,
-        source_kind="camera/opencv",
-        source_locator=f"device-index:{device_index}",
+        source_kind=source_kind,
+        source_locator=source_locator,
         artifact_paths=artifact_paths,
     )
     capture_receipt_path = output_path / "capture-receipt.json"
@@ -144,7 +163,9 @@ def run_camera_to_flyvis(
         "status": "observed_success",
         "observed_at_utc": datetime.now(UTC).isoformat(),
         "physical_source": {
-            "device_index": device_index,
+            "source_kind": source_kind,
+            "source_locator": source_locator,
+            "device_index": None if stream_url else device_index,
             "frame_count": len(frames),
             "capture_receipt_sha256": capture_receipt_sha256,
         },
