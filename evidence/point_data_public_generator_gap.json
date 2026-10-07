@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_PUBLIC_METRICS_GENERATOR_GAP",
+  "purpose": "Record the exact mismatch between the public Metrics1_Point_data notebook and the historical Point_data artifact so the current public notebook is not falsely promoted to exact historical producer.",
+  "public_notebook": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "commit": "3a1aa1a2e368ff8767f40791588eaf552e6d436d",
+    "path": "Notebooks/Metrics1_Point_data.ipynb",
+    "git_blob_sha": "2c31080a7f6f69d1c603bf287e4a5da7d4c3712b",
+    "runtime_python": "3.11.15",
+    "observed_metric_dataframe_columns": [
+      "ID",
+      "Neuron_type",
+      "Neuron_subtype",
+      "Subtype",
+      "hemisphere",
+      "root_x",
+      "root_y",
+      "root_z",
+      "Segement_count",
+      "Total_cable",
+      "Total_nodes",
+      "External_edges",
+      "Intenal_edges",
+      "Number_leaves",
+      "Number_branches",
+      "PC1",
+      "PC2",
+      "PC3",
+      "PC1_angle",
+      "Hull_volume",
+      "Scaled_hull_volume",
+      "Mean_segment_angle",
+      "Segment_angle_var"
+    ],
+    "column_count": 23,
+    "save_operation_present": false,
+    "concat_dataframe_and_save_section": "commented-out only; '# df_point = pd.concat(dfs)' is present, but no to_pickle call is present in the notebook.",
+    "exact_metric_call": "tree.coordinate_pca(robust = True, norm = True)"
+  },
+  "historical_artifact": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "first_git_commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "git_blob_sha": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+    "sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+    "rows": 5828,
+    "column_count": 24,
+    "historical_extra_columns": [
+      "Subtype_evDir_x",
+      "Subtype_evDir_y",
+      "Subtype_evDir_z"
+    ],
+    "historical_schema_columns": [
+      "ID",
+      "Type",
+      "Subtype",
+      "Root_x",
+      "Root_y",
+      "Root_z",
+      "Segment_Count",
+      "Total_Cable",
+      "Vertices_numbers",
+      "External_edge_count",
+      "Internal_edge_count",
+      "Leaf_number",
+      "Branch_number",
+      "PC1",
+      "PC2",
+      "PC3",
+      "PC1_angle",
+      "Hull_volume",
+      "Scaled_hull_volume",
+      "Mean_segment_angle",
+      "Segment_angle_var",
+      "Subtype_evDir_x",
+      "Subtype_evDir_y",
+      "Subtype_evDir_z"
+    ]
+  },
+  "repository_search_observation": {
+    "queries": [
+      "evDir",
+      "Subtype_evDir_x",
+      "Subtype_evDir",
+      "to_pickle"
+    ],
+    "github_code_search_hits": 0,
+    "interpretation": "No indexed public-repository code-search hit currently exposes the three historical Subtype_evDir columns or a to_pickle writer. This is search evidence, not proof that no local/private code ever existed."
+  },
+  "external_publication_context": {
+    "paper_doi": "10.1371/journal.pcbi.1014657",
+    "published": "2026-08-31",
+    "observations": [
+      "The published Data Availability statement says code for extracted dendrites and all metrics is provided and that it requires the NeuRosetta toolbox.",
+      "The published Methods state that every dendritic compartment was manually verified and modified where necessary."
+    ],
+    "source_urls": [
+      "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1014657"
+    ]
+  },
+  "conclusion": {
+    "proven": [
+      "The public Metrics1 notebook is not a complete textual producer for the historical 24-column Point_data artifact.",
+      "The three Subtype_evDir columns present in the historical artifact are absent from the public Metrics1 notebook's metric function and from indexed code-search hits.",
+      "The current public notebook therefore remains an algorithmic reconstruction source, not an exact historical producer receipt."
+    ],
+    "unresolved": [
+      "The code or notebook step that created Subtype_evDir_x/y/z in the historical Point_data artifact.",
+      "The exact writer/persistence step and execution environment that created the 2025-12-09 artifact.",
+      "Whether those three direction columns were computed in a private/local script, an uncommitted notebook cell, an earlier revision, or a separate downstream augmentation step."
+    ]
+  }
+}
