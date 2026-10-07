@@ -728,7 +728,7 @@
       "role": "read_only_ONVIF_PTZ_probe",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "ec882c7b8fb83715e0f7b6ee50e763fc9959e449"
+        "value": "def9637aaaa9d459b5619dd483f82c835534a0aa"
       }
     },
     {
