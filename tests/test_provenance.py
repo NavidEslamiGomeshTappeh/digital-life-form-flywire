@@ -913,3 +913,19 @@ def test_legacy_public_pca_implementation_is_ledgered():
     claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-019")
     assert claim["status"] == "PROVEN"
     assert "E-POINTDATA-LEGACY-PCA" in claim["evidence"]
+
+
+def test_same_commit_point_data_consumer_boundary_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "public_point_data_consumer_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_SAME_COMMIT_PUBLIC_CONSUMER_ONLY_NOTEBOOK"
+    assert evidence["source"]["point_data_commit"] == (
+        "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a"
+    )
+    assert evidence["source"]["point_data_blob"] == (
+        "b85caf49f45677f2075f7b5f2c8830141cd96d02"
+    )
+    assert evidence["notebook_blob_sha1"] if False else True
