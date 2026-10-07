@@ -89,19 +89,44 @@ def static_pickle_globals(path: Path) -> dict:
     data = path.read_bytes()
     explicit_globals = []
     stack_global_count = 0
+    recent_strings: list[str] = []
+    stack_global_context: list[list[str]] = []
     protocol = None
+    string_opcodes = {
+        "STRING",
+        "BINSTRING",
+        "SHORT_BINSTRING",
+        "UNICODE",
+        "BINUNICODE",
+        "BINUNICODE8",
+        "SHORT_BINUNICODE",
+    }
 
     for opcode, arg, _pos in pickletools.genops(data):
         if protocol is None and opcode.name == "PROTO":
             protocol = int(arg)
         if opcode.name == "GLOBAL":
             explicit_globals.append(str(arg))
+        elif opcode.name in string_opcodes and isinstance(arg, str):
+            recent_strings.append(arg)
+            if len(recent_strings) > 12:
+                recent_strings.pop(0)
         elif opcode.name == "STACK_GLOBAL":
             stack_global_count += 1
+            stack_global_context.append(recent_strings[-4:].copy())
 
     ascii_markers = {}
     for marker in (b"jax", b"jax.numpy", b"jaxlib", b"pandas", b"numpy"):
         ascii_markers[marker.decode()] = len(re.findall(re.escape(marker), data))
+
+    # The rolling string context is intentionally conservative: it fingerprints
+    # serialized dependency names without attempting to emulate the full pickle VM.
+    # The workflow also preserves the historical binary for independent review.
+    context_flat = [item for context in stack_global_context for item in context]
+    candidate_module_names = [
+        value for value in context_flat
+        if value.startswith(("jax", "jaxlib", "pandas", "numpy", "scipy", "sklearn"))
+    ]
 
     return {
         "bytes": len(data),
@@ -109,6 +134,8 @@ def static_pickle_globals(path: Path) -> dict:
         "explicit_global_count": len(explicit_globals),
         "explicit_globals": explicit_globals,
         "stack_global_count": stack_global_count,
+        "stack_global_context": stack_global_context,
+        "candidate_dependency_strings": sorted(set(candidate_module_names)),
         "ascii_marker_counts": ascii_markers,
     }
 
