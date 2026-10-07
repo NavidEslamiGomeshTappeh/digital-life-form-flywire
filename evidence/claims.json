@@ -313,6 +313,19 @@
         "The mismatch establishes that the current public Metrics1 notebook is not a complete textual producer for the historical artifact.",
         "It does not by itself identify whether the missing three direction columns were computed by a private/local script, an earlier notebook revision, an uncommitted cell, or a separate augmentation step."
       ]
+    },
+    {
+      "id": "C-POINTDATA-010",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "statement": "The four project Point_data anchor rows contain Subtype_evDir_x/y/z values that form unit-length direction vectors to numerical precision.",
+      "evidence": [
+        "E-POINTDATA-EVDIR-ANCHORS"
+      ],
+      "caveats": [
+        "This proves the stored vector values and their norm, not the algorithm that generated them.",
+        "The exact historical computation of Subtype_evDir remains unresolved."
+      ]
     }
   ]
 }
