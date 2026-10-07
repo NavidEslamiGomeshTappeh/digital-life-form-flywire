@@ -113,10 +113,13 @@ def _decode_values(
 def _orient_edges(
     edges: list[tuple[int, int]], num_vertices: int
 ) -> list[int]:
-    if not edges:
-        if num_vertices == 1:
-            return [-1]
-        raise ValueError("skeleton has multiple vertices but no edges")
+    if num_vertices <= 0:
+        raise ValueError("skeleton must contain at least one vertex")
+    if len(edges) != num_vertices - 1:
+        raise ValueError(
+            "skeleton must describe a single tree: "
+            f"expected {num_vertices - 1} edges, observed {len(edges)}"
+        )
 
     root_hints: list[int] | None = None
     for child_column in (0, 1):
@@ -138,6 +141,20 @@ def _orient_edges(
 
     for neighbors in adjacency:
         neighbors.sort()
+
+    seen = {0}
+    stack = [0]
+    while stack:
+        current = stack.pop()
+        for neighbor in adjacency[current]:
+            if neighbor in seen:
+                continue
+            seen.add(neighbor)
+            stack.append(neighbor)
+    if len(seen) != num_vertices:
+        raise ValueError(
+            "skeleton must describe a single connected tree"
+        )
 
     parents = [-2] * num_vertices
     seeds = root_hints[:] if root_hints else []
