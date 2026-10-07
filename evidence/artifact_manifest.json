@@ -685,6 +685,15 @@
         "type": "git_blob_sha1",
         "value": "f729e4fe6cf6208dd23b365b09b2c01cfde8a958"
       }
+    },
+    {
+      "id": "E-POINTDATA-EVDIR-LIFECYCLE",
+      "path": "evidence/point_data_evdir_legacy_lifecycle.json",
+      "role": "historical_evdir_column_lifecycle",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "2a828b751fb8805e9af9cf197fd8e53d5d649820"
+      }
     }
   ]
 }
