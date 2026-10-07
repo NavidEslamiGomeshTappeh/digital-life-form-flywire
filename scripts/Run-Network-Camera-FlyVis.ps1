@@ -136,7 +136,7 @@ if (-not (Test-Path $VenvPython)) {
     throw "Network-camera virtual environment was not created: $VenvPython"
 }
 
-Invoke-PipChecked "Installing Python build tooling" @("install", "setuptools>=68")
+Invoke-PipChecked "Installing Python build tooling" @("install", "setuptools>=68", "setuptools_scm[toml]>=3.4")
 Invoke-PipChecked "Installing Digital Life Form camera dependencies" @("install", "--no-build-isolation", "opencv-python>=4.10,<5", "onvif-python==0.4.4")
 Invoke-NativeChecked "Installing Digital Life Form package" { & $VenvPython -m pip install --no-index --no-deps --no-build-isolation -e . }
 
