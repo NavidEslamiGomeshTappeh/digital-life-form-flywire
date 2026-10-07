@@ -208,6 +208,16 @@ def main(argv=None) -> int:
     camera_flyvis.add_argument("--height", type=int, default=None)
     camera_flyvis.add_argument("--timeout", type=float, default=5.0)
     camera_flyvis.add_argument("--dt", type=float, default=1 / 100)
+    camera_flyvis.add_argument(
+        "--rtsp-url",
+        default=None,
+        help="RTSP URL; prefer --rtsp-url-env so credentials do not enter shell history.",
+    )
+    camera_flyvis.add_argument(
+        "--rtsp-url-env",
+        default="DLF_RTSP_URL",
+        help="Environment variable containing the RTSP URL (default: DLF_RTSP_URL).",
+    )
 
     recover = sub.add_parser("recover", help="Recover exact FlyWire morphology.")
     recover.add_argument("--dataset", type=int, default=783)
@@ -388,10 +398,12 @@ def main(argv=None) -> int:
         from .camera_flyvis import CameraFlyVisError, run_camera_to_flyvis
 
         try:
+            stream_url = args.rtsp_url or os.environ.get(args.rtsp_url_env)
             receipt = run_camera_to_flyvis(
                 device_index=args.device,
                 frame_count=args.frames,
                 output=args.output,
+                stream_url=stream_url,
                 width=args.width,
                 height=args.height,
                 per_frame_timeout_s=args.timeout,
