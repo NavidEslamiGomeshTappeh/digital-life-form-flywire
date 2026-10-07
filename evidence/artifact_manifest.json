@@ -892,6 +892,15 @@
         "type": "git_blob_sha1",
         "value": "b75f6aace4d80e42b2fb278cd256944555bc3068"
       }
+    },
+    {
+      "id": "E-POINTDATA-LEGACY-PCA",
+      "path": "evidence/legacy_public_pca_implementation.json",
+      "role": "pre_artifact_legacy_neurosetta_pca_implementation",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "48287ae391872efe146f6fb417c1dbb4588d40bb"
+      }
     }
   ]
 }
