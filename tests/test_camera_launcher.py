@@ -49,6 +49,7 @@ def test_windows_network_camera_launcher_contract():
     assert 'function Invoke-NativeChecked {' in script
     assert '$VenvPython = Join-Path $Venv "Scripts\\python.exe"' in script
     assert '$DlfCli = Join-Path $Venv "Scripts\\dlf-flywire.exe"' in script
+    assert 'Invoke-PipChecked "Installing Python build tooling" @("install", "setuptools>=68", "setuptools_scm[toml]>=3.4")' in script
     assert '$PipIndexes = @(' in script
     assert 'https://mirrors.aliyun.com/pypi/simple/' in script
     assert 'https://pypi.tuna.tsinghua.edu.cn/simple/' in script
