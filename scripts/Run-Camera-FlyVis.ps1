@@ -1,5 +1,19 @@
 $ErrorActionPreference = "Stop"
 
+function Invoke-NativeChecked {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Description,
+        [Parameter(Mandatory = $true)]
+        [scriptblock]$Command
+    )
+
+    & $Command
+    if ($LASTEXITCODE -ne 0) {
+        throw "$Description failed with exit code $LASTEXITCODE."
+    }
+}
+
 $Root = Split-Path -Parent $PSScriptRoot
 Set-Location $Root
 
@@ -21,7 +35,7 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 if (-not (Test-Path $VenvPython)) {
-    & $Python.Source -m venv $Venv
+    Invoke-NativeChecked "Creating Python virtual environment" { & $Python.Source -m venv $Venv }
 }
 
 if (-not (Test-Path $VenvPython)) {
@@ -37,31 +51,31 @@ New-Item -ItemType Directory -Force (Split-Path $FlyVisSrc) | Out-Null
 New-Item -ItemType Directory -Force $FlyVisRoot | Out-Null
 New-Item -ItemType Directory -Force $Output | Out-Null
 
-& $VenvPython -m pip install --upgrade pip
-& $VenvPython -m pip install -e ".[vision]"
+Invoke-NativeChecked "Upgrading camera/FlyVis pip" { & $VenvPython -m pip install --upgrade pip }
+Invoke-NativeChecked "Installing Digital Life Form vision dependencies" { & $VenvPython -m pip install -e ".[vision]" }
 
 if (-not (Test-Path (Join-Path $FlyVisSrc ".git"))) {
-    & git init $FlyVisSrc
-    & git -C $FlyVisSrc remote add origin https://github.com/TuragaLab/flyvis.git
+    Invoke-NativeChecked "Initializing FlyVis source checkout" { & git init $FlyVisSrc }
+    Invoke-NativeChecked "Adding FlyVis source remote" { & git -C $FlyVisSrc remote add origin https://github.com/TuragaLab/flyvis.git }
 }
-& git -C $FlyVisSrc fetch --depth=1 origin $FlyVisRev
-& git -C $FlyVisSrc checkout --detach $FlyVisRev
+Invoke-NativeChecked "Fetching pinned FlyVis revision" { & git -C $FlyVisSrc fetch --depth=1 origin $FlyVisRev }
+Invoke-NativeChecked "Checking out pinned FlyVis revision" { & git -C $FlyVisSrc checkout --detach $FlyVisRev }
 $Observed = (& git -C $FlyVisSrc rev-parse HEAD).Trim()
 if ($Observed -ne $FlyVisRev) {
     throw "FlyVis revision mismatch: expected $FlyVisRev, got $Observed"
 }
-& $VenvPython -m pip install $FlyVisSrc
+Invoke-NativeChecked "Installing pinned FlyVis source" { & $VenvPython -m pip install $FlyVisSrc }
 
 $env:FLYVIS_ROOT_DIR = $FlyVisRoot
 if (-not (Test-Path $FlyVisCli)) {
     throw "FlyVis CLI was not installed: $FlyVisCli"
 }
-& $FlyVisCli download-pretrained
+Invoke-NativeChecked "Downloading pinned FlyVis pretrained assets" { & $FlyVisCli download-pretrained }
 
 if (-not (Test-Path $DlfCli)) {
     throw "Digital Life Form CLI was not installed: $DlfCli"
 }
-& $DlfCli camera-flyvis --device 0 --frames 20 --output $Output
+Invoke-NativeChecked "Running camera/FlyVis pipeline" { & $DlfCli camera-flyvis --device 0 --frames 20 --output $Output }
 
 $Receipt = Join-Path $Output "camera-flyvis-receipt.json"
 if (-not (Test-Path $Receipt)) {
