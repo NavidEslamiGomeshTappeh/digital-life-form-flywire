@@ -286,6 +286,7 @@ dlf-flywire capture-network-camera --url-env DLF_RTSP_URL --frames 10 --output d
 ```
 
 A successful network-camera capture proves only that the configured RTSP endpoint returned bounded frames and those frames entered the same gray8/provenance boundary. It does not prove PTZ control or camera-driven biological control.
+The `camera-flyvis` command can also resolve the RTSP URI through ONVIF from `DLF_CAMERA_HOST`, `DLF_CAMERA_USERNAME`, and `DLF_CAMERA_PASSWORD`, so the stream path does not need to be guessed. `scripts/Run-Network-Camera-FlyVis.bat` is the double-click Windows entry point for that workflow.
 
 To cross the physical-camera boundary into the pinned FlyVis model locally:
 
