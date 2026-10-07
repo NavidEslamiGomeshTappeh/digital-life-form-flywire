@@ -764,7 +764,7 @@
       "role": "read_only_ONVIF_LAN_discovery",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b3f95108e7b17588f2fd07a25a84b212a51d61dc"
+        "value": "67642ea6427c2361a925d173c42f515f9c74969f"
       }
     },
     {
