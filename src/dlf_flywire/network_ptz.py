@@ -78,7 +78,7 @@ def probe_onvif_ptz(
         raise PTZProbeError("ONVIF password must not be empty")
 
     try:
-        from onvif import ONVIFCamera
+        from onvif import ONVIFClient
     except ImportError as exc:
         raise PTZProbeError(
             "onvif-python==0.4.4 is required for ONVIF PTZ inspection; "
@@ -86,8 +86,8 @@ def probe_onvif_ptz(
         ) from exc
 
     try:
-        camera = ONVIFCamera(host.strip(), port, username, password)
-        media = camera.create_media_service()
+        client = ONVIFClient(host.strip(), port, username, password)
+        media = client.media()
         profiles = list(media.GetProfiles())
         profile = next(
             (
@@ -108,16 +108,14 @@ def probe_onvif_ptz(
         if not profile_token or not configuration_token:
             raise PTZProbeError("ONVIF PTZ profile/configuration token is missing")
 
-        ptz = camera.create_ptz_service()
+        ptz = client.ptz()
 
         status = ptz.GetStatus({"ProfileToken": profile_token})
         position = _field(status, "Position")
         pan_tilt = _field(position, "PanTilt")
         move_status = _field(status, "MoveStatus")
 
-        request = ptz.create_type("GetConfigurationOptions")
-        request.ConfigurationToken = configuration_token
-        options = ptz.GetConfigurationOptions(request)
+        options = ptz.GetConfigurationOptions(configuration_token)
         spaces = _field(options, "Spaces")
         velocity_spaces = _field(spaces, "ContinuousPanTiltVelocitySpace") or []
         if isinstance(velocity_spaces, (list, tuple)):
