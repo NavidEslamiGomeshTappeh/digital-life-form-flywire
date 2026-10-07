@@ -45,8 +45,9 @@ if (-not (Test-Path $VenvPython)) {
     throw "Network-camera virtual environment was not created: $VenvPython"
 }
 
-Invoke-NativeChecked "Upgrading network-camera pip" { & $VenvPython -m pip install --upgrade pip }
-Invoke-NativeChecked "Installing Digital Life Form camera dependencies" { & $VenvPython -m pip install -e ".[vision,ptz]" }
+Invoke-NativeChecked "Installing Python build tooling" { & $VenvPython -m pip install --retries 8 --timeout 60 "setuptools>=68" }
+Invoke-NativeChecked "Installing Digital Life Form camera dependencies" { & $VenvPython -m pip install --retries 8 --timeout 60 --no-build-isolation "opencv-python>=4.10,<5" "onvif-python==0.4.4" }
+Invoke-NativeChecked "Installing Digital Life Form package" { & $VenvPython -m pip install --no-deps --no-build-isolation -e . }
 
 $FlyVisRev = "92b3845cc426dd309a1a0e1b3890156c42e14021"
 New-Item -ItemType Directory -Force (Split-Path $FlyVisSrc) | Out-Null
