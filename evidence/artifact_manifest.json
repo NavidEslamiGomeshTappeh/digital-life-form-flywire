@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "da4e604856fff6beb9a81fa93f03d585357b4a7d"
+        "value": "62ad155c82bcb02fbe2125b9efae05e5af79f454"
       }
     },
     {
@@ -278,7 +278,7 @@
       "role": "lineage_regeneration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "77a27f9972338face42d46dd2d07cf6166f58da4"
+        "value": "daff70f879567b4fe233a551bb3379a9acbebf1f"
       }
     },
     {
@@ -918,6 +918,15 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "8f01a22a6a04b827ecdda164f222c8bba4e05081"
+      }
+    },
+    {
+      "id": "E-POINTDATA-CONTEMPORANEOUS-GEOJAX-CONSUMER",
+      "path": "evidence/contemporaneous_pointdata_geojax_consumer.json",
+      "role": "same_week_pointdata_geojax_consumer_bridge",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "5ad98d6f2d993564bcc932e40df27989dd97cc93"
       }
     }
   ]

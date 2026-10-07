@@ -494,6 +494,21 @@
         "The historical Subtype_evDir_x/y/z computation remains unresolved.",
         "Type/algorithm compatibility is not producer identity."
       ]
+    },
+    {
+      "id": "C-POINTDATA-022",
+      "statement": "A public Figure_5 notebook added on 2025-12-10 directly loaded Data/Point_data.pkl in a neurosetta/Python 3.10.17 context, consumed its PC1/PC2/PC3 columns, and passed their type-level means to generate_random_bifurication; the same-date Random_bifurcations source imported GeoJax and used gj.cross/gj.angle/gj.normalize. This proves a contemporaneous Point_data-to-GeoJax consumer bridge, not that GeoJax or that module generated the historical PCA values.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-CONTEMPORANEOUS-GEOJAX-CONSUMER",
+        "E-POINTDATA-PICKLE-GLOBALS"
+      ],
+      "caveats": [
+        "The bridge begins at Point_data outputs PC1/PC2/PC3 and does not expose their producer.",
+        "The exact GeoJax revision installed in the December 2025 environment remains unresolved.",
+        "Random_bifurcations consumes PCA values; it is not evidence that it generated them."
+      ]
     }
   ]
 }
