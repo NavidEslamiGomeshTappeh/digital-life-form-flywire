@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_LATER_PUBLIC_PP3_EXECUTION_RECONSTRUCTION",
+  "purpose": "Preserve the actual GitHub Actions execution receipt for the later public PP3 reconstruction used to compare the four V229 anchor morphologies with historical Point_data.",
+  "workflow": {
+    "name": "V268 Historical Point_data + PP3 Frame Audit",
+    "run_id": 37158493013,
+    "head_sha": "12507d634819a52cefcc2144f30a31f1ca275b0e",
+    "conclusion": "success",
+    "artifact_id": 11287365245,
+    "artifact_sha256": "2a237b7bddf948b2b1341d75cc7d9211472774d94060cb77d62397ded182191b",
+    "artifact_bytes": 3453
+  },
+  "historical_artifact_identity": {
+    "source_url_used_by_run": "https://raw.githubusercontent.com/borstlab/T4_T5_Dendrite_Morphology_Paper/56901ad1853b44aeca15504cd908fa4c31009a3e/Data/Point_data.pkl",
+    "exact_first_git_commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "git_blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+    "sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+    "note": "The workflow used a later immutable paper-repository ref. The downloaded bytes were verified in the workflow against the exact Point_data Git blob and SHA-256 above, which is why the execution remains valid after correcting the canonical first-commit reference."
+  },
+  "algorithm": {
+    "study_repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "study_commit": "3a1aa1a2e368ff8767f40791588eaf552e6d436d",
+    "pp3_notebook": "Notebooks/PP3_Dendrite_extraction.ipynb",
+    "neurosetta_commit": "38f20f02194c129c234360db5a8be78a90c61db1",
+    "subtree_score": "(1 - subtree_cable / total_cable) + (subtree_leaves / total_leaves)",
+    "reduction": "reduce_graph preserves coordinates of selected original vertices"
+  },
+  "results": {
+    "selected_nodes_match_expected": {
+      "T4a": 292,
+      "T4c": 358,
+      "T5a": 343,
+      "T5c": 323
+    },
+    "direct_selected_root_exact_match": false,
+    "rigid_rms_um": 76.60485557886997,
+    "similarity_scale": 2.7061317382293972,
+    "similarity_rms_um": 9.813318737675393,
+    "similarity_residuals_um": {
+      "T4a": 9.909664480467757,
+      "T4c": 9.157778324387415,
+      "T5a": 10.99147622911769,
+      "T5c": 9.073367342917425
+    },
+    "pairwise_distance_ratios": {
+      "T4a_T4c": 1.0040016557496076,
+      "T4a_T5a": 2.8960978034475184,
+      "T4a_T5c": 2.6655593903497206,
+      "T4c_T5a": 2.788548743490449,
+      "T4c_T5c": 2.5708344090078596,
+      "T5a_T5c": 0.7700164158783878
+    }
+  },
+  "interpretation": {
+    "proven": [
+      "The later public PP3 subtree-selection rule can be executed reproducibly in GitHub Actions.",
+      "For all four project V229 SWCs, the execution selects the same PP3 node IDs previously recorded in the project evidence.",
+      "The selected V229 roots do not equal the historical Point_data roots, and a single rigid transform does not reconcile the four pairs."
+    ],
+    "unresolved": [
+      "The later public execution does not recover the historical .nr morphology snapshot or manual edits.",
+      "The similarity fit is a diagnostic transformation, not accepted as a historical coordinate-frame explanation.",
+      "This run does not identify the exact December 2025 producer revision."
+    ]
+  }
+}
