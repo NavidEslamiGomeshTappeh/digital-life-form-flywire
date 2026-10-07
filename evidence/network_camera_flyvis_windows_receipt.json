@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "status": "OBSERVED_SUCCESS",
+  "proof_type": "LOCAL_WINDOWS_EXECUTION_RECORD",
+  "observation": {
+    "observed_at_utc": "2026-10-07T15:22:58.741751+00:00",
+    "host_os": "Windows",
+    "launcher_path": "scripts/Run-Network-Camera-FlyVis.ps1",
+    "launcher_commit_under_test": "c9db52757ddfa6ea4dcb297a58f0d8bfacdf6387",
+    "merged_main_commit": "7a9683aa87c1d1e3332b13dbcc60196fd7f4b924",
+    "source_device_model": "Uniarch Uho-S2E",
+    "discovery_protocol": "ONVIF WS-Discovery",
+    "stream_resolution": "ONVIF GetStreamUri -> RTSP",
+    "private_endpoint_recorded": false,
+    "credentials_recorded": false,
+    "frame_count": 20
+  },
+  "boxeye": {
+    "hexal_count": 721,
+    "input_movie_shape": [
+      20,
+      1,
+      721
+    ],
+    "rendered_frame_sha256": [
+      "17d334c3ebf94f37cabeb4555ce14ccdd75dc3919cc84d5d399fe9abd60b5879",
+      "88d1adca18171c772eb8bb4bd569cdbf46a9e050fdcb760ed21702a3df52ad3b",
+      "a8b1f0ec50b39566cec87398817455b07120833ea8a8ea4366f4236ee0c2f51c",
+      "cf85ccbbdc9d7f8cafe284696c71d5feda4ed7ccf436f869636d15ba956f4e13",
+      "43b125b5c6ddc5ee99ac7363084933cf4267b70f4e3360df15f7e794e43e2c9b",
+      "68eba32aa35100a2973a3ec3a60b9f92425b281447eb36a981660da759e3a0fc",
+      "936a9f953128c4695da7649039aea4b3098b17e6dfce45052d135829bcf9e288",
+      "894b13049b5409006fed3d4b8363309606e5c66528a8060e7b23fa03709c6caa",
+      "e8eb932fd1e99492b90b5ee60df54c3dc87905f65f3aa58df48538c11f2b9ed3",
+      "7d944608bb715f07dfe6fd5a1a2f3fa8ca04cb84bb6310fdae075b7196f2ea58",
+      "7d944608bb715f07dfe6fd5a1a2f3fa8ca04cb84bb6310fdae075b7196f2ea58",
+      "371bdede5ee5784033310bec00dac48fb60294045d739c6834306e050c8996a7",
+      "19c93bc4f480cd58d019fc5e711d72c388c5dff2a069a73df51b69fac428f814",
+      "19c93bc4f480cd58d019fc5e711d72c388c5dff2a069a73df51b69fac428f814",
+      "19c93bc4f480cd58d019fc5e711d72c388c5dff2a069a73df51b69fac428f814",
+      "d86a4fbddb920e13e709627f8188cb75afc55eff1ca6b234c85b2df2246a38f6",
+      "f893fc1ac407cdc7c570e7140302b77dec61754378747cbf1d39a7102c3f9e09",
+      "f893fc1ac407cdc7c570e7140302b77dec61754378747cbf1d39a7102c3f9e09",
+      "20242a78495fa36a5e1f78486174e1f518c2f628d80ba3bfe5d47e077fe0c134",
+      "20242a78495fa36a5e1f78486174e1f518c2f628d80ba3bfe5d47e077fe0c134"
+    ]
+  },
+  "frames": {
+    "capture_receipt_sha256": "a5b82ad23d79708da5c6d79a6dfee4dbbef19aff7985ab5734181f323a92993c",
+    "pixel_sha256": [
+      "2b81e20bc6c9a264a02f89039adc81097d97cdf71e1d57dc90f6fdea03436503",
+      "a5dfee75f83238fc198829973585cf9722296b341c4c94c05e8aa7cd0d561455",
+      "5389652fd674adb222a030001a9cc0aed7f348d19159fee1ffee2be773bcbaa6",
+      "c79906dbeeba40fa9b93177ea10704dd4afae9d20acc9314b41e849e1c4bc4fc",
+      "9c02c1b6a00fef8e22b76ae5d67d9e7fd18dd3ef16253d0e50418f6408926af9",
+      "04cfecd7673ff643a04c3b14ea285cd17a261f926c2704c36c67de0bd99221e2",
+      "89724afa6e44263dc3eeca19eb77b1b017d25f884c79b1c80d1e2856ca298eed",
+      "f3f6daab556e26ccd159d17c64adb21630f10148bb211f537cb155a92e9678be",
+      "38a541dfca13a70c0ff374d2585ed1d588e82f5c2a5a83f4199db2a554a33d5e",
+      "4be91128c38b414c195d780ab589d2692deda57a1afb2a79861fdd8e592dfa72",
+      "dca7fada4e75269dbfc522d8f255f2998e5e76587bbfd93cebdec5419a6164c6",
+      "2a957a419e2c3098c6c54d9bd08bc5148bb0ac42cf19f65c1b692d9ee09dae59",
+      "698214093590f6e4f8ae04cefa9adf113192c1f27ff212a131bebd71375871aa",
+      "509d5a92183f86f9d90eff0d4cce42079ef07ed9975c920b5fd1d615d2275964",
+      "2b58907bbe4b4c5d94422c7cfb1bf28ab8dc93e6c822c4e0bef5a8492a616a02",
+      "8d5a6bf57b69b8db1e5588ec9369fb18e13e5783fd2bacaaf869ab960e5cbf7f",
+      "92e37aef48fb3bb4c78ecbb01d4dfcea8560d716c9c18e1d1836cc2cd8ec25e2",
+      "24692ae3e909e77d8e3521501363b82bbc05e9fd1bc6b16aeffc2ed93258b548",
+      "cbac51dec20caa89debb80d66abb18fe2bb21bfb461b86dcdd953c963148171e",
+      "f58206d31a63eb9800122cd60a4345d4f5060b32de1d1b3650f4b7f7d879ee4c"
+    ]
+  },
+  "flyvis": {
+    "release": "1.2.0",
+    "revision": "92b3845cc426dd309a1a0e1b3890156c42e14021",
+    "best_checkpoint_sha256": "d0e42857e738d0315897c2d50fde9eb3fb1a3fb1f071d55dfc13d53d72bccc3f",
+    "full_response_shape": [
+      1,
+      20,
+      45669
+    ],
+    "full_response_sha256": "e5f0bb0d15deb71fc3aeb0c68a0ece9a77e26307019413e4a1813cc26df523ca",
+    "central_traces_sha256": "5e2ae58b7c301c1d15b68336687d8772aaf81a72a57aa6c0475a2e4f0468ab34",
+    "central_trace_cell_types": [
+      "T4a",
+      "T4c",
+      "T5a",
+      "T5c"
+    ]
+  },
+  "scientific_boundary": {
+    "physical_camera_device": true,
+    "real_camera_frames": true,
+    "flyvis_continuous_model_response": true,
+    "exact_fafb_root_activity": false,
+    "spike_conversion": false,
+    "biological_control_claim": false,
+    "independent_github_camera_reproduction": false
+  },
+  "notes": [
+    "The run was executed locally against a physical network camera and recorded as an observed-success execution.",
+    "Private LAN endpoint details, credentials, and camera serial information are intentionally excluded from this public receipt.",
+    "The HEVC decoder emitted repeated 'VPS 0 does not exist' warnings, but the bounded run completed and produced the recorded FlyVis response.",
+    "This artifact is evidence of the observed software path only; it is not evidence of exact FAFB root-level electrical activity, biological spikes, or biological control."
+  ]
+}

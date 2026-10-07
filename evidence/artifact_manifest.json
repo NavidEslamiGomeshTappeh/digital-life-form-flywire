@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "c8d513779c63b06634b56b64a5365f34e6ff8903"
+        "value": "519c8a9589cfbfe80209cb14d2202d7e62e6373c"
       }
     },
     {
@@ -702,6 +702,15 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "7fd29e75dd7bd821edceb96da941eaad7aca4c01"
+      }
+    },
+    {
+      "id": "E-NETWORK-CAMERA-OBSERVED",
+      "path": "evidence/network_camera_flyvis_windows_receipt.json",
+      "role": "sanitized_physical_network_camera_execution_receipt",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "dcb6a917f3cbaa20978be1818b607e0c73f7baee"
       }
     },
     {

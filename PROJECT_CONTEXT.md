@@ -99,16 +99,23 @@ At the start of a new project chat:
 
 - Main remains on the unified Version 1.x line; current released metadata remains **1.7.1**.
 - `recovery.py` now rejects self-edges, invalid endpoints, disconnected skeletons, cycles, and non-tree edge counts before graph orientation. Regression coverage exists for invalid, disconnected, and cyclic skeleton inputs.
-- `scripts/Run-Camera-FlyVis.ps1` now uses explicit venv entrypoints and checks native `pip`/`git`/FlyVis/`dlf-flywire` command exit codes so a failed command cannot silently lead to a later partial run.
+- `scripts/Run-Camera-FlyVis.ps1` uses explicit venv entrypoints and checks native `pip`/`git`/FlyVis/`dlf-flywire` command exit codes so a failed command cannot silently lead to a later partial run.
 - `tests/test_camera_launcher.py` statically guards the Windows launcher contract and its fail-closed native-command handling.
-- GitHub Actions evidence at the latest completed point: **CI PASS** and **Security PASS** for commit `d03e3230a74ba02e2052b11f16c854d721d8ca6a`.
+- The latest completed maintenance PR (#66) had **CI PASS**, **Security PASS**, and **Historical/Zenodo audit PASS** before squash-merging as `7a9683aa87c1d1e3332b13dbcc60196fd7f4b924`.
 - The physical camera launcher remains a local-machine execution boundary; static CI coverage is not a claim that a physical camera was exercised by GitHub Actions.
-- A bounded `NetworkCameraSource` now accepts explicit `rtsp://` or `rtsps://` endpoints through OpenCV, converts frames into the existing `VisionFrame` contract, redacts credentials/query secrets from provenance locators, and is exposed through `capture-network-camera`.
-- A read-only `probe-camera-ptz` boundary now uses pinned `onvif-python==0.4.4` to inspect ONVIF PTZ profile/configuration tokens, current position/status, and continuous velocity ranges. It intentionally issues **no movement command**.
-- A read-only `discover-network-cameras` boundary now uses ONVIF WS-Discovery to locate cameras on the local LAN without requiring a known IP address. Discovered host/port, XAddrs, types/scopes, and services are returned as a provenance receipt; no PTZ or configuration commands are issued.
-- `NetworkCameraSource` now supports direct RTSP input and `resolve_rtsp_stream()` can obtain a live RTSP URI through the current `onvif-python==0.4.4` Media `GetStreamUri` API, injecting credentials only into the in-memory connection URI and recording only a redacted locator.
+- A bounded `NetworkCameraSource` accepts explicit `rtsp://` or `rtsps://` endpoints through OpenCV, converts frames into the existing `VisionFrame` contract, redacts credentials/query secrets from provenance locators, and is exposed through `capture-network-camera`.
+- A read-only `probe-camera-ptz` boundary uses pinned `onvif-python==0.4.4` to inspect ONVIF PTZ profile/configuration tokens, current position/status, and continuous velocity ranges. It intentionally issues **no movement command**.
+- A read-only `discover-network-cameras` boundary uses ONVIF WS-Discovery to locate cameras on the local LAN without requiring a known IP address. Discovered host/port, XAddrs, types/scopes, and services are returned as a provenance receipt; no PTZ or configuration commands are issued.
+- `NetworkCameraSource` supports direct RTSP input and `resolve_rtsp_stream()` can obtain a live RTSP URI through the current `onvif-python==0.4.4` Media `GetStreamUri` API, injecting credentials only into the in-memory connection URI and recording only a redacted locator.
 - `camera-flyvis` accepts either a direct RTSP URL or ONVIF host/credential environment variables and can therefore run the real network-camera stream through the existing BoxEye → pinned FlyVis pipeline.
-- `Run-Network-Camera-FlyVis.ps1` and `.bat` provide a double-click Windows entry point that prepares `[vision,ptz]`, performs ONVIF discovery, and runs the ONVIF-to-RTSP-to-FlyVis path when the required environment variables are present.
+- `Run-Network-Camera-FlyVis.ps1` and `.bat` provide a double-click Windows entry point that prepares [vision,ptz], performs ONVIF discovery, and runs the ONVIF-to-RTSP-to-FlyVis path when the required environment variables are present.
+
+## 2.6 Physical network-camera observation — 2026-10-07
+
+- A real local Windows run completed the full physical network-camera path: ONVIF WS-Discovery → RTSP → 20 real frames → BoxEye (721) → pinned FlyVis 1.2.0.
+- The observed FlyVis response shape was **[1, 20, 45669]** with recorded frame, BoxEye, checkpoint, response, and central-trace fingerprints.
+- The public receipt is sanitized: credentials, private LAN endpoint, and camera serial are excluded.
+- This is a **SOURCE_OBSERVATION**. It is not an independently reproduced physical-camera run in GitHub Actions, and it does not establish exact FAFB-root electrical activity, spike conversion, or biological control.
 
 ## 3. The current scientific anchor case
 
