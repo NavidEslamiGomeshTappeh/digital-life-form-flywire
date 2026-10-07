@@ -338,6 +338,15 @@ def test_published_method_boundary_is_ledgered():
     assert "E-PUBLISHED-METHOD-BOUNDARY" in claim["evidence"]
 
 
+def test_point_data_producer_gap_claim_is_unresolved():
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-009")
+    assert claim["status"] == "UNRESOLVED"
+    assert claim["classification"] == "UNRESOLVED"
+    assert claim["evidence"] == ["E-POINTDATA-PUBLIC-GENERATOR-GAP"]
+    assert claim["caveats"]
+
+
 def test_point_data_public_generator_gap_is_ledgered():
     evidence = json.loads(
         (ROOT / "evidence" / "point_data_public_generator_gap.json").read_text(
