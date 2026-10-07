@@ -755,7 +755,7 @@
       "role": "physical_camera_to_FlyVis_pipeline",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "3b143e45cd30bfe143ed6ac24a8cb7d114f8cb7d"
+        "value": "4d953b26efb1390ae016ce5c137a5b5ed7d058bc"
       }
     },
     {
