@@ -338,6 +338,36 @@ def test_published_method_boundary_is_ledgered():
     assert "E-PUBLISHED-METHOD-BOUNDARY" in claim["evidence"]
 
 
+def test_point_data_public_generator_gap_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_public_generator_gap.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_PUBLIC_METRICS_GENERATOR_GAP"
+    public = evidence["public_notebook"]
+    historical = evidence["historical_artifact"]
+    assert public["column_count"] == 23
+    assert public["save_operation_present"] is False
+    assert historical["column_count"] == 24
+    assert historical["historical_extra_columns"] == [
+        "Subtype_evDir_x",
+        "Subtype_evDir_y",
+        "Subtype_evDir_z",
+    ]
+    assert evidence["repository_search_observation"]["github_code_search_hits"] == 0
+    matrix = json.loads(
+        (ROOT / "evidence" / "point_data_revision_candidate_matrix.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert any(
+        item["status"] == "PROVEN_PUBLIC_NOTEBOOK_NON_IDENTITY"
+        and item["finding"] == "Public Metrics1 generator gap"
+        for item in matrix["decisions"]
+    )
+
+
 def test_github_platform_audit_snapshot_is_ledgered():
     audit = json.loads(
         (ROOT / "evidence" / "github_platform_october_2026_audit.json").read_text(
