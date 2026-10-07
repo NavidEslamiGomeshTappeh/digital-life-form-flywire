@@ -203,14 +203,21 @@ def resolve_rtsp_stream(
         if not profiles:
             raise VisionInputError("ONVIF camera returned no media profiles")
 
+        encoder_profiles = [
+            item
+            for item in profiles
+            if getattr(item, "VideoSourceConfiguration", None) is not None
+            and getattr(item, "VideoEncoderConfiguration", None) is not None
+        ]
         profile = next(
             (
                 item
-                for item in profiles
-                if getattr(item, "VideoSourceConfiguration", None) is not None
-                and getattr(item, "VideoEncoderConfiguration", None) is not None
+                for item in encoder_profiles
+                if str(getattr(getattr(item, "VideoEncoderConfiguration", None), "Encoding", ""))
+                .upper()
+                == "H264"
             ),
-            profiles[0],
+            encoder_profiles[0] if encoder_profiles else profiles[0],
         )
         token = _profile_token(profile)
         stream = media.GetStreamUri(
