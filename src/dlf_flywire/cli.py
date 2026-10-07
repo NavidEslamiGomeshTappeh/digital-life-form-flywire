@@ -239,6 +239,27 @@ def main(argv=None) -> int:
         default="DLF_RTSP_URL",
         help="Environment variable containing the RTSP URL (default: DLF_RTSP_URL).",
     )
+    camera_flyvis.add_argument(
+        "--onvif-host",
+        default=None,
+        help="ONVIF camera host; use this instead of supplying a manual RTSP URL.",
+    )
+    camera_flyvis.add_argument(
+        "--onvif-host-env",
+        default="DLF_CAMERA_HOST",
+        help="Environment variable containing the ONVIF camera host.",
+    )
+    camera_flyvis.add_argument("--onvif-port", type=int, default=80)
+    camera_flyvis.add_argument(
+        "--onvif-username-env",
+        default="DLF_CAMERA_USERNAME",
+        help="Environment variable containing the ONVIF username.",
+    )
+    camera_flyvis.add_argument(
+        "--onvif-password-env",
+        default="DLF_CAMERA_PASSWORD",
+        help="Environment variable containing the ONVIF password.",
+    )
 
     recover = sub.add_parser("recover", help="Recover exact FlyWire morphology.")
     recover.add_argument("--dataset", type=int, default=783)
@@ -454,6 +475,47 @@ def main(argv=None) -> int:
 
         try:
             stream_url = args.rtsp_url or os.environ.get(args.rtsp_url_env)
+            if stream_url and args.onvif_host:
+                raise CameraFlyVisError(
+                    "choose either a direct RTSP URL or ONVIF stream resolution, not both"
+                )
+            if not stream_url and args.onvif_host:
+                from .network_camera import resolve_rtsp_stream
+
+                username = os.environ.get(args.onvif_username_env)
+                password = os.environ.get(args.onvif_password_env)
+                if not username or not password:
+                    raise CameraFlyVisError(
+                        "ONVIF username/password environment variables are required "
+                        "when --onvif-host is used"
+                    )
+                resolution = resolve_rtsp_stream(
+                    host=args.onvif_host,
+                    port=args.onvif_port,
+                    username=username,
+                    password=password,
+                )
+                stream_url = resolution.connection_uri
+            if not stream_url:
+                onvif_host = os.environ.get(args.onvif_host_env)
+                username = os.environ.get(args.onvif_username_env)
+                password = os.environ.get(args.onvif_password_env)
+                if onvif_host or username or password:
+                    if not onvif_host or not username or not password:
+                        raise CameraFlyVisError(
+                            "ONVIF host, username, and password environment variables "
+                            "must all be set together"
+                        )
+                    from .network_camera import resolve_rtsp_stream
+
+                    resolution = resolve_rtsp_stream(
+                        host=onvif_host,
+                        port=args.onvif_port,
+                        username=username,
+                        password=password,
+                    )
+                    stream_url = resolution.connection_uri
+
             receipt = run_camera_to_flyvis(
                 device_index=args.device,
                 frame_count=args.frames,
