@@ -1,0 +1,77 @@
+{
+  "date_checked": "2026-10-07",
+  "repository_live_state": {
+    "visibility": "public",
+    "default_branch": "main",
+    "main_head": "7b194489545bf3543a0054e9f12a1cc1b3c0c124",
+    "branch_protection_enabled": false,
+    "required_status_checks": [],
+    "repository_rulesets": [],
+    "open_issues": 2
+  },
+  "github_features_relevant_to_project": [
+    {
+      "feature": "Workflow execution protections",
+      "status": "generally_available",
+      "relevance": "high",
+      "use": "Restrict who can trigger provenance/audit workflows and which events may execute them; workflow-file targeting and evaluate mode can be used for staged rollout.",
+      "source": "https://github.blog/changelog/2026-09-17-workflow-execution-protections-in-github-actions-generally-available/"
+    },
+    {
+      "feature": "Default public-repository block for pull_request_target",
+      "status": "enforcement_due_2026-11-02",
+      "relevance": "high",
+      "use": "Our workflows currently contain no pull_request_target, so the repository is already aligned with the upcoming default protection.",
+      "source": "https://docs.github.com/en/actions/concepts/about-actions-policies"
+    },
+    {
+      "feature": "Actions cache-mode",
+      "status": "generally_available",
+      "relevance": "medium",
+      "use": "Apply least-privilege cache access per workflow/job to reduce cache poisoning risk. Current project workflows do not use actions/cache, so no immediate change is required.",
+      "source": "https://github.blog/changelog/2026-09-10-control-github-actions-cache-access-with-cache-mode/"
+    },
+    {
+      "feature": "Block pull requests with secret-scanning alerts",
+      "status": "public_preview",
+      "relevance": "high",
+      "use": "Require secret-scanning alerts introduced by a PR to be resolved before merge. Public repositories have free secret scanning; repository-level push protection availability should be verified in GitHub settings.",
+      "source": "https://github.blog/changelog/2026-09-09-block-pull-requests-with-exposed-secrets-from-merging/"
+    },
+    {
+      "feature": "Privacy-safe star history REST API",
+      "status": "generally_available",
+      "relevance": "medium",
+      "use": "Track repository star growth over time without exposing stargazer identities; useful for measuring project reach alongside scientific milestones.",
+      "source": "https://github.blog/changelog/2026-09-04-new-api-endpoint-provides-privacy-safe-star-history-data/"
+    },
+    {
+      "feature": "Stacked pull requests",
+      "status": "generally_available",
+      "relevance": "medium",
+      "use": "Split long provenance/security changes into smaller reviewable stacks while keeping them coordinated; especially useful when separate evidence, workflow, and security changes need independent review.",
+      "source": "https://github.blog/changelog/2026-10-06-stacked-pull-requests-generally-available/"
+    },
+    {
+      "feature": "Async merge API",
+      "status": "generally_available",
+      "relevance": "low_to_medium",
+      "use": "Useful later for agent-driven PR orchestration and merge-queue automation; not required for the current audit path.",
+      "source": "https://github.blog/changelog/2026-10-01-github-async-merge-api-generally-available/"
+    }
+  ],
+  "immediate_project_actions": [
+    "Keep avoiding pull_request_target in all workflows.",
+    "Prioritize enabling/configuring workflow execution protections for the historical audit workflow once platform settings can be changed through the connected integration.",
+    "Prioritize branch protection/rulesets for main: require CI/security checks and block force-push/deletion.",
+    "Verify secret scanning and user/repository push protection in the public repository.",
+    "Use star-history API later for objective growth telemetry rather than relying only on visible star count snapshots."
+  ],
+  "important_live_correction": "Issue #16 currently contains a stale checked item claiming repository description is verified, but the live GitHub repository API reports description=null on 2026-10-07. This must remain unresolved until rechecked after a real repository metadata write.",
+  "sources_checked": [
+    "https://github.blog/changelog/month/10-2026/",
+    "https://github.blog/changelog/month/09-2026/",
+    "https://docs.github.com/en/actions/how-tos/administer/control-workflow-execution",
+    "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-security-and-analysis-settings-for-your-repository"
+  ]
+}
