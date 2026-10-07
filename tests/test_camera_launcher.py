@@ -56,8 +56,15 @@ def test_windows_network_camera_launcher_contract():
     assert 'function Invoke-PipChecked {' in script
     assert '--index-url $Index --retries 3 --timeout 60' in script
     assert '& $VenvPython -m pip @Arguments' in script
-    assert '& $VenvPython -m pip install --retries 8 --timeout 60 --no-build-isolation "opencv-python>=4.10,<5" "onvif-python==0.4.4"' in script
-    assert '& $VenvPython -m pip install --no-deps --no-build-isolation -e .' in script
+    assert 'Invoke-PipChecked "Installing Digital Life Form camera dependencies"' in script
+    assert 'Invoke-NativeChecked "Installing Digital Life Form package"' in script
+    assert '$CameraHost = $env:DLF_CAMERA_HOST' in script
+    assert '$Discovery = Get-Content -Raw -Path $DiscoveryOutput | ConvertFrom-Json' in script
+    assert '$Devices = @($Discovery.devices | Where-Object { $_.host -and $_.port })' in script
+    assert 'Selected discovered camera: ' in script
+    assert 'Read-Host "Enter the ONVIF username"' in script
+    assert 'Read-Host "Enter the ONVIF password" -AsSecureString' in script
+    assert '--onvif-port $CameraPort' in script
     assert '$FlyVisRev = "92b3845cc426dd309a1a0e1b3890156c42e14021"' in script
     assert 'discover-network-cameras --search Uho-S2E --timeout 5' in script
     assert 'camera-flyvis --onvif-host-env DLF_CAMERA_HOST' in script
