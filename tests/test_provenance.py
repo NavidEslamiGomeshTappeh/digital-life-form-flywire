@@ -338,6 +338,22 @@ def test_published_method_boundary_is_ledgered():
     assert "E-PUBLISHED-METHOD-BOUNDARY" in claim["evidence"]
 
 
+def test_github_platform_audit_snapshot_is_ledgered():
+    audit = json.loads(
+        (ROOT / "evidence" / "github_platform_october_2026_audit.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    live = audit["repository_live_state"]
+    assert live["visibility"] == "public"
+    assert live["default_branch"] == "main"
+    assert live["main_head"] == "a867738499b473e99500c20da73bb992ee172745"
+    assert live["public_branch_count"] == 63
+    assert live["description"] is None
+    manifest = json.loads((ROOT / "evidence" / "artifact_manifest.json").read_text(encoding="utf-8"))
+    assert any(item["id"] == "E-GITHUB-PLATFORM-AUDIT" for item in manifest["artifacts"])
+
+
 def test_later_public_pp3_reconstruction_receipt_is_ledgered():
     receipt = json.loads(
         (ROOT / "evidence" / "historical_pp3_later_reconstruction_receipt.json").read_text(
