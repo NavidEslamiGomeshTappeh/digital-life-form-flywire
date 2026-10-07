@@ -925,7 +925,8 @@
       "path": "evidence/contemporaneous_pointdata_geojax_consumer.json",
       "role": "same_week_pointdata_geojax_consumer_bridge",
       "identity": {
-        "type": "git_blob_sha1"
+        "type": "git_blob_sha1",
+        "value": "5ad98d6f2d993564bcc932e40df27989dd97cc93"
       }
     }
   ]
