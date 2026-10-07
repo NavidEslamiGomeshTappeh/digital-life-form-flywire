@@ -281,16 +281,15 @@
     },
     {
       "id": "C-POINTDATA-008",
-      "statement": "A pre-artifact public Neurosetta legacy environment used the name `neurosetta`, Python 3.10, and JAX, while its graph code imported GeoJax for geometry metrics; this is technically compatible context for the historical Point_data JAX ArrayImpl values.",
+      "statement": "A public GeoJax/legacy-Neurosetta software family contained JAX-backed geometry and PCA operations in snapshots predating the historical Point_data artifact; this is technically compatible context for the historical pickle's JAX ArrayImpl values.",
       "classification": "SOURCE_OBSERVATION",
       "status": "PROVEN",
       "evidence": [
         "E-LEGACY-JAX-CONTEXT"
       ],
       "caveats": [
-        "The historical December execution is not cryptographically bound to the July 2025 legacy environment or the cited GeoJax snapshot.",
-        "Matching environment name and Python major/minor identify a compatibility signal, not environment identity.",
-        "Compatibility does not establish producer causation."
+        "No exact historical Point_data execution is cryptographically bound to these software snapshots.",
+        "Compatibility does not establish producer identity or causation."
       ]
     },
     {
@@ -304,42 +303,41 @@
     },
     {
       "id": "C-POINTDATA-009",
-      "statement": "The public paper repository's exact Git DAG shows a publication/ingest boundary around the historical Point_data artifact: the first Point_data commit has no src/ tree, and the first public src/ commit 1,602 seconds later adds only downstream paper_ANOVA.py.",
-      "classification": "SOURCE_OBSERVATION",
-      "status": "PROVEN",
+      "classification": "UNRESOLVED",
+      "status": "UNRESOLVED",
+      "statement": "The exact historical producer of Point_data.pkl remains unresolved: the public Metrics1 notebook exposes a 23-column metric computation with no persistence call, while the historical artifact has 24 columns including Subtype_evDir_x/y/z that are not exposed by the public notebook or indexed public source.",
       "evidence": [
-        "E-POINTDATA-DAG-BOUNDARY"
+        "E-POINTDATA-PUBLIC-GENERATOR-GAP"
       ],
       "caveats": [
-        "This excludes a producer from the exposed public paper-repository DAG at that boundary; it does not exclude private/local or unarchived producer code.",
-        "The conclusion is about public repository contents, not the author's workstation or external repositories."
+        "The mismatch establishes that the current public Metrics1 notebook is not a complete textual producer for the historical artifact.",
+        "It does not by itself identify whether the missing three direction columns were computed by a private/local script, an earlier notebook revision, an uncommitted cell, or a separate augmentation step."
       ]
     },
     {
       "id": "C-POINTDATA-010",
-      "statement": "The contemporaneous December 9, 2025 Point_data consumer notebook used a `neurosetta` Jupyter kernel on Python 3.10.17, while a public July 2025 Neurosetta legacy environment also declares `name: neurosetta`, `python=3.10`, and `jax`; this forms a strong runtime-family compatibility fingerprint but not an exact execution identity.",
       "classification": "SOURCE_OBSERVATION",
       "status": "PROVEN",
+      "statement": "The four project Point_data anchor rows contain Subtype_evDir_x/y/z values that form unit-length direction vectors to numerical precision.",
       "evidence": [
-        "E-LEGACY-JAX-CONTEXT",
-        "E-POINTDATA-DAG-BOUNDARY"
+        "E-POINTDATA-EVDIR-ANCHORS"
       ],
       "caveats": [
-        "The exact December 2025 environment export is not recovered.",
-        "The name match may be coincidental or reflect a later installation; no lockfile pins the historical package revisions."
+        "This proves the stored vector values and their norm, not the algorithm that generated them.",
+        "The exact historical computation of Subtype_evDir remains unresolved."
       ]
     },
     {
       "id": "C-POINTDATA-011",
-      "statement": "The public Neurosetta legacy lineage had adopted GeoJax by February 21, 2025 and was still evolving against newer GeoJax in June 2025; by July 2025 its public environment was named `neurosetta`, used Python 3.10, and included JAX. This predates the December 9, 2025 historical Point_data artifact and matches its broad JAX-backed runtime family.",
       "classification": "SOURCE_OBSERVATION",
       "status": "PROVEN",
+      "statement": "The three historical Subtype_evDir_x/y/z columns are legacy/transitional fields at the public-snapshot level: they exist in the December 2025 Point_data artifact but are absent from the December public README schema and absent from the later August 2026 Zenodo Point_data schema.",
       "evidence": [
-        "E-LEGACY-JAX-CONTEXT"
+        "E-POINTDATA-EVDIR-LIFECYCLE"
       ],
       "caveats": [
-        "This establishes a pre-artifact software-family/runtime precedent, not the exact Point_data producer.",
-        "The exact December 2025 package versions and GeoJax/Neurosetta revisions remain unresolved."
+        "Legacy/internal is an interpretation of the lifecycle evidence, not proof of the private producer implementation.",
+        "The exact writer and mathematical definition remain unresolved."
       ]
     },
     {
