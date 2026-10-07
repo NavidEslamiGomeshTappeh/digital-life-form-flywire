@@ -20,7 +20,7 @@ class DiscoveredONVIFDevice:
     hostname: str | None
     services: tuple[str, ...]
     date_time: dict[str, str]
-    
+
     def to_dict(self) -> dict[str, object]:
         return {
             "host": self.host,
@@ -51,7 +51,11 @@ def discover_onvif_devices(
     search: str | None = None,
     prefer_https: bool = False,
 ) -> tuple[DiscoveredONVIFDevice, ...]:
-    if isinstance(timeout_s, bool) or not isinstance(timeout_s, int) or timeout_s <= 0:
+    if (
+        isinstance(timeout_s, bool)
+        or not isinstance(timeout_s, int)
+        or timeout_s <= 0
+    ):
         raise NetworkDiscoveryError("discovery timeout must be a positive integer")
     if interface is not None and not isinstance(interface, str):
         raise NetworkDiscoveryError("discovery interface must be a string or null")
@@ -79,7 +83,11 @@ def discover_onvif_devices(
         port = item.get("port")
         if not isinstance(host, str) or not host.strip():
             continue
-        if isinstance(port, bool) or not isinstance(port, int) or not (1 <= port <= 65535):
+        if (
+            isinstance(port, bool)
+            or not isinstance(port, int)
+            or not (1 <= port <= 65535)
+        ):
             continue
 
         devices.append(
