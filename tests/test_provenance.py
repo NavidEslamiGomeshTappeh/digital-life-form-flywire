@@ -646,3 +646,130 @@ def test_unsafe_artifact_paths_fail_closed(tmp_path):
         assert "unsafe artifact path" in str(exc)
     else:
         raise AssertionError("unsafe artifact path was accepted")
+
+def test_point_data_evdir_structure_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_evdir_structure.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_POINTDATA_EVDIR_STRUCTURE"
+    assert evidence["global"]["rows"] == 5828
+    assert evidence["global"]["exact_vector_count"] == 5828
+    assert evidence["global"]["scalar_dtype"] == "float32"
+    assert evidence["global"]["columns"] == 3
+    assert all(
+        item["rows"] == item["unique_exact"]
+        for item in evidence["by_subtype"].values()
+    )
+    assert evidence["global"]["global_max_abs_unit_norm_error"] < 5e-7
+
+def test_public_subtype_evdir_search_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "public_subtype_evdir_search.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_BOUNDED_PUBLIC_CODE_SEARCH_NEGATIVE"
+    assert evidence["search_date"] == "2026-10-06"
+    assert all(item["external_matches"] == 0 for item in evidence["queries"])
+
+def test_point_data_jax_serializer_byte_alignment_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_jax_serializer_compatibility.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["historical_artifact"]["pickle_global"] == (
+        "jax._src.array._reconstruct_array"
+    )
+    alignment = evidence["historical_byte_alignment"]
+    assert alignment["pickle_byte_position"] == 717551
+    assert alignment["opcode"] == "STACK_GLOBAL"
+    assert alignment["preceding_strings"][-2:] == [
+        "jax._src.array",
+        "_reconstruct_array",
+    ]
+    assert (
+        alignment["independent_local_recheck"]["sha256"]
+        == "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+    )
+
+def test_public_point_data_ingest_dag_boundary_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "public_point_data_ingest_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_PUBLIC_DAG_INGEST_BOUNDARY"
+    assert evidence["conclusions"]["proven"][0].startswith(
+        "The public paper repository had no src/"
+    )
+    assert evidence["key_commits"][2]["point_data_blob"] == (
+        "b85caf49f45677f2075f7b5f2c8830141cd96d02"
+    )
+    first_src = next(
+        item
+        for item in evidence["key_commits"]
+        if item["sha"] == "1007a708f0b2cd4d55875174256774a41ff5b0f4"
+    )
+    assert first_src["src_files_at_that_commit"] == [
+        {
+            "path": "src/paper_ANOVA.py",
+            "blob": "0f806edd292478db76cf330955b6c81c230f7059",
+        }
+    ]
+    assert evidence["derived_intervals"]["point_data_to_first_src_seconds"] == 1602
+
+def test_historical_neurosetta_runtime_family_fingerprint_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "legacy_jax_geometry_context.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    legacy = evidence["sources"]["legacy_neurosetta"]
+    assert legacy["commit_date"] == "2025-07-31T14:40:07
+
+def test_point_data_jax_serializer_release_family_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_jax_serializer_release_family.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_POINTDATA_JAX_SERIALI
+
+def test_point_data_jax_serializer_contract_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_jax_serializer_compatibility.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_POINTDATA_JAX_SERIALI
+
+def test_point_data_pickle_globals_receipt_is_ledgered():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_pickle_globals_receipt.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_POINTDATA_PICKLE_GLOBALS"
+    assert evidence["source"]["sha256"] == (
+        "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+    )
+    assert evidence["pickle_globals"]["stack_global_count"] == 11
+    assert "jax._src.array._reconstruct_array" in evidence["pickle_globals"]["exact_globals"]
+    assert evidence["pickle_globals"]["jax_globals"][0]["pickle_byte_position"] == 717551
+    fp = evidence["jax_value_fingerprint"]
+    assert fp["object_type"] == "jaxlib._jax.ArrayImpl"
+    assert fp["array_values_total"] == 46624
+    assert fp["exact_count_match"] is True
+    assert fp["shape"] == "()"
+    assert fp["dtype"] == "float32"
+    assert all(value == 5828 for value in fp["per_column_count"].values())
+    claims = json.loads(
+        (ROOT / "evidence" / "claims.json").read_text(encoding="utf-8")
+    )
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-012")
+    assert claim["status"] == "REPRODUCED"
+    assert "E-POINTDATA-PICKLE-GLOBALS" in claim["evidence"]
+
