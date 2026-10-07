@@ -775,6 +775,33 @@
         "type": "git_blob_sha1",
         "value": "e3bbef0244c6c08aa7aec0febc6f09e0a4940084"
       }
+    },
+    {
+      "id": "E-NETWORK-CAMERA-LAUNCHER",
+      "path": "scripts/Run-Network-Camera-FlyVis.ps1",
+      "role": "double_click_network_camera_launcher",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "150a00027f1288157e3916a9a2c73e1ed5514ca1"
+      }
+    },
+    {
+      "id": "E-NETWORK-CAMERA-BAT",
+      "path": "scripts/Run-Network-Camera-FlyVis.bat",
+      "role": "double_click_batch_launcher",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "d2a81a69e329295c9eed0cad3867781d34de1cad"
+      }
+    },
+    {
+      "id": "E-CAMERA-LAUNCHER-TESTS",
+      "path": "tests/test_camera_launcher.py",
+      "role": "camera_launcher_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "b56d1dd0538d86d982bbf6be37ff6b88738d0cbf"
+      }
     }
   ]
 }
