@@ -1,0 +1,94 @@
+{
+  "title": "Historical eigenvector-order lineage relevant to Point_data provenance",
+  "generated": "2026-10-08",
+  "scope": {
+    "field_under_audit": "Subtype_evDir_x/y/z",
+    "historical_artifact": "Data/Point_data.pkl",
+    "artifact_first_public_commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a"
+  },
+  "evidence": [
+    {
+      "repository": "NikDrummond/Neu_Trees",
+      "path": "Neu_Trees/Maths.py",
+      "commit": "8adc39ce4dd61b77a5e6f6a229f6d4309a949f62",
+      "date": "2023-03-02T15:37:06Z",
+      "observation": "coords_Eig computes covariance eigendecomposition, sorts eigenvectors by descending eigenvalue, and snap_to_axis explicitly aligns eigenvector 0 to y, eigenvector 1 to x, and eigenvector 2 to z."
+    },
+    {
+      "repository": "NikDrummond/Neu_Trees",
+      "path": "Neu_Trees/Metrics.py",
+      "commit": "3b4bd9c9a93d384ef272bfc64744ae06da3930a3",
+      "history": [
+        {
+          "commit": "11609fbcab828847713d34b9b13bbc898044d59f",
+          "date": "2022-11-08T10:34:24Z",
+          "message": "Core and simple metrics added"
+        },
+        {
+          "commit": "8adc39ce4dd61b77a5e6f6a229f6d4309a949f62",
+          "date": "2023-03-02T15:37:06Z",
+          "message": "upstream path lengths wasnt updated"
+        }
+      ],
+      "observation": "Eig_align calls snap_to_axis for individual neuron and population alignment."
+    },
+    {
+      "repository": "NikDrummond/Neurosetta_old",
+      "path": "Neurosetta/rotations.py",
+      "commits": [
+        {
+          "commit": "bb5f5ffaf435bf8d0d7fbc70238bab2c47b7ca92",
+          "date": "2023-04-25T14:57:33Z",
+          "message": "Added rotations module"
+        },
+        {
+          "commit": "d5b1ee75dce8fae6791e66c338a2e5082c8c35a0",
+          "date": "2023-04-25T15:20:21Z",
+          "message": "navis pd output"
+        }
+      ],
+      "observation": "The same eigenvector-ordering/alignment family is present in Neurosetta_old."
+    },
+    {
+      "repository": "NikDrummond/PhD_tools",
+      "path": "PhD_tools/rotations.py",
+      "commit": "cc1058687eee57364a77bf937cc58b7498c97572",
+      "date": "2024-02-29T16:53:53Z",
+      "message": "Added 3D rotations, snap to eigen axis",
+      "observation": "The author continued the eigen-axis alignment implementation in PhD_tools."
+    },
+    {
+      "repository": "NikDrummond/Neurosetta_legacy_v0.0.1",
+      "path": "Neurosetta/rotations.py",
+      "commit": "9c27f226128d98ea5420e7a3a32acf2adc8ce138",
+      "date": "2025-01-15T11:30:24Z",
+      "observation": "coord_eig_decomp is JAX/NumPy compatible, normalizes and sorts eigenvalues, and the eig_align API accepts eig_order, align_order, and perspective_order, explicitly allowing a specified eigenvector index to be aligned to a selected axis."
+    },
+    {
+      "repository": "NikDrummond/GeoJax",
+      "path": "NeuGeometry/core.py",
+      "commit": "4dfc82bbc6dbe37b64a540758d6ea3ed6c9829aa",
+      "date": "2025-02-12T15:02:47Z",
+      "message": "Eigen Decomposition",
+      "observation": "JAX-native coord_eig_decomp uses robust M-estimator covariance, jnp.linalg.eigh, descending eigenvalue sort, PCA normalization, and optional eigenvector transposition. The repository is later renamed from NeuGeometry to GeoJax."
+    }
+  ],
+  "inference_boundary": {
+    "supported": [
+      "The author had a long-standing, public implementation family for extracting, ordering, and aligning multiple eigenvectors before December 2025.",
+      "By January 2025, the legacy NeuRosetta API exposed explicit eigenvector-order selection via eig_order.",
+      "By February 2025, GeoJax provided a JAX-native eigendecomposition implementation compatible in broad numerical style with the JAX objects serialized inside historical Point_data.pkl."
+    ],
+    "not_proven": [
+      "No searched public repository contains the literal field name Subtype_evDir.",
+      "No searched public code yet proves which eigenvector produced Subtype_evDir for each T4/T5 subtype.",
+      "The historical Point_data producer, its morphology input artifact, exact December 2025 dependency revisions, and exact sign/orientation rule remain unresolved."
+    ]
+  },
+  "current_working_hypothesis": {
+    "statement": "Subtype_evDir is likely a historical/intermediate directional-eigenvector field derived from a selected eigenvector rather than a fixed published PC1 field.",
+    "supporting_observation": "In the recovered Point_data artifact, Subtype_evDir matches the published PC1-angle convention almost exactly for T4c/T4d/T5c/T5d, while T4a/T4b/T5a/T5b are displaced toward approximately an orthogonal eigenvector relation.",
+    "confidence": "medium",
+    "status": "hypothesis_only"
+  }
+}
