@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_PRE_ARTIFACT_GEOMETRY_LINEAGE_BUT_PRODUCER_UNRESOLVED",
+  "purpose": "Record the newly recovered lineage showing that the JAX-native robust PCA geometry originated in NeuGeometry and was renamed into GeoJax before the December 2025 Point_data artifact.",
+  "artifact_boundary": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "first_point_data_commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "first_point_data_time_utc": "2025-12-09T19:41:50Z",
+    "point_data_blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+    "point_data_sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+  },
+  "recovered_lineage": [
+    {
+      "stage": "NeuGeometry initial public lineage",
+      "repository": "NikDrummond/GeoJax",
+      "commit": "a5ef175ff96cb8d567e2f65cf31858e52608f64b",
+      "date_utc": "2025-02-10T16:57:40Z",
+      "observation": "Repository initial commit; package was initially named NeuGeometry."
+    },
+    {
+      "stage": "JAX robust PCA/eigendecomposition introduced",
+      "repository": "NikDrummond/GeoJax",
+      "commit": "4dfc82bbc6dbe37b64a540758d6ea3ed6c9829aa",
+      "date_utc": "2025-02-12T15:02:47Z",
+      "message": "Eigen Decomposition",
+      "observation": "Commit introduces point-cloud eigen decomposition with standard and robust covariance estimation. Historical NeuGeometry/core.py contains robust_covariance_mest and coord_eig_decomp implemented with JAX."
+    },
+    {
+      "stage": "JAX point-cloud alignment added",
+      "repository": "NikDrummond/GeoJax",
+      "commit": "8147e279bb0e49a4d28bbcf718900be1e2e1e88d",
+      "date_utc": "2025-02-12T17:15:13Z",
+      "message": "Align a point cloud to it's eigenvectors",
+      "observation": "Historical NeuGeometry/core.py adds align_point_cloud with eigenvector reordering, sign correction against target basis, and sequential minimal rotations."
+    },
+    {
+      "stage": "Rename from NeuGeometry to GeoJax",
+      "repository": "NikDrummond/GeoJax",
+      "commit": "6c2414117989a948c047dab76a06ef4f9443308e",
+      "date_utc": "2025-02-13T19:44:07Z",
+      "message": "Sort stuff after the rename!",
+      "observation": "Git detects GeoJax/__init__.py as renamed from NeuGeometry/__init__.py and GeoJax/core.py as renamed from NeuGeometry/core.py. This establishes direct repository lineage rather than merely similar implementations."
+    },
+    {
+      "stage": "Alignment implementation stabilized in pre-artifact public GeoJax",
+      "repository": "NikDrummond/GeoJax",
+      "commit": "33b0f8727ab447eff86e35a69c60c1f33b4d1513",
+      "date_utc": "2025-05-02T13:36:30Z",
+      "observation": "This is the last public GeoJax head before the December 2025 Point_data artifact. At this head GeoJax/__init__.py exports coord_eig_decomp, align_point_cloud, robust_covariance_mest, signed_angle; GeoJax/alignment.py is JAX-native."
+    }
+  ],
+  "pre_artifact_implementation_fingerprint": {
+    "repository": "NikDrummond/GeoJax",
+    "commit": "33b0f8727ab447eff86e35a69c60c1f33b4d1513",
+    "file": "GeoJax/alignment.py",
+    "robust_covariance": {
+      "estimator": "Huber-like M-estimator",
+      "c": 1.5,
+      "tol": 0.000001,
+      "max_iter": 100,
+      "covariance_regularization": "1e-6 * I",
+      "initial_location": "arithmetic mean",
+      "distance": "squared Mahalanobis distance",
+      "weighting": "1 inside c^2, otherwise c^2 / mahalanobis_squared"
+    },
+    "eigendecomposition": {
+      "solver": "jnp.linalg.eigh",
+      "normalize": "eigenvalues divided by their sum when PCA=True",
+      "sort": "descending",
+      "eigenvector_layout": "rows when transpose=True"
+    },
+    "alignment": {
+      "sign_correction": "flip eigenvector when dot product with target basis is negative",
+      "rotation": "basis-target alignment / sequential minimal rotations"
+    },
+    "scalar_output_family": "JAX arrays; GeoJax signed_angle is also JAX-native"
+  },
+  "point_data_serialization_fingerprint": {
+    "rows": 5828,
+    "columns": 24,
+    "jax_arrayimpl_columns": [
+      "PC1",
+      "PC2",
+      "PC3",
+      "PC1_angle",
+      "Mean_segment_angle",
+      "Subtype_evDir_x",
+      "Subtype_evDir_y",
+      "Subtype_evDir_z"
+    ],
+    "jax_arrayimpl_values_per_column": 5828,
+    "total_jax_arrayimpl_values": 46624,
+    "interpretation": "The historical artifact's PCA/angle/vector metrics are stored as JAX ArrayImpl scalar objects. This is technically congruent with a JAX-native geometry producer."
+  },
+  "contemporaneous_consumer_context": {
+    "consumer_commit": "61fd0f176d73932ad87ece04153945501b4c405c",
+    "consumer_date_utc": "2025-12-09T19:40:07Z",
+    "kernel": "neurosetta",
+    "python": "3.10.17",
+    "local_input_path": "/home/nik/Desktop/Software/T45_Morpho_data/Data/Pickled_data/Point_data.pkl",
+    "interpretation": "The consumer predates the artifact ingest and reads an already-existing local Point_data artifact."
+  },
+  "contemporary_geojax_usage": {
+    "paper_commit": "07b468181ceb3e43d1cb3647b5bac79d531acd18",
+    "date_utc": "2025-12-10T16:32:19Z",
+    "file": ".history/src/Random_bifurcations_20251210164127.py",
+    "observation": "The paper's immediately following public analysis history imports GeoJax as gj and uses gj.cross, gj.angle, and gj.normalize."
+  },
+  "legacy_neurosetta_boundary": {
+    "repository": "NikDrummond/Neurosetta_legacy_v0.0.1",
+    "latest_pre_artifact_public_snapshot": "25c911a28030deb5204eb7ab5a18ff4643363d96",
+    "observation": "Legacy Neurosetta had JAX and GeoJax-dependent geometry capabilities before the artifact, but its public coord_eig_decomp implementation in rotations.py is NumPy/sklearn MinCovDet rather than JAX-native. Therefore it does not by itself explain the Point_data ArrayImpl serialization fingerprint."
+  },
+  "negative_or_unresolved": {
+    "exact_producer_script": "UNRESOLVED",
+    "exact_neurosetta_revision": "UNRESOLVED",
+    "exact_geojax_revision_installed_on_producer_machine": "UNRESOLVED",
+    "exact_jax_version": "UNRESOLVED",
+    "exact_subtype_evdir_algorithm": "UNRESOLVED",
+    "exact_historical_reduced_dendrite_materialization": "UNRESOLVED",
+    "exact_alignment_save_point": "UNRESOLVED"
+  },
+  "conclusion": {
+    "strongest_current_statement": "The most technically specific pre-artifact candidate is the JAX-native NeuGeometry -> GeoJax geometry lineage, with public GeoJax head 33b0f872... as the last visible pre-artifact revision. This candidate simultaneously matches the documented Huber-type PCA method, target-basis sign correction lineage, JAX-native scalar outputs, and contemporaneous GeoJax use.",
+    "strict_limit": "This evidence does not prove that commit 33b0f872... was the exact revision installed or that it alone generated Point_data.pkl. The producer remains outside the exposed public repository DAG or in a local/private environment.",
+    "provenance_class": "IMPLEMENTATION-FAMILY_MATCH_STRONG; EXACT-PRODUCER_SHA_UNRECOVERED"
+  }
+}
