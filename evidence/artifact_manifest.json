@@ -7,48 +7,57 @@
   ],
   "artifacts": [
     {
-      "id": "E-VERSION",
-      "path": "VERSION",
-      "role": "project_version",
+      "id": "E-BUILD-SYNAPSE-LINEAGE",
+      "path": "scripts/build_synapse_lineage.py",
+      "role": "lineage_builder",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "943f9cbc4ec7ee28e6febd1d4451df4c39bcb193"
+        "value": "c468f70de28d590197e29e5e31e772370f06a51e"
       }
     },
     {
-      "id": "E-PYPROJECT",
-      "path": "pyproject.toml",
-      "role": "project_metadata",
+      "id": "E-CAMERA-FLYVIS",
+      "path": "src/dlf_flywire/camera_flyvis.py",
+      "role": "physical_camera_to_FlyVis_pipeline",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "8cc334adf8c4ac5657372bc0bcbe4dccc1206cec"
+        "value": "4d953b26efb1390ae016ce5c137a5b5ed7d058bc"
       }
     },
     {
-      "id": "E-PACKAGE-INIT",
-      "path": "src/dlf_flywire/__init__.py",
-      "role": "project_version",
+      "id": "E-CAMERA-LAUNCHER-TESTS",
+      "path": "tests/test_camera_launcher.py",
+      "role": "camera_launcher_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "3c1e9cbd302a4df7ac0ee47e577f5c5895b69e1a"
+        "value": "c48e1c66f594760c86661776e77534c5edde536a"
       }
     },
     {
-      "id": "E-PROVENANCE-CODE",
-      "path": "src/dlf_flywire/provenance.py",
-      "role": "audit_engine",
+      "id": "E-CAPABILITIES",
+      "path": "src/dlf_flywire/capabilities.py",
+      "role": "capability_doctor_engine",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "4852ddbf73944746c30a30f369171da2ff6e3f1f"
+        "value": "7c6f724ce0ed5c769b8c1eef5b717a6e27384565"
       }
     },
     {
-      "id": "E-CROSS-SOURCE-CODE",
-      "path": "src/dlf_flywire/cross_source.py",
-      "role": "cross_source_validator",
+      "id": "E-CAPABILITY-TESTS",
+      "path": "tests/test_capabilities.py",
+      "role": "capability_doctor_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "559ee5a402b99c30927d0efff3c05629691c6798"
+        "value": "adc8a3f9ba048a7f59467627266d7770d2b9ba15"
+      }
+    },
+    {
+      "id": "E-CLAIMS",
+      "path": "evidence/claims.json",
+      "role": "claim_ledger",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "decf925365a5b08111ea67d2f591f17b5a0c09aa"
       }
     },
     {
@@ -61,30 +70,48 @@
       }
     },
     {
-      "id": "E-MANIFEST",
-      "path": "evidence/manifest.json",
-      "role": "evidence_summary",
+      "id": "E-CODE-HAND",
+      "path": "src/dlf_flywire/code_hand.py",
+      "role": "code_hand_capability",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "592a783b304c916aee2330f14992cd08cb0cbd83"
+        "value": "cfd470effffa003fb3432feda46b75d8a3b90f40"
       }
     },
     {
-      "id": "E-CLAIMS",
-      "path": "evidence/claims.json",
-      "role": "claim_ledger",
+      "id": "E-CODE-HAND-TESTS",
+      "path": "tests/test_code_hand.py",
+      "role": "code_hand_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "78aefd6a2763c4890bcbe7f5714a5179ea7cbfaa"
+        "value": "ed89109127f50a9c8f76f7fb9518220bdb620868"
       }
     },
     {
-      "id": "E-HISTORICAL-BOUNDARY",
-      "path": "evidence/historical_generator_boundary.json",
-      "role": "historical_provenance_boundary",
+      "id": "E-CONNECTIVITY",
+      "path": "evidence/connectivity.json",
+      "role": "connectivity_evidence",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "6ea546fd25e0221c5896837b5529c886e4568b79"
+        "value": "f0d13232cf0bd94c465f9de7f5ba250917c9c7d6"
+      }
+    },
+    {
+      "id": "E-COORDINATE",
+      "path": "evidence/coordinate_provenance.json",
+      "role": "coordinate_provenance",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "db2d794ffb3ccb741433b6abd752e1de06e40d80"
+      }
+    },
+    {
+      "id": "E-CROSS-SOURCE-CODE",
+      "path": "src/dlf_flywire/cross_source.py",
+      "role": "cross_source_validator",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "559ee5a402b99c30927d0efff3c05629691c6798"
       }
     },
     {
@@ -97,30 +124,426 @@
       }
     },
     {
-      "id": "E-SUBTREE",
-      "path": "evidence/dendrite_subtree_mapping.json",
-      "role": "subtree_reproduction",
+      "id": "E-EXECUTION",
+      "path": "src/dlf_flywire/execution.py",
+      "role": "execution_checkpoint_recovery_engine",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "5eeba75fa5e2f9442ca08bfc9c9e9518a0f017fc"
+        "value": "af1f6c049eb36f18adb897a58cbac592ab17ede2"
       }
     },
     {
-      "id": "E-POINTDATA-VERSION-DELTA",
-      "path": "evidence/point_data_version_delta.json",
-      "role": "historical_vs_zenodo_point_data_boundary",
+      "id": "E-EXECUTION-TESTS",
+      "path": "tests/test_execution.py",
+      "role": "execution_recovery_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "a00dbf2d62ba5976d9c2b90bd692f2dc30d2b636"
+        "value": "e9f9d629c5cb99921e0e3fdf406c4d7b7ab34376"
       }
     },
     {
-      "id": "E-POINTDATA-DECODE",
-      "path": "evidence/point_data_pickle_decode_receipt.json",
-      "role": "exact_id_point_data_decode_and_serialization_receipt",
+      "id": "E-FIRST-TIME-BOOTSTRAP",
+      "path": "Run-Uho-S2E-First-Time.bat",
+      "role": "first_time_github_bootstrap",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "665c7937b41c1b4bfe86903a55c6981b7952c074"
+        "value": "853451f2cfc5f00cbe9bc432c14eb8bba9726734"
+      }
+    },
+    {
+      "id": "E-FIRST-TIME-BOOTSTRAP-TEST",
+      "path": "tests/test_first_time_bootstrap.py",
+      "role": "first_time_bootstrap_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "40e51b9e5499ab295b1962e8eee25ad32abd05e1"
+      }
+    },
+    {
+      "id": "E-FLYDRONES-INTEGRATION-RECEIPT",
+      "path": "evidence/flydrones_integration_receipt.json",
+      "role": "external_flydrones_integration_receipt",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "b370e3abc47de3fad365f8e35f7b7f7408476fb3"
+      }
+    },
+    {
+      "id": "E-FLYDRONES-INTEGRATION-RECEIPT-2",
+      "path": "evidence/flydrones_integration_receipt_2.json",
+      "role": "external_flydrones_full_source_provenance_receipt",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "e13a97ce5836082fc861511579cfd92688f7538b"
+      }
+    },
+    {
+      "id": "E-FLYVIS-ACTIVITY-BOUNDARY",
+      "path": "docs/FLYVIS_ACTIVITY_BOUNDARY.md",
+      "role": "continuous_model_response_scientific_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "970ca6019579b2e3718754002c76a6a80d01da9e"
+      }
+    },
+    {
+      "id": "E-FLYVIS-ADAPTER",
+      "path": "src/dlf_flywire/flyvis_adapter.py",
+      "role": "continuous_model_response_adapter",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "9268ed4f2117607c61c09272679a38d1847d237c"
+      }
+    },
+    {
+      "id": "E-FLYVIS-ADAPTER-TESTS",
+      "path": "tests/test_flyvis_adapter.py",
+      "role": "continuous_model_response_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "7b068f826df11b4a82646386d415ac73508c9ea1"
+      }
+    },
+    {
+      "id": "E-FLYVIS-RUNTIME",
+      "path": "src/dlf_flywire/flyvis_runtime.py",
+      "role": "real_FlyVis_runtime_contract",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "26dbdbb52f09aaba32842683cd44d4cdafbfb253"
+      }
+    },
+    {
+      "id": "E-FLYVIS-RUNTIME-RECEIPT",
+      "path": "evidence/flyvis_integration_receipt.json",
+      "role": "real_FlyVis_runtime_proof_receipt",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "5d1208e9296cb57175d14cd5771de1df86ee251d"
+      }
+    },
+    {
+      "id": "E-FLYVIS-RUNTIME-SMOKE",
+      "path": "scripts/flyvis_integration_smoke.py",
+      "role": "real_FlyVis_runtime_smoke",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "a3a7c7f96a7ec0220752ad08ab17fdf259381c8f"
+      }
+    },
+    {
+      "id": "E-FLYVIS-RUNTIME-TESTS",
+      "path": "tests/test_flyvis_runtime.py",
+      "role": "real_FlyVis_runtime_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "68bac4fc91e5a1f350699291efee34bf01f906e3"
+      }
+    },
+    {
+      "id": "E-FLYVIS-WORKFLOW",
+      "path": ".github/workflows/flyvis-integration.yml",
+      "role": "real_FlyVis_integration_workflow",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "706f3a7ed92505ba2c4d951051c9fb1a028fb8da"
+      }
+    },
+    {
+      "id": "E-GITHUB-PLATFORM-AUDIT",
+      "path": "evidence/github_platform_october_2026_audit.json",
+      "role": "live_github_platform_feature_and_state_audit",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "899ba72e94fe3695d3e9e8188aa434c0957ef9c8"
+      }
+    },
+    {
+      "id": "E-GLOBAL-ALIGNMENT-BOUNDARY",
+      "path": "evidence/global_alignment_boundary.json",
+      "role": "published_global_alignment_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "3b0247125008e533b8b906ece2e44b12c2973218"
+      }
+    },
+    {
+      "id": "E-HISTORICAL-BOUNDARY",
+      "path": "evidence/historical_generator_boundary.json",
+      "role": "historical_provenance_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "6ea546fd25e0221c5896837b5529c886e4568b79"
+      }
+    },
+    {
+      "id": "E-HISTORICAL-NEUROSETTA-LINEAGE",
+      "path": "evidence/historical_neurosetta_lineage_context.json",
+      "role": "pre_artifact_software_family_context",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "83149aa1e88174289c86a73ba094ba71ff5f1102"
+      }
+    },
+    {
+      "id": "E-HISTORICAL-PP3-LATER-RECONSTRUCTION",
+      "path": "evidence/historical_pp3_later_reconstruction_receipt.json",
+      "role": "later_public_pp3_execution_receipt",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "d16848cbc34fac2bb1c503809964a11a3b501eed"
+      }
+    },
+    {
+      "id": "E-HISTORICAL-SOFTWARE",
+      "path": "evidence/historical_software_release.json",
+      "role": "earliest_public_software_release_snapshot",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "3cb892f6c72caa25695b241f0173d2c3a3b1f6d4"
+      }
+    },
+    {
+      "id": "E-LEGACY-JAX-CONTEXT",
+      "path": "evidence/legacy_jax_geometry_context.json",
+      "role": "contextual_legacy_jax_geometry_compatibility",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "e105d9f5804103cc704c0f9d261d57dd43045580"
+      }
+    },
+    {
+      "id": "E-LEGACY-NEUROSETTA",
+      "path": "evidence/legacy_neurosetta_context.json",
+      "role": "historical_legacy_toolchain_context",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "818d87cf38dc175f7b5f937aa9974b064a607d92"
+      }
+    },
+    {
+      "id": "E-LINEAGE-REGEN-TEST",
+      "path": "tests/test_provenance.py",
+      "role": "lineage_regeneration_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "faefdeb0a5fff00355f0f16477deda3897ebbbba"
+      }
+    },
+    {
+      "id": "E-MANIFEST",
+      "path": "evidence/manifest.json",
+      "role": "evidence_summary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "d32ea95787414f742b9c6b3b0f5e3641ec778937"
+      }
+    },
+    {
+      "id": "E-MORPHOLOGY",
+      "path": "evidence/morphology_provenance.json",
+      "role": "morphology_provenance",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "ebec78b2e3db356b425e4aeda6c854c7dcc34f20"
+      }
+    },
+    {
+      "id": "E-NETWORK-CAMERA",
+      "path": "src/dlf_flywire/network_camera.py",
+      "role": "bounded_RTSP_network_camera_adapter",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "7fd29e75dd7bd821edceb96da941eaad7aca4c01"
+      }
+    },
+    {
+      "id": "E-NETWORK-CAMERA-BAT",
+      "path": "scripts/Run-Network-Camera-FlyVis.bat",
+      "role": "double_click_batch_launcher",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "d2a81a69e329295c9eed0cad3867781d34de1cad"
+      }
+    },
+    {
+      "id": "E-NETWORK-CAMERA-CLI-TESTS",
+      "path": "tests/test_network_camera_cli.py",
+      "role": "RTSP_network_camera_cli_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "e34bcabc364a3c459edf8cfd877b267ae62c3bc6"
+      }
+    },
+    {
+      "id": "E-NETWORK-CAMERA-LAUNCHER",
+      "path": "scripts/Run-Network-Camera-FlyVis.ps1",
+      "role": "double_click_network_camera_launcher",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "006957b8a74d3d2746472a2a30fc3f4513c34e21"
+      }
+    },
+    {
+      "id": "E-NETWORK-CAMERA-OBSERVED",
+      "path": "evidence/network_camera_flyvis_windows_receipt.json",
+      "role": "sanitized_physical_network_camera_execution_receipt",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "dcb6a917f3cbaa20978be1818b607e0c73f7baee"
+      }
+    },
+    {
+      "id": "E-NETWORK-CAMERA-TESTS",
+      "path": "tests/test_network_camera.py",
+      "role": "RTSP_network_camera_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "afa893d08e9954b236ed82a928cfc8a6ccdfdb8a"
+      }
+    },
+    {
+      "id": "E-NETWORK-DISCOVERY",
+      "path": "src/dlf_flywire/network_discovery.py",
+      "role": "read_only_ONVIF_LAN_discovery",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "67642ea6427c2361a925d173c42f515f9c74969f"
+      }
+    },
+    {
+      "id": "E-NETWORK-DISCOVERY-TESTS",
+      "path": "tests/test_network_discovery.py",
+      "role": "ONVIF_LAN_discovery_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "e3bbef0244c6c08aa7aec0febc6f09e0a4940084"
+      }
+    },
+    {
+      "id": "E-NETWORK-PTZ",
+      "path": "src/dlf_flywire/network_ptz.py",
+      "role": "read_only_ONVIF_PTZ_probe",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "def9637aaaa9d459b5619dd483f82c835534a0aa"
+      }
+    },
+    {
+      "id": "E-NETWORK-PTZ-CLI-TESTS",
+      "path": "tests/test_network_ptz_cli.py",
+      "role": "ONVIF_PTZ_probe_cli_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "b370275af18f680f4a34e399b857c2bed57b9098"
+      }
+    },
+    {
+      "id": "E-NETWORK-PTZ-TESTS",
+      "path": "tests/test_network_ptz.py",
+      "role": "ONVIF_PTZ_probe_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "967230125714cd127a762bb11e13019fac919ec2"
+      }
+    },
+    {
+      "id": "E-NEURAL-GATEWAY",
+      "path": "src/dlf_flywire/neural_gateway.py",
+      "role": "bounded_neural_intent_gateway",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "cc49a75a01b1a44cec50e91e8583eba630b12c90"
+      }
+    },
+    {
+      "id": "E-NEURAL-GATEWAY-TESTS",
+      "path": "tests/test_neural_gateway.py",
+      "role": "neural_boundary_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "c633648581376776fe43b7c933082e1eddef9032"
+      }
+    },
+    {
+      "id": "E-NEURAL-LEADER",
+      "path": "src/dlf_flywire/neural_leader.py",
+      "role": "neural_to_leader_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "353690d26755e6061adf49e124cca0f93c431e63"
+      }
+    },
+    {
+      "id": "E-NEURAL-LEADER-INTEGRATION-TEST",
+      "path": "tests/test_neural_leader_integration.py",
+      "role": "neural_to_code_hand_integration_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "816d42cd1975d52ee75b111635498ed51d8324e6"
+      }
+    },
+    {
+      "id": "E-NEURAL-MAPPING",
+      "path": "evidence/neural_mapping_stage_b.json",
+      "role": "evidence_backed_neural_subtype_mapping",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "48ecf372884a5756b3acd8d348d8db6da6088537"
+      }
+    },
+    {
+      "id": "E-NEURAL-MAPPING-DECODER",
+      "path": "src/dlf_flywire/neural_mapping.py",
+      "role": "evidence_backed_neural_functional_decoder",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "d31145c581a60eaed3ba8100f1d7194e362df5be"
+      }
+    },
+    {
+      "id": "E-NEURAL-MAPPING-DECODER-TESTS",
+      "path": "tests/test_neural_mapping_decoder.py",
+      "role": "neural_mapping_decoder_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "c303d3a538f4869ea8bac696cff16e07469c082c"
+      }
+    },
+    {
+      "id": "E-NEURAL-MAPPING-TESTS",
+      "path": "tests/test_neural_mapping.py",
+      "role": "neural_mapping_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "68697fff46af94c072fd68972c5fb38b03fd6388"
+      }
+    },
+    {
+      "id": "E-ORCHESTRATOR",
+      "path": "src/dlf_flywire/orchestrator.py",
+      "role": "leader_task_orchestrator",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "b67dcc4544f825df87a36eab9eaedbeb2bac19e4"
+      }
+    },
+    {
+      "id": "E-ORCHESTRATOR-TESTS",
+      "path": "tests/test_orchestrator.py",
+      "role": "leader_orchestration_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "bec5be671d95399cf1828e57eda9c0c6ca23cdab"
+      }
+    },
+    {
+      "id": "E-PACKAGE-INIT",
+      "path": "src/dlf_flywire/__init__.py",
+      "role": "project_version",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "3c1e9cbd302a4df7ac0ee47e577f5c5895b69e1a"
       }
     },
     {
@@ -142,48 +565,282 @@
       }
     },
     {
-      "id": "E-MORPHOLOGY",
-      "path": "evidence/morphology_provenance.json",
-      "role": "morphology_provenance",
+      "id": "E-POINTDATA-CONNECTIVITY-BRIDGE",
+      "path": "evidence/point_data_connectivity_bridge.json",
+      "role": "v230_point_data_anchor_bridge",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "ebec78b2e3db356b425e4aeda6c854c7dcc34f20"
+        "value": "cb4d2a278ae9bfeda5e5515fc73e62d29a918950"
       }
     },
     {
-      "id": "E-COORDINATE",
-      "path": "evidence/coordinate_provenance.json",
-      "role": "coordinate_provenance",
+      "id": "E-POINTDATA-CONTEMPORANEOUS-GEOJAX-CONSUMER",
+      "path": "evidence/contemporaneous_pointdata_geojax_consumer.json",
+      "role": "same_week_pointdata_geojax_consumer_bridge",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "db2d794ffb3ccb741433b6abd752e1de06e40d80"
+        "value": "5ad98d6f2d993564bcc932e40df27989dd97cc93"
       }
     },
     {
-      "id": "E-SOURCE-RECEIPTS",
-      "path": "evidence/source_receipts.json",
-      "role": "frozen_cross_source_receipts",
+      "id": "E-POINTDATA-DAG-BOUNDARY",
+      "path": "evidence/public_point_data_ingest_boundary.json",
+      "role": "public_git_dag_point_data_ingest_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "cc92b88dcbf08800e959cffe9e8a4d03a9d53dda"
+        "value": "2bdd011ea602213cd369d8281dc4a38d4ddac6af"
       }
     },
     {
-      "id": "E-CONNECTIVITY",
-      "path": "evidence/connectivity.json",
-      "role": "connectivity_evidence",
+      "id": "E-POINTDATA-DECODE",
+      "path": "evidence/point_data_pickle_decode_receipt.json",
+      "role": "exact_id_point_data_decode_and_serialization_receipt",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "f0d13232cf0bd94c465f9de7f5ba250917c9c7d6"
+        "value": "665c7937b41c1b4bfe86903a55c6981b7952c074"
       }
     },
     {
-      "id": "E-STRUCTURAL-VALIDATION",
-      "path": "evidence/structural_validation.json",
-      "role": "synapse_structure_validation",
+      "id": "E-POINTDATA-EVDIR-ANCHORS",
+      "path": "evidence/point_data_evdir_anchor_vectors.json",
+      "role": "historical_point_data_evdir_anchor_vectors",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "1581aa92f506a3264ef708dddcb1de90f6c1f326"
+        "value": "f729e4fe6cf6208dd23b365b09b2c01cfde8a958"
+      }
+    },
+    {
+      "id": "E-POINTDATA-EVDIR-AUDIT-SCRIPT",
+      "path": "scripts/audit_point_data_evdir.py",
+      "role": "historical_evdir_axis_and_subtype_rule_audit",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "8fcfca3cac19f6db41d16c15936bfe26fb8e49e2"
+      }
+    },
+    {
+      "id": "E-POINTDATA-EVDIR-AXIS-CONVENTION-RECEIPT",
+      "path": "evidence/point_data_evdir_axis_convention_receipt.json",
+      "role": "historical_evdir_six_convention_axis_comparison_receipt",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "9ab412dc770882da02a7c08d61fa3046dee01209"
+      }
+    },
+    {
+      "id": "E-POINTDATA-EVDIR-LIFECYCLE",
+      "path": "evidence/point_data_evdir_legacy_lifecycle.json",
+      "role": "historical_evdir_column_lifecycle",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "2a828b751fb8805e9af9cf197fd8e53d5d649820"
+      }
+    },
+    {
+      "id": "E-POINTDATA-EVDIR-PC-AXIS-HYPOTHESIS",
+      "path": "evidence/point_data_evdir_pc_axis_hypothesis.json",
+      "role": "subtype_dependent_historical_evdir_angle_hypothesis",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "ac9736d4370bbe548ab9807dc147a186b3394fb4"
+      }
+    },
+    {
+      "id": "E-POINTDATA-EVDIR-PC-AXIS-HYPOTHESIS-TEST",
+      "path": "tests/test_evdir_pc_axis_hypothesis.py",
+      "role": "regression_test_for_evdir_hypothesis_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "7f82985b5bdba27ce756ee4231ac4c36c93f7059"
+      }
+    },
+    {
+      "id": "E-POINTDATA-EVDIR-STRUCTURE",
+      "path": "evidence/point_data_evdir_structure.json",
+      "role": "historical_subtype_evdir_structure",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "47efb4ab2229fa39c40306619fc3a6629915d042"
+      }
+    },
+    {
+      "id": "E-POINTDATA-EXACT-BLOB-CONSUMER",
+      "path": "evidence/exact_pointdata_blob_consumer_binding.json",
+      "role": "exact_historical_pointdata_blob_consumer_binding",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "bce05f14f9461f65821a9a013742891efe3f43ee"
+      }
+    },
+    {
+      "id": "E-POINTDATA-GEOJAX-PREARTIFACT",
+      "path": "evidence/public_geojax_preartifact_jax_pca.json",
+      "role": "pre_artifact_public_geojax_jax_pca_lineage",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "ac0ae5aca76e4343fea4bdb2396eca972ad839c1"
+      }
+    },
+    {
+      "id": "E-POINTDATA-JAX-SERIALIZER",
+      "path": "evidence/point_data_jax_serializer_compatibility.json",
+      "role": "historical_jax_serializer_contract_compatibility",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "aea737a522fbf7db62815c197c6be490eef1f7bf"
+      }
+    },
+    {
+      "id": "E-POINTDATA-JAX-SERIALIZER-RELEASE-FAMILY",
+      "path": "evidence/point_data_jax_serializer_release_family.json",
+      "role": "jax_release_family_serializer_compatibility",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "f79fcd755321fbd499bc73b6b0f0bcdd1c169a9f"
+      }
+    },
+    {
+      "id": "E-POINTDATA-LEGACY-PCA",
+      "path": "evidence/legacy_public_pca_implementation.json",
+      "role": "pre_artifact_legacy_neurosetta_pca_implementation",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "48287ae391872efe146f6fb417c1dbb4588d40bb"
+      }
+    },
+    {
+      "id": "E-POINTDATA-MORPHOLOGY-CROSSCHECK",
+      "path": "evidence/point_data_morphology_crosscheck.json",
+      "role": "historical_point_data_morphology_metric_crosscheck",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "d4fea8bf7d76cca4883ea7275abd723bf9bf6774"
+      }
+    },
+    {
+      "id": "E-POINTDATA-NEUROSETTA-PCA-TIMELINE",
+      "path": "evidence/public_neurosetta_geometry_timeline.json",
+      "role": "current_public_neurosetta_pca_source_timeline",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "1a2c3a56cbb566516311b6cfc738417f05a998cc"
+      }
+    },
+    {
+      "id": "E-POINTDATA-PICKLE-GLOBALS",
+      "path": "evidence/point_data_pickle_globals_receipt.json",
+      "role": "byte_level_historical_point_data_pickle_globals",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "25e290d60c36c16bb4e44821d3c3ea31d311fa3f"
+      }
+    },
+    {
+      "id": "E-POINTDATA-PUBLIC-FILE-HISTORY",
+      "path": "evidence/point_data_historical_path_history.json",
+      "role": "historical_public_point_data_file_history",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "e0efda55826bb476ba01808d4921ec12704da59c"
+      }
+    },
+    {
+      "id": "E-POINTDATA-PUBLIC-GENERATOR-GAP",
+      "path": "evidence/point_data_public_generator_gap.json",
+      "role": "public_metrics_generator_gap",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "9723e2e867708c6d01edb63a82b7b4ea0c0f183e"
+      }
+    },
+    {
+      "id": "E-POINTDATA-PUBLIC-METRICS1-PIPELINE",
+      "path": "evidence/public_metrics1_pipeline_snapshot.json",
+      "role": "exact_public_metrics1_pipeline_parameters",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "b75f6aace4d80e42b2fb278cd256944555bc3068"
+      }
+    },
+    {
+      "id": "E-POINTDATA-REVISION-CANDIDATES",
+      "path": "evidence/point_data_revision_candidate_matrix.json",
+      "role": "point_data_revision_candidate_matrix",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "97ca1e7d41b68c48a7e81897840d08b374d2940b"
+      }
+    },
+    {
+      "id": "E-POINTDATA-SAME-COMMIT-CONSUMER",
+      "path": "evidence/public_point_data_consumer_boundary.json",
+      "role": "same_commit_point_data_public_consumer_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "988966cf49296f1c909bdca2b1301924f2434b16"
+      }
+    },
+    {
+      "id": "E-POINTDATA-SUBTYPE-EVDIR-SEARCH",
+      "path": "evidence/public_subtype_evdir_search.json",
+      "role": "bounded_public_code_search_negative",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "175bf1eaaacbd404b43a0cd66a0a643260aafcfb"
+      }
+    },
+    {
+      "id": "E-POINTDATA-VERSION-DELTA",
+      "path": "evidence/point_data_version_delta.json",
+      "role": "historical_vs_zenodo_point_data_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "a00dbf2d62ba5976d9c2b90bd692f2dc30d2b636"
+      }
+    },
+    {
+      "id": "E-POLICY",
+      "path": "src/dlf_flywire/policy.py",
+      "role": "execution_policy_gate",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "0bc0d507ab25ebfaadb368585ae82087dfdebf83"
+      }
+    },
+    {
+      "id": "E-PROVENANCE-CODE",
+      "path": "src/dlf_flywire/provenance.py",
+      "role": "audit_engine",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "4852ddbf73944746c30a30f369171da2ff6e3f1f"
+      }
+    },
+    {
+      "id": "E-PUBLIC-COORDINATE-PIPELINE-BOUNDARY",
+      "path": "evidence/public_coordinate_pipeline_boundary.json",
+      "role": "public_coordinate_pipeline_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "66f2eb9be945426d60e1201b5ccfa5b5b620b49e"
+      }
+    },
+    {
+      "id": "E-PUBLISHED-METHOD-BOUNDARY",
+      "path": "evidence/public_method_boundary.json",
+      "role": "published_method_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "854c1f744b4247b5cc5ee3f7f6997b8b258f9fbe"
+      }
+    },
+    {
+      "id": "E-PYPROJECT",
+      "path": "pyproject.toml",
+      "role": "project_metadata",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "8cc334adf8c4ac5657372bc0bcbe4dccc1206cec"
       }
     },
     {
@@ -196,6 +853,33 @@
       }
     },
     {
+      "id": "E-ROOT-COORD-COMP",
+      "path": "evidence/root_coordinate_comparison.json",
+      "role": "root_coordinate_direct_comparison",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "900a318ab7ec21107845c0f014ec7f17b5c2e8b3"
+      }
+    },
+    {
+      "id": "E-SOURCE-RECEIPTS",
+      "path": "evidence/source_receipts.json",
+      "role": "frozen_cross_source_receipts",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "cc92b88dcbf08800e959cffe9e8a4d03a9d53dda"
+      }
+    },
+    {
+      "id": "E-STRUCTURAL-VALIDATION",
+      "path": "evidence/structural_validation.json",
+      "role": "synapse_structure_validation",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "1581aa92f506a3264ef708dddcb1de90f6c1f326"
+      }
+    },
+    {
       "id": "E-STRUCTURE",
       "path": "evidence/structural_snapshot.json",
       "role": "connectome_structure",
@@ -205,31 +889,12 @@
       }
     },
     {
-      "id": "E-SYNAPSES",
-      "path": "evidence/synapses.csv",
-      "role": "canonical_synapses",
+      "id": "E-SUBTREE",
+      "path": "evidence/dendrite_subtree_mapping.json",
+      "role": "subtree_reproduction",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "507fc706cc29781457ed502ae0ebdf328a4bae33"
-      },
-      "content_sha256": "1eb87ae427dacc21528ce7a105ab021babd6dc10138f526f49678cf357172d5b"
-    },
-    {
-      "id": "E-SYNAPSE-LINEAGE",
-      "path": "evidence/synapse_lineage.json",
-      "role": "record_level_synapse_lineage",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "538aa6c1aad6d882092d082fae2b6433a6e2095c"
-      }
-    },
-    {
-      "id": "E-BUILD-SYNAPSE-LINEAGE",
-      "path": "scripts/build_synapse_lineage.py",
-      "role": "lineage_builder",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "c468f70de28d590197e29e5e31e772370f06a51e"
+        "value": "5eeba75fa5e2f9442ca08bfc9c9e9518a0f017fc"
       }
     },
     {
@@ -273,184 +938,23 @@
       "content_sha256": "83b287e914522b0b382e3e46d39ced36494ff257d835cac11d7f4243ae1d7745"
     },
     {
-      "id": "E-LINEAGE-REGEN-TEST",
-      "path": "tests/test_provenance.py",
-      "role": "lineage_regeneration_regression",
+      "id": "E-SYNAPSE-LINEAGE",
+      "path": "evidence/synapse_lineage.json",
+      "role": "record_level_synapse_lineage",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "faefdeb0a5fff00355f0f16477deda3897ebbbba"
+        "value": "538aa6c1aad6d882092d082fae2b6433a6e2095c"
       }
     },
     {
-      "id": "E-ROOT-COORD-COMP",
-      "path": "evidence/root_coordinate_comparison.json",
-      "role": "root_coordinate_direct_comparison",
+      "id": "E-SYNAPSES",
+      "path": "evidence/synapses.csv",
+      "role": "canonical_synapses",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "900a318ab7ec21107845c0f014ec7f17b5c2e8b3"
-      }
-    },
-    {
-      "id": "E-LEGACY-NEUROSETTA",
-      "path": "evidence/legacy_neurosetta_context.json",
-      "role": "historical_legacy_toolchain_context",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "818d87cf38dc175f7b5f937aa9974b064a607d92"
-      }
-    },
-    {
-      "id": "E-HISTORICAL-SOFTWARE",
-      "path": "evidence/historical_software_release.json",
-      "role": "earliest_public_software_release_snapshot",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "3cb892f6c72caa25695b241f0173d2c3a3b1f6d4"
-      }
-    },
-    {
-      "id": "E-POINTDATA-MORPHOLOGY-CROSSCHECK",
-      "path": "evidence/point_data_morphology_crosscheck.json",
-      "role": "historical_point_data_morphology_metric_crosscheck",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "d4fea8bf7d76cca4883ea7275abd723bf9bf6774"
-      }
-    },
-    {
-      "id": "E-PUBLISHED-METHOD-BOUNDARY",
-      "path": "evidence/public_method_boundary.json",
-      "role": "published_method_boundary",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "854c1f744b4247b5cc5ee3f7f6997b8b258f9fbe"
-      }
-    },
-    {
-      "id": "E-HISTORICAL-NEUROSETTA-LINEAGE",
-      "path": "evidence/historical_neurosetta_lineage_context.json",
-      "role": "pre_artifact_software_family_context",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "83149aa1e88174289c86a73ba094ba71ff5f1102"
-      }
-    },
-    {
-      "id": "E-GLOBAL-ALIGNMENT-BOUNDARY",
-      "path": "evidence/global_alignment_boundary.json",
-      "role": "published_global_alignment_boundary",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "3b0247125008e533b8b906ece2e44b12c2973218"
-      }
-    },
-    {
-      "id": "E-POINTDATA-CONNECTIVITY-BRIDGE",
-      "path": "evidence/point_data_connectivity_bridge.json",
-      "role": "v230_point_data_anchor_bridge",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "cb4d2a278ae9bfeda5e5515fc73e62d29a918950"
-      }
-    },
-    {
-      "id": "E-ZENODO-SUBMISSION-BOUNDARY",
-      "path": "evidence/zenodo_submission_release_boundary.json",
-      "role": "archived_release_content_boundary",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "faf9a0fa2233886295a720a6f53ecb8270b01220"
-      }
-    },
-    {
-      "id": "E-PUBLIC-COORDINATE-PIPELINE-BOUNDARY",
-      "path": "evidence/public_coordinate_pipeline_boundary.json",
-      "role": "public_coordinate_pipeline_boundary",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "66f2eb9be945426d60e1201b5ccfa5b5b620b49e"
-      }
-    },
-    {
-      "id": "E-CAPABILITIES",
-      "path": "src/dlf_flywire/capabilities.py",
-      "role": "capability_doctor_engine",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "7c6f724ce0ed5c769b8c1eef5b717a6e27384565"
-      }
-    },
-    {
-      "id": "E-CAPABILITY-TESTS",
-      "path": "tests/test_capabilities.py",
-      "role": "capability_doctor_regression",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "adc8a3f9ba048a7f59467627266d7770d2b9ba15"
-      }
-    },
-    {
-      "id": "E-EXECUTION",
-      "path": "src/dlf_flywire/execution.py",
-      "role": "execution_checkpoint_recovery_engine",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "af1f6c049eb36f18adb897a58cbac592ab17ede2"
-      }
-    },
-    {
-      "id": "E-EXECUTION-TESTS",
-      "path": "tests/test_execution.py",
-      "role": "execution_recovery_regression",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "e9f9d629c5cb99921e0e3fdf406c4d7b7ab34376"
-      }
-    },
-    {
-      "id": "E-POLICY",
-      "path": "src/dlf_flywire/policy.py",
-      "role": "execution_policy_gate",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "0bc0d507ab25ebfaadb368585ae82087dfdebf83"
-      }
-    },
-    {
-      "id": "E-ORCHESTRATOR",
-      "path": "src/dlf_flywire/orchestrator.py",
-      "role": "leader_task_orchestrator",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "b67dcc4544f825df87a36eab9eaedbeb2bac19e4"
-      }
-    },
-    {
-      "id": "E-ORCHESTRATOR-TESTS",
-      "path": "tests/test_orchestrator.py",
-      "role": "leader_orchestration_regression",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "bec5be671d95399cf1828e57eda9c0c6ca23cdab"
-      }
-    },
-    {
-      "id": "E-CODE-HAND",
-      "path": "src/dlf_flywire/code_hand.py",
-      "role": "code_hand_capability",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "cfd470effffa003fb3432feda46b75d8a3b90f40"
-      }
-    },
-    {
-      "id": "E-CODE-HAND-TESTS",
-      "path": "tests/test_code_hand.py",
-      "role": "code_hand_regression",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "ed89109127f50a9c8f76f7fb9518220bdb620868"
-      }
+        "value": "507fc706cc29781457ed502ae0ebdf328a4bae33"
+      },
+      "content_sha256": "1eb87ae427dacc21528ce7a105ab021babd6dc10138f526f49678cf357172d5b"
     },
     {
       "id": "E-VERIFIER",
@@ -471,516 +975,21 @@
       }
     },
     {
-      "id": "E-NEURAL-GATEWAY",
-      "path": "src/dlf_flywire/neural_gateway.py",
-      "role": "bounded_neural_intent_gateway",
+      "id": "E-VERSION",
+      "path": "VERSION",
+      "role": "project_version",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "cc49a75a01b1a44cec50e91e8583eba630b12c90"
+        "value": "943f9cbc4ec7ee28e6febd1d4451df4c39bcb193"
       }
     },
     {
-      "id": "E-NEURAL-LEADER",
-      "path": "src/dlf_flywire/neural_leader.py",
-      "role": "neural_to_leader_boundary",
+      "id": "E-ZENODO-SUBMISSION-BOUNDARY",
+      "path": "evidence/zenodo_submission_release_boundary.json",
+      "role": "archived_release_content_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "353690d26755e6061adf49e124cca0f93c431e63"
-      }
-    },
-    {
-      "id": "E-NEURAL-GATEWAY-TESTS",
-      "path": "tests/test_neural_gateway.py",
-      "role": "neural_boundary_regression",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "c633648581376776fe43b7c933082e1eddef9032"
-      }
-    },
-    {
-      "id": "E-NEURAL-LEADER-INTEGRATION-TEST",
-      "path": "tests/test_neural_leader_integration.py",
-      "role": "neural_to_code_hand_integration_regression",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "816d42cd1975d52ee75b111635498ed51d8324e6"
-      }
-    },
-    {
-      "id": "E-FLYDRONES-INTEGRATION-RECEIPT",
-      "path": "evidence/flydrones_integration_receipt.json",
-      "role": "external_flydrones_integration_receipt",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "b370e3abc47de3fad365f8e35f7b7f7408476fb3"
-      }
-    },
-    {
-      "id": "E-FLYDRONES-INTEGRATION-RECEIPT-2",
-      "path": "evidence/flydrones_integration_receipt_2.json",
-      "role": "external_flydrones_full_source_provenance_receipt",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "e13a97ce5836082fc861511579cfd92688f7538b"
-      }
-    },
-    {
-      "id": "E-NEURAL-MAPPING",
-      "path": "evidence/neural_mapping_stage_b.json",
-      "role": "evidence_backed_neural_subtype_mapping",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "48ecf372884a5756b3acd8d348d8db6da6088537"
-      }
-    },
-    {
-      "id": "E-NEURAL-MAPPING-TESTS",
-      "path": "tests/test_neural_mapping.py",
-      "role": "neural_mapping_regression",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "68697fff46af94c072fd68972c5fb38b03fd6388"
-      }
-    },
-    {
-      "id": "E-NEURAL-MAPPING-DECODER",
-      "path": "src/dlf_flywire/neural_mapping.py",
-      "role": "evidence_backed_neural_functional_decoder",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "d31145c581a60eaed3ba8100f1d7194e362df5be"
-      }
-    },
-    {
-      "id": "E-NEURAL-MAPPING-DECODER-TESTS",
-      "path": "tests/test_neural_mapping_decoder.py",
-      "role": "neural_mapping_decoder_regression",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "c303d3a538f4869ea8bac696cff16e07469c082c"
-      }
-    },
-    {
-      "id": "E-FLYVIS-ADAPTER",
-      "path": "src/dlf_flywire/flyvis_adapter.py",
-      "role": "continuous_model_response_adapter",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "9268ed4f2117607c61c09272679a38d1847d237c"
-      }
-    },
-    {
-      "id": "E-FLYVIS-ADAPTER-TESTS",
-      "path": "tests/test_flyvis_adapter.py",
-      "role": "continuous_model_response_regression",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "7b068f826df11b4a82646386d415ac73508c9ea1"
-      }
-    },
-    {
-      "id": "E-FLYVIS-ACTIVITY-BOUNDARY",
-      "path": "docs/FLYVIS_ACTIVITY_BOUNDARY.md",
-      "role": "continuous_model_response_scientific_boundary",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "970ca6019579b2e3718754002c76a6a80d01da9e"
-      }
-    },
-    {
-      "id": "E-FLYVIS-RUNTIME",
-      "path": "src/dlf_flywire/flyvis_runtime.py",
-      "role": "real_FlyVis_runtime_contract",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "26dbdbb52f09aaba32842683cd44d4cdafbfb253"
-      }
-    },
-    {
-      "id": "E-FLYVIS-RUNTIME-SMOKE",
-      "path": "scripts/flyvis_integration_smoke.py",
-      "role": "real_FlyVis_runtime_smoke",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "a3a7c7f96a7ec0220752ad08ab17fdf259381c8f"
-      }
-    },
-    {
-      "id": "E-FLYVIS-RUNTIME-TESTS",
-      "path": "tests/test_flyvis_runtime.py",
-      "role": "real_FlyVis_runtime_regression",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "68bac4fc91e5a1f350699291efee34bf01f906e3"
-      }
-    },
-    {
-      "id": "E-FLYVIS-WORKFLOW",
-      "path": ".github/workflows/flyvis-integration.yml",
-      "role": "real_FlyVis_integration_workflow",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "706f3a7ed92505ba2c4d951051c9fb1a028fb8da"
-      }
-    },
-    {
-      "id": "E-FLYVIS-RUNTIME-RECEIPT",
-      "path": "evidence/flyvis_integration_receipt.json",
-      "role": "real_FlyVis_runtime_proof_receipt",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "5d1208e9296cb57175d14cd5771de1df86ee251d"
-      }
-    },
-    {
-      "id": "E-LEGACY-JAX-CONTEXT",
-      "path": "evidence/legacy_jax_geometry_context.json",
-      "role": "contextual_legacy_jax_geometry_compatibility",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "e105d9f5804103cc704c0f9d261d57dd43045580"
-      }
-    },
-    {
-      "id": "E-HISTORICAL-PP3-LATER-RECONSTRUCTION",
-      "path": "evidence/historical_pp3_later_reconstruction_receipt.json",
-      "role": "later_public_pp3_execution_receipt",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "d16848cbc34fac2bb1c503809964a11a3b501eed"
-      }
-    },
-    {
-      "id": "E-GITHUB-PLATFORM-AUDIT",
-      "path": "evidence/github_platform_october_2026_audit.json",
-      "role": "live_github_platform_feature_and_state_audit",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "899ba72e94fe3695d3e9e8188aa434c0957ef9c8"
-      }
-    },
-    {
-      "id": "E-POINTDATA-PUBLIC-GENERATOR-GAP",
-      "path": "evidence/point_data_public_generator_gap.json",
-      "role": "public_metrics_generator_gap",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "9723e2e867708c6d01edb63a82b7b4ea0c0f183e"
-      }
-    },
-    {
-      "id": "E-POINTDATA-REVISION-CANDIDATES",
-      "path": "evidence/point_data_revision_candidate_matrix.json",
-      "role": "point_data_revision_candidate_matrix",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "97ca1e7d41b68c48a7e81897840d08b374d2940b"
-      }
-    },
-    {
-      "id": "E-POINTDATA-EVDIR-ANCHORS",
-      "path": "evidence/point_data_evdir_anchor_vectors.json",
-      "role": "historical_point_data_evdir_anchor_vectors",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "f729e4fe6cf6208dd23b365b09b2c01cfde8a958"
-      }
-    },
-    {
-      "id": "E-POINTDATA-EVDIR-LIFECYCLE",
-      "path": "evidence/point_data_evdir_legacy_lifecycle.json",
-      "role": "historical_evdir_column_lifecycle",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "2a828b751fb8805e9af9cf197fd8e53d5d649820"
-      }
-    },
-    {
-      "id": "E-NETWORK-CAMERA",
-      "path": "src/dlf_flywire/network_camera.py",
-      "role": "bounded_RTSP_network_camera_adapter",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "7fd29e75dd7bd821edceb96da941eaad7aca4c01"
-      }
-    },
-    {
-      "id": "E-NETWORK-CAMERA-OBSERVED",
-      "path": "evidence/network_camera_flyvis_windows_receipt.json",
-      "role": "sanitized_physical_network_camera_execution_receipt",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "dcb6a917f3cbaa20978be1818b607e0c73f7baee"
-      }
-    },
-    {
-      "id": "E-NETWORK-CAMERA-TESTS",
-      "path": "tests/test_network_camera.py",
-      "role": "RTSP_network_camera_regression",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "afa893d08e9954b236ed82a928cfc8a6ccdfdb8a"
-      }
-    },
-    {
-      "id": "E-NETWORK-CAMERA-CLI-TESTS",
-      "path": "tests/test_network_camera_cli.py",
-      "role": "RTSP_network_camera_cli_regression",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "e34bcabc364a3c459edf8cfd877b267ae62c3bc6"
-      }
-    },
-    {
-      "id": "E-NETWORK-PTZ",
-      "path": "src/dlf_flywire/network_ptz.py",
-      "role": "read_only_ONVIF_PTZ_probe",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "def9637aaaa9d459b5619dd483f82c835534a0aa"
-      }
-    },
-    {
-      "id": "E-NETWORK-PTZ-TESTS",
-      "path": "tests/test_network_ptz.py",
-      "role": "ONVIF_PTZ_probe_regression",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "967230125714cd127a762bb11e13019fac919ec2"
-      }
-    },
-    {
-      "id": "E-NETWORK-PTZ-CLI-TESTS",
-      "path": "tests/test_network_ptz_cli.py",
-      "role": "ONVIF_PTZ_probe_cli_regression",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "b370275af18f680f4a34e399b857c2bed57b9098"
-      }
-    },
-    {
-      "id": "E-CAMERA-FLYVIS",
-      "path": "src/dlf_flywire/camera_flyvis.py",
-      "role": "physical_camera_to_FlyVis_pipeline",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "4d953b26efb1390ae016ce5c137a5b5ed7d058bc"
-      }
-    },
-    {
-      "id": "E-NETWORK-DISCOVERY",
-      "path": "src/dlf_flywire/network_discovery.py",
-      "role": "read_only_ONVIF_LAN_discovery",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "67642ea6427c2361a925d173c42f515f9c74969f"
-      }
-    },
-    {
-      "id": "E-NETWORK-DISCOVERY-TESTS",
-      "path": "tests/test_network_discovery.py",
-      "role": "ONVIF_LAN_discovery_regression",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "e3bbef0244c6c08aa7aec0febc6f09e0a4940084"
-      }
-    },
-    {
-      "id": "E-NETWORK-CAMERA-LAUNCHER",
-      "path": "scripts/Run-Network-Camera-FlyVis.ps1",
-      "role": "double_click_network_camera_launcher",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "006957b8a74d3d2746472a2a30fc3f4513c34e21"
-      }
-    },
-    {
-      "id": "E-NETWORK-CAMERA-BAT",
-      "path": "scripts/Run-Network-Camera-FlyVis.bat",
-      "role": "double_click_batch_launcher",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "d2a81a69e329295c9eed0cad3867781d34de1cad"
-      }
-    },
-    {
-      "id": "E-CAMERA-LAUNCHER-TESTS",
-      "path": "tests/test_camera_launcher.py",
-      "role": "camera_launcher_regression",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "c48e1c66f594760c86661776e77534c5edde536a"
-      }
-    },
-    {
-      "id": "E-FIRST-TIME-BOOTSTRAP",
-      "path": "Run-Uho-S2E-First-Time.bat",
-      "role": "first_time_github_bootstrap",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "853451f2cfc5f00cbe9bc432c14eb8bba9726734"
-      }
-    },
-    {
-      "id": "E-FIRST-TIME-BOOTSTRAP-TEST",
-      "path": "tests/test_first_time_bootstrap.py",
-      "role": "first_time_bootstrap_regression",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "40e51b9e5499ab295b1962e8eee25ad32abd05e1"
-      }
-    },
-    {
-      "id": "E-POINTDATA-DAG-BOUNDARY",
-      "path": "evidence/public_point_data_ingest_boundary.json",
-      "role": "public_git_dag_point_data_ingest_boundary",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "2bdd011ea602213cd369d8281dc4a38d4ddac6af"
-      }
-    },
-    {
-      "id": "E-POINTDATA-PICKLE-GLOBALS",
-      "path": "evidence/point_data_pickle_globals_receipt.json",
-      "role": "byte_level_historical_point_data_pickle_globals",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "25e290d60c36c16bb4e44821d3c3ea31d311fa3f"
-      }
-    },
-    {
-      "id": "E-POINTDATA-JAX-SERIALIZER",
-      "path": "evidence/point_data_jax_serializer_compatibility.json",
-      "role": "historical_jax_serializer_contract_compatibility",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "aea737a522fbf7db62815c197c6be490eef1f7bf"
-      }
-    },
-    {
-      "id": "E-POINTDATA-JAX-SERIALIZER-RELEASE-FAMILY",
-      "path": "evidence/point_data_jax_serializer_release_family.json",
-      "role": "jax_release_family_serializer_compatibility",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "f79fcd755321fbd499bc73b6b0f0bcdd1c169a9f"
-      }
-    },
-    {
-      "id": "E-POINTDATA-SUBTYPE-EVDIR-SEARCH",
-      "path": "evidence/public_subtype_evdir_search.json",
-      "role": "bounded_public_code_search_negative",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "175bf1eaaacbd404b43a0cd66a0a643260aafcfb"
-      }
-    },
-    {
-      "id": "E-POINTDATA-EVDIR-STRUCTURE",
-      "path": "evidence/point_data_evdir_structure.json",
-      "role": "historical_subtype_evdir_structure",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "47efb4ab2229fa39c40306619fc3a6629915d042"
-      }
-    },
-    {
-      "id": "E-POINTDATA-PUBLIC-METRICS1-PIPELINE",
-      "path": "evidence/public_metrics1_pipeline_snapshot.json",
-      "role": "exact_public_metrics1_pipeline_parameters",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "b75f6aace4d80e42b2fb278cd256944555bc3068"
-      }
-    },
-    {
-      "id": "E-POINTDATA-LEGACY-PCA",
-      "path": "evidence/legacy_public_pca_implementation.json",
-      "role": "pre_artifact_legacy_neurosetta_pca_implementation",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "48287ae391872efe146f6fb417c1dbb4588d40bb"
-      }
-    },
-    {
-      "id": "E-POINTDATA-SAME-COMMIT-CONSUMER",
-      "path": "evidence/public_point_data_consumer_boundary.json",
-      "role": "same_commit_point_data_public_consumer_boundary",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "988966cf49296f1c909bdca2b1301924f2434b16"
-      }
-    },
-    {
-      "id": "E-POINTDATA-GEOJAX-PREARTIFACT",
-      "path": "evidence/public_geojax_preartifact_jax_pca.json",
-      "role": "pre_artifact_public_geojax_jax_pca_lineage",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "ac0ae5aca76e4343fea4bdb2396eca972ad839c1"
-      }
-    },
-    {
-      "id": "E-POINTDATA-CONTEMPORANEOUS-GEOJAX-CONSUMER",
-      "path": "evidence/contemporaneous_pointdata_geojax_consumer.json",
-      "role": "same_week_pointdata_geojax_consumer_bridge",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "5ad98d6f2d993564bcc932e40df27989dd97cc93"
-      }
-    },
-    {
-      "id": "E-POINTDATA-EXACT-BLOB-CONSUMER",
-      "path": "evidence/exact_pointdata_blob_consumer_binding.json",
-      "role": "exact_historical_pointdata_blob_consumer_binding",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "bce05f14f9461f65821a9a013742891efe3f43ee"
-      }
-    },
-    {
-      "id": "E-POINTDATA-EVDIR-PC-AXIS-HYPOTHESIS",
-      "path": "evidence/point_data_evdir_pc_axis_hypothesis.json",
-      "role": "subtype_dependent_historical_evdir_angle_hypothesis",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "ac9736d4370bbe548ab9807dc147a186b3394fb4"
-      }
-    },
-    {
-      "id": "E-POINTDATA-EVDIR-PC-AXIS-HYPOTHESIS-TEST",
-      "path": "tests/test_evdir_pc_axis_hypothesis.py",
-      "role": "regression_test_for_evdir_hypothesis_boundary",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "25e0b011376c90a26373ae58b9418c9231725604"
-      }
-    },
-    {
-      "id": "E-POINTDATA-EVDIR-AUDIT-SCRIPT",
-      "path": "scripts/audit_point_data_evdir.py",
-      "role": "historical_evdir_axis_and_subtype_rule_audit",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "8fcfca3cac19f6db41d16c15936bfe26fb8e49e2"
-      }
-    },
-    {
-      "id": "E-POINTDATA-EVDIR-AXIS-CONVENTION-RECEIPT",
-      "path": "evidence/point_data_evdir_axis_convention_receipt.json",
-      "role": "historical_evdir_six_convention_axis_comparison_receipt",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "9ab412dc770882da02a7c08d61fa3046dee01209"
-      }
-    },
-    {
-      "id": "E-POINTDATA-PUBLIC-FILE-HISTORY",
-      "path": "evidence/point_data_historical_path_history.json",
-      "role": "historical_public_point_data_file_history",
-      "identity": {
-        "type": "git_blob_sha1",
-        "value": "e0efda55826bb476ba01808d4921ec12704da59c"
+        "value": "faf9a0fa2233886295a720a6f53ecb8270b01220"
       }
     }
   ]
