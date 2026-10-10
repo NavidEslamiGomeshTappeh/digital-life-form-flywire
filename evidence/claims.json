@@ -522,6 +522,20 @@
         "This proves exact artifact consumption by the contemporaneous public notebook.",
         "It does not recover the producer of the artifact or prove the algorithm that created PC1/PC2/PC3."
       ]
+    },
+    {
+      "id": "C-POINTDATA-024",
+      "statement": "The historical Subtype_evDir vectors show a subtype-dependent planar angle pattern: the +y convention nearly reproduces PC1_angle for c/d, while the +x convention fits a/b better. This is compatible with, but does not prove, selecting a PC2-like axis for a/b and a PC1-like axis for c/d.",
+      "classification": "INFERENCE_ONLY",
+      "status": "INFERENCE_ONLY",
+      "evidence": [
+        "E-POINTDATA-EVDIR-PC-AXIS-HYPOTHESIS"
+      ],
+      "caveats": [
+        "The recovered historical artifact does not include per-row PCA eigenvector arrays or the December 2025 producer.",
+        "T5a and T5b retain substantial angular error under the candidate x-axis convention and have larger median absolute z components.",
+        "The exact eigenvector index, transform, and sign/orientation rule remain unresolved."
+      ]
     }
   ]
 }
