@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_PRE_ARTIFACT_LEGACY_NEUROSETTA_EIGEN_ALIGNMENT_CAPABILITY",
+  "purpose": "Record the exact public legacy Neurosetta PCA/eigen-alignment code available before the December 2025 Point_data.pkl artifact, without claiming it is the historical producer.",
+  "source": {
+    "repository": "NikDrummond/Neurosetta_legacy_v0.0.1",
+    "url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1",
+    "repository_created_at": "2023-07-16T10:57:15Z",
+    "observed_last_pushed_at": "2025-07-31T14:40:11Z",
+    "pinned_commit": "9c27f226128d98ea5420e7a3a32acf2adc8ce138",
+    "commit_timestamp": "2025-01-15T11:30:24Z",
+    "commit_message": "rotations module>?",
+    "source_file": "Neurosetta/rotations.py",
+    "source_blob_sha1": "b27b095090f5d54b54834709a4b33d6ec39f1f1f",
+    "source_file_bytes": 7705,
+    "environment_file": "environment.yml",
+    "environment_blob_sha1": "9889fd5ae5c9df86e25e58d0e01179200b41d750"
+  },
+  "implementation": {
+    "coord_eig_decomp": {
+      "signature": "coord_eig_decomp(coords, robust=True, center=False, PCA=True, sort=True, transpose=True)",
+      "covariance_estimators": {
+        "robust": "sklearn.covariance.MinCovDet().fit(coords).covariance_",
+        "non_robust": "sklearn.covariance.EmpiricalCovariance().fit(coords).covariance_"
+      },
+      "eigensolver": "numpy.linalg.eig",
+      "sorting": "If sort=True, eigenvalues sorted descending and eigenvector columns reordered accordingly",
+      "layout": "transpose=True returns eigenvectors as rows",
+      "normalization": "PCA=True divides eigenvalues by their sum"
+    },
+    "eig_align": {
+      "signature": "eig_align(N, eig_order, align_order, perspective_order, center='root', robust=True, bind=True)",
+      "capabilities": [
+        "Caller supplies an eigenvector index for each of three sequential alignments via eig_order",
+        "Caller independently supplies destination axes via align_order",
+        "Caller independently supplies rotation/perspective axes via perspective_order",
+        "center can be root, mean, median or None for supported input forms",
+        "coord_eig_decomp is invoked with the selected robust flag"
+      ],
+      "mechanism": "align_eigen_single computes a minimum angle for a selected eigenvector then rotates coordinates and eigenvectors about a supplied perspective axis",
+      "output_behavior": "With bind=True, writes rotated coordinates to a Neurosetta graph; with bind=False, returns rotated coordinates. It does not define the historical Subtype_evDir_x/y/z DataFrame columns."
+    },
+    "runtime_environment_declared_dependencies": [
+      "python=3.10",
+      "setuptools",
+      "graph-tool",
+      "gudhi",
+      "pykdtree",
+      "vedo",
+      "numpy",
+      "pandas",
+      "scipy",
+      "hdbscan",
+      "tqdm",
+      "fastcluster"
+    ],
+    "jax_declared_directly_in_environment_yml": false
+  },
+  "historical_artifact_comparison": {
+    "artifact_commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "artifact_timestamp": "2025-12-09T19:41:50Z",
+    "historical_pickle_sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+    "historical_jax_arrayimpl_scalar_cells": 46624,
+    "legacy_source_serialization_gap": [
+      "The public legacy function exposes an axis/eigenvector-order mechanism, but its declared environment does not list JAX directly.",
+      "The inspected eig_align function returns or binds rotated coordinates, not a scalar direction-vector DataFrame.",
+      "The historic pickle's 46,624 scalar cells across eight columns use jaxlib._jax.ArrayImpl; the public legacy snapshot alone does not explain this serialization signature."
+    ]
+  },
+  "boundary": {
+    "proven": [
+      "Public legacy Neurosetta source from 2025-01-15 had robust covariance PCA/eigendecomposition and configurable eigenvector/destination/perspective-axis ordering before the December 2025 artifact.",
+      "The implementation uses NumPy/SciPy/scikit-learn and does not itself create the exact historical Subtype_evDir fields.",
+      "This is a separate public pre-artifact axis-selection mechanism alongside the JAX-based GeoJax family."
+    ],
+    "not_proven": [
+      "That the producer of Point_data.pkl called eig_align or coord_eig_decomp.",
+      "That the producer imported this legacy repository at this exact commit.",
+      "That the exact axis/eigenvector order or robust setting used for any T4/T5 subtype can be recovered from this code alone.",
+      "That JAX was absent from the author's actual runtime; the observation is limited to the committed environment.yml not declaring it directly."
+    ],
+    "unresolved_claim_id": "C-POINTDATA-002"
+  },
+  "references": {
+    "pinned_commit_url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1/commit/9c27f226128d98ea5420e7a3a32acf2adc8ce138",
+    "source_file_url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1/blob/9c27f226128d98ea5420e7a3a32acf2adc8ce138/Neurosetta/rotations.py",
+    "environment_url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1/blob/9c27f226128d98ea5420e7a3a32acf2adc8ce138/environment.yml",
+    "historic_artifact_url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/commit/cd17d34afd0d46a3c2947e83a1f0fdd835a9959a"
+  }
+}

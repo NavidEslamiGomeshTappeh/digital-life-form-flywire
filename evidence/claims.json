@@ -577,6 +577,20 @@
         "No claim is made that equivalent local/private or pre-existing legacy code did not exist.",
         "C-POINTDATA-002 remains UNRESOLVED."
       ]
+    },
+    {
+      "id": "C-POINTDATA-028",
+      "statement": "The public Neurosetta_legacy_v0.0.1 snapshot at commit 9c27f226 (2025-01-15) includes coord_eig_decomp using scikit-learn covariance estimators and numpy.linalg.eig, plus eig_align accepting caller-specified eig_order, align_order, and perspective_order. This proves that a non-JAX legacy PCA/alignment path with configurable eigenvector/axis selection existed before the Point_data artifact. It does not prove that this code produced Subtype_evDir or explain the artifact's JAX ArrayImpl scalar serialization.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-LEGACY-NEUROSETTA-EIG-ALIGN"
+      ],
+      "caveats": [
+        "The public legacy functions align/return coordinates and do not directly emit the historical Subtype_evDir fields.",
+        "The committed environment.yml does not list JAX directly, but does not prove what other software may have been installed locally.",
+        "C-POINTDATA-002 remains UNRESOLVED."
+      ]
     }
   ]
 }

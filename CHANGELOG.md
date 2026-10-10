@@ -2,6 +2,8 @@
 
 
 ## Unreleased maintenance — 2026-10-10
+- Added a commit-pinned audit of public `Neurosetta_legacy_v0.0.1` (2025-01-15): NumPy eigendecomposition and configurable `eig_order` / `align_order` / `perspective_order`. The receipt explicitly distinguishes this pre-artifact capability from the historic JAX-scalar `Subtype_evDir` producer.
+- Added claim `C-POINTDATA-028` and a regression guard that preserves `C-POINTDATA-002` as unresolved.
 - Pinned the current NeuRosetta PCA source timeline: the repository's initial dated commit contains no Python source, its first public PCA utility is NumPy SVD on 2026-07-27, and the geometry-utils `eigh` refactor follows on 2026-07-28. Current NeuRosetta PCA is therefore not treated as direct evidence for the Dec 2025 producer.
 - Added claim `C-POINTDATA-027` and regression coverage preserving the boundary between public source timeline and unknown local/private historical code.
 - Recorded the public Point_data commit timeline: the analysis notebook already reads a machine-local Point_data.pkl path 103 seconds before the binary-only repository add; duplicate add commits reference the same blob. The public PP1-PP5/Metrics1 pipeline first appears in the Aug 2026 commit that removed the tracked data files.

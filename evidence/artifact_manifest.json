@@ -57,7 +57,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "decf925365a5b08111ea67d2f591f17b5a0c09aa"
+        "value": "d35667e77988c01dafe3dd111746e81a5e79d44e"
       }
     },
     {
@@ -336,7 +336,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d32ea95787414f742b9c6b3b0f5e3641ec778937"
+        "value": "834d3dc026f260a901bc0cd80450bba36cd29043"
       }
     },
     {
@@ -648,10 +648,10 @@
     {
       "id": "E-POINTDATA-EVDIR-PC-AXIS-HYPOTHESIS-TEST",
       "path": "tests/test_evdir_pc_axis_hypothesis.py",
-      "role": "regression_test_for_evdir_hypothesis_boundary",
+      "role": "regression_test_for_provenance_boundaries",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "7f82985b5bdba27ce756ee4231ac4c36c93f7059"
+        "value": "da082edd435cfbf8c59287d426be38989b1abb48"
       }
     },
     {
@@ -697,6 +697,15 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "f79fcd755321fbd499bc73b6b0f0bcdd1c169a9f"
+      }
+    },
+    {
+      "id": "E-POINTDATA-LEGACY-NEUROSETTA-EIG-ALIGN",
+      "path": "evidence/legacy_neurosetta_eig_alignment.json",
+      "role": "legacy_pre_artifact_eigen_alignment_implementation",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "412857fda38537e69be25f367a2538a745d6204f"
       }
     },
     {

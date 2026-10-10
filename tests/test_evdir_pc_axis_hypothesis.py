@@ -128,3 +128,26 @@ def test_current_neurosetta_pca_history_is_post_artifact_and_not_producer_proof(
     timeline_claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-027")
     assert producer_claim["status"] == "UNRESOLVED"
     assert timeline_claim["status"] == "PROVEN"
+
+
+def test_legacy_neurosetta_eigen_alignment_is_a_pre_artifact_capability_not_producer_proof():
+    evidence = json.loads(
+        (ROOT / "evidence" / "legacy_neurosetta_eig_alignment.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    impl = evidence["implementation"]
+    assert evidence["source"]["pinned_commit"] == "9c27f226128d98ea5420e7a3a32acf2adc8ce138"
+    assert evidence["source"]["commit_timestamp"] == "2025-01-15T11:30:24Z"
+    assert impl["coord_eig_decomp"]["eigensolver"] == "numpy.linalg.eig"
+    assert "caller-specified eig_order" not in impl["eig_align"]["capabilities"]
+    assert any("eigenvector index" in item for item in impl["eig_align"]["capabilities"])
+    assert impl["jax_declared_directly_in_environment_yml"] is False
+    assert "does not define the historical Subtype_evDir_x/y/z" in impl["eig_align"]["output_behavior"]
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    producer = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-002")
+    legacy = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-028")
+    assert producer["status"] == "UNRESOLVED"
+    assert legacy["status"] == "PROVEN"
+    assert "does not prove that this code produced Subtype_evDir" in legacy["statement"]
