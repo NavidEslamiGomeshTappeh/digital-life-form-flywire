@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "status": "HYPOTHESIS_ONLY_SUBTYPE_DEPENDENT_PC_AXIS_SELECTION",
+  "purpose": "Record the recovered historical Subtype_evDir angle pattern without overstating eigenvector identity or producer provenance.",
+  "source": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "git_blob_sha": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+    "sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+    "rows": 5828,
+    "columns": 24
+  },
+  "method": {
+    "measured_field": "Subtype_evDir_x/y/z",
+    "reference_field": "PC1_angle",
+    "plane": "xy",
+    "plane_normal": "+z",
+    "vector_sign_convention": "Flip the vector when its dot product with the candidate target axis is negative, matching the public NeuRosetta align_with behavior.",
+    "axis_convention_grid": "All six ordered target-axis / orthogonal plane-normal conventions were checked per subtype.",
+    "execution_note": "Numerical summaries were independently recomputed against the recovered historical pickle. The updated repository audit script now emits the same per-subtype checks in evdir_axis_convention_receipt.json."
+  },
+  "results": {
+    "universal_y": {
+      "rmse_rad": 1.028814212980031,
+      "interpretation": "Matches c/d almost exactly but fails systematically for a/b."
+    },
+    "by_subtype": {
+      "T4a": {
+        "rows": 713,
+        "x_rmse_rad": 0.18717827670881632,
+        "x_median_abs_delta_rad": 0.045367485192481016,
+        "y_rmse_rad": 1.604874,
+        "y_median_abs_delta_rad": 1.58004,
+        "median_abs_z_component": 0.17930692434310913
+      },
+      "T4b": {
+        "rows": 722,
+        "x_rmse_rad": 0.3012827254116911,
+        "x_median_abs_delta_rad": 0.05693669298982407,
+        "y_rmse_rad": 1.616918,
+        "y_median_abs_delta_rad": 1.597675,
+        "median_abs_z_component": 0.27799108624458313
+      },
+      "T4c": {
+        "rows": 825,
+        "x_rmse_rad": 1.570796,
+        "x_median_abs_delta_rad": 1.570796,
+        "y_rmse_rad": 7.266498471e-7,
+        "y_median_abs_delta_rad": 2.549047018e-7,
+        "median_abs_z_component": 0.2896499037742615
+      },
+      "T4d": {
+        "rows": 766,
+        "x_rmse_rad": 1.570796,
+        "x_median_abs_delta_rad": 1.570796,
+        "y_rmse_rad": 7.72891e-7,
+        "y_median_abs_delta_rad": 2.195073421e-7,
+        "median_abs_z_component": 0.3209512084722519
+      },
+      "T5a": {
+        "rows": 684,
+        "x_rmse_rad": 0.9193440204963036,
+        "x_median_abs_delta_rad": 0.29273726965157554,
+        "y_rmse_rad": 1.261263,
+        "y_median_abs_delta_rad": 1.361429,
+        "median_abs_z_component": 0.6403568387031555
+      },
+      "T5b": {
+        "rows": 713,
+        "x_rmse_rad": 0.7406988174750787,
+        "x_median_abs_delta_rad": 0.164185090177142,
+        "y_rmse_rad": 1.379356,
+        "y_median_abs_delta_rad": 1.459602,
+        "median_abs_z_component": 0.5025501847267151
+      },
+      "T5c": {
+        "rows": 719,
+        "x_rmse_rad": 1.570796,
+        "x_median_abs_delta_rad": 1.570796,
+        "y_rmse_rad": 0.00000102330016184,
+        "y_median_abs_delta_rad": 2.131086556e-7,
+        "median_abs_z_component": 0.2814512252807617
+      },
+      "T5d": {
+        "rows": 686,
+        "x_rmse_rad": 1.570796,
+        "x_median_abs_delta_rad": 1.570796,
+        "y_rmse_rad": 5.820758991e-7,
+        "y_median_abs_delta_rad": 1.960161411e-7,
+        "median_abs_z_component": 0.24658001214265823
+      }
+    }
+  },
+  "candidate_rule": {
+    "classification": "HYPOTHESIS_ONLY",
+    "rule": "Use +x for a/b and +y for c/d when comparing the stored vector's signed planar angle with PC1_angle.",
+    "weighted_global_rmse_rad": 0.42643560211880194,
+    "weighted_global_rmse_deg": 24.43296023552738,
+    "rmse_reduction_vs_universal_y": 0.5855076682080413,
+    "interpretation": "The subtype-aware axis convention fits the angular pattern better than one universal +y convention. It is compatible with, but does not prove, PC2 for a/b and PC1 for c/d."
+  },
+  "z_component_observation": {
+    "interpretation": "T5a and T5b have substantially larger median absolute z components than the other subtypes, so projecting to the xy plane can produce a weaker relation for these groups.",
+    "caution": "This may explain part of the weaker planar fit but does not establish the origin of the field."
+  },
+  "provenance_boundary": {
+    "proven": [
+      "The historical pickle contains three per-row Subtype_evDir columns and one unique vector per row.",
+      "The c/d vectors' measured planar direction matches the PC1_angle convention to about 1e-6 radians or better.",
+      "An x-axis convention is a better angular fit than a y-axis convention for all four a/b groups, though T5a/T5b errors remain substantial.",
+      "The chosen subtype-aware rule has lower aggregate RMSE than one universal y-axis rule."
+    ],
+    "not_proven": [
+      "That Subtype_evDir is literally PC2 for a/b and PC1 for c/d.",
+      "The eigenvector index, coordinate transform, sign rule, or producing function used in December 2025.",
+      "Identity between the historical Point_data input morphology and any current public SWC or Reduced_dendrites artifact."
+    ],
+    "unresolved_claim_id": "C-POINTDATA-002"
+  },
+  "references": {
+    "public_neurosetta_align_with_commit": "56d40605f8a36db319e4c3ae81fbfed24b062c7f",
+    "legacy_neurosetta_eig_order_commit": "9c27f226128d98ea5420e7a3a1f0fdd835a9959a",
+    "legacy_eig_order_commit_corrected": "9c27f226128d98ea5420e7a3a32acf2adc8ce138"
+  }
+}
