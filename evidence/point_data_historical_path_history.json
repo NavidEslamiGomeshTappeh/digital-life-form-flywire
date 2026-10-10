@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_PUBLIC_POINT_DATA_FILE_HISTORY",
+  "purpose": "Record commit-pinned public repository chronology for the historical Point_data.pkl artifact, distinguishing observed public history from the unresolved local producer.",
+  "source_repository": {
+    "name": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper"
+  },
+  "artifact": {
+    "path": "Data/Point_data.pkl",
+    "first_public_commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "blob_sha1": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+    "sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+    "bytes": 3049948,
+    "shape": [
+      5828,
+      24
+    ]
+  },
+  "events": [
+    {
+      "kind": "repository_initialization",
+      "commit": "79cf52212935de6bddf996c9f46c0df89f5c5442",
+      "timestamp": "2025-12-09T19:26:04Z",
+      "observation": "The repository's initial public commit predates the tracked Point_data binary and the later public Metrics1/PP preprocessing notebooks."
+    },
+    {
+      "kind": "consumer_notebook_added_before_artifact",
+      "commit": "61fd0f176d73932ad87ece04153945501b4c405c",
+      "timestamp": "2025-12-09T19:40:07Z",
+      "path": "Notebooks/ANOVA_analysis.ipynb",
+      "blob_sha1": "93eb31b90a738f64f5d803aaecda22f80edd6178",
+      "changed_paths": [
+        "Notebooks/ANOVA_analysis.ipynb"
+      ],
+      "absolute_local_path_in_notebook": "/home/nik/Desktop/Software/T45_Morpho_data/Data/Pickled_data/Point_data.pkl",
+      "read_expression": "df_point_data = pd.read_pickle(file_path)",
+      "timing_seconds_before_first_binary_commit": 103,
+      "interpretation": "The initial public notebook consumes a file at a machine-local path before Data/Point_data.pkl is added to the repository."
+    },
+    {
+      "kind": "historical_binary_added",
+      "commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+      "timestamp": "2025-12-09T19:41:50Z",
+      "file_path": "Data/Point_data.pkl",
+      "file_status": "added",
+      "changed_paths": [
+        "Data/Point_data.pkl"
+      ],
+      "blob_sha1": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+      "note": "GitHub's binary-file diff is empty; commit metadata identifies this as the only changed path and the artifact's first public appearance."
+    },
+    {
+      "kind": "duplicate_add_commit_same_binary",
+      "commit": "fe9779d4ca425613eec44b19e961610d117e7232",
+      "author_timestamp": "2025-12-09T19:41:50Z",
+      "committer_timestamp": "2025-12-09T19:42:19Z",
+      "parent": "61fd0f176d73932ad87ece04153945501b4c405c",
+      "file_path": "Data/Point_data.pkl",
+      "file_status": "added",
+      "blob_sha1": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+      "interpretation": "A second parallel add commit references the same binary blob, rather than exposing a later regenerated file."
+    },
+    {
+      "kind": "merge_of_duplicate_artifact_commits",
+      "commit": "8a38537f55371de369f80c50778915afb5d954b4",
+      "timestamp": "2025-12-09T19:42:30Z",
+      "parents": [
+        "fe9779d4ca425613eec44b19e961610d117e7232",
+        "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a"
+      ],
+      "tree_sha": "cd10c382b3abbbe68bf00e3841959b7fb06f4c07",
+      "interpretation": "The two commits are merged into the public history; the historical binary blob identity remains unchanged."
+    },
+    {
+      "kind": "public_generator_notebooks_added_after_artifact_and_binary_removed",
+      "commit": "8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+      "timestamp": "2026-08-10T15:49:32Z",
+      "message": "Paper submission update. Remove tracked Data artifacts and add preprocessing notebooks and revised analysis code.",
+      "producer_related_notebooks_added": [
+        {
+          "path": "Notebooks/PP1_Fetch_flywire.ipynb",
+          "role": "fetch ID/morphology source"
+        },
+        {
+          "path": "Notebooks/PP2_nr_conversion.ipynb",
+          "role": "convert morphology to NeuRosetta format"
+        },
+        {
+          "path": "Notebooks/PP3_Dendrite_extraction.ipynb",
+          "role": "dendrite extraction and reduction"
+        },
+        {
+          "path": "Notebooks/PP4_Global_allignment.ipynb",
+          "role": "global alignment"
+        },
+        {
+          "path": "Notebooks/PP5_Mesh_generation.ipynb",
+          "role": "mesh processing"
+        },
+        {
+          "path": "Notebooks/Metrics1_Point_data.ipynb",
+          "blob_sha1": "2c31080a7f6f69d1c603bf287e4a5da7d4c3712b",
+          "role": "later public point-metric generator"
+        }
+      ],
+      "point_data_status": "removed",
+      "later_metrics_notebook_observation": {
+        "contains_literal_Subtype_evDir": false,
+        "contains_active_pickle_persistence_call": false,
+        "caveat": "String-level inspection of this public notebook snapshot; this is not proof about private or local producer scripts."
+      }
+    }
+  ],
+  "conclusions": {
+    "proven": [
+      "The public analysis consumer was committed before the historical binary and referenced a local machine-specific input path.",
+      "The historical Point_data.pkl first entered public Git history as a binary-only file addition with blob b85caf49f45677f2075f7b5f2c8830141cd96d02.",
+      "The duplicate December add commit refers to the same binary blob.",
+      "The later public PP1-PP5 and Metrics1_Point_data notebooks were added on 2026-08-10 in the commit that removed tracked Data artifacts.",
+      "The inspected later Metrics1 notebook does not expose the historical Subtype_evDir columns or an active pickle-write call."
+    ],
+    "not_proven": [
+      "That no uncommitted or private producer script existed on the author's machine in December 2025.",
+      "That the later public PP/Metrics pipeline was the exact pipeline used to create the historical binary.",
+      "The exact function, software revision, parameters, input morphology artifact, or process that produced Subtype_evDir_x/y/z."
+    ],
+    "unresolved_claim_id": "C-POINTDATA-002"
+  },
+  "references": {
+    "consumer_commit_url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/commit/61fd0f176d73932ad87ece04153945501b4c405c",
+    "artifact_commit_url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/commit/cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "duplicate_add_commit_url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/commit/fe9779d4ca425613eec44b19e961610d117e7232",
+    "merge_commit_url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/commit/8a38537f55371de369f80c50778915afb5d954b4",
+    "later_pipeline_commit_url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/commit/8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+    "later_metrics_notebook_url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/blob/8700efd40bccfa3e74ac7c4df02da83a968b9b52/Notebooks/Metrics1_Point_data.ipynb"
+  }
+}

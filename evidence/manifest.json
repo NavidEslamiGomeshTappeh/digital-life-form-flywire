@@ -20,6 +20,7 @@
     "historical_generator_identity": "UNRESOLVED",
     "study_to_project_coordinate_identity": "UNRESOLVED",
     "evdir_eigenvector_identity": "UNRESOLVED",
-    "evdir_subtype_axis_interpretation": "INFERENCE_ONLY"
+    "evdir_subtype_axis_interpretation": "INFERENCE_ONLY",
+    "point_data_public_history": "PROVEN_PUBLIC_FILE_TIMELINE_BUT_LOCAL_PRODUCER_UNRESOLVED"
   }
 }

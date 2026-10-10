@@ -550,6 +550,19 @@
         "No producer invocation, subtype-specific order argument, target basis, or December 2025 dependency revision has been recovered.",
         "C-POINTDATA-002 remains UNRESOLVED."
       ]
+    },
+    {
+      "id": "C-POINTDATA-026",
+      "statement": "The public paper-repository history proves a consumer-before-artifact sequence: an ANOVA notebook added at 2025-12-09T19:40:07Z reads Point_data.pkl from a machine-local path, 103 seconds before the binary first appears as the sole changed path in commit cd17d34. The later public PP1-PP5/Metrics1_Point_data notebook set was added on 2026-08-10 in the commit that removed tracked Data artifacts. This establishes a public producer-code gap at the historical artifact boundary, not the nonexistence of a private or uncommitted local producer.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-PUBLIC-FILE-HISTORY"
+      ],
+      "caveats": [
+        "C-POINTDATA-002 remains UNRESOLVED because GitHub's public history cannot establish which local/private script generated the binary.",
+        "The later public Metrics1 notebook is not proof of the December 2025 producing implementation."
+      ]
     }
   ]
 }

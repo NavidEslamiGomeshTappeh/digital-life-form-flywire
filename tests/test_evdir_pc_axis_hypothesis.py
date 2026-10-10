@@ -69,3 +69,35 @@ def test_pre_artifact_geojax_ordering_capability_is_not_misreported_as_producer_
     assert producer_claim["status"] == "UNRESOLVED"
     assert capability_claim["status"] == "PROVEN"
     assert "not that this code generated Subtype_evDir" in capability_claim["statement"]
+
+
+def test_historical_point_data_public_history_keeps_producer_boundary_unresolved():
+    history = json.loads(
+        (ROOT / "evidence" / "point_data_historical_path_history.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    events = {item["kind"]: item for item in history["events"]}
+    consumer = events["consumer_notebook_added_before_artifact"]
+    artifact = events["historical_binary_added"]
+    duplicate = events["duplicate_add_commit_same_binary"]
+    later = events["public_generator_notebooks_added_after_artifact_and_binary_removed"]
+
+    assert consumer["timestamp"] == "2025-12-09T19:40:07Z"
+    assert consumer["absolute_local_path_in_notebook"].endswith(
+        "T45_Morpho_data/Data/Pickled_data/Point_data.pkl"
+    )
+    assert consumer["timing_seconds_before_first_binary_commit"] == 103
+    assert artifact["timestamp"] == "2025-12-09T19:41:50Z"
+    assert artifact["changed_paths"] == ["Data/Point_data.pkl"]
+    assert artifact["blob_sha1"] == "b85caf49f45677f2075f7b5f2c8830141cd96d02"
+    assert duplicate["blob_sha1"] == artifact["blob_sha1"]
+    assert later["point_data_status"] == "removed"
+    assert not later["later_metrics_notebook_observation"]["contains_literal_Subtype_evDir"]
+    assert history["conclusions"]["unresolved_claim_id"] == "C-POINTDATA-002"
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    producer_claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
+    timeline_claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-026")
+    assert producer_claim["status"] == "UNRESOLVED"
+    assert timeline_claim["status"] == "PROVEN"

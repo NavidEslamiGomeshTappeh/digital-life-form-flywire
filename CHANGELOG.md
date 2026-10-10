@@ -2,6 +2,8 @@
 
 
 ## Unreleased maintenance — 2026-10-10
+- Recorded the public Point_data commit timeline: the analysis notebook already reads a machine-local Point_data.pkl path 103 seconds before the binary-only repository add; duplicate add commits reference the same blob. The public PP1-PP5/Metrics1 pipeline first appears in the Aug 2026 commit that removed the tracked data files.
+- Added `C-POINTDATA-026` and a regression guard for the public producer-code gap while keeping the actual historical producer unresolved.
 - Added a commit-pinned GeoJax pre-artifact alignment snapshot: robust covariance defaults (`c=1.5`, `tol=1e-6`, `max_iter=100`), sorted JAX PCA, caller-supplied eigenvector order, and target-basis sign alignment. Explicitly preserves the unresolved producer boundary.
 - Added claim `C-POINTDATA-025` and regression coverage so implementation capability is not misreported as proof of the `Subtype_evDir` producer.
 
