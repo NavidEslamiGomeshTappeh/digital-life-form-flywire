@@ -964,6 +964,15 @@
         "type": "git_blob_sha1",
         "value": "8fcfca3cac19f6db41d16c15936bfe26fb8e49e2"
       }
+    },
+    {
+      "id": "E-POINTDATA-EVDIR-AXIS-CONVENTION-RECEIPT",
+      "path": "evidence/point_data_evdir_axis_convention_receipt.json",
+      "role": "historical_evdir_six_convention_axis_comparison_receipt",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "9ab412dc770882da02a7c08d61fa3046dee01209"
+      }
     }
   ]
 }
