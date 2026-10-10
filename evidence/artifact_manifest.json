@@ -66,7 +66,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "c82ad88b74659ce49d93bca18c01a21a6e34c126"
+        "value": "592a783b304c916aee2330f14992cd08cb0cbd83"
       }
     },
     {
@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "e2497aae4a040c04cbb7d053fa44a44d8830dc80"
+        "value": "78aefd6a2763c4890bcbe7f5714a5179ea7cbfaa"
       }
     },
     {
@@ -953,7 +953,7 @@
       "role": "regression_test_for_evdir_hypothesis_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d1d06bc55af274a79f3c426c51ebb0a960c7870f"
+        "value": "25e0b011376c90a26373ae58b9418c9231725604"
       }
     },
     {
@@ -972,6 +972,15 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "9ab412dc770882da02a7c08d61fa3046dee01209"
+      }
+    },
+    {
+      "id": "E-POINTDATA-PUBLIC-FILE-HISTORY",
+      "path": "evidence/point_data_historical_path_history.json",
+      "role": "historical_public_point_data_file_history",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "e0efda55826bb476ba01808d4921ec12704da59c"
       }
     }
   ]
