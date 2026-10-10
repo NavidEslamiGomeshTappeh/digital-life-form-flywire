@@ -18,9 +18,11 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install runtime
-        run: python -m pip install --disable-pip-version-check pandas jax jaxlib
+        run: python -m pip install --disable-pip-version-check pandas jax jaxlib pytest
       - name: Audit historical subtype vectors
         run: python scripts/audit_point_data_evdir.py
+      - name: Test hypothesis classification and regression guards
+        run: python -m pytest -q tests/test_evdir_pc_axis_hypothesis.py
       - name: Upload receipt
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
