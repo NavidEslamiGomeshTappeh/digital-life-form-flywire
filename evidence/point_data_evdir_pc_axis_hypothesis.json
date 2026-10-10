@@ -53,7 +53,7 @@
         "rows": 766,
         "x_rmse_rad": 1.570796,
         "x_median_abs_delta_rad": 1.570796,
-        "y_rmse_rad": 7.72891e-7,
+        "y_rmse_rad": 7.728765114929547e-7,
         "y_median_abs_delta_rad": 2.195073421e-7,
         "median_abs_z_component": 0.3209512084722519
       },
@@ -119,7 +119,6 @@
   },
   "references": {
     "public_neurosetta_align_with_commit": "56d40605f8a36db319e4c3ae81fbfed24b062c7f",
-    "legacy_neurosetta_eig_order_commit": "9c27f226128d98ea5420e7a3a1f0fdd835a9959a",
-    "legacy_eig_order_commit_corrected": "9c27f226128d98ea5420e7a3a32acf2adc8ce138"
+    "legacy_neurosetta_eig_order_commit": "9c27f226128d98ea5420e7a3a32acf2adc8ce138"
   }
 }
