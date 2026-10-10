@@ -47,3 +47,25 @@ def test_historical_evdir_pc_axis_rule_remains_a_hypothesis():
     claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
     generator_claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
     assert generator_claim["status"] == "UNRESOLVED"
+
+
+def test_pre_artifact_geojax_ordering_capability_is_not_misreported_as_producer_proof():
+    geojax = json.loads(
+        (ROOT / "evidence" / "public_geojax_preartifact_jax_pca.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    snapshot = geojax["pre_artifact_axis_ordering_snapshot"]
+    assert snapshot["source"]["commit"] == "33b0f8727ab447eff86e35a69c60c1f33b4d1513"
+    align = snapshot["functions"]["align_point_cloud"]
+    assert "Required caller-supplied eigenvector index order" in align["parameters"]["order"]
+    assert "sign(sum(E * target_basis, axis=1))" in align["sign_rule"]
+    assert "does not directly emit" in align["output_limit"]
+    assert any("producer called" in item for item in snapshot["provenance_boundary"]["not_proven"])
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    producer_claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
+    capability_claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-025")
+    assert producer_claim["status"] == "UNRESOLVED"
+    assert capability_claim["status"] == "PROVEN"
+    assert "not that this code generated Subtype_evDir" in capability_claim["statement"]
