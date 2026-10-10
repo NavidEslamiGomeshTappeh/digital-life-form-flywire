@@ -72,6 +72,84 @@
       "interval_end": "2025-12-09T19:41:50Z",
       "public_commits_found": 0
     },
-    "interpretation": "4dfc82b is the public entry point for the PCA/robust/JAX family; 33b0f872 is the last public GeoJax head observed before the December 2025 Point_data ingest."
+    "interpretation": "4dfc82b is the public entry point for the PCA/robust/JAX family; 33b0f872 is the last public GeoJax head observed before the December 2025 Point_data ingest.",
+    "axis_ordering_function_snapshot": "GeoJax/alignment.py at 53560fd7de0463a51e1283b4a9c0e0db5bb33e8e"
+  },
+  "pre_artifact_axis_ordering_snapshot": {
+    "source": {
+      "repository": "NikDrummond/GeoJax",
+      "commit": "33b0f8727ab447eff86e35a69c60c1f33b4d1513",
+      "commit_date": "2025-05-02T13:36:30Z",
+      "commit_message": "Bounds module update",
+      "path": "GeoJax/alignment.py",
+      "blob_sha1": "53560fd7de0463a51e1283b4a9c0e0db5bb33e8e",
+      "exported_from": "GeoJax/__init__.py",
+      "export_blob_sha1": "aab4e30d3d449d6d7120983ead8e49fc611ab04b"
+    },
+    "functions": {
+      "robust_covariance_mest": {
+        "signature": "robust_covariance_mest(X, c=1.5, tol=1e-6, max_iter=100)",
+        "method": "Huber-like M-estimator",
+        "mechanics_observed": [
+          "initialize location with coordinate-wise arithmetic mean",
+          "initialize covariance using jnp.cov(..., rowvar=False, bias=True)",
+          "compute squared Mahalanobis distances using inverse covariance with 1e-6 diagonal regularization",
+          "use unit weights inside c^2 and c^2 / distance outside",
+          "stop when location movement is below tol or max_iter is reached"
+        ]
+      },
+      "coord_eig_decomp": {
+        "signature": "coord_eig_decomp(coords, robust=True, center=False, PCA=True, sort=True, transpose=True)",
+        "defaults": {
+          "robust": true,
+          "center": false,
+          "PCA": true,
+          "sort": true,
+          "transpose": true
+        },
+        "implementation": {
+          "robust_covariance_function": "robust_covariance_mest",
+          "non_robust_covariance": "jnp.cov(c, rowvar=False, bias=True)",
+          "eigendecomposition": "jnp.linalg.eigh(cov)",
+          "eigenvalue_normalization": "evals / sum(evals) when PCA=True",
+          "sort_order": "descending eigenvalue order when sort=True",
+          "vector_layout": "eigenvectors returned as rows when transpose=True",
+          "degenerate_cloud_behavior": "returns zero eigenvalues and identity eigenvectors if all coordinates are close to the first coordinate"
+        }
+      },
+      "align_point_cloud": {
+        "signature": "align_point_cloud(coords, order, target_basis, robust=True, center=True, center_coord=zeros(3))",
+        "parameters": {
+          "order": "Required caller-supplied eigenvector index order; no default order is specified",
+          "target_basis": "Required caller-supplied target basis (3x3)",
+          "robust": true,
+          "center": true,
+          "center_coord_default": [
+            0,
+            0,
+            0
+          ]
+        },
+        "internal_eigendecomposition_call": "coord_eig_decomp(centered, robust=robust, center=True, PCA=True, sort=True, transpose=True)",
+        "eigenvector_selection": "E = sorted_vecs[order]",
+        "sign_rule": "sign(sum(E * target_basis, axis=1)) is applied per eigenvector before alignment",
+        "transform": "R = pinv(target_basis) @ E_adjusted; coordinates are returned after rotation/recentering",
+        "output_limit": "returns aligned point-cloud coordinates; it does not directly emit the historical Subtype_evDir_x/y/z fields"
+      }
+    },
+    "provenance_boundary": {
+      "proven": [
+        "By 2025-05-02, the public GeoJax code exposed a JAX PCA/eigendecomposition routine and an alignment routine with caller-supplied eigenvector order and target basis.",
+        "The public implementation included configurable eigenvector sign alignment relative to the target basis.",
+        "These operations existed in the public source before the December 2025 Point_data.pkl artifact."
+      ],
+      "not_proven": [
+        "That the December 2025 Point_data producer called align_point_cloud or coord_eig_decomp from this snapshot.",
+        "The actual order argument or target basis used for any T4/T5 subtype.",
+        "That the returned aligned coordinates or internal eigenvectors were used to generate Subtype_evDir_x/y/z.",
+        "The exact GeoJax revision or local modifications present in the producer environment."
+      ],
+      "interpretation": "This is a concrete pre-artifact mechanism for configurable PCA axis selection and sign orientation, not producer identity or proof of any subtype-to-PC mapping."
+    }
   }
 }
