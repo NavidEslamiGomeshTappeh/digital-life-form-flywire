@@ -46,5 +46,60 @@
       "The producer of Point_data.pkl was the Random_bifurcations module.",
       "The exact GeoJax commit installed in the 2025-12-10 environment."
     ]
+  },
+  "random_bifurcations_nonproducer_check": {
+    "source": {
+      "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+      "commit": "07b468181ceb3e43d1cb3647b5bac79d531acd18",
+      "file": ".history/src/Random_bifurcations_20251210164127.py",
+      "blob_sha1": "6d3739e9c8fdf72a3a8c0de493af6f7e24bd7aa2",
+      "commit_date": "2025-12-10T16:32:19Z"
+    },
+    "observed_behavior": {
+      "generate_random_bifurication": "Uses pc1/pc2/pc3 as shape scales s1=sqrt(pc2/pc1) and s2=sqrt(pc3/pc1), then generates anisotropic random unit vectors with parent oriented to -x and children to +x.",
+      "geojax_calls": [
+        "gj.cross",
+        "gj.angle",
+        "gj.normalize"
+      ],
+      "call_sites": "random_bifurication_sum and Dihedral_beta_random, downstream geometry/angle calculations."
+    },
+    "non_producer_indicators": {
+      "mentions_subtype_evdir_literal": false,
+      "calls_coord_eig_decomp": false,
+      "calls_align_point_cloud": false,
+      "calls_legacy_eig_align": false,
+      "writes_point_data_pickle": false,
+      "explanation": "The source consumes scalar PCA summaries as distribution parameters and creates synthetic random bifurcation vectors. It does not inspect neuron point clouds, calculate PCA eigenvectors, or write the historical Data/Point_data.pkl artifact."
+    },
+    "figure5_binding": {
+      "notebook_path": "Notebooks/Figure_5.ipynb",
+      "notebook_blob_sha1": "a65df260ce2b118d44e58388349b91a6c9483333",
+      "loads_exact_historical_point_data_blob": true,
+      "load_expression": "pd.read_pickle('../Data/Point_data.pkl')",
+      "consumes_from_point_data": [
+        "PC1",
+        "PC2",
+        "PC3"
+      ],
+      "uses_mean_PC1_PC2_PC3_by_type": [
+        "T4",
+        "T5"
+      ],
+      "calls": "generate_random_bifurication(10000, pc1, pc2, pc3)",
+      "direct_reference_to_Subtype_evDir": false
+    },
+    "conclusion": {
+      "proven": [
+        "The Figure 5 consumer resolves to the exact blob that was first publicly added in the Point_data commit.",
+        "The adjacent same-date Random_bifurcations source imports GeoJax for downstream vector geometry.",
+        "The inspected Figure 5 workflow and Random_bifurcations source do not reveal a Point_data/evDir producer."
+      ],
+      "not_proven": [
+        "Whether GeoJax was used in the separate, missing producer script.",
+        "How the historical PC1/PC2/PC3 values or Subtype_evDir columns were calculated."
+      ],
+      "unresolved_claim_id": "C-POINTDATA-002"
+    }
   }
 }

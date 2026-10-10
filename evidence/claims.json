@@ -608,6 +608,21 @@
         "The JAX serializer fingerprint proves the object type at serialization, not the function that computed the values.",
         "C-POINTDATA-002 remains UNRESOLVED."
       ]
+    },
+    {
+      "id": "C-POINTDATA-030",
+      "statement": "The exact-blob-bound Figure_5 notebook added on 2025-12-10 is a downstream consumer of Point_data.pkl: it reads PC1/PC2/PC3 means for T4 and T5 and passes them to generate_random_bifurication. The same-date Random_bifurcations module uses GeoJax cross/angle/normalize for synthetic vector geometry but the inspected source contains no PCA/eigen-alignment call, no Subtype_evDir field reference, and no Point_data pickle writer. This proves consumer scope, not producer identity.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-CONTEMPORANEOUS-GEOJAX-CONSUMER",
+        "E-POINTDATA-EXACT-BLOB-CONSUMER"
+      ],
+      "caveats": [
+        "The producer script might be separate/private/uncommitted.",
+        "The presence of GeoJax in this consumer runtime does not prove it was used in the missing producer.",
+        "C-POINTDATA-002 remains UNRESOLVED."
+      ]
     }
   ]
 }

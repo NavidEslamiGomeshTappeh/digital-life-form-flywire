@@ -2,6 +2,7 @@
 
 
 ## Unreleased maintenance — 2026-10-10
+- Expanded the exact-blob consumer bridge: the same-week Figure 5 notebook uses Point_data PC1/PC2/PC3 to parameterize synthetic random bifurcations. Its GeoJax-using helper contains no PCA/evDir producer logic or Point_data writer; registered as `C-POINTDATA-030`.
 - Added a bounded runtime-fingerprint comparison: the 46,624 serialized float32 JAX scalar cells fit a JAX-native GeoJax output family more directly than the inspected NumPy/SciPy legacy eig_align path. This is explicitly `INFERENCE_ONLY`, not producer attribution (`C-POINTDATA-029`).
 - Added a commit-pinned audit of public `Neurosetta_legacy_v0.0.1` (2025-01-15): NumPy eigendecomposition and configurable `eig_order` / `align_order` / `perspective_order`. The receipt explicitly distinguishes this pre-artifact capability from the historic JAX-scalar `Subtype_evDir` producer.
 - Added claim `C-POINTDATA-028` and a regression guard that preserves `C-POINTDATA-002` as unresolved.

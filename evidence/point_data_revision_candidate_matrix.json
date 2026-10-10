@@ -138,6 +138,13 @@
       "status": "INFERENCE_ONLY",
       "details": "The 46,624 float32 JAX scalar cells are directly compatible with GeoJax JAX-array outputs. The pre-artifact legacy Neurosetta eig_align API proves configurable axis selection but its inspected implementation is NumPy/SciPy and does not directly explain the JAX scalar serialization. This is a relative compatibility inference only; a conversion or local implementation remains possible.",
       "impact": "Rank the JAX/GeoJax family higher for runtime-type compatibility, but do not identify it as the exact historical producer or change C-POINTDATA-002 from UNRESOLVED."
+    },
+    {
+      "date_utc": "2026-10-10",
+      "finding": "Contemporaneous Figure 5 / Random_bifurcations is a consumer, not the point-data generator",
+      "status": "PROVEN_CONSUMER_NONIDENTITY",
+      "details": "The exact-hash Figure_5 notebook consumes PC1/PC2/PC3 from Point_data.pkl as synthetic-bifurcation scaling parameters. The same-date Random_bifurcations module uses GeoJax cross/angle/normalize but contains no PCA/eigen-alignment call, no Subtype_evDir reference, and no Point_data pickle writer.",
+      "impact": "Keep GeoJax as a plausible pre-artifact dependency/runtime family; do not label this module the historical producer."
     }
   ],
   "runtime_type_fingerprint_assessment": {

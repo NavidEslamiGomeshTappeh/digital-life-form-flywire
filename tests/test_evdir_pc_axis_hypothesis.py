@@ -181,3 +181,27 @@ def test_jax_scalar_fingerprint_ranks_runtime_family_only_as_inference():
     family_claim = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-029")
     assert producer["status"] == "UNRESOLVED"
     assert family_claim["status"] == "INFERENCE_ONLY"
+
+
+def test_same_week_geojax_consumer_is_not_misidentified_as_point_data_producer():
+    bridge = json.loads(
+        (ROOT / "evidence" / "contemporaneous_pointdata_geojax_consumer.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    observed = bridge["random_bifurcations_nonproducer_check"]
+    nonproducer = observed["non_producer_indicators"]
+    figure5 = observed["figure5_binding"]
+    assert figure5["loads_exact_historical_point_data_blob"] is True
+    assert figure5["notebook_blob_sha1"] == "a65df260ce2b118d44e58388349b91a6c9483333"
+    assert figure5["consumes_from_point_data"] == ["PC1", "PC2", "PC3"]
+    assert nonproducer["mentions_subtype_evdir_literal"] is False
+    assert nonproducer["calls_coord_eig_decomp"] is False
+    assert nonproducer["calls_align_point_cloud"] is False
+    assert nonproducer["writes_point_data_pickle"] is False
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    producer = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-002")
+    consumer = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-030")
+    assert producer["status"] == "UNRESOLVED"
+    assert consumer["status"] == "PROVEN"
