@@ -536,6 +536,20 @@
         "T5a and T5b retain substantial angular error under the candidate x-axis convention and have larger median absolute z components.",
         "The exact eigenvector index, transform, and sign/orientation rule remain unresolved."
       ]
+    },
+    {
+      "id": "C-POINTDATA-025",
+      "statement": "At the last public GeoJax snapshot before the historical Point_data.pkl ingest (2025-05-02), coord_eig_decomp provided robust JAX PCA with sorted eigenvectors and align_point_cloud accepted a caller-supplied eigenvector order and target basis, applying sign alignment per vector. This proves that configurable eigenvector-order/orientation machinery existed before the artifact, not that this code generated Subtype_evDir.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-GEOJAX-PREARTIFACT"
+      ],
+      "caveats": [
+        "align_point_cloud returns aligned coordinates; the source snapshot does not directly define or emit Subtype_evDir_x/y/z.",
+        "No producer invocation, subtype-specific order argument, target basis, or December 2025 dependency revision has been recovered.",
+        "C-POINTDATA-002 remains UNRESOLVED."
+      ]
     }
   ]
 }
