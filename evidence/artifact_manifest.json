@@ -651,7 +651,7 @@
       "role": "regression_test_for_provenance_boundaries",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "da082edd435cfbf8c59287d426be38989b1abb48"
+        "value": "dbc05280cd5ef8498419a723bd108198db9c9537"
       }
     },
     {

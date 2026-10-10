@@ -140,7 +140,9 @@ def test_legacy_neurosetta_eigen_alignment_is_a_pre_artifact_capability_not_prod
     assert evidence["source"]["pinned_commit"] == "9c27f226128d98ea5420e7a3a32acf2adc8ce138"
     assert evidence["source"]["commit_timestamp"] == "2025-01-15T11:30:24Z"
     assert impl["coord_eig_decomp"]["eigensolver"] == "numpy.linalg.eig"
-    assert "caller-specified eig_order" not in impl["eig_align"]["capabilities"]
+    assert any(
+        "via eig_order" in item for item in impl["eig_align"]["capabilities"]
+    )
     assert any("eigenvector index" in item for item in impl["eig_align"]["capabilities"])
     assert impl["jax_declared_directly_in_environment_yml"] is False
     assert "does not define the historical Subtype_evDir_x/y/z" in impl["eig_align"]["output_behavior"]
