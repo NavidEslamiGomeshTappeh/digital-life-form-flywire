@@ -120,5 +120,18 @@
   "references": {
     "public_neurosetta_align_with_commit": "56d40605f8a36db319e4c3ae81fbfed24b062c7f",
     "legacy_neurosetta_eig_order_commit": "9c27f226128d98ea5420e7a3a32acf2adc8ce138"
+  },
+  "ci_execution": {
+    "workflow": "Historical Point_data Subtype evDir audit",
+    "run_id": 38043403261,
+    "run_url": "https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/actions/runs/38043403261",
+    "commit": "05da73ae3c3ba04b4c63a3937a7c3c19b70a8102",
+    "conclusion": "success",
+    "job_id": 114187998189,
+    "test": "tests/test_evdir_pc_axis_hypothesis.py",
+    "test_result": "1 passed",
+    "artifact_id": 11666014992,
+    "artifact_name": "historical-point-data-evdir-audit",
+    "artifact_sha256": "f13a95281cd11dfd8635d2af9e811a937469a528872dff424a662a060e331166"
   }
 }
