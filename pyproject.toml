@@ -42,7 +42,7 @@ Issues = "https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/i
 
 [project.optional-dependencies]
 dev = [
-  "pytest>=8,<9",
+  "pytest>=8,<10",
   "ruff>=0.13,<1",
   "build>=1,<2",
 ]
