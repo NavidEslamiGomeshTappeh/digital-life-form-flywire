@@ -1,6 +1,10 @@
 # Changelog
 
 
+## Unreleased maintenance — 2026-10-10
+- Added a commit-pinned GeoJax pre-artifact alignment snapshot: robust covariance defaults (`c=1.5`, `tol=1e-6`, `max_iter=100`), sorted JAX PCA, caller-supplied eigenvector order, and target-basis sign alignment. Explicitly preserves the unresolved producer boundary.
+- Added claim `C-POINTDATA-025` and regression coverage so implementation capability is not misreported as proof of the `Subtype_evDir` producer.
+
 ## Unreleased maintenance — 2026-10-07
 - Tightened the historical Point_data candidate matrix with direct GeoJax chronology: PCA/JAX family introduced at `4dfc82b...` and last public pre-artifact head verified as `33b0f872...`.
 - Deepened historical Point_data provenance: byte-level pickle/JAX inspection, public Metrics1 pipeline parameter snapshot, public DAG ingest boundary, and bounded `Subtype_evDir_*` producer search.
