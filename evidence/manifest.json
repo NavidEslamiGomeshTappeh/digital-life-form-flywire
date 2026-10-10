@@ -18,6 +18,8 @@
   "scientific_boundary": {
     "individual_synapse_biological_compartment": "UNRESOLVED",
     "historical_generator_identity": "UNRESOLVED",
-    "study_to_project_coordinate_identity": "UNRESOLVED"
+    "study_to_project_coordinate_identity": "UNRESOLVED",
+    "evdir_eigenvector_identity": "UNRESOLVED",
+    "evdir_subtype_axis_interpretation": "INFERENCE_ONLY"
   }
 }
