@@ -66,7 +66,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "a93abe6b93f597a37bb7d1b952b11f0b15ae107a"
+        "value": "c82ad88b74659ce49d93bca18c01a21a6e34c126"
       }
     },
     {
@@ -75,7 +75,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "cfd36d9cc5bdf9a34fee4930d3f09b9bf208bf9e"
+        "value": "6055ad3fcd269382be7f595b55b79d4d39dca733"
       }
     },
     {
@@ -936,6 +936,33 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "bce05f14f9461f65821a9a013742891efe3f43ee"
+      }
+    },
+    {
+      "id": "E-POINTDATA-EVDIR-PC-AXIS-HYPOTHESIS",
+      "path": "evidence/point_data_evdir_pc_axis_hypothesis.json",
+      "role": "subtype_dependent_historical_evdir_angle_hypothesis",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "b382c71f3bddf105528fb313b4fcdb3eaf9d76ab"
+      }
+    },
+    {
+      "id": "E-POINTDATA-EVDIR-PC-AXIS-HYPOTHESIS-TEST",
+      "path": "tests/test_evdir_pc_axis_hypothesis.py",
+      "role": "regression_test_for_evdir_hypothesis_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "de7fa582489ba6795d08282ad2c754a3e8cfee86"
+      }
+    },
+    {
+      "id": "E-POINTDATA-EVDIR-AUDIT-SCRIPT",
+      "path": "scripts/audit_point_data_evdir.py",
+      "role": "historical_evdir_axis_and_subtype_rule_audit",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "8fcfca3cac19f6db41d16c15936bfe26fb8e49e2"
       }
     }
   ]
