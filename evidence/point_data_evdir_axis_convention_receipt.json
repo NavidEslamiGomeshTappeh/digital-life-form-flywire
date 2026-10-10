@@ -74,9 +74,9 @@
   "subtype_rule_test": {
     "rule": "Use +x for a/b and +y for c/d, always measuring signed planar direction in the xy plane about +z.",
     "weighted_global_rmse_rad": 0.42643560211880194,
-    "weighted_global_rmse_deg": 24.433436,
+    "weighted_global_rmse_deg": 24.432960235527375,
     "comparison_to_universal_yz_rmse_rad": 1.028814212980031,
-    "relative_rmse_reduction": 0.585645,
+    "relative_rmse_reduction": 0.5855076682080413,
     "interpretation": "This subtype-dependent axis rule is substantially closer to the historical PC1_angle field than one universal evDir->+y convention, but it remains an inference about the meaning of evDir."
   },
   "structural_finding": {
@@ -89,5 +89,11 @@
     "published_paper_lines": "The paper states that the longest internal dendrite axis is aligned to y for local subtype overlays, and that a/b dendrites grow along the anterior-posterior axis while c/d occupy the vertical axis.",
     "inference": "The observed evDir pattern is consistent with a direction-related field that uses the horizontal x axis for a/b and vertical y axis for c/d, rather than with evDir being universally identical to the PC1 vector.",
     "caution": "The available public paper does not define the historical Subtype_evDir_* columns, so their exact formula, sign rule, and producer remain unresolved."
+  },
+  "arithmetic_check": {
+    "formula_relative_rmse_reduction": "1 - weighted_global_rmse_rad / comparison_to_universal_yz_rmse_rad",
+    "recomputed_weighted_global_rmse_deg": 24.432960235527375,
+    "recomputed_relative_rmse_reduction": 0.5855076682080413,
+    "note": "Corrected summary arithmetic only; underlying row-level angle observations and comparisons are unchanged."
   }
 }
