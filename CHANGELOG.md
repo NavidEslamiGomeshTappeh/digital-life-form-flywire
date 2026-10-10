@@ -2,6 +2,7 @@
 
 
 ## Unreleased maintenance — 2026-10-10
+- Added a bounded runtime-fingerprint comparison: the 46,624 serialized float32 JAX scalar cells fit a JAX-native GeoJax output family more directly than the inspected NumPy/SciPy legacy eig_align path. This is explicitly `INFERENCE_ONLY`, not producer attribution (`C-POINTDATA-029`).
 - Added a commit-pinned audit of public `Neurosetta_legacy_v0.0.1` (2025-01-15): NumPy eigendecomposition and configurable `eig_order` / `align_order` / `perspective_order`. The receipt explicitly distinguishes this pre-artifact capability from the historic JAX-scalar `Subtype_evDir` producer.
 - Added claim `C-POINTDATA-028` and a regression guard that preserves `C-POINTDATA-002` as unresolved.
 - Pinned the current NeuRosetta PCA source timeline: the repository's initial dated commit contains no Python source, its first public PCA utility is NumPy SVD on 2026-07-27, and the geometry-utils `eigh` refactor follows on 2026-07-28. Current NeuRosetta PCA is therefore not treated as direct evidence for the Dec 2025 producer.

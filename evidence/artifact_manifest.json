@@ -57,7 +57,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d35667e77988c01dafe3dd111746e81a5e79d44e"
+        "value": "e72d18e69efb678934f382e4167efd85c8700f3c"
       }
     },
     {
@@ -336,7 +336,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "834d3dc026f260a901bc0cd80450bba36cd29043"
+        "value": "f90fc276f14306758083224a67ccd0b4b494fe6f"
       }
     },
     {
@@ -651,7 +651,7 @@
       "role": "regression_test_for_provenance_boundaries",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "dbc05280cd5ef8498419a723bd108198db9c9537"
+        "value": "607098b4f8540fd52b54180c566b21871133811f"
       }
     },
     {
@@ -777,7 +777,7 @@
       "role": "point_data_revision_candidate_matrix",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "97ca1e7d41b68c48a7e81897840d08b374d2940b"
+        "value": "f4e99f11d0ca6bb7473b9a3cd1f0dd269a89f28c"
       }
     },
     {

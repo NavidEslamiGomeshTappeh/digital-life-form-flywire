@@ -591,6 +591,23 @@
         "The committed environment.yml does not list JAX directly, but does not prove what other software may have been installed locally.",
         "C-POINTDATA-002 remains UNRESOLVED."
       ]
+    },
+    {
+      "id": "C-POINTDATA-029",
+      "statement": "The historical pickle serializes all eight PCA/angle/direction-vector columns across 5,828 rows as scalar float32 jaxlib._jax.ArrayImpl values (46,624 cells). This runtime fingerprint is more directly compatible with a JAX-native path such as the pre-artifact GeoJax PCA/eigenvector code than with direct output from the inspected NumPy/SciPy legacy eig_align implementation. The comparison supports only a relative implementation-family inference, not exact producer identity.",
+      "classification": "INFERENCE_ONLY",
+      "status": "INFERENCE_ONLY",
+      "evidence": [
+        "E-POINTDATA-PICKLE-GLOBALS",
+        "E-POINTDATA-GEOJAX-PREARTIFACT",
+        "E-POINTDATA-LEGACY-NEUROSETTA-EIG-ALIGN"
+      ],
+      "caveats": [
+        "NumPy/SciPy values could have been converted to JAX arrays before serialization.",
+        "The producer may have used private, local, uncommitted or modified code.",
+        "The JAX serializer fingerprint proves the object type at serialization, not the function that computed the values.",
+        "C-POINTDATA-002 remains UNRESOLVED."
+      ]
     }
   ]
 }

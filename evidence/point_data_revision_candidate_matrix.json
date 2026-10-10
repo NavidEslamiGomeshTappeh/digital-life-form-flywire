@@ -21,7 +21,8 @@
         "The public GeoJax history shows no later commits before 2026-01-16.",
         "The paper's contemporaneous 2025-12-10 Random_bifurcations history imports GeoJax as gj and directly uses gj.cross/gj.angle/gj.normalize while reading Point_data-derived PCA columns.",
         "GeoJax/alignment.py has the same blob SHA 53560fd7de0463a51e1283b4a9c0e0db5bb33e8e at both 2025-04-23 v0.2 and 2025-05-02, so the robust PCA implementation was unchanged through the pre-artifact head.",
-        "GeoJax/angles.py at the pre-artifact head has the Apr-30 signed-angle arctan2 implementation, which is later consistent with the contemporaneous paper's angle consumers."
+        "GeoJax/angles.py at the pre-artifact head has the Apr-30 signed-angle arctan2 implementation, which is later consistent with the contemporaneous paper's angle consumers.",
+        "The historic Point_data pickle stores all eight PCA/angle/direction scalar columns as float32 jaxlib._jax.ArrayImpl values; GeoJax's JAX-native PCA return types are more directly compatible with that serializer fingerprint than the inspected NumPy-only legacy alignment routine."
       ],
       "confidence": {
         "as_dependency_head_candidate": "HIGH",
@@ -59,6 +60,17 @@
       "confidence": {
         "as_pre_artifact_software_family_context": "HIGH",
         "as_exact_Point_data_producer_revision": "LOW"
+      },
+      "public_implementation_snapshot": {
+        "commit": "9c27f226128d98ea5420e7a3a32acf2adc8ce138",
+        "date_utc": "2025-01-15T11:30:24Z",
+        "file": "Neurosetta/rotations.py",
+        "file_blob_sha1": "b27b095090f5d54b54834709a4b33d6ec39f1f1f",
+        "signatures": [
+          "coord_eig_decomp(coords, robust=True, center=False, PCA=True, sort=True, transpose=True)",
+          "eig_align(N, eig_order, align_order, perspective_order, center='root', robust=True, bind=True)"
+        ],
+        "output_boundary": "The inspected functions do not directly emit the historical Subtype_evDir columns."
       }
     },
     "current_neurosetta": {
@@ -119,6 +131,75 @@
       "status": "PROVEN_PUBLIC_NOTEBOOK_NON_IDENTITY",
       "details": "Public Metrics1_Point_data.ipynb at commit 3a1aa1a... contains a 23-column per-tree function and no persistence call; historical Point_data has 24 columns including Subtype_evDir_x/y/z. Indexed public code search returned zero hits for evDir/Subtype_evDir/to_pickle.",
       "impact": "Do not label the public Metrics1 notebook as the exact historical Point_data producer."
+    },
+    {
+      "date_utc": "2026-10-10",
+      "finding": "Serialized JAX scalar fingerprint versus public PCA candidate families",
+      "status": "INFERENCE_ONLY",
+      "details": "The 46,624 float32 JAX scalar cells are directly compatible with GeoJax JAX-array outputs. The pre-artifact legacy Neurosetta eig_align API proves configurable axis selection but its inspected implementation is NumPy/SciPy and does not directly explain the JAX scalar serialization. This is a relative compatibility inference only; a conversion or local implementation remains possible.",
+      "impact": "Rank the JAX/GeoJax family higher for runtime-type compatibility, but do not identify it as the exact historical producer or change C-POINTDATA-002 from UNRESOLVED."
     }
-  ]
+  ],
+  "runtime_type_fingerprint_assessment": {
+    "historical_pickle": {
+      "sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+      "pickle_global": "jax._src.array._reconstruct_array",
+      "object_type": "jaxlib._jax.ArrayImpl",
+      "dtype": "float32",
+      "shape": "()",
+      "columns": [
+        "PC1",
+        "PC2",
+        "PC3",
+        "PC1_angle",
+        "Mean_segment_angle",
+        "Subtype_evDir_x",
+        "Subtype_evDir_y",
+        "Subtype_evDir_z"
+      ],
+      "rows": 5828,
+      "scalar_cells": 46624
+    },
+    "relative_compatibility": {
+      "geojax": {
+        "source_commit": "33b0f8727ab447eff86e35a69c60c1f33b4d1513",
+        "mechanisms": [
+          "coord_eig_decomp uses jnp.linalg.eigh and returns jnp arrays",
+          "align_point_cloud accepts a caller-supplied eigenvector order and target basis"
+        ],
+        "assessment": "JAX object fingerprint and PCA/eigenvector array family are directly compatible with the historical scalar type at serialization time."
+      },
+      "legacy_neurosetta": {
+        "source_commit": "9c27f226128d98ea5420e7a3a32acf2adc8ce138",
+        "mechanisms": [
+          "coord_eig_decomp uses numpy.linalg.eig",
+          "eig_align accepts eig_order, align_order and perspective_order",
+          "environment.yml does not directly declare JAX"
+        ],
+        "assessment": "The committed functions use NumPy/SciPy/scikit-learn and return/bind rotated coordinates; the inspected implementation does not directly account for JAX ArrayImpl scalar columns."
+      },
+      "current_neurosetta": {
+        "source_commit": "700922e9f7d6d80143cfcc0e86751d902ba22a4c",
+        "date_utc": "2026-07-28T22:03:34Z",
+        "mechanism": "NumPy eig_decomp using numpy.linalg.eigh",
+        "assessment": "Public code revision is post-artifact and cannot be used as direct evidence of the December producer."
+      }
+    },
+    "conclusion": {
+      "status": "INFERENCE_ONLY",
+      "statement": "If these eight scalar columns were serialized without an intermediate type conversion, the runtime fingerprint is more directly compatible with a JAX-based computation/serialization path such as public GeoJax than with direct use of the inspected NumPy-only legacy eig_align path.",
+      "alternatives": [
+        "A NumPy/SciPy result could have been converted to JAX scalar arrays before DataFrame serialization.",
+        "Private, uncommitted, or modified local code may differ from the public snapshots.",
+        "Another JAX-based implementation may have produced the values."
+      ],
+      "not_proven": [
+        "The producer imported GeoJax.",
+        "The producer used the exact GeoJax commit pinned above.",
+        "Any Subtype_evDir vector was a specific PC/eigenvector index.",
+        "The exact output conversion or writer path."
+      ],
+      "unresolved_claim_id": "C-POINTDATA-002"
+    }
+  }
 }

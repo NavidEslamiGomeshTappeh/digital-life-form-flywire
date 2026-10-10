@@ -23,6 +23,7 @@
     "evdir_subtype_axis_interpretation": "INFERENCE_ONLY",
     "point_data_public_history": "PROVEN_PUBLIC_FILE_TIMELINE_BUT_LOCAL_PRODUCER_UNRESOLVED",
     "neurosetta_current_pca_source_timeline": "PROVEN_POST_ARTIFACT_PUBLIC_HISTORY",
-    "legacy_neurosetta_eigen_alignment": "PROVEN_PRE_ARTIFACT_CAPABILITY_BUT_PRODUCER_UNRESOLVED"
+    "legacy_neurosetta_eigen_alignment": "PROVEN_PRE_ARTIFACT_CAPABILITY_BUT_PRODUCER_UNRESOLVED",
+    "runtime_type_to_implementation_family": "INFERENCE_ONLY_GEOJAX_MORE_DIRECTLY_COMPATIBLE_BUT_PRODUCER_UNRESOLVED"
   }
 }

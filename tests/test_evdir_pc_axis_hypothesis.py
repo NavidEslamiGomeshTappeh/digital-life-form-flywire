@@ -153,3 +153,31 @@ def test_legacy_neurosetta_eigen_alignment_is_a_pre_artifact_capability_not_prod
     assert producer["status"] == "UNRESOLVED"
     assert legacy["status"] == "PROVEN"
     assert "does not prove that this code produced Subtype_evDir" in legacy["statement"]
+
+
+def test_jax_scalar_fingerprint_ranks_runtime_family_only_as_inference():
+    matrix = json.loads(
+        (ROOT / "evidence" / "point_data_revision_candidate_matrix.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    comparison = matrix["runtime_type_fingerprint_assessment"]
+    historical = comparison["historical_pickle"]
+    assert historical["object_type"] == "jaxlib._jax.ArrayImpl"
+    assert historical["scalar_cells"] == 46624
+    assert len(historical["columns"]) == 8
+    assert historical["rows"] * len(historical["columns"]) == historical["scalar_cells"]
+    assert comparison["relative_compatibility"]["geojax"]["source_commit"] == (
+        "33b0f8727ab447eff86e35a69c60c1f33b4d1513"
+    )
+    assert comparison["relative_compatibility"]["legacy_neurosetta"]["source_commit"] == (
+        "9c27f226128d98ea5420e7a3a32acf2adc8ce138"
+    )
+    assert comparison["conclusion"]["status"] == "INFERENCE_ONLY"
+    assert comparison["conclusion"]["unresolved_claim_id"] == "C-POINTDATA-002"
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    producer = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-002")
+    family_claim = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-029")
+    assert producer["status"] == "UNRESOLVED"
+    assert family_claim["status"] == "INFERENCE_ONLY"
