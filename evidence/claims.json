@@ -563,6 +563,20 @@
         "C-POINTDATA-002 remains UNRESOLVED because GitHub's public history cannot establish which local/private script generated the binary.",
         "The later public Metrics1 notebook is not proof of the December 2025 producing implementation."
       ]
+    },
+    {
+      "id": "C-POINTDATA-027",
+      "statement": "The present public NeuRosetta repository's initial commit (timestamped 2025-10-21) contains only .gitignore, LICENSE.md, and a 13-byte README. The first PCA utility in its path history appears on 2026-07-27 as a 13-line NumPy SVD module, followed on 2026-07-28 by a 291-line NumPy eig_decomp refactor using numpy.linalg.eigh. This proves the public current NeuRosetta PCA implementation is post-artifact evidence, not proof of the December 2025 producer; local/private or older legacy implementation remains possible.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-NEUROSETTA-PCA-TIMELINE"
+      ],
+      "caveats": [
+        "The Git author/committer date of the initial repository commit is not a repository-publication timestamp; the repository itself was created 2026-01-20.",
+        "No claim is made that equivalent local/private or pre-existing legacy code did not exist.",
+        "C-POINTDATA-002 remains UNRESOLVED."
+      ]
     }
   ]
 }

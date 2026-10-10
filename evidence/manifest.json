@@ -21,6 +21,7 @@
     "study_to_project_coordinate_identity": "UNRESOLVED",
     "evdir_eigenvector_identity": "UNRESOLVED",
     "evdir_subtype_axis_interpretation": "INFERENCE_ONLY",
-    "point_data_public_history": "PROVEN_PUBLIC_FILE_TIMELINE_BUT_LOCAL_PRODUCER_UNRESOLVED"
+    "point_data_public_history": "PROVEN_PUBLIC_FILE_TIMELINE_BUT_LOCAL_PRODUCER_UNRESOLVED",
+    "neurosetta_current_pca_source_timeline": "PROVEN_POST_ARTIFACT_PUBLIC_HISTORY"
   }
 }

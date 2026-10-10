@@ -101,3 +101,30 @@ def test_historical_point_data_public_history_keeps_producer_boundary_unresolved
     timeline_claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-026")
     assert producer_claim["status"] == "UNRESOLVED"
     assert timeline_claim["status"] == "PROVEN"
+
+
+def test_current_neurosetta_pca_history_is_post_artifact_and_not_producer_proof():
+    history = json.loads(
+        (ROOT / "evidence" / "public_neurosetta_geometry_timeline.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    events = {item["kind"]: item for item in history["events"]}
+    initial = events["repository_initial_commit"]
+    first_pca = events["first_pca_module_in_public_git_history"]
+    refactor = events["pca_refactored_into_geometry_utils"]
+
+    assert history["source"]["repository_created_at"] == "2026-01-20T22:42:16Z"
+    assert initial["timestamp"] == "2025-10-21T09:23:42Z"
+    assert initial["files_at_this_commit"] == [".gitignore", "LICENSE.md", "README.md"]
+    assert first_pca["timestamp"] == "2026-07-27T15:05:30Z"
+    assert "np.linalg.svd" in first_pca["implementation_summary"]["principal_components"]
+    assert refactor["timestamp"] == "2026-07-28T22:03:34Z"
+    assert refactor["implementation_summary"]["eigensolver"] == "numpy.linalg.eigh"
+    assert history["conclusion"]["unresolved_claim_id"] == "C-POINTDATA-002"
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    producer_claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
+    timeline_claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-027")
+    assert producer_claim["status"] == "UNRESOLVED"
+    assert timeline_claim["status"] == "PROVEN"

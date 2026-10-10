@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_PUBLIC_NEUROSETTA_PCA_TIMELINE",
+  "purpose": "Pin the public GitHub timeline of the present NeuRosetta repository's PCA files so its July/August 2026 implementation is not misused as proof of the December 2025 Point_data producer.",
+  "source": {
+    "repository": "NikDrummond/NeuRosetta",
+    "url": "https://github.com/NikDrummond/NeuRosetta",
+    "repository_created_at": "2026-01-20T22:42:16Z",
+    "pushed_at_observed_at_audit": "2026-10-06T13:11:21Z",
+    "caveat": "GitHub repository creation metadata and Git author/committer timestamps answer different questions; the earliest commit timestamp predates repository creation, but the source tree at that initial commit contains only three non-code root files."
+  },
+  "events": [
+    {
+      "kind": "repository_initial_commit",
+      "commit": "e8e9d02fd308d1f5f3d8dc568c3d4f0af6bff870",
+      "timestamp": "2025-10-21T09:23:42Z",
+      "message": "Initial commit",
+      "parent_count": 0,
+      "files_at_this_commit": [
+        ".gitignore",
+        "LICENSE.md",
+        "README.md"
+      ],
+      "readme_size_bytes": 13,
+      "observation": "The initial commit has no Python source tree and no PCA/geometry implementation."
+    },
+    {
+      "kind": "first_pca_module_in_public_git_history",
+      "commit": "dd275628e4bbdb5674ab8d7ae1cfba12a9ca7177",
+      "timestamp": "2026-07-27T15:05:30Z",
+      "message": "woops",
+      "path": "src/NeuRosetta/utils/numpy_utils/pca.py",
+      "blob_sha1": "ef772b03eecb02c1123487db1bc2e0149b43288b",
+      "file_status": "added",
+      "additions": 13,
+      "implementation_summary": {
+        "imports": "import numpy as np",
+        "principal_components": "mean = np.mean(coords, axis=0); _, _, result = np.linalg.svd(coords - mean)",
+        "other_function": "major_axis(coords)",
+        "framework": "NumPy SVD, not JAX"
+      }
+    },
+    {
+      "kind": "pca_refactored_into_geometry_utils",
+      "commit": "700922e9f7d6d80143cfcc0e86751d902ba22a4c",
+      "timestamp": "2026-07-28T22:03:34Z",
+      "message": "starting on numpy/numba geometry",
+      "path": "src/NeuRosetta/utils/geometry_utils/pca.py",
+      "blob_sha1": "5948765fb44cc9693cda8f038fd4d37ad3dce65c",
+      "file_status": "added",
+      "additions": 291,
+      "removed_path": "src/NeuRosetta/utils/numpy_utils/pca.py",
+      "implementation_summary": {
+        "imports": "from numpy import ...; from numpy.linalg import inv, eigh",
+        "robust_covariance": "Huber M-estimator helper with inverse-covariance diagonal regularizer 1e-6",
+        "main_function_signature": "eig_decomp(x: ndarray, y: ndarray, z: ndarray, robust: bool = False, norm=False)",
+        "eigensolver": "numpy.linalg.eigh",
+        "eigenvector_layout": "columns corresponding to eigenvalues",
+        "framework": "NumPy implementation"
+      },
+      "interpretation": "This July 2026 refactor is not evidence of the exact dependency or implementation present at the December 2025 artifact date."
+    },
+    {
+      "kind": "package_path_case_rename",
+      "commit": "222220649460a6179e37ec9c3a5643d6826d0c39",
+      "timestamp": "2026-08-12T16:48:15Z",
+      "message": "push for lower case pythoninc naming :(",
+      "old_path": "src/NeuRosetta/utils/geometry_utils/pca.py",
+      "new_path": "src/neurosetta/utils/geometry_utils/pca.py",
+      "observation": "Current lowercase module path is downstream of the July implementation, not a pre-artifact snapshot."
+    }
+  ],
+  "conclusion": {
+    "proven": [
+      "The current NeuRosetta GitHub repository was created after the historical Point_data.pkl public commit.",
+      "Although its initial commit timestamp is 2025-10-21, that commit tree contains no Python source files.",
+      "The first public PCA utility in this repository path history appears on 2026-07-27 and uses NumPy SVD.",
+      "The current geometry_utils PCA file was added on 2026-07-28 as a NumPy implementation using numpy.linalg.eigh, well after the December 2025 artifact."
+    ],
+    "not_proven": [
+      "Whether equivalent code existed in the author's local/private working tree before it was pushed to GitHub.",
+      "Whether a pre-existing GeoJax or Neurosetta_legacy function was used by an uncommitted historical producer.",
+      "The exact function, dependency revision, subtype axis order, or serialization route that generated Subtype_evDir_x/y/z."
+    ],
+    "relevant_pre_artifact_public_alternative": "NikDrummond/GeoJax commit 33b0f8727ab447eff86e35a69c60c1f33b4d1513 (2025-05-02) exposes JAX PCA and caller-selected eigenvector ordering, but no producer invocation has been recovered.",
+    "unresolved_claim_id": "C-POINTDATA-002"
+  },
+  "references": {
+    "initial_commit_url": "https://github.com/NikDrummond/NeuRosetta/commit/e8e9d02fd308d1f5f3d8dc568c3d4f0af6bff870",
+    "first_pca_url": "https://github.com/NikDrummond/NeuRosetta/commit/dd275628e4bbdb5674ab8d7ae1cfba12a9ca7177",
+    "pca_refactor_url": "https://github.com/NikDrummond/NeuRosetta/commit/700922e9f7d6d80143cfcc0e86751d902ba22a4c",
+    "case_rename_url": "https://github.com/NikDrummond/NeuRosetta/commit/222220649460a6179e37ec9c3a5643d6826d0c39",
+    "pre_artifact_geojax_url": "https://github.com/NikDrummond/GeoJax/commit/33b0f8727ab447eff86e35a69c60c1f33b4d1513"
+  }
+}
