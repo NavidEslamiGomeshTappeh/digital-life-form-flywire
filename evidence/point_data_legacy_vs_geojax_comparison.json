@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "checked_date": "2026-10-12",
-  "status": "GEOfJAX_BETTER_TYPE_COMPATIBLE_PUBLIC_CANDIDATE; NEUROSETTA_LEGACY_ALGORITHM_CANDIDATE_NOT_PRODUCER",
+  "status": "GEOJAX_BETTER_TYPE_COMPATIBLE_PUBLIC_CANDIDATE; NEUROSETTA_LEGACY_ALGORITHM_CANDIDATE_NOT_PRODUCER",
   "historical_artifact": {
     "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
     "path": "Data/Point_data.pkl",

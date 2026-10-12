@@ -760,7 +760,7 @@ def test_geojax_candidate_ranks_above_legacy_only_for_type_fit_not_producer_iden
         )
     )
     assert evidence["status"] == (
-        "GEOfJAX_BETTER_TYPE_COMPATIBLE_PUBLIC_CANDIDATE; NEUROSETTA_LEGACY_ALGORITHM_CANDIDATE_NOT_PRODUCER"
+        "GEOJAX_BETTER_TYPE_COMPATIBLE_PUBLIC_CANDIDATE; NEUROSETTA_LEGACY_ALGORITHM_CANDIDATE_NOT_PRODUCER"
     )
     candidates = {item["repository"]: item for item in evidence["candidate_comparison"]}
     geo = candidates["NikDrummond/GeoJax"]
