@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "status": "BOUNDED_PUBLIC_SEARCH_FOUND_NO_DIRECT_SUBTYPE_EVDIR_PRODUCER",
+  "checked_date": "2026-10-12",
+  "purpose": "Record an expanded but explicitly bounded search of the public repositories most directly related to the historical Point_data producer. This is negative search evidence, not proof that a private/local producer never existed.",
+  "historical_artifact": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "path": "Data/Point_data.pkl",
+    "first_public_commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "git_blob_sha1": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+    "sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+  },
+  "scope": {
+    "repositories": [
+      {
+        "name": "NikDrummond/GeoJax",
+        "role": "pre-artifact public JAX PCA and alignment candidate",
+        "inspected_ref": "33b0f8727ab447eff86e35a69c60c1f33b4d1513"
+      },
+      {
+        "name": "NikDrummond/Neurosetta_legacy_v0.0.1",
+        "role": "pre-artifact NumPy PCA/eigen-alignment candidate",
+        "inspected_ref": "25c911a28030deb5204eb7ab5a18ff4643363d96"
+      },
+      {
+        "name": "NikDrummond/Neurosetta_old",
+        "role": "older public morphology/geometry family",
+        "inspected_scope": "public default branch code search"
+      },
+      {
+        "name": "NikDrummond/NeuRosetta",
+        "role": "later public morphology/PCA API",
+        "inspected_scope": "public default branch code search; post-artifact source chronology"
+      },
+      {
+        "name": "NikDrummond/Neu_Trees",
+        "role": "related public repository",
+        "inspected_scope": "README and public default-branch code search"
+      },
+      {
+        "name": "NikDrummond/NeuOptics",
+        "role": "related public fly visual-system repository",
+        "inspected_scope": "README and public default-branch code search"
+      },
+      {
+        "name": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+        "role": "historical artifact and later paper notebooks",
+        "inspected_scope": "public default branch and dated commits around artifact/later public notebook release"
+      }
+    ],
+    "query_terms": [
+      "Subtype_evDir",
+      "Point_data.pkl",
+      "evDir",
+      "coord_eig_decomp",
+      "coordinate_pca",
+      "PC1_angle"
+    ],
+    "additional_repository_name_query": "T45_Morpho_data",
+    "search_mode": "GitHub public code search and repository-name/description search, supplemented by direct inspection of named source files and immutable revisions"
+  },
+  "search_results": {
+    "Subtype_evDir": {
+      "match_count": 0,
+      "interpretation": "No text/code-search match surfaced in the seven selected public repositories for the historical field name."
+    },
+    "Point_data.pkl": {
+      "match_count": 0,
+      "interpretation": "No text/code-search match surfaced in the six selected related repositories outside the paper repository. GitHub text search does not inspect the binary pickle payload itself; the known binary artifact is separately identified by commit, Git blob and SHA-256."
+    },
+    "evDir": {
+      "match_count": 0,
+      "interpretation": "No text/code-search match surfaced in the selected related public repository code."
+    },
+    "coord_eig_decomp": {
+      "search_hit_paths": [
+        "NikDrummond/Neurosetta_legacy_v0.0.1/Neurosetta/rotations.py"
+      ],
+      "additional_direct_inspection": "GeoJax/GeoJax/alignment.py at the pinned pre-artifact commit also defines coord_eig_decomp; this was confirmed by fetching the exact file, irrespective of code-search indexing."
+    },
+    "coordinate_pca": {
+      "returned_paths_include": [
+        "NikDrummond/NeuRosetta/src/neurosetta/ops/tree_graphs/tree_coordinates.py",
+        "NikDrummond/NeuRosetta/src/neurosetta/api/tree_class.py",
+        "borstlab/T4_T5_Dendrite_Morphology_Paper/Notebooks/Metrics1_Point_data.ipynb"
+      ],
+      "interpretation": "These are general PCA/metric implementations or later public consumers; no matched file binds them to the December 2025 evDir fields."
+    },
+    "PC1_angle": {
+      "returned_paths_include": [
+        "borstlab/T4_T5_Dendrite_Morphology_Paper/Notebooks/Metrics1_Point_data.ipynb"
+      ],
+      "interpretation": "The public Metrics1 notebook computes PC1_angle from a sign-aligned PC1 vector and the y/z basis, but it does not define or write Subtype_evDir_x/y/z."
+    }
+  },
+  "direct_source_inspections": [
+    {
+      "repository": "NikDrummond/GeoJax",
+      "path": "GeoJax/alignment.py",
+      "commit": "33b0f8727ab447eff86e35a69c60c1f33b4d1513",
+      "blob_sha1": "53560fd7de0463a51e1283b4a9c0e0db5bb33e8e",
+      "observation": "coord_eig_decomp returns eigenvalues/eigenvectors; align_point_cloud applies caller-supplied axis order/sign alignment and returns rotated coordinates, not a Subtype_evDir vector table."
+    },
+    {
+      "repository": "NikDrummond/GeoJax",
+      "path": "setup.py",
+      "commit": "33b0f8727ab447eff86e35a69c60c1f33b4d1513",
+      "blob_sha1": "0a2f4758223c6965989e9e9c75f747e5349f452a",
+      "observation": "install_requires contains jax and jaxlib without version pins, so this packaging file does not identify an exact JAX runtime."
+    },
+    {
+      "repository": "NikDrummond/Neurosetta_legacy_v0.0.1",
+      "path": "Neurosetta/rotations.py",
+      "commit": "25c911a28030deb5204eb7ab5a18ff4643363d96",
+      "observation": "The legacy coord_eig_decomp is a NumPy/scikit-learn PCA candidate, but no inspected function names or writes the historical Subtype_evDir fields."
+    },
+    {
+      "repository": "NikDrummond/NeuRosetta",
+      "path": "src/neurosetta/ops/tree_graphs/tree_coordinates.py",
+      "inspected_commit": "56d40605f8a36db319e4c3ae81fbfed24b062c7f",
+      "observation": "The currently public coordinate_pca path is a later public API and cannot by itself establish the December 2025 execution revision."
+    },
+    {
+      "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+      "path": "Notebooks/Metrics1_Point_data.ipynb",
+      "first_public_commit": "8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+      "blob_sha1": "2c31080a7f6f69d1c603bf287e4a5da7d4c3712b",
+      "observation": "The later notebook has 23 metric columns, omits the three historical evDir fields, and has no active bulk apply/concat/pickle-save producer sequence."
+    },
+    {
+      "repository": "NikDrummond/Neu_Trees",
+      "path": "README.md",
+      "blob_sha1": "48a2e2ab1b5cdcd49cd5f312e9067b7d4298dd0c",
+      "observation": "The inspected README contributes no Point_data or PCA producer evidence."
+    },
+    {
+      "repository": "NikDrummond/NeuOptics",
+      "path": "README.md",
+      "blob_sha1": "cf358d7e006c7441992244e3d0e5c1a6bde28194",
+      "observation": "The inspected README describes a future optional visual-system submodule, not the historical morphology metric producer."
+    }
+  ],
+  "repository_name_search": {
+    "query": "T45_Morpho_data",
+    "match_count": 0,
+    "interpretation": "The public repository-name/description search returned no matching repository. This does not exclude a private repository, unindexed repository, or local-only directory."
+  },
+  "conclusion": {
+    "classification": "BOUNDED_NEGATIVE_SEARCH; NO_NEW_PRODUCER_IDENTIFIED",
+    "strongest_public_pca_candidate_remains": "GeoJax/JAX coord_eig_decomp algorithm family",
+    "exact_producer_claim_id": "C-POINTDATA-002",
+    "exact_producer_status": "UNRESOLVED",
+    "not_proven": [
+      "That the December 2025 Point_data producer lived in any one of the searched repositories.",
+      "That GeoJax/JAX generated the historical Subtype_evDir_x/y/z fields.",
+      "That the historical execution installed the JAX version compatible with the pickle serializer fingerprint.",
+      "That no source existed in a private/local workspace, notebook autosave, unindexed branch, or deleted repository."
+    ]
+  }
+}

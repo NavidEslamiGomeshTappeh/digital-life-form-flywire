@@ -823,6 +823,20 @@
         "The contemporaneous Figure 5 notebook proves only downstream use of PC1/PC2/PC3; the adjacent GeoJax caller is a non-producer of Point_data.",
         "The exact producer code, subtype-specific target basis/order, conversion path to JAX scalar values, and writer for Subtype_evDir_x/y/z remain unresolved under C-POINTDATA-002."
       ]
+    },
+    {
+      "id": "C-POINTDATA-045",
+      "statement": "A bounded public-code search across seven directly related repositories and six exact terms did not locate a public implementation that directly names or writes the historical Subtype_evDir_x/y/z fields. The search surfaced generic PCA code and later metric consumers, but no new exact producer.",
+      "classification": "BOUNDED_PUBLIC_SEARCH",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-RELATED-REPO-SEARCH"
+      ],
+      "caveats": [
+        "This is a statement about the recorded search scope and results, not proof that no public source exists anywhere.",
+        "The search does not exclude private/local code, deleted or unindexed repositories, uncommitted notebooks, binary artifacts, or unsearched branches.",
+        "The exact December 2025 producer remains unresolved under C-POINTDATA-002."
+      ]
     }
   ]
 }

@@ -598,3 +598,41 @@ def test_pre_artifact_geojax_pca_candidate_matches_jax_value_family_without_prod
     assert "E-POINTDATA-PCA-SUBTREE-REVISION-BOUNDARY" in claim["evidence"]
     unresolved = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
     assert unresolved["status"] == "UNRESOLVED"
+
+
+
+def test_expanded_related_public_repository_search_keeps_exact_producer_unresolved():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_related_repository_search.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == (
+        "BOUNDED_PUBLIC_SEARCH_FOUND_NO_DIRECT_SUBTYPE_EVDIR_PRODUCER"
+    )
+    assert len(evidence["scope"]["repositories"]) == 7
+    assert evidence["scope"]["query_terms"] == [
+        "Subtype_evDir", "Point_data.pkl", "evDir", "coord_eig_decomp",
+        "coordinate_pca", "PC1_angle"
+    ]
+    assert evidence["search_results"]["Subtype_evDir"]["match_count"] == 0
+    assert evidence["search_results"]["evDir"]["match_count"] == 0
+    assert evidence["repository_name_search"]["match_count"] == 0
+    assert evidence["conclusion"]["classification"] == (
+        "BOUNDED_NEGATIVE_SEARCH; NO_NEW_PRODUCER_IDENTIFIED"
+    )
+    assert evidence["conclusion"]["exact_producer_status"] == "UNRESOLVED"
+    geo = next(
+        item for item in evidence["direct_source_inspections"]
+        if item["repository"] == "NikDrummond/GeoJax"
+        and item["path"] == "GeoJax/alignment.py"
+    )
+    assert "returns rotated coordinates" in geo["observation"]
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    producer = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-002")
+    bounded_search = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-045")
+    assert producer["status"] == "UNRESOLVED"
+    assert bounded_search["status"] == "PROVEN"
+    assert "bounded" in bounded_search["statement"].lower()
+    assert "E-POINTDATA-RELATED-REPO-SEARCH" in bounded_search["evidence"]
