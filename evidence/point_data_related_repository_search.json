@@ -200,14 +200,15 @@
       ],
       "notebooks_directory_present": false,
       "data_directory_present": false,
-      "matching_history_paths_for": [
+      "interpretation": "The currently reachable public .history folder exposes editor-history snapshots for README, conda-environment and Python source files only. It contains no Notebook/ or Data/ history path, and no filename matching the historical Point_data producer.",
+      "searched_filename_tokens": [
         "Metrics1",
         "PP3",
         "Point_data",
         "evDir",
         "PCA"
       ],
-      "interpretation": "The currently reachable public .history folder exposes editor-history snapshots for README, conda-environment and Python source files only. It contains no Notebook/ or Data/ history path, and no filename matching the historical Point_data producer."
+      "matching_history_paths": []
     },
     "path_specific_git_history": {
       "metrics1_point_data_notebook": {

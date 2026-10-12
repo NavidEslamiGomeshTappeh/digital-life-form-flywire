@@ -666,7 +666,8 @@ def test_paper_repo_editor_history_and_notebook_timeline_do_not_overstate_produc
     assert hist["file_extension_counts"] == {".md": 44, ".yml": 11, ".py": 195}
     assert hist["notebooks_directory_present"] is False
     assert hist["data_directory_present"] is False
-    assert hist["matching_history_paths_for"] == []
+    assert hist["searched_filename_tokens"] == ["Metrics1", "PP3", "Point_data", "evDir", "PCA"]
+    assert hist["matching_history_paths"] == []
     notebook = history["path_specific_git_history"]["metrics1_point_data_notebook"]
     assert notebook["count"] == 1
     assert notebook["matching_commits"][0]["sha"] == "8700efd40bccfa3e74ac7c4df02da83a968b9b52"
