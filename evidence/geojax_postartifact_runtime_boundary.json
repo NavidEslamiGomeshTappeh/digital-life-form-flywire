@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "checked_date": "2026-10-12",
+  "status": "POST_ARTIFACT_GEOJAX_AND_CONDA_TIMELINE_PROVEN; EXACT_DECEMBER_PRODUCER_UNRESOLVED",
+  "historical_artifact": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "path": "Data/Point_data.pkl",
+    "first_public_commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "date": "2025-12-09",
+    "git_blob_sha1": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+    "sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+  },
+  "environment_recipe": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "path": "conda-environment.yml",
+    "commit": "11510d8504bbad56d4a9f532d5f3ac0e60eccd14",
+    "commit_date": "2026-01-16T13:42:40Z",
+    "blob_sha1": "7f08665154bdd3a55423fdc65f194dbb2da60689",
+    "requirements": {
+      "python": "python>=3.9",
+      "jax": "jax>=0.4.0",
+      "jaxlib": "jaxlib>=0.4.0",
+      "geojax": "git+https://github.com/NikDrummond/GeoJax.git",
+      "geoJax_revision_pinned": false,
+      "jax_upper_bound": false,
+      "jax_minimum_excludes_historical_serializer_incompatible_release": false
+    },
+    "interpretation": "This is a public environment recipe added 38 days after the December 9, 2025 Point_data artifact. The Git URL does not contain an @commit or tag, and the JAX/JAXLIB constraints are ranges rather than exact locks. It cannot be treated as the artifact producer's captured runtime."
+  },
+  "environment_editor_drafts": {
+    "source_repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "directory": ".history/",
+    "checked_drafts": 11,
+    "nonempty_drafts": 10,
+    "blank_draft": ".history/conda-environment_20260116143542.yml",
+    "remaining_draft_path_examples": [
+      ".history/conda-environment_20260116143549.yml",
+      ".history/conda-environment_20260116143556.yml",
+      ".history/conda-environment_20260116143559.yml",
+      ".history/conda-environment_20260116143600.yml",
+      ".history/conda-environment_20260116144038.yml",
+      ".history/conda-environment_20260116144040.yml",
+      ".history/conda-environment_20260116144043.yml",
+      ".history/conda-environment_20260116144046.yml",
+      ".history/conda-environment_20260116144052.yml",
+      ".history/conda-environment_20260116144056.yml"
+    ],
+    "stable_core_across_nonempty_drafts": [
+      "jax>=0.4.0",
+      "jaxlib>=0.4.0",
+      "git+https://github.com/NikDrummond/GeoJax.git"
+    ],
+    "observation": "The filenames date these editor snapshots to January 16, 2026, after the historical data artifact and after the public GeoJax alignment update at 14:06:07Z if the filename clock is interpreted as UTC. The drafts show unpinned requirements, not an execution receipt."
+  },
+  "geojax_public_timeline": {
+    "repository": "NikDrummond/GeoJax",
+    "default_branch": "main",
+    "pre_update_head": {
+      "commit": "33b0f8727ab447eff86e35a69c60c1f33b4d1513",
+      "date": "2025-05-02T13:36:30Z",
+      "role": "last public head before January 2026 changes; also parent of the January 16 update"
+    },
+    "post_artifact_alignment_update": {
+      "commit": "df2389d1a2494c5bdedd89d9cec96125442e54cf",
+      "date": "2026-01-16T14:06:07Z",
+      "parent": "33b0f8727ab447eff86e35a69c60c1f33b4d1513",
+      "message": "bits",
+      "path": "GeoJax/alignment.py",
+      "pre_update_blob_sha1": "53560fd7de0463a51e1283b4a9c0e0db5bb33e8e",
+      "post_update_blob_sha1": "c63255f455dd90da2143a31920184f0391d6b5a9",
+      "diff_summary": "Within center_on_point, replaces a direct coord_eig_decomp call with lax.cond(robust, ...) choosing robust=True or robust=False call branches. Existing eigenvalue ordering, caller-supplied order selection, sign alignment with target_basis, rotation matrix construction, and rotated-coordinate return remain the same in the inspected patch.",
+      "no_producer_finding": "This patch does not add a writer for Point_data.pkl or fields named Subtype_evDir_x/y/z. It changes a general point-cloud alignment call path, not the missing producer."
+    },
+    "later_public_head": {
+      "commit": "b224d82901e5c59a40321e9798752ec329b10f2a",
+      "date": "2026-01-19T16:20:35Z",
+      "parent": "df2389d1a2494c5bdedd89d9cec96125442e54cf",
+      "message": "1.5 update",
+      "changed_path_count": 300,
+      "non_history_path_count": 0,
+      "interpretation": "The inspected commit changes editor-history paths only; no active code files are listed as changed."
+    },
+    "chronology_interpretation": "The December 9 artifact predates both January 2026 GeoJax commits. The later unpinned environment recipe would resolve a then-current public default branch if installed later, but neither that recipe nor the later GeoJax commit proves which source/revision/runtime generated the December artifact."
+  },
+  "source_comparison": {
+    "coordinate_pca_function_changed_in_jan16_commit": false,
+    "subtype_evdir_writer_found": false,
+    "exact_historical_producer_claim": "C-POINTDATA-002",
+    "exact_historical_producer_status": "UNRESOLVED"
+  }
+}

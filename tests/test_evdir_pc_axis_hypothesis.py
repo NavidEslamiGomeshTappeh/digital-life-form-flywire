@@ -684,3 +684,39 @@ def test_paper_repo_editor_history_and_notebook_timeline_do_not_overstate_produc
     assert producer["status"] == "UNRESOLVED"
     assert boundary["status"] == "PROVEN"
     assert "E-POINTDATA-PUBLIC-HISTORY-BOUNDARY" in boundary["evidence"]
+
+
+def test_post_artifact_conda_and_geojax_timeline_is_not_misreported_as_producer_proof():
+    evidence = json.loads(
+        (ROOT / "evidence" / "geojax_postartifact_runtime_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    env = evidence["environment_recipe"]
+    assert env["commit"] == "11510d8504bbad56d4a9f532d5f3ac0e60eccd14"
+    assert env["commit_date"] == "2026-01-16T13:42:40Z"
+    assert env["requirements"]["jax"] == "jax>=0.4.0"
+    assert env["requirements"]["jaxlib"] == "jaxlib>=0.4.0"
+    assert env["requirements"]["geojax"] == "git+https://github.com/NikDrummond/GeoJax.git"
+    assert env["requirements"]["geoJax_revision_pinned"] is False
+    assert env["requirements"]["jax_minimum_excludes_historical_serializer_incompatible_release"] is False
+    assert evidence["environment_editor_drafts"]["checked_drafts"] == 11
+    assert evidence["environment_editor_drafts"]["nonempty_drafts"] == 10
+
+    geo = evidence["geojax_public_timeline"]
+    update = geo["post_artifact_alignment_update"]
+    assert update["commit"] == "df2389d1a2494c5bdedd89d9cec96125442e54cf"
+    assert update["parent"] == geo["pre_update_head"]["commit"]
+    assert update["path"] == "GeoJax/alignment.py"
+    assert update["pre_update_blob_sha1"] != update["post_update_blob_sha1"]
+    assert update["no_producer_finding"].find("does not add a writer") >= 0
+    later = geo["later_public_head"]
+    assert later["commit"] == "b224d82901e5c59a40321e9798752ec329b10f2a"
+    assert later["non_history_path_count"] == 0
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    exact = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-002")
+    timeline = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-047")
+    assert exact["status"] == "UNRESOLVED"
+    assert timeline["status"] == "PROVEN"
+    assert "E-POINTDATA-GEOJAX-POSTARTIFACT-ENV-BOUNDARY" in timeline["evidence"]

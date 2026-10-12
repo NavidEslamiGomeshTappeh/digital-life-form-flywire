@@ -850,6 +850,20 @@
         "This is scoped to the current reachable public main tree and commit history; it does not exclude private/local workspaces, deleted or unindexed branches, or uncommitted notebooks.",
         "The exact December 2025 producer remains unresolved under C-POINTDATA-002."
       ]
+    },
+    {
+      "id": "C-POINTDATA-047",
+      "statement": "The public paper repository's Conda recipe, first committed on 2026-01-16, uses jax>=0.4.0, jaxlib>=0.4.0 and an unpinned git+https://github.com/NikDrummond/GeoJax.git URL. On that date GeoJax main advanced from the May 2025 pre-artifact head in a commit that changes center_on_point to use lax.cond for robust/non-robust PCA dispatch, while the inspected patch leaves eigenvector ordering/sign alignment and the rotated-coordinate return intact and adds no Subtype_evDir writer. The public recipe and this January code revision postdate the 2025-12-09 Point_data artifact and do not identify its generating runtime.",
+      "classification": "SOURCE_TIMELINE_AND_COMPATIBILITY_BOUNDARY",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-GEOJAX-POSTARTIFACT-ENV-BOUNDARY"
+      ],
+      "caveats": [
+        "The January recipe is later than the historical binary; it cannot be assumed to be the artifact producer's environment.",
+        "Unpinned requirements do not identify an exact JAX/JAXLIB or GeoJax commit.",
+        "The exact December 2025 producer remains unresolved under C-POINTDATA-002."
+      ]
     }
   ]
 }
