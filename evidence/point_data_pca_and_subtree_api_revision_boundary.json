@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_PUBLIC_SOURCE_CHRONOLOGY_AND_PCA_SEMANTIC_DIFFERENCE",
+  "checked_date": "2026-10-12",
+  "purpose": "Compare the historical Point_data artifact chronology with the later public Metrics1 producer-like notebook, PCA implementations, and subtree API surface. This receipt distinguishes algorithm-family similarity from exact execution provenance.",
+  "historical_artifact": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "path": "Data/Point_data.pkl",
+    "first_public_commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "first_public_commit_url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/commit/cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "commit_date": "2025-12-09T19:41:50Z",
+    "commit_message": "A point value metrics data",
+    "changed_files_in_commit": [
+      "Data/Point_data.pkl"
+    ],
+    "git_blob_sha1": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+    "sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+    "rows": 5828,
+    "columns": 24,
+    "columns_absent_from_public_metrics1_function": [
+      "Subtype_evDir_x",
+      "Subtype_evDir_y",
+      "Subtype_evDir_z"
+    ],
+    "interpretation": "The December 2025 commit adds only the binary data file; it does not bind that artifact to a source notebook, exact PCA function version, or execution receipt."
+  },
+  "public_metrics1_notebook": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "path": "Notebooks/Metrics1_Point_data.ipynb",
+    "first_public_commit": "8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+    "first_public_commit_url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/commit/8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+    "first_public_commit_date": "2026-08-10T15:49:32Z",
+    "commit_message": "Paper submission update. Remove tracked Data artifacts and add preprocessing notebooks and revised analysis code.",
+    "git_blob_sha1": "2c31080a7f6f69d1c603bf287e4a5da7d4c3712b",
+    "commit_changes": {
+      "removed": "Data/Point_data.pkl",
+      "added": "Notebooks/Metrics1_Point_data.ipynb",
+      "pp3_added": "Notebooks/PP3_Dendrite_extraction.ipynb"
+    },
+    "metric_function_columns": [
+      "ID",
+      "Neuron_type",
+      "Neuron_subtype",
+      "Subtype",
+      "hemisphere",
+      "root_x",
+      "root_y",
+      "root_z",
+      "Segement_count",
+      "Total_cable",
+      "Total_nodes",
+      "External_edges",
+      "Intenal_edges",
+      "Number_leaves",
+      "Number_branches",
+      "PC1",
+      "PC2",
+      "PC3",
+      "PC1_angle",
+      "Hull_volume",
+      "Scaled_hull_volume",
+      "Mean_segment_angle",
+      "Segment_angle_var"
+    ],
+    "metric_function_column_count": 23,
+    "observed_pca_call": "tree.coordinate_pca(robust=True, norm=True)",
+    "eigenvector_use": [
+      "align_with(*evecs[:, 0], *basis.y)",
+      "get_mean_edge_angle(basis.x, evecs[:, -1], basis.neg_z)"
+    ],
+    "bulk_apply_is_commented_out": true,
+    "concat_is_commented_out": true,
+    "save_operation_present": false,
+    "missing_historical_direction_columns": [
+      "Subtype_evDir_x",
+      "Subtype_evDir_y",
+      "Subtype_evDir_z"
+    ],
+    "timeline_gap_from_historical_artifact_days": 244,
+    "conclusion": "This later public notebook documents a related metric pipeline, but it is not a complete textual producer for the December 2025 24-column artifact. Its bulk application/concatenation is commented out and no pickle save is present."
+  },
+  "pca_implementation_chronology": {
+    "earlier_public_geojax_snapshot": {
+      "repository": "NikDrummond/GeoJax",
+      "commit": "f44d45295a27edc4cd5154d1df2318b66de324eb",
+      "commit_date": "2025-04-23T14:46:23Z",
+      "file_path": "GeoJax/alignment.py",
+      "file_blob_sha1": "53560fd7de0463a51e1283b4a9c0e0db5bb33e8e",
+      "function": "coord_eig_decomp",
+      "implementation": {
+        "framework": "JAX",
+        "robust_covariance_default": true,
+        "huber_parameters": {
+          "c": 1.5,
+          "tol": 0.000001,
+          "max_iter": 100
+        },
+        "initial_covariance": "jnp.cov(X - mu0, rowvar=False, bias=True)",
+        "covariance_denominator": "n (population covariance)",
+        "eigensolver": "jnp.linalg.eigh",
+        "eigenvalue_sort": "descending when sort=True",
+        "eigenvector_output_layout_default": "rows because transpose=True by default",
+        "explicit_right_handed_basis_correction": false,
+        "normalization": "eigenvalues normalized to sum to 1 when PCA=True"
+      },
+      "limitation": "This is a dated public GeoJax source snapshot and candidate ancestor-family evidence; no historical execution receipt binds this exact function to Point_data.pkl."
+    },
+    "later_public_neurosetta_pca": {
+      "repository": "NikDrummond/NeuRosetta",
+      "pca_path": "src/neurosetta/utils/geometry_utils/pca.py",
+      "pca_blob_sha1": "0539fe529e28f79e19785c1ac651a064bc8ddddb",
+      "first_public_path_commit": "222220649460a6179e37ec9c3a5643d6826d0c39",
+      "first_public_path_commit_date": "2026-08-12T16:48:15Z",
+      "coordinate_wrapper_path": "src/neurosetta/ops/tree_graphs/tree_coordinates.py",
+      "coordinate_wrapper_blob_sha1": "56b1091aa3160280b31a5132993540dbc4a61e5e",
+      "coordinate_wrapper_first_public_commit": "958502da2f3e5bf74a2ede755c21357c8b7fdf3a",
+      "coordinate_wrapper_first_public_commit_date": "2026-08-15T19:45:56Z",
+      "function": "coordinate_pca(tree, robust=True, norm=True)",
+      "implementation": {
+        "framework": "NumPy/Numba",
+        "covariance_denominator": "n-1 (unbiased sample covariance in covariance_xyz)",
+        "robust_covariance": "custom Huber M-estimator in robust_covariance_xyz with c=1.5, tol=1e-6, max_iter=100",
+        "eigensolver": "numpy.linalg.eigh",
+        "eigenvalue_order": "descending",
+        "eigenvector_output_layout": "columns",
+        "explicit_right_handed_basis_correction": "flip the third eigenvector if (v0 cross v1) dot v2 is negative",
+        "normalization": "eigenvalues normalized to sum to 1 when norm=True"
+      },
+      "timing_boundary": "The inspected public coordinate_pca wrapper and PCA utility path appear in 2026-08 public history, after the December 2025 artifact. This does not rule out private/local predecessor code, but it does not establish that the currently published function generated the historical file."
+    },
+    "observed_semantic_differences": [
+      "The inspected GeoJax function defaults to row-oriented eigenvectors; the later NeuRosetta coordinate_pca contract returns eigenvectors as columns.",
+      "GeoJax's non-robust covariance uses bias=True (denominator n); later NeuRosetta covariance_xyz uses denominator n-1.",
+      "The later NeuRosetta PCA implementation explicitly enforces a right-handed basis by correcting the third eigenvector; the inspected GeoJax implementation has no corresponding explicit correction.",
+      "Both inspected implementations expose robust Huber-like covariance with c=1.5, tol=1e-6 and max_iter=100, which supports algorithm-family similarity but not implementation identity."
+    ]
+  },
+  "subtree_api_comparison": {
+    "legacy_repository": "NikDrummond/Neurosetta_legacy_v0.0.1",
+    "legacy_file_path": "Neurosetta/graphs.py",
+    "legacy_file_blob_sha1": "4406880c0fd8711d29f05fea006fa9c84ecf58b7",
+    "legacy_score_function": "get_sub_tree_quality",
+    "legacy_root_function": "optimal_partition_root",
+    "public_pp3_call": "forest.convert_forest_to_subtrees(max_workers=10)",
+    "public_pp3_url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/blob/v2.0.0/Notebooks/PP3_Dendrite_extraction.ipynb",
+    "current_neurosetta_paths": {
+      "subtree_ops": "src/neurosetta/ops/tree_graphs/tree_subtrees.py",
+      "subtree_ops_blob_sha1": "bd9ea7695810e24e0dad57f12bc0a8144f41fb5b",
+      "score_helper_path": "src/neurosetta/utils/graph_utils/subgraphs.py",
+      "score_helper_blob_sha1": "f54ed9d14f78eca39cc4939fc420fa26eaea4046",
+      "visible_method_surface": [
+        "get_subtree_scores",
+        "get_max_subtree_node",
+        "get_subtree",
+        "reduce_tree"
+      ],
+      "convert_forest_to_subtrees_found_by_current_code_search": false
+    },
+    "formula": "(1 - subtree_cable / total_cable) + (subtree_leaves / total_leaves)",
+    "comparison": "The legacy root-selection score and current public subgraph score use the same algebraic formula. The public PP3 call name is absent from the inspected current main code search, and the methods are not shown to be byte-identical or behaviorally identical.",
+    "limitations": [
+      "Formula agreement establishes algorithm-family correspondence only.",
+      "The legacy helper simplifies the tree before ranking branch candidates and maps the chosen coordinate back to the original graph; the current implementation computes subtree scores via a topological pass and exposes a different API surface.",
+      "The exact implementation invoked by PP3 in the historical December 2025 producer remains unbound."
+    ]
+  },
+  "conclusions": {
+    "proven": [
+      "The 2025-12-09 Point_data commit adds only the binary artifact.",
+      "Metrics1_Point_data.ipynb first appears in public file history on 2026-08-10 and its visible metric function generates 23 columns, omits the historical Subtype_evDir fields, and contains no active bulk save operation.",
+      "The public NeuRosetta coordinate_pca wrapper and PCA utility appear in public file history in August 2026, after the historical artifact.",
+      "The inspected GeoJax and current NeuRosetta PCA implementations differ in eigenvector layout, covariance denominator and explicit handedness correction.",
+      "The legacy root-selection score and current NeuRosetta subgraph score share the same algebraic formula, while the public PP3 method name does not appear in the inspected current API search."
+    ],
+    "not_proven": [
+      "Which PCA implementation or source revision produced the PC1/PC2/PC3 and angle columns in December 2025.",
+      "Which script or notebook added Subtype_evDir_x/y/z to the historical Point_data artifact.",
+      "That the public PP3 convert_forest_to_subtrees method was implemented identically to legacy optimal_partition_root or current get_max_subtree_node/get_subtree/reduce_tree.",
+      "That the current or released PCA implementations reproduce the exact historical numerical results when applied to the unavailable historical Reduced_dendrites snapshot."
+    ],
+    "unresolved_claim_id": "C-POINTDATA-002"
+  },
+  "references": {
+    "historical_pointdata_commit": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/commit/cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "public_metrics1_commit": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/commit/8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+    "geojax_april_source": "https://github.com/NikDrummond/GeoJax/blob/f44d45295a27edc4cd5154d1df2318b66de324eb/GeoJax/alignment.py",
+    "neurosetta_pca_source": "https://github.com/NikDrummond/NeuRosetta/blob/main/src/neurosetta/utils/geometry_utils/pca.py",
+    "neurosetta_coordinate_pca_source": "https://github.com/NikDrummond/NeuRosetta/blob/56d40605f8a36db319e4c3ae81fbfed24b062c7f/src/neurosetta/ops/tree_graphs/tree_coordinates.py",
+    "current_subtree_score_source": "https://github.com/NikDrummond/NeuRosetta/blob/56d40605f8a36db319e4c3ae81fbfed24b062c7f/src/neurosetta/utils/graph_utils/subgraphs.py"
+  }
+}

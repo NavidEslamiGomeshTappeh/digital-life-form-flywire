@@ -396,3 +396,90 @@ def test_legacy_neurosetta_installer_metadata_does_not_reconstruct_runtime():
     assert "E-POINTDATA-LEGACY-ROOT-TIMELINE" in claim["evidence"]
     unresolved = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
     assert unresolved["status"] == "UNRESOLVED"
+
+
+def test_public_metrics1_notebook_is_later_than_pointdata_and_not_a_complete_producer():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_pca_and_subtree_api_revision_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    historical = evidence["historical_artifact"]
+    notebook = evidence["public_metrics1_notebook"]
+    assert historical["commit_date"] == "2025-12-09T19:41:50Z"
+    assert historical["changed_files_in_commit"] == ["Data/Point_data.pkl"]
+    assert historical["rows"] == 5828
+    assert historical["columns"] == 24
+    assert notebook["first_public_commit_date"] == "2026-08-10T15:49:32Z"
+    assert notebook["git_blob_sha1"] == "2c31080a7f6f69d1c603bf287e4a5da7d4c3712b"
+    assert notebook["metric_function_column_count"] == 23
+    assert notebook["bulk_apply_is_commented_out"] is True
+    assert notebook["concat_is_commented_out"] is True
+    assert notebook["save_operation_present"] is False
+    assert set(notebook["missing_historical_direction_columns"]) == {
+        "Subtype_evDir_x", "Subtype_evDir_y", "Subtype_evDir_z"
+    }
+    assert notebook["timeline_gap_from_historical_artifact_days"] == 244
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    for claim_id in ("C-POINTDATA-038",):
+        claim = next(item for item in claims["claims"] if item["id"] == claim_id)
+        assert claim["status"] == "PROVEN"
+        assert "E-POINTDATA-PCA-SUBTREE-REVISION-BOUNDARY" in claim["evidence"]
+    unresolved = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
+    assert unresolved["status"] == "UNRESOLVED"
+
+
+def test_geojax_and_neurosetta_pca_revision_difference_is_bounded():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_pca_and_subtree_api_revision_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    versions = evidence["pca_implementation_chronology"]
+    geo = versions["earlier_public_geojax_snapshot"]
+    neuro = versions["later_public_neurosetta_pca"]
+    assert geo["file_blob_sha1"] == "53560fd7de0463a51e1283b4a9c0e0db5bb33e8e"
+    assert geo["implementation"]["covariance_denominator"] == "n (population covariance)"
+    assert geo["implementation"]["eigenvector_output_layout_default"] == "rows because transpose=True by default"
+    assert geo["implementation"]["explicit_right_handed_basis_correction"] is False
+    assert neuro["pca_blob_sha1"] == "0539fe529e28f79e19785c1ac651a064bc8ddddb"
+    assert neuro["implementation"]["covariance_denominator"] == "n-1 (unbiased sample covariance in covariance_xyz)"
+    assert neuro["implementation"]["eigenvector_output_layout"] == "columns"
+    assert "third eigenvector" in neuro["implementation"]["explicit_right_handed_basis_correction"]
+    assert neuro["coordinate_wrapper_first_public_commit_date"] > (
+        evidence["historical_artifact"]["commit_date"]
+    )
+    assert "not establish which implementation produced" in (
+        " ".join(evidence["conclusions"]["not_proven"])
+    )
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-039")
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-PCA-SUBTREE-REVISION-BOUNDARY" in claim["evidence"]
+
+
+def test_legacy_and_current_subtree_scores_share_formula_not_method_identity():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_pca_and_subtree_api_revision_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    api = evidence["subtree_api_comparison"]
+    assert api["formula"] == (
+        "(1 - subtree_cable / total_cable) + (subtree_leaves / total_leaves)"
+    )
+    assert api["legacy_file_blob_sha1"] == "4406880c0fd8711d29f05fea006fa9c84ecf58b7"
+    assert api["public_pp3_call"] == "forest.convert_forest_to_subtrees(max_workers=10)"
+    assert "convert_forest_to_subtrees" not in api["current_neurosetta_paths"]["visible_method_surface"]
+    assert api["current_neurosetta_paths"]["convert_forest_to_subtrees_found_by_current_code_search"] is False
+    assert "same algebraic formula" in api["comparison"]
+    assert "not shown to be byte-identical" in api["comparison"]
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-040")
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-PCA-SUBTREE-REVISION-BOUNDARY" in claim["evidence"]
+    unresolved = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
+    assert unresolved["status"] == "UNRESOLVED"

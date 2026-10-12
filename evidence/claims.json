@@ -723,6 +723,49 @@
         "It does not establish whether GeoJax, jaxlib, or other dependencies were installed manually or via another environment step.",
         "The exact runtime and Point_data producer remain unresolved under C-POINTDATA-002."
       ]
+    },
+    {
+      "id": "C-POINTDATA-038",
+      "statement": "The historical Point_data.pkl binary was added to the public paper repository on 2025-12-09 in a commit changing only that data file. The public Metrics1_Point_data.ipynb first appears in the repository file history on 2026-08-10 and contains a 23-column per-neuron metric function, while the historical 24-column artifact has additional Subtype_evDir_x/y/z columns; bulk apply/concat are commented and no save operation is present. The public notebook is therefore not a complete textual producer receipt for the historical binary.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-PCA-SUBTREE-REVISION-BOUNDARY"
+      ],
+      "caveats": [
+        "The result is scoped to public repository history and the inspected notebook cells.",
+        "The source or uncommitted notebook used in 2025 may have existed locally or privately; its existence and content are not established here.",
+        "The producer remains unresolved under C-POINTDATA-002."
+      ]
+    },
+    {
+      "id": "C-POINTDATA-039",
+      "statement": "The inspected public GeoJax PCA implementation and the later public NeuRosetta coordinate_pca implementation are not identical: GeoJax defaults to row-oriented eigenvectors, population covariance when non-robust, and no explicit right-handed basis correction; NeuRosetta returns eigenvectors as columns, uses sample covariance with denominator n-1 in covariance_xyz, and explicitly corrects handedness by flipping the third eigenvector when needed. Their robust Huber-style settings are similar, but this does not establish which implementation produced the December 2025 Point_data values.",
+      "classification": "SOURCE_COMPARISON",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-PCA-SUBTREE-REVISION-BOUNDARY"
+      ],
+      "caveats": [
+        "The public NeuRosetta coordinate_pca wrapper/PCA path is tracked in 2026-08 source history, later than the historical artifact.",
+        "The inspected GeoJax source is a public 2025 source snapshot, not a runtime receipt for the historical producer.",
+        "The exact historical PCA implementation remains unresolved under C-POINTDATA-002."
+      ]
+    },
+    {
+      "id": "C-POINTDATA-040",
+      "statement": "Legacy Neurosetta optimal_partition_root/get_sub_tree_quality and current NeuRosetta subgraph_score use the same score formula (1 - subtree_cable/total_cable) + (subtree_leaves/total_leaves). However, the later public PP3 notebook calls convert_forest_to_subtrees, which is not found in the inspected current main code search; current public source exposes get_max_subtree_node/get_subtree/reduce_tree instead. This is algorithm-family correspondence, not proof of exact implementation identity.",
+      "classification": "SOURCE_COMPARISON",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-PCA-SUBTREE-REVISION-BOUNDARY",
+        "E-POINTDATA-LEGACY-ROOT-TIMELINE",
+        "E-POINTDATA-PUBLIC-PP1-PP3-PIPELINE"
+      ],
+      "caveats": [
+        "A missing search result in current main is scoped to the inspected public code-search result.",
+        "The exact implementation invoked by the historical producer remains unresolved under C-POINTDATA-002."
+      ]
     }
   ]
 }

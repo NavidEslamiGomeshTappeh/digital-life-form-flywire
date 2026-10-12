@@ -884,3 +884,12 @@ The legacy `NikDrummond/Neurosetta_legacy_v0.0.1` `graphs.py` snapshot dated 202
 
 
 Additional dependency provenance: the legacy `setup.py` reads `requirements.txt` but the `setup()` call does not pass it as `install_requires`; that requirements file omits GeoJax/JAX/jaxlib. The separate `environment.yml` specifies Python 3.10 and unpinned JAX, with no explicit GeoJax or jaxlib entry. Since the old `graphs.py` imports GeoJax, the published install metadata is insufficient to reconstruct a valid exact runtime. This does not show those packages were absent from the actual environment; it leaves the December 2025 runtime unresolved (`C-POINTDATA-037`).
+
+
+## 2026-10-12 update — PCA/Point_data public-source chronology
+
+The historical `Data/Point_data.pkl` was added on 2025-12-09 by a commit changing only that binary (5828 rows, 24 columns). The public `Notebooks/Metrics1_Point_data.ipynb` first appears on 2026-08-10, in the commit that also removed tracked data artifacts and added revised analysis notebooks. Its visible `process_one_point` function describes 23 columns, omits the historical `Subtype_evDir_x/y/z` fields, has bulk apply/concatenation commented out and contains no save call; this is not a complete producer receipt for the historical binary.
+
+The inspected 2025-04 GeoJax `coord_eig_decomp` source uses JAX, population covariance (`bias=True`), row-oriented eigenvectors by default, and no explicit handedness correction. The later public NeuRosetta PCA utility uses NumPy/Numba, sample covariance with denominator `n-1`, returns eigenvectors as columns, and enforces a right-handed basis by potentially flipping PC3. The NeuRosetta PCA path and `coordinate_pca` wrapper are tracked in public source history in August 2026, after the historical artifact. Similar Huber parameters are not enough to identify the historical implementation.
+
+The legacy root-selection formula and current `subgraph_score` formula match algebraically, but the public PP3 call is `convert_forest_to_subtrees(max_workers=10)`, which was not found in the inspected current main source search; current main exposes `get_max_subtree_node`, `get_subtree` and `reduce_tree`. This supports algorithm-family correspondence, not exact API/source equivalence. Claims `C-POINTDATA-038`–`C-POINTDATA-040` record these boundaries; `C-POINTDATA-002` remains UNRESOLVED.

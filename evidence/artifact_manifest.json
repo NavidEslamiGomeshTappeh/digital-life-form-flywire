@@ -57,7 +57,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "fb5484602ca0fca4fbb5ad97b5b9bcb904f68657"
+        "value": "2f1ae9014e7d4c83481bd55a0880d95aefe94bb4"
       }
     },
     {
@@ -336,7 +336,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "5299b268d056b6adf7aeaa55d2e9ea53ba271f04"
+        "value": "96a5a253f7a9e571d8628c6230166fb3ea1bb16e"
       }
     },
     {
@@ -660,7 +660,7 @@
       "role": "regression_test_for_provenance_boundaries",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "9696386b585d3a42179dcd0d4215af1172865451"
+        "value": "4c862efc972ed1f89f23b0b7f2c7f0b025a1aa0a"
       }
     },
     {
@@ -1052,7 +1052,7 @@
       "role": "public_morphology_pipeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "9696386b585d3a42179dcd0d4215af1172865451"
+        "value": "4c862efc972ed1f89f23b0b7f2c7f0b025a1aa0a"
       }
     },
     {
@@ -1070,7 +1070,7 @@
       "role": "legacy_algorithm_timeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "9696386b585d3a42179dcd0d4215af1172865451"
+        "value": "4c862efc972ed1f89f23b0b7f2c7f0b025a1aa0a"
       }
     },
     {
@@ -1088,7 +1088,25 @@
       "role": "legacy_installation_metadata_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "9696386b585d3a42179dcd0d4215af1172865451"
+        "value": "4c862efc972ed1f89f23b0b7f2c7f0b025a1aa0a"
+      }
+    },
+    {
+      "id": "E-POINTDATA-PCA-SUBTREE-REVISION-BOUNDARY",
+      "path": "evidence/point_data_pca_and_subtree_api_revision_boundary.json",
+      "role": "public_source_chronology_pca_and_subtree_api_comparison",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "837b2b0822b01d8612c6e970d8120555518f59e4"
+      }
+    },
+    {
+      "id": "E-POINTDATA-PCA-SUBTREE-REVISION-TESTS",
+      "path": "tests/test_evdir_pc_axis_hypothesis.py",
+      "role": "pca_and_subtree_revision_boundary_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "4c862efc972ed1f89f23b0b7f2c7f0b025a1aa0a"
       }
     }
   ]
