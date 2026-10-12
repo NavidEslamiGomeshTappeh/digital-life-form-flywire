@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_PUBLIC_2026_ARCHIVE_INVENTORY_BOUNDARY",
+  "checked_date": "2026-10-12",
+  "purpose": "Record the difference between the January 2026 downstream-only software snapshot and the August 2026 public source/data release, focusing on whether manually reviewed/reduced morphology intermediates are actually listed in either published archive.",
+  "sources": {
+    "software_release": {
+      "record_url": "https://zenodo.org/records/21876360",
+      "doi": "10.5281/zenodo.21876360",
+      "published": "2026-08-10",
+      "version": "v2.0.0",
+      "archive_name": "borstlab/T4_T5_Dendrite_Morphology_Paper-v2.0.0.zip",
+      "archive_md5": "4b41a973cf55f5c21cf698b18ca62bfa",
+      "published_size_label": "5.6 MB",
+      "preview_url": "https://zenodo.org/records/21876360/preview/borstlab/T4_T5_Dendrite_Morphology_Paper-v2.0.0.zip?include_deleted=0"
+    },
+    "data_release": {
+      "record_url": "https://zenodo.org/records/21876510",
+      "doi": "10.5281/zenodo.21876510",
+      "published": "2026-08-10",
+      "version": "v1",
+      "archive_name": "T4_T5_dendrite_morphology_data.zip",
+      "archive_md5": "8bbc291c2e3e3555974b7f9f6c557109",
+      "published_size_label": "306.9 MB",
+      "preview_url": "https://zenodo.org/records/21876510/preview/T4_T5_dendrite_morphology_data.zip?include_deleted=0"
+    },
+    "earlier_release_for_comparison": {
+      "record_url": "https://zenodo.org/records/18269709",
+      "published": "2026-01-16",
+      "version": "Submission_release",
+      "existing_evidence_path": "evidence/zenodo_submission_release_boundary.json"
+    }
+  },
+  "observed_publication_inventory": {
+    "software_archive_includes": [
+      "Notebooks/PP1_Fetch_flywire.ipynb",
+      "Notebooks/PP2_nr_conversion.ipynb",
+      "Notebooks/PP3_Dendrite_extraction.ipynb",
+      "Notebooks/PP4_Global_allignment.ipynb",
+      "Notebooks/PP5_Mesh_generation.ipynb",
+      "Notebooks/Metrics1_Point_data.ipynb",
+      "Notebooks/Metrics2_Vertex_data.ipynb",
+      "Notebooks/Metrics3_Edge_data.ipynb",
+      "Notebooks/Metrics4_Bifurcation_data.ipynb",
+      "Notebooks/Metrics5_Deviation_data.ipynb",
+      "Notebooks/Metrics6_Contour_data.ipynb",
+      "Flywire_ids.csv",
+      "README.md",
+      "conda-environment.yml",
+      "src/"
+    ],
+    "software_archive_paths_not_found_in_preview": [
+      "Reduced_dendrites/",
+      ".nr intermediate morphology trees",
+      "standalone .swc morphology files"
+    ],
+    "data_archive_includes": [
+      "Data/bifurcation_data.pkl",
+      "Data/columns.pkl",
+      "Data/contour_data.pkl",
+      "Data/contour_data_left.pkl",
+      "Data/contour_data_right.pkl",
+      "Data/deviation_data.pkl",
+      "Data/edge_data.pkl",
+      "Data/point_data.pkl",
+      "Data/readme.txt",
+      "Data/vertex_data.pkl"
+    ],
+    "data_archive_paths_not_found_in_preview": [
+      "Reduced_dendrites/",
+      ".nr intermediate morphology trees",
+      "standalone .swc morphology files"
+    ],
+    "observation_method": "Inspected the public Zenodo archive preview trees. The source archive preview visibly lists PP1–PP5 and Metrics1–Metrics6; the dataset archive preview visibly lists only the derived Data/*.pkl files and readme.txt. The archive previews did not return matches for 'Reduced_dendrites' or '.nr'."
+  },
+  "conclusions": {
+    "proven": [
+      "The August 2026 public software archive includes the preprocessing notebooks PP1–PP5, unlike the January 2026 Submission_release archive previously inspected.",
+      "The August 2026 dataset archive lists derived metrics products such as point_data.pkl, vertex_data.pkl, edge_data.pkl, bifurcation_data.pkl, deviation data, contour/column data, and readme.txt.",
+      "The inspected August 2026 archive previews do not list the Reduced_dendrites intermediate forest, .nr morphology trees, or standalone .swc morphology files."
+    ],
+    "not_proven": [
+      "The archive listing does not prove that the authors never possessed those morphology intermediates; they may have been local, private, omitted from release, or stored elsewhere.",
+      "The available PP1–PP5 source notebooks do not themselves bind a specific historical December 2025 Point_data.pkl producer execution to an exact input morphology snapshot and manual-edit receipt.",
+      "This inventory does not identify the exact December 2025 NeuRosetta/GeoJax/JAX revisions, execution parameters, or manual dendrite corrections."
+    ],
+    "unresolved_claim_id": "C-POINTDATA-002"
+  },
+  "interpretation": {
+    "status": "ARCHIVE_CONTENT_BOUNDARY_NOT_GLOBAL_ABSENCE",
+    "update_to_prior_evidence": "The January 2026 release lacked PP1–PP5; the later August 2026 software archive includes them. The missing part is now more precisely the published materialized morphology/intermediate and its binding to the historic Point_data artifact, not a blanket claim that all preprocessing source code is still unavailable.",
+    "next_high_value_step": "Read the released PP1–PP5 notebook source cells to determine the expected morphology input path and execution parameters, then compare those requirements against the exact historical artifact boundary and any source material available in the paper's Git history."
+  }
+}

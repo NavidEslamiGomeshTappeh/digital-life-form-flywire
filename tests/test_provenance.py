@@ -1058,3 +1058,38 @@ def test_exact_pointdata_blob_consumer_binding_is_ledgered():
     claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-023")
     assert claim["status"] == "PROVEN"
     assert "E-POINTDATA-EXACT-BLOB-CONSUMER" in claim["evidence"]
+
+
+def test_august_2026_zenodo_archives_refine_the_pointdata_provenance_boundary():
+    evidence = json.loads(
+        (ROOT / "evidence" / "zenodo_2026_publication_archive_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_PUBLIC_2026_ARCHIVE_INVENTORY_BOUNDARY"
+    sources = evidence["sources"]
+    assert sources["software_release"]["published"] == "2026-08-10"
+    assert sources["software_release"]["archive_md5"] == "4b41a973cf55f5c21cf698b18ca62bfa"
+    assert sources["data_release"]["archive_md5"] == "8bbc291c2e3e3555974b7f9f6c557109"
+
+    inventory = evidence["observed_publication_inventory"]
+    assert "Notebooks/PP3_Dendrite_extraction.ipynb" in inventory["software_archive_includes"]
+    assert "Notebooks/Metrics1_Point_data.ipynb" in inventory["software_archive_includes"]
+    assert "Data/point_data.pkl" in inventory["data_archive_includes"]
+    for category in ("software_archive_paths_not_found_in_preview", "data_archive_paths_not_found_in_preview"):
+        assert "Reduced_dendrites/" in inventory[category]
+        assert ".nr intermediate morphology trees" in inventory[category]
+
+    assert evidence["interpretation"]["status"] == "ARCHIVE_CONTENT_BOUNDARY_NOT_GLOBAL_ABSENCE"
+    assert evidence["conclusions"]["unresolved_claim_id"] == "C-POINTDATA-002"
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-033")
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-ZENODO-2026-ARCHIVE" in claim["evidence"]
+
+    manifest = json.loads((ROOT / "evidence" / "manifest.json").read_text(encoding="utf-8"))
+    assert (
+        manifest["scientific_boundary"]["public_2026_publication_archive_inventory"]
+        == "PROVEN_SOURCE_CODE_RELEASED_BUT_REDUCED_MORPHOLOGY_INTERMEDIATE_NOT_LISTED"
+    )

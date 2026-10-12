@@ -652,6 +652,20 @@
         "The result does not cover private or deleted repositories, local or uncommitted files, external archives, or every possible synonym and path.",
         "C-POINTDATA-002 remains UNRESOLVED."
       ]
+    },
+    {
+      "id": "C-POINTDATA-033",
+      "statement": "The public Zenodo software archive published on 2026-08-10 lists the PP1–PP5 preprocessing notebooks and Metrics1–Metrics6 notebooks, while the companion dataset archive lists derived metric products; the inspected archive previews do not list Reduced_dendrites, .nr intermediate morphology trees, or standalone .swc morphology files. This establishes a published-archive content boundary, not global absence, and it does not recover the exact historical December 2025 Point_data producer.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-ZENODO-2026-ARCHIVE"
+      ],
+      "caveats": [
+        "The result is scoped to the public Zenodo archive preview trees inspected on 2026-10-12.",
+        "The authors may have retained local/private/intermediate morphology files or omitted them from the released archives.",
+        "The producer, installed historical NeuRosetta/GeoJax/JAX revisions, exact parameter bundle, and manual corrections for the December 2025 Point_data artifact remain unresolved under C-POINTDATA-002."
+      ]
     }
   ]
 }

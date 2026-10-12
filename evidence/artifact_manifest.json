@@ -57,7 +57,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d8cf731e9d69d4bc2e5cdc6d586ad0f9a9bd7e12"
+        "value": "d2382ecfc3ed73ac3c61d99183816f41c1739859"
       }
     },
     {
@@ -327,7 +327,7 @@
       "role": "lineage_regeneration_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "faefdeb0a5fff00355f0f16477deda3897ebbbba"
+        "value": "27848596dc117fe6dbec19e4a31ed05574ec46cd"
       }
     },
     {
@@ -336,7 +336,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "106e6f12f73c8da78586adcc92d1fbec60ed28c3"
+        "value": "22bbcbda5c2030fef99d1994c58e0288dc24c15f"
       }
     },
     {
@@ -1017,6 +1017,24 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "faf9a0fa2233886295a720a6f53ecb8270b01220"
+      }
+    },
+    {
+      "id": "E-POINTDATA-ZENODO-2026-ARCHIVE",
+      "path": "evidence/zenodo_2026_publication_archive_boundary.json",
+      "role": "published_software_and_dataset_archive_content_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "2e27150182f82b9c62b572a7dc066bf6c796e1b0"
+      }
+    },
+    {
+      "id": "E-POINTDATA-ZENODO-ARCHIVE-REGRESSION",
+      "path": "tests/test_provenance.py",
+      "role": "published_archive_boundary_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "27848596dc117fe6dbec19e4a31ed05574ec46cd"
       }
     }
   ]
