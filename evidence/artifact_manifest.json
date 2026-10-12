@@ -660,7 +660,7 @@
       "role": "regression_test_for_provenance_boundaries",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "4c862efc972ed1f89f23b0b7f2c7f0b025a1aa0a"
+        "value": "a63e0ee80c811e3a9462cb2f844141cbe8b53cbf"
       }
     },
     {
@@ -1052,7 +1052,7 @@
       "role": "public_morphology_pipeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "4c862efc972ed1f89f23b0b7f2c7f0b025a1aa0a"
+        "value": "a63e0ee80c811e3a9462cb2f844141cbe8b53cbf"
       }
     },
     {
@@ -1070,7 +1070,7 @@
       "role": "legacy_algorithm_timeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "4c862efc972ed1f89f23b0b7f2c7f0b025a1aa0a"
+        "value": "a63e0ee80c811e3a9462cb2f844141cbe8b53cbf"
       }
     },
     {
@@ -1088,7 +1088,7 @@
       "role": "legacy_installation_metadata_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "4c862efc972ed1f89f23b0b7f2c7f0b025a1aa0a"
+        "value": "a63e0ee80c811e3a9462cb2f844141cbe8b53cbf"
       }
     },
     {
@@ -1106,7 +1106,7 @@
       "role": "pca_and_subtree_revision_boundary_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "4c862efc972ed1f89f23b0b7f2c7f0b025a1aa0a"
+        "value": "a63e0ee80c811e3a9462cb2f844141cbe8b53cbf"
       }
     }
   ]

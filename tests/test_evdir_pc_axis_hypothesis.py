@@ -450,7 +450,7 @@ def test_geojax_and_neurosetta_pca_revision_difference_is_bounded():
     assert neuro["coordinate_wrapper_first_public_commit_date"] > (
         evidence["historical_artifact"]["commit_date"]
     )
-    assert "not establish which implementation produced" in (
+    assert "Which PCA implementation or source revision produced" in (
         " ".join(evidence["conclusions"]["not_proven"])
     )
 
