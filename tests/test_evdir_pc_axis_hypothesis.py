@@ -514,3 +514,54 @@ def test_early_neurosetta_public_source_does_not_bind_historical_pca_producer():
     assert "E-POINTDATA-PCA-SUBTREE-REVISION-BOUNDARY" in claim["evidence"]
     unresolved = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
     assert unresolved["status"] == "UNRESOLVED"
+
+
+def test_legacy_neurosetta_pca_candidate_is_recorded_without_producer_attribution():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_pca_and_subtree_api_revision_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    legacy = evidence["pca_implementation_chronology"]["legacy_neurosetta_pca_candidate"]
+    impl = legacy["observed_implementation"]
+    assert legacy["function"] == (
+        "coord_eig_decomp(coords, robust=True, center=False, PCA=True, sort=True, transpose=True)"
+    )
+    assert impl["robust_covariance"] == "sklearn.covariance.MinCovDet().fit(coords).covariance_"
+    assert impl["nonrobust_covariance"] == "sklearn.covariance.EmpiricalCovariance().fit(coords).covariance_"
+    assert impl["eigensolver"] == "numpy.linalg.eig"
+    assert impl["eigenvector_layout_when_transpose_true"] == "rows; PC1 eigenvector is evecs[0]"
+    assert legacy["producer_binding"] == "NOT_ESTABLISHED"
+    assert legacy["runtime_reproducibility_caveat"]["scikit_learn_in_requirements_txt"] is False
+    assert legacy["runtime_reproducibility_caveat"]["scikit_learn_explicit_in_environment_yml"] is False
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-042")
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-PCA-SUBTREE-REVISION-BOUNDARY" in claim["evidence"]
+    unresolved = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
+    assert unresolved["status"] == "UNRESOLVED"
+
+
+def test_paper_repository_parent_tree_does_not_contain_public_producer_notebook():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_pca_and_subtree_api_revision_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    pre = evidence["paper_repository_preartifact_snapshot"]
+    assert pre["parent_of_historical_pointdata_commit"] == "61fd0f176d73932ad87ece04153945501b4c405c"
+    assert set(pre["parent_tree_paths"]) == {
+        ".gitignore", "Notebooks/ANOVA_analysis.ipynb", "README.md"
+    }
+    assert pre["notebook_blob_sha1"] == "93eb31b90a738f64f5d803aaecda22f80edd6178"
+    assert pre["observed_notebook_input_path"].endswith("/T45_Morpho_data/Data/Pickled_data/Point_data.pkl")
+    assert pre["producer_notebook_in_parent_tree"] is False
+    assert pre["changed_files_in_historical_data_commit"] == ["Data/Point_data.pkl"]
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-043")
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-PCA-SUBTREE-REVISION-BOUNDARY" in claim["evidence"]
+    unresolved = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
+    assert unresolved["status"] == "UNRESOLVED"

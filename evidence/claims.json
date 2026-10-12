@@ -780,6 +780,35 @@
         "This does not prove the authors lacked private/local code or used no separate GeoJax script before the public source appeared.",
         "The exact producer for the historical Point_data binary remains unresolved under C-POINTDATA-002."
       ]
+    },
+    {
+      "id": "C-POINTDATA-042",
+      "statement": "The inspected public Neurosetta_legacy_v0.0.1 source contains coord_eig_decomp(coords, robust=True, center=False, PCA=True, sort=True, transpose=True). It uses sklearn MinCovDet covariance by default, EmpiricalCovariance when robust=False, numpy.linalg.eig, eigenvalue normalization/sorting, and row-oriented eigenvectors when transpose=True; companion helpers minimum_theta and align_eigen_single align eigenvectors relative to a selected axis/perspective. This is a plausible pre-Point_data PCA/angle algorithm-family candidate.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-PCA-SUBTREE-REVISION-BOUNDARY"
+      ],
+      "caveats": [
+        "The active source snapshot inspected is dated 2025-07-31; the January 8, 2025 filename belongs to a retained editor-history snapshot and is not itself a Git commit date.",
+        "The public paper repository does not bind this function to the December 2025 Point_data producer or to the three Subtype_evDir columns.",
+        "setup.py does not pass requirements.txt through install_requires, and neither requirements.txt nor environment.yml explicitly pins scikit-learn.",
+        "The exact historical PCA producer/runtime remains unresolved under C-POINTDATA-002."
+      ]
+    },
+    {
+      "id": "C-POINTDATA-043",
+      "statement": "The inspected parent commit 61fd0f176d73932ad87ece04153945501b4c405c of the paper repository's 2025-12-09 Point_data commit has only .gitignore, README.md and Notebooks/ANOVA_analysis.ipynb. The ANOVA notebook loads Point_data.pkl from a separate local T45_Morpho_data path; the 2025-12-09 commit itself adds only Data/Point_data.pkl. No producer notebook appears in this inspected pre-artifact paper-repository tree.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-PCA-SUBTREE-REVISION-BOUNDARY"
+      ],
+      "caveats": [
+        "This establishes absence from the inspected public paper-repository tree only; producer code may have existed in another repository, a local/private workspace, or an uncommitted notebook.",
+        "It does not prove that the legacy coord_eig_decomp routine generated the binary.",
+        "The exact historical producer remains unresolved under C-POINTDATA-002."
+      ]
     }
   ]
 }

@@ -177,6 +177,50 @@
         "caution": "This is a retained editor-history snapshot imported into the later repository, not a versioned executed producer or proof that no other local file existed."
       },
       "conclusion": "The earliest inspected active NeuRosetta code snapshot in the GitHub repository is dated 2026-01-20, after the historical 2025-12-09 Point_data artifact. That active snapshot does not include coordinate_pca or a PCA module. The current coordinate_pca/PCA paths are later public source. This narrows the public-source boundary but does not exclude private/local code."
+    },
+    "legacy_neurosetta_pca_candidate": {
+      "repository": "NikDrummond/Neurosetta_legacy_v0.0.1",
+      "repository_url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1",
+      "inspected_active_source": {
+        "file_path": "Neurosetta/rotations.py",
+        "blob_sha1": "b27b095090f5d54b54834709a4b33d6ec39f1f1f",
+        "inspected_public_source_ref": "25c911a28030deb5204eb7ab5a18ff4643363d96",
+        "source_snapshot_date": "2025-07-31T14:40:07Z",
+        "url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1/blob/25c911a28030deb5204eb7ab5a18ff4643363d96/Neurosetta/rotations.py"
+      },
+      "retained_editor_history_snapshot": {
+        "file_path": ".history/Neurosetta/rotations_20250108141009.py",
+        "blob_sha1": "e967dd4072d537f62b49cb04f5578c9e450088a6",
+        "filename_timestamp": "2025-01-08T14:10:09",
+        "url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1/blob/25c911a28030deb5204eb7ab5a18ff4643363d96/.history/Neurosetta/rotations_20250108141009.py",
+        "caution": "The filename timestamp is an editor-history label, not a Git commit timestamp. The active public source snapshot itself is observed at the July 31, 2025 revision."
+      },
+      "function": "coord_eig_decomp(coords, robust=True, center=False, PCA=True, sort=True, transpose=True)",
+      "observed_implementation": {
+        "robust_default": true,
+        "robust_covariance": "sklearn.covariance.MinCovDet().fit(coords).covariance_",
+        "nonrobust_covariance": "sklearn.covariance.EmpiricalCovariance().fit(coords).covariance_",
+        "eigensolver": "numpy.linalg.eig",
+        "normalize_eigenvalues_when_PCA_true": true,
+        "sort_eigenvalues_descending": true,
+        "eigenvector_layout_when_transpose_true": "rows; PC1 eigenvector is evecs[0]",
+        "center_parameter_default": false,
+        "angle_helpers": {
+          "minimum_theta": "Use vg.signed_angle(v1,v2,look=plane,units='rad'), then fold the result into the minimum rotation interval around +/- pi/2.",
+          "align_eigen_single": "Compute minimum_theta(evecs[evec_ind], axis, perspective), rotate both coordinates and eigenvectors around that perspective axis."
+        }
+      },
+      "runtime_reproducibility_caveat": {
+        "legacy_setup_py_blob_sha1": "a8ecbf566ba082170e2679d4e45f7aa346073928",
+        "legacy_requirements_blob_sha1": "423759ecea6991584b8cb7be9e10ddeb3e055f30",
+        "legacy_environment_yml_blob_sha1": "05cf1967baea026f1bb251b99eabd454bfa302b0",
+        "scikit_learn_in_requirements_txt": false,
+        "scikit_learn_explicit_in_environment_yml": false,
+        "setup_passes_requirements_to_install_requires": false,
+        "interpretation": "The code is a real, public historical PCA implementation candidate, but the shipped dependency metadata does not pin scikit-learn or provide a complete installation binding. Exact runtime/version used for Point_data remains unknown."
+      },
+      "producer_binding": "NOT_ESTABLISHED",
+      "interpretation": "This legacy implementation is a stronger public pre-artifact candidate than relying only on the later 2026 NeuRosetta coordinate_pca API. It does not prove the historical Point_data producer called this function or used these exact installed package versions."
     }
   },
   "subtree_api_comparison": {
@@ -215,14 +259,18 @@
       "The public NeuRosetta coordinate_pca wrapper and PCA utility appear in public file history in August 2026, after the historical artifact.",
       "The inspected GeoJax and current NeuRosetta PCA implementations differ in eigenvector layout, covariance denominator and explicit handedness correction.",
       "The legacy root-selection score and current NeuRosetta subgraph score share the same algebraic formula, while the public PP3 method name does not appear in the inspected current API search.",
-      "The public NeuRosetta repository's first inspected active code snapshot (v0.1.1, 2026-01-20) postdates the historical Point_data binary; its coordinates.py contains only vertex_coordinates and edge_coordinates, and its Tree class has no coordinate_pca method."
+      "The public NeuRosetta repository's first inspected active code snapshot (v0.1.1, 2026-01-20) postdates the historical Point_data binary; its coordinates.py contains only vertex_coordinates and edge_coordinates, and its Tree class has no coordinate_pca method.",
+      "The inspected legacy Neurosetta source contains a pre-August-2026 PCA implementation using sklearn MinCovDet by default, NumPy eigendecomposition, eigenvalue normalization/sorting, and row-oriented eigenvectors by default. This establishes a plausible public algorithm-family candidate predating the historical Point_data binary, but not an artifact-specific execution binding.",
+      "The inspected parent tree before the historical Point_data commit contains only .gitignore, README.md, and Notebooks/ANOVA_analysis.ipynb; that notebook reads Point_data.pkl from a separate local T45_Morpho_data workspace. The 2025-12-09 commit adds only Data/Point_data.pkl."
     ],
     "not_proven": [
       "Which PCA implementation or source revision produced the PC1/PC2/PC3 and angle columns in December 2025.",
       "Which script or notebook added Subtype_evDir_x/y/z to the historical Point_data artifact.",
       "That the public PP3 convert_forest_to_subtrees method was implemented identically to legacy optimal_partition_root or current get_max_subtree_node/get_subtree/reduce_tree.",
       "That the current or released PCA implementations reproduce the exact historical numerical results when applied to the unavailable historical Reduced_dendrites snapshot.",
-      "Whether the authors had a private/local NeuRosetta implementation or used GeoJax directly to calculate PCA before the later public API was added."
+      "Whether the authors had a private/local NeuRosetta implementation or used GeoJax directly to calculate PCA before the later public API was added.",
+      "That Neurosetta_legacy_v0.0.1 coord_eig_decomp, eig_align, align_eigen_single, or minimum_theta produced the PCA/angle/direction fields in the historical Point_data.pkl.",
+      "The exact scikit-learn, NumPy, SciPy and vg versions present in the 2025 producing session, because the legacy public setup/environment metadata do not fully pin them."
     ],
     "unresolved_claim_id": "C-POINTDATA-002"
   },
@@ -233,5 +281,24 @@
     "neurosetta_pca_source": "https://github.com/NikDrummond/NeuRosetta/blob/main/src/neurosetta/utils/geometry_utils/pca.py",
     "neurosetta_coordinate_pca_source": "https://github.com/NikDrummond/NeuRosetta/blob/56d40605f8a36db319e4c3ae81fbfed24b062c7f/src/neurosetta/ops/tree_graphs/tree_coordinates.py",
     "current_subtree_score_source": "https://github.com/NikDrummond/NeuRosetta/blob/56d40605f8a36db319e4c3ae81fbfed24b062c7f/src/neurosetta/utils/graph_utils/subgraphs.py"
+  },
+  "paper_repository_preartifact_snapshot": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "parent_of_historical_pointdata_commit": "61fd0f176d73932ad87ece04153945501b4c405c",
+    "parent_tree_paths": [
+      ".gitignore",
+      "Notebooks/ANOVA_analysis.ipynb",
+      "README.md"
+    ],
+    "notebook_path": "Notebooks/ANOVA_analysis.ipynb",
+    "notebook_blob_sha1": "93eb31b90a738f64f5d803aaecda22f80edd6178",
+    "observed_notebook_input_path": "/home/nik/Desktop/Software/T45_Morpho_data/Data/Pickled_data/Point_data.pkl",
+    "first_historical_data_commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "first_historical_data_commit_message": "Point value metrics data",
+    "changed_files_in_historical_data_commit": [
+      "Data/Point_data.pkl"
+    ],
+    "producer_notebook_in_parent_tree": false,
+    "interpretation": "The inspected public paper-repository parent had README, .gitignore, and an ANOVA notebook that reads a Point_data.pkl from a separate local workspace; it did not contain a PCA/dendrite-metrics producer notebook. The later public Metrics1 notebook was added on 2026-08-10."
   }
 }
