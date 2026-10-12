@@ -483,3 +483,34 @@ def test_legacy_and_current_subtree_scores_share_formula_not_method_identity():
     assert "E-POINTDATA-PCA-SUBTREE-REVISION-BOUNDARY" in claim["evidence"]
     unresolved = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
     assert unresolved["status"] == "UNRESOLVED"
+
+
+def test_early_neurosetta_public_source_does_not_bind_historical_pca_producer():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_pca_and_subtree_api_revision_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    chronology = evidence["pca_implementation_chronology"]["earliest_public_code_boundary"]
+    old_tree = chronology["oldest_visible_git_commit"]
+    code = chronology["first_inspected_code_snapshot"]
+    editor = chronology["dated_editor_history_snapshot"]
+    assert chronology["repository_api_created_at"] == "2026-01-20T22:42:16Z"
+    assert old_tree["tree_file_count"] == 3
+    assert old_tree["tree_blob_paths"] == [".gitignore", "LICENSE.md", "README.md"]
+    assert code["commit"] == "f2d8778671a9c5e0ff97b8af44cf1bcefc4da57b"
+    assert code["date"] > evidence["historical_artifact"]["commit_date"]
+    assert code["coordinates_functions"] == ["vertex_coordinates", "edge_coordinates"]
+    assert code["tree_class_has_coordinate_pca"] is False
+    assert code["active_pca_module_found"] is False
+    assert editor["source_timestamp_from_filename"] == "2025-10-21T17:13:21"
+    assert editor["definitions"] == ["__init__", "get_coordinates"]
+    assert editor["coordinate_pca_found"] is False
+    assert "does not exclude private/local code" in chronology["conclusion"]
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-041")
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-PCA-SUBTREE-REVISION-BOUNDARY" in claim["evidence"]
+    unresolved = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
+    assert unresolved["status"] == "UNRESOLVED"

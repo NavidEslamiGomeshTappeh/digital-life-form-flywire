@@ -57,7 +57,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "2f1ae9014e7d4c83481bd55a0880d95aefe94bb4"
+        "value": "b1a98592b66049bf6dcccb4465c65a62b449a84b"
       }
     },
     {
@@ -336,7 +336,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "96a5a253f7a9e571d8628c6230166fb3ea1bb16e"
+        "value": "49369f29e8f36400f0ff88ae367643cc33c72eff"
       }
     },
     {
@@ -660,7 +660,7 @@
       "role": "regression_test_for_provenance_boundaries",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "a63e0ee80c811e3a9462cb2f844141cbe8b53cbf"
+        "value": "de091f672455ea2d32aee2bc80ce70c66b0847a6"
       }
     },
     {
@@ -1052,7 +1052,7 @@
       "role": "public_morphology_pipeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "a63e0ee80c811e3a9462cb2f844141cbe8b53cbf"
+        "value": "de091f672455ea2d32aee2bc80ce70c66b0847a6"
       }
     },
     {
@@ -1070,7 +1070,7 @@
       "role": "legacy_algorithm_timeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "a63e0ee80c811e3a9462cb2f844141cbe8b53cbf"
+        "value": "de091f672455ea2d32aee2bc80ce70c66b0847a6"
       }
     },
     {
@@ -1088,7 +1088,7 @@
       "role": "legacy_installation_metadata_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "a63e0ee80c811e3a9462cb2f844141cbe8b53cbf"
+        "value": "de091f672455ea2d32aee2bc80ce70c66b0847a6"
       }
     },
     {
@@ -1097,7 +1097,7 @@
       "role": "public_source_chronology_pca_and_subtree_api_comparison",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "837b2b0822b01d8612c6e970d8120555518f59e4"
+        "value": "9cceb5a83930f20336049732ffce1d22e4c22179"
       }
     },
     {
@@ -1106,7 +1106,25 @@
       "role": "pca_and_subtree_revision_boundary_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "a63e0ee80c811e3a9462cb2f844141cbe8b53cbf"
+        "value": "de091f672455ea2d32aee2bc80ce70c66b0847a6"
+      }
+    },
+    {
+      "id": "E-POINTDATA-NEUROSETTA-EARLY-SOURCE-BOUNDARY",
+      "path": "evidence/point_data_pca_and_subtree_api_revision_boundary.json",
+      "role": "earliest_public_neurosetta_code_boundary_for_historical_pca",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "9cceb5a83930f20336049732ffce1d22e4c22179"
+      }
+    },
+    {
+      "id": "E-POINTDATA-NEUROSETTA-EARLY-SOURCE-TEST",
+      "path": "tests/test_evdir_pc_axis_hypothesis.py",
+      "role": "pre_pointdata_public_pca_boundary_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "de091f672455ea2d32aee2bc80ce70c66b0847a6"
       }
     }
   ]

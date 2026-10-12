@@ -133,7 +133,51 @@
       "GeoJax's non-robust covariance uses bias=True (denominator n); later NeuRosetta covariance_xyz uses denominator n-1.",
       "The later NeuRosetta PCA implementation explicitly enforces a right-handed basis by correcting the third eigenvector; the inspected GeoJax implementation has no corresponding explicit correction.",
       "Both inspected implementations expose robust Huber-like covariance with c=1.5, tol=1e-6 and max_iter=100, which supports algorithm-family similarity but not implementation identity."
-    ]
+    ],
+    "earliest_public_code_boundary": {
+      "repository": "NikDrummond/NeuRosetta",
+      "repository_api_created_at": "2026-01-20T22:42:16Z",
+      "oldest_visible_git_commit": {
+        "sha": "e8e9d02fd308d1f5f3d8dc568c3d4f0af6bff870",
+        "author_date": "2025-10-21T09:23:42Z",
+        "tree_blob_paths": [
+          ".gitignore",
+          "LICENSE.md",
+          "README.md"
+        ],
+        "tree_file_count": 3,
+        "interpretation": "The oldest visible commit tree is metadata-only; a commit author timestamp alone does not establish when a repository was publicly available."
+      },
+      "first_inspected_code_snapshot": {
+        "commit": "f2d8778671a9c5e0ff97b8af44cf1bcefc4da57b",
+        "date": "2026-01-20T22:17:59Z",
+        "title": "v0.1.1 — core utility, counting properties, plotting, io",
+        "active_file_count": 40,
+        "coordinates_path": "src/NeuRosetta/tree_graphs/coordinates.py",
+        "coordinates_blob_sha1": "c20a8dfac6da95acc63b45e6e98eff519b11ae3e",
+        "coordinates_functions": [
+          "vertex_coordinates",
+          "edge_coordinates"
+        ],
+        "tree_class_path": "src/NeuRosetta/classes/tree_class.py",
+        "tree_class_blob_sha1": "066a36d2a0256a9299a1acb3ef193717dc135a37",
+        "tree_class_has_coordinate_pca": false,
+        "active_pca_module_found": false
+      },
+      "dated_editor_history_snapshot": {
+        "path": ".history/src/NeuRosetta/classes/tree_class_20251021171321.py",
+        "blob_sha1": "4d2643e49ada582ba3e58766c03e7c5de475f386",
+        "source_timestamp_from_filename": "2025-10-21T17:13:21",
+        "line_count": 13,
+        "definitions": [
+          "__init__",
+          "get_coordinates"
+        ],
+        "coordinate_pca_found": false,
+        "caution": "This is a retained editor-history snapshot imported into the later repository, not a versioned executed producer or proof that no other local file existed."
+      },
+      "conclusion": "The earliest inspected active NeuRosetta code snapshot in the GitHub repository is dated 2026-01-20, after the historical 2025-12-09 Point_data artifact. That active snapshot does not include coordinate_pca or a PCA module. The current coordinate_pca/PCA paths are later public source. This narrows the public-source boundary but does not exclude private/local code."
+    }
   },
   "subtree_api_comparison": {
     "legacy_repository": "NikDrummond/Neurosetta_legacy_v0.0.1",
@@ -170,13 +214,15 @@
       "Metrics1_Point_data.ipynb first appears in public file history on 2026-08-10 and its visible metric function generates 23 columns, omits the historical Subtype_evDir fields, and contains no active bulk save operation.",
       "The public NeuRosetta coordinate_pca wrapper and PCA utility appear in public file history in August 2026, after the historical artifact.",
       "The inspected GeoJax and current NeuRosetta PCA implementations differ in eigenvector layout, covariance denominator and explicit handedness correction.",
-      "The legacy root-selection score and current NeuRosetta subgraph score share the same algebraic formula, while the public PP3 method name does not appear in the inspected current API search."
+      "The legacy root-selection score and current NeuRosetta subgraph score share the same algebraic formula, while the public PP3 method name does not appear in the inspected current API search.",
+      "The public NeuRosetta repository's first inspected active code snapshot (v0.1.1, 2026-01-20) postdates the historical Point_data binary; its coordinates.py contains only vertex_coordinates and edge_coordinates, and its Tree class has no coordinate_pca method."
     ],
     "not_proven": [
       "Which PCA implementation or source revision produced the PC1/PC2/PC3 and angle columns in December 2025.",
       "Which script or notebook added Subtype_evDir_x/y/z to the historical Point_data artifact.",
       "That the public PP3 convert_forest_to_subtrees method was implemented identically to legacy optimal_partition_root or current get_max_subtree_node/get_subtree/reduce_tree.",
-      "That the current or released PCA implementations reproduce the exact historical numerical results when applied to the unavailable historical Reduced_dendrites snapshot."
+      "That the current or released PCA implementations reproduce the exact historical numerical results when applied to the unavailable historical Reduced_dendrites snapshot.",
+      "Whether the authors had a private/local NeuRosetta implementation or used GeoJax directly to calculate PCA before the later public API was added."
     ],
     "unresolved_claim_id": "C-POINTDATA-002"
   },

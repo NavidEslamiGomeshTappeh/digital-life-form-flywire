@@ -766,6 +766,20 @@
         "A missing search result in current main is scoped to the inspected public code-search result.",
         "The exact implementation invoked by the historical producer remains unresolved under C-POINTDATA-002."
       ]
+    },
+    {
+      "id": "C-POINTDATA-041",
+      "statement": "The first inspected active code snapshot in the public NikDrummond/NeuRosetta repository is commit f2d877 (2026-01-20), after the historical Point_data.pkl commit of 2025-12-09. In that v0.1.1 snapshot, tree_graphs/coordinates.py implements vertex_coordinates and edge_coordinates only, Tree has no coordinate_pca method, and no active PCA module is present. A retained editor-history Tree snapshot timestamped 2025-10-21 also contains only __init__ and get_coordinates. The public repository therefore does not supply a pre-2025-12-09 PCA producer binding.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-PCA-SUBTREE-REVISION-BOUNDARY"
+      ],
+      "caveats": [
+        "The editor-history snapshot is not a producer execution receipt.",
+        "This does not prove the authors lacked private/local code or used no separate GeoJax script before the public source appeared.",
+        "The exact producer for the historical Point_data binary remains unresolved under C-POINTDATA-002."
+      ]
     }
   ]
 }
