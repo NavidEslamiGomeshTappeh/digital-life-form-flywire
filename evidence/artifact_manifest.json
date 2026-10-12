@@ -660,7 +660,7 @@
       "role": "regression_test_for_provenance_boundaries",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "ffa2a530d9a76022815c2741dc55c00eb4de63fe"
+        "value": "e39aedb8b59a7050152955e287be8dcc880a4059"
       }
     },
     {
@@ -1052,7 +1052,7 @@
       "role": "public_morphology_pipeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "ffa2a530d9a76022815c2741dc55c00eb4de63fe"
+        "value": "e39aedb8b59a7050152955e287be8dcc880a4059"
       }
     },
     {
@@ -1070,7 +1070,7 @@
       "role": "legacy_algorithm_timeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "ffa2a530d9a76022815c2741dc55c00eb4de63fe"
+        "value": "e39aedb8b59a7050152955e287be8dcc880a4059"
       }
     },
     {
@@ -1088,7 +1088,7 @@
       "role": "legacy_installation_metadata_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "ffa2a530d9a76022815c2741dc55c00eb4de63fe"
+        "value": "e39aedb8b59a7050152955e287be8dcc880a4059"
       }
     },
     {
@@ -1106,7 +1106,7 @@
       "role": "pca_and_subtree_revision_boundary_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "ffa2a530d9a76022815c2741dc55c00eb4de63fe"
+        "value": "e39aedb8b59a7050152955e287be8dcc880a4059"
       }
     },
     {
@@ -1124,7 +1124,7 @@
       "role": "pre_pointdata_public_pca_boundary_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "ffa2a530d9a76022815c2741dc55c00eb4de63fe"
+        "value": "e39aedb8b59a7050152955e287be8dcc880a4059"
       }
     },
     {
@@ -1142,7 +1142,7 @@
       "role": "legacy_pca_candidate_and_parent_tree_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "ffa2a530d9a76022815c2741dc55c00eb4de63fe"
+        "value": "e39aedb8b59a7050152955e287be8dcc880a4059"
       }
     },
     {
@@ -1160,7 +1160,7 @@
       "role": "geojax_jax_pca_candidate_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "ffa2a530d9a76022815c2741dc55c00eb4de63fe"
+        "value": "e39aedb8b59a7050152955e287be8dcc880a4059"
       }
     },
     {
@@ -1169,7 +1169,7 @@
       "role": "bounded_negative_search_of_related_public_pca_and_morphology_repositories",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "63fd5f9a434af360984b416707c4fe0a85d5770d"
+        "value": "9a1bcaa3d7d4769ab9f514c02739141e84f51a7a"
       }
     },
     {
@@ -1178,7 +1178,16 @@
       "role": "regression_for_bounded_related_public_repository_search",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "ffa2a530d9a76022815c2741dc55c00eb4de63fe"
+        "value": "e39aedb8b59a7050152955e287be8dcc880a4059"
+      }
+    },
+    {
+      "id": "E-POINTDATA-PUBLIC-ISSUE-SEARCH-TEST",
+      "path": "tests/test_evdir_pc_axis_hypothesis.py",
+      "role": "regression_for_bounded_public_issue_search_evidence",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "e39aedb8b59a7050152955e287be8dcc880a4059"
       }
     }
   ]

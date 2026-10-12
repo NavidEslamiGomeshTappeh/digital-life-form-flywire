@@ -636,3 +636,17 @@ def test_expanded_related_public_repository_search_keeps_exact_producer_unresolv
     assert bounded_search["status"] == "PROVEN"
     assert "bounded" in bounded_search["statement"].lower()
     assert "E-POINTDATA-RELATED-REPO-SEARCH" in bounded_search["evidence"]
+
+
+def test_related_public_issue_search_is_recorded_as_bounded_negative_evidence():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_related_repository_search.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    issue_search = evidence["public_issue_search"]
+    assert issue_search["checked_date"] == "2026-10-12"
+    assert len(issue_search["queries"]) == 4
+    assert all(item["match_count"] == 0 for item in issue_search["queries"])
+    assert "bounded search result" in issue_search["interpretation"]
+    assert "not proof" in issue_search["interpretation"]

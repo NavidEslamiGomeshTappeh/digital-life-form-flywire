@@ -156,5 +156,28 @@
       "That the historical execution installed the JAX version compatible with the pickle serializer fingerprint.",
       "That no source existed in a private/local workspace, notebook autosave, unindexed branch, or deleted repository."
     ]
+  },
+  "public_issue_search": {
+    "scope": "GitHub issue/PR search, scoped to the same seven related public repositories listed in scope.repositories",
+    "checked_date": "2026-10-12",
+    "queries": [
+      {
+        "query": "\"T45_Morpho_data\"",
+        "match_count": 0
+      },
+      {
+        "query": "\"Point_data\"",
+        "match_count": 0
+      },
+      {
+        "query": "\"evDir\"",
+        "match_count": 0
+      },
+      {
+        "query": "\"GeoJax\" \"Point_data\"",
+        "match_count": 0
+      }
+    ],
+    "interpretation": "No matching public issue or pull-request discussion was returned for these exact queries in the selected repositories. This is a bounded search result, not proof that private discussions, deleted issues, or unsearched repositories do not exist."
   }
 }
