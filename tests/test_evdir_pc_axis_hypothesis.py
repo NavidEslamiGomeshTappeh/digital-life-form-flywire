@@ -256,7 +256,7 @@ def test_pre_artifact_geojax_package_version_does_not_bind_neurosetta_runtime():
     assert upstream["packaging"]["pins_versions"] is False
     assert upstream["packaging"]["readme_installation_path"] == "pip install -e ."
     assert any(
-        "does not bind the historical runtime" in item
+        "installed GeoJax using this documented path" in item
         for item in upstream["interpretation"]["not_proven"]
     )
     claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
