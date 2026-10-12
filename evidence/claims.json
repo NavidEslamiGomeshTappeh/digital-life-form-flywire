@@ -709,6 +709,20 @@
         "The exact installed NeuRosetta/GeoJax/JAX/jaxlib revisions and manual morphology edits remain unresolved under C-POINTDATA-002.",
         "The current public NeuRosetta API is a later and different method surface from the method call visible in the August 2026 PP3 notebook."
       ]
+    },
+    {
+      "id": "C-POINTDATA-037",
+      "statement": "In the inspected July 2025 public legacy Neurosetta snapshot, setup.py reads requirements.txt but does not pass that list to setup() via install_requires; the listed requirements omit GeoJax, JAX and jaxlib, while environment.yml includes unpinned jax and no explicit GeoJax entry. Therefore the published installation metadata is not sufficient to reconstruct the December 2025 runtime.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-LEGACY-ROOT-TIMELINE"
+      ],
+      "caveats": [
+        "This describes public installer/environment files only.",
+        "It does not establish whether GeoJax, jaxlib, or other dependencies were installed manually or via another environment step.",
+        "The exact runtime and Point_data producer remain unresolved under C-POINTDATA-002."
+      ]
     }
   ]
 }

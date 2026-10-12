@@ -368,3 +368,31 @@ def test_legacy_neurosetta_root_selection_timeline_is_explicitly_bounded():
     assert "E-POINTDATA-LEGACY-ROOT-TIMELINE" in claim["evidence"]
     unresolved = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
     assert unresolved["status"] == "UNRESOLVED"
+
+
+def test_legacy_neurosetta_installer_metadata_does_not_reconstruct_runtime():
+    evidence = json.loads(
+        (ROOT / "evidence" / "legacy_neurosetta_subtree_root_timeline.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    dependency = evidence["legacy_repository"]["dependency_metadata_observation"]
+    setup = dependency["setup_behavior"]
+    assert setup["reads_requirements_txt"] is True
+    assert setup["passes_requirements_as_install_requires"] is False
+    requirements = {entry.lower() for entry in dependency["requirements_entries"]}
+    assert not any("geojax" in item for item in requirements)
+    assert not any(item.startswith("jax") for item in requirements)
+    assert dependency["environment_yml_python"] == "3.10"
+    assert dependency["environment_yml_has_unpinned_jax"] is True
+    assert dependency["environment_yml_has_explicit_geojax"] is False
+    assert "does not prove which packages were manually installed" in (
+        " ".join(evidence["conclusions"]["not_proven"])
+    )
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-037")
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-LEGACY-ROOT-TIMELINE" in claim["evidence"]
+    unresolved = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
+    assert unresolved["status"] == "UNRESOLVED"

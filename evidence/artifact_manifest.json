@@ -57,7 +57,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "c1210b208e98acf29a7aaad9c35a95519e4b0b67"
+        "value": "fb5484602ca0fca4fbb5ad97b5b9bcb904f68657"
       }
     },
     {
@@ -336,7 +336,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "72d1f1a8d2cded556c5bcd6225b7462c9acf8fbb"
+        "value": "5299b268d056b6adf7aeaa55d2e9ea53ba271f04"
       }
     },
     {
@@ -660,7 +660,7 @@
       "role": "regression_test_for_provenance_boundaries",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "eedac6a871d20b882fe23d1296da80af1a1257f5"
+        "value": "d3f78a9973e621b69d7defe5397f9e24484d3f4e"
       }
     },
     {
@@ -1052,7 +1052,7 @@
       "role": "public_morphology_pipeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "eedac6a871d20b882fe23d1296da80af1a1257f5"
+        "value": "d3f78a9973e621b69d7defe5397f9e24484d3f4e"
       }
     },
     {
@@ -1061,7 +1061,7 @@
       "role": "legacy_subtree_root_algorithm_and_revision_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "66b9b7d6055b9474dad6f2a9912ab718be963021"
+        "value": "c124c3c0906346792393eea56eb08f4ce58283b1"
       }
     },
     {
@@ -1070,7 +1070,25 @@
       "role": "legacy_algorithm_timeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "eedac6a871d20b882fe23d1296da80af1a1257f5"
+        "value": "d3f78a9973e621b69d7defe5397f9e24484d3f4e"
+      }
+    },
+    {
+      "id": "E-POINTDATA-LEGACY-INSTALLER-METADATA",
+      "path": "evidence/legacy_neurosetta_subtree_root_timeline.json",
+      "role": "legacy_installation_metadata_reproducibility_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "c124c3c0906346792393eea56eb08f4ce58283b1"
+      }
+    },
+    {
+      "id": "E-POINTDATA-LEGACY-INSTALLER-REGRESSION",
+      "path": "tests/test_evdir_pc_axis_hypothesis.py",
+      "role": "legacy_installation_metadata_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "d3f78a9973e621b69d7defe5397f9e24484d3f4e"
       }
     }
   ]

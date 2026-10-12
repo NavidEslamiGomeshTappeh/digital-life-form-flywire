@@ -20,8 +20,40 @@
     "dependency_boundary": [
       "The legacy environment.yml uses Python 3.10 and an unpinned jax dependency.",
       "The legacy requirements.txt does not pin GeoJax, JAX, or jaxlib versions.",
-      "The inspected July 2025 source state therefore does not identify the versions installed during creation of the December 2025 Point_data artifact."
-    ]
+      "The inspected July 2025 source state therefore does not identify the versions installed during creation of the December 2025 Point_data artifact.",
+      "The inspected setup.py reads requirements.txt but its setup() call omits install_requires=requirements; requirements.txt does not list GeoJax/JAX/jaxlib, although graphs.py imports GeoJax. environment.yml includes unpinned jax but no explicit GeoJax or jaxlib entry."
+    ],
+    "setup_py_blob_sha1": "a8ecbf566ba082170e2679d4e45f7aa346073928",
+    "dependency_metadata_observation": {
+      "requirements_blob_sha1": "423759ecea6991584b8cb7be9e10ddeb3e055f30",
+      "environment_blob_sha1": "05cf1967baea026f1bb251b99eabd454bfa302b0",
+      "setup_behavior": {
+        "reads_requirements_txt": true,
+        "passes_requirements_as_install_requires": false,
+        "setup_call_observation": "The setup.py source constructs a requirements list, then calls setup(name=..., version=..., description=..., url=..., author=..., author_email=..., license=..., packages=find_packages(), zip_safe=False) without install_requires=requirements.",
+        "setup_call_lines": [
+          16,
+          25
+        ]
+      },
+      "requirements_entries": [
+        "setuptools>=41.0.1",
+        "graph_tool>=2.48",
+        "numpy>=1.16.3",
+        "vedo",
+        "pandas",
+        "ghudi"
+      ],
+      "requirements_have_geojax": false,
+      "requirements_have_jax": false,
+      "requirements_have_jaxlib": false,
+      "environment_yml_python": "3.10",
+      "environment_yml_has_unpinned_jax": true,
+      "environment_yml_has_explicit_geojax": false,
+      "environment_yml_has_explicit_jaxlib": false,
+      "import_observation": "The legacy graphs.py source imports GeoJax, while the checked requirements.txt does not list it.",
+      "interpretation": "Published install metadata is insufficient to recover a complete environment; this does not prove which packages were manually installed or actually imported in the December 2025 producing session."
+    }
   },
   "revision_timeline": [
     {
@@ -127,12 +159,14 @@
       "The inspected June 5 snapshot contains get_sub_tree_quality, optimal_partition_root and simplify_neuron.",
       "The July 29 public commit fixes mapping from a simplified-graph branch candidate back to the original neuron.",
       "The legacy score formula is also present in current NeuRosetta's subtree-score implementation.",
-      "The older legacy dependency files do not pin the exact JAX/GeoJax runtime."
+      "The older legacy dependency files do not pin the exact JAX/GeoJax runtime.",
+      "The legacy setup.py reads requirements.txt but does not pass its list to setup() as install_requires; the published requirements also omit GeoJax/JAX/jaxlib while the environment.yml includes unpinned jax."
     ],
     "not_proven": [
       "That the December 2025 Point_data.pkl producer called optimal_partition_root, or used its score formula for all neuron subtypes.",
       "That the August 2026 convert_forest_to_subtrees implementation is byte-identical or behaviorally identical to the July 2025 optimal_partition_root implementation.",
-      "The exact installed NeuRosetta/GeoJax/JAX/jaxlib revision, source morphology inputs, manual edits, and execution parameters used for the historical Point_data artifact."
+      "The exact installed NeuRosetta/GeoJax/JAX/jaxlib revision, source morphology inputs, manual edits, and execution parameters used for the historical Point_data artifact.",
+      "The exact package installation route or manually installed versions used in the actual December 2025 session; deficient installer metadata does not prove the session lacked these packages."
     ],
     "unresolved_claim_id": "C-POINTDATA-002"
   }
