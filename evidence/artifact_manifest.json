@@ -57,7 +57,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "7d96755e27927e1d7018bfc3fbc80e676f6f7c16"
+        "value": "983776a1cf04a99940f084bd34b06e77b0cf7688"
       }
     },
     {
@@ -336,7 +336,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "66ca9c8b771af8bb2cf7e85559f506b319a86cee"
+        "value": "d7ff33bad9da8f1bb0d6a0ab210f6d084f99a5f4"
       }
     },
     {
@@ -651,7 +651,7 @@
       "role": "regression_test_for_provenance_boundaries",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "46cf08789a060850cb9335e6a07107f440466d4d"
+        "value": "ed81762670db6473731841ffc1ee205778f8110a"
       }
     },
     {
@@ -697,6 +697,15 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "f79fcd755321fbd499bc73b6b0f0bcdd1c169a9f"
+      }
+    },
+    {
+      "id": "E-POINTDATA-LEGACY-GEOJAX-PIN-AUDIT",
+      "path": "evidence/legacy_geojax_dependency_pin_audit.json",
+      "role": "public_legacy_geojax_dependency_pin_audit",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "13a2aa893a2b2ac25473ab06393c73a4c43df12c"
       }
     },
     {
@@ -777,7 +786,7 @@
       "role": "point_data_revision_candidate_matrix",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "8e0b9dc2c50dc2228be3ab48276bc4467c55a238"
+        "value": "3c5e06d67101d353bf19cbd27067311d1dad4a4b"
       }
     },
     {

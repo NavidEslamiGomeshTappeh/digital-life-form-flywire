@@ -205,3 +205,39 @@ def test_same_week_geojax_consumer_is_not_misidentified_as_point_data_producer()
     consumer = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-030")
     assert producer["status"] == "UNRESOLVED"
     assert consumer["status"] == "PROVEN"
+
+
+def test_public_legacy_install_metadata_does_not_pin_geojax_revision():
+    evidence = json.loads(
+        (ROOT / "evidence" / "legacy_geojax_dependency_pin_audit.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    dep = evidence["snapshots"][0]
+    latest = evidence["snapshots"][1]
+    assert dep["environment_yml"]["python"] == "3.10"
+    assert dep["environment_yml"]["mentions_jax"] is False
+    assert dep["requirements_txt"]["mentions_geoJax"] is False
+    assert dep["requirements_txt"]["mentions_jax"] is False
+    assert latest["source_file"]["observed_import"] == "import GeoJax"
+    assert latest["environment_yml"]["jax"] == "listed without a version pin"
+    assert latest["environment_yml"]["geoJax"] == "not listed"
+    assert "does not pass install_requires=requirements" in dep["setup_py"]["observed"]
+    assert evidence["conclusion"]["exact_dependency_revision"] == "UNRESOLVED"
+
+    matrix = json.loads(
+        (ROOT / "evidence" / "point_data_revision_candidate_matrix.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert matrix["dependency_installation_metadata"]["status"] == (
+        "PROVEN_PUBLIC_INSTALL_METADATA_DOES_NOT_PIN_GEOJAX"
+    )
+    assert matrix["dependency_installation_metadata"]["interpretation"].endswith(
+        "Exact dependency resolution remains unresolved."
+    )
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    producer = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-002")
+    dependency = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-031")
+    assert producer["status"] == "UNRESOLVED"
+    assert dependency["status"] == "PROVEN"

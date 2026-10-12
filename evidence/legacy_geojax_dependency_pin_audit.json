@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_PUBLIC_INSTALL_METADATA_DOES_NOT_PIN_GEOJAX",
+  "purpose": "Check whether public Neurosetta legacy installation files bind the GeoJax/JAX dependency to an exact source or version near the historical Point_data artifact date.",
+  "source": {
+    "repository": "NikDrummond/Neurosetta_legacy_v0.0.1",
+    "dependency_introducing_commit": {
+      "sha": "beea421fb235364f9289e7d68fc8a050f12a2372",
+      "timestamp_utc": "2025-02-21T11:36:49Z",
+      "message": "Branching Angles; Adds function to get branching angles. Also now has GeoJax as a dependency",
+      "url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1/commit/beea421fb235364f9289e7d68fc8a050f12a2372"
+    },
+    "latest_public_pre_artifact_commit": {
+      "sha": "25c911a28030deb5204eb7ab5a18ff4643363d96",
+      "timestamp_utc": "2025-07-31T14:40:07Z",
+      "url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1/commit/25c911a28030deb5204eb7ab5a18ff4643363d96"
+    }
+  },
+  "snapshots": [
+    {
+      "label": "GeoJax dependency introduction",
+      "commit": "beea421fb235364f9289e7d68fc8a050f12a2372",
+      "setup_py": {
+        "blob_sha1": "a8ecbf566ba082170e2679d4e45f7aa346073928",
+        "observed": "Reads requirements.txt into a variable, but setup(...) does not pass install_requires=requirements."
+      },
+      "requirements_txt": {
+        "blob_sha1": "423759ecea6991584b8cb7be9e10ddeb3e055f30",
+        "lines": [
+          "setuptools>=41.0.1",
+          "graph_tool>=2.48",
+          "numpy>=1.16.3",
+          "vedo",
+          "pandas",
+          "ghudi"
+        ],
+        "mentions_geoJax": false,
+        "mentions_jax": false
+      },
+      "environment_yml": {
+        "blob_sha1": "81b032dabf4033c625f40c51fca19e9dbb5357d4",
+        "python": "3.10",
+        "mentions_jax": false,
+        "mentions_geoJax": false
+      }
+    },
+    {
+      "label": "Latest public pre-artifact legacy snapshot",
+      "commit": "25c911a28030deb5204eb7ab5a18ff4643363d96",
+      "source_file": {
+        "path": "Neurosetta/graphs.py",
+        "blob_sha1": "4406880c0fd8711d29f05fea006fa9c84ecf58b7",
+        "observed_import": "import GeoJax"
+      },
+      "setup_py": {
+        "blob_sha1": "a8ecbf566ba082170e2679d4e45f7aa346073928",
+        "observed": "Same setup.py blob; setup(...) still omits install_requires."
+      },
+      "requirements_txt": {
+        "blob_sha1": "423759ecea6991584b8cb7be9e10ddeb3e055f30",
+        "mentions_geoJax": false,
+        "mentions_jax": false
+      },
+      "environment_yml": {
+        "blob_sha1": "05cf1967baea026f1bb251b99eabd454bfa302b0",
+        "python": "3.10",
+        "jax": "listed without a version pin",
+        "geoJax": "not listed"
+      }
+    }
+  ],
+  "findings": {
+    "proven": [
+      "By 2025-02-21 the public legacy Neurosetta source claimed GeoJax as a dependency and code additions subsequently imported GeoJax.",
+      "Neither the committed requirements.txt snapshot nor the later one names GeoJax or JAX.",
+      "The later environment.yml does list JAX but without a version pin and does not list GeoJax.",
+      "The observed setup.py reads requirements.txt but does not pass that list as install_requires to setuptools.",
+      "The public install metadata does not identify the source URL, commit SHA, package version, or installation mechanism for GeoJax."
+    ],
+    "not_proven": [
+      "Whether the author installed GeoJax from a public Git URL, a local checkout, a wheel, or another private source.",
+      "Which GeoJax commit, JAX version, and jaxlib version were installed on 2025-12-09.",
+      "That the historical Point_data producer used the same environment as the later public consumer notebooks."
+    ]
+  },
+  "conclusion": {
+    "exact_dependency_revision": "UNRESOLVED",
+    "impact": "The public legacy repo supports GeoJax-family plausibility but cannot narrow the exact installed commit through dependency metadata. Keep the current public GeoJax head as a best public candidate only, not as an identified runtime.",
+    "unresolved_claim_id": "C-POINTDATA-002"
+  },
+  "references": {
+    "setup_py_url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1/blob/25c911a28030deb5204eb7ab5a18ff4643363d96/setup.py",
+    "requirements_url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1/blob/25c911a28030deb5204eb7ab5a18ff4643363d96/requirements.txt",
+    "environment_url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1/blob/25c911a28030deb5204eb7ab5a18ff4643363d96/environment.yml",
+    "geoJax_import_url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1/blob/25c911a28030deb5204eb7ab5a18ff4643363d96/Neurosetta/graphs.py",
+    "historical_artifact_url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/commit/cd17d34afd0d46a3c2947e83a1f0fdd835a9959a"
+  }
+}

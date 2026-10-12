@@ -1,6 +1,9 @@
 # Changelog
 
 
+## Unreleased maintenance — 2026-10-12
+- Audited the public legacy Neurosetta dependency metadata: code imports GeoJax, but requirements.txt does not pin GeoJax/JAX, setup.py omits `install_requires`, and the later environment.yml lists only unpinned JAX. Added `C-POINTDATA-031`; exact installed GeoJax revision remains unresolved.
+
 ## Unreleased maintenance — 2026-10-10
 - Expanded the exact-blob consumer bridge: the same-week Figure 5 notebook uses Point_data PC1/PC2/PC3 to parameterize synthetic random bifurcations. Its GeoJax-using helper contains no PCA/evDir producer logic or Point_data writer; registered as `C-POINTDATA-030`.
 - Added a bounded runtime-fingerprint comparison: the 46,624 serialized float32 JAX scalar cells fit a JAX-native GeoJax output family more directly than the inspected NumPy/SciPy legacy eig_align path. This is explicitly `INFERENCE_ONLY`, not producer attribution (`C-POINTDATA-029`).

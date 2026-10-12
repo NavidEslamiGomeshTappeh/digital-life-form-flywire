@@ -145,6 +145,13 @@
       "status": "PROVEN_CONSUMER_NONIDENTITY",
       "details": "The exact-hash Figure_5 notebook consumes PC1/PC2/PC3 from Point_data.pkl as synthetic-bifurcation scaling parameters. The same-date Random_bifurcations module uses GeoJax cross/angle/normalize but contains no PCA/eigen-alignment call, no Subtype_evDir reference, and no Point_data pickle writer.",
       "impact": "Keep GeoJax as a plausible pre-artifact dependency/runtime family; do not label this module the historical producer."
+    },
+    {
+      "date_utc": "2026-10-12",
+      "finding": "Public legacy installation metadata does not pin GeoJax",
+      "status": "PROVEN_PUBLIC_DEPENDENCY_PIN_GAP",
+      "details": "The GeoJax dependency introduction is a code-level/public commit message, not a lockfile binding. requirements.txt lacks GeoJax/JAX; setup.py parses but does not pass install_requires; the later environment.yml lists unpinned JAX but not GeoJax. These files cannot identify the GeoJax SHA actually installed for December 2025.",
+      "impact": "Do not infer a package install source or exact version from the legacy code's import statement. C-POINTDATA-002 stays unresolved."
     }
   ],
   "runtime_type_fingerprint_assessment": {
@@ -208,5 +215,18 @@
       ],
       "unresolved_claim_id": "C-POINTDATA-002"
     }
+  },
+  "dependency_installation_metadata": {
+    "evidence_file": "evidence/legacy_geojax_dependency_pin_audit.json",
+    "status": "PROVEN_PUBLIC_INSTALL_METADATA_DOES_NOT_PIN_GEOJAX",
+    "dependency_introducing_commit": "beea421fb235364f9289e7d68fc8a050f12a2372",
+    "latest_public_pre_artifact_commit": "25c911a28030deb5204eb7ab5a18ff4643363d96",
+    "observed": {
+      "code_import": "GeoJax is imported by Neurosetta/graphs.py",
+      "requirements_txt": "No GeoJax or JAX entry",
+      "setup_py": "requirements variable is parsed but install_requires is omitted",
+      "environment_yml": "JAX is listed without version at the later public snapshot; GeoJax itself is not listed"
+    },
+    "interpretation": "The public source demonstrates a GeoJax runtime dependency but does not fix how or which GeoJax revision was installed. Exact dependency resolution remains unresolved."
   }
 }
