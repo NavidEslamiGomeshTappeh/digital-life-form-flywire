@@ -57,7 +57,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "ba1b81b8c751184de13d1a64660434df7c676d99"
+        "value": "211c4ccfeb2efced3ab9f90dc057db0e8f587b23"
       }
     },
     {
@@ -660,7 +660,7 @@
       "role": "regression_test_for_provenance_boundaries",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d55c63fb219a8467ef2a58c26ad7e402e6af3d44"
+        "value": "5f2f9d4d6eb36988f32b294719ab3a5fe032634b"
       }
     },
     {
@@ -1052,7 +1052,7 @@
       "role": "public_morphology_pipeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d55c63fb219a8467ef2a58c26ad7e402e6af3d44"
+        "value": "5f2f9d4d6eb36988f32b294719ab3a5fe032634b"
       }
     },
     {
@@ -1070,7 +1070,7 @@
       "role": "legacy_algorithm_timeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d55c63fb219a8467ef2a58c26ad7e402e6af3d44"
+        "value": "5f2f9d4d6eb36988f32b294719ab3a5fe032634b"
       }
     },
     {
@@ -1088,7 +1088,7 @@
       "role": "legacy_installation_metadata_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d55c63fb219a8467ef2a58c26ad7e402e6af3d44"
+        "value": "5f2f9d4d6eb36988f32b294719ab3a5fe032634b"
       }
     },
     {
@@ -1106,7 +1106,7 @@
       "role": "pca_and_subtree_revision_boundary_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d55c63fb219a8467ef2a58c26ad7e402e6af3d44"
+        "value": "5f2f9d4d6eb36988f32b294719ab3a5fe032634b"
       }
     },
     {
@@ -1124,7 +1124,7 @@
       "role": "pre_pointdata_public_pca_boundary_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d55c63fb219a8467ef2a58c26ad7e402e6af3d44"
+        "value": "5f2f9d4d6eb36988f32b294719ab3a5fe032634b"
       }
     },
     {
@@ -1142,7 +1142,7 @@
       "role": "legacy_pca_candidate_and_parent_tree_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d55c63fb219a8467ef2a58c26ad7e402e6af3d44"
+        "value": "5f2f9d4d6eb36988f32b294719ab3a5fe032634b"
       }
     },
     {
@@ -1160,7 +1160,7 @@
       "role": "geojax_jax_pca_candidate_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d55c63fb219a8467ef2a58c26ad7e402e6af3d44"
+        "value": "5f2f9d4d6eb36988f32b294719ab3a5fe032634b"
       }
     },
     {
@@ -1178,7 +1178,7 @@
       "role": "regression_for_bounded_related_public_repository_search",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d55c63fb219a8467ef2a58c26ad7e402e6af3d44"
+        "value": "5f2f9d4d6eb36988f32b294719ab3a5fe032634b"
       }
     },
     {
@@ -1187,7 +1187,7 @@
       "role": "regression_for_bounded_public_issue_search_evidence",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d55c63fb219a8467ef2a58c26ad7e402e6af3d44"
+        "value": "5f2f9d4d6eb36988f32b294719ab3a5fe032634b"
       }
     },
     {
@@ -1205,7 +1205,7 @@
       "role": "regression_for_public_editor_history_producer_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d55c63fb219a8467ef2a58c26ad7e402e6af3d44"
+        "value": "5f2f9d4d6eb36988f32b294719ab3a5fe032634b"
       }
     },
     {
@@ -1223,7 +1223,7 @@
       "role": "regression_for_postartifact_environment_revision_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d55c63fb219a8467ef2a58c26ad7e402e6af3d44"
+        "value": "5f2f9d4d6eb36988f32b294719ab3a5fe032634b"
       }
     },
     {
@@ -1241,7 +1241,25 @@
       "role": "regression_for_neurosetta_public_history_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d55c63fb219a8467ef2a58c26ad7e402e6af3d44"
+        "value": "5f2f9d4d6eb36988f32b294719ab3a5fe032634b"
+      }
+    },
+    {
+      "id": "E-POINTDATA-LEGACY-VS-GEOJAX-COMPARISON",
+      "path": "evidence/point_data_legacy_vs_geojax_comparison.json",
+      "role": "compare_pre_artifact_numpy_legacy_and_jax_pca_candidates",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "941f2cc109fde68d193e84d4cd9d485e08eda41a"
+      }
+    },
+    {
+      "id": "E-POINTDATA-LEGACY-VS-GEOJAX-COMPARISON-TEST",
+      "path": "tests/test_evdir_pc_axis_hypothesis.py",
+      "role": "regression_for_pca_candidate_comparison_without_overclaiming_producer",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "5f2f9d4d6eb36988f32b294719ab3a5fe032634b"
       }
     }
   ]

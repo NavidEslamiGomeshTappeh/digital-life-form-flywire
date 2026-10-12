@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "checked_date": "2026-10-12",
+  "status": "GEOfJAX_BETTER_TYPE_COMPATIBLE_PUBLIC_CANDIDATE; NEUROSETTA_LEGACY_ALGORITHM_CANDIDATE_NOT_PRODUCER",
+  "historical_artifact": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "path": "Data/Point_data.pkl",
+    "commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "date": "2025-12-09T19:41:50Z",
+    "sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+    "serializer_observation": "PC1/PC2/PC3, PC1_angle, Mean_segment_angle and Subtype_evDir_x/y/z contain scalar jaxlib._jax.ArrayImpl float32 objects in the pickle."
+  },
+  "candidate_comparison": [
+    {
+      "repository": "NikDrummond/GeoJax",
+      "source_path": "GeoJax/alignment.py",
+      "source_commit": "33b0f8727ab447eff86e35a69c60c1f33b4d1513",
+      "commit_date": "2025-05-02T13:36:30Z",
+      "blob_sha1": "53560fd7de0463a51e1283b4a9c0e0db5bb33e8e",
+      "core_function": "coord_eig_decomp",
+      "array_stack": "jax.numpy / jnp.linalg.eigh",
+      "returns": "JAX-compatible eigenvalue/eigenvector arrays; caller may transpose eigenvectors into rows",
+      "axis_alignment": "align_point_cloud accepts caller-supplied eigen-axis order and target basis, aligns signs, then returns rotated coordinates",
+      "direct_evdir_writer_found": false,
+      "type_fit": "HIGHER among these two public candidates, because the historical artifact's scalar PCA/evDir cells are serialized as JAX ArrayImpl objects.",
+      "constraints": "Still not proven to be the producer; no visible call site maps its outputs into Subtype_evDir_x/y/z or writes the historical Point_data.pkl."
+    },
+    {
+      "repository": "NikDrummond/Neurosetta_legacy_v0.0.1",
+      "source_path": "Neurosetta/rotations.py",
+      "source_commit": "9c27f226128d98ea5420e7a3a32acf2adc8ce138",
+      "commit_date": "2025-01-15T11:30:24Z",
+      "current_snapshot_commit": "25c911a28030deb5204eb7ab5a18ff4643363d96",
+      "current_blob_sha1": "b27b095090f5d54b54834709a4b33d6ec39f1f1f",
+      "functions": [
+        "coord_eig_decomp",
+        "align_eigen_single",
+        "eig_align"
+      ],
+      "algorithm": "scikit-learn MinCovDet or EmpiricalCovariance, numpy.linalg.eig, eigenvalue sorting and optional eigenvector transpose; eig_align accepts an eigenvector index order, target axes, perspective axes and a root/mean/median centering choice.",
+      "direct_evdir_writer_found": false,
+      "array_stack": "NumPy / scikit-learn",
+      "runtime_manifest": {
+        "requirements_path": "requirements.txt",
+        "requirements_blob_sha1": "423759ecea6991584b8cb7be9e10ddeb3e055f30",
+        "requirements_lines": [
+          "setuptools>=41.0.1",
+          "graph_tool>=2.48",
+          "numpy>=1.16.3",
+          "vedo",
+          "pandas",
+          "ghudi"
+        ],
+        "sklearn_declared": false,
+        "scipy_declared": false,
+        "vg_declared": false,
+        "environment_path": "environment.yml",
+        "environment_blob_sha1": "05cf1967baea026f1bb251b99eabd454bfa302b0",
+        "environment_declares": [
+          "python=3.10",
+          "setuptools",
+          "graph-tool",
+          "gudhi",
+          "pykdtree",
+          "vedo",
+          "numpy",
+          "pandas",
+          "scipy",
+          "hdbscan",
+          "tqdm",
+          "fastcluster",
+          "jax",
+          "numba",
+          "scikit-image",
+          "trimesh"
+        ],
+        "setup_path": "setup.py",
+        "setup_blob_sha1": "a8ecbf566ba082170e2679d4e45f7aa346073928",
+        "observation": "setup.py reads requirements.txt into a local variable but does not pass it as install_requires; the inspected requirements file also omits sklearn, scipy and vg even though rotations.py imports them."
+      },
+      "type_fit": "LOWER without an unobserved conversion step, because this implementation's eigendecomposition returns NumPy arrays while the historical serialized scalar fields are JAX ArrayImpl objects.",
+      "chronology_fit": "The source pre-dates the artifact and has controllable axis order/sign alignment, so it remains an algorithmic candidate for related morphology work; public evidence does not bind it to the December 2025 artifact."
+    }
+  ],
+  "comparison_conclusion": {
+    "strongest_public_candidate_for_historical_JAX_array_serialization": "NikDrummond/GeoJax at public pre-artifact commit 33b0f8727ab447eff86e35a69c60c1f33b4d1513",
+    "strongest_legacy_algorithm_alternative": "NikDrummond/Neurosetta_legacy_v0.0.1::eig_align",
+    "not_proven": [
+      "That either function was actually called to create the December 2025 dataset.",
+      "Which eigenvector index or target basis was selected per subtype.",
+      "How Subtype_evDir_x/y/z values were written into the pandas DataFrame.",
+      "Whether a NumPy-to-JAX conversion or post-processing step existed outside the public code."
+    ],
+    "exact_producer_claim": "C-POINTDATA-002",
+    "exact_producer_status": "UNRESOLVED"
+  }
+}

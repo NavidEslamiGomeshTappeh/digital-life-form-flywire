@@ -751,3 +751,35 @@ def test_neurosetta_public_history_has_no_pca_producer_at_historical_artifact_da
     assert exact["status"] == "UNRESOLVED"
     assert boundary["status"] == "PROVEN"
     assert "E-POINTDATA-NEUROSETTA-PUBLIC-HISTORY-BOUNDARY" in boundary["evidence"]
+
+
+def test_geojax_candidate_ranks_above_legacy_only_for_type_fit_not_producer_identity():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_legacy_vs_geojax_comparison.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == (
+        "GEOfJAX_BETTER_TYPE_COMPATIBLE_PUBLIC_CANDIDATE; NEUROSETTA_LEGACY_ALGORITHM_CANDIDATE_NOT_PRODUCER"
+    )
+    candidates = {item["repository"]: item for item in evidence["candidate_comparison"]}
+    geo = candidates["NikDrummond/GeoJax"]
+    legacy = candidates["NikDrummond/Neurosetta_legacy_v0.0.1"]
+    assert geo["source_commit"] == "33b0f8727ab447eff86e35a69c60c1f33b4d1513"
+    assert geo["direct_evdir_writer_found"] is False
+    assert legacy["current_blob_sha1"] == "b27b095090f5d54b54834709a4b33d6ec39f1f1f"
+    assert legacy["direct_evdir_writer_found"] is False
+    assert legacy["runtime_manifest"]["sklearn_declared"] is False
+    assert legacy["runtime_manifest"]["scipy_declared"] is False
+    assert legacy["runtime_manifest"]["vg_declared"] is False
+    assert legacy["type_fit"].startswith("LOWER")
+    conclusion = evidence["comparison_conclusion"]
+    assert conclusion["exact_producer_status"] == "UNRESOLVED"
+    assert "GeoJax" in conclusion["strongest_public_candidate_for_historical_JAX_array_serialization"]
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    exact = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-002")
+    compared = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-049")
+    assert exact["status"] == "UNRESOLVED"
+    assert compared["status"] == "PROVEN"
+    assert "E-POINTDATA-LEGACY-VS-GEOJAX-COMPARISON" in compared["evidence"]

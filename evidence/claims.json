@@ -877,6 +877,20 @@
         "Absence from the public repository history does not exclude private/local or uncommitted source code, a separate repository, or a notebook outside this project.",
         "The exact December 2025 producer remains unresolved under C-POINTDATA-002."
       ]
+    },
+    {
+      "id": "C-POINTDATA-049",
+      "statement": "Compared with the pre-artifact public NumPy/scikit-learn Neurosetta legacy `eig_align` implementation, the pre-artifact public GeoJax `coord_eig_decomp`/`align_point_cloud` family is a stronger match to the historical serialized runtime because the pickle stores PCA/evDir scalar cells as JAX ArrayImpl float32 objects. The legacy algorithm remains a plausible axis-alignment method, but its public implementation has no Subtype_evDir writer, uses NumPy arrays, and its listed requirements/setup do not reliably declare or install all imported dependencies.",
+      "classification": "CANDIDATE_COMPARISON_NOT_PRODUCER_IDENTIFICATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-LEGACY-VS-GEOJAX-COMPARISON"
+      ],
+      "caveats": [
+        "Serialization type compatibility raises relative plausibility but does not identify a caller or prove a producer function.",
+        "No direct public writer of historical Subtype_evDir_x/y/z fields was found in either candidate source.",
+        "The exact producer and per-subtype axis/sign selection remain unresolved under C-POINTDATA-002."
+      ]
     }
   ]
 }
