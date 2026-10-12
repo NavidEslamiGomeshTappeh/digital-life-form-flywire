@@ -386,7 +386,7 @@ def test_legacy_neurosetta_installer_metadata_does_not_reconstruct_runtime():
     assert dependency["environment_yml_python"] == "3.10"
     assert dependency["environment_yml_has_unpinned_jax"] is True
     assert dependency["environment_yml_has_explicit_geojax"] is False
-    assert "does not prove which packages were manually installed" in (
+    assert "does not prove the session lacked these packages" in (
         " ".join(evidence["conclusions"]["not_proven"])
     )
 
