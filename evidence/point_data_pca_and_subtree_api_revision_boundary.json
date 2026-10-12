@@ -221,6 +221,101 @@
       },
       "producer_binding": "NOT_ESTABLISHED",
       "interpretation": "This legacy implementation is a stronger public pre-artifact candidate than relying only on the later 2026 NeuRosetta coordinate_pca API. It does not prove the historical Point_data producer called this function or used these exact installed package versions."
+    },
+    "pre_artifact_geojax_jax_candidate": {
+      "status": "PRE_ARTIFACT_PUBLIC_JAX_PCA_AND_ALIGNMENT_CODE",
+      "repository": "NikDrummond/GeoJax",
+      "first_public_pca_commit": {
+        "sha": "4dfc82bbc6dbe37b64a540758d6ea3ed6c9829aa",
+        "date": "2025-02-12T15:02:47Z",
+        "message": "Eigen Decomposition",
+        "path": "NeuGeometry/core.py",
+        "blob_sha1": "2874922c65288ed90695eb2b68881c44989c9d3f"
+      },
+      "last_inspected_pre_artifact_public_head": {
+        "sha": "33b0f8727ab447eff86e35a69c60c1f33b4d1513",
+        "date": "2025-05-02T13:36:30Z",
+        "message": "Bounds module update",
+        "path": "GeoJax/alignment.py",
+        "blob_sha1": "53560fd7de0463a51e1283b4a9c0e0db5bb33e8e",
+        "observed_public_commits_between_head_and_pointdata": 0
+      },
+      "pca_contract": {
+        "function": "coord_eig_decomp(coords, robust=True, center=False, PCA=True, sort=True, transpose=True)",
+        "framework": "JAX",
+        "robust_covariance": {
+          "function": "robust_covariance_mest",
+          "method": "Huber-like M-estimator",
+          "defaults": {
+            "c": 1.5,
+            "tol": 0.000001,
+            "max_iter": 100
+          },
+          "details": [
+            "Initial location is the coordinate-wise arithmetic mean.",
+            "Initial covariance uses jnp.cov(..., rowvar=False, bias=True), a population-covariance denominator.",
+            "Mahalanobis-distance inverse uses 1e-6 diagonal regularization.",
+            "Weights are 1 inside c^2 and c^2/distance outside."
+          ]
+        },
+        "nonrobust_covariance": "jnp.cov(coords, rowvar=False, bias=True)",
+        "eigensolver": "jnp.linalg.eigh",
+        "eigenvalue_normalization": "evals / evals.sum() when PCA=True",
+        "ordering": "descending when sort=True",
+        "default_eigenvector_layout": "rows when transpose=True",
+        "default_center": false,
+        "degenerate_cloud_behavior": "zero eigenvalues and identity eigenvectors when all coordinates are close to the first coordinate"
+      },
+      "axis_selection_api": {
+        "function": "align_point_cloud(coords, order, target_basis, robust=True, center=True, center_coord=zeros(3))",
+        "order": "Required caller-supplied eigenvector index order; no default order was observed.",
+        "target_basis": "Required caller-supplied 3x3 target basis.",
+        "sign_rule": "sign(sum(E * target_basis, axis=1)) is applied per eigenvector before alignment.",
+        "output_boundary": "Returns aligned point-cloud coordinates; the inspected function does not directly emit Subtype_evDir_x/y/z."
+      },
+      "serializer_compatibility": {
+        "historical_pickle_global": "jax._src.array._reconstruct_array",
+        "historical_jax_value_type": "jaxlib._jax.ArrayImpl",
+        "historical_metric_scalar_dtype": "float32",
+        "historical_aval_state_keys": [
+          "weak_type"
+        ],
+        "public_release_family": {
+          "incompatible_standard_release": "jax-v0.4.30",
+          "first_checked_compatible_standard_release": "jax-v0.4.31",
+          "later_checked_compatible_releases": [
+            "jax-v0.5.0",
+            "jax-v0.6.2",
+            "jax-v0.7.0",
+            "jax-v0.7.2",
+            "jax-v0.8.0"
+          ],
+          "release_evidence_path": "evidence/point_data_jax_serializer_release_family.json"
+        },
+        "conditional_python_constraint": {
+          "contemporaneous_consumer_python": "3.10.17",
+          "consumer_commit_date": "2025-12-10",
+          "public_jax_python_boundary": "JAX 0.7.0 and later requires Python >=3.11; JAX 0.6.2 supports Python >=3.10.",
+          "implication": "If the producer shared the consumer's Python 3.10 environment and used an unmodified standard JAX release, JAX 0.7.x/0.8.x are excluded and a compatible standard family from 0.4.31 through 0.6.2 is a candidate.",
+          "status": "CONDITIONAL_ONLY_NOT_A_PRODUCER_LOCK"
+        }
+      },
+      "comparison_to_legacy_numpy_candidate": {
+        "legacy_function": "Neurosetta_legacy_v0.0.1.Neurosetta.rotations.coord_eig_decomp",
+        "legacy_output": "NumPy arrays",
+        "historical_metric_storage": "scalar JAX ArrayImpl objects",
+        "inference": "The old NumPy implementation does not by itself explain the historical serialized object type unless the values were subsequently wrapped/converted into JAX arrays. The public GeoJax implementation is more directly compatible with the observed JAX value type.",
+        "certainty": "COMPATIBILITY_COMPARISON_NOT_PRODUCER_IDENTIFICATION"
+      },
+      "contemporaneous_context": {
+        "consumer_commit": "07b468181ceb3e43d1cb3647b5bac79d531acd18",
+        "consumer_commit_date": "2025-12-10T16:32:19Z",
+        "consumer_notebook": "Notebooks/Figure_5.ipynb",
+        "consumer_python": "3.10.17",
+        "observation": "A next-day public Figure 5 notebook loads Point_data.pkl and consumes PC1/PC2/PC3. An adjacent Random_bifurcations source imports GeoJax but demonstrably consumes the scalar PCs for synthetic bifurcation geometry rather than producing Point_data.",
+        "limit": "This proves GeoJax was used by a contemporaneous downstream consumer, not that it produced the stored PCA or evDir fields."
+      },
+      "conclusion": "A JAX-based GeoJax PCA/alignment family is the strongest public-source candidate identified so far for explaining both the historical JAX ArrayImpl serialization type and the availability of robust PCA/axis-selection code before December 2025. The exact producer call, target basis/order per subtype, and Subtype_evDir writer remain unbound."
     }
   },
   "subtree_api_comparison": {
@@ -261,7 +356,8 @@
       "The legacy root-selection score and current NeuRosetta subgraph score share the same algebraic formula, while the public PP3 method name does not appear in the inspected current API search.",
       "The public NeuRosetta repository's first inspected active code snapshot (v0.1.1, 2026-01-20) postdates the historical Point_data binary; its coordinates.py contains only vertex_coordinates and edge_coordinates, and its Tree class has no coordinate_pca method.",
       "The inspected legacy Neurosetta source contains a pre-August-2026 PCA implementation using sklearn MinCovDet by default, NumPy eigendecomposition, eigenvalue normalization/sorting, and row-oriented eigenvectors by default. This establishes a plausible public algorithm-family candidate predating the historical Point_data binary, but not an artifact-specific execution binding.",
-      "The inspected parent tree before the historical Point_data commit contains only .gitignore, README.md, and Notebooks/ANOVA_analysis.ipynb; that notebook reads Point_data.pkl from a separate local T45_Morpho_data workspace. The 2025-12-09 commit adds only Data/Point_data.pkl."
+      "The inspected parent tree before the historical Point_data commit contains only .gitignore, README.md, and Notebooks/ANOVA_analysis.ipynb; that notebook reads Point_data.pkl from a separate local T45_Morpho_data workspace. The 2025-12-09 commit adds only Data/Point_data.pkl.",
+      "Public GeoJax code exposed a JAX PCA/eigendecomposition routine and configurable axis/sign alignment by 2025-05-02, and the historical pickle's scalar metric objects are JAX ArrayImpl values; this is a strong type-compatible candidate family but not artifact-specific producer proof."
     ],
     "not_proven": [
       "Which PCA implementation or source revision produced the PC1/PC2/PC3 and angle columns in December 2025.",
@@ -270,7 +366,8 @@
       "That the current or released PCA implementations reproduce the exact historical numerical results when applied to the unavailable historical Reduced_dendrites snapshot.",
       "Whether the authors had a private/local NeuRosetta implementation or used GeoJax directly to calculate PCA before the later public API was added.",
       "That Neurosetta_legacy_v0.0.1 coord_eig_decomp, eig_align, align_eigen_single, or minimum_theta produced the PCA/angle/direction fields in the historical Point_data.pkl.",
-      "The exact scikit-learn, NumPy, SciPy and vg versions present in the 2025 producing session, because the legacy public setup/environment metadata do not fully pin them."
+      "The exact scikit-learn, NumPy, SciPy and vg versions present in the 2025 producing session, because the legacy public setup/environment metadata do not fully pin them.",
+      "The exact GeoJax routine and target-basis/eigenvector order used for each subtype, and whether its result was the source of Subtype_evDir_x/y/z."
     ],
     "unresolved_claim_id": "C-POINTDATA-002"
   },

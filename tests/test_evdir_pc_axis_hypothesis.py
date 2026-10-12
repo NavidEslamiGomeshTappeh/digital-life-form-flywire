@@ -565,3 +565,36 @@ def test_paper_repository_parent_tree_does_not_contain_public_producer_notebook(
     assert "E-POINTDATA-PCA-SUBTREE-REVISION-BOUNDARY" in claim["evidence"]
     unresolved = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
     assert unresolved["status"] == "UNRESOLVED"
+
+
+def test_pre_artifact_geojax_pca_candidate_matches_jax_value_family_without_producer_claim():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_pca_and_subtree_api_revision_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    candidate = evidence["pca_implementation_chronology"]["pre_artifact_geojax_jax_candidate"]
+    pca = candidate["pca_contract"]
+    serializer = candidate["serializer_compatibility"]
+    assert candidate["first_public_pca_commit"]["sha"] == "4dfc82bbc6dbe37b64a540758d6ea3ed6c9829aa"
+    assert candidate["last_inspected_pre_artifact_public_head"]["sha"] == "33b0f8727ab447eff86e35a69c60c1f33b4d1513"
+    assert candidate["last_inspected_pre_artifact_public_head"]["observed_public_commits_between_head_and_pointdata"] == 0
+    assert pca["framework"] == "JAX"
+    assert pca["robust_covariance"]["defaults"] == {"c": 1.5, "tol": 0.000001, "max_iter": 100}
+    assert pca["eigensolver"] == "jnp.linalg.eigh"
+    assert pca["default_eigenvector_layout"] == "rows when transpose=True"
+    assert serializer["historical_jax_value_type"] == "jaxlib._jax.ArrayImpl"
+    assert serializer["incompatible_standard_release"] == "jax-v0.4.30"
+    assert serializer["first_checked_compatible_standard_release"] == "jax-v0.4.31"
+    assert serializer["conditional_python_constraint"]["status"] == "CONDITIONAL_ONLY_NOT_A_PRODUCER_LOCK"
+    assert candidate["comparison_to_legacy_numpy_candidate"]["certainty"] == (
+        "COMPATIBILITY_COMPARISON_NOT_PRODUCER_IDENTIFICATION"
+    )
+    assert "strongest public-source candidate" in candidate["conclusion"]
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-044")
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-PCA-SUBTREE-REVISION-BOUNDARY" in claim["evidence"]
+    unresolved = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
+    assert unresolved["status"] == "UNRESOLVED"

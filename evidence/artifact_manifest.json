@@ -57,7 +57,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "a677acb4bf47aa46f2512c6229c1813eb1c6bd4a"
+        "value": "46c97b9f1e5f7932cffd47c594aa11523c6f1516"
       }
     },
     {
@@ -336,7 +336,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "4d2f9a81b90c9a0459523f5db3f24d59cbf4d796"
+        "value": "9f4a9a9e9cffff3cb62cb7cecd0dabd0ea037cca"
       }
     },
     {
@@ -660,7 +660,7 @@
       "role": "regression_test_for_provenance_boundaries",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "a83265bb2fd15df92a9b407a25dc46c0e4c5b39e"
+        "value": "82a01b9d109c419d2431a48063227c7c8eace055"
       }
     },
     {
@@ -1052,7 +1052,7 @@
       "role": "public_morphology_pipeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "a83265bb2fd15df92a9b407a25dc46c0e4c5b39e"
+        "value": "82a01b9d109c419d2431a48063227c7c8eace055"
       }
     },
     {
@@ -1070,7 +1070,7 @@
       "role": "legacy_algorithm_timeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "a83265bb2fd15df92a9b407a25dc46c0e4c5b39e"
+        "value": "82a01b9d109c419d2431a48063227c7c8eace055"
       }
     },
     {
@@ -1088,7 +1088,7 @@
       "role": "legacy_installation_metadata_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "a83265bb2fd15df92a9b407a25dc46c0e4c5b39e"
+        "value": "82a01b9d109c419d2431a48063227c7c8eace055"
       }
     },
     {
@@ -1097,7 +1097,7 @@
       "role": "public_source_chronology_pca_and_subtree_api_comparison",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "126a8ec0cf717db0a380e97f8ee89d6cf947c4dd"
+        "value": "b4ab59ea1f9f2ac7bcc309ec293acbb06c272e90"
       }
     },
     {
@@ -1106,7 +1106,7 @@
       "role": "pca_and_subtree_revision_boundary_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "a83265bb2fd15df92a9b407a25dc46c0e4c5b39e"
+        "value": "82a01b9d109c419d2431a48063227c7c8eace055"
       }
     },
     {
@@ -1115,7 +1115,7 @@
       "role": "earliest_public_neurosetta_code_boundary_for_historical_pca",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "126a8ec0cf717db0a380e97f8ee89d6cf947c4dd"
+        "value": "b4ab59ea1f9f2ac7bcc309ec293acbb06c272e90"
       }
     },
     {
@@ -1124,7 +1124,7 @@
       "role": "pre_pointdata_public_pca_boundary_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "a83265bb2fd15df92a9b407a25dc46c0e4c5b39e"
+        "value": "82a01b9d109c419d2431a48063227c7c8eace055"
       }
     },
     {
@@ -1133,7 +1133,7 @@
       "role": "legacy_min_cov_det_pca_candidate_and_preartifact_tree_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "126a8ec0cf717db0a380e97f8ee89d6cf947c4dd"
+        "value": "b4ab59ea1f9f2ac7bcc309ec293acbb06c272e90"
       }
     },
     {
@@ -1142,7 +1142,25 @@
       "role": "legacy_pca_candidate_and_parent_tree_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "a83265bb2fd15df92a9b407a25dc46c0e4c5b39e"
+        "value": "82a01b9d109c419d2431a48063227c7c8eace055"
+      }
+    },
+    {
+      "id": "E-POINTDATA-GEOJAX-JAX-PCA-CANDIDATE",
+      "path": "evidence/point_data_pca_and_subtree_api_revision_boundary.json",
+      "role": "pre_artifact_jax_pca_and_historical_serializer_compatibility",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "b4ab59ea1f9f2ac7bcc309ec293acbb06c272e90"
+      }
+    },
+    {
+      "id": "E-POINTDATA-GEOJAX-JAX-PCA-CANDIDATE-TEST",
+      "path": "tests/test_evdir_pc_axis_hypothesis.py",
+      "role": "geojax_jax_pca_candidate_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "82a01b9d109c419d2431a48063227c7c8eace055"
       }
     }
   ]

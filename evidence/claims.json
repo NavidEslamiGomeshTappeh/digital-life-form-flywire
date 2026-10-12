@@ -809,6 +809,20 @@
         "It does not prove that the legacy coord_eig_decomp routine generated the binary.",
         "The exact historical producer remains unresolved under C-POINTDATA-002."
       ]
+    },
+    {
+      "id": "C-POINTDATA-044",
+      "statement": "Public GeoJax had a JAX PCA/eigendecomposition routine by 2025-02-12 and, by its inspected 2025-05-02 public head, exposed `coord_eig_decomp` with Huber-like robust covariance, eigenvalue normalization/sorting, row-oriented eigenvectors by default, and `align_point_cloud` with caller-supplied eigenvector order and target basis. The historical Point_data pickle stores every PC/angle/evDir scalar as a float32 `jaxlib._jax.ArrayImpl`, and the pickle serializer contract matches public JAX release families from v0.4.31 onward but not v0.4.30. This makes GeoJax/JAX a stronger public-source compatibility candidate than the legacy NumPy PCA function.",
+      "classification": "SOURCE_COMPARISON",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-PCA-SUBTREE-REVISION-BOUNDARY"
+      ],
+      "caveats": [
+        "The JAX serializer family constrains compatibility, not the exact installed version.",
+        "The contemporaneous Figure 5 notebook proves only downstream use of PC1/PC2/PC3; the adjacent GeoJax caller is a non-producer of Point_data.",
+        "The exact producer code, subtype-specific target basis/order, conversion path to JAX scalar values, and writer for Subtype_evDir_x/y/z remain unresolved under C-POINTDATA-002."
+      ]
     }
   ]
 }
