@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_LEGACY_ROOT_SELECTION_RULE_AND_REVISION_BOUNDARY",
+  "checked_date": "2026-10-12",
+  "purpose": "Record the earliest inspected public snapshots for the legacy optimal_partition_root rule, the July 2025 vertex-indexing correction, and the boundary between that pre-Point_data legacy code and the later NeuRosetta API.",
+  "historical_target": {
+    "artifact": "Data/Point_data.pkl",
+    "first_public_ingest_commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "first_public_ingest_date": "2025-12-09",
+    "blob_sha1": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+    "sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+  },
+  "legacy_repository": {
+    "url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1",
+    "created_at": "2023-07-16T10:57:15Z",
+    "latest_inspected_commit": "25c911a28030deb5204eb7ab5a18ff4643363d96",
+    "latest_inspected_commit_date": "2025-07-31T14:40:07Z",
+    "requirements_blob_sha1": "423759ecea6991584b8cb7be9e10ddeb3e055f30",
+    "environment_blob_sha1": "05cf1967baea026f1bb251b99eabd454bfa302b0",
+    "dependency_boundary": [
+      "The legacy environment.yml uses Python 3.10 and an unpinned jax dependency.",
+      "The legacy requirements.txt does not pin GeoJax, JAX, or jaxlib versions.",
+      "The inspected July 2025 source state therefore does not identify the versions installed during creation of the December 2025 Point_data artifact."
+    ]
+  },
+  "revision_timeline": [
+    {
+      "date": "2025-04-18T17:05:03Z",
+      "commit": "94ff9e5a956d5a91c40bb386f33e3dfa60896987",
+      "commit_url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1/commit/94ff9e5a956d5a91c40bb386f33e3dfa60896987",
+      "file_path": "Neurosetta/graphs.py",
+      "file_blob_sha1": "bfadccb0f7bdd5b4db4f41942576ef492e45a364",
+      "present_functions": [
+        "g_subtree",
+        "g_subtree_mask"
+      ],
+      "absent_functions_in_inspected_snapshot": [
+        "get_sub_tree_quality",
+        "optimal_partition_root",
+        "simplify_neuron"
+      ],
+      "interpretation": "Subtree masks existed, but the inspected public source at this snapshot does not yet contain the later scoring/root-selection helper."
+    },
+    {
+      "date": "2025-06-05T15:55:50Z",
+      "commit": "b9681b64163a3e3a2937f8bb2058c06f1460b55a",
+      "commit_url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1/commit/b9681b64163a3e3a2937f8bb2058c06f1460b55a",
+      "file_path": "Neurosetta/graphs.py",
+      "file_blob_sha1": "8676bda4650c25cf3ec8681bee91acc2edbbb223",
+      "present_functions": [
+        "get_sub_tree_quality",
+        "optimal_partition_root",
+        "simplify_neuron"
+      ],
+      "interpretation": "This is the first inspected public graphs.py snapshot in the path history that contains all three functions. The exact earliest authoring instant within the intervening development period is not inferred beyond the checked commit snapshots."
+    },
+    {
+      "date": "2025-07-29T10:18:50Z",
+      "commit": "9816dad67180ebf5937ae05316ae14d1f190aae4",
+      "commit_url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1/commit/9816dad67180ebf5937ae05316ae14d1f190aae4",
+      "file_path": "Neurosetta/graphs.py",
+      "file_blob_sha1": "b5ace2e7d7db211796c735a3652ce386b3f271a2",
+      "patch_observation": "Fixes vertex indexing when mapping from the simplified neuron back to the original. The new expression takes g_vert_coords(simp_N, subset=b_inds)[scores.argmax()] and passes that coordinate to nearest_vertex(N, simp_dRoot_coord), instead of treating scores.argmax() as an index into all original vertices.",
+      "interpretation": "A concrete root-selection implementation correction exists before the historical Point_data artifact's first public ingest."
+    },
+    {
+      "date": "2025-07-31T14:40:07Z",
+      "commit": "25c911a28030deb5204eb7ab5a18ff4643363d96",
+      "commit_url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1/commit/25c911a28030deb5204eb7ab5a18ff4643363d96",
+      "file_path": "Neurosetta/graphs.py",
+      "file_blob_sha1": "4406880c0fd8711d29f05fea006fa9c84ecf58b7",
+      "present_functions": [
+        "get_sub_tree_quality",
+        "optimal_partition_root",
+        "simplify_neuron"
+      ],
+      "interpretation": "Last inspected public legacy source state prior to the December 2025 Point_data artifact; this makes it a plausible code-family candidate, not proof of the runtime that generated the artifact."
+    }
+  ],
+  "observed_legacy_algorithm": {
+    "functions_and_source": {
+      "get_sub_tree_quality": "Neurosetta/graphs.py, legacy July 31 snapshot, approximately lines 1846-1886",
+      "optimal_partition_root": "Neurosetta/graphs.py, legacy July 31 snapshot, approximately lines 1889-1925",
+      "simplify_neuron": "Neurosetta/graphs.py, legacy July 31 snapshot, approximately lines 1927-1995"
+    },
+    "score_formula": "(1 - (sub_cable / total_cable)) + (sub_leaves / total_leaves)",
+    "candidate_set": "Branch vertices of the simplified graph",
+    "sub_cable": "Sum of Path_length for edges reachable downstream from a candidate branch",
+    "sub_leaves": "Count of original leaf indices present among the candidate subtree's vertices",
+    "procedure": [
+      "Ensure the source graph has Path_length values.",
+      "Create a simplified graph whose section endpoints are leaves/branch points and whose edges preserve path length from the original graph.",
+      "Compute the subtree quality score at each branch in the simplified graph using total cable and total leaf count.",
+      "Take scores.argmax() and select that branch's coordinate in the simplified-graph branch subset.",
+      "Map the selected coordinate to the nearest vertex in the original graph.",
+      "The July 31 snapshot additionally binds the selected index as graph property Subtree_root."
+    ],
+    "meaning": "The explicit score and its simplified-graph implementation are observed source code. They describe a plausible historical dendrite-root-selection algorithm but do not establish that this function ran for any specific historical neuron."
+  },
+  "later_neurosetta_api_boundary": {
+    "repository_url": "https://github.com/NikDrummond/NeuRosetta",
+    "created_at": "2026-01-20T22:42:16Z",
+    "inspected_main_push_date": "2026-10-06T13:11:21Z",
+    "inspected_pyproject_version": "0.1.0",
+    "pyproject_blob_sha1": "bec634c2af6ac358eb8581c8594b68005ba28007",
+    "visible_subtree_methods_in_inspected_current_api": [
+      "get_subtree_scores",
+      "get_max_subtree_node",
+      "get_subtree",
+      "reduce_tree"
+    ],
+    "score_formula_in_current_source": "(1 - (subtree_cable / total_cable)) + (subtree_leaves / total_leaves)",
+    "relevant_source_urls": [
+      "https://github.com/NikDrummond/NeuRosetta/blob/main/src/neurosetta/api/forest_class.py",
+      "https://github.com/NikDrummond/NeuRosetta/blob/main/src/neurosetta/ops/tree_graphs/tree_subtrees.py",
+      "https://github.com/NikDrummond/NeuRosetta/blob/main/src/neurosetta/utils/graph_utils/subgraphs.py"
+    ],
+    "boundary": [
+      "The current repository was created after the December 2025 Point_data artifact.",
+      "Its inspected current public API exposes a different method surface from the PP3 call convert_forest_to_subtrees in the August 2026 paper source.",
+      "A matching score formula supports algorithm-family similarity; it does not prove binary/source identity, exact dependency revision, or execution identity."
+    ]
+  },
+  "conclusions": {
+    "proven": [
+      "The inspected April 18 legacy snapshot contains subtree masks but not the later score/root-selection helper.",
+      "The inspected June 5 snapshot contains get_sub_tree_quality, optimal_partition_root and simplify_neuron.",
+      "The July 29 public commit fixes mapping from a simplified-graph branch candidate back to the original neuron.",
+      "The legacy score formula is also present in current NeuRosetta's subtree-score implementation.",
+      "The older legacy dependency files do not pin the exact JAX/GeoJax runtime."
+    ],
+    "not_proven": [
+      "That the December 2025 Point_data.pkl producer called optimal_partition_root, or used its score formula for all neuron subtypes.",
+      "That the August 2026 convert_forest_to_subtrees implementation is byte-identical or behaviorally identical to the July 2025 optimal_partition_root implementation.",
+      "The exact installed NeuRosetta/GeoJax/JAX/jaxlib revision, source morphology inputs, manual edits, and execution parameters used for the historical Point_data artifact."
+    ],
+    "unresolved_claim_id": "C-POINTDATA-002"
+  }
+}

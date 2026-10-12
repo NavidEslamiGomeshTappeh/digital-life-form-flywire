@@ -694,6 +694,21 @@
         "No morphology file is attached to this evidence receipt.",
         "The README statement does not identify file hashes, revision, per-neuron manual edits, or a binding to the December 2025 Point_data.pkl SHA-256."
       ]
+    },
+    {
+      "id": "C-POINTDATA-036",
+      "statement": "Public legacy Neurosetta source shows the subtree quality/root-selection algorithm by the inspected 2025-06-05 graphs.py snapshot, with a July 29 correction to map the selected simplified-graph branch coordinate to the nearest vertex in the original tree. The observed score is (1 - sub_cable/total_cable) + (sub_leaves/total_leaves). This is a plausible pre-artifact algorithm-family candidate, not proof that it generated Point_data.pkl.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-LEGACY-ROOT-TIMELINE"
+      ],
+      "caveats": [
+        "The inspected April 18 snapshot has subtree masks but not the later score/root-selection helper; the algorithm is only confirmed in the June 5 public snapshot.",
+        "The repository's public source state is not a runtime receipt for the December 2025 producer.",
+        "The exact installed NeuRosetta/GeoJax/JAX/jaxlib revisions and manual morphology edits remain unresolved under C-POINTDATA-002.",
+        "The current public NeuRosetta API is a later and different method surface from the method call visible in the August 2026 PP3 notebook."
+      ]
     }
   ]
 }

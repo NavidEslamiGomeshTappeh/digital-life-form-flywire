@@ -2,6 +2,7 @@
 
 
 ## Unreleased maintenance — 2026-10-12
+- Added the legacy subtree-root-selection revision boundary: the April 18 snapshot has subtree masks only, the June 5 snapshot contains `optimal_partition_root`/`get_sub_tree_quality`, and July 29 fixes mapping from simplified-tree coordinates to the original neuron. Recorded score and unresolved historical runtime without attributing this candidate to `Point_data.pkl` (`C-POINTDATA-036`).
 - Read the released PP1–PP3 source cells and recorded exact public notebook blob hashes, 100 nm SWC resampling, parallel `.nr` import/reduction settings, the visible hard-coded local inputs, PP1's placeholder/state-bound references, and the README's statement that extracted `.swc`/`.nr` files are available upon request (`C-POINTDATA-034`, `C-POINTDATA-035`). These later notebooks do not prove the exact 2025 producer.
 - Compared the August 2026 Zenodo software and data archive trees: PP1–PP5 and Metrics1–Metrics6 notebooks are publicly included in v2.0.0 source, but the companion metrics dataset and source archive previews still do not list materialized `Reduced_dendrites`, `.nr`, or `.swc` morphology intermediates. This refines rather than overstates the producer gap (`C-POINTDATA-033`).
 - Recorded a bounded public-source search for the missing T45_Morpho_data/Point_data producer. The reviewed related-repository searches returned no matches; the record explicitly does not claim global absence (`C-POINTDATA-032`).

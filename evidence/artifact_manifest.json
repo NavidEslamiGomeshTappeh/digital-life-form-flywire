@@ -57,7 +57,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "079d55f344e2594e206042d381e5c2879c361ec9"
+        "value": "c1210b208e98acf29a7aaad9c35a95519e4b0b67"
       }
     },
     {
@@ -336,7 +336,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "7c8417550d5e8b5dfe8ab40e1a7d06ed018cad79"
+        "value": "72d1f1a8d2cded556c5bcd6225b7462c9acf8fbb"
       }
     },
     {
@@ -660,7 +660,7 @@
       "role": "regression_test_for_provenance_boundaries",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "8dab81b8ac347fdea4e172a26c8bd14c748eb8dc"
+        "value": "bc6562dd452a25aa50cb8f2e76c5af5a62788a4c"
       }
     },
     {
@@ -1052,7 +1052,25 @@
       "role": "public_morphology_pipeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "8dab81b8ac347fdea4e172a26c8bd14c748eb8dc"
+        "value": "bc6562dd452a25aa50cb8f2e76c5af5a62788a4c"
+      }
+    },
+    {
+      "id": "E-POINTDATA-LEGACY-ROOT-TIMELINE",
+      "path": "evidence/legacy_neurosetta_subtree_root_timeline.json",
+      "role": "legacy_subtree_root_algorithm_and_revision_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "66b9b7d6055b9474dad6f2a9912ab718be963021"
+      }
+    },
+    {
+      "id": "E-POINTDATA-LEGACY-ROOT-REGRESSION",
+      "path": "tests/test_evdir_pc_axis_hypothesis.py",
+      "role": "legacy_algorithm_timeline_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "bc6562dd452a25aa50cb8f2e76c5af5a62788a4c"
       }
     }
   ]

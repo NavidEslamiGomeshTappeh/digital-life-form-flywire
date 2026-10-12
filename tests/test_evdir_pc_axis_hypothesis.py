@@ -336,3 +336,35 @@ def test_public_pp1_pp3_pipeline_snapshot_preserves_historical_limitations():
         assert "E-POINTDATA-PUBLIC-PP1-PP3-PIPELINE" in claim["evidence"]
     unresolved = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
     assert unresolved["status"] == "UNRESOLVED"
+
+
+def test_legacy_neurosetta_root_selection_timeline_is_explicitly_bounded():
+    evidence = json.loads(
+        (ROOT / "evidence" / "legacy_neurosetta_subtree_root_timeline.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_LEGACY_ROOT_SELECTION_RULE_AND_REVISION_BOUNDARY"
+    timeline = {item["commit"]: item for item in evidence["revision_timeline"]}
+    april = timeline["94ff9e5a956d5a91c40bb386f33e3dfa60896987"]
+    june = timeline["b9681b64163a3e3a2937f8bb2058c06f1460b55a"]
+    july_fix = timeline["9816dad67180ebf5937ae05316ae14d1f190aae4"]
+    latest = timeline["25c911a28030deb5204eb7ab5a18ff4643363d96"]
+    assert "optimal_partition_root" in april["absent_functions_in_inspected_snapshot"]
+    assert "optimal_partition_root" in june["present_functions"]
+    assert "g_vert_coords(simp_N, subset=b_inds)[scores.argmax()]" in july_fix["patch_observation"]
+    assert "Subtree_root" in latest["interpretation"] or "Subtree_root" in evidence["observed_legacy_algorithm"]["procedure"][-1]
+    assert evidence["observed_legacy_algorithm"]["score_formula"] == (
+        "(1 - (sub_cable / total_cable)) + (sub_leaves / total_leaves)"
+    )
+    assert evidence["later_neurosetta_api_boundary"]["created_at"] > (
+        evidence["historical_target"]["first_public_ingest_date"] + "T00:00:00Z"
+    )
+    assert "UNRESOLVED" in evidence["conclusions"]["unresolved_claim_id"]
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-036")
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-LEGACY-ROOT-TIMELINE" in claim["evidence"]
+    unresolved = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
+    assert unresolved["status"] == "UNRESOLVED"
