@@ -905,6 +905,19 @@
         "Shared robust estimator parameters do not prove source-code derivation or shared historical execution.",
         "The exact producer and historical Subtype_evDir axis/sign rule remain unresolved under C-POINTDATA-002."
       ]
+    },
+    {
+      "id": "C-POINTDATA-051",
+      "statement": "The public Metrics1_Point_data notebook commit (2026-08-10 15:49:32Z) predates by 5 days 3 hours 56 minutes 24 seconds the first public commit of the current NeuRosetta tree_coordinates.py path that defines coordinate_pca (2026-08-15 19:45:56Z). Therefore the currently reachable public main history does not pin the exact coordinate_pca source implementation used by the notebook at its first public commit.",
+      "classification": "PUBLIC_HISTORY_EXECUTION_BOUNDARY",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-NEUROSETTA-PCA-NUMPY-BOUNDARY"
+      ],
+      "caveats": [
+        "The notebook may have used a local, uncommitted or differently located implementation; chronology alone does not establish that the code was absent from the author's workspace.",
+        "The notebook and API both postdate the December 2025 Point_data artifact and do not identify its producer."
+      ]
     }
   ]
 }

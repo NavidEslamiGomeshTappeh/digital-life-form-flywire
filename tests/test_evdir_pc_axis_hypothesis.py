@@ -822,3 +822,26 @@ def test_postartifact_neurosetta_numpy_pca_is_not_treated_as_jax_producer_proof(
     assert exact["status"] == "UNRESOLVED"
     assert boundary["status"] == "PROVEN"
     assert "E-POINTDATA-NEUROSETTA-PCA-NUMPY-BOUNDARY" in boundary["evidence"]
+
+
+def test_public_metrics_notebook_precedes_current_neurosetta_coordinate_pca_path():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_neurosetta_pca_numpy_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    chronology = evidence["public_chronology_cross_check"]
+    assert chronology["notebook_commit"] == "8700efd40bccfa3e74ac7c4df02da83a968b9b52"
+    assert chronology["api_path_first_commit"] == "958502da2f3e5bf74a2ede755c21357c8b7fdf3a"
+    assert chronology["notebook_calls_coordinate_pca"] is True
+    assert chronology["elapsed_between_public_commits"] == (
+        "5 days, 3 hours, 56 minutes, 24 seconds"
+    )
+    assert "does not pin the exact code version" in chronology["interpretation"]
+    assert "not proof" in chronology["interpretation"]
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    exact = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-002")
+    boundary = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-051")
+    assert exact["status"] == "UNRESOLVED"
+    assert boundary["status"] == "PROVEN"
+    assert "E-POINTDATA-NEUROSETTA-PCA-NUMPY-BOUNDARY" in boundary["evidence"]

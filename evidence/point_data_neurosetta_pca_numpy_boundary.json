@@ -97,5 +97,18 @@
       "The subtype-specific eigenvector index and sign/axis rule.",
       "Any hidden local conversion step that could turn NumPy results into JAX scalar values."
     ]
+  },
+  "public_chronology_cross_check": {
+    "notebook_commit": "8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+    "notebook_commit_date": "2026-08-10T15:49:32Z",
+    "notebook_path": "Notebooks/Metrics1_Point_data.ipynb",
+    "notebook_calls_coordinate_pca": true,
+    "api_path_first_commit": "958502da2f3e5bf74a2ede755c21357c8b7fdf3a",
+    "api_path_first_commit_date": "2026-08-15T19:45:56Z",
+    "api_path": "src/neurosetta/ops/tree_graphs/tree_coordinates.py",
+    "elapsed_between_public_commits": "5 days, 3 hours, 56 minutes, 24 seconds",
+    "interpretation": "The consumer notebook was publicly committed before the current public source path that defines coordinate_pca. The public main history therefore does not pin the exact code version that notebook executed at its first public commit. A local/uncommitted or differently located API implementation is possible; this ordering is not proof that no such implementation existed.",
+    "historical_artifact_date": "2025-12-09T19:41:50Z",
+    "implication": "Both public commits above are months after the historical Point_data artifact, and neither identifies the December 2025 producer."
   }
 }
