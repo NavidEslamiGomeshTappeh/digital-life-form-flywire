@@ -584,8 +584,8 @@ def test_pre_artifact_geojax_pca_candidate_matches_jax_value_family_without_prod
     assert pca["eigensolver"] == "jnp.linalg.eigh"
     assert pca["default_eigenvector_layout"] == "rows when transpose=True"
     assert serializer["historical_jax_value_type"] == "jaxlib._jax.ArrayImpl"
-    assert serializer["incompatible_standard_release"] == "jax-v0.4.30"
-    assert serializer["first_checked_compatible_standard_release"] == "jax-v0.4.31"
+    assert serializer["public_release_family"]["incompatible_standard_release"] == "jax-v0.4.30"
+    assert serializer["public_release_family"]["first_checked_compatible_standard_release"] == "jax-v0.4.31"
     assert serializer["conditional_python_constraint"]["status"] == "CONDITIONAL_ONLY_NOT_A_PRODUCER_LOCK"
     assert candidate["comparison_to_legacy_numpy_candidate"]["certainty"] == (
         "COMPATIBILITY_COMPARISON_NOT_PRODUCER_IDENTIFICATION"
