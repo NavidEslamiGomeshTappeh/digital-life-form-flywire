@@ -179,5 +179,84 @@
       }
     ],
     "interpretation": "No matching public issue or pull-request discussion was returned for these exact queries in the selected repositories. This is a bounded search result, not proof that private discussions, deleted issues, or unsearched repositories do not exist."
+  },
+  "public_editor_history_boundary": {
+    "source_repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "inspected_ref": "main",
+    "inspected_tree_commit": "3a1aa1a2e368ff8767f40791588eaf552e6d436d",
+    "inspected_tree_path_count": 289,
+    "recursive_tree_response_truncated": false,
+    "history_folder": {
+      "path_prefix": ".history/",
+      "path_entries_including_directory": 251,
+      "files": 250,
+      "file_extension_counts": {
+        ".md": 44,
+        ".yml": 11,
+        ".py": 195
+      },
+      "subdirectory_entries": [
+        ".history/src"
+      ],
+      "notebooks_directory_present": false,
+      "data_directory_present": false,
+      "matching_history_paths_for": [
+        "Metrics1",
+        "PP3",
+        "Point_data",
+        "evDir",
+        "PCA"
+      ],
+      "interpretation": "The currently reachable public .history folder exposes editor-history snapshots for README, conda-environment and Python source files only. It contains no Notebook/ or Data/ history path, and no filename matching the historical Point_data producer."
+    },
+    "path_specific_git_history": {
+      "metrics1_point_data_notebook": {
+        "path": "Notebooks/Metrics1_Point_data.ipynb",
+        "matching_commits": [
+          {
+            "sha": "8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+            "date": "2026-08-10T15:49:32Z",
+            "url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/commit/8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+            "message": "Paper submission update. Remove tracked Data artifacts and add preprocessing notebooks and revised analysis code."
+          }
+        ],
+        "count": 1,
+        "interpretation": "The public producer-like Metrics1 notebook has one path-specific commit in the inspected current main history, dated 2026-08-10, well after the December 2025 binary artifact."
+      },
+      "point_data_pickle": {
+        "path": "Data/Point_data.pkl",
+        "commits_returned_by_path_query": [
+          {
+            "sha": "fe9779d4ca425613eec44b19e961610d117e7232",
+            "date": "2025-12-09T19:42:19Z",
+            "message": "Point value metrics data",
+            "url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/commit/fe9779d4ca425613eec44b19e961610d117e7232"
+          },
+          {
+            "sha": "8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+            "date": "2026-08-10T15:49:32Z",
+            "message": "Paper submission update. Remove tracked Data artifacts and add preprocessing notebooks and revised analysis code.",
+            "url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/commit/8700efd40bccfa3e74ac7c4df02da83a968b9b52"
+          }
+        ],
+        "interpretation": "The public path history shows addition and later removal of the binary file, not an accompanying source-generation notebook in those changes. Earlier evidence separately records the parallel add commit and first public blob identity."
+      },
+      "public_repository_surface": {
+        "branches": [
+          {
+            "name": "main",
+            "sha": "3a1aa1a2e368ff8767f40791588eaf552e6d436d"
+          }
+        ],
+        "pull_requests_found": 0,
+        "checked_date": "2026-10-12",
+        "caveat": "This is the current reachable public repository surface, not a guarantee that no historical deleted branch or private repository ever existed."
+      }
+    },
+    "conclusion": {
+      "classification": "CURRENT_PUBLIC_HISTORY_FOLDER_AND_NOTEBOOK_TIMELINE_CHECKED; HISTORICAL_PRODUCER_NOT_EXPOSED",
+      "impact": "This narrows the inspected public-source avenues: the current public editor-history folder does not preserve the missing producer-like notebook, while Metrics1_Point_data entered public history in August 2026. The exact December 2025 producer remains unresolved.",
+      "unresolved_claim_id": "C-POINTDATA-002"
+    }
   }
 }

@@ -837,6 +837,19 @@
         "The search does not exclude private/local code, deleted or unindexed repositories, uncommitted notebooks, binary artifacts, or unsearched branches.",
         "The exact December 2025 producer remains unresolved under C-POINTDATA-002."
       ]
+    },
+    {
+      "id": "C-POINTDATA-046",
+      "statement": "The inspected current public paper-repository tree contains 250 files under .history but no Notebook/ or Data/ history folder and no history filename matching Metrics1, PP3, Point_data, evDir or PCA. The path-specific public history for Notebooks/Metrics1_Point_data.ipynb returns one commit dated 2026-08-10, after the December 2025 artifact. These checks do not expose the historical producer in the currently reachable public source history.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-PUBLIC-HISTORY-BOUNDARY"
+      ],
+      "caveats": [
+        "This is scoped to the current reachable public main tree and commit history; it does not exclude private/local workspaces, deleted or unindexed branches, or uncommitted notebooks.",
+        "The exact December 2025 producer remains unresolved under C-POINTDATA-002."
+      ]
     }
   ]
 }

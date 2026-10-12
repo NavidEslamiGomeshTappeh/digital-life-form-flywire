@@ -650,3 +650,36 @@ def test_related_public_issue_search_is_recorded_as_bounded_negative_evidence():
     assert all(item["match_count"] == 0 for item in issue_search["queries"])
     assert "bounded search result" in issue_search["interpretation"]
     assert "not proof" in issue_search["interpretation"]
+
+
+def test_paper_repo_editor_history_and_notebook_timeline_do_not_overstate_producer_recovery():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_related_repository_search.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    history = evidence["public_editor_history_boundary"]
+    assert history["inspected_tree_commit"] == "3a1aa1a2e368ff8767f40791588eaf552e6d436d"
+    assert history["inspected_tree_path_count"] == 289
+    hist = history["history_folder"]
+    assert hist["files"] == 250
+    assert hist["file_extension_counts"] == {".md": 44, ".yml": 11, ".py": 195}
+    assert hist["notebooks_directory_present"] is False
+    assert hist["data_directory_present"] is False
+    assert hist["matching_history_paths_for"] == []
+    notebook = history["path_specific_git_history"]["metrics1_point_data_notebook"]
+    assert notebook["count"] == 1
+    assert notebook["matching_commits"][0]["sha"] == "8700efd40bccfa3e74ac7c4df02da83a968b9b52"
+    assert notebook["matching_commits"][0]["date"] == "2026-08-10T15:49:32Z"
+    conclusion = history["conclusion"]
+    assert conclusion["classification"] == (
+        "CURRENT_PUBLIC_HISTORY_FOLDER_AND_NOTEBOOK_TIMELINE_CHECKED; HISTORICAL_PRODUCER_NOT_EXPOSED"
+    )
+    assert conclusion["unresolved_claim_id"] == "C-POINTDATA-002"
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    producer = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-002")
+    boundary = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-046")
+    assert producer["status"] == "UNRESOLVED"
+    assert boundary["status"] == "PROVEN"
+    assert "E-POINTDATA-PUBLIC-HISTORY-BOUNDARY" in boundary["evidence"]
