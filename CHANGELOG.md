@@ -2,6 +2,7 @@
 
 
 ## Unreleased maintenance — 2026-10-12
+- Read the released PP1–PP3 source cells and recorded exact public notebook blob hashes, 100 nm SWC resampling, parallel `.nr` import/reduction settings, the visible hard-coded local inputs, PP1's placeholder/state-bound references, and the README's statement that extracted `.swc`/`.nr` files are available upon request (`C-POINTDATA-034`, `C-POINTDATA-035`). These later notebooks do not prove the exact 2025 producer.
 - Compared the August 2026 Zenodo software and data archive trees: PP1–PP5 and Metrics1–Metrics6 notebooks are publicly included in v2.0.0 source, but the companion metrics dataset and source archive previews still do not list materialized `Reduced_dendrites`, `.nr`, or `.swc` morphology intermediates. This refines rather than overstates the producer gap (`C-POINTDATA-033`).
 - Recorded a bounded public-source search for the missing T45_Morpho_data/Point_data producer. The reviewed related-repository searches returned no matches; the record explicitly does not claim global absence (`C-POINTDATA-032`).
 - Extended the dependency pin audit upstream: GeoJax was package version `0.2` in the pinned 2025-05-02 snapshot, its setup metadata required unpinned `jax`/`jaxlib`, and the README documented `pip install -e .`. These facts establish a viable install path but do not bind the December runtime to that commit.

@@ -284,3 +284,55 @@ def test_bounded_public_producer_search_does_not_claim_global_absence():
     search_claim = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-032")
     assert producer["status"] == "UNRESOLVED"
     assert search_claim["status"] == "PROVEN"
+
+
+def test_august_2026_archive_inventory_boundary_is_regression_guarded():
+    archive = json.loads(
+        (ROOT / "evidence" / "zenodo_2026_publication_archive_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert archive["status"] == "PROVEN_PUBLIC_2026_ARCHIVE_INVENTORY_BOUNDARY"
+    assert "Notebooks/PP3_Dendrite_extraction.ipynb" in (
+        archive["observed_publication_inventory"]["software_archive_includes"]
+    )
+    assert "Data/point_data.pkl" in archive["observed_publication_inventory"]["data_archive_includes"]
+    assert "Reduced_dendrites/" in (
+        archive["observed_publication_inventory"]["software_archive_paths_not_found_in_preview"]
+    )
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-033")
+    assert claim["status"] == "PROVEN"
+    assert "E-POINTDATA-ZENODO-2026-ARCHIVE" in claim["evidence"]
+
+
+def test_public_pp1_pp3_pipeline_snapshot_preserves_historical_limitations():
+    evidence = json.loads(
+        (ROOT / "evidence" / "public_pp1_pp3_morphology_pipeline_snapshot.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert evidence["status"] == "PROVEN_LATER_PUBLIC_PP1_PP3_PIPELINE_CALLS"
+    sources = {item["path"]: item for item in evidence["source_release"]["notebooks"]}
+    assert sources["Notebooks/PP1_Fetch_flywire.ipynb"]["git_blob_sha1"] == (
+        "30d3376dcee3a09b9a0e305d4e18f16f6b35bb27"
+    )
+    assert any("100 nanometer" in call for call in sources["Notebooks/PP1_Fetch_flywire.ipynb"]["observed_calls"])
+    assert any("max_workers=10" in call for call in sources["Notebooks/PP2_nr_conversion.ipynb"]["observed_inputs_and_calls"])
+    assert any("reduce_forest" in call for call in sources["Notebooks/PP3_Dendrite_extraction.ipynb"]["observed_inputs_and_calls"])
+    assert evidence["source_release"]["readme"]["git_blob_sha1"] == (
+        "a70bc212f005ac730ec2dcfbfe8638dd6469fe80"
+    )
+    assert ".nr files" in evidence["source_release"]["readme"]["statement"]
+    assert evidence["observed_pipeline_boundary"]["producer_binding"] == "UNRESOLVED"
+    limitations = " ".join(evidence["observed_pipeline_boundary"]["reasons"])
+    assert "df/n_ids" in limitations
+    assert evidence["conclusions"]["unresolved_claim_id"] == "C-POINTDATA-002"
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    for claim_id in ("C-POINTDATA-034", "C-POINTDATA-035"):
+        claim = next(item for item in claims["claims"] if item["id"] == claim_id)
+        assert claim["status"] == "PROVEN"
+        assert "E-POINTDATA-PUBLIC-PP1-PP3-PIPELINE" in claim["evidence"]
+    unresolved = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-002")
+    assert unresolved["status"] == "UNRESOLVED"

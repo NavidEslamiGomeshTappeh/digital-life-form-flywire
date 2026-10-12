@@ -57,7 +57,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d2382ecfc3ed73ac3c61d99183816f41c1739859"
+        "value": "079d55f344e2594e206042d381e5c2879c361ec9"
       }
     },
     {
@@ -336,7 +336,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "22bbcbda5c2030fef99d1994c58e0288dc24c15f"
+        "value": "7c8417550d5e8b5dfe8ab40e1a7d06ed018cad79"
       }
     },
     {
@@ -660,7 +660,7 @@
       "role": "regression_test_for_provenance_boundaries",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d563c74b8399fdf808cb77a851b60adcc94f7d1c"
+        "value": "8dab81b8ac347fdea4e172a26c8bd14c748eb8dc"
       }
     },
     {
@@ -1035,6 +1035,24 @@
       "identity": {
         "type": "git_blob_sha1",
         "value": "27848596dc117fe6dbec19e4a31ed05574ec46cd"
+      }
+    },
+    {
+      "id": "E-POINTDATA-PUBLIC-PP1-PP3-PIPELINE",
+      "path": "evidence/public_pp1_pp3_morphology_pipeline_snapshot.json",
+      "role": "public_morphology_pipeline_source_snapshot",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "ad58fffcce28bdda27c375438d0b3166a72db56a"
+      }
+    },
+    {
+      "id": "E-POINTDATA-PUBLIC-PIPELINE-REGRESSION",
+      "path": "tests/test_evdir_pc_axis_hypothesis.py",
+      "role": "public_morphology_pipeline_regression",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "8dab81b8ac347fdea4e172a26c8bd14c748eb8dc"
       }
     }
   ]

@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_LATER_PUBLIC_PP1_PP3_PIPELINE_CALLS",
+  "checked_date": "2026-10-12",
+  "purpose": "Pin the notebook-level morphology pipeline calls publicly released in the August 2026 software archive without attributing them to the historical December 2025 Point_data producer.",
+  "source_release": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "tag": "v2.0.0",
+    "zenodo_record_url": "https://zenodo.org/records/21876360",
+    "release_publication_date": "2026-08-10",
+    "notebooks": [
+      {
+        "path": "Notebooks/PP1_Fetch_flywire.ipynb",
+        "url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/blob/v2.0.0/Notebooks/PP1_Fetch_flywire.ipynb",
+        "git_blob_sha1": "30d3376dcee3a09b9a0e305d4e18f16f6b35bb27",
+        "observed_calls": [
+          "search_annotations(NC(type=n_types, side='right')) and corresponding left-side query for T4a/b/c/d and T5a/b/c/d",
+          "chunks = np.array_split(ids, 15)",
+          "fwy.get_mesh_neuron(c, omit_failures=True, threads=10, progress=False)",
+          "mesh_neuron.skeletonize()",
+          "navis.resample_skeleton(skel, resample_to='100 nanometer', inplace=True)",
+          "navis.write_swc(...)"
+        ],
+        "visible_source_limitations": [
+          "mesh_path is assigned the literal placeholder '<save path to mesh directory>'",
+          "f_df is created from the left/right query frames, but the visible later cells read df and n_ids; no assignment to df or n_ids is visible in the notebook's inspected source cells"
+        ]
+      },
+      {
+        "path": "Notebooks/PP2_nr_conversion.ipynb",
+        "url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/blob/v2.0.0/Notebooks/PP2_nr_conversion.ipynb",
+        "git_blob_sha1": "dc2235bd2f8b4a6d6dee0a5f0dc014dfd2b5f287",
+        "observed_inputs_and_calls": [
+          "Reads /home/ndrummond@neuro.mpg.de/Datasets/Optic_lobe_neurons/T45_neurons.pkl",
+          "Imports SWC using nr.import_swc(swc_path, parallel=True, max_workers=10, progress=True)",
+          "Sets metadata for subtype, neuron type, units='nm', dataset, and hemisphere",
+          "Saves a forest under /home/ndrummond@neuro.mpg.de/Datasets/Optic_lobe_neurons/nr/ with parallel=True and max_workers=10"
+        ]
+      },
+      {
+        "path": "Notebooks/PP3_Dendrite_extraction.ipynb",
+        "url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/blob/v2.0.0/Notebooks/PP3_Dendrite_extraction.ipynb",
+        "git_blob_sha1": "67a9b41986eab50df7d540c1d40a39a2870a290d",
+        "observed_inputs_and_calls": [
+          "Visible input example loads /home/ndrummond@neuro.mpg.de/Datasets/Optic_lobe_neurons/nr/Female/T4/ with max_workers=10",
+          "Skips a tree when its graph-level flag property exists and equals 1",
+          "Calls forest.convert_forest_to_subtrees(max_workers=10)",
+          "Saves an intermediate under /home/ndrummond@neuro.mpg.de/Datasets/Paper_data/nr/Flywire/Dendrites/",
+          "Calls forest.reduce_forest(parallel=True, max_workers=10, progress=True, inplace=True)",
+          "Saves the result under /home/ndrummond@neuro.mpg.de/Datasets/Paper_data/nr/Flywire/Reduced_dendrites/"
+        ],
+        "visible_source_limitations": [
+          "The inspected input path is a hard-coded local path and shows the Female/T4 example; this notebook snapshot alone does not demonstrate a complete execution for every subtype."
+        ]
+      }
+    ],
+    "readme": {
+      "path": "README.md",
+      "url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/blob/v2.0.0/README.md",
+      "git_blob_sha1": "a70bc212f005ac730ec2dcfbfe8638dd6469fe80",
+      "statement": "The repository README says both .swc and .nr files for extracted dendrites used in the manuscript are available upon request."
+    },
+    "metrics_notebook": {
+      "path": "Notebooks/Metrics1_Point_data.ipynb",
+      "url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/blob/v2.0.0/Notebooks/Metrics1_Point_data.ipynb",
+      "git_blob_sha1": "2c31080a7f6f69d1c603bf287e4a5da7d4c3712b",
+      "boundary": "The public metrics notebook loads Reduced_dendrites and calls coordinate_pca(robust=True,norm=True), but it does not itself contain the three historical Subtype_evDir_x/y/z output fields or an active pickle write call."
+    }
+  },
+  "observed_pipeline_boundary": {
+    "stages_visible_in_later_public_source": [
+      "FlyWire annotation/mesh retrieval",
+      "mesh skeletonization and 100 nm resampling to SWC",
+      "SWC import into NeuRosetta forests and metadata assignment",
+      "subtree extraction and reduction to a Reduced_dendrites directory",
+      "derived scalar morphology metrics and PCA"
+    ],
+    "producer_binding": "UNRESOLVED",
+    "reasons": [
+      "The public v2.0.0 notebook set was published after the December 2025 Point_data artifact.",
+      "Several steps depend on hard-coded local filesystem paths and external/local inputs not included in the inspected archive.",
+      "The visible PP1 cell sequence has a placeholder mesh path and references df/n_ids without visible assignments.",
+      "The visible PP3 example shows the Female/T4 input directory and does not bind a full run across all subtypes.",
+      "No execution receipt binds an exact input morphology snapshot, manual corrections, package revisions, and parameters to the historical Point_data SHA-256."
+    ],
+    "manual_curation_boundary": {
+      "published_method_url": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1014657",
+      "source_notebook_receipt_contains_individual_manual_edit_log": false,
+      "interpretation": "The inspected public notebook source provides automated calls and local path conventions but no per-neuron manual-edit record bound to the December 2025 artifact."
+    }
+  },
+  "conclusions": {
+    "proven": [
+      "These exact PP1/PP2/PP3 source blobs expose a later public pipeline and concrete call/worker/resampling settings.",
+      "The public README explicitly says manuscript .swc or .nr morphology files are available upon request.",
+      "The visible source establishes an expected file/input route that can guide further recovery."
+    ],
+    "not_proven": [
+      "The exact NeuRosetta, GeoJax, JAX, or jaxlib revisions installed when Point_data.pkl was created.",
+      "That the August 2026 source notebook versions are byte-identical to the December 2025 producer.",
+      "The exact per-neuron manual corrections or materialized Reduced_dendrites files used for the historic metrics.",
+      "That the notebook fragments, as published, execute cleanly from a fresh environment without additional state or manual path setup."
+    ],
+    "unresolved_claim_id": "C-POINTDATA-002"
+  }
+}

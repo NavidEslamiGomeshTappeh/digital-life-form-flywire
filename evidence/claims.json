@@ -666,6 +666,34 @@
         "The authors may have retained local/private/intermediate morphology files or omitted them from the released archives.",
         "The producer, installed historical NeuRosetta/GeoJax/JAX revisions, exact parameter bundle, and manual corrections for the December 2025 Point_data artifact remain unresolved under C-POINTDATA-002."
       ]
+    },
+    {
+      "id": "C-POINTDATA-034",
+      "statement": "The public v2.0.0 PP1/PP2/PP3 notebook source records a later morphology pipeline: FlyWire mesh retrieval and 100 nm SWC resampling, parallel SWC import into NeuRosetta with max_workers=10, then flagged-tree filtering, subtree extraction, reduction, and saving to Reduced_dendrites. This is later public source evidence, not an exact December 2025 producer binding.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-PUBLIC-PP1-PP3-PIPELINE"
+      ],
+      "caveats": [
+        "The source notebooks were published after the historical Point_data artifact.",
+        "PP1 has a placeholder mesh path and visible references to df/n_ids without assignments in the inspected notebook cells.",
+        "PP2 depends on a hard-coded local T45_neurons.pkl and SWC directory; PP3 shows a hard-coded Female/T4 input example.",
+        "The exact input morphology, execution environment, package revisions, and manual changes for historical Point_data remain unresolved under C-POINTDATA-002."
+      ]
+    },
+    {
+      "id": "C-POINTDATA-035",
+      "statement": "The public T4/T5 dendrite morphology paper README states that both SWC files and NeuRosetta NR files for the extracted dendrites used in the manuscript are available upon request; this is evidence of stated availability, not evidence that the files have been obtained or that they reproduce the historical Point_data execution.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-PUBLIC-PP1-PP3-PIPELINE"
+      ],
+      "caveats": [
+        "No morphology file is attached to this evidence receipt.",
+        "The README statement does not identify file hashes, revision, per-neuron manual edits, or a binding to the December 2025 Point_data.pkl SHA-256."
+      ]
     }
   ]
 }
