@@ -864,6 +864,19 @@
         "Unpinned requirements do not identify an exact JAX/JAXLIB or GeoJax commit.",
         "The exact December 2025 producer remains unresolved under C-POINTDATA-002."
       ]
+    },
+    {
+      "id": "C-POINTDATA-048",
+      "statement": "The currently reachable public NikDrummond/NeuRosetta history has only a README/LICENSE/.gitignore commit before the 2025-12-09 Point_data artifact. Its first code-bearing commit is 2026-01-20; the inspected active coordinates module only extracts graph vertex/edge positions and contains no PCA, eigenvector, coordinate_pca or evDir calculation. This public repository therefore does not provide a direct historical producer for the December 2025 fields.",
+      "classification": "PUBLIC_SOURCE_TIMELINE_BOUNDARY",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-NEUROSETTA-PUBLIC-HISTORY-BOUNDARY"
+      ],
+      "caveats": [
+        "Absence from the public repository history does not exclude private/local or uncommitted source code, a separate repository, or a notebook outside this project.",
+        "The exact December 2025 producer remains unresolved under C-POINTDATA-002."
+      ]
     }
   ]
 }

@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "checked_date": "2026-10-12",
+  "status": "NO_PUBLIC_NEUROSETTA_IMPLEMENTATION_AT_DECEMBER_2025_ARTIFACT_DATE; EXACT_PRODUCER_UNRESOLVED",
+  "historical_artifact": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "path": "Data/Point_data.pkl",
+    "commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "date": "2025-12-09T19:41:50Z",
+    "blob_sha1": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+    "sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f"
+  },
+  "public_neurosetta_history": {
+    "repository": "NikDrummond/NeuRosetta",
+    "default_branch": "main",
+    "public_commit_count_inspected": 92,
+    "only_commit_before_artifact_date": {
+      "sha": "e8e9d02fd308d1f5f3d8dc568c3d4f0af6bff870",
+      "date": "2025-10-21T09:23:42Z",
+      "message": "Initial commit",
+      "tree_sha": "b37eea65478e384d858c003ede79ba7127c28ac8",
+      "tree_path_count": 3,
+      "paths": [
+        ".gitignore",
+        "LICENSE.md",
+        "README.md"
+      ],
+      "code_file_count": 0,
+      "interpretation": "The only reachable public commit before the December 9 Point_data ingest contained no code files."
+    },
+    "first_code_bearing_commit": {
+      "sha": "f2d8778671a9c5e0ff97b8af44cf1bcefc4da57b",
+      "date": "2026-01-20T22:17:59Z",
+      "message": "v0.1.1 — core utility, counting properties, plotting, io",
+      "parent": "e8e9d02fd308d1f5f3d8dc568c3d4f0af6bff870",
+      "tree_sha": "2a176b602b855e83f16881216182c8e625dd9da6",
+      "tree_entry_count": 2541,
+      "active_source_paths": [
+        "src/NeuRosetta/classes/tree_class.py",
+        "src/NeuRosetta/tree_graphs/coordinates.py",
+        "src/NeuRosetta/tree_graphs/counting.py",
+        "src/NeuRosetta/tree_graphs/path_lengths.py",
+        "src/NeuRosetta/tree_graphs/tree_checks.py"
+      ],
+      "coordinate_module": {
+        "path": "src/NeuRosetta/tree_graphs/coordinates.py",
+        "blob_sha1": "c20a8dfac6da95acc63b45e6e98eff519b11ae3e",
+        "functions": [
+          "vertex_coordinates",
+          "edge_coordinates"
+        ],
+        "terms_checked": [
+          "PCA",
+          "eigen",
+          "principal",
+          "coordinate_pca",
+          "align",
+          "evDir"
+        ],
+        "term_counts": {
+          "PCA": 0,
+          "eigen": 0,
+          "principal": 0,
+          "coordinate_pca": 0,
+          "align": 0,
+          "evDir": 0
+        },
+        "interpretation": "This module extracts vertex and edge coordinates from a graph; the inspected version does not calculate principal components or directional eigenvectors."
+      },
+      "tree_class": {
+        "path": "src/NeuRosetta/classes/tree_class.py",
+        "blob_sha1": "066a36d2a0256a9299a1acb3ef193717dc135a37",
+        "observation": "The inspected Tree class delegates coordinate access to vertex_coordinates and edge_coordinates and contains no PCA or Subtype_evDir calculation."
+      }
+    },
+    "early_editor_history_snapshot": {
+      "path": ".history/src/NeuRosetta/classes/tree_class_20251021171321.py",
+      "blob_sha1": "4d2643e49ada582ba3e58766c03e7c5de475f386",
+      "content_length_bytes": 415,
+      "functions": [
+        "__init__",
+        "get_coordinates"
+      ],
+      "observation": "The preserved October 21, 2025 editor-history snapshot is a minimal Tree_graph wrapper exposing get_coordinates; it contains no PCA, eigenvector, or evDir function."
+    },
+    "later_pca_api_path_history": {
+      "current_path": "src/neurosetta/ops/tree_graphs/tree_coordinates.py",
+      "first_path_specific_public_commit": {
+        "sha": "958502da2f3e5bf74a2ede755c21357c8b7fdf3a",
+        "date": "2026-08-15T19:45:56Z",
+        "message": "curent night progress"
+      },
+      "caveat": "Path-specific history is not the same as a full rename-following history; the earlier Jan 20 source tree was separately inspected and had no PCA in its active coordinate module."
+    },
+    "chronology_conclusion": "The current public NeuRosetta repository does not expose a code implementation at the December 9, 2025 artifact date. The January 20 code-bearing release follows the artifact by 42 days; its coordinate module only extracts vertex/edge positions. Modern coordinate_pca paths are dated later still."
+  },
+  "inference_limits": {
+    "proven": "No directly applicable NeuRosetta implementation appears in the currently reachable public commit history before the artifact date.",
+    "not_proven": [
+      "That the author had no private/local NeuRosetta code or separate repository during December 2025.",
+      "That no other Python library or unpublished notebook generated Point_data.pkl.",
+      "That the exact historical producer can be inferred solely from the data serializer or later matching algorithms."
+    ],
+    "exact_producer_claim": "C-POINTDATA-002",
+    "exact_producer_status": "UNRESOLVED"
+  }
+}

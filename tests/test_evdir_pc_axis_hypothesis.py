@@ -720,3 +720,34 @@ def test_post_artifact_conda_and_geojax_timeline_is_not_misreported_as_producer_
     assert exact["status"] == "UNRESOLVED"
     assert timeline["status"] == "PROVEN"
     assert "E-POINTDATA-GEOJAX-POSTARTIFACT-ENV-BOUNDARY" in timeline["evidence"]
+
+
+def test_neurosetta_public_history_has_no_pca_producer_at_historical_artifact_date():
+    evidence = json.loads(
+        (ROOT / "evidence" / "neurosetta_pre_artifact_revision_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    history = evidence["public_neurosetta_history"]
+    initial = history["only_commit_before_artifact_date"]
+    assert initial["sha"] == "e8e9d02fd308d1f5f3d8dc568c3d4f0af6bff870"
+    assert initial["date"] == "2025-10-21T09:23:42Z"
+    assert initial["paths"] == [".gitignore", "LICENSE.md", "README.md"]
+    assert initial["code_file_count"] == 0
+
+    first_code = history["first_code_bearing_commit"]
+    assert first_code["sha"] == "f2d8778671a9c5e0ff97b8af44cf1bcefc4da57b"
+    assert first_code["date"] == "2026-01-20T22:17:59Z"
+    coordinates = first_code["coordinate_module"]
+    assert coordinates["functions"] == ["vertex_coordinates", "edge_coordinates"]
+    assert all(value == 0 for value in coordinates["term_counts"].values())
+    assert "does not calculate principal components" in coordinates["interpretation"]
+
+    limits = evidence["inference_limits"]
+    assert limits["exact_producer_status"] == "UNRESOLVED"
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    exact = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-002")
+    boundary = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-048")
+    assert exact["status"] == "UNRESOLVED"
+    assert boundary["status"] == "PROVEN"
+    assert "E-POINTDATA-NEUROSETTA-PUBLIC-HISTORY-BOUNDARY" in boundary["evidence"]
