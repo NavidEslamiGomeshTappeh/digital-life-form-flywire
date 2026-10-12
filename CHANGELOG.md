@@ -2,6 +2,7 @@
 
 
 ## Unreleased maintenance — 2026-10-12
+- Recorded a bounded public-source search for the missing T45_Morpho_data/Point_data producer. The reviewed related-repository searches returned no matches; the record explicitly does not claim global absence (`C-POINTDATA-032`).
 - Extended the dependency pin audit upstream: GeoJax was package version `0.2` in the pinned 2025-05-02 snapshot, its setup metadata required unpinned `jax`/`jaxlib`, and the README documented `pip install -e .`. These facts establish a viable install path but do not bind the December runtime to that commit.
 - Audited the public legacy Neurosetta dependency metadata: code imports GeoJax, but requirements.txt does not pin GeoJax/JAX, setup.py omits `install_requires`, and the later environment.yml lists only unpinned JAX. Added `C-POINTDATA-031`; exact installed GeoJax revision remains unresolved.
 

@@ -638,6 +638,20 @@
         "The GeoJax version 0.2 snapshot is an available public candidate, not proof of the installed version.",
         "C-POINTDATA-002 remains UNRESOLVED."
       ]
+    },
+    {
+      "id": "C-POINTDATA-032",
+      "statement": "A bounded public GitHub search recorded on 2026-10-12 found no independent public T45_Morpho_data repository or Point_data Subtype_evDir producer in the listed repositories and queries. This proves only the recorded search outcome and scope, not that no private, deleted, local, or unindexed producer exists.",
+      "classification": "SOURCE_OBSERVATION",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-BOUNDED-PUBLIC-PRODUCER-SEARCH"
+      ],
+      "caveats": [
+        "Repository search and code indexing are not exhaustive.",
+        "The result does not cover private or deleted repositories, local or uncommitted files, external archives, or every possible synonym and path.",
+        "C-POINTDATA-002 remains UNRESOLVED."
+      ]
     }
   ]
 }

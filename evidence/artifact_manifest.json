@@ -57,7 +57,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "08a57e04327f4bf075461db19579247ff22279ea"
+        "value": "d8cf731e9d69d4bc2e5cdc6d586ad0f9a9bd7e12"
       }
     },
     {
@@ -336,7 +336,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "49a900f4a451f95ffcb243ce85a64f510bffe463"
+        "value": "106e6f12f73c8da78586adcc92d1fbec60ed28c3"
       }
     },
     {
@@ -565,6 +565,15 @@
       }
     },
     {
+      "id": "E-POINTDATA-BOUNDED-PUBLIC-PRODUCER-SEARCH",
+      "path": "evidence/point_data_bounded_public_producer_search.json",
+      "role": "bounded_public_producer_search_receipt",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "85930317c87327e305c85d6fe317f3eb8be5d35c"
+      }
+    },
+    {
       "id": "E-POINTDATA-CONNECTIVITY-BRIDGE",
       "path": "evidence/point_data_connectivity_bridge.json",
       "role": "v230_point_data_anchor_bridge",
@@ -651,7 +660,7 @@
       "role": "regression_test_for_provenance_boundaries",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d227bfac29b18fb125dfb64d97979a5a6cfabd2d"
+        "value": "d563c74b8399fdf808cb77a851b60adcc94f7d1c"
       }
     },
     {
@@ -786,7 +795,7 @@
       "role": "point_data_revision_candidate_matrix",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "1eb1a5e570c12f323cb4e85a7346aca9348ed595"
+        "value": "e38d8ab935dea9f4572c3e7881c0140869550fd9"
       }
     },
     {

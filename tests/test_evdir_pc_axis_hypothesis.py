@@ -264,3 +264,23 @@ def test_pre_artifact_geojax_package_version_does_not_bind_neurosetta_runtime():
     dependency = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-031")
     assert producer["status"] == "UNRESOLVED"
     assert dependency["status"] == "PROVEN"
+
+
+def test_bounded_public_producer_search_does_not_claim_global_absence():
+    receipt = json.loads(
+        (ROOT / "evidence" / "point_data_bounded_public_producer_search.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    queries = receipt["code_searches"]
+    assert len(queries) == 6
+    assert all(item["result_count"] == 0 for item in queries)
+    assert receipt["conclusion"]["independent_public_copy_found"] is False
+    assert receipt["conclusion"]["exact_historical_producer_identity"] == "UNRESOLVED"
+    assert "does not establish" in receipt["conclusion"]["limitation"]
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    producer = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-002")
+    search_claim = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-032")
+    assert producer["status"] == "UNRESOLVED"
+    assert search_claim["status"] == "PROVEN"

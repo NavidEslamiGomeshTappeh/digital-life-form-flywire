@@ -159,6 +159,13 @@
       "status": "PROVEN_PUBLIC_INSTALL_OPTION_NOT_HISTORICAL_INSTALL_PROOF",
       "details": "The pre-artifact GeoJax snapshot identified itself as version 0.2, contained setup.py declaring unpinned jax/jaxlib, and README documented pip install -e .; no reviewed Neurosetta metadata binds its GeoJax import to a source URL or SHA.",
       "impact": "This provides a plausible manual/editable installation mechanism, not proof of which checkout generated Point_data."
+    },
+    {
+      "date_utc": "2026-10-12",
+      "finding": "Bounded public repository search did not identify the local T45_Morpho_data producer",
+      "status": "PROVEN_BOUNDED_SEARCH_NEGATIVE",
+      "details": "The listed related-repository code searches returned zero results and path scans did not find an independent public producer source.",
+      "impact": "This narrows known public leads only; the exact historical producer remains UNRESOLVED."
     }
   ],
   "runtime_type_fingerprint_assessment": {

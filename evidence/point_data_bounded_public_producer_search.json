@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "status": "PROVEN_BOUNDED_PUBLIC_SEARCH_NEGATIVE",
+  "search_date": "2026-10-12",
+  "purpose": "Record bounded public GitHub searches for a public copy of T45_Morpho_data or source code that produces historical Point_data Subtype_evDir columns.",
+  "repository_tree_scan": {
+    "repositories": [
+      "NikDrummond/AxisBlueprint",
+      "NikDrummond/2025_04_28",
+      "NikDrummond/NeuGen",
+      "NikDrummond/Neudev",
+      "NikDrummond/Neurosetta_old",
+      "NikDrummond/PhD_tools",
+      "NikDrummond/Neu_Trees",
+      "NikDrummond/stats_tools",
+      "NikDrummond/Smooth_mat",
+      "NikDrummond/Conn_tools"
+    ],
+    "path_patterns": [
+      "Point_data",
+      "Subtype_evDir",
+      "T45_Morpho_data",
+      "dendrite",
+      "morphology",
+      "coordinate_pca",
+      "pca",
+      "eig_align",
+      "coord_eig",
+      "reduced_dendrite",
+      "point_data",
+      "SWC"
+    ],
+    "finding": "The scanned tree paths did not identify an independent historical Point_data producer file."
+  },
+  "code_searches": [
+    {
+      "repository": "NikDrummond/Neurosetta_legacy_v0.0.1",
+      "query": "Subtype_evDir",
+      "result_count": 0
+    },
+    {
+      "repository": "NikDrummond/Neurosetta_old",
+      "query": "T45_Morpho_data",
+      "result_count": 0
+    },
+    {
+      "repository": "NikDrummond/PhD_tools",
+      "query": "Point_data.pkl",
+      "result_count": 0
+    },
+    {
+      "repository": "NikDrummond/Neu_Trees",
+      "query": "Subtype_evDir",
+      "result_count": 0
+    },
+    {
+      "repository": "NikDrummond/GeoJax",
+      "query": "T45_Morpho_data",
+      "result_count": 0
+    },
+    {
+      "repository": "NikDrummond/NeuGen",
+      "query": "Point_data.pkl",
+      "result_count": 0
+    }
+  ],
+  "public_repository_searches": [
+    {
+      "query": "T45_Morpho_data",
+      "independent_repository_found": false
+    },
+    {
+      "query": "T45 Morphology FlyWire",
+      "independent_repository_found": false
+    },
+    {
+      "query": "Drummond T4 T5 dendrite",
+      "independent_repository_found": false
+    }
+  ],
+  "conclusion": {
+    "independent_public_copy_found": false,
+    "producer_source_found_in_scanned_scope": false,
+    "exact_historical_producer_identity": "UNRESOLVED",
+    "unresolved_claim_id": "C-POINTDATA-002",
+    "limitation": "This records only the listed queries and path scans. It does not establish that a private, deleted, local, uncommitted, external, or unindexed producer source does not exist."
+  }
+}
