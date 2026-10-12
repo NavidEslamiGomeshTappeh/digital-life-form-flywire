@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "checked_date": "2026-10-12",
+  "status": "POST_ARTIFACT_NEUROSETTA_PCA_IS_NUMPY_NUMBA; HISTORICAL_JAX_PRODUCER_UNRESOLVED",
+  "historical_artifact": {
+    "repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "path": "Data/Point_data.pkl",
+    "commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "date": "2025-12-09T19:41:50Z",
+    "sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+    "observed_scalar_type": "jaxlib._jax.ArrayImpl",
+    "observed_dtype": "float32",
+    "fields": [
+      "PC1",
+      "PC2",
+      "PC3",
+      "PC1_angle",
+      "Mean_segment_angle",
+      "Subtype_evDir_x",
+      "Subtype_evDir_y",
+      "Subtype_evDir_z"
+    ]
+  },
+  "later_public_neurosetta_pca": {
+    "repository": "NikDrummond/NeuRosetta",
+    "public_path": "src/neurosetta/ops/tree_graphs/tree_coordinates.py",
+    "first_path_specific_commit": {
+      "sha": "958502da2f3e5bf74a2ede755c21357c8b7fdf3a",
+      "date": "2026-08-15T19:45:56Z",
+      "message": "curent night progress",
+      "url": "https://github.com/NikDrummond/NeuRosetta/commit/958502da2f3e5bf74a2ede755c21357c8b7fdf3a",
+      "file_blob_sha1": "56b1091aa3160280b31a5132993540dbc4a61e5e"
+    },
+    "wrapper": {
+      "function": "coordinate_pca",
+      "signature": "coordinate_pca(tree, robust=True, norm=True)",
+      "observation": "Obtains x/y/z coordinates from the tree and returns eig_decomp(x,y,z,robust=robust,norm=norm)."
+    },
+    "pca_implementation": {
+      "path": "src/neurosetta/utils/geometry_utils/pca.py",
+      "blob_sha1": "0539fe529e28f79e19785c1ac651a064bc8ddddb",
+      "imports": "numba.njit and numpy.linalg.eigh/inv; no JAX import",
+      "robust_function": "robust_covariance_xyz",
+      "robust_defaults": {
+        "c": 1.5,
+        "tol": 0.000001,
+        "max_iter": 100,
+        "diagonal_regularization": 0.000001
+      },
+      "baseline_covariance": "Unbiased covariance using multiplier 1/(n-1); robust covariance subsequently weights observations and divides by total weight.",
+      "eigensystem": "NumPy symmetric eigh; descending eigenvalue order; optional right-handed basis by flipping third eigenvector.",
+      "normalized_eigenvalues": "norm=True divides each eigenvalue by their sum.",
+      "return_type": "NumPy ndarray eigenvalues and eigenvectors, not JAX ArrayImpl objects."
+    },
+    "later_public_consumer_notebook": {
+      "path": "Notebooks/Metrics1_Point_data.ipynb",
+      "first_public_commit": "8700efd40bccfa3e74ac7c4df02da83a968b9b52",
+      "commit_date": "2026-08-10T15:49:32Z",
+      "blob_sha1": "2c31080a7f6f69d1c603bf287e4a5da7d4c3712b",
+      "active_function_calls": {
+        "pca": "evals, evecs = tree.coordinate_pca(robust=True, norm=True)",
+        "explained_variance": "df[['PC1','PC2','PC3']] = evals",
+        "pc1_angle": "aligned_ev1 = align_with(*evecs[:,0], *basis.y); signed_angle(..., basis.y, basis.z)",
+        "segment_angle": "tree.get_mean_edge_angle(basis.x, evecs[:,-1], basis.neg_z)"
+      },
+      "historical_field_gap": "The inspected process_one_point code does not define Subtype_evDir_x/y/z. The notebook and its PCA implementation postdate the December 2025 artifact."
+    }
+  },
+  "pre_artifact_geojax_contrast": {
+    "repository": "NikDrummond/GeoJax",
+    "commit": "33b0f8727ab447eff86e35a69c60c1f33b4d1513",
+    "date": "2025-05-02T13:36:30Z",
+    "path": "GeoJax/alignment.py",
+    "blob_sha1": "53560fd7de0463a51e1283b4a9c0e0db5bb33e8e",
+    "backend": "jax.numpy / jnp.linalg.eigh",
+    "robust_covariance_defaults": {
+      "c": 1.5,
+      "tol": 0.000001,
+      "max_iter": 100,
+      "diagonal_regularization": 0.000001
+    },
+    "baseline_covariance": "jnp.cov(..., bias=True), i.e. population-style denominator n before robust reweighting.",
+    "output_type": "JAX arrays can naturally explain ArrayImpl values if retained rather than converted to Python/NumPy scalars.",
+    "exact_match_limits": [
+      "The covariance baseline is not identical to the later NeuRosetta NumPy/Numba implementation (bias=True versus unbiased n-1).",
+      "The GeoJax public functions inspected do not directly write the historical DataFrame columns Subtype_evDir_x/y/z.",
+      "Matching default values and JAX type compatibility do not prove the historical function call or exact package revision."
+    ]
+  },
+  "conclusion": {
+    "interpretation": "The post-August-2026 public NeuRosetta pipeline is a useful reference for later parameters but is not a direct explanation for the December 2025 JAX ArrayImpl serialization. The pre-artifact GeoJax/JAX family remains the stronger type-compatible public candidate, while the older Neurosetta legacy code is a separate NumPy/scikit-learn algorithm candidate.",
+    "exact_producer_claim": "C-POINTDATA-002",
+    "exact_producer_status": "UNRESOLVED",
+    "not_proven": [
+      "Which algorithm actually generated the December 2025 PC/evDir columns.",
+      "That the later Huber defaults were copied from or shared with the historical run.",
+      "The subtype-specific eigenvector index and sign/axis rule.",
+      "Any hidden local conversion step that could turn NumPy results into JAX scalar values."
+    ]
+  }
+}

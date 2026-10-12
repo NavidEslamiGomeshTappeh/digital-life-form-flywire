@@ -891,6 +891,20 @@
         "No direct public writer of historical Subtype_evDir_x/y/z fields was found in either candidate source.",
         "The exact producer and per-subtype axis/sign selection remain unresolved under C-POINTDATA-002."
       ]
+    },
+    {
+      "id": "C-POINTDATA-050",
+      "statement": "The later public NeuRosetta coordinate_pca API first appears in its current path history on 2026-08-15 and calls a NumPy/Numba PCA implementation (NumPy eigh/inv, Huber-like covariance defaults c=1.5, tol=1e-6, max_iter=100, regularization 1e-6). The August 10 public Metrics1 notebook calls coordinate_pca(robust=True, norm=True), extracts PC1–PC3, aligns PC1 to basis.y for PC1_angle, and uses the third eigenvector for segment-angle metrics, but does not write the historical Subtype_evDir columns. This later NumPy pipeline is not a direct match to the December 2025 JAX ArrayImpl serialization; the pre-artifact GeoJax/JAX family remains a better type-compatible candidate, not an identified producer.",
+      "classification": "PUBLIC_IMPLEMENTATION_AND_SERIALIZER_COMPARISON",
+      "status": "PROVEN",
+      "evidence": [
+        "E-POINTDATA-NEUROSETTA-PCA-NUMPY-BOUNDARY"
+      ],
+      "caveats": [
+        "The public API and Metrics1 notebook were published months after the binary artifact.",
+        "Shared robust estimator parameters do not prove source-code derivation or shared historical execution.",
+        "The exact producer and historical Subtype_evDir axis/sign rule remain unresolved under C-POINTDATA-002."
+      ]
     }
   ]
 }

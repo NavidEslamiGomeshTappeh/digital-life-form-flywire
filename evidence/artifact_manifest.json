@@ -57,7 +57,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "211c4ccfeb2efced3ab9f90dc057db0e8f587b23"
+        "value": "77d0389ddb19e284a26eb9bf23548d23ade3aabe"
       }
     },
     {
@@ -660,7 +660,7 @@
       "role": "regression_test_for_provenance_boundaries",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b7f0bf51823ba596f3e1920ca43e82f8d04cf215"
+        "value": "365af91c15064683bb6c2fb84b0bccf4a391ef90"
       }
     },
     {
@@ -1052,7 +1052,7 @@
       "role": "public_morphology_pipeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b7f0bf51823ba596f3e1920ca43e82f8d04cf215"
+        "value": "365af91c15064683bb6c2fb84b0bccf4a391ef90"
       }
     },
     {
@@ -1070,7 +1070,7 @@
       "role": "legacy_algorithm_timeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b7f0bf51823ba596f3e1920ca43e82f8d04cf215"
+        "value": "365af91c15064683bb6c2fb84b0bccf4a391ef90"
       }
     },
     {
@@ -1088,7 +1088,7 @@
       "role": "legacy_installation_metadata_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b7f0bf51823ba596f3e1920ca43e82f8d04cf215"
+        "value": "365af91c15064683bb6c2fb84b0bccf4a391ef90"
       }
     },
     {
@@ -1106,7 +1106,7 @@
       "role": "pca_and_subtree_revision_boundary_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b7f0bf51823ba596f3e1920ca43e82f8d04cf215"
+        "value": "365af91c15064683bb6c2fb84b0bccf4a391ef90"
       }
     },
     {
@@ -1124,7 +1124,7 @@
       "role": "pre_pointdata_public_pca_boundary_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b7f0bf51823ba596f3e1920ca43e82f8d04cf215"
+        "value": "365af91c15064683bb6c2fb84b0bccf4a391ef90"
       }
     },
     {
@@ -1142,7 +1142,7 @@
       "role": "legacy_pca_candidate_and_parent_tree_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b7f0bf51823ba596f3e1920ca43e82f8d04cf215"
+        "value": "365af91c15064683bb6c2fb84b0bccf4a391ef90"
       }
     },
     {
@@ -1160,7 +1160,7 @@
       "role": "geojax_jax_pca_candidate_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b7f0bf51823ba596f3e1920ca43e82f8d04cf215"
+        "value": "365af91c15064683bb6c2fb84b0bccf4a391ef90"
       }
     },
     {
@@ -1178,7 +1178,7 @@
       "role": "regression_for_bounded_related_public_repository_search",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b7f0bf51823ba596f3e1920ca43e82f8d04cf215"
+        "value": "365af91c15064683bb6c2fb84b0bccf4a391ef90"
       }
     },
     {
@@ -1187,7 +1187,7 @@
       "role": "regression_for_bounded_public_issue_search_evidence",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b7f0bf51823ba596f3e1920ca43e82f8d04cf215"
+        "value": "365af91c15064683bb6c2fb84b0bccf4a391ef90"
       }
     },
     {
@@ -1205,7 +1205,7 @@
       "role": "regression_for_public_editor_history_producer_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b7f0bf51823ba596f3e1920ca43e82f8d04cf215"
+        "value": "365af91c15064683bb6c2fb84b0bccf4a391ef90"
       }
     },
     {
@@ -1223,7 +1223,7 @@
       "role": "regression_for_postartifact_environment_revision_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b7f0bf51823ba596f3e1920ca43e82f8d04cf215"
+        "value": "365af91c15064683bb6c2fb84b0bccf4a391ef90"
       }
     },
     {
@@ -1241,7 +1241,7 @@
       "role": "regression_for_neurosetta_public_history_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b7f0bf51823ba596f3e1920ca43e82f8d04cf215"
+        "value": "365af91c15064683bb6c2fb84b0bccf4a391ef90"
       }
     },
     {
@@ -1259,7 +1259,25 @@
       "role": "regression_for_pca_candidate_comparison_without_overclaiming_producer",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "b7f0bf51823ba596f3e1920ca43e82f8d04cf215"
+        "value": "365af91c15064683bb6c2fb84b0bccf4a391ef90"
+      }
+    },
+    {
+      "id": "E-POINTDATA-NEUROSETTA-PCA-NUMPY-BOUNDARY",
+      "path": "evidence/point_data_neurosetta_pca_numpy_boundary.json",
+      "role": "record_postartifact_neurosetta_numpy_pca_and_jax_serializer_discriminator",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "6f8d18e83af791fe39473d43a4d59e4c538d5f29"
+      }
+    },
+    {
+      "id": "E-POINTDATA-NEUROSETTA-PCA-NUMPY-BOUNDARY-TEST",
+      "path": "tests/test_evdir_pc_axis_hypothesis.py",
+      "role": "regression_for_postartifact_neurosetta_numpy_pca_boundary",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "365af91c15064683bb6c2fb84b0bccf4a391ef90"
       }
     }
   ]

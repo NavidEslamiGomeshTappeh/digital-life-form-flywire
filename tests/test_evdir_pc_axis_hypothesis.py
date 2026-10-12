@@ -783,3 +783,42 @@ def test_geojax_candidate_ranks_above_legacy_only_for_type_fit_not_producer_iden
     assert exact["status"] == "UNRESOLVED"
     assert compared["status"] == "PROVEN"
     assert "E-POINTDATA-LEGACY-VS-GEOJAX-COMPARISON" in compared["evidence"]
+
+
+def test_postartifact_neurosetta_numpy_pca_is_not_treated_as_jax_producer_proof():
+    evidence = json.loads(
+        (ROOT / "evidence" / "point_data_neurosetta_pca_numpy_boundary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    artifact = evidence["historical_artifact"]
+    assert artifact["observed_scalar_type"] == "jaxlib._jax.ArrayImpl"
+    assert artifact["observed_dtype"] == "float32"
+
+    nr = evidence["later_public_neurosetta_pca"]
+    assert nr["first_path_specific_commit"]["sha"] == "958502da2f3e5bf74a2ede755c21357c8b7fdf3a"
+    assert nr["first_path_specific_commit"]["date"] == "2026-08-15T19:45:56Z"
+    assert nr["wrapper"]["signature"] == "coordinate_pca(tree, robust=True, norm=True)"
+    pca = nr["pca_implementation"]
+    assert pca["blob_sha1"] == "0539fe529e28f79e19785c1ac651a064bc8ddddb"
+    assert "NumPy" in pca["return_type"]
+    assert "no JAX import" in pca["imports"]
+    assert pca["robust_defaults"] == {
+        "c": 1.5, "tol": 0.000001, "max_iter": 100,
+        "diagonal_regularization": 0.000001
+    }
+
+    notebook = nr["later_public_consumer_notebook"]
+    assert notebook["first_public_commit"] == "8700efd40bccfa3e74ac7c4df02da83a968b9b52"
+    assert "does not define Subtype_evDir_x/y/z" in notebook["historical_field_gap"]
+    geo = evidence["pre_artifact_geojax_contrast"]
+    assert geo["commit"] == "33b0f8727ab447eff86e35a69c60c1f33b4d1513"
+    assert geo["backend"] == "jax.numpy / jnp.linalg.eigh"
+    assert geo["exact_match_limits"][0].startswith("The covariance baseline is not identical")
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    exact = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-002")
+    boundary = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-050")
+    assert exact["status"] == "UNRESOLVED"
+    assert boundary["status"] == "PROVEN"
+    assert "E-POINTDATA-NEUROSETTA-PCA-NUMPY-BOUNDARY" in boundary["evidence"]
