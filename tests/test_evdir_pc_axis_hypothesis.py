@@ -360,7 +360,7 @@ def test_legacy_neurosetta_root_selection_timeline_is_explicitly_bounded():
     assert evidence["later_neurosetta_api_boundary"]["created_at"] > (
         evidence["historical_target"]["first_public_ingest_date"] + "T00:00:00Z"
     )
-    assert "UNRESOLVED" in evidence["conclusions"]["unresolved_claim_id"]
+    assert evidence["conclusions"]["unresolved_claim_id"] == "C-POINTDATA-002"
 
     claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
     claim = next(item for item in claims["claims"] if item["id"] == "C-POINTDATA-036")

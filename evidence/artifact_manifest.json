@@ -660,7 +660,7 @@
       "role": "regression_test_for_provenance_boundaries",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "bc6562dd452a25aa50cb8f2e76c5af5a62788a4c"
+        "value": "eedac6a871d20b882fe23d1296da80af1a1257f5"
       }
     },
     {
@@ -1052,7 +1052,7 @@
       "role": "public_morphology_pipeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "bc6562dd452a25aa50cb8f2e76c5af5a62788a4c"
+        "value": "eedac6a871d20b882fe23d1296da80af1a1257f5"
       }
     },
     {
@@ -1070,7 +1070,7 @@
       "role": "legacy_algorithm_timeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "bc6562dd452a25aa50cb8f2e76c5af5a62788a4c"
+        "value": "eedac6a871d20b882fe23d1296da80af1a1257f5"
       }
     }
   ]
