@@ -26,6 +26,6 @@
     "legacy_neurosetta_eigen_alignment": "PROVEN_PRE_ARTIFACT_CAPABILITY_BUT_PRODUCER_UNRESOLVED",
     "runtime_type_to_implementation_family": "INFERENCE_ONLY_GEOJAX_MORE_DIRECTLY_COMPATIBLE_BUT_PRODUCER_UNRESOLVED",
     "figure5_random_bifurcations_role": "PROVEN_DOWNSTREAM_CONSUMER_NOT_POINTDATA_PRODUCER",
-    "geojax_installed_revision": "UNRESOLVED_PUBLIC_INSTALL_METADATA_DOES_NOT_PIN_REVISION"
+    "geojax_installed_revision": "UNRESOLVED_PUBLIC_METADATA_HAS_UNPINNED_GEOJAX_0_2_CANDIDATE"
   }
 }

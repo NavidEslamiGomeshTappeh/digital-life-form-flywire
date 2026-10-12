@@ -241,3 +241,26 @@ def test_public_legacy_install_metadata_does_not_pin_geojax_revision():
     dependency = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-031")
     assert producer["status"] == "UNRESOLVED"
     assert dependency["status"] == "PROVEN"
+
+
+def test_pre_artifact_geojax_package_version_does_not_bind_neurosetta_runtime():
+    evidence = json.loads(
+        (ROOT / "evidence" / "legacy_geojax_dependency_pin_audit.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    upstream = evidence["upstream_geojax_package_metadata"]
+    assert upstream["source"]["commit"] == "33b0f8727ab447eff86e35a69c60c1f33b4d1513"
+    assert upstream["package_version"] == "0.2"
+    assert upstream["packaging"]["install_requires"] == ["jax", "jaxlib"]
+    assert upstream["packaging"]["pins_versions"] is False
+    assert upstream["packaging"]["readme_installation_path"] == "pip install -e ."
+    assert any(
+        "does not bind the historical runtime" in item
+        for item in upstream["interpretation"]["not_proven"]
+    )
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    producer = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-002")
+    dependency = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-031")
+    assert producer["status"] == "UNRESOLVED"
+    assert dependency["status"] == "PROVEN"

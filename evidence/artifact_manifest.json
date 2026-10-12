@@ -57,7 +57,7 @@
       "role": "claim_ledger",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "983776a1cf04a99940f084bd34b06e77b0cf7688"
+        "value": "08a57e04327f4bf075461db19579247ff22279ea"
       }
     },
     {
@@ -336,7 +336,7 @@
       "role": "evidence_summary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "d7ff33bad9da8f1bb0d6a0ab210f6d084f99a5f4"
+        "value": "49a900f4a451f95ffcb243ce85a64f510bffe463"
       }
     },
     {
@@ -651,7 +651,7 @@
       "role": "regression_test_for_provenance_boundaries",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "ed81762670db6473731841ffc1ee205778f8110a"
+        "value": "de4f73fe6278cf84c5651045f8d4e3f030e4e9b5"
       }
     },
     {
@@ -705,7 +705,7 @@
       "role": "public_legacy_geojax_dependency_pin_audit",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "13a2aa893a2b2ac25473ab06393c73a4c43df12c"
+        "value": "36eb4dab18b4f97f05dcc1652ffaa84211518059"
       }
     },
     {
@@ -786,7 +786,7 @@
       "role": "point_data_revision_candidate_matrix",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "3c5e06d67101d353bf19cbd27067311d1dad4a4b"
+        "value": "1eb1a5e570c12f323cb4e85a7346aca9348ed595"
       }
     },
     {

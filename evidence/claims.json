@@ -626,7 +626,7 @@
     },
     {
       "id": "C-POINTDATA-031",
-      "statement": "In the public Neurosetta_legacy_v0.0.1 snapshots, GeoJax is imported by source code and a February 2025 commit message says it is now a dependency, but the committed requirements.txt contains neither GeoJax nor JAX, setup.py reads requirements but omits install_requires, and the later environment.yml only lists JAX without a version pin and does not list GeoJax. Thus the public installation metadata does not identify the GeoJax installation source or exact revision used near the December 2025 Point_data artifact.",
+      "statement": "In the public Neurosetta_legacy_v0.0.1 snapshots, GeoJax is imported by source code and a February 2025 commit message says it is now a dependency, but the committed requirements.txt contains neither GeoJax nor JAX, setup.py reads requirements but omits install_requires, and the later environment.yml only lists JAX without a version pin and does not list GeoJax. The separate pre-artifact GeoJax package snapshot was version 0.2, declared unpinned jax/jaxlib, and documented `pip install -e .`; none of the reviewed public metadata binds Neurosetta to that exact GeoJax commit or installation route.",
       "classification": "SOURCE_OBSERVATION",
       "status": "PROVEN",
       "evidence": [
@@ -635,6 +635,7 @@
       "caveats": [
         "This describes the reviewed public files, not the author's actual local environment.",
         "GeoJax may have been installed by a local checkout, an uncommitted setup, a wheel, or another source not represented in these files.",
+        "The GeoJax version 0.2 snapshot is an available public candidate, not proof of the installed version.",
         "C-POINTDATA-002 remains UNRESOLVED."
       ]
     }

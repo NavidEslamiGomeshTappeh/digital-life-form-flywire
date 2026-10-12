@@ -94,5 +94,39 @@
     "environment_url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1/blob/25c911a28030deb5204eb7ab5a18ff4643363d96/environment.yml",
     "geoJax_import_url": "https://github.com/NikDrummond/Neurosetta_legacy_v0.0.1/blob/25c911a28030deb5204eb7ab5a18ff4643363d96/Neurosetta/graphs.py",
     "historical_artifact_url": "https://github.com/borstlab/T4_T5_Dendrite_Morphology_Paper/commit/cd17d34afd0d46a3c2947e83a1f0fdd835a9959a"
+  },
+  "upstream_geojax_package_metadata": {
+    "source": {
+      "repository": "NikDrummond/GeoJax",
+      "commit": "33b0f8727ab447eff86e35a69c60c1f33b4d1513",
+      "commit_timestamp_utc": "2025-05-02T13:36:30Z",
+      "package_init_blob_sha1": "844bb3c1e75f21df838869878c717de42fdfc813",
+      "setup_py_blob_sha1": "0a2f4758223c6965989e9e9c75f747e5349f452a",
+      "requirements_txt_blob_sha1": "455eefc7452c2f1ea52f2d96ce421d397f897645",
+      "readme_blob_sha1": "b956ab73e37142242e167bc9473bdd4cc96f45cd"
+    },
+    "package_version": "0.2",
+    "packaging": {
+      "install_requires": [
+        "jax",
+        "jaxlib"
+      ],
+      "pins_versions": false,
+      "readme_installation_path": "pip install -e .",
+      "followup_jax_install_command": "pip install \"jax[cpu]\"",
+      "metadata_observation": "GeoJax had its own setup.py and documented a local editable source checkout install, but neither the GeoJax setup metadata nor README identifies which exact commit/working tree was used by Neurosetta."
+    },
+    "interpretation": {
+      "proven": [
+        "A packageable GeoJax source snapshot with version 0.2 existed publicly by 2025-05-02.",
+        "Its setup.py declares unpinned jax and jaxlib dependencies.",
+        "Its README documents local editable installation (pip install -e .)."
+      ],
+      "not_proven": [
+        "That Neurosetta installed GeoJax using this documented path.",
+        "That version 0.2 or this exact Git commit was installed in the December 2025 environment.",
+        "That the author did not use a later local checkout, private revision, or an already installed editable source tree."
+      ]
+    }
   }
 }
