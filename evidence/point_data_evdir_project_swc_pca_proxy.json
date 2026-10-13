@@ -1,0 +1,490 @@
+{
+  "schema_version": 1,
+  "status": "DIAGNOSTIC_ONLY_CURRENT_MORPHOLOGY_NOT_HISTORICAL_PRODUCER",
+  "scope": "Four anchor neurons only; this evaluates a transparent proxy on currently committed SWCs, not all 5828 historical rows.",
+  "source": {
+    "project_repository": "NavidEslamiGomeshTappeh/digital-life-form-flywire",
+    "project_main_commit_at_audit": "5d47ad16af3f8c4e2f8982da5c2f5623ec21029b",
+    "historical_artifact_repository": "borstlab/T4_T5_Dendrite_Morphology_Paper",
+    "historical_artifact_commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+    "historical_artifact_git_blob_sha1": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+    "historical_artifact_sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+    "stored_vector_receipt_blob_sha1": "f729e4fe6cf6208dd23b365b09b2c01cfde8a958",
+    "mapping_csv_git_blob_sha1": "20084577bfcafe7b045c6846a312e07393ccc8be",
+    "morphology_crosscheck_json_git_blob_sha1": "d4fea8bf7d76cca4883ea7275abd723bf9bf6774"
+  },
+  "method": {
+    "subtree_selection": "Read per-root published_algorithm_node_id from current project's dendrite_subtree_mapping.csv; reproduce descendants from that node in corresponding committed SWC.",
+    "reduction_proxy": "Keep SWC labels 5 (branch/fork) and 6 (terminal) within selected subtree. This approximates the point set for PCA; it is not a call to the original NeuRosetta reduce_forest implementation.",
+    "pca_comparisons": [
+      "Ordinary sample covariance, denominator n-1, symmetric eigensolver and descending eigenvalue order.",
+      "GeoJax pre-artifact Huber-like covariance formula: c=1.5, tol=1e-6, max_iter=100, 1e-6 diagonal regularization, initial covariance denominator n, weighted covariance denominator sum(weights)."
+    ],
+    "axis_metric": "Absolute dot product and acute line angle; ignores eigenvector sign ambiguity."
+  },
+  "cases": [
+    {
+      "subtype": "T4a",
+      "root_id": "720575940632008007",
+      "swc": {
+        "path": "data/morphology/T4a.swc",
+        "git_blob_sha1": "b6c89d790b3943bd4e316ca711eabc6b0836e51a",
+        "source_note": "Committed SWC header says it was created on 2026-09-30 using navis.",
+        "full_node_count": 880
+      },
+      "selection": {
+        "published_algorithm_node_id": 292,
+        "descendant_count_reproduced": 596,
+        "mapping_candidate_node_count": 596,
+        "label_0_count": 383,
+        "label_5_branch_count": 103,
+        "label_6_terminal_count": 109,
+        "reduced_label_5_or_6_proxy_node_count": 212,
+        "published_project_subtree_node_count": 213,
+        "proxy_count_matches_published_project_subtree": false,
+        "historical_point_data_node_count": 223
+      },
+      "historical_evdir": {
+        "vector": [
+          -0.729699,
+          0.345574,
+          0.590015
+        ],
+        "norm": 1,
+        "source_point_data_sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+        "source_vector_receipt_blob_sha1": "f729e4fe6cf6208dd23b365b09b2c01cfde8a958"
+      },
+      "pca": {
+        "sample_covariance": {
+          "covariance_denominator": "n-1 (sample covariance)",
+          "variance_shares": [
+            0.603125,
+            0.342449,
+            0.054426
+          ],
+          "comparisons": [
+            {
+              "pc": "PC1",
+              "signed_dot": 0.329597,
+              "abs_cos": 0.329597,
+              "acute_angle_deg": 70.756
+            },
+            {
+              "pc": "PC2",
+              "signed_dot": 0.370938,
+              "abs_cos": 0.370938,
+              "acute_angle_deg": 68.227
+            },
+            {
+              "pc": "PC3",
+              "signed_dot": -0.8682,
+              "abs_cos": 0.8682,
+              "acute_angle_deg": 29.75
+            }
+          ],
+          "best_alignment": {
+            "pc": "PC3",
+            "signed_dot": -0.8682,
+            "abs_cos": 0.8682,
+            "acute_angle_deg": 29.75
+          }
+        },
+        "geojax_huber_formula": {
+          "covariance_denominator": "sum(weights) after Huber-like reweighting",
+          "variance_shares": [
+            0.606628,
+            0.338712,
+            0.05466
+          ],
+          "comparisons": [
+            {
+              "pc": "PC1",
+              "signed_dot": 0.343643,
+              "abs_cos": 0.343643,
+              "acute_angle_deg": 69.901
+            },
+            {
+              "pc": "PC2",
+              "signed_dot": 0.367985,
+              "abs_cos": 0.367985,
+              "acute_angle_deg": 68.409
+            },
+            {
+              "pc": "PC3",
+              "signed_dot": -0.864,
+              "abs_cos": 0.864,
+              "acute_angle_deg": 30.231
+            }
+          ],
+          "best_alignment": {
+            "pc": "PC3",
+            "signed_dot": -0.864,
+            "abs_cos": 0.864,
+            "acute_angle_deg": 30.231
+          },
+          "robust_config": {
+            "c": 1.5,
+            "tol": 0.000001,
+            "max_iter": 100,
+            "diagonal_regularization": 0.000001,
+            "initial_covariance_denominator": "n",
+            "weighted_covariance_denominator": "sum(weights)"
+          }
+        }
+      }
+    },
+    {
+      "subtype": "T4c",
+      "root_id": "720575940616224414",
+      "swc": {
+        "path": "data/morphology/T4c.swc",
+        "git_blob_sha1": "afc8f5a68ca6b95574f6bd750c66369b86dd223c",
+        "source_note": "Committed SWC header says it was created on 2026-09-30 using navis.",
+        "full_node_count": 898
+      },
+      "selection": {
+        "published_algorithm_node_id": 358,
+        "descendant_count_reproduced": 570,
+        "mapping_candidate_node_count": 570,
+        "label_0_count": 358,
+        "label_5_branch_count": 99,
+        "label_6_terminal_count": 113,
+        "reduced_label_5_or_6_proxy_node_count": 212,
+        "published_project_subtree_node_count": 212,
+        "proxy_count_matches_published_project_subtree": true,
+        "historical_point_data_node_count": 206
+      },
+      "historical_evdir": {
+        "vector": [
+          0.013583,
+          0.983437,
+          0.180743
+        ],
+        "norm": 1,
+        "source_point_data_sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+        "source_vector_receipt_blob_sha1": "f729e4fe6cf6208dd23b365b09b2c01cfde8a958"
+      },
+      "pca": {
+        "sample_covariance": {
+          "covariance_denominator": "n-1 (sample covariance)",
+          "variance_shares": [
+            0.595078,
+            0.303065,
+            0.101857
+          ],
+          "comparisons": [
+            {
+              "pc": "PC1",
+              "signed_dot": 0.824966,
+              "abs_cos": 0.824966,
+              "acute_angle_deg": 34.415
+            },
+            {
+              "pc": "PC2",
+              "signed_dot": 0.558517,
+              "abs_cos": 0.558517,
+              "acute_angle_deg": 56.047
+            },
+            {
+              "pc": "PC3",
+              "signed_dot": 0.08654,
+              "abs_cos": 0.08654,
+              "acute_angle_deg": 85.035
+            }
+          ],
+          "best_alignment": {
+            "pc": "PC1",
+            "signed_dot": 0.824966,
+            "abs_cos": 0.824966,
+            "acute_angle_deg": 34.415
+          }
+        },
+        "geojax_huber_formula": {
+          "covariance_denominator": "sum(weights) after Huber-like reweighting",
+          "variance_shares": [
+            0.598121,
+            0.308536,
+            0.093344
+          ],
+          "comparisons": [
+            {
+              "pc": "PC1",
+              "signed_dot": 0.885222,
+              "abs_cos": 0.885222,
+              "acute_angle_deg": 27.721
+            },
+            {
+              "pc": "PC2",
+              "signed_dot": 0.458723,
+              "abs_cos": 0.458723,
+              "acute_angle_deg": 62.695
+            },
+            {
+              "pc": "PC3",
+              "signed_dot": 0.077168,
+              "abs_cos": 0.077168,
+              "acute_angle_deg": 85.574
+            }
+          ],
+          "best_alignment": {
+            "pc": "PC1",
+            "signed_dot": 0.885222,
+            "abs_cos": 0.885222,
+            "acute_angle_deg": 27.721
+          },
+          "robust_config": {
+            "c": 1.5,
+            "tol": 0.000001,
+            "max_iter": 100,
+            "diagonal_regularization": 0.000001,
+            "initial_covariance_denominator": "n",
+            "weighted_covariance_denominator": "sum(weights)"
+          }
+        }
+      }
+    },
+    {
+      "subtype": "T5a",
+      "root_id": "720575940625571465",
+      "swc": {
+        "path": "data/morphology/T5a.swc",
+        "git_blob_sha1": "edf6eff5249b9c70b40ca6409a511fcea062262d",
+        "source_note": "Committed SWC header says it was created on 2026-09-30 using navis.",
+        "full_node_count": 601
+      },
+      "selection": {
+        "published_algorithm_node_id": 343,
+        "descendant_count_reproduced": 492,
+        "mapping_candidate_node_count": 492,
+        "label_0_count": 311,
+        "label_5_branch_count": 87,
+        "label_6_terminal_count": 94,
+        "reduced_label_5_or_6_proxy_node_count": 181,
+        "published_project_subtree_node_count": 181,
+        "proxy_count_matches_published_project_subtree": true,
+        "historical_point_data_node_count": 135
+      },
+      "historical_evdir": {
+        "vector": [
+          0.983824,
+          0.095762,
+          -0.151395
+        ],
+        "norm": 1,
+        "source_point_data_sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+        "source_vector_receipt_blob_sha1": "f729e4fe6cf6208dd23b365b09b2c01cfde8a958"
+      },
+      "pca": {
+        "sample_covariance": {
+          "covariance_denominator": "n-1 (sample covariance)",
+          "variance_shares": [
+            0.810238,
+            0.134732,
+            0.055031
+          ],
+          "comparisons": [
+            {
+              "pc": "PC1",
+              "signed_dot": 0.88354,
+              "abs_cos": 0.88354,
+              "acute_angle_deg": 27.928
+            },
+            {
+              "pc": "PC2",
+              "signed_dot": -0.305513,
+              "abs_cos": 0.305513,
+              "acute_angle_deg": 72.211
+            },
+            {
+              "pc": "PC3",
+              "signed_dot": -0.354993,
+              "abs_cos": 0.354993,
+              "acute_angle_deg": 69.207
+            }
+          ],
+          "best_alignment": {
+            "pc": "PC1",
+            "signed_dot": 0.88354,
+            "abs_cos": 0.88354,
+            "acute_angle_deg": 27.928
+          }
+        },
+        "geojax_huber_formula": {
+          "covariance_denominator": "sum(weights) after Huber-like reweighting",
+          "variance_shares": [
+            0.802905,
+            0.137175,
+            0.059919
+          ],
+          "comparisons": [
+            {
+              "pc": "PC1",
+              "signed_dot": 0.878614,
+              "abs_cos": 0.878614,
+              "acute_angle_deg": 28.524
+            },
+            {
+              "pc": "PC2",
+              "signed_dot": -0.325486,
+              "abs_cos": 0.325486,
+              "acute_angle_deg": 71.005
+            },
+            {
+              "pc": "PC3",
+              "signed_dot": -0.349422,
+              "abs_cos": 0.349422,
+              "acute_angle_deg": 69.548
+            }
+          ],
+          "best_alignment": {
+            "pc": "PC1",
+            "signed_dot": 0.878614,
+            "abs_cos": 0.878614,
+            "acute_angle_deg": 28.524
+          },
+          "robust_config": {
+            "c": 1.5,
+            "tol": 0.000001,
+            "max_iter": 100,
+            "diagonal_regularization": 0.000001,
+            "initial_covariance_denominator": "n",
+            "weighted_covariance_denominator": "sum(weights)"
+          }
+        }
+      }
+    },
+    {
+      "subtype": "T5c",
+      "root_id": "720575940617782941",
+      "swc": {
+        "path": "data/morphology/T5c.swc",
+        "git_blob_sha1": "2770b37654ab07ebf3b59017fa59a10380c33ad1",
+        "source_note": "Committed SWC header says it was created on 2026-09-30 using navis.",
+        "full_node_count": 577
+      },
+      "selection": {
+        "published_algorithm_node_id": 323,
+        "descendant_count_reproduced": 362,
+        "mapping_candidate_node_count": 362,
+        "label_0_count": 209,
+        "label_5_branch_count": 71,
+        "label_6_terminal_count": 82,
+        "reduced_label_5_or_6_proxy_node_count": 153,
+        "published_project_subtree_node_count": 153,
+        "proxy_count_matches_published_project_subtree": true,
+        "historical_point_data_node_count": 153
+      },
+      "historical_evdir": {
+        "vector": [
+          0.174446,
+          0.966179,
+          -0.18991
+        ],
+        "norm": 1,
+        "source_point_data_sha256": "76b7d6a1c44ad6b2ca730feff88174c71327e095cce45d8a47a0d998f77df58f",
+        "source_vector_receipt_blob_sha1": "f729e4fe6cf6208dd23b365b09b2c01cfde8a958"
+      },
+      "pca": {
+        "sample_covariance": {
+          "covariance_denominator": "n-1 (sample covariance)",
+          "variance_shares": [
+            0.608307,
+            0.318439,
+            0.073254
+          ],
+          "comparisons": [
+            {
+              "pc": "PC1",
+              "signed_dot": 0.961624,
+              "abs_cos": 0.961624,
+              "acute_angle_deg": 15.925
+            },
+            {
+              "pc": "PC2",
+              "signed_dot": 0.273629,
+              "abs_cos": 0.273629,
+              "acute_angle_deg": 74.12
+            },
+            {
+              "pc": "PC3",
+              "signed_dot": -0.020171,
+              "abs_cos": 0.020171,
+              "acute_angle_deg": 88.844
+            }
+          ],
+          "best_alignment": {
+            "pc": "PC1",
+            "signed_dot": 0.961624,
+            "abs_cos": 0.961624,
+            "acute_angle_deg": 15.925
+          }
+        },
+        "geojax_huber_formula": {
+          "covariance_denominator": "sum(weights) after Huber-like reweighting",
+          "variance_shares": [
+            0.58856,
+            0.339705,
+            0.071735
+          ],
+          "comparisons": [
+            {
+              "pc": "PC1",
+              "signed_dot": 0.959027,
+              "abs_cos": 0.959027,
+              "acute_angle_deg": 16.458
+            },
+            {
+              "pc": "PC2",
+              "signed_dot": 0.281599,
+              "abs_cos": 0.281599,
+              "acute_angle_deg": 73.644
+            },
+            {
+              "pc": "PC3",
+              "signed_dot": -0.031139,
+              "abs_cos": 0.031139,
+              "acute_angle_deg": 88.216
+            }
+          ],
+          "best_alignment": {
+            "pc": "PC1",
+            "signed_dot": 0.959027,
+            "abs_cos": 0.959027,
+            "acute_angle_deg": 16.458
+          },
+          "robust_config": {
+            "c": 1.5,
+            "tol": 0.000001,
+            "max_iter": 100,
+            "diagonal_regularization": 0.000001,
+            "initial_covariance_denominator": "n",
+            "weighted_covariance_denominator": "sum(weights)"
+          }
+        }
+      }
+    }
+  ],
+  "summary": {
+    "anchor_count": 4,
+    "reduction_proxy_count_matches_published_project_subtree": 3,
+    "reduction_proxy_count_mismatches": [
+      "T4a"
+    ],
+    "largest_best_alignment_abs_cosine": 0.961624,
+    "smallest_best_alignment_acute_angle_deg": 15.925,
+    "interpretation": "The retained-node PCA axes do not exactly reproduce the stored historical evDir vectors on these current SWC proxies. This is a diagnostic mismatch, not evidence that the historical direction was not PCA-derived: the current SWCs are dated 2026-09-30, their identity with the historical morphologies is unproven, and the label-based reduction proxy is not the original reduction implementation."
+  },
+  "provenance_limits": {
+    "proven": [
+      "The selected current SWC descendants reproduce the candidate subtree node counts recorded in the project mapping CSV.",
+      "The label-5/label-6 proxy matches the recorded project subtree node count for three of four anchors; T4a differs by one node.",
+      "Under both tested covariance methods, the best PCA line for each current proxy remains measurably different from the stored anchor direction."
+    ],
+    "not_proven": [
+      "That these current SWCs or their reduced proxies are the exact historical morphology point sets used for Point_data.pkl.",
+      "That Subtype_evDir is intended to equal an individual neuron's PC1, PC2 or PC3 rather than a transformed, aggregated or otherwise derived direction.",
+      "The December 2025 producer function, per-subtype axis rule, or sign convention."
+    ],
+    "unresolved_claim_id": "C-POINTDATA-002"
+  }
+}

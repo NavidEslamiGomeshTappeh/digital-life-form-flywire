@@ -918,6 +918,21 @@
         "The notebook may have used a local, uncommitted or differently located implementation; chronology alone does not establish that the code was absent from the author's workspace.",
         "The notebook and API both postdate the December 2025 Point_data artifact and do not identify its producer."
       ]
+    },
+    {
+      "id": "C-POINTDATA-052",
+      "statement": "For the four project anchor neurons, a deterministic PCA diagnostic on current committed SWC descendants and a transparent reduction proxy (retaining labels 5/6) does not exactly recover the stored historical Subtype_evDir vector as any PCA axis under either ordinary sample covariance or a GeoJax-style Huber covariance formula. The best line-angle matches range from 15.925° to 30.231°; the reduction proxy node count matches the current published subtree count for three of four anchors and differs by one node for T4a.",
+      "classification": "DETERMINISTIC_COMPUTATION_ON_CURRENT_MORPHOLOGY_PROXY",
+      "status": "REPRODUCED",
+      "evidence": [
+        "E-POINTDATA-SWC-PCA-PROXY"
+      ],
+      "caveats": [
+        "The SWC files are dated 2026-09-30 and have not been proven identical to the historical morphology points used to generate Point_data.pkl.",
+        "Retaining SWC labels 5/6 approximates reduction and is not the original NeuRosetta reduce_forest implementation.",
+        "This per-anchor PCA check does not rule out a transformed direction, a subtype/population-level estimator, or a different historical morphology.",
+        "The exact producer remains unresolved under C-POINTDATA-002."
+      ]
     }
   ]
 }

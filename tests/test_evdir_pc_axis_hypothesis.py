@@ -845,3 +845,63 @@ def test_public_metrics_notebook_precedes_current_neurosetta_coordinate_pca_path
     assert exact["status"] == "UNRESOLVED"
     assert boundary["status"] == "PROVEN"
     assert "E-POINTDATA-NEUROSETTA-PCA-NUMPY-BOUNDARY" in boundary["evidence"]
+
+
+def test_current_project_swc_pca_proxy_does_not_masquerade_as_historical_producer():
+    import importlib.util
+
+    script_path = ROOT / "scripts" / "audit_evdir_project_swc_pca_proxy.py"
+    spec = importlib.util.spec_from_file_location("audit_evdir_project_swc_pca_proxy", script_path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+
+    receipt = json.loads(
+        (ROOT / "evidence" / "point_data_evdir_project_swc_pca_proxy.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    actual = module.run_audit(ROOT)
+    assert actual["status"] == receipt["status"]
+    assert actual["source"] == receipt["source"]
+    assert actual["summary"]["anchor_count"] == 4
+    assert actual["summary"]["reduction_proxy_count_matches_published_project_subtree"] == 3
+    assert actual["summary"]["reduction_proxy_count_mismatches"] == ["T4a"]
+    assert actual["summary"]["largest_best_alignment_abs_cosine"] < 0.97
+    assert actual["summary"]["smallest_best_alignment_acute_angle_deg"] > 13.0
+
+    expected_cases = {item["subtype"]: item for item in receipt["cases"]}
+    for case in actual["cases"]:
+        expected = expected_cases[case["subtype"]]
+        assert case["root_id"] == expected["root_id"]
+        assert case["swc"]["git_blob_sha1"] == expected["swc"]["git_blob_sha1"]
+        assert case["selection"]["descendant_count_reproduced"] == (
+            expected["selection"]["descendant_count_reproduced"]
+        )
+        assert case["selection"]["reduced_label_5_or_6_proxy_node_count"] == (
+            expected["selection"]["reduced_label_5_or_6_proxy_node_count"]
+        )
+        assert case["selection"]["proxy_count_matches_published_project_subtree"] == (
+            expected["selection"]["proxy_count_matches_published_project_subtree"]
+        )
+        for method in ("sample_covariance", "geojax_huber_formula"):
+            observed = case["pca"][method]
+            target = expected["pca"][method]
+            assert observed["best_alignment"]["pc"] == target["best_alignment"]["pc"]
+            assert abs(
+                observed["best_alignment"]["acute_angle_deg"]
+                - target["best_alignment"]["acute_angle_deg"]
+            ) < 0.02
+            for actual_axis, expected_axis in zip(observed["comparisons"], target["comparisons"]):
+                assert actual_axis["pc"] == expected_axis["pc"]
+                assert abs(actual_axis["abs_cos"] - expected_axis["abs_cos"]) < 0.0002
+                assert abs(
+                    actual_axis["acute_angle_deg"] - expected_axis["acute_angle_deg"]
+                ) < 0.02
+
+    claims = json.loads((ROOT / "evidence" / "claims.json").read_text(encoding="utf-8"))
+    unresolved = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-002")
+    diagnostic = next(c for c in claims["claims"] if c["id"] == "C-POINTDATA-052")
+    assert unresolved["status"] == "UNRESOLVED"
+    assert diagnostic["status"] == "REPRODUCED"
+    assert "E-POINTDATA-SWC-PCA-PROXY" in diagnostic["evidence"]
