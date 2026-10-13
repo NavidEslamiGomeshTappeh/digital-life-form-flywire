@@ -226,7 +226,7 @@ The command resumes successful steps from verified receipts and returns exit cod
 
 ## Code Hand
 
-Version 1.5.1 extends the concrete Hand boundary with guarded edit execution plus the bounded Neural → Leader path and provenance-bearing simulator adapters.
+The guarded Code Hand edit capability, bounded Neural → Leader path, and provenance-bearing simulator adapters were introduced during the 1.5.x series and remain part of the unified 1.7.1 baseline.
 
 CodeHand can:
 - create one new UTF-8 source file inside an explicit workspace;
@@ -260,7 +260,7 @@ The Code Hand contract is documented in docs/CODE_HAND.md. The initial implement
 
 ## Neural → Leader boundary
 
-Version 1.5.1 now contains a bounded neural execution path plus provenance-bearing external simulator signal adapters. The FlyDrones path has a persisted external integration receipt; the FlyVis path now also has a persisted live runtime receipt from GitHub Actions.
+The bounded Neural → Leader path was introduced in 1.5.1. The current 1.7.1 baseline retains that path and includes persisted integration receipts for FlyDrones and the pinned FlyVis runtime; FlyVis responses remain continuous model values, not direct evidence of spikes or exact-root electrical activity.
 
 `NeuralIntentGateway` accepts bounded sparse observations and produces deterministic capability candidates with evidence hashing. `NeuralLeaderBridge` turns an activated candidate into the existing Leader/TaskStep contract.
 
