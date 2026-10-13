@@ -42,12 +42,12 @@ Issues = "https://github.com/NavidEslamiGomeshTappeh/digital-life-form-flywire/i
 
 [project.optional-dependencies]
 dev = [
-  "pytest>=8,<9",
+  "pytest>=8,<10",
   "ruff>=0.13,<1",
   "build>=1,<2",
 ]
 vision = [
-  "opencv-python>=4.10,<5",
+  "opencv-python>=4.10,<6",
 ]
 ptz = [
   "onvif-python==0.4.4",
