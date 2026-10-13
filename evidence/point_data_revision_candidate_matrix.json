@@ -21,7 +21,8 @@
         "The public GeoJax history shows no later commits before 2026-01-16.",
         "The paper's contemporaneous 2025-12-10 Random_bifurcations history imports GeoJax as gj and directly uses gj.cross/gj.angle/gj.normalize while reading Point_data-derived PCA columns.",
         "GeoJax/alignment.py has the same blob SHA 53560fd7de0463a51e1283b4a9c0e0db5bb33e8e at both 2025-04-23 v0.2 and 2025-05-02, so the robust PCA implementation was unchanged through the pre-artifact head.",
-        "GeoJax/angles.py at the pre-artifact head has the Apr-30 signed-angle arctan2 implementation, which is later consistent with the contemporaneous paper's angle consumers."
+        "GeoJax/angles.py at the pre-artifact head has the Apr-30 signed-angle arctan2 implementation, which is later consistent with the contemporaneous paper's angle consumers.",
+        "The exact historical Point_data blob was directly consumed by Figure_5 on 2025-12-10 in the same project week in which Random_bifurcations imported GeoJax."
       ],
       "confidence": {
         "as_dependency_head_candidate": "HIGH",
@@ -120,5 +121,26 @@
       "details": "Public Metrics1_Point_data.ipynb at commit 3a1aa1a... contains a 23-column per-tree function and no persistence call; historical Point_data has 24 columns including Subtype_evDir_x/y/z. Indexed public code search returned zero hits for evDir/Subtype_evDir/to_pickle.",
       "impact": "Do not label the public Metrics1 notebook as the exact historical Point_data producer."
     }
-  ]
+  ],
+  "provenance_upgrade_2026_10_07": {
+    "exact_historical_blob_consumer": {
+      "figure5_commit": "07b468181ceb3e43d1cb3647b5bac79d531acd18",
+      "figure5_commit_date": "2025-12-10T16:32:19Z",
+      "point_data_blob": "b85caf49f45677f2075f7b5f2c8830141cd96d02",
+      "first_ingest_commit": "cd17d34afd0d46a3c2947e83a1f0fdd835a9959a",
+      "elapsed_seconds": 75029,
+      "significance": "The contemporaneous Figure_5 notebook consumed the exact historical Point_data Git blob, not merely a same-named file."
+    },
+    "contemporaneous_geojax_bridge": {
+      "random_bifurcations_commit": "07b468181ceb3e43d1cb3647b5bac79d531acd18",
+      "geojax_import": "import GeoJax as gj",
+      "geojax_calls": [
+        "gj.cross",
+        "gj.angle",
+        "gj.normalize"
+      ],
+      "significance": "Same-week downstream geometry usage establishes contemporaneous GeoJax presence in the analysis environment, but does not prove producer identity."
+    },
+    "boundary": "Exact Point_data producer, exact GeoJax/JAX revisions installed at production time, and Subtype_evDir generation remain unresolved."
+  }
 }
