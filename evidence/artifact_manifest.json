@@ -660,7 +660,7 @@
       "role": "regression_test_for_provenance_boundaries",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "163d30895a8d4e7bed7a710ff027393727bcbf77"
+        "value": "533fd30ddbd4131c96a45fd5cb4757566395d85b"
       }
     },
     {
@@ -1052,7 +1052,7 @@
       "role": "public_morphology_pipeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "163d30895a8d4e7bed7a710ff027393727bcbf77"
+        "value": "533fd30ddbd4131c96a45fd5cb4757566395d85b"
       }
     },
     {
@@ -1070,7 +1070,7 @@
       "role": "legacy_algorithm_timeline_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "163d30895a8d4e7bed7a710ff027393727bcbf77"
+        "value": "533fd30ddbd4131c96a45fd5cb4757566395d85b"
       }
     },
     {
@@ -1088,7 +1088,7 @@
       "role": "legacy_installation_metadata_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "163d30895a8d4e7bed7a710ff027393727bcbf77"
+        "value": "533fd30ddbd4131c96a45fd5cb4757566395d85b"
       }
     },
     {
@@ -1106,7 +1106,7 @@
       "role": "pca_and_subtree_revision_boundary_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "163d30895a8d4e7bed7a710ff027393727bcbf77"
+        "value": "533fd30ddbd4131c96a45fd5cb4757566395d85b"
       }
     },
     {
@@ -1124,7 +1124,7 @@
       "role": "pre_pointdata_public_pca_boundary_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "163d30895a8d4e7bed7a710ff027393727bcbf77"
+        "value": "533fd30ddbd4131c96a45fd5cb4757566395d85b"
       }
     },
     {
@@ -1142,7 +1142,7 @@
       "role": "legacy_pca_candidate_and_parent_tree_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "163d30895a8d4e7bed7a710ff027393727bcbf77"
+        "value": "533fd30ddbd4131c96a45fd5cb4757566395d85b"
       }
     },
     {
@@ -1160,7 +1160,7 @@
       "role": "geojax_jax_pca_candidate_regression",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "163d30895a8d4e7bed7a710ff027393727bcbf77"
+        "value": "533fd30ddbd4131c96a45fd5cb4757566395d85b"
       }
     },
     {
@@ -1178,7 +1178,7 @@
       "role": "regression_for_bounded_related_public_repository_search",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "163d30895a8d4e7bed7a710ff027393727bcbf77"
+        "value": "533fd30ddbd4131c96a45fd5cb4757566395d85b"
       }
     },
     {
@@ -1187,7 +1187,7 @@
       "role": "regression_for_bounded_public_issue_search_evidence",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "163d30895a8d4e7bed7a710ff027393727bcbf77"
+        "value": "533fd30ddbd4131c96a45fd5cb4757566395d85b"
       }
     },
     {
@@ -1205,7 +1205,7 @@
       "role": "regression_for_public_editor_history_producer_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "163d30895a8d4e7bed7a710ff027393727bcbf77"
+        "value": "533fd30ddbd4131c96a45fd5cb4757566395d85b"
       }
     },
     {
@@ -1223,7 +1223,7 @@
       "role": "regression_for_postartifact_environment_revision_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "163d30895a8d4e7bed7a710ff027393727bcbf77"
+        "value": "533fd30ddbd4131c96a45fd5cb4757566395d85b"
       }
     },
     {
@@ -1241,7 +1241,7 @@
       "role": "regression_for_neurosetta_public_history_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "163d30895a8d4e7bed7a710ff027393727bcbf77"
+        "value": "533fd30ddbd4131c96a45fd5cb4757566395d85b"
       }
     },
     {
@@ -1259,7 +1259,7 @@
       "role": "regression_for_pca_candidate_comparison_without_overclaiming_producer",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "163d30895a8d4e7bed7a710ff027393727bcbf77"
+        "value": "533fd30ddbd4131c96a45fd5cb4757566395d85b"
       }
     },
     {
@@ -1277,7 +1277,7 @@
       "role": "regression_for_postartifact_neurosetta_numpy_pca_boundary",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "163d30895a8d4e7bed7a710ff027393727bcbf77"
+        "value": "533fd30ddbd4131c96a45fd5cb4757566395d85b"
       }
     },
     {
@@ -1286,7 +1286,7 @@
       "role": "regression_for_public_notebook_before_api_path_chronology",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "163d30895a8d4e7bed7a710ff027393727bcbf77"
+        "value": "533fd30ddbd4131c96a45fd5cb4757566395d85b"
       }
     },
     {
@@ -1295,7 +1295,7 @@
       "role": "four-anchor-pca-diagnostic-on-current-project-swc-reduction-proxy",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "6bdcfd37bf3121379a4b3f6ab99724ffcacb42ee"
+        "value": "89a527cdd1426eac9efd6292d053409f0958fed5"
       }
     },
     {
@@ -1313,7 +1313,16 @@
       "role": "regression-for-current-swc-pca-proxy-and-provenance-limits",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "163d30895a8d4e7bed7a710ff027393727bcbf77"
+        "value": "533fd30ddbd4131c96a45fd5cb4757566395d85b"
+      }
+    },
+    {
+      "id": "E-POINTDATA-SWC-PCA-PROXY-NORM-TEST",
+      "path": "tests/test_evdir_pc_axis_hypothesis.py",
+      "role": "regression_for_float32_evdir_norm_roundoff",
+      "identity": {
+        "type": "git_blob_sha1",
+        "value": "533fd30ddbd4131c96a45fd5cb4757566395d85b"
       }
     }
   ]

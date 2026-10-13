@@ -905,3 +905,20 @@ def test_current_project_swc_pca_proxy_does_not_masquerade_as_historical_produce
     assert unresolved["status"] == "UNRESOLVED"
     assert diagnostic["status"] == "REPRODUCED"
     assert "E-POINTDATA-SWC-PCA-PROXY" in diagnostic["evidence"]
+
+
+def test_current_swc_pca_proxy_receipt_preserves_float32_direction_norm_roundoff():
+    receipt = json.loads(
+        (ROOT / "evidence" / "point_data_evdir_project_swc_pca_proxy.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    expected_norms = {
+        "T4a": 0.999999900,
+        "T4c": 0.999999953,
+        "T5a": 1.000000047,
+        "T5c": 0.999999805,
+    }
+    for case in receipt["cases"]:
+        assert case["historical_evdir"]["norm"] == expected_norms[case["subtype"]]
+        assert abs(case["historical_evdir"]["norm"] - 1.0) < 2e-7
