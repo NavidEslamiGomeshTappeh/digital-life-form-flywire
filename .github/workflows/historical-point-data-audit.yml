@@ -9,6 +9,12 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - ".github/workflows/historical-point-data-audit.yml"
+      - "scripts/audit_point_data_binary.py"
+      - "evidence/point_data_*.json"
+      - "evidence/public_point_data_*.json"
+      - "evidence/exact_pointdata_blob_consumer_binding.json"
   workflow_dispatch:
 
 permissions:
