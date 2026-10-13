@@ -21,7 +21,7 @@
       "role": "project_metadata",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "8cc334adf8c4ac5657372bc0bcbe4dccc1206cec"
+        "value": "68c0a5c22fcc4e025c384beb2a246f5ac6a6c3ce"
       }
     },
     {
@@ -620,7 +620,7 @@
       "role": "real_FlyVis_integration_workflow",
       "identity": {
         "type": "git_blob_sha1",
-        "value": "706f3a7ed92505ba2c4d951051c9fb1a028fb8da"
+        "value": "81ebd6810b0c233d6e94ecf6f123f31007394643"
       }
     },
     {
