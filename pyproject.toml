@@ -47,7 +47,7 @@ dev = [
   "build>=1,<2",
 ]
 vision = [
-  "opencv-python>=4.10,<5",
+  "opencv-python>=4.10,<6",
 ]
 ptz = [
   "onvif-python==0.4.4",
